@@ -230,6 +230,10 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Body.Medium.Gray800">
+        <item name="android:textColor">#1F2730</item>
+    </style>
+
     <style name="Body.Small">
         <item name="android:textSize">14sp</item>
         <item name="android:minHeight">22sp</item>

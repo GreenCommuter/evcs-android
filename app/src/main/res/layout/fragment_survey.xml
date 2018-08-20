@@ -45,9 +45,17 @@
 
             <org.evcs.android.features.shared.StandardTextField
                 android:id="@+id/survey_comments"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" />
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                style="@style/TextInputStyle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextField>
 
             <View
                 android:layout_width="wrap_content"

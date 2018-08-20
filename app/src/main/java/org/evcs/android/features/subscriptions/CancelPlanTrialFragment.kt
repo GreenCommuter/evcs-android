@@ -3,9 +3,11 @@ package org.evcs.android.features.subscriptions
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.FrameLayout
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentCancelPlanTrialBinding
+import org.evcs.android.navigation.controller.AbstractNavigationController
 
 class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
 
@@ -15,7 +17,7 @@ class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
         super.init()
         //TODO: not on trial
         if (true) {
-            onContinueClicked()
+            goToCancelPlan(AbstractNavigationController.replaceLastNavOptions(findNavController()))
         }
     }
 
@@ -24,7 +26,12 @@ class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
     }
 
     override fun onContinueClicked() {
-        return findNavController().navigate(CancelPlanTrialFragmentDirections.actionCancelPlanTrialFragmentToCancelPlanFragment())
+        goToCancelPlan()
+    }
+
+    fun goToCancelPlan(navoptions: NavOptions? = null) {
+        findNavController().navigate(CancelPlanTrialFragmentDirections.actionCancelPlanTrialFragmentToCancelPlanFragment(),
+                navoptions)
     }
 
     override fun getCancelText(): String {

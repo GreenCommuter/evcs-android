@@ -6,13 +6,15 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.databinding.ViewPlanBinding
+import org.evcs.android.model.Plan
 
 class PlanView : LinearLayout {
 
     private lateinit var mBinding: ViewPlanBinding
 
-    constructor(context: Context) : super(context) {
+    constructor(context: Context, plan: Plan) : super(context) {
         init(context)
+        setPlan(plan)
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -25,5 +27,8 @@ class PlanView : LinearLayout {
 
     private fun init(context: Context) {
         mBinding = ViewPlanBinding.inflate(LayoutInflater.from(context), this, true)
+    }
+
+    fun setPlan(plan: Plan) {
     }
 }

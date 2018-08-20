@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/spacing_medium_extra"
@@ -37,10 +38,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 android:gravity="center"
-                android:text="Most popular"
                 android:background="#FFEBE5"
                 android:padding="@dimen/spacing_medium"
                 android:textColor="@color/evcs_primary_800"
+                tools:text="Most popular"
                 style="@style/Body.Small.Bold"/>
 
             <TextView
@@ -48,31 +49,31 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                android:text="Unlimited Off-peak"
+                tools:text="Unlimited Off-peak"
                 style="@style/Body.Large.Bold"/>
 
             <TextView
                 android:id="@+id/view_plan_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$99.99/mo"
                 android:layout_marginBottom="@dimen/spacing_large"
+                tools:text="$99.99/mo"
                 style="@style/Headline.Large"/>
 
             <TextView
                 android:id="@+id/view_plan_limits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Unlimited charging 10PM-6AM"
                 android:layout_marginBottom="@dimen/spacing_medium"
+                tools:text="Unlimited charging 10PM-6AM"
                 style="@style/Title.Large"/>
 
             <TextView
                 android:id="@+id/view_plan_limit_aprox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Approximately 760 miles"
                 android:textColor="@color/evcs_gray_600"
+                tools:text="Approximately 760 miles"
                 style="@style/Body.Small"/>
 
 
@@ -80,19 +81,19 @@
                 android:id="@+id/view_plan_flat_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Flat rate 6AM-10PM"
                 android:textColor="@color/evcs_gray_600"
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_medium"
+                tools:text="Flat rate 6AM-10PM"
                 style="@style/Body.Small.Bold"/>
 
             <TextView
                 android:id="@+id/view_plan_dc_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DC Fast: $0.32/kWh"
                 android:textColor="@color/evcs_gray_600"
                 android:layout_marginBottom="@dimen/spacing_medium"
+                tools:text="DC Fast: $0.32/kWh"
                 style="@style/Body.Small.Bold"/>
 
             <TextView
@@ -100,8 +101,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_large"
-                android:text="Level 2: $0.32/kWh"
                 android:textColor="@color/evcs_gray_600"
+                tools:text="Level 2: $0.32/kWh"
                 style="@style/Body.Small.Bold"/>
 
             <TextView
@@ -111,7 +112,7 @@
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:layout_marginLeft="@dimen/spacing_medium_extra"
                 android:layout_marginRight="@dimen/spacing_medium_extra"
-                android:text="Get 7 Days Free"
+                tools:text="Get 7 Days Free"
                 style="@style/ButtonK.Orange"/>
 
             <TextView

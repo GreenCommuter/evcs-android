@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base application colors -->
+    <color name="evcs_green">#09ca87</color>
+    <color name="evcs_orange">#F45A2E</color>
+    <color name="evcs_true_black">#000000</color>
+    <color name="evcs_black">#2b2b2b</color>
+    <color name="evcs_dark_grey">#514f4d</color>
+    <color name="evcs_grey">#808080</color>
+    <color name="evcs_gray_89">#e4e5e7</color>
+    <color name="evcs_light_grey">#f6f6f6</color>
+    <color name="evcs_white">#ffffff</color>
+    <color name="evcs_red">#dc6b6a</color>
+    <color name="evcs_purple">#240031</color>
+
+    <color name="evcs_baseline_color">#4D4D4D</color>
+
+    <!-- Tint colors -->
+    <color name="evcs_splash_tint">#d9333333</color>
+    <color name="evcs_profile_tint">#d9333333</color>
+    <color name="evcs_dialog_tint">#d9333333</color>
+    <color name="evcs_green_transparent">#d909ca87</color>
+    <color name="evcs_green_transparent_new">#9a09ca87</color>
+    <color name="evcs_drawer_tint">#99333333</color>
+    <color name="evcs_transparent_black">#7f000000</color>
+    <color name="evcs_transparent_red">#ccdc6b6a</color>
+
+    <!-- Common colors -->
+    <color name="evcs_transparent">#00000000</color>
+
+    <!-- Button color -->
+    <color name="evcs_grey_transparent">#80808080</color>
+
+    <!-- Choose Time Range Bar color -->
+    <color name="choose_time_range_bar_slider">#474747</color>
+
+    <!-- Spinner disabled color -->
+    <color name="material_spinner_disabled_color">#474747</color>
+    
+    <!-- Map Colors -->
+    <color name="circle_blue_transparent">#8800CCFF</color>
+    <color name="polyline_green">#09ca87</color>
+    <color name="polyline_grey">#808080</color>
+
+</resources>

@@ -1,0 +1,137 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
+
+    <!-- For old versions -->
+    <style name="AppTheme.Transparent"/>
+
+    <!-- Splash screen -->
+    <style name="SplashTheme" parent="AppTheme.Transparent">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
+
+    <!-- Toolbar -->
+    <style name="ToolbarTitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:fontFamily">@font/proximanova_bold</item>
+        <item name="android:textColor">@color/evcs_white</item>
+        <item name="textAllCaps">true</item>
+    </style>
+
+    <style name="ToolbarTitle.New">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="textAllCaps">false</item>
+    </style>
+
+    <style name="ToolbarIconStyle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <!-- Buttons -->
+    <style name="Button">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">@dimen/font_medium_more</item>
+        <item name="android:minHeight">@dimen/spacing_big_extra</item>
+        <!-- This margin is added to provide enough space for the shadow -->
+        <item name="android:layout_marginBottom">@dimen/spacing_small</item>
+        <item name="android:layout_marginLeft">@dimen/spacing_small</item>
+        <item name="android:layout_marginRight">@dimen/spacing_small</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:paddingLeft">@dimen/spacing_big</item>
+        <item name="android:paddingRight">@dimen/spacing_big</item>
+    </style>
+
+    <style name="Button.Onboarding">
+        <item name="android:background">@color/evcs_transparent</item>
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+
+    <style name="Button.Green">
+        <item name="android:background">@drawable/button_selector_green</item>
+        <item name="android:textColor">@color/button_text_color_selector_green</item>
+    </style>
+
+    <style name="Button.Black.RightBullet">
+        <item name="android:background">@drawable/button_right_transparent</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+    </style>
+
+    <style name="Button.Black.LeftBullet">
+        <item name="android:background">@drawable/button_left_transparent</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+    </style>
+
+    <style name="Button.Black">
+        <item name="android:background">@drawable/button_selector_black_border</item>
+        <item name="android:textColor">@color/button_text_color_selector_black</item>
+    </style>
+
+    <style name="Button.Black.NoBorder">
+        <item name="android:background">@drawable/button_selector_black</item>
+        <item name="android:textColor">@color/button_text_color_selector_black</item>
+    </style>
+
+    <style name="Button.Black.WhiteText">
+        <item name="android:background">@drawable/button_selector_black_border</item>
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="Button.White">
+        <item name="android:background">@drawable/button_white</item>
+        <item name="android:textColor">@color/button_text_color_selector_white</item>
+    </style>
+
+    <style name="Button.White.Border">
+        <item name="android:background">@drawable/button_selector_white_border</item>
+        <item name="android:textColor">@color/button_text_color_selector_white_border</item>
+    </style>
+
+    <style name="Button.Oval.White">
+        <item name="android:background">@drawable/button_circle_white</item>
+    </style>
+
+    <style name="Button.Oval.Green">
+        <item name="android:background">@drawable/button_circle_green</item>
+    </style>
+
+    <style name="Button.Ariel">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minHeight">52dp</item>
+    </style>
+
+
+    <style name="Button.Ariel.Grey">
+        <item name="android:background">@drawable/button_selector_grey_border</item>
+    </style>
+
+    <!-- TextInputLayout -->
+    <style name="TextInputStyle" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColorHint">@color/input_field_floating_label</item>
+    </style>
+
+    <!-- Spinner Style and Spinner Item Style -->
+
+    <!-- Vanpool CarChecklist -->
+
+    <!-- corporate label my trips -->
+    <style name="Button.Oval"/>
+
+    <style name="EVCSDatePickerDialogTheme"/>
+
+    <style name="EVCSDatePickerStyle"/>
+
+    <style name="StandardEditText" parent="@style/Roboto.Body">
+        <item name="android:textColorHint">@color/evcs_grey</item>
+    </style>
+
+    <style name="NavigationViewStyle">
+        <item name="android:listPreferredItemHeightSmall">34dp</item>
+        <item name="itemTextAppearance">@style/Roboto.ProfileMenu</item>
+    </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<FindBugsFilter>
+
+    <Match>
+        <Class name="~.*R\$.*" />
+    </Match>
+    <Match>
+        <Class name="~.*Manifest\$.*" />
+    </Match>
+    <Match>
+        <Package name="~org\.greencommuter\.android\.model.*" />
+        <Bug code="UuF,UwF,UrF,NP,UR"/>
+    </Match>
+    <Match>
+        <Class name="~.*_ViewBinding" />
+        <Bug code="DLS,UrF"/>
+    </Match>
+    <Match>
+        <Bug code="SF"/>
+    </Match>
+</FindBugsFilter>

@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:windowContentTransitions">true</item>
+
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+        <item name="android:windowSharedElementEnterTransition">@android:transition/move</item>
+        <item name="android:windowSharedElementExitTransition">@android:transition/move</item>
+
+        <!-- Status bar, background and accent color -->
+        <item name="android:colorPrimaryDark">@color/evcs_black</item>
+        <item name="android:windowBackground">@color/evcs_light_grey</item>
+        <item name="android:textColorPrimary">@color/evcs_dark_grey</item>
+        <item name="colorControlNormal">@color/evcs_grey</item>
+        <item name="colorAccent">@color/evcs_black</item>
+        <item name="textColorError">@color/evcs_red</item>
+        <item name="android:statusBarColor">@color/evcs_gray_89</item>
+
+        <!-- Text styling and background of options menu items -->
+        <item name="android:itemTextAppearance">@style/SansationRegular.MediumMore.Black</item>
+        <item name="android:itemBackground">@color/evcs_white</item>
+
+        <!-- TextInputLayout style -->
+        <item name="textInputLayoutStyle">@style/TextInputStyle</item>
+
+        <item name="android:datePickerDialogTheme">@style/EVCSDatePickerDialogTheme</item>
+    </style>
+
+    <style name="AppTheme.Transparent">
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+<!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+    </style>
+
+    <!-- Date Picker -->
+    <style name="EVCSDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
+        <item name="android:colorAccent">@color/evcs_green</item>
+        <item name="android:datePickerStyle">@style/EVCSDatePickerStyle</item>
+    </style>
+
+    <style name="EVCSDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
+        <item name="android:headerBackground">@color/evcs_green</item>
+    </style>
+    
+</resources>

@@ -1,0 +1,180 @@
+apply plugin: 'com.android.application'
+apply from: 'keystore.gradle'
+//apply from: '../jacoco.gradle'
+apply from: '../quality.gradle'
+apply from: '../scripts/warp/warp_task.gradle'
+
+android {
+    compileSdkVersion 32
+
+    defaultConfig {
+        applicationId "org.greencommuter.android"
+        minSdkVersion 21
+        targetSdkVersion 32
+        versionCode 1
+        versionName "0.0.1"
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath true
+            }
+        }
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('keystore/debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            storeFile file('keystore/production.keystore')
+            storePassword store_password
+            keyAlias key_alias
+            keyPassword key_password
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.release
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            signingConfig signingConfigs.debug
+            testCoverageEnabled = false // Disabled to fix debug in android studio
+        }
+    }
+
+    flavorDimensions "enviroment", "app_colour"
+
+    productFlavors {
+
+        develop {
+            dimension "enviroment"
+            applicationIdSuffix ".dev"
+            versionName defaultConfig.versionName + "-dev"
+            manifestPlaceholders.appNamePrefix = "[Dev] "
+        }
+
+        stage {
+            dimension "enviroment"
+            applicationIdSuffix ".stage"
+            versionName defaultConfig.versionName + "-stage"
+            manifestPlaceholders.appNamePrefix = "[Stage] "
+        }
+
+        production {
+            dimension "enviroment"
+            manifestPlaceholders.appNamePrefix = ""
+        }
+
+        gc {
+            dimension "app_colour"
+            applicationId "org.greencommuter.android"
+            manifestPlaceholders.appName = "EVCS"
+            resValue "string", "app_name", "evcs"
+        }
+
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    repositories {
+        def properties = new Properties()
+        File githubPropertiesFile = rootProject.file(".github.properties")
+        if (githubPropertiesFile.exists()) {
+            properties.load(githubPropertiesFile.newDataInputStream())
+        }
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/Geotab/keyless-sdk-android")
+            credentials {
+                username = properties["GITHUB_USERNAME"] ?: System.getenv("GITHUB_USERNAME")
+                password = properties["GITHUB_PERSONAL_ACCESS_TOKEN"] ?: System.getenv("GITHUB_PERSONAL_ACCESS_TOKEN")
+            }
+        }
+    }
+    buildFeatures.viewBinding = true
+}
+
+configurations.all {
+    exclude group: 'com.android.support', module: 'support-v13'
+}
+
+dependencies {
+    // Base
+    implementation 'com.github.BharatGad3:AndroidBase:master'
+
+    // Android Support Library
+    implementation 'com.google.android.material:material:1.2.1'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
+    implementation 'com.squareup.retrofit2:converter-gson:2.2.0'
+
+    // Google Play Services
+    implementation 'com.google.android.gms:play-services-gcm:17.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
+    implementation 'com.google.android.libraries.places:places:2.5.0'
+    implementation 'com.google.android.gms:play-services-location:17.0.0'
+    implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    // Google Utilities
+    implementation 'com.google.firebase:firebase-core:16.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.1.0'
+    implementation 'com.google.maps.android:android-maps-utils:0.4'
+
+    // Third-party
+    implementation 'com.jakewharton:butterknife:8.4.0'
+    implementation 'org.greenrobot:eventbus:3.0.0'
+    implementation 'io.github.inflationx:calligraphy3:3.1.1'
+    implementation(name: 'material-spinner', ext: 'aar')
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.facebook.fresco:fresco:2.6.0'
+    implementation 'com.facebook.android:facebook-android-sdk:8.2.0'
+
+//    implementation 'com.braintreepayments.api:drop-in:5.2.0'
+    implementation 'joda-time:joda-time:2.9.9'
+    implementation 'org.ocpsoft.prettytime:prettytime:4.0.1.Final'
+    implementation 'me.relex:photodraweeview:1.1.3'
+    implementation 'com.rollbar:rollbar-android:0.2.0'
+    implementation 'co.infinum:materialdatetimepicker-support:3.5.1'
+    implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
+
+    // Navigation
+    def nav_version = "2.3.0"
+
+    // Java language implementation
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //GeoTabs
+//    implementation "com.geotab:keyless:0.0.13"
+
+    // Leak Canary
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+    // Testing dependencies
+//    testImplementation 'junit:junit:4.12'
+//    testImplementation 'org.mockito:mockito-core:2.7.22'
+//    testImplementation 'org.assertj:assertj-core:2.6.0'
+//    testImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
+}
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+// Google GMS plugin
+apply plugin: 'com.google.gms.google-services'

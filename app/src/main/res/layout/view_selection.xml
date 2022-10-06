@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/view_selection_tint"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing_large_extra"
+        android:orientation="vertical"
+        android:gravity="top"
+        android:layout_gravity="center"
+        android:background="@drawable/selection_view_background_tint_selector">
+
+        <TextView
+            android:id="@+id/view_selection_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:textColor="@color/selection_view_title"
+            style="@style/TitleFont.MediumExtra"/>
+
+        <TextView
+            android:id="@+id/view_selection_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/SansationRegular.Medium" />
+
+    </LinearLayout>
+
+</merge>

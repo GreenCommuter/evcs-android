@@ -1,0 +1,78 @@
+{
+  "project_info": {
+    "project_number": "400459472122",
+    "firebase_url": "https://greencommuter-ios-1335.firebaseio.com",
+    "project_id": "greencommuter-ios-1335",
+    "storage_bucket": "greencommuter-ios-1335.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:400459472122:android:9cb1aa16f4b00cfe",
+        "android_client_info": {
+          "package_name": "org.greencommuter.android.stage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "400459472122-uk1lsodsv1pmdapcrs3p1k07f3tci215.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vFD0ck8_mNCVJGkgTvVam98Eji4yeJM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282371108097:android:a63828a208a44135dabf00",
+        "android_client_info": {
+          "package_name": "org.redcommuter.android.stage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vFD0ck8_mNCVJGkgTvVam98Eji4yeJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282371108097-cnf8iv8ie7juh9oqcko0ghjjfgna038v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.greencommuter.greencommuter.release"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

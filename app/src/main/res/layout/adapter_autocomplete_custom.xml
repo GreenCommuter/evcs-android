@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/evcs_true_black">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/spacing_medium_extra"
+        android:paddingLeft="@dimen/spacing_medium_extra"
+        android:paddingRight="@dimen/spacing_medium_more"
+        android:paddingBottom="@dimen/spacing_medium_extra">
+
+        <ImageView
+            android:id="@+id/adapter_autocomplete_custom_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/spacing_small"
+            android:gravity="center"
+            tools:src="@drawable/ic_map_car_location"/>
+
+        <TextView
+            android:id="@+id/adapter_autocomplete_custom_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_tiny"
+            android:maxLines="1"
+            android:ellipsize="end"
+            tools:text="Example, Text, Location"
+            tools:textColor="@color/evcs_white"
+            style="@style/SansationRegular.MediumMore.White"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_tiniest"
+        android:background="@color/evcs_grey_transparent" />
+
+</LinearLayout>

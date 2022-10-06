@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_white">
+
+<!--    <org.evcs.android.features.auth.register.RegisterStepsView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="@dimen/spacing_large"-->
+<!--        custom:progress="2"/>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_register_enter_code_title"
+        android:textAllCaps="false"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:gravity="center"
+        style="@style/TitleFont.Large"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/fragment_register_enter_code_subtitle"
+        android:gravity="center"
+        android:padding="@dimen/spacing_medium_extra"
+        style="@style/Roboto.Body"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/spacing_large"
+        android:paddingRight="@dimen/spacing_large">
+
+        <org.evcs.android.features.shared.StandardTextField
+            android:id="@+id/fragment_register_enter_code_text"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/spacing_medium_extra"
+            android:layout_marginEnd="@dimen/spacing_medium_extra"
+            android:layout_marginBottom="@dimen/spacing_medium_extra"
+            style="@style/TextInputStyle"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                style="@style/Roboto.Body.Grey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="50" />
+
+        </org.evcs.android.features.shared.StandardTextField>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Didn't receve a code?"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                style="@style/Roboto.Body"/>
+
+            <TextView
+                android:id="@+id/fragment_register_enter_code_resend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resend it"
+                android:textColor="@color/evcs_orange"
+                style="@style/Roboto.Body"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="@dimen/spacing_large"
+            android:paddingRight="@dimen/spacing_large">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mistyped your cellphone?"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                style="@style/Roboto.Body"/>
+
+            <TextView
+                android:id="@+id/fragment_register_enter_code_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Edit your number"
+                android:textColor="@color/evcs_orange"
+                style="@style/Roboto.Body"/>
+
+        </LinearLayout>
+
+        <org.evcs.android.features.shared.ThinButton
+            android:id="@+id/fragment_register_enter_code_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large_extra"
+            android:layout_gravity="center"
+            android:enabled="true"
+            android:text="@string/fragment_register_enter_code_button"
+            style="@style/Button.Black" />
+
+    </LinearLayout>
+
+</LinearLayout>

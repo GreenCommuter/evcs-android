@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/navigation_header_extra_padding"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_ariel_related"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_ariel_different"
+        android:paddingLeft="@dimen/padding_ariel_big"
+        android:paddingRight="@dimen/padding_ariel_big"
+        android:paddingBottom="@dimen/spacing_ariel_different"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/navigation_header_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                style="@style/RobotoBold.Title"/>
+
+            <TextView
+                android:id="@+id/navigation_header_surname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                style="@style/RobotoBold.Title"/>
+
+        </LinearLayout>
+
+        <com.facebook.drawee.view.SimpleDraweeView
+            android:id="@+id/navigation_header_avatar"
+            android:layout_width="@dimen/ariel_avatar_size"
+            android:layout_height="@dimen/ariel_avatar_size"
+            android:background="@drawable/ic_profile_placeholder"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:roundAsCircle="true"
+            fresco:roundingBorderColor="@color/evcs_white"
+            fresco:roundingBorderWidth="@dimen/app_avatar_border_width" />
+
+    </LinearLayout>
+
+</LinearLayout>

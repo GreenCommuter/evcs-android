@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Static Spacing -->
+    <dimen name="static_spacing_tiniest">1dp</dimen>
+    <dimen name="static_spacing_tiny">2dp</dimen>
+    <dimen name="static_spacing_small">4dp</dimen>
+    <dimen name="static_spacing_medium">8dp</dimen>
+    <dimen name="static_spacing_medium_extra">16dp</dimen>
+    <dimen name="static_spacing_large">20dp</dimen>
+    <dimen name="static_spacing_large_extra">28dp</dimen>
+    <dimen name="static_spacing_big">36dp</dimen>
+    <dimen name="static_spacing_huge">48dp</dimen>
+    <dimen name="static_spacing_huge_extra">60dp</dimen>
+    <dimen name="static_spacing_largest">72dp</dimen>
+
+    <!-- Spacing -->
+    <dimen name="spacing_none">0dp</dimen>
+    <dimen name="spacing_tiniest">1dp</dimen>
+    <dimen name="spacing_tiny">1dp</dimen>
+    <dimen name="spacing_small">2dp</dimen>
+    <dimen name="spacing_medium">4dp</dimen>
+    <dimen name="spacing_medium_more">8dp</dimen>
+    <dimen name="spacing_medium_extra">12dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_large_extra">22dp</dimen>
+    <dimen name="spacing_big">28dp</dimen>
+    <dimen name="spacing_big_extra">32dp</dimen>
+    <dimen name="spacing_huge">38dp</dimen>
+    <dimen name="spacing_huge_extra">46dp</dimen>
+    <dimen name="spacing_largest">54dp</dimen>
+    <dimen name="spacing_largest_extra">64dp</dimen>
+
+    <!-- Px Spacing -->
+    <dimen name="spacing_ariel_dense">4dp</dimen>
+    <dimen name="spacing_ariel_related">8dp</dimen>
+    <dimen name="spacing_ariel_leftpadding">12dp</dimen>
+    <dimen name="spacing_ariel_icons">16dp</dimen>
+    <dimen name="spacing_ariel_different">28dp</dimen>
+    <dimen name="spacing_ariel_sections">56dp</dimen>
+
+    <dimen name="padding_ariel_standard">16dp</dimen>
+    <dimen name="padding_ariel_outer">0dp</dimen>
+    <dimen name="padding_ariel_inner">28dp</dimen>
+    <dimen name="padding_ariel_big">36dp</dimen>
+
+    <dimen name="radius_text">8dp</dimen>
+    <dimen name="radius_ariel_co2">24dp</dimen>
+    <dimen name="radius_ariel_big">28dp</dimen>
+
+    <dimen name="ariel_avatar_size">64dp</dimen>
+    <dimen name="ariel_avatar_size_vanpoolers">48dp</dimen>
+    <dimen name="ariel_icon_size">40dp</dimen>
+
+    <!-- Anti-spacing -->
+    <dimen name="negative_spacing_medium">-4dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="font_tiny">6sp</dimen>
+    <dimen name="font_small">8sp</dimen>
+    <dimen name="font_small_more">10sp</dimen>
+    <dimen name="font_medium">12sp</dimen>
+    <dimen name="font_medium_more">14sp</dimen>
+    <dimen name="font_medium_extra">16sp</dimen>
+    <dimen name="font_large">18sp</dimen>
+    <dimen name="font_large_extra">20sp</dimen>
+    <dimen name="font_big">22sp</dimen>
+    <dimen name="font_huge">24sp</dimen>
+
+    <!-- General -->
+    <dimen name="app_avatar_border_width">1dp</dimen>
+
+    <!-- Radius -->
+    <dimen name="default_radius">2dp</dimen>
+    <dimen name="button_radius">16dp</dimen>
+
+    <!-- Border -->
+    <dimen name="thin_border">0.8dp</dimen>
+    <dimen name="default_border">1dp</dimen>
+
+    <!-- Profile Image -->
+    <dimen name="profile_background_height">180dp</dimen>
+    <dimen name="profile_avatar_size">80dp</dimen>
+
+    <!-- My Information -->
+    <dimen name="my_information_zip_width">160dp</dimen>
+
+    <!-- Drawer height -->
+    <dimen name="drawer_height">192dp</dimen>
+
+    <!-- Map -->
+    <dimen name="map_padding">40dp</dimen>
+    <dimen name="vanpool_detail_map_size">200dp</dimen>
+    <dimen name="vanpool_map_bottom_padding">144dp</dimen>
+    <dimen name="carsharing_detail_map_height">166dp</dimen>
+    <dimen name="carsharing_map_bottom_padding">72dp</dimen>
+    <dimen name="vanpool_search_top_padding">72dp</dimen>
+
+    <!-- Dialog -->
+    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="progress_dialog_height">92dp</dimen>
+
+    <!-- Rectangle Switch -->
+    <dimen name="switch_rectangle_thumb_width">104dp</dimen>
+    <dimen name="switch_rectangle_thumb_height">40dp</dimen>
+    <dimen name="switch_rectangle_radius">6dp</dimen>
+
+    <!--Tab Switch-->
+    <dimen name="switch_tab_thumb_height">148dp</dimen>
+
+    <!-- Image Checkbox -->
+    <dimen name="image_checkbox_image_size">44dp</dimen>
+
+    <!-- My Trips -->
+    <dimen name="my_trips_cards_margin_left_right">12dp</dimen>
+    <dimen name="my_trips_cards_margin_top_bottom">8dp</dimen>
+    <dimen name="my_trips_corporate_label">5dp</dimen>
+    <dimen name="my_trips_images_height">100dp</dimen>
+
+    <!-- Future Reservation -->
+    <dimen name="future_reservation_parking_space_margin_top">10dp</dimen>
+    <dimen name="future_reservation_parking_space_margin_left">16dp</dimen>
+    <dimen name="future_reservation_address_margin_left">12dp</dimen>
+
+    <!-- Booking Details -->
+    <dimen name="booking_detail_element_size">88dp</dimen>
+
+    <!--Payment Methods-->
+    <dimen name="payment_methods_credit_font_size">50sp</dimen>
+
+    <!-- Show Password -->
+    <dimen name="show_password_margin_bottom">12dp</dimen>
+
+    <!-- Incident Report -->
+    <dimen name="incident_report_images_dimens">48dp</dimen>
+
+    <!-- Ongoing Car -->
+    <dimen name="ongoing_car_width">100dp</dimen>
+    <dimen name="ongoing_car_height">70dp</dimen>
+    <dimen name="ongoing_car_tabs_height">228dp</dimen>
+
+    <!--Car Sharing-->
+    <dimen name="carsharing_pin_size">25dp</dimen>
+    <dimen name="carsharing_timetable_size">20dp</dimen>
+</resources>
+

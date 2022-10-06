@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "282371108097",
+    "firebase_url": "https://green-commuter.firebaseio.com",
+    "project_id": "green-commuter",
+    "storage_bucket": "green-commuter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282371108097:android:e55ed9a04466c61a",
+        "android_client_info": {
+          "package_name": "org.greencommuter.android.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282371108097-o59c9he198b9sh3ifrvt2nfn9gv5mu7u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.greencommuter.android.dev",
+            "certificate_hash": "d356057d19e7b2a5f6790520179ef50b6563b358"
+          }
+        },
+        {
+          "client_id": "282371108097-6d6b9acldqiptvqpc4t9bnhq9f4iknoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.greencommuter.android.dev",
+            "certificate_hash": "99e9e21dd61b9e5a24643c930dad22e14d2170e1"
+          }
+        },
+        {
+          "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vFD0ck8_mNCVJGkgTvVam98Eji4yeJM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:282371108097:android:e800bcda885bf6c1dabf00",
+        "android_client_info": {
+          "package_name": "org.redcommuter.android.dev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA8vFD0ck8_mNCVJGkgTvVam98Eji4yeJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282371108097-cnf8iv8ie7juh9oqcko0ghjjfgna038v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.greencommuter.greencommuter.release"
+              }
+            }
+          ]
+        }
+      }
+    },
+  ],
+  "configuration_version": "1"
+}

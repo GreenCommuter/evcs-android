@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:color="@color/evcs_dark_grey" android:state_focused="true" />
+    <item android:color="@color/evcs_dark_grey" app:state_empty_text="true"/>
+    <item android:color="@color/evcs_red" app:state_error_text="true"/>
+    <item android:color="@color/evcs_dark_grey"/> <!-- default color -->
+</selector>

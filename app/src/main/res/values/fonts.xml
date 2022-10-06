@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Sansation Regular styles -->
+    <style name="SansationRegular" parent="@android:style/TextAppearance">
+        <item name="fontPath">fonts/Sansation-Regular.ttf</item>
+    </style>
+
+    <style name="SansationRegular.SmallMore">
+        <item name="android:textSize">@dimen/font_small_more</item>
+    </style>
+
+    <style name="SansationRegular.SmallMore.Grey">
+        <item name="android:textColor">@color/evcs_grey</item>
+    </style>
+
+    <style name="SansationRegular.SmallMore.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="SansationRegular.Small">
+        <item name="android:textSize">@dimen/font_small</item>
+    </style>
+
+    <style name="SansationRegular.Small.Switch">
+        <item name="android:textColor">@color/switch_color</item>
+    </style>
+
+    <style name="SansationRegular.Small.Switch.Caps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="SansationRegular.Medium">
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="SansationRegular.Medium.Switch">
+        <item name="android:textColor">@color/switch_color</item>
+    </style>
+
+    <style name="SansationRegular.Medium.Switch.Caps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="SansationRegular.Medium.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="SansationRegular.Medium.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="SansationRegular.Medium.Grey">
+        <item name="android:textColor">@color/evcs_grey</item>
+    </style>
+
+    <style name="SansationRegular.Medium.Transparent">
+        <item name="android:textColor">@color/evcs_transparent</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.Red">
+        <item name="android:textColor">@color/evcs_red</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore">
+        <item name="android:textSize">@dimen/font_medium_more</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.White.Clickable">
+        <item name="android:textColor">@color/clickable_text_color_white</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.Grey">
+        <item name="android:textColor">@color/evcs_grey</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.LightGrey">
+        <item name="android:textColor">@color/evcs_light_grey</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.Green.Caps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.DarkGrey">
+        <item name="android:textColor">@color/evcs_dark_grey</item>
+    </style>
+
+    <style name="SansationRegular.MediumMore.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="SansationRegular.MediumExtra">
+        <item name="android:textSize">@dimen/font_medium_extra</item>
+    </style>
+
+    <style name="SansationRegular.MediumExtra.Grey">
+       <item name="android:textColor">@color/evcs_grey</item>
+    </style>
+
+    <style name="SansationRegular.MediumExtra.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="SansationRegular.Large">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="SansationRegular.Large.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="SansationRegular.Large.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="SansationRegular.Huge">
+        <item name="android:textSize">@dimen/font_huge</item>
+    </style>
+
+    <style name="SansationRegular.Huge.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <!-- Proxima Nova Bold styles -->
+    <style name="ProximaNovaBold" parent="@android:style/TextAppearance">
+        <item name="fontPath">fonts/ProximaNova-Bold.otf</item>
+    </style>
+
+    <style name="ProximaNovaBold.SmallMore">
+        <item name="android:textSize">@dimen/font_small_more</item>
+    </style>
+
+    <style name="ProximaNovaBold.Medium">
+        <item name="android:textSize">@dimen/font_medium</item>
+    </style>
+
+    <style name="ProximaNovaBold.Medium.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumMore">
+        <item name="android:textSize">@dimen/font_medium_more</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumMore.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumMore.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumExtra">
+        <item name="android:textSize">@dimen/font_medium_extra</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumExtra.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumExtra.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="ProximaNovaBold.MediumExtra.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="ProximaNovaBold.Large">
+        <item name="android:textSize">@dimen/font_large</item>
+    </style>
+
+    <style name="ProximaNovaBold.Large.Switch">
+        <item name="android:textColor">@color/switch_color</item>
+    </style>
+
+    <style name="ProximaNovaBold.Large.Switch.Caps">
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="ProximaNovaBold.Large.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="ProximaNovaBold.Large.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="ProximaNovaBold.Large.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="ProximaNovaBold.Huge">
+        <item name="android:textSize">@dimen/font_huge</item>
+    </style>
+
+    <!-- Title text styles -->
+    <style name="TitleFont" parent="@android:style/TextAppearance">
+        <item name="fontPath">fonts/ProximaNova-Bold.otf</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="TitleFont.MediumMore">
+         <item name="android:textSize">@dimen/font_medium_more</item>
+    </style>
+
+    <style name="TitleFont.MediumMore.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="TitleFont.MediumMore.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="TitleFont.MediumExtra">
+         <item name="android:textSize">@dimen/font_medium_extra</item>
+    </style>
+
+    <style name="TitleFont.MediumExtra.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="TitleFont.MediumExtra.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="TitleFont.MediumExtra.Green">
+        <item name="android:textColor">@color/evcs_green</item>
+    </style>
+
+    <style name="TitleFont.Large">
+        <item name="android:textSize">@dimen/font_huge</item>
+    </style>
+
+    <style name="TitleFont.Large.Black">
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="TitleFont.Large.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
+    <style name="Roboto" parent="@android:style/TextAppearance">
+        <item name="fontPath">fonts/Roboto-Regular.ttf</item>
+    </style>
+
+    <style name="Roboto.Body">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Roboto.Body.Grey">
+        <item name="android:textColor">#514f4d</item>
+    </style>
+
+    <style name="Roboto.BodySmall">
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="Roboto.BodySmall.Grey">
+        <item name="android:textColor">#514f4d</item>
+    </style>
+
+    <style name="Roboto.ProfileMenu">
+        <item name="android:textColor">@color/button_text_color_selector_green</item>
+        <item name="android:textSize">21sp</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
+
+    <style name="RobotoBold" parent="@android:style/TextAppearance">
+        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
+    </style>
+
+    <style name="RobotoBold.Title">
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="RobotoBold.SectionTitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="RobotoBold.CallToAction">
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="RobotoBold.Body">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="RobotoBold.Body.Grey">
+        <item name="android:textColor">#514f4d</item>
+    </style>
+
+</resources>

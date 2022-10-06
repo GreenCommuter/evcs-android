@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SelectionView">
+        <attr name="image" format="reference"/>
+        <attr name="title" format="string"/>
+        <attr name="description" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="EmptyTextInputLayout">
+        <attr name="collapsedHintColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="TextInputLayoutTheme">
+        <attr name="textInputLayoutStyle" format="reference"/>
+    </declare-styleable>
+
+    <!-- Custom state for the text input layout to determine whether the label is shown above some text or not -->
+    <declare-styleable name="EmptyTextState">
+        <attr name="state_empty_text" format="boolean"/>
+        <attr name="state_error_text" format="boolean"/>
+    </declare-styleable>
+
+    <!-- Error state to use in custom view groups -->
+    <declare-styleable name="ErrorState">
+        <attr name="state_error" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="ListButtonView">
+        <attr name="text" format="string"/>
+        <attr name="bottomDivider" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="SeekBar">
+        <attr name="seekbar_title" format="string"/>
+        <attr name="min" format="float"/>
+        <attr name="max" format="float"/>
+        <attr name="ticks" format="integer"/>
+        <attr name="textStep" format="integer"/>
+        <attr name="format" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="HoodView">
+        <attr name="hoodText" format="string|reference" />
+        <attr name="hoodTextStyle" format="reference" />
+        <attr name="hoodButtonText" format="string|reference" />
+        <attr name="hoodButtonTextStyle" format="reference" />
+        <attr name="hoodButtonBackground" format="reference" />
+        <attr name="hoodBackgroundColor" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="DateTimeView">
+        <attr name="textColor" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="StandardTextField">
+        <attr name="label" format="string|reference" />
+    </declare-styleable>
+
+    <declare-styleable name="CustomTabLayout">
+        <attr name="selectedTab" format="reference" />
+        <attr name="unselectedTab" format="reference" />
+        <attr name="innerMargin" format="dimension" />
+    </declare-styleable>
+
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ProgressBar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/spacing_large_extra"
+    android:layout_height="@dimen/spacing_large_extra"
+    android:indeterminateTint="@color/evcs_white"
+    android:gravity="center"/>

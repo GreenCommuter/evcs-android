@@ -1,0 +1,498 @@
+<resources>
+
+    <!-- General -->
+    <string name="app_ok">OK</string>
+    <string name="app_next">Next</string>
+    <string name="app_finish">Finish</string>
+    <string name="app_error_network">There was a network error. Try again later.</string>
+    <string name="app_error_unknown">There was an unknown error. Try again later.</string>
+    <string name="app_error_oom">"Error: out of memory.</string>
+    <string name="app_price_format">$%.2f</string>
+    <string name="app_time_format">hh:mm a</string>
+    <string name="app_long_date_format">MMMM d</string>
+    <string name="app_edit">Edit</string>
+    <string name="app_save">Save</string>
+    <string name="app_search">Search</string>
+    <string name="app_more">More</string>
+    <string name="app_vanpool_id_format">Vanpool #%1$d</string>
+    <string name="app_miles_distance_format">%1$.1f Miles away</string>
+    <string name="app_yes">Yes</string>
+    <string name="app_no">No</string>
+    <string name="app_continue">Continue</string>
+    <string name="app_username_format">%1$s %2$s</string> <!-- 1: First Name | 2: Last Name -->
+    <string name="app_middlescore">&#8211;</string>
+    <string name="app_enable">Enable</string>
+    <string name="app_new_line">\n</string>
+    <string name="app_from">From</string>
+    <string name="app_to">To</string>
+    <string name="drawer_activity_version_name_prefix_format">v%s</string>
+    <string name="facebook_app_id">1238029779934289</string>
+    <string name="fb_login_protocol_scheme">fb499944703962223</string>
+
+    <!-- Progress Dialog -->
+    <string name="progress_dialog_loading">Loading&#8230;</string>
+
+    <!-- Auth -->
+    <string name="auth_sign_in">Log In</string>
+    <string name="auth_register">Sign Up</string>
+    <string name="auth_or">Or</string>
+
+    <!-- Choose Plan -->
+    <string name="choose_plan_title">Choose plan</string>
+    <string name="choose_plan_pay_as_you_go_title">Pay as you go</string>
+    <string name="choose_plan_pay_as_you_go_description">No regular fee. Pay for each rental. This plan is ideal for occasional use.</string>
+    <string name="choose_plan_basic_title">Basic membership</string>
+    <string name="choose_plan_basic_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
+    <string name="choose_plan_premium_title">Premium membership</string>
+    <string name="choose_plan_premium_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
+
+    <!-- Sign In -->
+    <string name="sign_in_title">Login</string>
+    <string name="sign_in_email">e-mail Address *</string>
+<!--    <string name="sign_in_email">e-mail Address *</string>-->
+    <string name="sign_in_name">Name *</string>
+    <string name="sign_in_password">Password *</string>
+    <string name="sign_in_forgot_password">Forgot your Password?</string>
+    <string name="sign_in_button">Sign in</string>
+    <string name="sign_in_social">Sign in with Google or Facebook account</string>
+    <string name="sign_in_goto_sign_up">Don\'t have an account yet?</string>
+    <string name="sign_in_error_facebook_email">Make sure your account has an email address</string>
+
+    <!-- Forgot Password -->
+    <string name="forgot_password_title">Password Recovery</string>
+    <string name="forgot_password_email">Enter your email address</string>
+    <string name="forgot_password_button">Send me an email</string>
+    <string name="forgot_password_dialog">Password recovery instructions have been sent to your email address</string>
+    <string name="forgot_password_wrong_email">Invalid email address</string>
+
+    <!-- Register -->
+    <string name="register_title">Let\'s get to know you</string>
+    <string name="register_email">Email</string>
+    <string name="register_password">Password *</string>
+    <string name="register_password_confirm">Re-enter the password</string>
+    <string name="register_password_hint">Must be at least %1d characters long</string>
+    <string name="register_button">Sign Up</string>
+    <string name="register_gotologin">Do you already have an account with us?</string>
+    <string name="i_agree_terms">I agree to EVCS\'s <a href="https://greencommuter.org/privacy">privacy policy</a> and <a href="https://greencommuter.org/term_of_use">terms of use</a></string>
+    <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
+
+    <!-- Choose service -->
+    <string name="choose_service_title">Choose Service</string>
+    <string name="choose_service_vanpooling_title">Vanpooling</string>
+    <string name="choose_service_carsharing_title">Car Sharing</string>
+    <string name="choose_service_corporate_title">Corporate</string>
+    <string name="choose_service_vanpooling_description_wording_key">vanpooling_choose_service_description</string>
+    <string name="choose_service_carsharing_description_wording_key">carsharing_choose_service_description</string>
+
+    <!--Placeholder Fragment-->
+    <string name="placeholder_no_internet_dialog_title">Connection Lost</string>
+    <string name="placeholder_no_internet_dialog_subtitle">We will try again as soon as the connection reestablishes</string>
+
+    <!-- In Development -->
+    <string name="carsharing_dialog_in_development_title">Coming soon!</string>
+    <string name="carsharing_dialog_in_development_body">These features are currently under development.</string>
+
+    <!--Car Sharing no location error-->
+    <string name="carsharing_location_error_title_path">carsharing_location_error_title</string>
+    <string name="carsharing_location_error_subtitle_path">carsharing_location_error_subtitle</string>
+    <string name="carsharing_gps_permissions_error_subtitle_path">carsharing_gps_permissions_error_subtitle</string>
+
+    <!-- My Information -->
+    <string name="my_information_title">My information</string>
+    <string name="my_information_first_name">First Name</string>
+    <string name="my_information_middle_name">Middle Name (optional)</string>
+    <string name="my_information_last_name">Last Name</string>
+    <string name="my_information_gender">Gender</string>
+    <string name="my_information_gender_default">(select an option)</string>
+    <string-array name="my_information_gender_array">
+        <item>Male</item>
+        <item>Female</item>
+    </string-array>
+    <string name="my_information_birthdate">Birthdate</string>
+    <string name="my_information_street_address">Street Address</string>
+    <string name="my_information_zip_code">Zip Code *</string>
+    <string name="my_information_phone_number">Phone Number</string>
+    <string name="my_information_email">Email</string>
+    <string name="my_information_email_taken">Email has already been taken</string>
+
+    <!-- BrainTree -->
+    <string name="braintree_title">Add a new credit card</string>
+    <string name="braintree_error_token">Error retrieving token</string>
+    <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
+
+    <!-- Profile -->
+    <string name="profile_title">Profile</string>
+    <string name="profile_username_format">%1$s %2$s</string> <!-- 1: First Name | 2: Last Name -->
+    <string name="profile_billing_information">Wallet</string>
+    <string name="profile_personal_information">Personal Information</string>
+    <string name="profile_employer">Corporate Plan</string>
+    <string name="profile_change_password">Account</string>
+    <string name="show_password">Show</string>
+    <string name="profile_sign_out">Sign Out</string>
+    <string name="profile_avatar_change_title">Change Profile Picture</string>
+    <string name="profile_avatar_change_camera_button">Take a picture</string>
+    <string name="profile_avatar_change_library_button">Choose from library</string>
+    <string name="profile_avatar_change_cancel_button">Cancel</string>
+    <string name="profile_avatar_change_request_failure">There was an error when processing your request. Try again later.</string>
+
+    <!-- Personal Information -->
+    <string name="personal_information_update_successful">User updated</string>
+    <string name="underage_issue_wording">error_underage</string>
+
+    <!-- Billing information -->
+    <string name="profile_billing_information_braintree_description">Choose your payment method</string>
+    <string name="billing_information_credit_card_formatter">... %1$s</string>
+    <string name="billing_information_credit_card_formatter_full">···· ···· ···· %1$s</string>
+    <string name="payment_method_fragment_title">Payment method</string>
+    <string name="payment_methods_account_credit">Account Credit</string>
+    <string name="payment_method_dialog_card_information">Card information</string>
+    <string name="payment_method_dialog_make_default">Make default</string>
+    <string name="payment_method_dialog_remove">Remove</string>
+    <string name="payment_method_dialog_remove_subtitle">Are you sure you want to remove this payment method?</string>
+    <string name="payment_method_dialog_remove_title">Warning</string>
+    <string name="payment_method_dialog_default_subtitle">Are you sure you want to set this credit card as your default payment method? Your subscriptions will be charged to this card</string>
+    <string name="payment_method_dialog_remove_button">Delete card</string>
+    <string name="payment_method_promo_codes">Promo codes</string>
+    <string name="payment_method_add_coupon">Add a new promo code</string>
+    <string-array name="payment_method_balance_format">
+        <item>You currently have </item>
+        <item>%s</item>
+        <item> in your wallet. The chosen credit card will only be used if the final amount exceeds your credit</item>
+    </string-array>
+    <string name="payment_method_empty">No credit card found. Add yours to start using our services!</string>
+
+    <!--Add credit card-->
+    <string name="payment_method_toolbar_add">Add a new credit card</string>
+    <string name="profile_billing_information_braintree_success">New payment method registered</string>
+    <string name="add_credit_card_number">Credit Card Number</string>
+    <string name="add_credit_card_expiration">Expiration</string>
+    <string name="add_credit_card_zip_code">Billing Zip Code</string>
+    <string name="add_credit_card_cvv">CVV</string>
+    <string name="add_credit_card_ok">Add card</string>
+
+    <!--Payment History-->
+    <string name="payment_history_title">Payment History</string>
+    <string name="payment_history_month_formatter">MMMM yyyy</string>
+    <string name="payment_history_date_formatter">MMM d, yyyy</string>
+    <string name="payment_history_formatter">%1$s (%2$s)</string>
+    <string name="payment_history_empty">No trips done yet</string>
+    <string name="payment_history_month_title"> - Payments</string>
+
+    <!--Payment Details-->
+    <string name="payment_details_title">Payment Details</string>
+    <string name="payment_details_payment_method">Payment method</string>
+    <string name="payment_details_date">Date</string>
+    <string name="payment_details_amount">Amount</string>
+    <string name="payment_details_authorization_code">Authorization #</string>
+
+    <!--Account-->
+    <string name="account_fragment_email_updated">Email updated</string>
+
+    <!--Search Location-->
+    <string name="search_location_explanation">Start typing the address and then select from \n the results</string>
+
+    <!-- Change password -->
+    <string name="change_password_success">Password changed</string>
+    <string name="change_password_new">New password</string>
+    <string name="change_password_confirm">Confirm new password</string>
+    <string name="change_password_button">Change your password</string>
+    <string name="change_password_reset">Forgot password? Reset it via email</string>
+
+    <!-- Drawer -->
+    <string name="drawer_header_user_format">%1$s %2$s</string>
+    <string name="drawer_menu_open">Open</string>
+    <string name="drawer_menu_close">Close</string>
+    <string name="drawer_menu_profile">Profile</string>
+    <string name="drawer_menu_coupons">COUPONS</string>
+    <string name="drawer_menu_help">Help</string>
+
+    <!-- Monthly Fee View -->
+    <string name="monthly_fee_text">Monthly fee</string>
+
+    <!-- Passenger Item View -->
+    <string name="passenger_item_view_me">%1$s (me)</string>
+    <string name="passenger_item_view_absent">%1$s (absent)</string>
+
+    <!-- Passengers View -->
+    <string name="passengers_view_collapsed_format">%d people</string>
+
+    <!-- Notifications -->
+    <string name="notifications_title">Notifications</string>
+    <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
+    <string name="notifications_downgraded">You were downgraded. Please check your license information.</string>
+    <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
+    <string name="notifications_mvr_approved">Congratulations! Your MVR has been approved. You can now start using our services.</string>
+    <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>
+    <string name="notifications_drivers_license_information_filled_out">We are now reviewing your driving record. It should take 24–48 hours. Look for an update shortly.</string>
+    <string name="notifications_plug_in_reminder">Did you remember to plug in the car?</string>
+    <string name="notifications_vanpool_already_left">Your vanpool already left today.</string>
+    <string name="notifications_user_added">%@ has joined your vanpool.</string>
+    <string name="notifications_user_quit">%@ has quit your vanpool.</string>
+    <string name="notifications_vanpool_problems">We had a problem with the car. For more information contact us.</string>
+    <string name="notifications_car_assigned">Awesome! A car has been assigned to your vanpool.</string>
+    <string name="notifications_user_not_coming">%@ is not coming today.</string>
+    <string name="notifications_user_late">%@ is running a little late.</string>
+    <string name="notifications_driver_not_coming">The assigned driver can´t make it on %@. You will be the driver that day.</string>
+    <string name="notifications_vanpool_created">Your vanpool has been created.</string>
+    <string name="notifications_vanpool_in_next_minutes">Your vanpool will start in %@ minutes.</string>
+    <string name="notifications_vanpool_preapproved">Your vanpool has been preapproved.</string>
+    <string name="notifications_vanpool_approved">Your vanpool has been approved.</string>
+    <string name="notifications_vanpool_activated">Your vanpool has been activated.</string>
+    <string name="notifications_vanpool_payment_required">Your vanpool has been approved and the payment is required.</string>
+    <string name="notifications_invitation">%@ has invited you to a vanpool.</string>
+    <string name="notifications_forgot_password">You have requested to change your password. Please check your email.</string>
+    <string name="notifications_cancellation_confirmation">As per your request, your reservation has been canceled.</string>
+    <string name="notifications_reservation_reminder">Your reservation starts in %@ minutes.</string>
+    <string name="notifications_reservation_ending_soon">Your reservation ends in %@ minutes. Please head back to the parking lot to return the car.</string>
+    <string name="notifications_you_left_vanpool">You have left your vanpool.</string>
+    <string name="notifications_complete_vanpool_poll">Please complete your vanpool checklist.</string>
+    <string name="notifications_complete_carshare_poll">Please go to My Trips and complete your booking checklist.</string>
+
+    <!-- My Vanpools -->
+    <string name="my_vanpools_title">Vanpools you applied</string>
+
+    <!-- Vanpool Travel Information View -->
+    <string name="vanpool_travel_information_time">Travel time</string>
+    <string name="vanpool_travel_information_estimated_distance">Estimated Distance</string>
+    <string name="vanpool_travel_information_travel_distance">Travel Distance</string>
+    <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
+    <string name="vanpool_travel_information_km_distance_format">%1$.1f Km</string>
+    <string name="vanpool_travel_information_time_format">%1$d min</string>
+
+    <!-- Billing confirmation Dialog -->
+    <string name="vanpool_detail_billing_confirmation_dialog_title">Billing confirmation</string>
+    <string name="vanpool_detail_billing_confirmation_dialog_subtitle">A monthly subscription will be billed to your credit card once the vanpool is active</string>
+    <string name="vanpool_detail_billing_confirmation_dialog_button">Send payment</string>
+
+    <!-- Congratulations Fragment -->
+    <string name="vanpool_detail_congratulations_fragment_description">Thank you for your payment. Your vanpool is scheduled to begin on %1$s. $%2$.2f will be deducted monthly from your credit card on file.</string>
+
+    <!-- Vanpool Status -->
+    <string name="vanpool_status_cancelled">Canceled</string>
+    <string name="vanpool_status_missing_vanpoolers">Not enough vanpoolers</string>
+    <string name="vanpool_status_waiting_preapproval">Pending preapproval</string>
+    <string name="vanpool_status_waiting_approval">Pending approval</string>
+    <string name="vanpool_status_waiting_payment">Waiting for driver\'s payment</string>
+    <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
+    <string name="vanpool_status_active">Active</string>
+    <string name="vanpool_status_inactive">Inactive</string>
+
+    <!-- Vanpool Absence -->
+    <string name="vanpool_absence_title">Absence</string>
+    <string name="vanpool_absence_loaded">Absence successfully registered</string>
+    <string name="vanpool_absence_not_going_today">I\'m not going today</string>
+    <string name="vanpool_absence_temporarily">I\'ll be absent temporarily</string>
+
+    <!-- Vanpool Checklist -->
+    <string name="vanpool_checklist_title">Car checklist</string>
+    <string name="vanpool_checklist_hood_text">You must answer this checklist to be able to finish your ride.</string>
+    <string name="vanpool_checklist_damage_item_question">Any vehicle damage to report?</string>
+    <string name="vanpool_checklist_damage_item_note">Note</string>
+    <string name="vanpool_checklist_clean_item_question">Is the vehicle dirty?</string>
+    <string name="vanpool_checklist_clean_item_note">Note</string>
+    <string name="vanpool_checklist_equipment_item_question">Is all vehicle equipment still on board?</string>
+    <string name="vanpool_checklist_equipment_item_select_missing">Please select any missing equipment</string>
+    <string name="vanpool_checklist_equipment_item_select_missing_subtitle">Tap the picture to see what each item looks like</string>
+    <string name="vanpool_checklist_equipment_charging_kit">Vehicle charging kit</string>
+    <string name="vanpool_checklist_equipment_safety_equipment">Safety equipment</string>
+    <string name="vanpool_checklist_equipment_charging_cards">Charging cords</string>
+    <string name="vanpool_checklist_equipment_vehicle_documents">Vehicle documents</string>
+    <string name="vanpool_checklist_passengers_item_question">Are all passengers today?</string>
+    <string name="vanpool_checklist_passengers_item_not_riding">Who is not riding?</string>
+    <string name="vanpool_checklist_equipment_format">%1$s</string>
+
+    <!-- Vanpool Pre-Checklist -->
+    <string name="vanpool_pre_checklist_unlock_car">Unlock</string>
+
+    <!-- Vanpool Ongoing ride -->
+    <string name="vanpool_ongoing_ride_title">Ongoing Ride</string>
+    <string name="vanpool_ongoing_ride_finish_booking">Finish journey</string>
+    <string name="vanpool_ongoing_ride_start_engine">Start Car</string>
+    <string name="vanpool_ongoing_ride_lock_car">Lock car</string>
+    <string name="vanpool_ongoing_ride_unlock_car">Unlock car</string>
+    <string name="vanpool_ongoing_ride_tab_controls">CONTROLS</string>
+    <string name="vanpool_ongoing_ride_tab_end_trip">END TRIP</string>
+    <string name="vanpool_ongoing_ride_enable_location_dialog_title">Location error</string>
+    <string name="vanpool_ongoing_ride_report_text">Reports can be submitted for any big or small issues \nfound when using the car.</string>
+    <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
+    <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
+    <string name="vanpool_ongoing_ride_lock_toggle_error">There was an error whilst trying to lock/unlock the car. Please try again or contact customer support!</string>
+    <string name="vanpool_ongoing_ride_start_engine_error">There was an error whilst trying to start the engine of the car. Please try again or contact customer support!</string>
+    <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
+    <string name="vanpool_ongoing_ride_tracking_enabled">Tracking enabled</string>
+    <string name="vanpool_ongoing_ride_tracking_disabled">Tracking disabled</string>
+    <string name="vanpool_ongoing_ride_file_report_button">File report</string>
+    <string name="vanpool_ongoing_ride_call_us">Call us</string>
+    <string name="vanpool_ongoing_ride_control_lock">Lock</string>
+    <string name="vanpool_ongoing_ride_control_unlock">Unlock</string>
+    <string name="vanpool_ongoing_ride_control_lock_unlock">Lock / Unlock</string>
+    <string name="vanpool_ongoing_ride_control_start">Start</string>
+    <string name="vanpool_ongoing_ride_end_trip_return">Return the car to</string>
+    <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
+    <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
+    <string name="vanpool_ongoing_ride_map_uri_format">http://maps.google.com/maps?%s&amp;dirflg=d</string>
+    <string name="vanpool_ongoing_ride_clock_format">%1$01d:%2$02d</string>
+    <string name="vanpool_ongoing_ride_clock_left_time">left in your reservation</string>
+    <string name="vanpool_ongoing_ride_clock_overtime">overtime</string>
+    <string name="vanpool_ongoing_ride_service">TeslaService</string>
+    <string name="vanpool_ongoing_ride_spinner">Finishing the ride, please wait</string>
+    <string-array name="vanpool_ongoing_ride_spinner">
+        <item>Beginning the process to finish your ride, please wait</item>
+        <item>Communicating with vehicle</item>
+        <item>Checking GPS location</item>
+        <item>Gathering trip data</item>
+        <item>Running security checks</item>
+        <item>Ending the ride</item>
+    </string-array>
+    <string name="ongoing_ride_offline">You need to be online to perform this action</string>
+    <string name="ongoing_ride_offline_2">You are offline. Some features may not be available</string>
+
+    <string name="vanpool_ongoing_ride_dismiss">Dismiss</string>
+    <string name="vanpool_ongoing_ride_do_not_show_again">Do not show again</string>
+
+    <!-- Vanpool Post-Checklist -->
+    <string name="vanpool_post_checklist_lock_car">Lock</string>
+
+    <!--Book Now-->
+    <string name="book_now_parking_space_nearby">Cars nearby</string>
+    <string name="book_now_my_location">My location</string>
+    <string name="book_now_search_location">Search location</string>
+    <string name="book_now_current_location">Current Location</string>
+    <string name="book_now_current_location_click">Current location (tap to change)</string>
+    <string name="book_now_tab">Book Now</string>
+    <string name="book_now_error_no_cars_found">Sorry, no available cars found for the requested location, please try another one.</string>
+    <string name="book_now_advice_enable_location_advice">Enabling location permissions will enable you to find the closest cars to your location.</string>
+    <string name="book_now_enable_location_dialog_title">Location error</string>
+    <string name="book_now_enable_location_dialog_body">We couldn\'t find your location. Please turn on location services and try again or search from the address field.</string>
+    <string name="book_now_error_google_api_connection">Could not connect to Google API Client</string>
+
+    <!-- Future Reservation -->
+    <string name="future_reservation_tab">Future Reservation</string>
+    <string name="future_reservation_error_no_cars_found">Sorry, no cars found for current location, please try another one.</string>
+    <string name="future_reservation_pick_up">Pick up</string>
+    <string name="future_reservation_drop_off">Drop off</string>
+    <string name="future_reservation_hour">/hour</string>
+    <string name="future_reservation_day">/day</string>
+
+    <!-- Supported Version -->
+    <string name="not_supported_version_dialog_title">New Version Available</string>
+    <string name="not_supported_version_dialog_message">This version is deprecated. Please download the latest version.</string>
+    <string name="not_supported_version_dialog_button">Go to store</string>
+
+     <!-- Map Toolbar -->
+    <string name="toolbar_map_icon_title">Go to map</string>
+
+    <!-- Create Booking -->
+    <string name="create_booking_toolbar_title">Car sharing</string>
+    <string name="create_booking_pick_up">Pick up time</string>
+    <string name="create_booking_drop_off">Drop off time</string>
+    <string name="create_booking_choose_your_car">Choose your car</string>
+    <string name="create_booking_confirm_booking">Confirm booking</string>
+    <string name="create_booking_issues_car">Any issues with the car?</string>
+    <string name="create_booking_fetch_bookable_cars_error">There was an error while displaying the available cars. Please try again later!</string>
+    <string name="create_booking_create_booking_error">You already have a booking on that date.</string>
+    <string name="create_booking_started_title">This booking has already been started</string>
+    <string name="create_booking_car_title">Car</string>
+    <string name="create_booking_car_name_format">%1$s %2$s</string>
+    <string name="create_booking_car_plate_format">#%s</string>
+    <string name="create_booking_plus_tax">+ tax</string>
+    <string name="create_booking_unavailable_plan">You have reached the limit of booking hours allowed by your car share plan.</string>
+    <string name="create_booking_wallet_error_title">The payment has failed</string>
+    <string name="create_booking_wallet_error_subtitle">Please edit your wallet information</string>
+    <string name="create_booking_wallet_error_edit">Go to Wallet</string>
+    <string name="create_booking_wallet_error_cancel">Cancel</string>
+    <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
+    <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
+    <string name="create_booking_choose_a_diferent_car">Choose a different car</string>
+    <string name="create_booking_please_select_a_car">Please select a car</string>
+    <string name="create_booking_license_plate_number">License Plate %s</string>
+
+    <!-- Choose Car -->
+    <string name="choose_car_title">Select a car</string>
+    <string name="choose_car_per_hour">Per hour</string>
+    <string name="choose_car_text_format">%1$s %2$s</string>
+    <string name="choose_car_empty_view_wording">No cars at this location are available within the time frame specified. Please try another location or a different time frame.</string>
+    <string name="choose_car_suggestion_format">Available at %s</string>
+    <string name="choose_car_suggestion_header">We did not find any available cars at the desired pickup and dropoff times \n Here are other availabilities that may also work for you</string>
+
+    <!-- My Trips -->
+    <string name="my_trips_active_reservation"><b>Active reservation</b></string>
+    <string name="my_trips_finished_reservation"><b>Finished reservation</b></string>
+    <string name="my_trips_future_reservation"><b>Future reservation</b></string>
+    <string name="my_trips_canceled_reservation"><b>Canceled reservation</b></string>
+    <string name="my_trips_date_time_format">MM/dd/yy @ hh:mm a</string>
+    <string name="my_trips_car_formatter">%1$s %2$s</string>
+    <string name="my_trips_vanpool_formatter">%1$s to \n%2$s</string>
+    <string name="my_trips_booking_format">Booking # %d</string>
+    <string name="my_carshare_trip_canceled">Canceled trip</string>
+
+    <!-- Coupons -->
+    <string name="coupons_toolbar_title">Coupons</string>
+    <string name="coupons_format_discount_percentage">%.0f%% off</string>
+    <string name="coupons_format_wallet_credit">$%.2f wallet credit</string>
+    <string name="coupons_format_register_company">Register company</string>
+    <string name="coupons_format_weekend">Weekend plan</string>
+    <string name="coupons_add_code_button">Add coupon code</string>
+    <string name="coupons_empty_text">Coupon code</string>
+    <string name="coupon_invalid_dialog_title">Invalid Coupon</string>
+    <string name="coupon_invalid_dialog_button">Retry</string>
+    <string name="coupon_add_hint">Type the coupon code</string>
+    <string name="coupon_item_expires">Expires: %s</string>
+    <string name="coupon_item_does_not_expires">This promo code does not expire</string>
+    <string name="coupon_redeemed_title">Promo code Redeemed</string>
+    <string name="coupon_redeemed_description">You have successfully redeemed your coupon. It will be applied to your next purchase.</string>
+    <string name="promo_codes_dialog_unused">%d unused</string>
+
+    <!--Promo Code details-->
+    <string name="promo_code_details_title">Promo code details</string>
+    <string name="promo_code_details_code">Promo code</string>
+    <string name="promo_code_details_details">Details</string>
+    <string name="promo_code_details_expiration_date">Expiration date</string>
+    <string name="promo_code_add_title">Add promo code</string>
+    <string name="promo_code_add_redeem">Redeem</string>
+
+    <!-- Help -->
+    <string name="help_title">Help</string>
+    <string name="help_description">EVCS is here to help! \nIf you have any questions or concerns please send an email to help@evcs.org or call us at (844)&#8211;4RIDE&#8211;GC. That\'s \n (844) 474&#8211;3342.</string>
+    <string name="help_terms_of_use"><a href="https://greencommuter.org/term_of_use">Terms Of Use</a></string>
+    <string name="help_privacy_policy"><a href="https://greencommuter.org/privacy">Privacy Policy</a></string>
+
+    <!-- Invoice -->
+    <string name="invoice_total_price">Total price</string>
+    <string name="invoice_title">Invoice</string>
+
+    <!--Image Gallery-->
+    <string name="image_gallery_title">Image Gallery</string>
+
+    <!--Search Location-->
+    <string name="fragment_search_current_location">Current Location</string>
+    <string name="fragment_search_pickup_on">Pick up on %s</string>
+    <string-array name="fragment_search_dropoff_dialog">
+        <item>Select the</item>
+        <item>drop off</item>
+        <item>date and time</item>
+    </string-array>
+    <string-array name="fragment_search_pickup_dialog">
+        <item>Select the</item>
+        <item>pick up</item>
+        <item>date and time</item>
+    </string-array>
+
+    <!--Notifications-->
+    <string name="notifications_channel_name">All notifications</string>
+    <string name="notifications_channel_description">All notifications sent by the app</string>
+
+    <string name="register_your_car_title">Your car</string>
+    <string name="register_your_car_subtitle">Knowing what type of car you drive, we can personalize your experience with EVCS</string>
+    <string name="register_your_car_year">Year</string>
+    <string name="register_your_car_model">Model *</string>
+
+    <string name="fragment_register_cell_phone_title">One last thing</string>
+    <string name="fragment_register_cell_phone_subtitle">Let\'s validate your account using your phone number</string>
+    <string name="fragment_register_cell_phone_button">Send me a code</string>
+
+    <string name="fragment_register_enter_code_title">Enter your code</string>
+    <string name="fragment_register_enter_code_subtitle">Please enter the code you received on your cellphone (818) 660-6219</string>
+    <string name="fragment_register_enter_code_button">Validate it</string>
+
+</resources>

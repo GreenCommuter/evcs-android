@@ -113,7 +113,7 @@ configurations.all {
 
 dependencies {
     // Base
-    implementation 'com.github.BharatGad3:AndroidBase:master'
+    implementation 'com.github.BharatGad3:AndroidBase:1.0.1'
 
     // Android Support Library
     implementation 'com.google.android.material:material:1.2.1'

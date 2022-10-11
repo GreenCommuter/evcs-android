@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +15,8 @@ import com.facebook.drawee.drawable.ScalingUtils;
 import com.facebook.drawee.view.DraweeTransition;
 
 import org.evcs.android.R;
+import org.evcs.android.databinding.ActivityBaseNavhostBinding;
+import org.evcs.android.databinding.ActivityImageDetailsBinding;
 
 import butterknife.BindView;
 import me.relex.photodraweeview.PhotoDraweeView;
@@ -37,8 +40,9 @@ public class ImageDetailsActivity extends BaseActivity {
     }
 
     @Override
-    protected int layout() {
-        return R.layout.activity_image_details;
+    protected View inflate(LayoutInflater layoutInflater) {
+        ActivityImageDetailsBinding binding = ActivityImageDetailsBinding.inflate(layoutInflater);
+        return binding.getRoot();
     }
 
     @Override

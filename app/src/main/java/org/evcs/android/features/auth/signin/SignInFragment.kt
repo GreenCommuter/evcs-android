@@ -114,11 +114,12 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     }
 
     fun onButtonClick() {
-        showLoading(true)
-        presenter!!.logIn(
-            mEmailInputLayout.text.toString(),
-            mPasswordInputLayout.text.toString()
-        )
+//        showLoading(true)
+//        presenter!!.logIn(
+//            mEmailInputLayout.text.toString(),
+//            mPasswordInputLayout.text.toString()
+//        )
+        onTokenSent()
     }
 
     override fun onTokenSent() {
@@ -131,7 +132,7 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
             .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragment())
     }
 
-    public fun showLoading(loading : Boolean) {
+    override fun showLoading(loading : Boolean) {
         mLoginButton.isActivated = loading
         binding.fragmentSignInProgressBar.visibility = if (loading) VISIBLE else INVISIBLE
     }

@@ -66,14 +66,17 @@
     <string name="forgot_password_wrong_email">Invalid email address</string>
 
     <!-- Register -->
-    <string name="register_title">Let\'s get to know you</string>
+    <string name="register_title">Finish setting up your account</string>
+    <string name="register_subtitle">Sign up with your name and email</string>
     <string name="register_email">Email</string>
+    <string name="register_email_confirm">Confirm E-mail *</string>
     <string name="register_password">Password *</string>
     <string name="register_password_confirm">Re-enter the password</string>
     <string name="register_password_hint">Must be at least %1d characters long</string>
-    <string name="register_button">Sign Up</string>
+    <string name="register_button">Create account</string>
     <string name="register_gotologin">Do you already have an account with us?</string>
-    <string name="i_agree_terms">I agree to EVCS\'s <a href="https://greencommuter.org/privacy">privacy policy</a> and <a href="https://greencommuter.org/term_of_use">terms of use</a></string>
+    <string name="fragment_register_step">Step %d of 4</string>
+    <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
     <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
 
     <!-- Choose service -->

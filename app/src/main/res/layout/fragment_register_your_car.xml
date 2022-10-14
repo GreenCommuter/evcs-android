@@ -6,11 +6,13 @@
     android:orientation="vertical"
     android:background="@color/evcs_white">
 
-<!--    <org.evcs.android.features.auth.register.RegisterStepsView-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="@dimen/spacing_large"-->
-<!--        custom:progress="1"/>-->
+    <TextView
+        android:id="@+id/fragment_register_step"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_marginLeft="@dimen/spacing_large"
+        />
 
     <TextView
         android:layout_width="match_parent"

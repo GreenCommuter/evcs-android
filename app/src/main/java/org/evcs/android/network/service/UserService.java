@@ -3,13 +3,17 @@ package org.evcs.android.network.service;
 import org.evcs.android.model.user.AuthUser;
 import org.evcs.android.model.user.CodeWrapper;
 import org.evcs.android.model.user.PhoneWrapper;
+import org.evcs.android.model.user.UserCar;
 import org.evcs.android.model.user.UserRequest;
 import org.evcs.android.model.user.UserRequestSignup;
+import org.evcs.android.model.user.ZipCodeWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 public interface UserService {
 
@@ -44,5 +48,11 @@ public interface UserService {
 
 //    @GET("/api/v1/users/me")
 //    Call<User> getCurrentUser();
+
+    @PUT("/management/v1/users/{id}")
+    Call<Void> updateUser(@Path("id") int id, ZipCodeWrapper zipcode);
+
+    @POST ("/members/v1/user_cars")
+    Call<Void> saveUserCar(@Body UserCar userCar);
 
 }

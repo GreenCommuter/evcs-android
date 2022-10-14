@@ -18,7 +18,8 @@ open class AuthPresenter<T>(viewInstance: T, services: RetrofitServices?) :
         return object : NetworkCallback<AuthUser>() {
             override fun onResponseSuccessful(authUser: AuthUser?) {
                 UserUtils.saveAuthUser(authUser)
-                getToken()
+//                getToken()
+                view?.onTokenSent()
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, i: Int) {

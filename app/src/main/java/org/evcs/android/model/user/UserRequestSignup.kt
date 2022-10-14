@@ -1,4 +1,4 @@
 package org.evcs.android.model.user
 
-class UserRequestSignup(email: String, password: String, private val name: String) :
-    UserRequest(email, password)
+class UserRequestSignup(name: String, email: String, password: String) :
+    UserRequest(name, email, password)

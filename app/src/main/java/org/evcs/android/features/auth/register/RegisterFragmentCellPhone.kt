@@ -47,6 +47,8 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone>(), R
     override fun init() {
         mBinding.fragmentRegisterCellphoneNumber.editText?.addTextChangedListener(PhoneNumberFormattingTextWatcher(
             BaseConfiguration.DEFAULT_LOCALE.country))
+        mBinding.fragmentRegisterStep.text =
+            String.format(getString(R.string.fragment_register_step), 3)
     }
 
     override fun setListeners() {

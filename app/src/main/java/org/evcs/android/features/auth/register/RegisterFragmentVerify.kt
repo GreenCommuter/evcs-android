@@ -47,6 +47,8 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mPreviousNumber = requireArguments().getString("previous_number")
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
+        mBinding.fragmentRegisterStep.text =
+            String.format(getString(R.string.fragment_register_step), 4)
     }
 
     override fun setListeners() {

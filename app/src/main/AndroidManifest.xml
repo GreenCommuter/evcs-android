@@ -87,6 +87,13 @@
             </intent-filter>
         </activity>
 
+        <receiver android:name=".SMSBroadcastReceiver" android:exported="true"
+            android:permission="com.google.android.gms.auth.api.phone.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
+
         <!-- Start services -->
 
         <!-- End services -->

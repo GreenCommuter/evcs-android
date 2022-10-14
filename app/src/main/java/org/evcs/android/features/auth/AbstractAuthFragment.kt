@@ -149,7 +149,7 @@ abstract class AbstractAuthFragment<T : AuthPresenter<*>> : LoadingFragment<T>()
         ToastUtils.show(error.body)
     }
 
-    private fun showLoading(loading: Boolean) {
+    protected open fun showLoading(loading: Boolean) {
         if (loading) showProgressDialog() else hideProgressDialog()
     }
 

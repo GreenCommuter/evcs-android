@@ -42,16 +42,16 @@ public class SelectionView extends LinearLayout {
         Drawable imageResource = typedArray.getDrawable(R.styleable.SelectionView_image);
         typedArray.recycle();
 
-        mTitle.setText(titleResource);
-        mDescription.setText(descriptionResource);
+//        mTitle.setText(titleResource);
+//        mDescription.setText(descriptionResource);
         setBackground(imageResource);
     }
 
     public void setDescription(String description) {
-        mDescription.setText(description);
+//        mDescription.setText(description);
     }
 
     public void setTitle(String title) {
-        mTitle.setText(title);
+//        mTitle.setText(title);
     }
 }

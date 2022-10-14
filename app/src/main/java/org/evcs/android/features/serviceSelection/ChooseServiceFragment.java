@@ -48,7 +48,7 @@ public class ChooseServiceFragment extends LoadingFragment<ChooseServicePresente
     public void init() {
         mChooseServiceListener = MainNavigationController.getInstance();
 
-        setDescriptions();
+//        setDescriptions();
 
         if (!mAlreadyLoaded) {
             getPresenter().getLoggedUser();

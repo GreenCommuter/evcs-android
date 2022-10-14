@@ -35,16 +35,16 @@ abstract class AbstractDrawerActivity : AbstractSupportedVersionActivity() {
     private lateinit  var mActivityBaseContent: View
 
     private lateinit var navController: NavController
-    private lateinit var navigationView: NavigationView
     private lateinit var mDrawerToggle: ActionBarDrawerToggle
     private var mNavigationItemListener: NavigationView.OnNavigationItemSelectedListener? = null
     private var mAvatarOnClickListener: View.OnClickListener? = null
 
     override fun inflate(layoutInflater: LayoutInflater): View {
         val binding = ActivityToolbarBaseBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         mDrawerLayout = binding.activityDrawer
         navController = Navigation.findNavController(this, R.id.activity_base_content)
-        navigationView = binding.activityNavigationView
+        mNavigationView = binding.activityNavigationView
         mVersionTextView = binding.activityVersionTextView
         mActivityBaseContent = findViewById(R.id.activity_base_content)
         return binding.root
@@ -85,6 +85,7 @@ abstract class AbstractDrawerActivity : AbstractSupportedVersionActivity() {
                 mNavigationItemListener!!.onNavigationItemSelected(item)
             } else false
         }
+        return
         mDrawerToggle = object : ActionBarDrawerToggle(
             this, mDrawerLayout, mToolbar,
             R.string.drawer_menu_open, R.string.drawer_menu_close

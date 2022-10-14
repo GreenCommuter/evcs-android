@@ -1,12 +1,15 @@
 package org.evcs.android.features.auth.register
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.View
 import android.widget.AdapterView
+import androidx.core.view.isEmpty
 import androidx.navigation.Navigation
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterYourCarBinding
+import org.evcs.android.model.Car
 import org.evcs.android.model.CarMaker
 import org.evcs.android.ui.fragment.ErrorFragment
 
@@ -41,10 +44,12 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
     }
 
     override fun init() {
-        mBinding.fragmentRegisterYourCarMake.setItems(ArrayList())
-        mBinding.fragmentRegisterYourCarModel.setItems(ArrayList())
+        mBinding.fragmentRegisterYourCarMake.setItems<Any?>(ArrayList())
+        mBinding.fragmentRegisterYourCarModel.setItems<Any?>(ArrayList())
         presenter!!.getCars()
         setEnableButton(true)
+        mBinding.fragmentRegisterStep.text =
+            String.format(getString(R.string.fragment_register_step), 2)
     }
 
     override fun setListeners() {
@@ -70,6 +75,7 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
     private fun validfields(): Boolean {
         return mBinding.fragmentRegisterYourCarMake.isItemSelected()
                 && mBinding.fragmentRegisterYourCarModel.isItemSelected()
+                && !TextUtils.isEmpty(mBinding.fragmentRegisterYourCarZipcode.text)
     }
 
     override fun showCarMakers(carMakers: List<CarMaker>) {
@@ -78,9 +84,8 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
     }
 
     fun onManufacturerClicked(manufacturer: String) {
-        val items = presenter!!.getCars(manufacturer).map { car -> car.model }
+        val items = presenter!!.getCars(manufacturer)//.map { car -> car.model }
         mBinding.fragmentRegisterYourCarModel.setItems(items)
-
     }
 
     fun setEnableButton(validFields: Boolean) {
@@ -89,10 +94,11 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
 
     private fun onButtonClick() {
         progressDialog.show()
+        presenter!!.updateZipcode(
+            mBinding.fragmentRegisterYourCarZipcode.text.toString()
+        )
         presenter!!.register(
-            mBinding.fragmentRegisterYourCarZipcode.text.toString(),
-            mBinding.fragmentRegisterYourCarMake.getSelectedItem().toString(),
-            mBinding.fragmentRegisterYourCarModel.getSelectedItem().toString(),
+            (mBinding.fragmentRegisterYourCarModel.getSelectedItem() as Car).id,
             mBinding.fragmentRegisterYourCarYear.text.toString()
         )
         Navigation.findNavController(requireView())

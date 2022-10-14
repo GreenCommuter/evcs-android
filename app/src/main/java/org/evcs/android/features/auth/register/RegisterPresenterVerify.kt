@@ -1,15 +1,18 @@
 package org.evcs.android.features.auth.register
 
+import android.content.Context
 import com.base.networking.retrofit.RetrofitServices
+import com.google.android.gms.auth.api.phone.SmsRetriever
 import okhttp3.ResponseBody
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.CodeWrapper
 import org.evcs.android.network.callback.AuthCallback
+import org.evcs.android.network.service.MessageReceiver
 import org.evcs.android.network.service.UserService
 import org.evcs.android.util.ErrorUtils
 
 class RegisterPresenterVerify(viewInstance: RegisterViewVerify, services: RetrofitServices) :
-    RegisterPresenterCellphone(viewInstance, services) {
+    RegisterPresenterCellphone(viewInstance, services), MessageReceiver {
 
     fun sendCode(code : String) {
         getService(UserService::class.java).sendCode(CodeWrapper(code))
@@ -28,4 +31,18 @@ class RegisterPresenterVerify(viewInstance: RegisterViewVerify, services: Retrof
             })
     }
 
+    fun startSMSListener(context : Context) {
+        val client = SmsRetriever.getClient(context)
+        val task = client.startSmsRetriever()
+        task.addOnSuccessListener {
+
+        }
+        task.addOnFailureListener {
+
+        }
+    }
+
+    override fun onReceive(s: String?) {
+        sendCode(s!!)
+    }
 }

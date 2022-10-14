@@ -14,10 +14,15 @@ import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.util.ViewUtils
+import org.evcs.android.util.validator.MatchingValidator
 import org.evcs.android.util.validator.TextInputLayoutInterface
+import org.evcs.android.util.validator.ValidatorManager
+import kotlin.system.measureNanoTime
 
 class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
+    private lateinit var mLastNameInputLayout: StandardTextField
+    private lateinit var mNameInputLayout: StandardTextField
     private lateinit var mConfirmEmailInputLayout: StandardTextField
     private lateinit var mEmailInputLayout: StandardTextField
     private lateinit var mPasswordInputLayout: StandardTextField
@@ -48,12 +53,16 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     override fun setUi(v: View) {
         super.setUi(v)
         val binding = FragmentRegisterBinding.bind(v)
+        mNameInputLayout = binding.fragmentRegisterFirstNameInput
+        mLastNameInputLayout = binding.fragmentRegisterFirstNameInput
         mEmailInputLayout = binding.fragmentRegisterEmailInput
         mConfirmEmailInputLayout = binding.fragmentRegisterConfirmEmailInput
         mPasswordInputLayout = binding.fragmentRegisterPasswordInput
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
         mGoToLogin = binding.fragmentRegisterGotologin
+        binding.fragmentRegisterStep.text =
+            String.format(getString(R.string.fragment_register_step), 1)
     }
 
     override fun init() {
@@ -63,6 +72,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
             BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
         )
         ViewUtils.addUnderlines(mGoToLogin)
+        mValidatorManager.addValidator(MatchingValidator(mConfirmEmailInputLayout, mEmailInputLayout))
     }
 
     override fun setListeners() {
@@ -72,25 +82,27 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     }
 
     override fun setEnableButton(validFields: Boolean) {
-        mContinueButton.isEnabled = validFields
+        mContinueButton.isEnabled = true
     }
 
     override fun emailTextInputLayout(): TextInputLayoutInterface = mEmailInputLayout
     override fun passwordTextInputLayout(): TextInputLayoutInterface = mPasswordInputLayout
 
     private fun onButtonClick() {
-//        progressDialog.show()
-//        presenter!!.register(
-//            mEmailInputLayout.text.toString(),
-//            mPasswordInputLayout.text.toString()
-//        )
-        Navigation.findNavController(requireView())
-            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
+        progressDialog.show()
+        presenter!!.register(
+            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),
+            mEmailInputLayout.text.toString(),
+            mPasswordInputLayout.text.toString()
+        )
+//        Navigation.findNavController(requireView())
+//            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
     }
 
     override fun onTokenSent() {
         progressDialog.dismiss()
-        (activity as AuthActivity).onAuthFinished()
+        Navigation.findNavController(requireView())
+            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
     }
 
     protected fun onLoginClick() {

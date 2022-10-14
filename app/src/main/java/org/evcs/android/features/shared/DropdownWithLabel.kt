@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.widget.*
 import org.evcs.android.R
 import org.evcs.android.databinding.DropdownWithLabelBinding
+import org.evcs.android.model.Car
 
 class DropdownWithLabel : RelativeLayout {
 
@@ -54,8 +55,8 @@ class DropdownWithLabel : RelativeLayout {
         mBlackBorder = resources.getDrawable(R.drawable.layout_corners_rounded_black_border)
     }
 
-    fun setItems(items: List<String>) {
-        val adapter = ArrayAdapter<String>(context, R.layout.dropdown_head, listOf(PROMPT) + items)
+    fun <T> setItems(items: List<T>) {
+        val adapter = ArrayAdapter<T>(context, R.layout.dropdown_head, items)
         adapter.setDropDownViewResource(R.layout.dropdown_item)
         mDropdown.adapter = adapter
     }

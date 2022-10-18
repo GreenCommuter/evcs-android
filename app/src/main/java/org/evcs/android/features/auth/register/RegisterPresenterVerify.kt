@@ -1,6 +1,7 @@
 package org.evcs.android.features.auth.register
 
 import android.content.Context
+import android.util.Log
 import com.base.networking.retrofit.RetrofitServices
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import okhttp3.ResponseBody
@@ -12,13 +13,13 @@ import org.evcs.android.network.service.UserService
 import org.evcs.android.util.ErrorUtils
 
 class RegisterPresenterVerify(viewInstance: RegisterViewVerify, services: RetrofitServices) :
-    RegisterPresenterCellphone(viewInstance, services), MessageReceiver {
+    RegisterPresenterCellphone<RegisterViewVerify>(viewInstance, services), MessageReceiver {
 
     fun sendCode(code : String) {
         getService(UserService::class.java).sendCode(CodeWrapper(code))
             .enqueue(object : AuthCallback<Void>(this) {
                 override fun onResponseSuccessful(p0: Void?) {
-                    (view as RegisterViewVerify).onCellphoneVerified()
+                    view.onCellphoneVerified()
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody?, p1: Int) {
@@ -35,14 +36,16 @@ class RegisterPresenterVerify(viewInstance: RegisterViewVerify, services: Retrof
         val client = SmsRetriever.getClient(context)
         val task = client.startSmsRetriever()
         task.addOnSuccessListener {
-
+            Log.e("startSMSListener", "Success")
         }
         task.addOnFailureListener {
-
+            Log.e("startSMSListener", "Failure")
         }
     }
 
     override fun onReceive(s: String?) {
+        //TODO: trimear
+        view?.showCode(s)
         sendCode(s!!)
     }
 }

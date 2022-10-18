@@ -28,13 +28,7 @@ public class RootActivity extends AppCompatActivity {
     }
 
     private Intent buildIntent() {
-        Intent newIntent;
-        if (mRootActivityPresenter.isLoggedUser()) {
-            newIntent = new Intent(this, MainActivity.class);
-        } else {
-            newIntent = new Intent(this, AuthActivity.class);
-        }
-        return newIntent;
+        return new Intent(this, MainActivity.class);
     }
 
 }

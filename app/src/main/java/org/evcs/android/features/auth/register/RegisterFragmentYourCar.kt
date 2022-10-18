@@ -1,17 +1,20 @@
 package org.evcs.android.features.auth.register
 
 import android.os.Bundle
+import android.text.Editable
 import android.text.TextUtils
+import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
-import androidx.core.view.isEmpty
 import androidx.navigation.Navigation
+import butterknife.OnTextChanged
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterYourCarBinding
 import org.evcs.android.model.Car
 import org.evcs.android.model.CarMaker
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.joda.time.DateTime
 
 
 class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), RegisterViewYourCar {
@@ -44,21 +47,31 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
     }
 
     override fun init() {
-        mBinding.fragmentRegisterYourCarMake.setItems<Any?>(ArrayList())
-        mBinding.fragmentRegisterYourCarModel.setItems<Any?>(ArrayList())
+        mBinding.fragmentRegisterYourCarMake.setItems<String>(ArrayList())
+        mBinding.fragmentRegisterYourCarModel.setItems<String>(ArrayList())
+        mBinding.fragmentRegisterYourCarYear.setItems(IntRange(2000, DateTime().year).map { i -> i.toString() })
         presenter!!.getCars()
         setEnableButton(true)
-        mBinding.fragmentRegisterStep.text =
-            String.format(getString(R.string.fragment_register_step), 2)
+        mBinding.fragmentRegisterStep.text = String.format(getString(R.string.fragment_register_step), 2)
     }
 
     override fun setListeners() {
+        mBinding.fragmentRegisterYourCarZipcode.editText?.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                setEnableButton(validFields())
+            }
+
+            override fun afterTextChanged(p0: Editable?) {}
+
+        })
         mBinding.fragmentRegisterYourCarButton.setOnClickListener { onButtonClick() }
         mBinding.fragmentRegisterYourCarMake.setListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                onManufacturerClicked(mBinding.fragmentRegisterYourCarMake.getSelectedItem().toString())
+                onManufacturerClicked(mBinding.fragmentRegisterYourCarMake.getSelectedItemLabel())
             }
 
         })
@@ -66,13 +79,13 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
             override fun onNothingSelected(parent: AdapterView<*>?) {}
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                setEnableButton(validfields())
+                setEnableButton(validFields())
             }
 
         })
     }
 
-    private fun validfields(): Boolean {
+    private fun validFields(): Boolean {
         return mBinding.fragmentRegisterYourCarMake.isItemSelected()
                 && mBinding.fragmentRegisterYourCarModel.isItemSelected()
                 && !TextUtils.isEmpty(mBinding.fragmentRegisterYourCarZipcode.text)
@@ -84,7 +97,7 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
     }
 
     fun onManufacturerClicked(manufacturer: String) {
-        val items = presenter!!.getCars(manufacturer)//.map { car -> car.model }
+        val items = presenter!!.getCars(manufacturer)
         mBinding.fragmentRegisterYourCarModel.setItems(items)
     }
 
@@ -99,14 +112,16 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
         )
         presenter!!.register(
             (mBinding.fragmentRegisterYourCarModel.getSelectedItem() as Car).id,
-            mBinding.fragmentRegisterYourCarYear.text.toString()
+            mBinding.fragmentRegisterYourCarYear.getSelectedItem()?.toString()
         )
+    }
+
+    override fun onCarsAdded() {
+        progressDialog.dismiss()
         Navigation.findNavController(requireView())
             .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
     }
 
-    fun onTokenSent() {
-        progressDialog.dismiss()
-    }
+    override fun onZipCodeUpdated() {}
 
 }

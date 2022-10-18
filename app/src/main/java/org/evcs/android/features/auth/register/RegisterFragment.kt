@@ -13,6 +13,9 @@ import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.shared.StandardTextField
+import org.evcs.android.model.user.AuthUser
+import org.evcs.android.model.user.AuthUser.TestAuthUser
+import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.MatchingValidator
 import org.evcs.android.util.validator.TextInputLayoutInterface
@@ -61,8 +64,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
         mGoToLogin = binding.fragmentRegisterGotologin
-        binding.fragmentRegisterStep.text =
-            String.format(getString(R.string.fragment_register_step), 1)
+        binding.fragmentRegisterStep.text = String.format(getString(R.string.fragment_register_step), 1)
     }
 
     override fun init() {
@@ -89,14 +91,15 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     override fun passwordTextInputLayout(): TextInputLayoutInterface = mPasswordInputLayout
 
     private fun onButtonClick() {
-        progressDialog.show()
-        presenter!!.register(
-            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),
-            mEmailInputLayout.text.toString(),
-            mPasswordInputLayout.text.toString()
-        )
-//        Navigation.findNavController(requireView())
-//            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
+//        progressDialog.show()
+//        presenter!!.register(
+//            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),
+//            mEmailInputLayout.text.toString(),
+//            mPasswordInputLayout.text.toString()
+//        )
+        UserUtils.saveAuthUser(TestAuthUser())
+        Navigation.findNavController(requireView())
+            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentVerify(""))
     }
 
     override fun onTokenSent() {
@@ -108,5 +111,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     protected fun onLoginClick() {
         Navigation.findNavController(requireView()).popBackStack()
     }
+
+    //Ver password
 
 }

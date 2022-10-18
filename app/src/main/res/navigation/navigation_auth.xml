@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_registerFragment_to_registerFragmentYourCar"
             app:destination="@id/registerFragmentYourCar" />
+        <action
+            android:id="@+id/action_registerFragment_to_registerFragmentVerify"
+            app:destination="@id/registerFragmentVerify" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"

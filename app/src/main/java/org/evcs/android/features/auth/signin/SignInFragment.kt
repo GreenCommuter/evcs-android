@@ -114,12 +114,12 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     }
 
     fun onButtonClick() {
-//        showLoading(true)
-//        presenter!!.logIn(
-//            mEmailInputLayout.text.toString(),
-//            mPasswordInputLayout.text.toString()
-//        )
-        onTokenSent()
+        showLoading(true)
+        presenter!!.logIn(
+            mEmailInputLayout.text.toString(),
+            mPasswordInputLayout.text.toString()
+        )
+//        onTokenSent()
     }
 
     override fun onTokenSent() {

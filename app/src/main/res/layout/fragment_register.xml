@@ -151,7 +151,7 @@
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:layout_gravity="center"
                 android:enabled="true"
-                android:text="@string/app_continue" />
+                android:text="Create account" />
 
             <TextView
                 android:layout_width="wrap_content"

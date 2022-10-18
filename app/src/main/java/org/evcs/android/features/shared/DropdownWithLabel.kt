@@ -7,9 +7,10 @@ import android.view.LayoutInflater
 import android.widget.*
 import org.evcs.android.R
 import org.evcs.android.databinding.DropdownWithLabelBinding
-import org.evcs.android.model.Car
 
 class DropdownWithLabel : RelativeLayout {
+
+    private lateinit var adapter: ArrayAdapterWithPrompt<*>
 
     private lateinit var mDropdown: Spinner
     private lateinit var mLayout: RelativeLayout
@@ -18,8 +19,6 @@ class DropdownWithLabel : RelativeLayout {
     private lateinit var mBlackBorder: Drawable
     private lateinit var mRedBorder: Drawable
     private var mLabelString: String? = null
-
-    private val PROMPT = "Select One"
 
     constructor(context: Context) : super(context) {
         init(context)
@@ -56,7 +55,8 @@ class DropdownWithLabel : RelativeLayout {
     }
 
     fun <T> setItems(items: List<T>) {
-        val adapter = ArrayAdapter<T>(context, R.layout.dropdown_head, items)
+        adapter = ArrayAdapterWithPrompt<T>(context,
+            R.layout.dropdown_head, items)
         adapter.setDropDownViewResource(R.layout.dropdown_item)
         mDropdown.adapter = adapter
     }
@@ -66,11 +66,16 @@ class DropdownWithLabel : RelativeLayout {
     }
 
     fun getSelectedItem(): Any? {
-        return mDropdown.selectedItem
+        return adapter.getActualItem(mDropdown.selectedItemPosition)
+    }
+
+    fun getSelectedItemLabel(): String {
+        return adapter.getItemLabel(mDropdown.selectedItemPosition)
     }
 
     fun isItemSelected() : Boolean {
-        return mDropdown.selectedItem?.toString() != "" && mDropdown.selectedItem?.toString() != PROMPT
+        return adapter.isActualItem(mDropdown.selectedItemPosition)
+                //mDropdown.selectedItem?.toString() != "" && mDropdown.selectedItem?.toString() != PROMPT
     }
 
 }

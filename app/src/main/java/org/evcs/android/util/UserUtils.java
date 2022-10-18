@@ -2,6 +2,8 @@ package org.evcs.android.util;
 
 import android.text.TextUtils;
 
+import androidx.annotation.Nullable;
+
 import com.base.core.util.NavigationUtils;
 import com.base.networking.retrofit.serializer.BaseGsonBuilder;
 import com.google.gson.Gson;
@@ -90,7 +92,8 @@ public final class UserUtils {
     /**
      * Removes the current user from shared preferences.
      */
-    public static void logout(final AuthCallback<Void> authCallback) {
+    public static void logout(@Nullable final AuthCallback<Void> authCallback) {
+        clearKeys();
     }
 
     private static void clearKeys() {

@@ -49,8 +49,8 @@ public interface UserService {
 //    @GET("/api/v1/users/me")
 //    Call<User> getCurrentUser();
 
-    @PUT("/management/v1/users/{id}")
-    Call<Void> updateUser(@Path("id") int id, ZipCodeWrapper zipcode);
+    @PUT("/members/v1/users/{id}")
+    Call<Void> updateUser(@Path("id") int id, @Body ZipCodeWrapper zipcode);
 
     @POST ("/members/v1/user_cars")
     Call<Void> saveUserCar(@Body UserCar userCar);

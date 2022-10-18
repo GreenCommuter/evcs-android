@@ -53,7 +53,7 @@ class StandardTextField : RelativeLayout, TextInputLayoutInterface {
             context.obtainStyledAttributes(attrs, R.styleable.StandardTextField, defStyleAttr, 0)
         mLabelString = typedArray.getString(R.styleable.StandardTextField_label)
         mLabel.text = mLabelString
-        mLabel.visibility = if (TextUtils.isEmpty(mLabelString)) VISIBLE else GONE
+        mLabel.visibility = if (TextUtils.isEmpty(mLabelString)) GONE else VISIBLE
         mLabelEmpty.text = mLabelString
     }
 
@@ -107,8 +107,8 @@ class StandardTextField : RelativeLayout, TextInputLayoutInterface {
 
     private fun updateLabel(hasFocus: Boolean, isEmpty: Boolean) {
 //        if (hasFocus || !isEmpty || mEditText.hint != null) {
-            mLabel.visibility = VISIBLE
-            mLabelEmpty.visibility = GONE
+//            mLabel.visibility = VISIBLE
+//            mLabelEmpty.visibility = GONE
 //        } else {
 //            mLabel.visibility = INVISIBLE
 //            mLabelEmpty.visibility = VISIBLE

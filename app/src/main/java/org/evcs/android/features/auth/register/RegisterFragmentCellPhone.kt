@@ -3,19 +3,16 @@ package org.evcs.android.features.auth.register
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.Navigation
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterCellPhoneBinding
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.util.validator.EmailTextInputValidator
-import org.evcs.android.util.validator.PasswordTextInputValidator
 import org.evcs.android.util.validator.PhoneTextInputValidator
 import org.evcs.android.util.validator.ValidatorManager
 
-class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone>(), RegisterViewCellphone {
+class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<RegisterViewCellphone>>(), RegisterViewCellphone {
 
     private lateinit var mBinding: FragmentRegisterCellPhoneBinding
 
@@ -35,7 +32,7 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone>(), R
         return R.layout.fragment_register_cell_phone
     }
 
-    override fun createPresenter(): RegisterPresenterCellphone {
+    override fun createPresenter(): RegisterPresenterCellphone<RegisterViewCellphone> {
         return RegisterPresenterCellphone(this, EVCSApplication.getInstance().retrofitServices)
     }
 

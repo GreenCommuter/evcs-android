@@ -19,14 +19,11 @@ class RegisterPresenterYourCar(viewInstance: RegisterViewYourCar, services: EVCS
 
     private lateinit var mCarMakers: List<CarMaker>
 
-    fun register(make: String, model: String, year: String?) {
-    }
-
     fun register(carId: Int, year: String?) {
         getService(UserService::class.java).saveUserCar(UserCar(carId, year))
             .enqueue(object : AuthCallback<Void>(this) {
             override fun onResponseSuccessful(response: Void?) {
-                TODO("Not yet implemented")
+                view?.onCarsAdded()
             }
 
             override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
@@ -60,12 +57,25 @@ class RegisterPresenterYourCar(viewInstance: RegisterViewYourCar, services: EVCS
 
     fun getCars(manufacturer: String) : List<Car> {
         if (!this::mCarMakers.isInitialized) return ArrayList()
-        val make = mCarMakers.filter { maker -> maker.make == manufacturer }.firstOrNull()
+        val make = mCarMakers.firstOrNull { maker -> maker.make == manufacturer }
         return make?.cars ?: ArrayList()
     }
 
     fun updateZipcode(zipCode: String) {
         getService(UserService::class.java).updateUser(UserUtils.getUserId(), ZipCodeWrapper(zipCode))
+            .enqueue(object : AuthCallback<Void>(this) {
+                override fun onResponseSuccessful(response: Void) {
+                    view?.onZipCodeUpdated();
+                }
+
+                override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                    view?.showError(ErrorUtils.getError(responseBody))
+                }
+
+                override fun onCallFailure(throwable: Throwable) {
+                    runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+                }
+            })
     }
 
 }

@@ -12,7 +12,7 @@
             app:destination="@id/chooseServiceFragment" />    </fragment>
     <fragment
         android:id="@+id/chooseServiceFragment"
-        android:name="org.evcs.android.features.serviceSelection.ChooseServiceFragment"
+        android:name="org.evcs.android.features.serviceSelection.MainMapFragment"
         android:label="ChooseServiceFragment"
-        tools:layout="@layout/fragment_choose_service"/>
+        tools:layout="@layout/fragment_main_map"/>
 </navigation>

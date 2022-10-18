@@ -1,5 +1,6 @@
 package org.evcs.android.features.auth.register
 
+import android.content.IntentFilter
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
@@ -8,6 +9,7 @@ import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterEnterCodeBinding
+import org.evcs.android.network.service.SMSBroadcastReceiver
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.ViewUtils
 
@@ -54,7 +56,9 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     override fun setListeners() {
         mBinding.fragmentRegisterEnterCodeButton.setOnClickListener { onButtonClick() }
         mBinding.fragmentRegisterEnterCodeEdit.setOnClickListener { Navigation.findNavController(requireView()).popBackStack() }
-        mBinding.fragmentRegisterEnterCodeResend.setOnClickListener { presenter!!.sendNumbertoVerify(mPreviousNumber!!) }
+        mBinding.fragmentRegisterEnterCodeResend.setOnClickListener { presenter?.sendNumbertoVerify(mPreviousNumber!!) }
+        requireActivity().registerReceiver(SMSBroadcastReceiver(presenter), IntentFilter("com.google.android.gms.auth.api.phone.SMS_RETRIEVED"))
+        presenter?.startSMSListener(requireContext())
     }
 
     fun setEnableButton(validFields: Boolean) {
@@ -70,6 +74,10 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
 
     override fun onCellphoneSent() {
         progressDialog.dismiss()
+    }
+
+    override fun showCode(s: String?) {
+        mBinding.fragmentRegisterEnterCodeText.editText?.setText(s)
     }
 
     override fun onCellphoneVerified() {

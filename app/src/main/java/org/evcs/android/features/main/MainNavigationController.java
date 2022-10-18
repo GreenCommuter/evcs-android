@@ -4,20 +4,19 @@ import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
-import org.evcs.android.features.serviceSelection.ChooseServiceFragment;
+import org.evcs.android.features.serviceSelection.MainMapFragment;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
-import org.evcs.android.ui.drawer.AbstractDrawerActivity;
 
 public class MainNavigationController extends AbstractNavigationController
-        implements ChooseServiceFragment.IChooseServiceListener {
+        implements MainMapFragment.IMainMapListener {
 
     private static MainNavigationController mInstance;
-    private final AbstractDrawerActivity mActivity;
+    private final MainActivity mActivity;
     private AbstractNavigationController mCurrentController;
     private final boolean mHasRoot;
     private @IdRes Integer mRootId;
 
-    public MainNavigationController(AbstractDrawerActivity mainActivity, boolean hasRoot, NavController navController) {
+    public MainNavigationController(MainActivity mainActivity, boolean hasRoot, NavController navController) {
         super(navController);
         mActivity = mainActivity;
         mHasRoot = hasRoot;

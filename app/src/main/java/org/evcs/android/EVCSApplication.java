@@ -26,7 +26,7 @@ public class EVCSApplication extends NetworkingApplication {
     private static final String NOT_LOGGED_USER_ID = "User wasn't logged yet, so there isn't id";
     private static final String NOT_LOGGED_USER_EMAIL = "User wasn't logged yet, so there isn't email";
 
-    private EVCSRetrofitServices mGreenCommmuterRetrofitServices;
+    private EVCSRetrofitServices mEvcsRetrofitServices;
     private RefWatcher mRefWatcher;
 
     @NonNull
@@ -60,11 +60,11 @@ public class EVCSApplication extends NetworkingApplication {
 
     @Override
     public EVCSRetrofitServices getRetrofitServices() {
-        if (mGreenCommmuterRetrofitServices == null) {
-            mGreenCommmuterRetrofitServices = new EVCSRetrofitServices();
-            mGreenCommmuterRetrofitServices.init();
+        if (mEvcsRetrofitServices == null) {
+            mEvcsRetrofitServices = new EVCSRetrofitServices();
+            mEvcsRetrofitServices.init();
         }
-        return mGreenCommmuterRetrofitServices;
+        return mEvcsRetrofitServices;
     }
 
     @Override

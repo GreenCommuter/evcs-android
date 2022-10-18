@@ -4,20 +4,22 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.CallSuper;
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
 
 import org.evcs.android.R;
+import org.evcs.android.activity.AbstractSupportedVersionActivity;
+import org.evcs.android.databinding.ActivityBaseNavhostBinding;
 import org.evcs.android.features.shared.IVersionView;
-import org.evcs.android.ui.drawer.AbstractDrawerActivity;
 import org.evcs.android.util.Extras;
 import org.evcs.android.util.PushNotificationUtils;
-import org.evcs.android.util.VersionUtils;
 
-public class MainActivity extends AbstractDrawerActivity implements IVersionView {
+public class MainActivity extends AbstractSupportedVersionActivity implements IVersionView {
 
     public MainNavigationController mNavigationController;
 
@@ -35,6 +37,13 @@ public class MainActivity extends AbstractDrawerActivity implements IVersionView
         if (!getIntent().hasExtra(Extras.Root.VIEW_KEY)) {
             return;
         }
+    }
+
+    @Override
+    protected View inflate(LayoutInflater layoutInflater) {
+        @NonNull ActivityBaseNavhostBinding binding = ActivityBaseNavhostBinding.inflate(layoutInflater);
+        setContentView(binding.getRoot());
+        return binding.getRoot();
     }
 
     private void createNotificationChannel() {
@@ -64,8 +73,4 @@ public class MainActivity extends AbstractDrawerActivity implements IVersionView
         //Handled by fragment
     }
 
-    @Override
-    protected void populateHeader(View headerView) {
-
-    }
 }

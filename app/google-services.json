@@ -1,38 +1,20 @@
-
 {
   "project_info": {
-    "project_number": "282371108097",
-    "firebase_url": "https://green-commuter.firebaseio.com",
-    "project_id": "green-commuter",
-    "storage_bucket": "green-commuter.appspot.com"
+    "project_number": "472330493979",
+    "project_id": "evcs-809e4",
+    "storage_bucket": "evcs-809e4.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:282371108097:android:3408ce36cf8dcdb7",
+        "mobilesdk_app_id": "1:472330493979:android:a3b59d33aaa3eac88018be",
         "android_client_info": {
-          "package_name": "org.greencommuter.android"
+          "package_name": "org.evcs.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "282371108097-almh98lfaj2q479hln3c1c2rvfq80002.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.greencommuter.android",
-            "certificate_hash": "d356057d19e7b2a5f6790520179ef50b6563b358"
-          }
-        },
-        {
-          "client_id": "282371108097-3j4f0pbio04bsb9e4e8feiac86fb88uv.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.greencommuter.android",
-            "certificate_hash": "99e9e21dd61b9e5a24643c930dad22e14d2170e1"
-          }
-        },
-        {
-          "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+          "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -42,49 +24,26 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+              "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:282371108097:android:e55ed9a04466c61a",
+        "mobilesdk_app_id": "1:472330493979:android:e66cb14791902a5c8018be",
         "android_client_info": {
-          "package_name": "org.greencommuter.android.dev"
+          "package_name": "org.evcs.android.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "282371108097-o59c9he198b9sh3ifrvt2nfn9gv5mu7u.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.greencommuter.android.dev",
-            "certificate_hash": "d356057d19e7b2a5f6790520179ef50b6563b358"
-          }
-        },
-        {
-          "client_id": "282371108097-6d6b9acldqiptvqpc4t9bnhq9f4iknoq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.greencommuter.android.dev",
-            "certificate_hash": "99e9e21dd61b9e5a24643c930dad22e14d2170e1"
-          }
-        },
-        {
-          "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+          "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -94,75 +53,16 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
+              "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:282371108097:android:9cb1aa16f4b00cfe",
-        "android_client_info": {
-          "package_name": "org.greencommuter.android.stage"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "282371108097-sraaad99j3cev0ssni135kuah3jkreh4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.greencommuter.android.stage",
-            "certificate_hash": "d356057d19e7b2a5f6790520179ef50b6563b358"
-          }
-        },
-        {
-          "client_id": "282371108097-p12sjs5gjfdprtllujcaea3ad352lu57.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "org.greencommuter.android.stage",
-            "certificate_hash": "99e9e21dd61b9e5a24643c930dad22e14d2170e1"
-          }
-        },
-        {
-          "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyA8vFD0ck8_mNCVJGkgTvVam98Eji4yeJM"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "282371108097-h7motthd01iajjvvv43ei71d6gvsk2am.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
   ],
   "configuration_version": "1"
-} 
+}

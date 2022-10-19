@@ -1,20 +1,28 @@
 package org.evcs.android.features.auth.register
 
+import android.content.Intent
 import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.Navigation
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterEnterCodeBinding
+import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.network.service.SMSBroadcastReceiver
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.ViewUtils
 
 class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), RegisterViewVerify {
 
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
     private var mPreviousNumber: String? = null
     private lateinit var mBinding : FragmentRegisterEnterCodeBinding
 
@@ -28,6 +36,13 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         val fragment = RegisterFragmentVerify()
         fragment.arguments = args
         return fragment
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result -> presenter.onConsentResult(result)
+        }
     }
 
     override fun layout(): Int {
@@ -57,8 +72,16 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mBinding.fragmentRegisterEnterCodeButton.setOnClickListener { onButtonClick() }
         mBinding.fragmentRegisterEnterCodeEdit.setOnClickListener { Navigation.findNavController(requireView()).popBackStack() }
         mBinding.fragmentRegisterEnterCodeResend.setOnClickListener { presenter?.sendNumbertoVerify(mPreviousNumber!!) }
-        requireActivity().registerReceiver(SMSBroadcastReceiver(presenter), IntentFilter("com.google.android.gms.auth.api.phone.SMS_RETRIEVED"))
-        presenter?.startSMSListener(requireContext())
+        val intentFilter = IntentFilter()
+        intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)
+        requireActivity().registerReceiver(SMSBroadcastReceiver(presenter), intentFilter)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            presenter?.startSMSListener(requireContext())
+        }
+    }
+
+    override fun openConsentDialog(consentIntent: Intent) {
+        startForResult.launch(consentIntent)
     }
 
     fun setEnableButton(validFields: Boolean) {
@@ -81,7 +104,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun onCellphoneVerified() {
-//        TODO("Not yet implemented")
+        (requireActivity() as AuthActivity).onAuthFinished()
         progressDialog.dismiss()
     }
 

@@ -1,5 +1,7 @@
 package org.evcs.android.network.service
 
+import android.content.Intent
+
 interface MessageReceiver {
-    fun onReceive(s: String?)
+    fun openConsentDialog(consentIntent: Intent);
 }

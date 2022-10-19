@@ -206,6 +206,7 @@
     <!-- Title text styles -->
     <style name="TitleFont" parent="@android:style/TextAppearance">
         <item name="fontPath">fonts/ProximaNova-Bold.otf</item>
+        <item name="android:fontFamily">@font/proximanova_bold</item>
         <item name="android:textAllCaps">true</item>
     </style>
 

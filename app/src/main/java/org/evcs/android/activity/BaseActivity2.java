@@ -1,6 +1,7 @@
 package org.evcs.android.activity;
 
 import android.content.Context;
+import android.os.Build;
 
 import androidx.annotation.IdRes;
 
@@ -24,6 +25,10 @@ public abstract class BaseActivity2 extends BaseActivity {
 
     @Override
     protected void attachBaseContext(Context context) {
-        super.attachBaseContext(ViewPumpContextWrapper.wrap(context));
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q){
+            super.attachBaseContext(ViewPumpContextWrapper.wrap(context));
+        } else {
+            super.attachBaseContext(context);
+        }
     }
 }

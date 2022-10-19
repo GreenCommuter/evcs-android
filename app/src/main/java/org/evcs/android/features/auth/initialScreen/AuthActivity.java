@@ -65,4 +65,5 @@ public class AuthActivity extends AbstractSupportedVersionActivity implements IV
     protected int getNavGraphId() {
         return R.navigation.navigation_auth;
     }
+
 }

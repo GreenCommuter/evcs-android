@@ -43,7 +43,7 @@ public interface UserService {
     @POST("/members/v1/users/send_phone_verification_code")
     Call<Void> sendPhoneToVerify(@Body PhoneWrapper phone);
 
-    @GET("/members/v1/users/verify_phone")
+    @POST("/members/v1/users/verify_phone")
     Call<Void> sendCode(@Body CodeWrapper code);
 
 //    @GET("/api/v1/users/me")

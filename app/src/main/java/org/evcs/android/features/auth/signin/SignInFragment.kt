@@ -55,8 +55,8 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
         mEmailInputLayout = binding.fragmentSignInEmailInput
         mPasswordInputLayout = binding.fragmentSignInPasswordInput
         mLoginButton = binding.fragmentSignInButton
-        mLoginFacebook = binding.fragmentSignInFacebook
-        mLoginGoogle = binding.fragmentSignInGoogle
+        mLoginFacebook = binding.fragmentSignInSocial.fragmentSignInFacebook
+        mLoginGoogle = binding.fragmentSignInSocial.fragmentSignInGoogle
     }
 
     override fun populate() {
@@ -91,8 +91,8 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
         binding.fragmentSignInButton.setOnClickListener { onButtonClick() }
         binding.fragmentSignInForgotPassword.setOnClickListener { onForgotPasswordClick() }
         binding.fragmentSignInSignUp.setOnClickListener { onRegisterClick() }
-        binding.fragmentSignInGoogle.setOnClickListener { onLoginWithGoogleClick() }
-        binding.fragmentSignInFacebook.setOnClickListener { onLoginWithFacebookClick() }
+        binding.fragmentSignInSocial.fragmentSignInGoogle.setOnClickListener { onLoginWithGoogleClick() }
+        binding.fragmentSignInSocial.fragmentSignInFacebook.setOnClickListener { onLoginWithFacebookClick() }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

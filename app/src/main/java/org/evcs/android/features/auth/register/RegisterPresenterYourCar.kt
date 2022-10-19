@@ -63,8 +63,8 @@ class RegisterPresenterYourCar(viewInstance: RegisterViewYourCar, services: EVCS
 
     fun updateZipcode(zipCode: String) {
         getService(UserService::class.java).updateUser(UserUtils.getUserId(), ZipCodeWrapper(zipCode))
-            .enqueue(object : AuthCallback<Void>(this) {
-                override fun onResponseSuccessful(response: Void) {
+            .enqueue(object : AuthCallback<Void?>(this) {
+                override fun onResponseSuccessful(response: Void?) {
                     view?.onZipCodeUpdated();
                 }
 

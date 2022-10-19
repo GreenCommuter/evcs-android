@@ -1,0 +1,115 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="@dimen/spacing_large"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/evcs_gray_89"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            android:gravity="center"
+            android:text="@string/auth_or"
+            android:textAllCaps="true"
+            android:textSize="16sp"
+            android:textAppearance="@style/RobotoBold.Body.Grey"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:background="@color/evcs_gray_89"/>
+
+    </LinearLayout>
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:layout_marginBottom="@dimen/spacing_medium_extra"-->
+        <!--            android:paddingTop="@dimen/spacing_medium"-->
+        <!--            android:paddingBottom="@dimen/spacing_medium"-->
+        <!--            android:paddingStart="@dimen/spacing_medium_more"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:background="@drawable/button_selector_grey_border">-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/fragment_sign_in_facebook"-->
+        <!--                android:layout_width="@dimen/spacing_big"-->
+        <!--                android:layout_height="@dimen/spacing_big"-->
+        <!--                android:layout_marginStart="@dimen/spacing_small"-->
+        <!--                android:background="@drawable/btn_fb"/>-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/spacing_medium_extra"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="Sign in with Facebook"-->
+        <!--                android:textAppearance="@style/Roboto.Body.Grey"/>-->
+
+        <!--        </LinearLayout>-->
+
+        <!--        <LinearLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:gravity="center_vertical"-->
+        <!--            android:orientation="horizontal"-->
+        <!--            android:paddingTop="@dimen/spacing_medium"-->
+        <!--            android:paddingBottom="@dimen/spacing_medium"-->
+        <!--            android:paddingStart="@dimen/spacing_medium_more"-->
+        <!--            android:background="@drawable/button_selector_grey_border">-->
+
+        <!--            <Button-->
+        <!--                android:id="@+id/fragment_sign_in_google"-->
+        <!--                android:layout_width="@dimen/spacing_big"-->
+        <!--                android:layout_height="@dimen/spacing_big"-->
+        <!--                android:layout_marginStart="@dimen/spacing_small"-->
+        <!--                android:background="@drawable/btn_google"/>-->
+
+        <!--            <TextView-->
+        <!--                android:layout_width="wrap_content"-->
+        <!--                android:layout_height="wrap_content"-->
+        <!--                android:layout_marginStart="@dimen/spacing_medium_extra"-->
+        <!--                android:gravity="center"-->
+        <!--                android:text="Sign in with Google"-->
+        <!--                android:textAppearance="@style/Roboto.Body.Grey"/>-->
+
+        <!--        </LinearLayout>-->
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/fragment_sign_in_facebook"
+        android:layout_width="@dimen/spacing_largest"
+        android:layout_height="@dimen/spacing_largest"
+        android:layout_margin="@dimen/spacing_large"
+        android:background="@drawable/btn_fb"/>
+
+    <Button
+        android:id="@+id/fragment_sign_in_google"
+        android:layout_width="@dimen/spacing_largest"
+        android:layout_height="@dimen/spacing_largest"
+        android:layout_margin="@dimen/spacing_large"
+        android:background="@drawable/btn_google"/>
+
+    </LinearLayout>
+
+</LinearLayout>

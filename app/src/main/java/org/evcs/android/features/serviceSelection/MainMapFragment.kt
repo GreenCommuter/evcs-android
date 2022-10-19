@@ -46,7 +46,7 @@ class MainMapFragment : AbstractMapFragment<MainMapPresenter>(), IChooseServiceV
     }
 
     override fun setListeners() {
-        mBinding.signOut.setText(if (UserUtils.getLoggedUser() == null) "Sign in"  else "Sign out")
+        mBinding.signOut.text = if (UserUtils.getLoggedUser() == null) "Sign in"  else "Sign out"
         mBinding.signOut.setOnClickListener {
             if (UserUtils.getLoggedUser() == null)
                 startActivity(Intent(requireContext(), AuthActivity::class.java))
@@ -71,7 +71,7 @@ class MainMapFragment : AbstractMapFragment<MainMapPresenter>(), IChooseServiceV
         ToastUtils.show(requestError.body)
     }
 
-    val isOpeningApp: Boolean
+    private val isOpeningApp: Boolean
         get() = requireActivity().intent.getBooleanExtra(Extras.Root.OPENING_KEY, false)
 
     override fun onLoadError(user: User) {

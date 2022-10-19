@@ -44,8 +44,7 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     override fun init() {
         mBinding.fragmentRegisterCellphoneNumber.editText?.addTextChangedListener(PhoneNumberFormattingTextWatcher(
             BaseConfiguration.DEFAULT_LOCALE.country))
-        mBinding.fragmentRegisterStep.text =
-            String.format(getString(R.string.fragment_register_step), 3)
+        mBinding.fragmentRegisterStep.text = String.format(getString(R.string.fragment_register_step), 3)
     }
 
     override fun setListeners() {
@@ -60,10 +59,12 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     }
 
     private fun onButtonClick() {
-        progressDialog.show()
-        presenter!!.sendNumbertoVerify(
-            mBinding.fragmentRegisterCellphoneNumber.text.toString()
-        )
+        //TODO: switch
+//        progressDialog.show()
+//        presenter!!.sendNumbertoVerify(
+//            mBinding.fragmentRegisterCellphoneNumber.text.toString()
+//        )
+        onCellphoneSent()
     }
 
     override fun onCellphoneSent() {

@@ -94,6 +94,9 @@ public final class UserUtils {
      */
     public static void logout(@Nullable final AuthCallback<Void> authCallback) {
         clearKeys();
+
+        // Jump to main screen
+        NavigationUtils.jumpToClearingTask(EVCSApplication.getInstance(), AuthActivity.class);
     }
 
     private static void clearKeys() {
@@ -101,9 +104,6 @@ public final class UserUtils {
         sToken = null;
         StorageUtils.clearKey(USER_PREF);
         StorageUtils.clearKey(USER_SESSION_PREF);
-
-        // Jump to main screen
-        NavigationUtils.jumpToClearingTask(EVCSApplication.getInstance(), AuthActivity.class);
     }
 
     /**

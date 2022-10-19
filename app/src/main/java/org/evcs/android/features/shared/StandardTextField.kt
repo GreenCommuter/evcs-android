@@ -19,10 +19,10 @@ import androidx.core.text.TextUtilsCompat
 import com.base.core.util.KeyboardUtils
 import org.evcs.android.databinding.StandardTextFieldBinding
 
-class StandardTextField : RelativeLayout, TextInputLayoutInterface {
+open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
     private var mErrorEnabled = false
     private lateinit var mEditText: EditText
-    private lateinit var mLayout: RelativeLayout
+    protected lateinit var mLayout: RelativeLayout
     private lateinit var mLabel: TextView
     private lateinit var mLabelEmpty: TextView
     private lateinit var mGreyBorder: Drawable
@@ -57,7 +57,7 @@ class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         mLabelEmpty.text = mLabelString
     }
 
-    private fun init(context: Context) {
+    protected open fun init(context: Context) {
         val binding = StandardTextFieldBinding.inflate(LayoutInflater.from(context), this, true)
         mLabelEmpty = binding.standardTextFieldLabelEmpty
         mLayout = binding.standardTextFieldLayout
@@ -159,4 +159,5 @@ class StandardTextField : RelativeLayout, TextInputLayoutInterface {
             }
         })
     }
+
 }

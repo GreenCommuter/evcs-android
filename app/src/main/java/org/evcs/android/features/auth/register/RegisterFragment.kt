@@ -11,16 +11,11 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterBinding
 import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
-import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.model.user.AuthUser
 import org.evcs.android.model.user.AuthUser.TestAuthUser
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils
-import org.evcs.android.util.validator.MatchingValidator
-import org.evcs.android.util.validator.TextInputLayoutInterface
-import org.evcs.android.util.validator.ValidatorManager
-import kotlin.system.measureNanoTime
+import org.evcs.android.util.validator.*
 
 class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
@@ -74,7 +69,12 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
             BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
         )
         ViewUtils.addUnderlines(mGoToLogin)
+        mValidatorManager.addValidator(NonEmptyTextInputValidator(mNameInputLayout))
+        mValidatorManager.addValidator(NonEmptyTextInputValidator(mLastNameInputLayout))
+        mValidatorManager.addValidator(EmailTextInputValidator(mEmailInputLayout))
         mValidatorManager.addValidator(MatchingValidator(mConfirmEmailInputLayout, mEmailInputLayout))
+        mValidatorManager.addValidator(PasswordTextInputValidator(mPasswordInputLayout))
+        mValidatorManager.setOnAnyTextChangedListener { setEnableButton(mValidatorManager.areAllFieldsValid()) }
     }
 
     override fun setListeners() {
@@ -83,6 +83,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     }
 
+    //TODO: replace for validFields
     override fun setEnableButton(validFields: Boolean) {
         mContinueButton.isEnabled = true
     }
@@ -91,6 +92,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     override fun passwordTextInputLayout(): TextInputLayoutInterface = mPasswordInputLayout
 
     private fun onButtonClick() {
+        //TODO: switch
 //        progressDialog.show()
 //        presenter!!.register(
 //            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),

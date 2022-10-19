@@ -52,7 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLength="8" />
+                android:maxLength="9" />
 
         </org.evcs.android.features.shared.StandardTextField>
 
@@ -110,7 +110,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large_extra"
             android:layout_gravity="center"
-            android:enabled="true"
+            android:enabled="false"
             android:text="@string/fragment_register_enter_code_button"
             style="@style/Button.Black" />
 

@@ -155,6 +155,7 @@ abstract class AbstractAuthFragment<T : AuthPresenter<*>> : LoadingFragment<T>()
 
     override fun showErrorPopup(error: RequestError) {
         showLoading(false)
+        ToastUtils.show(error.body)
     }
 
     override fun onTermsAcceptedSent() {

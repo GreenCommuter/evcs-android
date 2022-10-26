@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:custom="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/map_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="center"
+        android:layout_above="@+id/map_carousel_recycler"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="end|bottom"/>
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_height="match_parent" />
 
-    <LinearLayout
+    <ImageButton
+        android:id="@+id/map_search"
+        android:layout_width="@dimen/spacing_largest"
+        android:layout_height="@dimen/spacing_largest"
+        android:src="@drawable/ic_magnifying_glass_solid"/>
+
+    <ImageButton
+        android:id="@+id/map_filter"
+        android:layout_width="@dimen/spacing_largest"
+        android:layout_height="@dimen/spacing_largest"
+        android:src="@drawable/ic_sliders_solid"
+        android:layout_alignParentEnd="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/map_carousel_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:layout_alignParentBottom="true"
+        android:paddingLeft="@dimen/spacing_medium"
+        android:paddingRight="@dimen/spacing_medium"
+        android:clipToPadding="false" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Map"/>
-
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Charging"/>
-
-        <Button
-            android:id="@+id/sign_out"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Sign out"/>
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

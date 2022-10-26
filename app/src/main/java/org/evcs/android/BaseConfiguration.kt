@@ -43,6 +43,12 @@ object BaseConfiguration {
         const val ROBOTO_BOLD = "fonts/Roboto-Bold.ttf"
     }
 
+    object Map {
+        const val DEFAULT_LATITUDE = 34.0223187
+        const val DEFAULT_LONGITUDE = -118.3104457
+        const val DEFAULT_ZOOM = 10f
+    }
+
     object Notifications {
         const val ITEMS_VISIBLE_THRESHOLD = 15
     }

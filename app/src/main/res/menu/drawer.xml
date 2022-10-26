@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group
-        android:id="@+id/menu_bottom"
-        android:checkableBehavior="single">
+    <item
+        android:id="@+id/menu_drawer_map"
+        android:icon="@drawable/ic_map_solid"
+        android:title="@string/drawer_menu_map" />
 
-        <item
-            android:id="@+id/menu_drawer_profile"
-            android:title="@string/drawer_menu_profile" />
+    <item
+        android:id="@+id/menu_drawer_charging"
+        android:icon="@drawable/ic_bolt_solid"
+        android:title="@string/drawer_menu_charging" />
 
-        <item
-            android:id="@+id/menu_drawer_help"
-            android:title="@string/drawer_menu_help" />
-    </group>
+    <item
+        android:id="@+id/menu_drawer_profile"
+        android:icon="@drawable/ic_user_solid"
+        android:title="@string/drawer_menu_profile" />
 </menu>

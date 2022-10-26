@@ -4,7 +4,7 @@ import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
-import org.evcs.android.features.serviceSelection.MainMapFragment;
+import org.evcs.android.features.map.MainMapFragment;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
 
 public class MainNavigationController extends AbstractNavigationController

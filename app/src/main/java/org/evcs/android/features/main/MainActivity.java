@@ -2,9 +2,11 @@ package org.evcs.android.features.main;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.CallSuper;
@@ -12,16 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import org.evcs.android.R;
 import org.evcs.android.activity.AbstractSupportedVersionActivity;
 import org.evcs.android.databinding.ActivityBaseNavhostBinding;
+import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding;
+import org.evcs.android.features.auth.initialScreen.AuthActivity;
 import org.evcs.android.features.shared.IVersionView;
 import org.evcs.android.util.Extras;
 import org.evcs.android.util.PushNotificationUtils;
+import org.evcs.android.util.UserUtils;
 
 public class MainActivity extends AbstractSupportedVersionActivity implements IVersionView {
 
     public MainNavigationController mNavigationController;
+    private BottomNavigationView mMenu;
 
     @Override
     @CallSuper
@@ -41,8 +49,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
 
     @Override
     protected View inflate(LayoutInflater layoutInflater) {
-        @NonNull ActivityBaseNavhostBinding binding = ActivityBaseNavhostBinding.inflate(layoutInflater);
+        @NonNull ActivityBaseNavhostWithBottomNavBinding binding =
+                ActivityBaseNavhostWithBottomNavBinding.inflate(layoutInflater);
         setContentView(binding.getRoot());
+        mMenu = binding.bottomNavigation;
         return binding.getRoot();
     }
 
@@ -66,6 +76,34 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     @Override
     public void isSupportedVersion(boolean isSupported, String versionWording) {
 
+    }
+
+    public BottomNavigationView getMenuView() {
+        return mMenu;
+    }
+
+    @Override
+    protected void setListeners() {
+        super.setListeners();
+        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ? "Sign in" : "Sign out");
+        mMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.menu_drawer_map:
+                        break;
+                    case R.id.menu_drawer_charging:
+                        break;
+                    case R.id.menu_drawer_profile:
+                        if (UserUtils.getLoggedUser() == null)
+                            startActivity(new Intent(MainActivity.this, AuthActivity.class));
+                        else
+                            UserUtils.logout(null);
+
+                }
+                return true;
+            }
+        });
     }
 
     @Override

@@ -205,9 +205,9 @@
     <string name="drawer_header_user_format">%1$s %2$s</string>
     <string name="drawer_menu_open">Open</string>
     <string name="drawer_menu_close">Close</string>
+    <string name="drawer_menu_map">Map</string>
+    <string name="drawer_menu_charging">Charging</string>
     <string name="drawer_menu_profile">Profile</string>
-    <string name="drawer_menu_coupons">COUPONS</string>
-    <string name="drawer_menu_help">Help</string>
 
     <!-- Monthly Fee View -->
     <string name="monthly_fee_text">Monthly fee</string>

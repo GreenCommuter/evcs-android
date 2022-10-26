@@ -9,10 +9,11 @@
         android:name="org.evcs.android.ui.fragment.EmptyFragment">
         <action
             android:id="@+id/action_rootFragment_to_chooseServiceFragment"
-            app:destination="@id/chooseServiceFragment" />    </fragment>
+            app:destination="@id/chooseServiceFragment" />
+    </fragment>
     <fragment
         android:id="@+id/chooseServiceFragment"
-        android:name="org.evcs.android.features.serviceSelection.MainMapFragment"
+        android:name="org.evcs.android.features.map.MainMapFragment2"
         android:label="ChooseServiceFragment"
         tools:layout="@layout/fragment_main_map"/>
 </navigation>

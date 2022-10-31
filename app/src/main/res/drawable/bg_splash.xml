@@ -3,7 +3,7 @@
 
     <item android:drawable="@color/evcs_purple" />
 
-    <item android:drawable="@drawable/logo_white"
+    <item android:drawable="@drawable/logo_white_splash"
           android:gravity="center"
         android:width="131dp"
         android:height="146dp"/>

@@ -15,7 +15,7 @@ public class Location {
                 "dc": 0,
                 "ac": 0
     },*/
-    public float distance;
+    public Float distance;
     List<Station> stations;
     public Address address;
 

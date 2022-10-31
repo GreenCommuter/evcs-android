@@ -20,6 +20,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     private val mMultipleRequestsManager: MultipleRequestsManager
 
+    private var mLocations: MutableList<Location> = ArrayList()
+
     init {
         mMultipleRequestsManager = MultipleRequestsManager(this)
     }
@@ -37,14 +39,16 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     override fun onMapDestroyed() {}
 
     fun getLocations() {
-            getService(LocationService::class.java).getLocations()
+            getService(LocationService::class.java).getLocations(mPaginationState.page)
                 .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
                         mPaginationState.updateTotal(response!!.totalPages)
-                        view.showLocations(response.page)
+                        enqueueLocations(response.page as List<Location>)
                         mPaginationState.advancePage()
                         if (mPaginationState.pagesLeft()) {
                             getLocations()
+                        } else {
+                            view.showLocations(mLocations)
                         }
                     }
 
@@ -56,6 +60,10 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                         view.showError(RequestError.getNetworkError())
                     }
                 })
+    }
+
+    private fun enqueueLocations(page: List<Location>) {
+        mLocations.addAll(page)
     }
 
 }

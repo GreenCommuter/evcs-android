@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
@@ -6,9 +6,11 @@
     <!-- For old versions -->
     <style name="AppTheme.Transparent"/>
 
-    <!-- Splash screen -->
     <style name="SplashTheme" parent="AppTheme.Transparent">
         <item name="android:windowBackground">@drawable/bg_splash</item>
+        <item name="android:windowSplashScreenBackground" tools:targetApi="s">@color/evcs_purple</item>
+        <item name="android:windowSplashScreenAnimatedIcon" tools:targetApi="s">@drawable/logo_white_splash</item>
+        <item name="postSplashScreenTheme">@style/AppTheme.Transparent</item>
     </style>
 
     <!-- Toolbar -->

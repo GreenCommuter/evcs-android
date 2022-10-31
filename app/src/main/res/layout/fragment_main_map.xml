@@ -18,18 +18,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageButton
-        android:id="@+id/map_search"
-        android:layout_width="@dimen/spacing_largest"
-        android:layout_height="@dimen/spacing_largest"
-        android:src="@drawable/ic_magnifying_glass_solid"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/status_bar_height"
+        android:padding="@dimen/spacing_medium">
 
-    <ImageButton
-        android:id="@+id/map_filter"
-        android:layout_width="@dimen/spacing_largest"
-        android:layout_height="@dimen/spacing_largest"
-        android:src="@drawable/ic_sliders_solid"
-        android:layout_alignParentEnd="true"/>
+        <ImageButton
+            android:id="@+id/map_search"
+            android:layout_width="@dimen/spacing_big_extra"
+            android:layout_height="@dimen/spacing_big_extra"
+            android:background="@drawable/layout_oval_black"
+            android:src="@drawable/ic_magnifying_glass_solid"/>
+
+        <ImageButton
+            android:id="@+id/map_filter"
+            android:layout_width="@dimen/spacing_big_extra"
+            android:layout_height="@dimen/spacing_big_extra"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_sliders_solid"
+            android:background="@drawable/layout_oval_black"/>
+
+    </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/map_carousel_recycler"

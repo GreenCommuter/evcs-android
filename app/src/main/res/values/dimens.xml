@@ -91,7 +91,7 @@
     <!-- Map -->
     <dimen name="map_padding">40dp</dimen>
     <dimen name="vanpool_detail_map_size">200dp</dimen>
-    <dimen name="vanpool_map_bottom_padding">144dp</dimen>
+    <dimen name="map_bottom_padding">120dp</dimen>
     <dimen name="carsharing_detail_map_height">166dp</dimen>
     <dimen name="carsharing_map_bottom_padding">72dp</dimen>
     <dimen name="vanpool_search_top_padding">72dp</dimen>
@@ -132,7 +132,7 @@
     <dimen name="show_password_margin_bottom">12dp</dimen>
 
     <!-- Incident Report -->
-    <dimen name="incident_report_images_dimens">48dp</dimen>
+    <dimen name="status_bar_height">24dp</dimen>
 
     <!-- Ongoing Car -->
     <dimen name="ongoing_car_width">100dp</dimen>

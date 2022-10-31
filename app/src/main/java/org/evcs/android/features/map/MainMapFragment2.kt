@@ -11,26 +11,25 @@ import org.evcs.android.model.shared.RequestError
 import com.base.core.util.ToastUtils
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.ImageButton
 import org.evcs.android.activity.FilterActivity
+import org.evcs.android.activity.LocationActivity
 import org.evcs.android.activity.SearchActivity
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.Location
-import org.evcs.android.ui.adapter.BaseRecyclerAdapter
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
+import kotlin.math.roundToInt
 
 class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), IMainMapView {
 
     val DEFAULT_SELECTED_ITEM = 0
-    var mVanpoolCarouselItemSpacing = 0
-    var mVanpoolDetailsSize = 0
+    var mCarouselItemSpacing = 0
+    var mCarouselHeight = 0
 
     var mPaddingExtra = 0
     private lateinit var mLinearLayoutManager: LinearLayoutManager
     private lateinit var mMapAdapter: CarouselAdapter
     private lateinit var mVanpoolCarouselScrollListener: RecyclerView.OnScrollListener
-    private val mNavigationListener: IVanpoolMapNavigationListener? = null
     private lateinit var mCarouselRecycler: RecyclerView
     private lateinit var mSearchButton: ImageButton
     private lateinit var mFilterButton: ImageButton
@@ -59,8 +58,8 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
 
     override fun init() {
         super.init()
-        mVanpoolCarouselItemSpacing = resources.getDimension(R.dimen.spacing_medium).toInt()
-        mVanpoolDetailsSize = resources.getDimension(R.dimen.vanpool_map_bottom_padding).toInt()
+        mCarouselItemSpacing = resources.getDimension(R.dimen.spacing_medium).toInt()
+        mCarouselHeight = resources.getDimension(R.dimen.map_bottom_padding).toInt()
         mPaddingExtra = resources.getDimension(R.dimen.spacing_medium).toInt()
         initializeRecycler()
         mVanpoolCarouselScrollListener = object : RecyclerView.OnScrollListener() {
@@ -112,7 +111,7 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
         mCarouselRecycler.layoutManager = mLinearLayoutManager
         mCarouselRecycler.addItemDecoration(
             SpaceItemDecoration(
-                mVanpoolCarouselItemSpacing,
+                mCarouselItemSpacing,
                 SpaceItemDecoration.HORIZONTAL
             )
         )
@@ -130,7 +129,7 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
         mMapAdapter.appendBottomAll(mapItems)
         mMapAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location, adapterPosition: Int) {
-                mNavigationListener!!.onLocationDetail(item)
+                startActivity(Intent(requireContext(), LocationActivity::class.java))
             }
         })
     }
@@ -139,10 +138,11 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
         return Container(location, drawMarker(location?.latLng!!, selected))
     }
 
-//    override fun setMapParameters() {
-//        super.setMapParameters()
-//        setMapPadding(0, 0, 0, mVanpoolDetailsSize + mPaddingExtra)
-//    }
+    override fun setMapParameters() {
+        super.setMapParameters()
+        val top = resources.getDimension(R.dimen.status_bar_height).toInt()
+        setMapPadding(0, top, 0, mCarouselHeight + mPaddingExtra)
+    }
 
     public override fun getDefaultSelectedMapItem(): Int {
         return DEFAULT_SELECTED_ITEM
@@ -150,13 +150,6 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
 
     override fun showError(requestError: RequestError) {
         ToastUtils.show(requestError.body)
-    }
-
-    /**
-     * Listener that provides navigation.
-     */
-    interface IVanpoolMapNavigationListener /*extends INavigationListener*/ {
-        fun onLocationDetail(location: Location?)
     }
 
     override fun getMapViewId(): Int {

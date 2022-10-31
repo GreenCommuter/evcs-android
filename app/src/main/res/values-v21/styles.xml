@@ -17,11 +17,7 @@
         <item name="colorControlNormal">@color/evcs_grey</item>
         <item name="colorAccent">@color/evcs_black</item>
         <item name="textColorError">@color/evcs_red</item>
-        <item name="android:statusBarColor">@color/evcs_gray_89</item>
-
-        <!-- Text styling and background of options menu items -->
-        <item name="android:itemTextAppearance">@style/SansationRegular.MediumMore.Black</item>
-        <item name="android:itemBackground">@color/evcs_white</item>
+<!--        <item name="android:statusBarColor">@color/evcs_gray_89</item>-->
 
         <!-- TextInputLayout style -->
         <item name="textInputLayoutStyle">@style/TextInputStyle</item>
@@ -29,9 +25,19 @@
         <item name="android:datePickerDialogTheme">@style/EVCSDatePickerDialogTheme</item>
     </style>
 
-    <style name="AppTheme.Transparent">
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    <!-- Text styling and background of options menu items -->
+    <style name="SelectableItemTheme">
+        <item name="colorControlHighlight">@color/evcs_white</item>
+    </style>
+
+<!--    <style name="AppTheme.Transparent">-->
+<!--        <item name="android:windowDrawsSystemBarBackgrounds">true</item>-->
 <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+<!--    </style>-->
+
+    <style name="AppTheme.Transparent">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
     <!-- Date Picker -->

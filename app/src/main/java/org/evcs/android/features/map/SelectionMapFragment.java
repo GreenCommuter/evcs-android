@@ -181,9 +181,7 @@ public abstract class SelectionMapFragment<T extends ServicesPresenter & IMapPre
      * @param container target route
      * @param selected determines wether it should render selected or not
      */
-    private void setUpContainer(
-            @NonNull Container container,
-            boolean selected) {
+    private void setUpContainer(@NonNull Container container, boolean selected) {
         formatMarker(container.marker, selected);
     }
 

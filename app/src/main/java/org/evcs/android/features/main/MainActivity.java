@@ -18,7 +18,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.evcs.android.R;
 import org.evcs.android.activity.AbstractSupportedVersionActivity;
-import org.evcs.android.databinding.ActivityBaseNavhostBinding;
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding;
 import org.evcs.android.features.auth.initialScreen.AuthActivity;
 import org.evcs.android.features.shared.IVersionView;

@@ -13,13 +13,12 @@ public class MainNavigationController extends AbstractNavigationController
     private static MainNavigationController mInstance;
     private final MainActivity mActivity;
     private AbstractNavigationController mCurrentController;
-    private final boolean mHasRoot;
     private @IdRes Integer mRootId;
+    private boolean mIsInCharging;
 
     public MainNavigationController(MainActivity mainActivity, boolean hasRoot, NavController navController) {
         super(navController);
         mActivity = mainActivity;
-        mHasRoot = hasRoot;
         mInstance = this;
     }
 
@@ -29,21 +28,27 @@ public class MainNavigationController extends AbstractNavigationController
 
     @Override
     protected @IdRes int getStartingHistoryBuilder() {
-        return R.id.chooseServiceFragment;
+        return R.id.mainMapFragment;
     }
 
     public void startFlow() {
-        if (mHasRoot) {
-            mRootId = getStartingHistoryBuilder();
-            replaceLastKey(getStartingHistoryBuilder(), null);
-        } else {
-            onCarSharingSelected(false);
-        }
+        replaceLastKey(R.id.mainMapFragment, null);
     }
-
 
     @Override
     public void onCarSharingSelected(boolean skipPlaceholder) {
     }
 
+    public void goToCharging() {
+        if (mIsInCharging) return;
+        mIsInCharging = true;
+        navigate(R.id.chargingFragment);
+    }
+
+    public void onMapClicked() {
+        if (!mIsInCharging) return;
+        mIsInCharging = false;
+        mNavController.popBackStack();
+        mActivity.getMenuView().setSelectedItemId(R.id.menu_drawer_map);
+    }
 }

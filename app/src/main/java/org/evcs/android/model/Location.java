@@ -2,9 +2,10 @@ package org.evcs.android.model;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Location {
+public class Location implements Serializable {
     public int id;
     public String name;
     public double latitude;

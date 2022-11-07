@@ -1,5 +1,7 @@
 package org.evcs.android.util;
 
+import android.content.Context;
+import android.content.Intent;
 import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
@@ -10,6 +12,7 @@ import com.google.gson.Gson;
 
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.features.auth.initialScreen.AuthActivity;
+import org.evcs.android.features.main.MainActivity;
 import org.evcs.android.model.user.AuthUser;
 import org.evcs.android.model.user.User;
 import org.evcs.android.network.callback.AuthCallback;
@@ -96,7 +99,11 @@ public final class UserUtils {
         clearKeys();
 
         // Jump to main screen
-        NavigationUtils.jumpToClearingTask(EVCSApplication.getInstance(), AuthActivity.class);
+        Context context = EVCSApplication.getInstance().getApplicationContext();
+        Intent intent1 = new Intent(context, MainActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        Intent intent2 = new Intent(context, AuthActivity.class);
+        context.startActivities(new Intent[]{ intent1, intent2 });
     }
 
     private static void clearKeys() {

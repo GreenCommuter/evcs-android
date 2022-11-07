@@ -78,11 +78,6 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
         }
     }
 
-    override fun populate() {
-        super.populate()
-        presenter!!.getLocations()
-    }
-
     override fun onContainerClicked(container: Container) {
         val markersToggled = toggleContainerSelection(container)
         if (!markersToggled) {
@@ -129,7 +124,9 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
         mMapAdapter.appendBottomAll(mapItems)
         mMapAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location, adapterPosition: Int) {
-                startActivity(Intent(requireContext(), LocationActivity::class.java))
+                val intent = Intent(requireContext(), LocationActivity::class.java)
+                intent.putExtra("Location", item)
+                startActivity(intent)
             }
         })
     }

@@ -9,11 +9,23 @@
         android:name="org.evcs.android.ui.fragment.EmptyFragment">
         <action
             android:id="@+id/action_rootFragment_to_chooseServiceFragment"
-            app:destination="@id/chooseServiceFragment" />
+            app:destination="@id/mainMapFragment" />
     </fragment>
     <fragment
-        android:id="@+id/chooseServiceFragment"
+        android:id="@+id/mainMapFragment"
         android:name="org.evcs.android.features.map.MainMapFragment2"
         android:label="ChooseServiceFragment"
-        tools:layout="@layout/fragment_main_map"/>
+        tools:layout="@layout/fragment_main_map">
+        <action
+            android:id="@+id/action_mainMapFragmentt_to_chargingFragment"
+            app:destination="@id/chargingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chargingFragment"
+        android:name="org.evcs.android.features.charging.ChargingFragment"
+        tools:layout="@layout/fragment_charging">
+        <action
+            android:id="@+id/action_chargingFragment_to_mainMapFragment"
+            app:destination="@id/mainMapFragment" />
+    </fragment>
 </navigation>

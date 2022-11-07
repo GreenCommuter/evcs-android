@@ -14,12 +14,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
 
+import com.base.core.util.NavigationUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.evcs.android.R;
 import org.evcs.android.activity.AbstractSupportedVersionActivity;
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding;
 import org.evcs.android.features.auth.initialScreen.AuthActivity;
+
 import org.evcs.android.features.shared.IVersionView;
 import org.evcs.android.util.Extras;
 import org.evcs.android.util.PushNotificationUtils;
@@ -90,12 +92,14 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.menu_drawer_map:
+                        mNavigationController.onMapClicked();
                         break;
                     case R.id.menu_drawer_charging:
+                        mNavigationController.goToCharging();
                         break;
                     case R.id.menu_drawer_profile:
                         if (UserUtils.getLoggedUser() == null)
-                            startActivity(new Intent(MainActivity.this, AuthActivity.class));
+                            NavigationUtils.jumpTo(MainActivity.this, AuthActivity.class);
                         else
                             UserUtils.logout(null);
 

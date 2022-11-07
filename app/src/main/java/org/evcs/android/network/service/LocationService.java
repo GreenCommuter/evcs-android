@@ -2,9 +2,11 @@ package org.evcs.android.network.service;
 
 import androidx.annotation.Nullable;
 
+import org.evcs.android.model.ConnectorType;
 import org.evcs.android.model.Location;
 import org.evcs.android.model.PaginatedResponse;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -15,18 +17,9 @@ public interface LocationService {
 
     @GET("/members/v1/locations")
     Call<PaginatedResponse<Location>> getLocations(@Query("page") int page,
-                                                   @Query("latitude") float latitude,
-                                                   @Query("longitude") float longitude);
-//                                                 @Query("distance") @Nullable Integer distance
-
-
-    @GET("/members/v1/locations")
-    Call<PaginatedResponse<Location>> getLocations(@Query("page") int page,
-                                                   @Query("latitude") float latitude,
-                                                   @Query("longitude") float longitude,
+                                                   @Query("latitude") @Nullable Double latitude,
+                                                   @Query("longitude") @Nullable Double longitude,
                                                    @Query("min_kw") @Nullable Integer minKw,
-                                                   @Query("connector") @Nullable String connector);
+                                                   @Query("connector") @Nullable ConnectorType[] connector);
 
-    @GET("/members/v1/locations")
-    Call<PaginatedResponse<Location>> getLocations(@Query("page") int page);
 }

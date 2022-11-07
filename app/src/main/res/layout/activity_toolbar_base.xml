@@ -22,7 +22,7 @@
 
             app:layout_constraintTop_toTopOf="parent" />
 
-        <org.evcs.android.ui.view.shared.GreenCommuterToolbar
+        <org.evcs.android.ui.view.shared.EVCSToolbar
             android:id="@+id/activity_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -7,13 +7,11 @@ import com.base.core.fragment.BaseFragment;
 import com.base.core.presenter.BasePresenter;
 
 import org.evcs.android.R;
-import org.evcs.android.ui.drawer.IToolbarView;
 
 /**
  * Fragment to use as a placeholder while the Navigation Controller loads user information.
  */
-public class EmptyFragment extends BaseFragment
-    implements IToolbarView {
+public class EmptyFragment extends BaseFragment {
 
     public static EmptyFragment newInstance() {
         return new EmptyFragment();
@@ -31,17 +29,5 @@ public class EmptyFragment extends BaseFragment
 
     @Override
     public void init() {}
-
-    @NonNull
-    @Override
-    public ToolbarState getToolbarState() {
-        return ToolbarState.HIDE_TOOLBAR;
-    }
-
-    @Nullable
-    @Override
-    public String getToolbarTitle() {
-        return null;
-    }
 
 }

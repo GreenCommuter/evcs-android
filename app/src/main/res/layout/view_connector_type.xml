@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_corners_rounded_filter"
+    android:layout_margin="@dimen/spacing_medium"
+    android:padding="@dimen/spacing_large">
+
+    <ImageView
+        android:id="@+id/connector_type_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_large"/>
+
+    <TextView
+        android:id="@+id/connector_type_ac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:duplicateParentState="true"
+        android:textAllCaps="true"
+        android:layout_toRightOf="@id/connector_type_icon"
+        android:background="@drawable/layout_corners_rounded_filter_filled"
+        android:textColor="@color/evcs_white"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:text="ac"/>
+
+    <TextView
+        android:id="@+id/connector_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/connector_type_ac"
+        android:layout_toRightOf="@id/connector_type_icon"/>
+
+</RelativeLayout>

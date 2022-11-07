@@ -161,12 +161,7 @@ abstract class AbstractDrawerActivity : AbstractSupportedVersionActivity() {
                 override fun onFragmentViewCreated(
                     fm: FragmentManager, f: Fragment, v: View,
                     savedInstanceState: Bundle?
-                ) {
-                    if (f is IToolbarView) {
-                        // Clear toolbar or load menu from fragment
-                        f.setHasOptionsMenu(true)
-                    }
-                }
+                ) {}
 
                 override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
                     if (currentFocus != null) {

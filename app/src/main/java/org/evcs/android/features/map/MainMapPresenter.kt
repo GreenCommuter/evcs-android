@@ -1,9 +1,11 @@
 package org.evcs.android.features.map
 
+import androidx.activity.result.ActivityResult
 import com.base.maps.IMapPresenter
 import com.base.networking.retrofit.RetrofitServices
+import com.google.android.gms.maps.model.LatLng
 import okhttp3.ResponseBody
-import org.evcs.android.features.charging.ChargingFragmentDirections
+import org.evcs.android.model.ConnectorType
 import org.evcs.android.model.Location
 import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.shared.RequestError
@@ -36,8 +38,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
     override fun onMapDestroyed() {}
 
-    fun getLocations() {
-            getService(LocationService::class.java).getLocations(1)
+    fun getLocations(latlng: LatLng?, minKw: Int?, connector: Array<ConnectorType>?) {
+            getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
                 .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
                         view.showLocations(response?.page)
@@ -51,6 +53,16 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                         view.showError(RequestError.getNetworkError())
                     }
                 })
+    }
+
+    fun getLocations() {
+        getLocations(null, null, null);
+    }
+
+    fun onFilterResult(result: ActivityResult) {
+        if (result.data == null) return
+        val connectorTypes = result.data!!.getSerializableExtra("Connector Types")
+        getLocations(null, null, (connectorTypes as Array<ConnectorType>))
     }
 
 }

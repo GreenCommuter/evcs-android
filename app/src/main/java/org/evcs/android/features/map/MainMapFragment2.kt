@@ -12,13 +12,13 @@ import com.base.core.util.ToastUtils
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import androidx.activity.result.contract.ActivityResultContracts
 import org.evcs.android.activity.FilterActivity
 import org.evcs.android.activity.LocationActivity
 import org.evcs.android.activity.SearchActivity
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.Location
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
-import kotlin.math.roundToInt
 
 class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), IMainMapView {
 
@@ -95,8 +95,12 @@ class MainMapFragment2 : SelectionMapFragment<MainMapPresenter?, Location?>(), I
 
     override fun setListeners() {
         mCarouselRecycler.addOnScrollListener(mVanpoolCarouselScrollListener)
+        var startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                presenter?.onFilterResult(result)
+            }
         mSearchButton.setOnClickListener { startActivity(Intent(requireContext(), SearchActivity::class.java)) }
-        mFilterButton.setOnClickListener { startActivity(Intent(requireContext(), FilterActivity::class.java)) }
+        mFilterButton.setOnClickListener { startForResult.launch(Intent(requireContext(), FilterActivity::class.java)) }
     }
 
     private fun initializeRecycler() {

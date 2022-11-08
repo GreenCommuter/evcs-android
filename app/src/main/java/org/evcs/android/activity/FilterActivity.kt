@@ -4,6 +4,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.GridLayout
+import org.evcs.android.R
 import org.evcs.android.databinding.ActivityFilterBinding
 import org.evcs.android.model.ConnectorType
 import org.evcs.android.ui.view.shared.ConnectorTypeView
@@ -31,14 +32,16 @@ class FilterActivity : BaseActivity2() {
             )
             param.height = GridLayout.LayoutParams.WRAP_CONTENT
             param.width = 0
-            v.layoutParams = param
 
-            mBinding.activityFilterConnectorTypes.addView(v)
+//            mBinding.activityFilterConnectorTypes.addView(v, param)
             v.setOnClickListener {
-                v.isSelected = !v.isSelected;
+                v.isSelected = !v.isSelected
                 toggle(v.connectorType)
             }
         }
+        mBinding.activityFilterToolbar.title = "Filters"
+        mBinding.activityFilterToolbar.navigationIcon = resources.getDrawable(R.drawable.new_close)
+        mBinding.activityFilterToolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun toggle(connectorType: ConnectorType) {
@@ -56,6 +59,10 @@ class FilterActivity : BaseActivity2() {
             data.putExtra("Connector Types", mSelectedConnectors.toTypedArray())
             setResult(RESULT_OK, data)
             finish()
+        }
+        for (i in 0 until mBinding.activityFilterAuthorities.childCount) {
+            val child = mBinding.activityFilterAuthorities.getChildAt(i)
+            child.setOnClickListener{ child.isSelected = !child.isSelected }
         }
     }
 

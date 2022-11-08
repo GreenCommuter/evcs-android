@@ -6,28 +6,146 @@
     android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:id="@+id/activity_filter_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <TextView
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Connector types"/>
+        android:layout_margin="@dimen/spacing_large">
 
-    <GridLayout
-        android:id="@+id/activity_filter_connector_types"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available charging sites only"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            style="@style/RobotoBold.CallToAction"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/activity_filter_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/evcs_grey"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_large"
-        android:columnCount="2">
+        android:orientation="vertical">
 
-    </GridLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connector types"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            style="@style/RobotoBold.CallToAction"/>
+
+        <GridLayout
+            android:id="@+id/activity_filter_connector_types"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/evcs_grey"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Authority (not yet implemented)"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            style="@style/RobotoBold.CallToAction"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="2"
+            android:id="@+id/activity_filter_authorities">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill"
+                android:gravity="center_vertical"
+                android:layout_columnWeight="1"
+                android:layout_margin="@dimen/spacing_medium"
+                android:padding="@dimen/spacing_large"
+                android:text="Public locations"
+                style="@style/RobotoBold.CallToAction"
+                android:background="@drawable/layout_corners_rounded_filter"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:text="Restricted Access locations"
+                android:layout_margin="@dimen/spacing_medium"
+                android:padding="@dimen/spacing_large"
+                style="@style/RobotoBold.CallToAction"
+                android:background="@drawable/layout_corners_rounded_filter"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="fill"
+                android:layout_columnWeight="1"
+                android:layout_margin="@dimen/spacing_medium"
+                android:padding="@dimen/spacing_large"
+                android:text="Residential locations"
+                style="@style/RobotoBold.CallToAction"
+                android:background="@drawable/layout_corners_rounded_filter"/>
+
+        </GridLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/evcs_grey"/>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Minimum power level"
+            style="@style/RobotoBold.CallToAction"/>
+
+    </FrameLayout>
 
     <Button
         android:id="@+id/activity_filter_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:layout_marginEnd="@dimen/spacing_large"
         android:text="Apply"
-        style="@style/Button.Ariel" />
+        style="@style/Button.Black" />
 
 </LinearLayout>

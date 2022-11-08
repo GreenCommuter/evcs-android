@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import androidx.annotation.DrawableRes
 import org.evcs.android.R
 import org.evcs.android.databinding.ViewConnectorTypeBinding
 import org.evcs.android.model.ConnectorType
@@ -29,7 +28,6 @@ class ConnectorTypeView : RelativeLayout {
     }
 
     protected fun init(context: Context) {
-        R.layout.view_connector_type
         val binding = ViewConnectorTypeBinding.inflate(LayoutInflater.from(context), this, true)
         binding.connectorTypeText.text = connectorType.printableName
         binding.connectorTypeIcon.setImageDrawable(context.resources.getDrawable(connectorType.mIcon!!))

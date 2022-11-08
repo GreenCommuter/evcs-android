@@ -8,9 +8,9 @@
         android:id="@+id/map_center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="center"
         android:layout_above="@+id/map_carousel_recycler"
         android:layout_alignParentEnd="true"
+        android:text="center"
         android:layout_gravity="end|bottom"/>
 
     <com.google.android.gms.maps.MapView

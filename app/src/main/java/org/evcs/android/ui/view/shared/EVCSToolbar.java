@@ -38,9 +38,10 @@ public class EVCSToolbar extends Toolbar {
     }
 
     private void init(Context context) {
-        ButterKnife.bind(this);
         setBackgroundColor(ContextCompat.getColor(context, R.color.evcs_purple));
         setOverflowIcon(ContextCompat.getDrawable(context, R.drawable.ic_more));
+        setTitleTextColor(getResources().getColor(R.color.evcs_white));
+        setPadding(0, (int) getResources().getDimension(R.dimen.status_bar_height), 0, 0);
     }
 
 //    public void setToolbarState(IToolbarView.ToolbarState toolbarState) {

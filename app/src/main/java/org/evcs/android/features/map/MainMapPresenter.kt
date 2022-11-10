@@ -17,6 +17,8 @@ import org.evcs.android.util.ErrorUtils
 class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?) :
     ServicesPresenter<IMainMapView?>(viewInstance, services), IMapPresenter {
 
+    var mLastLocation: LatLng? = null
+
     /**
      * Returns the current logged user from API
      *
@@ -27,8 +29,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     override fun onMapReady() {
-        getLocations()
     }
+
     override fun onMapDestroyed() {}
 
     fun getLocations(latlng: LatLng?, minKw: Int?, connector: Array<ConnectorType>?) {
@@ -49,14 +51,14 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     fun getLocations() {
-        getLocations(null, null, null);
+        getLocations(mLastLocation, null, null);
     }
 
     fun onFilterResult(result: ActivityResult) {
         if (result.data == null) return
         val connectorTypes = result.data!!.getSerializableExtra("Connector Types")
         val minKw = result.data!!.getIntExtra("Min Kw", 0)
-        getLocations(null, minKw, (connectorTypes as Array<ConnectorType>))
+        getLocations(mLastLocation, minKw, (connectorTypes as Array<ConnectorType>))
     }
 
 }

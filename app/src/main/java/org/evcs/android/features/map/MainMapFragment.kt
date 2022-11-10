@@ -45,7 +45,7 @@ class MainMapFragment : AbstractMapFragment<MainMapPresenter>(), IMainMapView {
 
     override fun populate() {
         super.populate()
-        presenter?.getLocations();
+//        presenter?.getLocations();
     }
 
     override fun setListeners() {

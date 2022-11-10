@@ -11,18 +11,11 @@ import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.LocationService
-import org.evcs.android.network.service.presenter.MultipleRequestsManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
 class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?) :
     ServicesPresenter<IMainMapView?>(viewInstance, services), IMapPresenter {
-
-    private val mMultipleRequestsManager: MultipleRequestsManager
-
-    init {
-        mMultipleRequestsManager = MultipleRequestsManager(this)
-    }
 
     /**
      * Returns the current logged user from API
@@ -62,7 +55,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     fun onFilterResult(result: ActivityResult) {
         if (result.data == null) return
         val connectorTypes = result.data!!.getSerializableExtra("Connector Types")
-        getLocations(null, null, (connectorTypes as Array<ConnectorType>))
+        val minKw = result.data!!.getIntExtra("Min Kw", 0)
+        getLocations(null, minKw, (connectorTypes as Array<ConnectorType>))
     }
 
 }

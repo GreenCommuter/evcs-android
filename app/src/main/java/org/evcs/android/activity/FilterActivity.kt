@@ -13,6 +13,7 @@ import org.evcs.android.ui.view.shared.ConnectorTypeView
 class FilterActivity : BaseActivity2() {
     private lateinit var mBinding: ActivityFilterBinding
     private var mSelectedConnectors : MutableSet<ConnectorType> = ConnectorType.values().toMutableSet()
+    private var mMinKwValues : Array<Int> = arrayOf(0, 50, 70, 120)
 
     override fun inflate(layoutInflater: LayoutInflater): View {
         mBinding = ActivityFilterBinding.inflate(layoutInflater)
@@ -33,7 +34,7 @@ class FilterActivity : BaseActivity2() {
             param.height = GridLayout.LayoutParams.WRAP_CONTENT
             param.width = 0
 
-//            mBinding.activityFilterConnectorTypes.addView(v, param)
+            mBinding.activityFilterConnectorTypes.addView(v, param)
             v.setOnClickListener {
                 v.isSelected = !v.isSelected
                 toggle(v.connectorType)
@@ -42,6 +43,9 @@ class FilterActivity : BaseActivity2() {
         mBinding.activityFilterToolbar.title = "Filters"
         mBinding.activityFilterToolbar.navigationIcon = resources.getDrawable(R.drawable.new_close)
         mBinding.activityFilterToolbar.setNavigationOnClickListener { finish() }
+
+        mBinding.activityFilterMinPower.setLabels(
+            mMinKwValues.map{ i -> if (i > 0) "$i"+"kW" else "Any"}.toTypedArray());
     }
 
     private fun toggle(connectorType: ConnectorType) {
@@ -57,6 +61,7 @@ class FilterActivity : BaseActivity2() {
         mBinding.activityFilterButton.setOnClickListener {
             var data = Intent()
             data.putExtra("Connector Types", mSelectedConnectors.toTypedArray())
+            data.putExtra("Min Kw", mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress])
             setResult(RESULT_OK, data)
             finish()
         }

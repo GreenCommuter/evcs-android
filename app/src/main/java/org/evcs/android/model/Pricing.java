@@ -1,6 +1,8 @@
 package org.evcs.android.model;
 
-public class Pricing {
+import java.io.Serializable;
+
+public class Pricing implements Serializable {
     String desc;
     PricingDetail pricingDetail;
 /*        "pricing": {

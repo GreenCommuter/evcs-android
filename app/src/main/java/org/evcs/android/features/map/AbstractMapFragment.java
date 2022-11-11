@@ -1,7 +1,11 @@
 package org.evcs.android.features.map;
 
+import androidx.annotation.NonNull;
+
 import com.base.core.presenter.BasePresenter;
 import com.base.maps.IMapPresenter;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
 
 import org.evcs.android.R;
 
@@ -26,6 +30,10 @@ public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresente
     @Override
     public int getUnselectedPinRes() {
         return R.drawable.ic_map_pin_unselected;
+    }
+
+    protected void centerMap(@NonNull LatLng latLng) {
+        applyCameraUpdate(CameraUpdateFactory.newLatLng(latLng), true);
     }
 
 }

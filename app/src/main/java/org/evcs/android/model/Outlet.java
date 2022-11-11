@@ -1,6 +1,8 @@
 package org.evcs.android.model;
 
-public class Outlet {
+import java.io.Serializable;
+
+public class Outlet implements Serializable {
     String type;
     int count;
 }

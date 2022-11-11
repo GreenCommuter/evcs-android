@@ -1,11 +1,12 @@
 package org.evcs.android.model;
 
 import com.google.android.gms.maps.model.LatLng;
+import com.google.maps.android.clustering.ClusterItem;
 
 import java.io.Serializable;
 import java.util.List;
 
-public class Location implements Serializable {
+public class Location implements Serializable, ClusterItem {
     public int id;
     public String name;
     public double latitude;
@@ -22,5 +23,10 @@ public class Location implements Serializable {
 
     public LatLng getLatLng() {
         return new LatLng(latitude, longitude);
+    }
+
+    @Override
+    public LatLng getPosition() {
+        return getLatLng();
     }
 }

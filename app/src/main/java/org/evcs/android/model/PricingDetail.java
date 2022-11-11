@@ -1,6 +1,8 @@
 package org.evcs.android.model;
 
-public class PricingDetail {
+import java.io.Serializable;
+
+public class PricingDetail implements Serializable {
     float priceKwh;
     float initialFee;
 //            "occupancy_flat_fee": null,

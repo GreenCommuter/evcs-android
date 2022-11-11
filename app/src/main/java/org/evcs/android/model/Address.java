@@ -1,6 +1,8 @@
 package org.evcs.android.model;
 
-public class Address {
+import java.io.Serializable;
+
+public class Address implements Serializable {
     String streetAddress;
     String city;
     String state;

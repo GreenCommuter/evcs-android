@@ -4,20 +4,25 @@ import ClusterRender
 import android.os.Bundle
 import android.view.View
 import com.base.maps.IMapPresenter
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.clustering.ClusterItem
 import com.google.maps.android.clustering.ClusterManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 
+
 abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFragment<K>()
     where K : ServicesPresenter<*>, K : IMapPresenter {
 
     val ZOOM_LIMIT: Int = 8
-
     protected lateinit var mClusterManager: ClusterManager<T>
+
     protected lateinit var mRenderer: ClusterRender<T>
     protected var mSelectedContainer: Container? = null
+    private var mOnCameraChangeListener: GoogleMap.OnCameraChangeListener? = null
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,19 +30,41 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         mapView?.getMapAsync { map ->
             mClusterManager = ClusterManager<T>(requireContext(), map)
             mClusterManager.setAlgorithm(ZoomLimitedGridBasedAlgorithm(ZOOM_LIMIT))
-            map.setOnCameraChangeListener(mClusterManager)
-            map.setOnMarkerClickListener(mClusterManager)
             mRenderer = ClusterRender(requireContext(), map, mClusterManager)
             mClusterManager.setRenderer(mRenderer)
-
-            mClusterManager.setOnClusterItemClickListener { selectedLocation ->
-
-                toggleContainerSelection2(selectedLocation)
-
-                true
-            }
-
+            setListeners(map)
         }
+    }
+
+    private fun setListeners(map : GoogleMap) {
+        map.setOnCameraChangeListener { cameraPosition ->
+            mOnCameraChangeListener?.onCameraChange(cameraPosition)
+            mClusterManager.onCameraChange(cameraPosition)
+        }
+        map.setOnMarkerClickListener(mClusterManager)
+        mClusterManager.setOnClusterItemClickListener { selectedLocation ->
+            if (map.cameraPosition.zoom >= ZOOM_LIMIT) {
+                toggleContainerSelection2(selectedLocation)
+            } else {
+                zoomTo(map, selectedLocation.position)
+            }
+            true
+        }
+        mClusterManager.setOnClusterClickListener { cluster ->
+            zoomTo(map, cluster.position)
+            true
+        }
+    }
+
+    private fun zoomTo(map: GoogleMap, position: LatLng) {
+        val cameraPosition = CameraPosition.Builder()
+            .target(position).zoom(ZOOM_LIMIT.toFloat()).build()
+
+        map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
+    }
+
+    fun addOnCameraChangeListener(listener: GoogleMap.OnCameraChangeListener?) {
+        mOnCameraChangeListener = listener
     }
 
     open fun showMapItems(mapItems: List<T?>) {

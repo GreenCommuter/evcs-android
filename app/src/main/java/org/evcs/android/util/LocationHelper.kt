@@ -17,7 +17,7 @@ class LocationHelper {
 
     private lateinit var mReceiver: FragmentLocationReceiver
     private lateinit var mLocationPermissionRequest: ActivityResultLauncher<Array<String>>
-    private lateinit var resolutionForResult: ActivityResultLauncher<IntentSenderRequest>
+    private lateinit var mLocationSettingsRequest: ActivityResultLauncher<IntentSenderRequest>
     private lateinit var mLocationRequest: LocationRequest
 
     fun init(receiver : FragmentLocationReceiver) {
@@ -28,29 +28,31 @@ class LocationHelper {
     }
 
     private fun registerLocationPermission() {
-        mLocationPermissionRequest = mReceiver.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
+        mLocationPermissionRequest =
+            mReceiver.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
                 permissions ->
-            when {
-                permissions[Manifest.permission.ACCESS_FINE_LOCATION]!! -> {
-                    onLocationPermissionGranted()
-                }
-                permissions[Manifest.permission.ACCESS_COARSE_LOCATION]!! -> {
-                    onLocationPermissionGranted()
-                } else -> {
-                    mReceiver.onLocationNotRetrieved()
-                }
-            }
+                    when {
+                        permissions[Manifest.permission.ACCESS_FINE_LOCATION]!! -> {
+                            onLocationPermissionGranted()
+                        }
+                        permissions[Manifest.permission.ACCESS_COARSE_LOCATION]!! -> {
+                            onLocationPermissionGranted()
+                        } else -> {
+                            mReceiver.onLocationNotRetrieved()
+                        }
+                    }
         }
     }
 
     private fun registerLocationSettingsPermission() {
-        resolutionForResult =
-            mReceiver.registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) { activityResult ->
-                if (activityResult.resultCode == Activity.RESULT_OK) {
-                    onLocationSettingsEnabled(mLocationRequest)
-                } else {
-                    mReceiver.onLocationNotRetrieved()
-                }
+        mLocationSettingsRequest =
+            mReceiver.registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
+                activityResult ->
+                    if (activityResult.resultCode == Activity.RESULT_OK) {
+                        onLocationSettingsEnabled(mLocationRequest)
+                    } else {
+                        mReceiver.onLocationNotRetrieved()
+                    }
             }
     }
 
@@ -71,7 +73,7 @@ class LocationHelper {
         task.addOnFailureListener { exception ->
             try {
                 val intentSenderRequest = IntentSenderRequest.Builder((exception as ApiException).status.resolution!!).build()
-                resolutionForResult.launch(intentSenderRequest)
+                mLocationSettingsRequest.launch(intentSenderRequest)
             } catch (e: Exception) {
                 mReceiver.onLocationNotRetrieved()
             }

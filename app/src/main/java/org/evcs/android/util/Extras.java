@@ -10,4 +10,13 @@ public class Extras {
         public static final String OPENING_KEY = "opened_app";
     }
 
+    public static final class FilterActivity {
+        public static final String CONNECTOR_TYPES = "Connector Types";
+        public static final String MIN_KW = "Min Kw";
+    }
+
+    public static final class LocationActivity {
+        public static final String LOCATION = "Location";
+    }
+
 }

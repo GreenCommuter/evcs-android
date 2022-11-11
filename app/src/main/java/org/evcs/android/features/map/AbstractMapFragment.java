@@ -1,5 +1,7 @@
 package org.evcs.android.features.map;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 
 import com.base.core.presenter.BasePresenter;
@@ -34,6 +36,11 @@ public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresente
 
     protected void centerMap(@NonNull LatLng latLng) {
         applyCameraUpdate(CameraUpdateFactory.newLatLng(latLng), true);
+    }
+
+    @SuppressLint("MissingPermission")
+    protected void drawLocationMarker() {
+        getMapView().getMapAsync(googleMap -> googleMap.setMyLocationEnabled(true));
     }
 
 }

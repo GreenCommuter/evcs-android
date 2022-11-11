@@ -15,7 +15,7 @@
     <string name="app_search">Search</string>
     <string name="app_more">More</string>
     <string name="app_vanpool_id_format">Vanpool #%1$d</string>
-    <string name="app_miles_distance_format">%1$.1f Miles away</string>
+    <string name="app_miles_distance_format">%.1f mi</string>
     <string name="app_yes">Yes</string>
     <string name="app_no">No</string>
     <string name="app_continue">Continue</string>
@@ -423,11 +423,7 @@
     <string name="my_trips_finished_reservation"><b>Finished reservation</b></string>
     <string name="my_trips_future_reservation"><b>Future reservation</b></string>
     <string name="my_trips_canceled_reservation"><b>Canceled reservation</b></string>
-    <string name="my_trips_date_time_format">MM/dd/yy @ hh:mm a</string>
     <string name="my_trips_car_formatter">%1$s %2$s</string>
-    <string name="my_trips_vanpool_formatter">%1$s to \n%2$s</string>
-    <string name="my_trips_booking_format">Booking # %d</string>
-    <string name="my_carshare_trip_canceled">Canceled trip</string>
 
     <!-- Coupons -->
     <string name="coupons_toolbar_title">Coupons</string>
@@ -497,5 +493,11 @@
     <string name="fragment_register_enter_code_title">Enter your code</string>
     <string name="fragment_register_enter_code_subtitle">Please enter the code you received on your cellphone (818) 660-6219</string>
     <string name="fragment_register_enter_code_button">Validate it</string>
+
+    <!--Filter Activity-->
+    <string name="filter_activity_title">Filters</string>
+    <string name="filter_activity_available_only">Available charging sites only</string>
+    <string name="filter_activity_connector_types">Connector types</string>
+    <string name="filter_activity_minimum_power_level">Minimum power level</string>
 
 </resources>

@@ -13,6 +13,7 @@ import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
+import org.evcs.android.util.Extras
 
 class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?) :
     ServicesPresenter<IMainMapView?>(viewInstance, services), IMapPresenter {
@@ -56,8 +57,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     fun onFilterResult(result: ActivityResult) {
         if (result.data == null) return
-        val connectorTypes = result.data!!.getSerializableExtra("Connector Types")
-        val minKw = result.data!!.getIntExtra("Min Kw", 0)
+        val connectorTypes = result.data!!.getSerializableExtra(Extras.FilterActivity.CONNECTOR_TYPES)
+        val minKw = result.data!!.getIntExtra(Extras.FilterActivity.MIN_KW, 0)
         getLocations(mLastLocation, minKw, (connectorTypes as Array<ConnectorType>))
     }
 

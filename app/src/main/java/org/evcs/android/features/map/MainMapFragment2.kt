@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.base.core.util.ToastUtils
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.Marker
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -23,15 +22,18 @@ import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.recycler.decoration.SpaceItemDecoration
+import org.evcs.android.util.AnimationUtils
+import org.evcs.android.util.Extras
 import org.evcs.android.util.FragmentLocationReceiver
 import org.evcs.android.util.LocationHelper
 
 class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>(), IMainMapView,
     FragmentLocationReceiver {
 
-    var mCarouselItemSpacing = 0
-    var mCarouselHeight = 0
-    var mPaddingExtra = 0
+    private var mCarouselItemSpacing = 0
+    private var mMapTopPadding = 0
+    private var mMapBottomPadding = 0
+    private var isCarouselShowing: Boolean = false
     private lateinit var mLinearLayoutManager: LinearLayoutManager
     private lateinit var mMapAdapter: CarouselAdapter
     private lateinit var mVanpoolCarouselScrollListener: RecyclerView.OnScrollListener
@@ -40,7 +42,6 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
 
     private lateinit var mFilterButton: ImageButton
     private lateinit var mCenterButton: Button
-    private var mLocationMarker: Marker? = null
 
     fun newInstance(): MainMapFragment2 {
             val args = Bundle()
@@ -63,14 +64,16 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         mSearchButton = binding.mapSearch
         mFilterButton = binding.mapFilter
         mCenterButton = binding.mapCenter
-        LocationHelper().init(this)
     }
 
     override fun init() {
         super.init()
+        LocationHelper().init(this)
         mCarouselItemSpacing = resources.getDimension(R.dimen.spacing_medium).toInt()
-        mCarouselHeight = resources.getDimension(R.dimen.map_bottom_padding).toInt()
-        mPaddingExtra = resources.getDimension(R.dimen.spacing_medium).toInt()
+        val carouselHeight = resources.getDimension(R.dimen.map_bottom_padding).toInt()
+        val paddingExtra = resources.getDimension(R.dimen.spacing_medium).toInt()
+        mMapBottomPadding = carouselHeight + paddingExtra
+        mMapTopPadding = resources.getDimension(R.dimen.status_bar_height).toInt()
         initializeRecycler()
     }
 
@@ -96,7 +99,17 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         mSearchButton.setOnClickListener { startActivity(Intent(requireContext(), SearchActivity::class.java)) }
         mFilterButton.setOnClickListener { startForResult.launch(Intent(requireContext(), FilterActivity::class.java)) }
         mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
+        addOnCameraChangeListener {
+                cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
+        }
 
+    }
+
+    private fun showCarousel(show: Boolean) {
+        isCarouselShowing = show
+        AnimationUtils.animateTranslation(mCarouselRecycler, if (show) 0f else mMapBottomPadding.toFloat())
+        AnimationUtils.animateTranslation(mCenterButton, if (show) 0f else mMapBottomPadding.toFloat())
+        setMapPadding(0, mMapTopPadding, 0, if (show) mMapBottomPadding else 0)
     }
 
     override fun onLocationNotRetrieved() {
@@ -111,13 +124,6 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         getLocations()
     }
 
-    private fun drawLocationMarker() {
-        if (mLocationMarker == null)
-            mLocationMarker = drawMarker(presenter?.mLastLocation!!, true)
-        else
-            mLocationMarker!!.position = presenter?.mLastLocation
-    }
-
     private fun getLocations() {
         mapView!!.getMapAsync{ presenter?.getLocations() }
     }
@@ -125,9 +131,14 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     override fun onContainerClicked(container: Container) {
         //This line in particular is not working because the listener is set back before the scrolling ends
         mCarouselRecycler.removeOnScrollListener(mVanpoolCarouselScrollListener)
-        mCarouselRecycler.smoothScrollToPosition(mMapAdapter.getItemPosition(container.mapItem))
+        val scrollTo = mMapAdapter.getItemPosition(container.mapItem)
+        if (isCarouselShowing)
+            mCarouselRecycler.smoothScrollToPosition(scrollTo)
+        else
+            mCarouselRecycler.scrollToPosition(scrollTo)
         mCarouselRecycler.addOnScrollListener(mVanpoolCarouselScrollListener)
 //        centerFromContainer(container)
+        showCarousel(true)
     }
 
     private fun initializeRecycler() {
@@ -136,10 +147,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         mLinearLayoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         mCarouselRecycler.layoutManager = mLinearLayoutManager
         mCarouselRecycler.addItemDecoration(
-            SpaceItemDecoration(
-                mCarouselItemSpacing,
-                SpaceItemDecoration.HORIZONTAL
-            )
+            SpaceItemDecoration(mCarouselItemSpacing, SpaceItemDecoration.HORIZONTAL)
         )
         val onFlingListener = LinearSnapHelper()
         onFlingListener.attachToRecyclerView(mCarouselRecycler)
@@ -152,28 +160,21 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     override fun showMapItems(mapItems: List<Location?>) {
         clearMap()
         mMapAdapter.clear()
-        if (presenter?.mLastLocation != null) drawLocationMarker()
         super.showMapItems(mapItems)
 
         mMapAdapter.appendBottomAll(mapItems)
         mMapAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location, adapterPosition: Int) {
                 val intent = Intent(requireContext(), LocationActivity::class.java)
-                intent.putExtra("Location", item)
+                intent.putExtra(Extras.LocationActivity.LOCATION, item)
                 startActivity(intent)
             }
         })
     }
 
-    override fun clearMap() {
-        super.clearMap()
-        mLocationMarker = null
-    }
-
     override fun setMapParameters() {
         super.setMapParameters()
-        val top = resources.getDimension(R.dimen.status_bar_height).toInt()
-        setMapPadding(0, top, 0, mCarouselHeight + mPaddingExtra)
+        showCarousel(false)
     }
 
 //    fun getDefaultSelectedMapItem(): Int {

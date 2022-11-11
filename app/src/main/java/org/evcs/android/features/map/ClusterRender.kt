@@ -12,11 +12,6 @@ import org.evcs.android.R
 class ClusterRender<T : ClusterItem>(context: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
     DefaultClusterRenderer<T>(context, map, clusterManager) {
 
-    companion object {
-        const val SELECTED_ALPHA = 1.0f
-        const val UNSELECTED_ALPHA = 0.5f
-    }
-
     override fun onBeforeClusterItemRendered(item: T, markerOptions: MarkerOptions) {
         markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_pin_unselected))
 //        if (item.isSelected) {
@@ -25,10 +20,6 @@ class ClusterRender<T : ClusterItem>(context: Context, map: GoogleMap, clusterMa
 //            markerOptions.alpha(UNSELECTED_ALPHA)
 //        }
     }
-
-//    override fun getColor(clusterSize: Int): Int {
-//        return ContextCompat.getColor(context, R.color.my_color)
-//    }
 
     fun onClusterItemChange(item: T, marker: Marker, isSelected : Boolean) {
         if (isSelected) {

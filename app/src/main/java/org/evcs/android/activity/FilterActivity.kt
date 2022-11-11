@@ -8,6 +8,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.ActivityFilterBinding
 import org.evcs.android.model.ConnectorType
 import org.evcs.android.ui.view.shared.ConnectorTypeView
+import org.evcs.android.util.Extras
 
 
 class FilterActivity : BaseActivity2() {
@@ -40,7 +41,7 @@ class FilterActivity : BaseActivity2() {
                 toggle(v.connectorType)
             }
         }
-        mBinding.activityFilterToolbar.title = "Filters"
+        mBinding.activityFilterToolbar.title = getString(R.string.filter_activity_title)
         mBinding.activityFilterToolbar.navigationIcon = resources.getDrawable(R.drawable.new_close)
         mBinding.activityFilterToolbar.setNavigationOnClickListener { finish() }
 
@@ -60,8 +61,8 @@ class FilterActivity : BaseActivity2() {
         super.setListeners()
         mBinding.activityFilterButton.setOnClickListener {
             var data = Intent()
-            data.putExtra("Connector Types", mSelectedConnectors.toTypedArray())
-            data.putExtra("Min Kw", mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress])
+            data.putExtra(Extras.FilterActivity.CONNECTOR_TYPES, mSelectedConnectors.toTypedArray())
+            data.putExtra(Extras.FilterActivity.MIN_KW, mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress])
             setResult(RESULT_OK, data)
             finish()
         }

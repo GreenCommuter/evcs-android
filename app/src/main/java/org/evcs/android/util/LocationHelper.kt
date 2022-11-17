@@ -3,7 +3,6 @@ package org.evcs.android.util
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
-import android.os.Looper
 import androidx.activity.result.ActivityResultCallback
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.IntentSenderRequest
@@ -18,7 +17,6 @@ class LocationHelper {
     private lateinit var mReceiver: FragmentLocationReceiver
     private lateinit var mLocationPermissionRequest: ActivityResultLauncher<Array<String>>
     private lateinit var mLocationSettingsRequest: ActivityResultLauncher<IntentSenderRequest>
-    private lateinit var mLocationRequest: LocationRequest
 
     fun init(receiver : FragmentLocationReceiver) {
         mReceiver = receiver
@@ -49,7 +47,7 @@ class LocationHelper {
             mReceiver.registerForActivityResult(ActivityResultContracts.StartIntentSenderForResult()) {
                 activityResult ->
                     if (activityResult.resultCode == Activity.RESULT_OK) {
-                        onLocationSettingsEnabled(mLocationRequest)
+                        onLocationSettingsEnabled()
                     } else {
                         mReceiver.onLocationNotRetrieved()
                     }
@@ -63,12 +61,13 @@ class LocationHelper {
     }
 
     private fun onLocationPermissionGranted() {
-        mLocationRequest = LocationRequest.Builder(50000).setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY).build()
-        val builder = LocationSettingsRequest.Builder().addLocationRequest(mLocationRequest)
+//        mLocationRequest = LocationRequest.Builder(50000).setPriority(Priority.PRIORITY_BALANCED_POWER_ACCURACY).build()
+        val builder = LocationSettingsRequest.Builder()
+//            .addLocationRequest(mLocationRequest)
         val client: SettingsClient = LocationServices.getSettingsClient(mReceiver.requireActivity())
         val task: Task<LocationSettingsResponse> = client.checkLocationSettings(builder.build())
         task.addOnSuccessListener {
-            onLocationSettingsEnabled(mLocationRequest)
+            onLocationSettingsEnabled()
         }
         task.addOnFailureListener { exception ->
             try {
@@ -82,20 +81,14 @@ class LocationHelper {
 
 
     @SuppressLint("MissingPermission")
-    private fun onLocationSettingsEnabled(locationRequest: LocationRequest) {
+    private fun onLocationSettingsEnabled() {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(mReceiver.requireActivity())
-        val locationCallback = object : LocationCallback() {
-            override fun onLocationAvailability(var1: LocationAvailability) {
-                if (!var1.isLocationAvailable)
-                    mReceiver.onLocationNotRetrieved()
-            }
-
-            override fun onLocationResult(var1: LocationResult) {
-                mReceiver.onLocationResult(var1.lastLocation!!)
-            }
+        fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+            mReceiver.onLocationResult(location)
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest,
-            locationCallback, Looper.getMainLooper())
+        .addOnFailureListener {
+            mReceiver.onLocationNotRetrieved()
+        }
     }
 }
 

@@ -1,6 +1,5 @@
 package org.evcs.android.features.map
 
-import ClusterRender
 import android.os.Bundle
 import android.view.View
 import com.base.maps.IMapPresenter
@@ -20,7 +19,7 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
     val ZOOM_LIMIT: Int = 8
     protected lateinit var mClusterManager: ClusterManager<T>
 
-    protected lateinit var mRenderer: ClusterRender<T>
+    protected lateinit var mRenderer: ClusterRenderer<T>
     protected var mSelectedContainer: Container? = null
     private var mOnCameraChangeListener: GoogleMap.OnCameraChangeListener? = null
 
@@ -29,8 +28,8 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         super.onViewCreated(view, savedInstanceState)
         mapView?.getMapAsync { map ->
             mClusterManager = ClusterManager<T>(requireContext(), map)
-            mClusterManager.setAlgorithm(ZoomLimitedGridBasedAlgorithm(ZOOM_LIMIT))
-            mRenderer = ClusterRender(requireContext(), map, mClusterManager)
+            mClusterManager.setAlgorithm(ZoomLimitedNonHDistanceAlgorithm(ZOOM_LIMIT))
+            mRenderer = ClusterRenderer(requireContext(), map, mClusterManager)
             mClusterManager.setRenderer(mRenderer)
             setListeners(map)
         }
@@ -88,7 +87,7 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         if (mSelectedContainer != null) {
             val marker = mRenderer.getMarker(mSelectedContainer!!.mapItem)
             if (marker != null)
-                mRenderer.onClusterItemChange(mSelectedContainer!!.mapItem!!, marker, false)
+                mRenderer.onClusterItemChange(mSelectedContainer!!.mapItem, marker, false)
         }
         mSelectedContainer = null
     }
@@ -110,8 +109,7 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
      */
     protected abstract fun onContainerClicked(container: Container)
 
-    protected inner class Container(mapItem: T, marker: Marker) :
-        ClusterItem {
+    protected inner class Container(mapItem: T, marker: Marker) : ClusterItem {
         val mapItem: T
         val marker: Marker
 

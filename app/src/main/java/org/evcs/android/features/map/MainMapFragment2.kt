@@ -44,10 +44,10 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     private lateinit var mCenterButton: Button
 
     fun newInstance(): MainMapFragment2 {
-            val args = Bundle()
-            val fragment = MainMapFragment2()
-            fragment.arguments = args
-            return fragment
+        val args = Bundle()
+        val fragment = MainMapFragment2()
+        fragment.arguments = args
+        return fragment
     }
 
     override fun layout(): Int {
@@ -199,7 +199,5 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
             BaseConfiguration.Map.DEFAULT_LONGITUDE
         )
     }
-
-    //TODO: remove updates
 
 }

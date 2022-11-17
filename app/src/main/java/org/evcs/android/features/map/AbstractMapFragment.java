@@ -1,6 +1,8 @@
 package org.evcs.android.features.map;
 
 import android.annotation.SuppressLint;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.annotation.NonNull;
 
@@ -41,6 +43,12 @@ public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresente
     @SuppressLint("MissingPermission")
     protected void drawLocationMarker() {
         getMapView().getMapAsync(googleMap -> googleMap.setMyLocationEnabled(true));
+        /*View locationButton = ((View) getMapView().findViewById(Integer.parseInt("1")).getParent())
+                .findViewById(Integer.parseInt("2"));
+        RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+        rlp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        rlp.setMargins(0, 180, 180, 0);*/
     }
 
 }

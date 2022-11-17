@@ -6,7 +6,7 @@ import com.google.maps.android.clustering.ClusterItem;
 import java.io.Serializable;
 import java.util.List;
 
-public class Location implements Serializable, ClusterItem {
+public class Location implements Serializable, ClusterItemWithText {
     public int id;
     public String name;
     public double latitude;
@@ -28,5 +28,10 @@ public class Location implements Serializable, ClusterItem {
     @Override
     public LatLng getPosition() {
         return getLatLng();
+    }
+
+    @Override
+    public String getMarkerText() {
+        return Integer.toString(stations.size());
     }
 }

@@ -3,6 +3,8 @@ package org.evcs.android.model;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.clustering.ClusterItem;
 
+import org.jetbrains.annotations.Nullable;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,6 +22,19 @@ public class Location implements Serializable, ClusterItemWithText {
     public Float distance;
     List<Station> stations;
     public Address address;
+//       "directions":"TO BE DEFINED",
+//               "open_247":true,
+//               "authority":"public",
+
+//        "noodoe_id": "abc123",
+//        "contact": {
+//        "name": "Rina",
+//        "title": "XS",
+//        "email": "rina@sawayama.com",
+//        "phone": "1 222 333 4444",
+//        "company": "Sawayama"
+//        },
+//        "subscriptions_enabled": false
 
     public LatLng getLatLng() {
         return new LatLng(latitude, longitude);
@@ -33,5 +48,9 @@ public class Location implements Serializable, ClusterItemWithText {
     @Override
     public String getMarkerText() {
         return Integer.toString(stations.size());
+    }
+
+    public final CharSequence getPrintableDistance() {
+        return (distance == null) ? "-- mi" : String.format("%.1f mi", distance);
     }
 }

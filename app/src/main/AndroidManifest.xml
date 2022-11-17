@@ -63,7 +63,7 @@
             android:theme="@style/AppTheme.Transparent" />
 
         <activity
-            android:name="org.evcs.android.activity.SearchActivity"
+            android:name="org.evcs.android.activity.search.SearchActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/SplashTheme" />

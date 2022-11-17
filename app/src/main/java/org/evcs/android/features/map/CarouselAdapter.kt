@@ -14,4 +14,12 @@ class CarouselAdapter : BaseRecyclerAdapter<Location?, LocationViewHolder?>() {
         holder?.setLocation(item!!)
     }
 
+    //Ugly af
+    fun find(location: Location): Location? {
+        for (i in 0..itemCount - 1) {
+            if (get(i)?.latLng?.equals(location.latLng)!!) return get(i)
+        }
+        return null
+    }
+
 }

@@ -84,7 +84,7 @@ class LocationHelper {
     private fun onLocationSettingsEnabled() {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(mReceiver.requireActivity())
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
-            mReceiver.onLocationResult(location)
+            if (location == null) mReceiver.onLocationNotRetrieved() else mReceiver.onLocationResult(location)
         }
         .addOnFailureListener {
             mReceiver.onLocationNotRetrieved()

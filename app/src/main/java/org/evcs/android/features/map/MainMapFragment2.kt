@@ -1,5 +1,6 @@
 package org.evcs.android.features.map
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -16,7 +17,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.FilterActivity
 import org.evcs.android.activity.LocationActivity
-import org.evcs.android.activity.SearchActivity
+import org.evcs.android.activity.search.SearchActivity
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
@@ -92,17 +93,26 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
             }
         }
         mCarouselRecycler.addOnScrollListener(mVanpoolCarouselScrollListener)
-        val startForResult =
+        val searchActivityTask =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                if (result.resultCode == Activity.RESULT_OK)
+                    onSearchResult(result.data!!.getSerializableExtra(Extras.LocationActivity.LOCATION) as Location)
+            }
+        val filterActivityTask =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 presenter?.onFilterResult(result)
             }
-        mSearchButton.setOnClickListener { startActivity(Intent(requireContext(), SearchActivity::class.java)) }
-        mFilterButton.setOnClickListener { startForResult.launch(Intent(requireContext(), FilterActivity::class.java)) }
+        mSearchButton.setOnClickListener { searchActivityTask.launch(Intent(requireContext(), SearchActivity::class.java)) }
+        mFilterButton.setOnClickListener { filterActivityTask.launch(Intent(requireContext(), FilterActivity::class.java)) }
         mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
         addOnCameraChangeListener {
                 cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
         }
 
+    }
+
+    private fun onSearchResult(location: Location) {
+        toggleContainerSelection(mMapAdapter.find(location)!!)
     }
 
     private fun showCarousel(show: Boolean) {

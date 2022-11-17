@@ -15,7 +15,7 @@ class LocationViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) 
 
     fun setLocation(location: Location) {
         mBinding.adapterMapName.text = location.name
-        mBinding.adapterMapDistance.text = if (location.distance == null) "-- mi" else String.format("%.1f mi", location.distance)
+        mBinding.adapterMapDistance.text = location.printableDistance
         mBinding.adapterMapAddress.text = location.address.toString()
     }
 }

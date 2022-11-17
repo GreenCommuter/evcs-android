@@ -359,7 +359,6 @@
     <!--Book Now-->
     <string name="book_now_parking_space_nearby">Cars nearby</string>
     <string name="book_now_my_location">My location</string>
-    <string name="book_now_search_location">Search location</string>
     <string name="book_now_current_location">Current Location</string>
     <string name="book_now_current_location_click">Current location (tap to change)</string>
     <string name="book_now_tab">Book Now</string>
@@ -499,5 +498,11 @@
     <string name="filter_activity_available_only">Available charging sites only</string>
     <string name="filter_activity_connector_types">Connector types</string>
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
+
+    <!--Search Activity-->
+    <string name="search_activity_hint">Search by name or address</string>
+    <string name="search_activity_empty">Search for charging sites by name or address</string>
+    <string name="search_activity_fail">Cannot find</string>
+    <string name="search_activity_fail_description">Try searching again using diferent spelling or keywords.</string>
 
 </resources>

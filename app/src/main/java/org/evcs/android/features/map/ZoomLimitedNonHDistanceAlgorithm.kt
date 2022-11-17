@@ -7,7 +7,7 @@ import com.google.maps.android.clustering.algo.NonHierarchicalDistanceBasedAlgor
 import com.google.maps.android.clustering.algo.StaticCluster
 import java.util.HashSet
 
-class ZoomLimitedNonHDistanceAlgorithm<T : ClusterItem?>(private val mZoomLimit: Int) :
+class ZoomLimitedNonHDistanceAlgorithm<T : ClusterItem>(private val mZoomLimit: Int) :
     NonHierarchicalDistanceBasedAlgorithm<T?>() {
 
     override fun getClusters(zoom: Double): Set<Cluster<T?>> {

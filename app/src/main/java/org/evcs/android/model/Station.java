@@ -9,7 +9,7 @@ public class Station implements Serializable {
     int id;
     String name;
     String availableStatus;
-    float km;
+    float kw;
     DateTime lastSynchedAt;
     List<Outlet> outlets;
     String chargerType;

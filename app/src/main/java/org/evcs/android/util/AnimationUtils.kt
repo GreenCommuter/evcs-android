@@ -8,7 +8,7 @@ class AnimationUtils {
     companion object {
         fun animateTranslation(v: View, distance: Float) {
             ObjectAnimator.ofFloat(v, "translationY", distance).apply {
-                duration = 1000
+                duration = 500
                 interpolator = LinearInterpolator()
                 start()
             }

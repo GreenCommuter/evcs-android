@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/layout_corners_rounded_white"
+    android:gravity="center"
+    android:layout_margin="@dimen/spacing_medium"
+    android:padding="@dimen/spacing_large">
+
+    <ImageView
+        android:id="@+id/station_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/spacing_large"
+        android:src="@drawable/ic_map_pin_unselected" />
+
+    <TextView
+        android:id="@+id/station_ac"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/station_icon"
+        android:duplicateParentState="true"
+        android:text="ac"
+        android:textAllCaps="true" />
+
+    <TextView
+        android:id="@+id/station_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/station_icon"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:text="Tesla" />
+
+    <TextView
+        android:id="@+id/station_power"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/station_type"
+        android:text="50kW" />
+
+    <TextView
+        android:id="@+id/station_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/station_icon"
+        android:layout_below="@id/station_power"
+        android:paddingStart="@dimen/spacing_medium"
+        android:paddingEnd="@dimen/spacing_medium"
+        android:background="@drawable/layout_corners_rounded_filter_filled"
+        android:text="0.49 USD/kWh" />
+
+    <TextView
+        android:id="@+id/station_available"
+        style="@style/RobotoBold.Body"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@+id/station_total"
+        android:text="\?\?"
+        android:textColor="@color/evcs_green" />
+
+    <TextView
+        android:id="@+id/station_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/station_arrow"
+        android:text="/\?\?" />
+
+    <ImageView
+        android:id="@+id/station_arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_map_pin_unselected"
+        />
+
+</RelativeLayout>

@@ -13,14 +13,14 @@ public class Location implements Serializable, ClusterItemWithText {
     public String name;
     public double latitude;
     public double longitude;
-    List<String> imageUrls;
+    public List<String> imageUrls;
 /*        "station_count": {
         "dc50kw": 4,
                 "dc": 0,
                 "ac": 0
     },*/
     public Float distance;
-    List<Station> stations;
+    public List<Station> stations;
     public Address address;
 //       "directions":"TO BE DEFINED",
 //               "open_247":true,

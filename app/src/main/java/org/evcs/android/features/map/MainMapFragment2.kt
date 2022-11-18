@@ -16,7 +16,7 @@ import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.FilterActivity
-import org.evcs.android.activity.LocationActivity
+import org.evcs.android.activity.location.LocationActivity
 import org.evcs.android.activity.search.SearchActivity
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.Location

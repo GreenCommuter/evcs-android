@@ -17,14 +17,14 @@
         android:id="@+id/connector_type_ac"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:duplicateParentState="true"
-        android:textAllCaps="true"
         android:layout_toRightOf="@id/connector_type_icon"
         android:background="@drawable/layout_corners_rounded_filter_filled"
-        android:textColor="@color/evcs_white"
+        android:duplicateParentState="true"
         android:paddingStart="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_medium"
-        android:text="ac"/>
+        android:text="ac"
+        android:textAllCaps="true"
+        android:textColor="@color/evcs_white" />
 
     <TextView
         android:id="@+id/connector_type_text"

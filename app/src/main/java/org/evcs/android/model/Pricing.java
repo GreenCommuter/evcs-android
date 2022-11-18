@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Pricing implements Serializable {
     String desc;
-    PricingDetail pricingDetail;
+    PricingDetail detail;
 /*        "pricing": {
         "desc": "by energy",
                 "detail": {
@@ -30,4 +30,8 @@ public class Pricing implements Serializable {
 //        "buffer_time": null
 //        }
 
+
+    public PricingDetail getDetail() {
+        return detail;
+    }
 }

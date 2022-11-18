@@ -14,4 +14,27 @@ public class Station implements Serializable {
     List<Outlet> outlets;
     String chargerType;
     Pricing pricing;
+
+    public String getAvailableStatus() {
+        return availableStatus;
+    }
+
+    public float getKw() {
+        return kw;
+    }
+
+    public List<Outlet> getOutlets() {
+        return outlets;
+    }
+
+    public ConnectorType getChargerType() {
+        for (ConnectorType ct : ConnectorType.values()) {
+            if (ct.toString().equals(chargerType)) return ct;
+        }
+        return ConnectorType.TYPE1;
+    }
+
+    public Pricing getPricing() {
+        return pricing;
+    }
 }

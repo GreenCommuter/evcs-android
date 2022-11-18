@@ -11,4 +11,8 @@ public class PricingDetail implements Serializable {
     int firstHourPrice;
     int thereafterPrice;
     int regularMinimumCost;
+
+    public float getPriceKwh() {
+        return priceKwh;
+    }
 }

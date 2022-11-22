@@ -2,7 +2,11 @@ package org.evcs.android.util;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
+import android.net.Uri;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -103,6 +107,14 @@ public final class LocationUtils {
                 callback.onLocationRetrieved(task.getResult());
             }
         });
+    }
+
+    public static void launchGoogleMapsWithPin(Context context, LatLng latLng) {
+        Uri gmmIntentUri = Uri.parse("geo:" + latLng.latitude +"," + latLng.longitude
+                + "?q=" + latLng.latitude + "," + latLng.longitude);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        context.startActivity(mapIntent);
     }
 
     public interface LocationCallback {

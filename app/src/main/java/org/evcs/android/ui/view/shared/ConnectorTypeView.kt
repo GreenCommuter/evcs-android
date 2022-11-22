@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import org.evcs.android.R
 import org.evcs.android.databinding.ViewConnectorTypeBinding
 import org.evcs.android.model.ConnectorType
 

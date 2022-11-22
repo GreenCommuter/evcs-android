@@ -37,25 +37,33 @@ class FilterActivity : BaseActivity2() {
 
             mBinding.activityFilterConnectorTypes.addView(v, param)
             v.setOnClickListener {
-                v.isSelected = !v.isSelected
-                toggle(v.connectorType)
+                onConnectorClicked(v)
             }
         }
         mBinding.activityFilterToolbar.title = getString(R.string.filter_activity_title)
-        mBinding.activityFilterToolbar.navigationIcon = resources.getDrawable(R.drawable.new_close)
+        mBinding.activityFilterToolbar.navigationIcon = resources.getDrawable(R.drawable.ic_xmark_solid)
         mBinding.activityFilterToolbar.setNavigationOnClickListener { finish() }
 
         mBinding.activityFilterMinPower.setLabels(
             mMinKwValues.map{ i -> if (i > 0) "$i"+"kW" else "Any"}.toTypedArray());
+        mBinding.activityFilterMinPower.seekbar.progressDrawable =
+            resources.getDrawable(R.drawable.progress_bar_background)
     }
 
-    private fun toggle(connectorType: ConnectorType) {
-        if (connectorType in mSelectedConnectors) {
-            mSelectedConnectors.remove(connectorType)
-        } else {
-            mSelectedConnectors.add(connectorType)
-        }
+    private fun onConnectorClicked(v : ConnectorTypeView) {
+        for (i in 0 .. mBinding.activityFilterConnectorTypes.childCount - 1)
+            mBinding.activityFilterConnectorTypes.getChildAt(i).isSelected = false
+        v.isSelected = true
+        mSelectedConnectors = mutableSetOf(v.connectorType)
     }
+
+//    private fun toggle(connectorType: ConnectorType) {
+//        if (connectorType in mSelectedConnectors) {
+//            mSelectedConnectors.remove(connectorType)
+//        } else {
+//            mSelectedConnectors.add(connectorType)
+//        }
+//    }
 
     override fun setListeners() {
         super.setListeners()

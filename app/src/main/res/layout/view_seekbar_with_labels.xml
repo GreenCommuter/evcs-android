@@ -8,7 +8,9 @@
     <SeekBar
         android:id="@+id/view_seekbar_with_labels_seekbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_medium"
+        android:clipToPadding="false"/>
 
     <LinearLayout
         android:id="@+id/view_seekbar_with_labels_labels"
@@ -26,8 +28,7 @@
 <!--        <View-->
 <!--            android:layout_width="0dp"-->
 <!--            android:layout_height="1dp"-->
-<!--            android:layout_weight="1"-->
-<!--            />-->
+<!--            android:layout_weight="1"/>-->
 
     </LinearLayout>
 

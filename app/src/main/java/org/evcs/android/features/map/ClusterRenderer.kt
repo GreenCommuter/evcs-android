@@ -27,7 +27,7 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
     override fun onBeforeClusterItemRendered(item: T, markerOptions: MarkerOptions) {
         markerOptions.icon(getBitmap(item, R.drawable.ic_map_pin_unselected))
         //If items have the same z index the one at the back is selected, for some reason
-        markerOptions.zIndex(Random().nextFloat())
+//        markerOptions.zIndex((90 - item.position.latitude).toFloat())
     }
 
     //Show exact number

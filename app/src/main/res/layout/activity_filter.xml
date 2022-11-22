@@ -99,9 +99,7 @@
                         android:layout_margin="@dimen/spacing_medium"
                         android:padding="@dimen/spacing_large"
                         android:text="Public locations"
-                        style="@style/RobotoBold.CallToAction"
                         android:background="@drawable/layout_corners_rounded_filter"/>
-
 
                     <TextView
                         android:layout_width="0dp"
@@ -111,7 +109,6 @@
                         android:text="Restricted Access locations"
                         android:layout_margin="@dimen/spacing_medium"
                         android:padding="@dimen/spacing_large"
-                        style="@style/RobotoBold.CallToAction"
                         android:background="@drawable/layout_corners_rounded_filter"/>
 
 
@@ -123,7 +120,6 @@
                         android:layout_margin="@dimen/spacing_medium"
                         android:padding="@dimen/spacing_large"
                         android:text="Residential locations"
-                        style="@style/RobotoBold.CallToAction"
                         android:background="@drawable/layout_corners_rounded_filter"/>
 
                 </GridLayout>
@@ -150,8 +146,7 @@
                 <org.evcs.android.ui.view.shared.SeekbarWithLabels
                     android:id="@+id/activity_filter_min_power"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    />
+                    android:layout_height="wrap_content"/>
 
             </LinearLayout>
 
@@ -161,8 +156,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_large"
                 android:layout_marginEnd="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large"
                 android:text="Apply"
-                style="@style/Button.Black" />
+                android:textAllCaps="false"
+                android:textColor="@color/evcs_white"
+                android:background="@drawable/layout_corners_rounded_orange_gradient"
+                style="@style/Button" />
 
         </LinearLayout>
 

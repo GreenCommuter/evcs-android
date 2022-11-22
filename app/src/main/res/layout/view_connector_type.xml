@@ -22,7 +22,6 @@
         android:duplicateParentState="true"
         android:paddingStart="@dimen/spacing_medium"
         android:paddingEnd="@dimen/spacing_medium"
-        android:text="ac"
         android:textAllCaps="true"
         android:textColor="@color/evcs_white" />
 

@@ -16,10 +16,13 @@ import org.evcs.android.util.PaginationState
 class LocationActivityPresenter(viewInstance: LocationActivityView, services: RetrofitServices) :
     ServicesPresenter<LocationActivityView>(viewInstance, services) {
 
+    var mLocation: Location? = null
+
     fun getLocation(id: Int) {
         getService(LocationService::class.java).getLocation(id)
             .enqueue(object : AuthCallback<Location?>(this) {
                 override fun onResponseSuccessful(response: Location?) {
+                    mLocation = response
                     view.showLocation(response)
                 }
 

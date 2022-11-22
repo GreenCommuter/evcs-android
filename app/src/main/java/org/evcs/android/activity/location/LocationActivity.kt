@@ -11,6 +11,7 @@ import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.view.shared.StationsView
 import org.evcs.android.util.Extras
+import org.evcs.android.util.LocationUtils
 import java.io.Serializable
 
 class LocationActivity : BaseActivity2(), LocationActivityView {
@@ -38,7 +39,9 @@ class LocationActivity : BaseActivity2(), LocationActivityView {
 
     override fun setListeners() {
         mBinding.activityLocationGo.setOnClickListener{
-            //TODO: launch google maps
+            if (mPresenter.mLocation != null) {
+                LocationUtils.launchGoogleMapsWithPin(this, mPresenter.mLocation!!.latLng)
+            }
         }
     }
 

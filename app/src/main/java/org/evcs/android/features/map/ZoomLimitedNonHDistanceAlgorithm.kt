@@ -1,7 +1,6 @@
 package org.evcs.android.features.map
 
 import com.google.maps.android.clustering.ClusterItem
-import com.google.maps.android.clustering.algo.GridBasedAlgorithm
 import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.algo.NonHierarchicalDistanceBasedAlgorithm
 import com.google.maps.android.clustering.algo.StaticCluster

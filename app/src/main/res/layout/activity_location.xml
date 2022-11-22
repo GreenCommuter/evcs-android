@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/activity_location_picture"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="200dp"
                 android:src="@drawable/bg_profile_header"/>
 
             <LinearLayout
@@ -35,7 +35,7 @@
                     android:gravity="center"
                     android:textSize="@dimen/font_large"
                     android:layout_marginBottom="@dimen/spacing_medium"
-                    style="@style/Roboto.Body"/>
+                    style="@style/RobotoBold.CallToAction"/>
 
                 <TextView
                     android:id="@+id/activity_location_distance"
@@ -44,6 +44,7 @@
                     android:layout_marginBottom="@dimen/spacing_large"
                     android:text="-- mi"
                     android:gravity="center"
+                    android:textColor="@color/evcs_purple_gray"
                     style="@style/Roboto.Body"/>
 
                 <TextView
@@ -67,7 +68,17 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:textColor="@color/evcs_white"
+                    android:text="Parking charges may apply"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    style="@style/Roboto.Body"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:text="Connector Type"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:textColor="@color/evcs_purple_gray"
                     style="@style/Roboto.Body"/>
 
                 <LinearLayout
@@ -82,7 +93,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/evcs_white"/>
+                android:background="@color/evcs_purple_gray"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -100,7 +111,6 @@
                     android:paddingTop="@dimen/padding_ariel_standard"
                     android:paddingBottom="@dimen/padding_ariel_standard"
                     android:drawablePadding="@dimen/spacing_medium"
-                    android:text="201 E Ave S, Palmdale"
                     android:drawableLeft="@drawable/ic_map_pin_unselected"
                     android:textColor="@color/evcs_white"
                     style="@style/Roboto.Body"/>
@@ -108,7 +118,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/evcs_white"/>
+                    android:background="@color/evcs_purple_gray"/>
 
                 <TextView
                     android:id="@+id/activity_location_open_hours"
@@ -126,7 +136,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/evcs_white"/>
+                    android:background="@color/evcs_purple_gray"/>
 
                 <TextView
                     android:id="@+id/activity_location_authority"
@@ -144,7 +154,11 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="@color/evcs_white"/>
+                    android:background="@color/evcs_purple_gray"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/spacing_largest"/>
 
             </LinearLayout>
 
@@ -158,6 +172,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_large"
         android:layout_gravity="bottom|end"
-        android:src="@drawable/ic_map_pin_selected"/>
+        app:backgroundTint="@color/evcs_light_orange"
+        android:src="@drawable/ic_diamond_turn_right_solid"/>
 
 </FrameLayout>

@@ -117,14 +117,6 @@
     <dimen name="my_trips_corporate_label">5dp</dimen>
     <dimen name="my_trips_images_height">100dp</dimen>
 
-    <!-- Future Reservation -->
-    <dimen name="future_reservation_parking_space_margin_top">10dp</dimen>
-    <dimen name="future_reservation_parking_space_margin_left">16dp</dimen>
-    <dimen name="future_reservation_address_margin_left">12dp</dimen>
-
-    <!-- Booking Details -->
-    <dimen name="booking_detail_element_size">88dp</dimen>
-
     <!--Payment Methods-->
     <dimen name="payment_methods_credit_font_size">50sp</dimen>
 

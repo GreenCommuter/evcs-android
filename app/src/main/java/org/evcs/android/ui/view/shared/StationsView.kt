@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
-import org.evcs.android.databinding.ViewStationBinding
+import org.evcs.android.databinding.ViewStationsBinding
 import org.evcs.android.model.Station
 
 class StationsView : RelativeLayout {
@@ -30,7 +30,7 @@ class StationsView : RelativeLayout {
     }
 
     protected fun init(context: Context) {
-        val binding = ViewStationBinding.inflate(LayoutInflater.from(context), this, true)
+        val binding = ViewStationsBinding.inflate(LayoutInflater.from(context), this, true)
         binding.stationAc.text = if (mStation.chargerType.mIsAc) "Ac" else "Dc"
         binding.stationIcon.setImageDrawable(resources.getDrawable(mStation.chargerType.mIcon))
         binding.stationPower.text = String.format("%.0fkW", mStation.kw)

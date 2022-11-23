@@ -15,8 +15,8 @@ public class Station implements Serializable {
     String chargerType;
     Pricing pricing;
 
-    public String getAvailableStatus() {
-        return availableStatus;
+    public int getId() {
+        return id;
     }
 
     public float getKw() {
@@ -36,5 +36,18 @@ public class Station implements Serializable {
 
     public Pricing getPricing() {
         return pricing;
+    }
+
+    public AvailableStatus getAvailableStatus() {
+        for (AvailableStatus value : AvailableStatus.values()) {
+            if (availableStatus.equals(value.toString())) {
+                return value;
+            }
+        }
+        return AvailableStatus.UNKNOWN;
+    }
+
+    public enum AvailableStatus {
+        AVAILABLE, BLOCKED, CHARGING, INOPERATIVE, OUTOFORDER, PLANNED, REMOVED, RESERVED, UNKNOWN;
     }
 }

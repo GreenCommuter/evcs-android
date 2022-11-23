@@ -1,6 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_dark_purple">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:id="@+id/activity_stations_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium_extra"
+        android:text="Charger Details"
+        android:textColor="@color/evcs_white"
+        style="@style/Roboto.Body"/>
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/evcs_purple_gray"
+            android:layout_margin="@dimen/spacing_medium_extra"
+            android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/evcs_purple_gray"
+            android:padding="@dimen/spacing_medium_extra">
+
+            <TextView
+                style="@style/RobotoBold.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Connection Fee"
+                android:textColor="@color/evcs_white" />
+
+            <TextView
+                android:id="@+id/activity_stations_connection_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Free"
+                android:textColor="@color/evcs_white"
+                android:layout_alignParentEnd="true"
+                style="@style/Roboto.Body"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_stations_connection_fee"
+                android:text="Session Fee"
+                android:textColor="@color/evcs_white"
+                style="@style/RobotoBold.Body"/>
+
+            <TextView
+                android:id="@+id/activity_stations_session_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_stations_connection_fee"
+                android:text="0.29 USD/kWh"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/evcs_white"
+                style="@style/Roboto.Body"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/activity_stations_session_fee"
+                android:background="@color/evcs_white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_stations_session_fee"
+                android:text="Occupancy Fee"
+                style="@style/RobotoBold.Body"
+                android:textColor="@color/evcs_white" />
+
+            <TextView
+                android:id="@+id/activity_stations_occupancy_fee"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_stations_session_fee"
+                android:text="0.00 USD/charge"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/evcs_white"
+                style="@style/Roboto.Body"/>
+
+            <TextView
+                android:id="@+id/activity_stations_grace_period"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_stations_occupancy_fee"
+                android:text="(Grace period: 0 mins)"
+                android:textColor="@color/evcs_white"
+                style="@style/Roboto.Body"/>
+
+            <TextView
+                android:id="@+id/activity_stations_grace_period_clarification"
+                style="@style/Roboto.Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/activity_stations_grace_period"
+                android:text="Avoid occupancy fees by unplugging your vehicle within the grace period. You will receive a notification when the energy transfer has ended"
+                android:textColor="@color/evcs_white" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_stations_stations"
+            style="@style/Roboto.Body"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/evcs_white"
+            android:orientation="vertical" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

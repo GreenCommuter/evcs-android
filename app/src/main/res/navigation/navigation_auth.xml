@@ -16,6 +16,11 @@
         <action
             android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_registerFragmentYourCar"
+            app:popUpTo="@id/signInFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/registerFragmentYourCar" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"

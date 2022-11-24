@@ -3,7 +3,7 @@ package org.evcs.android.features.auth.register
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -69,7 +69,7 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
 
     override fun onCellphoneSent() {
         progressDialog.dismiss()
-        Navigation.findNavController(requireView())
+        findNavController()
             .navigate(RegisterFragmentCellPhoneDirections.actionRegisterFragmentCellPhoneToRegisterFragmentVerify(
                 mBinding.fragmentRegisterCellphoneNumber.text.toString()
             ))

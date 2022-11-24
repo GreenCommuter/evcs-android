@@ -10,7 +10,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.evcs.android.BaseConfiguration
@@ -75,7 +75,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
 
     override fun setListeners() {
         mBinding.fragmentRegisterEnterCodeButton.setOnClickListener { onButtonClick() }
-        mBinding.fragmentRegisterEnterCodeEdit.setOnClickListener { Navigation.findNavController(requireView()).popBackStack() }
+        mBinding.fragmentRegisterEnterCodeEdit.setOnClickListener { findNavController().popBackStack() }
         mBinding.fragmentRegisterEnterCodeResend.setOnClickListener { presenter?.sendNumbertoVerify(mPreviousNumber!!) }
         val intentFilter = IntentFilter()
         intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)

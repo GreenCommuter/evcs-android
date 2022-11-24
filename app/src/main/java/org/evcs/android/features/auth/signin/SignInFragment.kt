@@ -8,7 +8,7 @@ import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
 import android.widget.Button
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.base.core.util.KeyboardUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -109,7 +109,7 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     }
 
     fun onForgotPasswordClick() {
-        Navigation.findNavController(requireView())
+        findNavController()
             .navigate(SignInFragmentDirections.actionSignInFragmentToForgotPasswordFragment())
     }
 
@@ -124,11 +124,20 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
 
     override fun onTokenSent() {
         showLoading(false)
-        (activity as AuthActivity).onAuthFinished()
+        if (hasCompletedRegistration()) {
+            (activity as AuthActivity).onAuthFinished()
+        } else {
+            findNavController()
+                .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragmentYourCar())
+        }
+    }
+
+    private fun hasCompletedRegistration(): Boolean {
+        return UserUtils.getLoggedUser().isPhoneVerified
     }
 
     protected fun onRegisterClick() {
-        Navigation.findNavController(requireView())
+        findNavController()
             .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragment())
     }
 

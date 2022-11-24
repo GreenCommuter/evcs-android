@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -100,18 +100,18 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 //            mPasswordInputLayout.text.toString()
 //        )
         UserUtils.saveAuthUser(TestAuthUser())
-        Navigation.findNavController(requireView())
+        findNavController()
             .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentVerify(""))
     }
 
     override fun onTokenSent() {
         progressDialog.dismiss()
-        Navigation.findNavController(requireView())
+        findNavController()
             .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
     }
 
     protected fun onLoginClick() {
-        Navigation.findNavController(requireView()).popBackStack()
+        findNavController().popBackStack()
     }
 
     //Ver password

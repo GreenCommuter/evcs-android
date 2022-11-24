@@ -41,9 +41,14 @@ public abstract class AbstractNavigationController {
      * Replaces the last fragment with the given key.
      */
     protected void replaceLastKey(@IdRes int id, Bundle args) {
-        NavOptions navOptions = getAnimations().setPopUpTo(mNavController.getCurrentDestination().getId(), true)
+//        NavOptions navOptions = getAnimations().setPopUpTo(mNavController.getCurrentDestination().getId(), true)
+//                .build();
+        mNavController.navigate(id, args, replaceLastNavOptions(mNavController));
+    }
+
+    public static NavOptions replaceLastNavOptions(NavController controller) {
+        return new NavOptions.Builder().setPopUpTo(controller.getCurrentDestination().getId(), true)
                 .build();
-        mNavController.navigate(id, args, navOptions);
     }
 
     protected void navigate(@IdRes int action) {

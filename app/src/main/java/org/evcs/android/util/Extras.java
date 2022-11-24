@@ -19,4 +19,8 @@ public class Extras {
         public static final String LOCATION = "Location";
     }
 
+    public static final class StationsActivity {
+        public static final String STATIONS = "Stations";
+    }
+
 }

@@ -3,6 +3,7 @@ package org.evcs.android.activity.location
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
+import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.activity.StationActivity
@@ -55,7 +56,7 @@ class LocationActivity : BaseActivity2(), LocationActivityView {
             val v = StationsView(this, stations.first(), mPresenter.countAvailable(stations), stations.size)
             v.setOnClickListener {
                 val intent = Intent(this, StationActivity::class.java)
-                intent.putExtra("Stations", stations as Serializable)
+                intent.putExtra(Extras.StationsActivity.STATIONS, stations as Serializable)
                 startActivity(intent)
             }
             mBinding.activityLocationConnectors.addView(v)
@@ -63,5 +64,6 @@ class LocationActivity : BaseActivity2(), LocationActivityView {
     }
 
     override fun showError(requestError: RequestError) {
+        ToastUtils.show(requestError.body)
     }
 }

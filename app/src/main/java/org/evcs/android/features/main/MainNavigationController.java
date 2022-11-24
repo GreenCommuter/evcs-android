@@ -4,11 +4,9 @@ import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
-import org.evcs.android.features.map.MainMapFragment;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
 
-public class MainNavigationController extends AbstractNavigationController
-        implements MainMapFragment.IMainMapListener {
+public class MainNavigationController extends AbstractNavigationController {
 
     private static MainNavigationController mInstance;
     private final MainActivity mActivity;
@@ -33,10 +31,6 @@ public class MainNavigationController extends AbstractNavigationController
 
     public void startFlow() {
         replaceLastKey(R.id.mainMapFragment, null);
-    }
-
-    @Override
-    public void onCarSharingSelected(boolean skipPlaceholder) {
     }
 
     public void goToCharging() {

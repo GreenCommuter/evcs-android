@@ -30,7 +30,7 @@ class ConnectorTypeView : RelativeLayout {
         val binding = ViewConnectorTypeBinding.inflate(LayoutInflater.from(context), this, true)
         binding.connectorTypeText.text = connectorType.printableName
         binding.connectorTypeIcon.setImageDrawable(context.resources.getDrawable(connectorType.mIcon!!))
-        binding.connectorTypeAc.text = if (connectorType.mIsAc) "Ac" else "Dc"
+        binding.connectorTypeAc.text = connectorType.mAc
         mLayout = binding.connectorTypeAc.parent as RelativeLayout
         isSelected = true
     }

@@ -71,7 +71,7 @@
         android:layout_toStartOf="@+id/station_total"
         android:text="\?\?"
         style="@style/RobotoBold.CallToAction"
-        android:textColor="@color/evcs_green" />
+        android:textColor="@color/color_selector_available" />
 
     <TextView
         android:id="@+id/station_total"

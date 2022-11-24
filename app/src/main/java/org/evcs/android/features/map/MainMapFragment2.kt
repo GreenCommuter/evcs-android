@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ProgressBar
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -40,9 +41,9 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     private lateinit var mVanpoolCarouselScrollListener: RecyclerView.OnScrollListener
     private lateinit var mCarouselRecycler: RecyclerView
     private lateinit var mSearchButton: ImageButton
-
     private lateinit var mFilterButton: ImageButton
     private lateinit var mCenterButton: Button
+    private lateinit var mLoading: ProgressBar
 
     fun newInstance(): MainMapFragment2 {
         val args = Bundle()
@@ -65,6 +66,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         mSearchButton = binding.mapSearch
         mFilterButton = binding.mapFilter
         mCenterButton = binding.mapCenter
+        mLoading = binding.mapLoading
     }
 
     override fun init() {
@@ -161,18 +163,6 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         )
         val onFlingListener = LinearSnapHelper()
         onFlingListener.attachToRecyclerView(mCarouselRecycler)
-    }
-
-    override fun showLocations(response: List<Location?>?) {
-        showMapItems(response!!)
-    }
-
-    override fun showMapItems(mapItems: List<Location?>) {
-        clearMap()
-        mMapAdapter.clear()
-        super.showMapItems(mapItems)
-
-        mMapAdapter.appendBottomAll(mapItems)
         mMapAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location, adapterPosition: Int) {
                 val intent = Intent(requireContext(), LocationActivity::class.java)
@@ -182,8 +172,20 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         })
     }
 
-    override fun setMapParameters() {
-        super.setMapParameters()
+    override fun showLocations(response: List<Location?>?) {
+        hideLoading()
+        showMapItems(response!!)
+    }
+
+    override fun showMapItems(mapItems: List<Location?>) {
+        clearMap()
+        mMapAdapter.clear()
+        super.showMapItems(mapItems)
+
+        mMapAdapter.appendBottomAll(mapItems)
+    }
+
+    override fun onMapReady() {
         showCarousel(false)
     }
 
@@ -192,7 +194,16 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
 //    }
 
     override fun showError(requestError: RequestError) {
+        hideLoading()
         ToastUtils.show(requestError.body)
+    }
+
+    override fun showLoading() {
+        mLoading.visibility = View.VISIBLE
+    }
+
+    override fun hideLoading() {
+        mLoading.visibility = View.GONE
     }
 
     override fun getMapViewId(): Int {

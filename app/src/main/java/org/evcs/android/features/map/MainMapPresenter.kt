@@ -30,25 +30,27 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     override fun onMapReady() {
+        view.onMapReady()
     }
 
     override fun onMapDestroyed() {}
 
     fun getLocations(latlng: LatLng?, minKw: Int?, connector: Array<ConnectorType>?) {
-            getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
-                .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
-                    override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
-                        view.showLocations(response?.page)
-                    }
+        view?.showLoading()
+        getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
+            .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
+                override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
+                    view.showLocations(response?.page)
+                }
 
-                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
-                    }
+                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                    view.showError(ErrorUtils.getError(responseBody))
+                }
 
-                    override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
-                    }
-                })
+                override fun onCallFailure(t: Throwable) {
+                    view.showError(RequestError.getNetworkError())
+                }
+            })
     }
 
     fun getLocations() {
@@ -57,6 +59,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     fun onFilterResult(result: ActivityResult) {
         if (result.data == null) return
+        view?.showLoading()
         val connectorTypes = result.data!!.getSerializableExtra(Extras.FilterActivity.CONNECTOR_TYPES)
         val minKw = result.data!!.getIntExtra(Extras.FilterActivity.MIN_KW, 0)
         getLocations(mLastLocation, minKw, (connectorTypes as Array<ConnectorType>))

@@ -31,7 +31,7 @@ class SearchActivityPresenter(viewInstance: SearchActivityView, services: Retrof
                     mPaginationState.updateTotal(response!!.totalPages)
                     val locationList: List<Location?>? = response.page
                     if (locationList!!.size == 0 && mPaginationState.isOnFirstPage) {
-//                        view.onEmptyResponse()
+                        view.onEmptyResponse()
                     } else {
                         view.showLocations(
                             locationList, mPaginationState.pagesLeft(), mPaginationState.isOnFirstPage)

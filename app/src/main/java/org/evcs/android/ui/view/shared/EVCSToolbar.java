@@ -1,6 +1,7 @@
 package org.evcs.android.ui.view.shared;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
@@ -38,7 +39,7 @@ public class EVCSToolbar extends Toolbar {
     }
 
     private void init(Context context) {
-        setBackgroundColor(ContextCompat.getColor(context, R.color.evcs_purple));
+        setBackgroundColor(Color.parseColor("#2D1142"));
         setOverflowIcon(ContextCompat.getDrawable(context, R.drawable.ic_more));
         setTitleTextColor(getResources().getColor(R.color.evcs_white));
         setPadding(0, (int) getResources().getDimension(R.dimen.status_bar_height), 0, 0);

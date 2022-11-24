@@ -48,9 +48,8 @@ class LocationActivityPresenter(viewInstance: LocationActivityView, services: Re
 //        return res
     }
 
-    //TODO: use enum
     fun countAvailable(stations: List<Station>): Int {
-        return stations.count { station -> station.availableStatus == Station.AvailableStatus.AVAILABLE }
+        return stations.count { station -> station.isAvailable }
     }
 
 }

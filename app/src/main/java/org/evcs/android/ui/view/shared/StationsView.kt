@@ -31,12 +31,13 @@ class StationsView : RelativeLayout {
 
     protected fun init(context: Context) {
         val binding = ViewStationsBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.stationAc.text = if (mStation.chargerType.mIsAc) "Ac" else "Dc"
+        binding.stationAc.text = mStation.chargerType.mAc
         binding.stationIcon.setImageDrawable(resources.getDrawable(mStation.chargerType.mIcon))
-        binding.stationPower.text = String.format("%.0fkW", mStation.kw)
+        binding.stationPower.text = mStation.printKw()
         binding.stationAvailable.text = mAvailable.toString()
+        binding.stationAvailable.isEnabled = mAvailable > 0
         binding.stationTotal.text = "/$mTotal"
-        binding.stationPrice.text = String.format("%.2f USD/kWh", mStation.pricing.detail.priceKwh)
+        binding.stationPrice.text = mStation.pricing.detail.printPriceKwh()
         binding.stationType.text = mStation.chargerType.printableName
     }
 

@@ -407,7 +407,6 @@
     <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
     <string name="create_booking_choose_a_diferent_car">Choose a different car</string>
     <string name="create_booking_please_select_a_car">Please select a car</string>
-    <string name="create_booking_license_plate_number">License Plate %s</string>
 
     <!-- Choose Car -->
     <string name="choose_car_title">Select a car</string>
@@ -498,11 +497,15 @@
     <string name="filter_activity_available_only">Available charging sites only</string>
     <string name="filter_activity_connector_types">Connector types</string>
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
+    <string name="filter_activity_apply">Apply</string>
 
     <!--Search Activity-->
     <string name="search_activity_hint">Search by name or address</string>
     <string name="search_activity_empty">Search for charging sites by name or address</string>
     <string name="search_activity_fail">Cannot find</string>
     <string name="search_activity_fail_description">Try searching again using diferent spelling or keywords.</string>
+
+    <!--Stations Activity-->
+    <string name="activity_stations_occupancy_clarification">Avoid occupancy fees by unplugging your vehicle within the grace period. You will receive a notification when the energy transfer has ended</string>
 
 </resources>

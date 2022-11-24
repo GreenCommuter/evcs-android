@@ -1,20 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/evcs_dark_purple"
-    android:paddingTop="@dimen/status_bar_height">
+    android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/fragment_search_location_address_layout"
+    <LinearLayout
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/evcs_dark_purple"
+        android:paddingTop="@dimen/status_bar_height">
+
+        <FrameLayout
+            android:id="@+id/fragment_search_location_address_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"/>
+
+        <org.evcs.android.ui.recycler.EndlessRecyclerView
+            android:id="@+id/activity_search_results"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/activity_search_empty"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_medium"/>
+        android:text="@string/search_activity_empty"
+        android:textColor="@color/evcs_white"
+        android:layout_gravity="center"
+        style="@style/Roboto.Body"/>
 
-    <org.evcs.android.ui.recycler.EndlessRecyclerView
-        android:id="@+id/activity_search_results"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <LinearLayout
+        android:id="@+id/activity_search_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:visibility="gone"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:text="Cannot find laci"
+            android:textColor="@color/evcs_white"
+            style="@style/RobotoBold.CallToAction"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/search_activity_fail_description"
+            android:textColor="@color/evcs_white"
+            style="@style/Roboto.Body"/>
+
+    </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/activity_search_loading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:indeterminateTint="@color/evcs_white"/>
+
+</FrameLayout>

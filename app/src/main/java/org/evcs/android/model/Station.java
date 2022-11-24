@@ -1,5 +1,6 @@
 package org.evcs.android.model;
 
+import org.evcs.android.util.StringUtils;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
@@ -19,8 +20,8 @@ public class Station implements Serializable {
         return id;
     }
 
-    public float getKw() {
-        return kw;
+    public String printKw() {
+        return String.format("%.0fkW", kw);
     }
 
     public List<Outlet> getOutlets() {
@@ -47,7 +48,15 @@ public class Station implements Serializable {
         return AvailableStatus.UNKNOWN;
     }
 
+    public CharSequence printAvailableStatus() {
+        return StringUtils.capitalize(availableStatus.toLowerCase().replace("_", " "));
+    }
+
+    public boolean isAvailable() {
+        return getAvailableStatus().equals(AvailableStatus.AVAILABLE);
+    }
+
     public enum AvailableStatus {
-        AVAILABLE, BLOCKED, CHARGING, INOPERATIVE, OUTOFORDER, PLANNED, REMOVED, RESERVED, UNKNOWN;
+        AVAILABLE, BLOCKED, IN_USE, INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN;
     }
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -20,6 +21,7 @@ import org.evcs.android.activity.FilterActivity
 import org.evcs.android.activity.location.LocationActivity
 import org.evcs.android.activity.search.SearchActivity
 import org.evcs.android.databinding.FragmentMainMapBinding
+import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
@@ -102,10 +104,10 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
             }
         val filterActivityTask =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                presenter?.onFilterResult(result)
+                onFilterResult(result)
             }
-        mSearchButton.setOnClickListener { searchActivityTask.launch(Intent(requireContext(), SearchActivity::class.java)) }
-        mFilterButton.setOnClickListener { filterActivityTask.launch(Intent(requireContext(), FilterActivity::class.java)) }
+        mSearchButton.setOnClickListener { searchActivityTask.launch(getIntentWithFilterState(SearchActivity::class.java)) }
+        mFilterButton.setOnClickListener { filterActivityTask.launch(getIntentWithFilterState(FilterActivity::class.java)) }
         mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
         addOnCameraChangeListener {
                 cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
@@ -113,8 +115,29 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
 
     }
 
+    private fun onFilterResult(result: ActivityResult) {
+        if (result.data == null) return
+        showLoading()
+        val filterState = result.data!!.getSerializableExtra(Extras.FilterActivity.FILTER_STATE) as FilterState
+        mFilterButton.isSelected = !filterState.isEmpty()
+        presenter.onFilterResult(filterState)
+    }
+
+    private fun getIntentWithFilterState(activity : Class <*>) : Intent {
+        val intent = Intent(requireContext(), activity)
+        intent.putExtra(Extras.FilterActivity.FILTER_STATE, presenter.mFilterState)
+        return intent
+    }
+
     private fun onSearchResult(location: Location) {
-        toggleContainerSelection(mMapAdapter.find(location)!!)
+        val marker = mMapAdapter.find(location)
+        if (marker != null)
+            toggleContainerSelection(marker)
+        //Ex: markers didn't load
+        else {
+            centerMap(location.latLng)
+            getLocations()
+        }
     }
 
     private fun showCarousel(show: Boolean) {

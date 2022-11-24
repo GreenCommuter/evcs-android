@@ -5,7 +5,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import org.evcs.android.databinding.ViewStationBinding
-import org.evcs.android.databinding.ViewStationsBinding
 import org.evcs.android.model.Station
 
 class StationView : LinearLayout {

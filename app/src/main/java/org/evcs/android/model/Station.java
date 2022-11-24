@@ -11,7 +11,7 @@ public class Station implements Serializable {
     String name;
     String availableStatus;
     float kw;
-    DateTime lastSynchedAt;
+//    DateTime lastSynchedAt;
     List<Outlet> outlets;
     String chargerType;
     Pricing pricing;

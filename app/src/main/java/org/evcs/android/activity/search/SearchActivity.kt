@@ -8,17 +8,21 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.core.util.ToastUtils
+import com.base.networking.retrofit.serializer.BaseGsonBuilder
 import com.google.android.gms.maps.model.LatLng
+import com.google.gson.Gson
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivitySearchBinding
+import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.ui.view.shared.SearchLocationChildFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.StorageUtils
 
 class SearchActivity : BaseActivity2(), SearchActivityView {
 
@@ -47,6 +51,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
     override fun onStart() {
         mPresenter = SearchActivityPresenter(this, EVCSApplication.getInstance().retrofitServices)
         mPresenter.onViewCreated()
+        mPresenter.mFilterState = intent.getSerializableExtra(Extras.FilterActivity.FILTER_STATE) as FilterState
         super.onStart()
 
     }
@@ -71,7 +76,9 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
                 this@SearchActivity.onLocationChosen(address, latLng)
             }
 
-            override fun onLocationRemoved() {}
+            override fun onLocationRemoved() {
+                clear()
+            }
 
             override fun onCloseClicked() {
                 this@SearchActivity.finish()
@@ -79,6 +86,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         })
         mAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location?, adapterPosition: Int) {
+                saveToLocationHistory(item!!)
                 val data = Intent()
                 data.putExtra(Extras.LocationActivity.LOCATION, item)
                 setResult(RESULT_OK, data)
@@ -87,13 +95,21 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         })
     }
 
+    private fun saveToLocationHistory(item: Location) {
+        val json = StorageUtils.getStringFromSharedPreferences(Extras.SearchActivity.HISTORY, "")
+        val gson: Gson = BaseGsonBuilder.getBaseGsonBuilder().create()
+        val history = gson.fromJson(json, Array<Location>::class.java)?.toMutableList() ?: mutableListOf()
+        history.add(item)
+        StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, history.toTypedArray())
+    }
+
     private fun onLocationChosen(address: String, latLng: LatLng) {
         showLoading()
         mAdapter.clear()
         mRecycler.setUp(true, {
             mPresenter.search(latLng)
         }, 10)
-        mAddress = address;
+        mAddress = address
     }
 
     override fun showLocations(page: List<Location?>?, pagesLeft: Boolean, onFirstPage: Boolean) {
@@ -117,6 +133,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         mFailView.visibility = View.VISIBLE
     }
 
+    //This will be "show history"
     private fun clear() {
         mAdapter.clear()
         mEmptyView.visibility = View.VISIBLE

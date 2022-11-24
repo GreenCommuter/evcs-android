@@ -22,13 +22,13 @@
 
     <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium_extra">
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#6B5773"
-            android:layout_margin="@dimen/spacing_medium_extra"
             android:orientation="vertical">
 
             <RelativeLayout

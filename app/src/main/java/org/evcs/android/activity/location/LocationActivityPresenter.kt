@@ -1,17 +1,14 @@
 package org.evcs.android.activity.location
 
 import com.base.networking.retrofit.RetrofitServices
-import com.google.android.gms.maps.model.LatLng
 import okhttp3.ResponseBody
 import org.evcs.android.model.Location
-import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.Station
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
-import org.evcs.android.util.PaginationState
 
 class LocationActivityPresenter(viewInstance: LocationActivityView, services: RetrofitServices) :
     ServicesPresenter<LocationActivityView>(viewInstance, services) {

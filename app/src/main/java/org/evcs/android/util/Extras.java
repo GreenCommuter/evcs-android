@@ -11,8 +11,7 @@ public class Extras {
     }
 
     public static final class FilterActivity {
-        public static final String CONNECTOR_TYPES = "Connector Types";
-        public static final String MIN_KW = "Min Kw";
+        public static final String FILTER_STATE = "Filter state";
     }
 
     public static final class LocationActivity {
@@ -21,6 +20,10 @@ public class Extras {
 
     public static final class StationsActivity {
         public static final String STATIONS = "Stations";
+    }
+
+    public static final class SearchActivity {
+        public static final String HISTORY = "History";
     }
 
 }

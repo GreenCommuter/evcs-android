@@ -1,11 +1,10 @@
 package org.evcs.android.features.map
 
-import androidx.activity.result.ActivityResult
 import com.base.maps.IMapPresenter
 import com.base.networking.retrofit.RetrofitServices
 import com.google.android.gms.maps.model.LatLng
 import okhttp3.ResponseBody
-import org.evcs.android.model.ConnectorType
+import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.shared.RequestError
@@ -13,11 +12,11 @@ import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
-import org.evcs.android.util.Extras
 
 class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?) :
     ServicesPresenter<IMainMapView?>(viewInstance, services), IMapPresenter {
 
+    var mFilterState: FilterState = FilterState()
     var mLastLocation: LatLng? = null
 
     /**
@@ -35,7 +34,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     override fun onMapDestroyed() {}
 
-    fun getLocations(latlng: LatLng?, minKw: Int?, connector: Array<ConnectorType>?) {
+    fun getLocations(latlng: LatLng?, minKw: Int?, connector: String?) {
         view?.showLoading()
         getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
             .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
@@ -54,15 +53,12 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     fun getLocations() {
-        getLocations(mLastLocation, null, null);
+        getLocations(mLastLocation, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
     }
 
-    fun onFilterResult(result: ActivityResult) {
-        if (result.data == null) return
-        view?.showLoading()
-        val connectorTypes = result.data!!.getSerializableExtra(Extras.FilterActivity.CONNECTOR_TYPES)
-        val minKw = result.data!!.getIntExtra(Extras.FilterActivity.MIN_KW, 0)
-        getLocations(mLastLocation, minKw, (connectorTypes as Array<ConnectorType>))
+    fun onFilterResult(result: FilterState) {
+        mFilterState = result
+        getLocations()
     }
 
 }

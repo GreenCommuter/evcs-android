@@ -18,7 +18,7 @@ public interface LocationService {
                                                    @Query("latitude") @Nullable Double latitude,
                                                    @Query("longitude") @Nullable Double longitude,
                                                    @Query("min_kw") @Nullable Integer minKw,
-                                                   @Query("connector") @Nullable ConnectorType[] connector);
+                                                   @Query("connector") @Nullable String connector);
 
     @GET("/members/v1/locations")
     Call<PaginatedResponse<Location>> getLocations(@Query("page") int page,

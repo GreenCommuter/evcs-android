@@ -17,10 +17,46 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/spacing_medium"/>
 
-        <org.evcs.android.ui.recycler.EndlessRecyclerView
-            android:id="@+id/activity_search_results"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content">
+
+            <org.evcs.android.ui.recycler.EndlessRecyclerView
+                android:id="@+id/activity_search_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <RelativeLayout
+                android:id="@+id/activity_search_history_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Search history"
+                    android:textColor="@color/evcs_white"
+                    style="@style/RobotoBold.Body"/>
+
+                <TextView
+                    android:id="@+id/activity_search_history_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:text="Clear all"
+                    style="@style/RobotoBold.Body"
+                    android:textColor="@color/evcs_red" />
+
+                <org.evcs.android.ui.recycler.EndlessRecyclerView
+                    android:id="@+id/activity_search_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/activity_search_history_clear"/>
+
+            </RelativeLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 

@@ -77,16 +77,18 @@ class SearchActivity : BaseActivity2() {
             }
         }
         mHistoryAdapter.setItemClickListener(itemClickListener)
-        mHistoryClear.setOnClickListener {
-            StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, arrayOf<Location>())
-            refreshHistoryView()
-        }
+        mHistoryClear.setOnClickListener { setLocationHistory(arrayOf()) }
     }
 
     private fun refreshHistoryView() {
         mHistoryAdapter = SearchResultsAdapter()
         mHistoryRecycler.adapter = mHistoryAdapter
         mHistoryAdapter.appendBottomAll(getLocationHistory())
+        mHistoryAdapter.setOnXClickListener { item ->
+            val history = getLocationHistory()
+            history.removeAll { location -> location.latLng == item.latLng }
+            setLocationHistory(history.toTypedArray())
+        }
         mEmptyView.visibility = if (mHistoryAdapter.itemCount == 0) View.VISIBLE else View.GONE
     }
 
@@ -95,16 +97,18 @@ class SearchActivity : BaseActivity2() {
             val history = getLocationHistory()
             history.removeAll { location -> location.latLng == item.latLng }
             history.add(0, item)
-            StorageUtils.storeInSharedPreferences(
-                Extras.SearchActivity.HISTORY,
-                history.toTypedArray()
-            )
+            StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, history.toTypedArray())
         }
         private fun getLocationHistory(): MutableList<Location> {
             val json = StorageUtils.getStringFromSharedPreferences(Extras.SearchActivity.HISTORY, "")
             val gson: Gson = BaseGsonBuilder.getBaseGsonBuilder().create()
             return gson.fromJson(json, Array<Location>::class.java)?.toMutableList() ?: mutableListOf()
         }
+    }
+
+    private fun setLocationHistory(history: Array<Location>) {
+        StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, history)
+        refreshHistoryView()
     }
 
     private fun onLocationChosen(address: String, latLng: LatLng) {

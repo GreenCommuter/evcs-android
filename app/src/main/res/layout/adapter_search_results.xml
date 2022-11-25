@@ -51,7 +51,7 @@
         />
 
     <ImageView
-        android:id="@+id/adapter_search_remve"
+        android:id="@+id/adapter_search_remove"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"

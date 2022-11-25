@@ -16,7 +16,6 @@ class SearchResultsLocationViewHolder(itemView: View?) : RecyclerView.ViewHolder
 
     fun setLocation(location: Location) {
         mBinding.adapterSearchName.text = location.name
-        mBinding.adapterSearchDistance.text = location.printableDistance
         mBinding.adapterSearchAddress.text = location.address.toString()
     }
 

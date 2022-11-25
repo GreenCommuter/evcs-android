@@ -52,8 +52,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
             })
     }
 
-    fun getLocations() {
-        getLocations(mLastLocation, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
+    fun getLocations(latlng : LatLng? = mLastLocation) {
+        getLocations(latlng, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
     }
 
     fun onFilterResult(result: FilterState) {

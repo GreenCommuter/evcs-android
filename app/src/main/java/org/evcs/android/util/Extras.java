@@ -24,6 +24,7 @@ public class Extras {
 
     public static final class SearchActivity {
         public static final String HISTORY = "History";
+        public static final String LATLNG = "Latlng";
     }
 
 }

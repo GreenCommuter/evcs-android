@@ -1,5 +1,6 @@
 package org.evcs.android.activity.search
 
+import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import org.evcs.android.R
@@ -15,5 +16,9 @@ class SearchResultsAdapter : BaseRecyclerAdapter<Location, SearchResultsLocation
     override fun populate(holder: SearchResultsLocationViewHolder?, item: Location?, position: Int) {
         holder?.setLocation(item!!)
     }
+
+//    fun setOnXClickListener(listener: View.OnClickListener) {
+//
+//    }
 
 }

@@ -11,6 +11,7 @@
         android:id="@+id/connector_type_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
         android:layout_marginEnd="@dimen/spacing_medium_extra"/>
 
     <TextView

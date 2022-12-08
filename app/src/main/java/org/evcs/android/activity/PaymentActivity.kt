@@ -16,9 +16,7 @@ class PaymentActivity : BaseActivity2() {
 
     override fun init() {}
 
-    override fun populate() {
-        super.populate()
-        mBinding.fragmentPaymentToolbar.title = "Payment"
-        mBinding.fragmentPaymentToolbar.navigationIcon = getDrawable(R.drawable.back_arrow)
+    override fun setListeners() {
+        mBinding.fragmentPaymentToolbar.setNavigationOnClickListener { finish() }
     }
 }

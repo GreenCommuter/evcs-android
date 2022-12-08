@@ -1,11 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_account_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_gray_89">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar
-        android:id="@+id/fragment_change_name_toolbar"
+        android:id="@+id/activity_change_name_toolbar"
+        android:padding="0dp"
+        android:paddingTop="0dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:title="Edit Your Name"
+        app:navigationIcon="@drawable/back_arrow"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spacing_medium_extra"
+        android:layout_marginTop="@dimen/spacing_medium_extra"
+        android:text="Your Name"/>
+
+    <org.evcs.android.features.shared.StandardTextField
+        android:id="@+id/fragment_change_name_text"
+        android:layout_width="match_parent"
+        android:layout_marginStart="@dimen/spacing_medium_extra"
+        android:layout_marginEnd="@dimen/spacing_medium_extra"
+        android:layout_marginBottom="@dimen/spacing_medium_extra"
+        style="@style/TextInputStyle"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            style="@style/Roboto.Body.Grey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </org.evcs.android.features.shared.StandardTextField>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/activity_change_name_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium_extra"
+        android:background="@drawable/layout_corners_rounded_orange_gradient"
+        android:text="@string/app_save"
+        android:textAllCaps="false"
+        android:textColor="@color/evcs_white"
+        android:gravity="center"
+        style="@style/Button"/>
 
 </LinearLayout>

@@ -21,21 +21,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ViewUtils {
 
-    private static final AtomicInteger sNextGeneratedId = new AtomicInteger(1);
-    private static final int VIEW_THRESHOLD = 0x00FFFFFF;
-
     private ViewUtils() {}
-
-    /**
-     * Generate a value suitable for use in {@link View#setId(int)}. This value will not collide with ID
-     * values generated at build time by aapt for R.id.
-     * This method is used because {@link View#generateViewId()} is only available for API>=17.
-     *
-     * @return a generated ID value
-     */
-    public static int generateViewId() {
-        return View.generateViewId();
-    }
 
     /**
      * Determines and sets a view visibility depending on a flag.

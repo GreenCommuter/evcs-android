@@ -101,10 +101,6 @@
     <string name="carsharing_gps_permissions_error_subtitle_path">carsharing_gps_permissions_error_subtitle</string>
 
     <!-- My Information -->
-    <string name="my_information_title">My information</string>
-    <string name="my_information_first_name">First Name</string>
-    <string name="my_information_middle_name">Middle Name (optional)</string>
-    <string name="my_information_last_name">Last Name</string>
     <string name="my_information_gender">Gender</string>
     <string name="my_information_gender_default">(select an option)</string>
     <string-array name="my_information_gender_array">
@@ -115,7 +111,6 @@
     <string name="my_information_street_address">Street Address</string>
     <string name="my_information_zip_code">Zip Code *</string>
     <string name="my_information_phone_number">Phone Number</string>
-    <string name="my_information_email">Email</string>
     <string name="my_information_email_taken">Email has already been taken</string>
 
     <!-- BrainTree -->
@@ -127,16 +122,21 @@
     <string name="profile_title">Profile</string>
     <string name="profile_username_format">%1$s %2$s</string> <!-- 1: First Name | 2: Last Name -->
     <string name="profile_billing_information">Payments</string>
-    <string name="profile_personal_information">Personal Information</string>
     <string name="profile_employer">Subscription Plan</string>
     <string name="profile_change_password">Account</string>
     <string name="show_password">Show</string>
-    <string name="profile_sign_out">Sign Out</string>
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
     <string name="profile_avatar_change_library_button">Choose from library</string>
     <string name="profile_avatar_change_cancel_button">Cancel</string>
-    <string name="profile_avatar_change_request_failure">There was an error when processing your request. Try again later.</string>
+
+    <!-- Account activity -->
+    <string name="activity_account_title">Edit Account</string>
+    <string name="activity_account_email">Email</string>
+    <string name="activity_account_name">Your name</string>
+    <string name="activity_account_change_password">Change password</string>
+    <string name="activity_account_sign_out">Sign Out</string>
+    <string name="activity_account_delete_account">Delete account</string>
 
     <!-- Personal Information -->
     <string name="personal_information_update_successful">User updated</string>

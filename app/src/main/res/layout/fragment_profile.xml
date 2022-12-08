@@ -25,7 +25,8 @@
             android:drawableLeft="@drawable/ic_account"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_medium_extra"
+            android:paddingBottom="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -42,7 +43,8 @@
             android:drawableLeft="@drawable/ic_payments"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_medium_extra"
+            android:paddingBottom="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -59,7 +61,8 @@
             android:drawableLeft="@drawable/ic_subscription"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_medium_extra"
+            android:paddingBottom="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -76,7 +79,8 @@
             android:drawableLeft="@drawable/ic_map_pin_unselected"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_medium_extra"
+            android:paddingBottom="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -93,7 +97,8 @@
             android:drawableLeft="@drawable/ic_call"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_medium_extra"
+            android:paddingBottom="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -110,7 +115,8 @@
             android:drawableLeft="@drawable/ic_feedback"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_medium_extra"
+            android:paddingBottom="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 

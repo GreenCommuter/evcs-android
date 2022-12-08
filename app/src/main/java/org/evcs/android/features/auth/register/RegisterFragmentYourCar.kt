@@ -1,11 +1,10 @@
 package org.evcs.android.features.auth.register
 
 import android.os.Bundle
-import android.text.Editable
 import android.text.TextUtils
-import android.text.TextWatcher
 import android.view.View
 import android.widget.AdapterView
+import androidx.core.widget.doOnTextChanged
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
@@ -66,16 +65,9 @@ class RegisterFragmentYourCar : ErrorFragment<RegisterPresenterYourCar>(), Regis
     }
 
     override fun setListeners() {
-        mBinding.fragmentRegisterYourCarZipcode.editText?.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                setEnableButton(validFields())
-            }
-
-            override fun afterTextChanged(p0: Editable?) {}
-
-        })
+        mBinding.fragmentRegisterYourCarZipcode.editText?.doOnTextChanged { _, _, _, _ ->
+            setEnableButton(validFields())
+        }
         mBinding.fragmentRegisterYourCarButton.setOnClickListener { onButtonClick() }
         mBinding.fragmentRegisterYourCarMake.setListener(object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {}

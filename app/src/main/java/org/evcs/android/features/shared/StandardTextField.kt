@@ -16,6 +16,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.text.TextUtilsCompat
+import androidx.core.widget.doAfterTextChanged
 import com.base.core.util.KeyboardUtils
 import org.evcs.android.databinding.StandardTextFieldBinding
 
@@ -86,13 +87,9 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
             updateLabel(hasFocus, text.length == 0)
             if (hasFocus) KeyboardUtils.showKeyboard(context, child)
         }
-        child.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                updateLabel(child.hasFocus(), text.length == 0)
-            }
-        })
+        child.doAfterTextChanged {
+            updateLabel(child.hasFocus(), text.length == 0)
+        }
         updateLabel(child.hasFocus(), text.length == 0)
         //    android:paddingRight="@dimen/spacing_small"
     }
@@ -150,14 +147,10 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
 
     //Workaround for what seems to be a bug in the support library
     fun setAllCaps() {
-        editText!!.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable) {
-                if (s.toString() == s.toString().toUpperCase()) return
-                s.replace(0, s.length, s.toString().toUpperCase())
-            }
-        })
+        editText!!.doAfterTextChanged { s ->
+                if (s.toString() != s.toString().toUpperCase())
+                    s!!.replace(0, s.length, s.toString().toUpperCase())
+        }
     }
 
 }

@@ -18,8 +18,6 @@ class StationActivity : BaseActivity2() {
     }
 
     override fun init() {
-        mBinding.activityStationsToolbar.navigationIcon = getDrawable(R.drawable.back_arrow)
-        mBinding.activityStationsToolbar.title = "Details"
         mBinding.activityStationsToolbar.setNavigationOnClickListener { finish() }
         val stations = intent.getSerializableExtra(Extras.StationsActivity.STATIONS) as ArrayList<Station>
 

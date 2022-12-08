@@ -4,6 +4,7 @@ import okhttp3.ResponseBody
 import org.evcs.android.model.Car
 import org.evcs.android.model.CarMaker
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.model.user.User
 import org.evcs.android.model.user.UserCar
 import org.evcs.android.model.user.ZipCodeWrapper
 import org.evcs.android.network.callback.AuthCallback
@@ -63,8 +64,9 @@ class RegisterPresenterYourCar(viewInstance: RegisterViewYourCar, services: EVCS
 
     fun updateZipcode(zipCode: String) {
         getService(UserService::class.java).updateUser(UserUtils.getUserId(), ZipCodeWrapper(zipCode))
-            .enqueue(object : AuthCallback<Void?>(this) {
-                override fun onResponseSuccessful(response: Void?) {
+            .enqueue(object : AuthCallback<User?>(this) {
+                override fun onResponseSuccessful(response: User?) {
+                    UserUtils.saveUser(response)
                     view?.onZipCodeUpdated();
                 }
 

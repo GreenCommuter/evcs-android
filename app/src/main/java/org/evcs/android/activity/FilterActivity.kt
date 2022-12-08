@@ -42,8 +42,6 @@ class FilterActivity : BaseActivity2() {
                 onConnectorClicked(v)
             }
         }
-        mBinding.activityFilterToolbar.title = getString(R.string.filter_activity_title)
-        mBinding.activityFilterToolbar.navigationIcon = resources.getDrawable(R.drawable.ic_xmark_solid)
         mBinding.activityFilterToolbar.inflateMenu(R.menu.filter_activity_toolbar)
 
         mBinding.activityFilterMinPower.setLabels(

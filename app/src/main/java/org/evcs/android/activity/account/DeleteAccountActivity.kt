@@ -15,8 +15,7 @@ class DeleteAccountActivity : BaseActivity2() {
 
     override fun init() {}
 
-    override fun populate() {
-        super.populate()
-        mBinding.fragmentDeleteAccountToolbar.title = "Delete account"
+    override fun setListeners() {
+        mBinding.fragmentDeleteAccountToolbar.setNavigationOnClickListener { finish() }
     }
 }

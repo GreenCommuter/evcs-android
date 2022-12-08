@@ -100,7 +100,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         val searchActivityTask =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 if (result.resultCode == Activity.RESULT_OK)
-                    onSearchResult(result.data!!.getSerializableExtra(Extras.LocationActivity.LOCATION) as Location)
+                    onSearchResult(result.data!!)
             }
         val filterActivityTask =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -129,14 +129,21 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         return intent
     }
 
-    private fun onSearchResult(location: Location) {
-        val marker = mMapAdapter.find(location)
-        if (marker != null)
-            toggleContainerSelection(marker)
-        //Ex: markers didn't load
-        else {
-            centerMap(location.latLng)
-            getLocations()
+    private fun onSearchResult(result: Intent) {
+        if (result.hasExtra(Extras.LocationActivity.LOCATION)) {
+            val location = result.getSerializableExtra(Extras.LocationActivity.LOCATION) as Location
+            val marker = mMapAdapter.find(location)
+            if (marker != null)
+                toggleContainerSelection(marker)
+            //Ex: markers didn't load
+            else {
+                centerMap(location.latLng)
+                getLocations()
+            }
+        } else {
+            val latlng = result.getParcelableExtra<LatLng>(Extras.SearchActivity.LATLNG)
+            presenter.getLocations(latlng)
+            mapView!!.getMapAsync { map -> zoomTo(map, latlng!!, ZOOM_LIMIT * 2.0f) }
         }
     }
 
@@ -188,6 +195,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         onFlingListener.attachToRecyclerView(mCarouselRecycler)
         mMapAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location, adapterPosition: Int) {
+                SearchActivity.saveToLocationHistory(item)
                 val intent = Intent(requireContext(), LocationActivity::class.java)
                 intent.putExtra(Extras.LocationActivity.LOCATION, item)
                 startActivity(intent)
@@ -195,9 +203,9 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         })
     }
 
-    override fun showLocations(response: List<Location?>?) {
+    override fun showLocations(response: List<Location?>) {
         hideLoading()
-        showMapItems(response!!)
+        showMapItems(response)
     }
 
     override fun showMapItems(mapItems: List<Location?>) {

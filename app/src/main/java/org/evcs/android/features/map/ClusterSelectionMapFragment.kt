@@ -55,9 +55,9 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         }
     }
 
-    private fun zoomTo(map: GoogleMap, position: LatLng) {
+    fun zoomTo(map: GoogleMap, position: LatLng, zoom: Float = ZOOM_LIMIT.toFloat()) {
         val cameraPosition = CameraPosition.Builder()
-            .target(position).zoom(ZOOM_LIMIT.toFloat()).build()
+            .target(position).zoom(zoom).build()
 
         map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition))
     }

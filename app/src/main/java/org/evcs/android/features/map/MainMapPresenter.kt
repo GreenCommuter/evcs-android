@@ -12,6 +12,7 @@ import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
+import org.evcs.android.util.LocationUtils
 
 class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?) :
     ServicesPresenter<IMainMapView?>(viewInstance, services), IMapPresenter {
@@ -39,7 +40,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
         getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
             .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
-                    view.showLocations(response?.page)
+                    view.showLocations(populateDistances(response?.page!!))
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -52,8 +53,17 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
             })
     }
 
-    fun getLocations() {
-        getLocations(mLastLocation, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
+    private fun populateDistances(locations: List<Location?>): List<Location?> {
+        if (mLastLocation != null) {
+            locations.forEach { location ->
+                location!!.distance = LocationUtils.distance(location.latLng, mLastLocation)
+            }
+        }
+        return locations
+    }
+
+    fun getLocations(latlng : LatLng? = mLastLocation) {
+        getLocations(latlng, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
     }
 
     fun onFilterResult(result: FilterState) {

@@ -203,9 +203,9 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         })
     }
 
-    override fun showLocations(response: List<Location?>?) {
+    override fun showLocations(response: List<Location?>) {
         hideLoading()
-        showMapItems(response!!)
+        showMapItems(response)
     }
 
     override fun showMapItems(mapItems: List<Location?>) {

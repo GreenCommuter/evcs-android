@@ -117,6 +117,26 @@ public final class LocationUtils {
         context.startActivity(mapIntent);
     }
 
+    public static float distance(LatLng latLng, LatLng latLng2) {
+        double lon1 = Math.toRadians(latLng.longitude);
+        double lon2 = Math.toRadians(latLng2.longitude);
+        double lat1 = Math.toRadians(latLng.latitude);
+        double lat2 = Math.toRadians(latLng2.latitude);
+
+        // Haversine formula
+        double dlon = lon2 - lon1;
+        double dlat = lat2 - lat1;
+        double a = Math.pow(Math.sin(dlat / 2), 2)
+                + Math.cos(lat1) * Math.cos(lat2)
+                * Math.pow(Math.sin(dlon / 2),2);
+
+        double c = 2 * Math.asin(Math.sqrt(a));
+
+        float earthRadius = 3956; //miles
+
+        return (float) (c * earthRadius);
+    }
+
     public interface LocationCallback {
         void onLocationRetrieved(Location location);
     }

@@ -42,7 +42,8 @@ public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresente
 
     @SuppressLint("MissingPermission")
     protected void drawLocationMarker() {
-        getMapView().getMapAsync(googleMap -> googleMap.setMyLocationEnabled(true));
+        if (getMapView() != null)
+            getMapView().getMapAsync(googleMap -> googleMap.setMyLocationEnabled(true));
         /*View locationButton = ((View) getMapView().findViewById(Integer.parseInt("1")).getParent())
                 .findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();

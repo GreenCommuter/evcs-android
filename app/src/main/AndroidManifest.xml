@@ -20,7 +20,7 @@
         android:name="org.evcs.android.EVCSApplication"
         android:allowBackup="true"
         android:fullBackupContent="@xml/backup_files"
-        android:icon="@mipmap/ic_launcher_gc"
+        android:icon="@mipmap/ic_launcher"
         android:label="${appNamePrefix}${appName}"
         android:theme="@style/AppTheme"
         tools:replace="icon,label">

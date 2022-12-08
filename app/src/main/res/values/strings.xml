@@ -126,9 +126,9 @@
     <!-- Profile -->
     <string name="profile_title">Profile</string>
     <string name="profile_username_format">%1$s %2$s</string> <!-- 1: First Name | 2: Last Name -->
-    <string name="profile_billing_information">Wallet</string>
+    <string name="profile_billing_information">Payments</string>
     <string name="profile_personal_information">Personal Information</string>
-    <string name="profile_employer">Corporate Plan</string>
+    <string name="profile_employer">Subscription Plan</string>
     <string name="profile_change_password">Account</string>
     <string name="show_password">Show</string>
     <string name="profile_sign_out">Sign Out</string>

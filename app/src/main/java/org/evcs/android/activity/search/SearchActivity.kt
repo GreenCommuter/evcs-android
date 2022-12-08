@@ -116,6 +116,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
             history.add(0, item)
             StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, history.toTypedArray())
         }
+
         private fun getLocationHistory(): MutableList<Location> {
             val json = StorageUtils.getStringFromSharedPreferences(Extras.SearchActivity.HISTORY, "")
             val gson: Gson = BaseGsonBuilder.getBaseGsonBuilder().create()

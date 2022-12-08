@@ -36,7 +36,7 @@ public class EVCSToolbar extends Toolbar {
     }
 
     private void init(Context context) {
-        setBackgroundColor(Color.parseColor("#2D1142"));
+        setBackgroundColor(Color.parseColor("#112F42"));
         setOverflowIcon(ContextCompat.getDrawable(context, R.drawable.ic_more));
         setTitleTextColor(getResources().getColor(R.color.evcs_white));
         setPadding(0, (int) getResources().getDimension(R.dimen.status_bar_height), 0, 0);

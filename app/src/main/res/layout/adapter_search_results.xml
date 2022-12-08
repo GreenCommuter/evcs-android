@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/spacing_medium_extra"
     android:paddingStart="@dimen/spacing_medium_extra"
-    android:background="@color/evcs_purple"
+    android:background="@color/evcs_dark_purple"
     >
 
     <ImageView

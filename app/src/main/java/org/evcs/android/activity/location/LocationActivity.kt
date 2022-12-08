@@ -44,6 +44,7 @@ class LocationActivity : BaseActivity2(), LocationActivityView {
                 LocationUtils.launchGoogleMapsWithPin(this, mPresenter.mLocation!!.latLng)
             }
         }
+        mBinding.activityLocationClose.setOnClickListener { finish() }
     }
 
     override fun showLocation(response: Location?) {

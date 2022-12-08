@@ -111,7 +111,7 @@
                     android:paddingTop="@dimen/padding_ariel_standard"
                     android:paddingBottom="@dimen/padding_ariel_standard"
                     android:drawablePadding="@dimen/spacing_medium"
-                    android:drawableLeft="@drawable/ic_map_pin_unselected"
+                    android:drawableLeft="@drawable/ic_loc"
                     android:textColor="@color/evcs_white"
                     style="@style/Roboto.Body"/>
 
@@ -129,7 +129,7 @@
                     android:paddingBottom="@dimen/padding_ariel_standard"
                     android:drawablePadding="@dimen/spacing_medium"
                     android:text="24 hours (Open hours may differ based on circumstances at the location.)"
-                    android:drawableLeft="@drawable/ic_map_pin_unselected"
+                    android:drawableLeft="@drawable/ic_clock"
                     android:textColor="@color/evcs_white"
                     style="@style/Roboto.Body"/>
 
@@ -147,7 +147,7 @@
                     android:paddingBottom="@dimen/padding_ariel_standard"
                     android:drawablePadding="@dimen/spacing_medium"
                     android:text="Public locations"
-                    android:drawableLeft="@drawable/ic_map_pin_unselected"
+                    android:drawableLeft="@drawable/ic_screw"
                     android:textColor="@color/evcs_white"
                     style="@style/Roboto.Body"/>
 
@@ -174,5 +174,13 @@
         android:layout_gravity="bottom|end"
         app:backgroundTint="@color/evcs_light_orange"
         android:src="@drawable/ic_diamond_turn_right_solid"/>
+
+    <ImageView
+        android:id="@+id/activity_location_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium_extra"
+        android:paddingTop="@dimen/status_bar_height"
+        android:src="@drawable/down_chev_circle"/>
 
 </FrameLayout>

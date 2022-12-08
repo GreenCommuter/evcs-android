@@ -30,5 +30,6 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="org.evcs.android.features.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

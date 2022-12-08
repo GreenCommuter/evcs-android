@@ -2,6 +2,7 @@ package org.evcs.android.activity
 
 import android.view.LayoutInflater
 import android.view.View
+import org.evcs.android.R
 import org.evcs.android.databinding.ActivityStationsBinding
 import org.evcs.android.model.PricingDetail
 import org.evcs.android.model.Station
@@ -17,7 +18,7 @@ class StationActivity : BaseActivity2() {
     }
 
     override fun init() {
-        mBinding.activityStationsToolbar.navigationIcon = null
+        mBinding.activityStationsToolbar.navigationIcon = getDrawable(R.drawable.back_arrow)
         mBinding.activityStationsToolbar.title = "Details"
         mBinding.activityStationsToolbar.setNavigationOnClickListener { finish() }
         val stations = intent.getSerializableExtra(Extras.StationsActivity.STATIONS) as ArrayList<Station>

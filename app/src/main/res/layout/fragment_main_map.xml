@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <Button
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/map_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <ImageView
         android:id="@+id/map_center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/map_carousel_recycler"
         android:layout_alignParentEnd="true"
-        android:text="center"
+        android:src="@drawable/no_location"
         android:layout_gravity="end|bottom"/>
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -45,11 +45,11 @@
         android:id="@+id/map_carousel_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/spacing_medium"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/spacing_medium"
+        android:clipToPadding="false"
         android:paddingLeft="@dimen/spacing_medium"
-        android:paddingRight="@dimen/spacing_medium"
-        android:clipToPadding="false" />
+        android:paddingRight="@dimen/spacing_medium" />
 
     <ProgressBar
         android:id="@+id/map_loading"

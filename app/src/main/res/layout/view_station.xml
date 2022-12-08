@@ -53,8 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="@dimen/spacing_medium"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:src="@drawable/ic_map_pin_unselected" />
+            android:layout_marginEnd="@dimen/spacing_medium" />
 
         <TextView
             android:id="@+id/station_ac"

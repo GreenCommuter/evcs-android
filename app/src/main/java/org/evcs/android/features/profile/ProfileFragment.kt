@@ -1,9 +1,13 @@
 package org.evcs.android.features.profile
 
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.base.core.presenter.BasePresenter
+import com.base.core.util.NavigationUtils
 import org.evcs.android.BuildConfig
 import org.evcs.android.R
+import org.evcs.android.activity.PaymentActivity
+import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.ui.fragment.ErrorFragment
@@ -29,13 +33,12 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun init() {
-        mBinding.profileMenuVersion.text = BuildConfig.VERSION_NAME
+        mBinding.profileMenuVersion.text = "Version " + BuildConfig.VERSION_NAME
     }
 
     override fun setListeners() {
-        mBinding.profileMenuAccount.setOnClickListener {  }
-        mBinding.profileMenuPayments.setOnClickListener {  }
-        mBinding.profileMenuFeedback.setOnClickListener {  }
+        mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
+        mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), PaymentActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener {  }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener {  }
         mBinding.profileMenuCallCustomerCare.setOnClickListener {  }

@@ -40,7 +40,7 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
     }
 
     fun onClusterItemChange(item: T, marker: Marker, isSelected : Boolean) {
-        val icon = if (isSelected) R.drawable.ic_map_pin_selected else R.drawable.ic_map_pin_unselected
+        val icon = if (isSelected) R.drawable.ic_map_orange else R.drawable.ic_map_pin_unselected
         marker.setIcon(getBitmap(item, icon))
     }
 

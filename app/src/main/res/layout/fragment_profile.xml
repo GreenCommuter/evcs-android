@@ -22,10 +22,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/profile_change_password"
-            android:drawableLeft="@drawable/ic_map_pin_unselected"
+            android:drawableLeft="@drawable/ic_account"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -39,10 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/profile_billing_information"
-            android:drawableLeft="@drawable/ic_map_pin_unselected"
+            android:drawableLeft="@drawable/ic_payments"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -56,10 +56,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/profile_employer"
-            android:drawableLeft="@drawable/ic_map_pin_unselected"
+            android:drawableLeft="@drawable/ic_subscription"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -76,7 +76,7 @@
             android:drawableLeft="@drawable/ic_map_pin_unselected"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -90,10 +90,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Call Customer Care (866)300-EVCS"
-            android:drawableLeft="@drawable/ic_map_pin_unselected"
+            android:drawableLeft="@drawable/ic_call"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
@@ -107,10 +107,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Give Feedback"
-            android:drawableLeft="@drawable/ic_map_pin_unselected"
+            android:drawableLeft="@drawable/ic_feedback"
             android:textColor="@color/evcs_white"
             android:gravity="center_vertical"
-            android:padding="@dimen/spacing_medium"
+            android:padding="@dimen/spacing_medium_extra"
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 

@@ -8,7 +8,8 @@ public class User implements Serializable {
 
     private int id;
     private String email;
-    private String name;
+    public String firstName;
+    public String lastName;
     private String phone;
     private DateTime phoneVerifiedAt;
     private String zipCode;
@@ -22,7 +23,7 @@ public class User implements Serializable {
     }
 
     public String getName() {
-        return name;
+        return firstName + " " + lastName;
     }
 
     public boolean isPhoneVerified() {

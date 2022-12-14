@@ -6,4 +6,4 @@ class CodeWrapper(var code: String)
 
 class ZipCodeWrapper(var zipCode: String)
 
-class NameWrapper(var name: String)
+class NameWrapper(var firstName: String, var lastName: String)

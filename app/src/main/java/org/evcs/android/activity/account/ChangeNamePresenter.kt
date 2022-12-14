@@ -14,8 +14,8 @@ import org.evcs.android.util.UserUtils
 class ChangeNamePresenter(viewInstance: ChangeNameView?, services: RetrofitServices?) :
     ServicesPresenter<ChangeNameView?>(viewInstance, services) {
 
-    fun changeName(text: CharSequence) {
-        getService(UserService::class.java).updateUser(UserUtils.getUserId(), NameWrapper(text.toString()))
+    fun changeName(first: CharSequence, last: CharSequence) {
+        getService(UserService::class.java).updateUser(UserUtils.getUserId(), NameWrapper(first.toString(), last.toString()))
             .enqueue(object : AuthCallback<User?>(this) {
                 override fun onResponseSuccessful(response: User?) {
                     UserUtils.saveUser(response)

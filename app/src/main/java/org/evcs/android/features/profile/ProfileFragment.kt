@@ -1,12 +1,11 @@
 package org.evcs.android.features.profile
 
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BuildConfig
 import org.evcs.android.R
-import org.evcs.android.activity.PaymentActivity
+import org.evcs.android.activity.payment.PaymentActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController

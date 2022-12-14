@@ -3,17 +3,19 @@ package org.evcs.android.activity.account
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.ViewCompat
-import androidx.core.widget.doOnTextChanged
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityChangeNameBinding
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.validator.NonEmptyTextInputValidator
+import org.evcs.android.util.validator.ValidatorManager
 
 
 class ChangeNameActivity : BaseActivity2(), ChangeNameView {
 
+    private lateinit var mValidatorManager: ValidatorManager
     private lateinit var mBinding: ActivityChangeNameBinding
     private lateinit var mPresenter: ChangeNamePresenter
 
@@ -24,21 +26,25 @@ class ChangeNameActivity : BaseActivity2(), ChangeNameView {
 
     override fun init() {
         mPresenter = ChangeNamePresenter(this, EVCSApplication.getInstance().retrofitServices)
+        mValidatorManager = ValidatorManager()
         mPresenter.onViewCreated()
     }
 
     override fun populate() {
         super.populate()
-        mBinding.fragmentChangeNameText.editText?.setText(UserUtils.getLoggedUser().name)
-        mBinding.fragmentChangeNameText.editText?.doOnTextChanged {
-                text, _, _, _ -> mBinding.activityChangeNameSave.isEnabled = text!!.isNotEmpty()
+        mValidatorManager.addValidator(NonEmptyTextInputValidator(mBinding.fragmentChangeNameFirst))
+        mValidatorManager.addValidator(NonEmptyTextInputValidator(mBinding.fragmentChangeNameLast))
+        mBinding.fragmentChangeNameFirst.editText?.setText(UserUtils.getLoggedUser().firstName)
+        mBinding.fragmentChangeNameLast.editText?.setText(UserUtils.getLoggedUser().lastName)
+        mValidatorManager.setOnAnyTextChangedListener {
+            mBinding.activityChangeNameSave.isEnabled = mValidatorManager.areAllFieldsValid()
         }
     }
 
     override fun setListeners() {
         mBinding.activityChangeNameSave.setOnClickListener {
             mBinding.activityChangeNameSave.isEnabled = false
-            mPresenter.changeName(mBinding.fragmentChangeNameText.text.trim())
+            mPresenter.changeName(mBinding.fragmentChangeNameFirst.text.trim(), mBinding.fragmentChangeNameLast.text.trim())
         }
         mBinding.activityChangeNameToolbar.setNavigationOnClickListener { finish() }
 

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/evcs_gray_89">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:id="@+id/activity_card_information_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Card information"
+        app:navigationIcon="@drawable/back_arrow"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/evcs_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium_extra"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Card Number"/>
+
+            <TextView
+                android:id="@+id/fragment_card_information_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="···· ···· ···· 1111"
+                android:textColor="@color/evcs_black"
+                style="@style/Roboto.Body"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_marginStart="@dimen/spacing_medium_extra"
+            android:background="@color/evcs_purple_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium_extra"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Expiration Date"/>
+
+            <TextView
+                android:id="@+id/fragment_card_information_expiration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="06/2023"
+                android:textColor="@color/evcs_black"
+                style="@style/Roboto.Body"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_marginStart="@dimen/spacing_medium_extra"
+            android:background="@color/evcs_purple_gray"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/spacing_large" />
+
+    <TextView
+        android:id="@+id/activity_card_information_remove"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/evcs_red"
+        android:padding="@dimen/spacing_medium_extra"
+        android:background="@color/evcs_white"
+        android:text="Remove Card"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+</LinearLayout>

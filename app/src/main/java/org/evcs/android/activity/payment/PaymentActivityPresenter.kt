@@ -1,12 +1,10 @@
 package org.evcs.android.activity.payment
 
 import okhttp3.ResponseBody
-import org.evcs.android.model.Location
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.EVCSRetrofitServices
-import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.PaymentMethodsService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils

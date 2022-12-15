@@ -28,7 +28,7 @@ class PaymentMethodView : LinearLayout {
 
     private fun init(context: Context) {
         val binding = ViewPaymentMethodBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.paymentMethodBrand.text = mPaymentMethod.card.brand
+        binding.paymentMethodBrand.text = mPaymentMethod.card.brand.name
         binding.paymentMethodNumber.text = mPaymentMethod.card.last4
     }
 

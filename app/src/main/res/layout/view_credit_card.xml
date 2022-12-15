@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_ariel_standard"
+    android:background="@drawable/button_selector_black_border">
+
+    <com.facebook.drawee.view.SimpleDraweeView
+        android:id="@+id/credit_card_view_provider"
+        android:layout_width="120dp"
+        android:layout_height="@dimen/spacing_ariel_different"
+        android:layout_gravity="end"
+        android:layout_marginBottom="@dimen/spacing_medium"/>
+
+    <ImageView
+        android:layout_width="@dimen/spacing_big"
+        android:layout_height="@dimen/spacing_big"
+        android:layout_marginBottom="@dimen/padding_ariel_standard"
+        android:src="@drawable/chip"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_credit_card_number"
+                style="@style/Roboto.BodySmall.Grey"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XXXX XXXX XXXX "
+                    style="@style/Roboto.Body.Grey"/>
+
+                <TextView
+                    android:id="@+id/credit_card_view_last4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Roboto.Body"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="@dimen/spacing_big"
+            android:layout_weight="1"/>
+
+        <ImageView
+            android:id="@+id/credit_card_view_star"
+            android:layout_width="@dimen/spacing_ariel_icons"
+            android:layout_height="@dimen/spacing_ariel_icons"
+            android:layout_marginEnd="@dimen/spacing_ariel_related"
+            android:src="@drawable/ic_star_filled"
+            android:visibility="gone"/>
+
+        <ImageView
+            android:id="@+id/credit_card_view_trash"
+            android:layout_width="@dimen/spacing_ariel_icons"
+            android:layout_height="@dimen/spacing_ariel_icons"
+            android:src="@drawable/ic_xmark_solid"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+</LinearLayout>

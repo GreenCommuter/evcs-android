@@ -19,7 +19,7 @@ public class PaymentMethod implements Serializable {
 //      "name": null,
 //      "phone": null
 //  },
-    public Card card;
+    public CreditCard card;
 //    "created": 1598907588,
 //    "customer": "cus_aASDNVjf",
 //    "livemode": false,

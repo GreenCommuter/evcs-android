@@ -2,8 +2,8 @@ package org.evcs.android.model;
 
 import java.io.Serializable;
 
-public class Card implements Serializable {
-    public String brand;
+public class CreditCard implements Serializable {
+    public CreditCardProvider brand;
 //      "checks": {
 //          "address_line1_check": null,
 //          "address_postal_code_check": null,
@@ -26,4 +26,8 @@ public class Card implements Serializable {
 //          "supported": true
 //      },
 //      "wallet": null
+
+    public CreditCardProvider getProvider() {
+        return brand;
+    }
 }

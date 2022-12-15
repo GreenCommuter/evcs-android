@@ -5,21 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.EVCSApplication
 import org.evcs.android.databinding.ActivityCardInformationBinding
-import org.evcs.android.model.Card
-import org.evcs.android.network.service.EVCSRetrofitServices
+import org.evcs.android.model.CreditCard
 import org.evcs.android.util.Extras
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-import java.io.Serializable
-import java.time.LocalDate
 
 class CardInformationActivity : BaseActivity2(), CardInformationActivityView {
 
     private lateinit var mDateTimeFormatter: DateTimeFormatter
     private lateinit var mPresenter: CardInformationActivityPresenter
     private lateinit var mBinding: ActivityCardInformationBinding
-    private lateinit var mCard: Card
+    private lateinit var mCard: CreditCard
 
     override fun inflate(layoutInflater: LayoutInflater): View {
         mBinding = ActivityCardInformationBinding.inflate(layoutInflater)
@@ -30,7 +27,7 @@ class CardInformationActivity : BaseActivity2(), CardInformationActivityView {
         mDateTimeFormatter = DateTimeFormat.forPattern("MM/yy")
         mPresenter = CardInformationActivityPresenter(this, EVCSApplication.getInstance().retrofitServices)
         mPresenter.onViewCreated()
-        mCard = intent.getSerializableExtra(Extras.PaymentActivity.CARD) as Card
+        mCard = intent.getSerializableExtra(Extras.PaymentActivity.CARD) as CreditCard
     }
 
     override fun setListeners() {

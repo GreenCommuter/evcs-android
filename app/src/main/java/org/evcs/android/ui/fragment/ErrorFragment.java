@@ -27,10 +27,7 @@ public abstract class ErrorFragment<T extends BasePresenter> extends LoadingFrag
 
     //For cases when this can't be extended
     public static void showError(BaseFragment fragment, @NonNull RequestError requestError) {
-        if (requestError.getTitle() != null) {
-        } else {
-            ToastUtils.show(requestError.getBody());
-        }
+        ToastUtils.show(requestError.getBody());
     }
 
     @Override

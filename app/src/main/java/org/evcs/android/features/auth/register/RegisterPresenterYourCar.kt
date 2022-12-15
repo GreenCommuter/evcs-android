@@ -26,7 +26,7 @@ class RegisterPresenterYourCar(viewInstance: RegisterViewYourCar, services: EVCS
                 view?.onCarsAdded()
             }
 
-            override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
+            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
                 view?.showError(ErrorUtils.getError(responseBody))
             }
 

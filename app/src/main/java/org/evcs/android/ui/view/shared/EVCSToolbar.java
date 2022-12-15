@@ -12,9 +12,6 @@ import org.evcs.android.R;
 
 import java.util.ArrayList;
 
-import butterknife.BindColor;
-import butterknife.ButterKnife;
-
 public class EVCSToolbar extends Toolbar {
 
 //    @BindColor(R.color.evcs_gray_89) int mEvenDarkerGray;

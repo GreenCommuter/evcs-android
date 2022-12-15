@@ -25,7 +25,7 @@ class RegisterPresenterVerify(viewInstance: RegisterViewVerify, services: Retrof
                     view.onCellphoneVerified()
                 }
 
-                override fun onResponseFailed(responseBody: ResponseBody?, p1: Int) {
+                override fun onResponseFailed(responseBody: ResponseBody, p1: Int) {
                     view?.showError(ErrorUtils.getError(responseBody))
                 }
 

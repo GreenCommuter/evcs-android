@@ -19,7 +19,7 @@ open class RegisterPresenterCellphone<T : RegisterViewCellphone?>(viewInstance: 
                     view?.onCellphoneSent()
                 }
 
-                override fun onResponseFailed(responseBody: ResponseBody?, p1: Int) {
+                override fun onResponseFailed(responseBody: ResponseBody, p1: Int) {
                     view?.showError(ErrorUtils.getError(responseBody))
                 }
 

@@ -1,5 +1,7 @@
 package org.evcs.android.util;
 
+import org.jetbrains.annotations.Nullable;
+
 public class Extras {
 
     private Extras() {}
@@ -25,6 +27,7 @@ public class Extras {
     public static final class SearchActivity {
         public static final String HISTORY = "History";
         public static final String LATLNG = "Latlng";
+        public static final String LOCATIONS = "Locations";
     }
 
 }

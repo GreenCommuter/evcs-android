@@ -133,7 +133,7 @@
     <!-- Account activity -->
     <string name="activity_account_title">Edit Account</string>
     <string name="activity_account_email">Email</string>
-    <string name="activity_account_name">Your name</string>
+    <string name="activity_account_name">Name</string>
     <string name="activity_account_change_password">Change password</string>
     <string name="activity_account_sign_out">Sign Out</string>
     <string name="activity_account_delete_account">Delete account</string>

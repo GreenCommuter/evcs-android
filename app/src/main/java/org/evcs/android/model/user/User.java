@@ -10,7 +10,8 @@ public class User implements Serializable {
     private String email;
     public String firstName;
     public String lastName;
-    private String phone;
+    public String phone;
+    public UserCar userCar;
     private DateTime phoneVerifiedAt;
     private String zipCode;
 

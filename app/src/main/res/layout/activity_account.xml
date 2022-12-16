@@ -46,6 +46,33 @@
             android:layout_marginStart="@dimen/spacing_medium_extra"
             android:background="@color/evcs_purple_gray"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium_extra"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Phone number"/>
+
+            <TextView
+                android:id="@+id/fragment_account_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="javier@evcs.com"
+                android:textColor="@color/evcs_black"
+                style="@style/Roboto.Body"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_marginStart="@dimen/spacing_medium_extra"
+            android:background="@color/evcs_purple_gray"/>
+
         <RelativeLayout
             android:id="@+id/fragment_account_name_layout"
             android:layout_width="match_parent"
@@ -65,6 +92,78 @@
                 android:text="Javier"
                 android:textColor="@color/evcs_black"
                 android:layout_below="@id/fragment_account_name_label"
+                style="@style/Roboto.Body"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/black_chevron" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_marginStart="@dimen/spacing_medium_extra"
+            android:background="@color/evcs_purple_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/fragment_account_car_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium_extra">
+
+            <TextView
+                android:id="@+id/fragment_account_car_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Car" />
+
+            <TextView
+                android:id="@+id/fragment_account_car"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asd"
+                android:textColor="@color/evcs_black"
+                android:layout_below="@id/fragment_account_car_label"
+                style="@style/Roboto.Body"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/black_chevron" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/spacing_tiniest"
+            android:layout_marginStart="@dimen/spacing_medium_extra"
+            android:background="@color/evcs_purple_gray"/>
+
+        <RelativeLayout
+            android:id="@+id/fragment_account_zipcode_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/spacing_medium_extra">
+
+            <TextView
+                android:id="@+id/fragment_account_zipcode_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zipcode" />
+
+            <TextView
+                android:id="@+id/fragment_account_zipcode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asd"
+                android:textColor="@color/evcs_black"
+                android:layout_below="@id/fragment_account_zipcode_label"
                 style="@style/Roboto.Body"/>
 
             <ImageView

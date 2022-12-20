@@ -27,7 +27,22 @@ public class CreditCard implements Serializable {
 //      },
 //      "wallet": null
 
+    public CreditCard() {
+        brand = CreditCardProvider.MASTERCARD;
+        last4 = "1111";
+        expL = 12;
+        expYear = 25;
+    }
+
     public CreditCardProvider getProvider() {
         return brand;
+    }
+
+    public boolean isDefault() {
+        return false;
+    }
+
+    public void setDefault(boolean b) {
+
     }
 }

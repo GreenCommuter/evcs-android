@@ -15,6 +15,6 @@ public class UserCar {
 
     @Override
     public @NonNull String toString() {
-        return year + " " + make + " " + model + " ";
+        return (year != null ? year + " " : "") + make + " " + model + " ";
     }
 }

@@ -58,6 +58,6 @@ public interface UserService {
     Call<User> updateUser(@Path("id") int id, @Body NameWrapper zipcode);
 
     @POST ("/members/v1/user_cars")
-    Call<Void> saveUserCar(@Body UserCar userCar);
+    Call<UserCar> saveUserCar(@Body UserCar userCar);
 
 }

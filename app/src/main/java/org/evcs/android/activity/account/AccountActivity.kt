@@ -31,7 +31,7 @@ class AccountActivity : BaseActivity2() {
         val user = UserUtils.getLoggedUser()
         mBinding.fragmentAccountEmail.text = user.email
         mBinding.fragmentAccountPhone.text = user.phone
-        mBinding.fragmentAccountCar.text = (user.userCar?:"").toString()
+        mBinding.fragmentAccountCar.text = (user.userCar ?: "").toString()
         mBinding.fragmentAccountZipcode.text = user.zipCode
         mBinding.fragmentAccountName.text = UserUtils.getLoggedUser().name;
     }
@@ -43,8 +43,7 @@ class AccountActivity : BaseActivity2() {
         }
         mBinding.fragmentAccountChangePassword.setOnClickListener { jumpTo(this, ChangePasswordActivity::class.java) }
         mBinding.fragmentAccountCarLayout.setOnClickListener {
-            //TODO: create the activity
-            mChangeUserResult.launch(Intent(this, ChangeNameActivity::class.java))
+            mChangeUserResult.launch(Intent(this, ChangeCarActivity::class.java))
         }
         mBinding.fragmentAccountZipcodeLayout.setOnClickListener {
             //TODO: create the activity

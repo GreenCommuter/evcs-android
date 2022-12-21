@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/evcs_black">
+    android:background="@color/evcs_gray_89">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar
         android:layout_width="match_parent"
@@ -12,23 +12,13 @@
         app:navigationIcon="@drawable/back_arrow"
         app:title="@string/profile_billing_information"/>
 
-    <LinearLayout
+    <org.evcs.android.features.profile.wallet.WalletHeaderView
+        android:id="@+id/wallet_header_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/padding_ariel_outer"
         android:layout_marginRight="@dimen/padding_ariel_outer"
         android:layout_marginBottom="@dimen/padding_ariel_outer"
-        android:orientation="vertical"
-        android:background="@drawable/layout_corners_rounded_dark_grey"
-        android:paddingTop="@dimen/padding_ariel_inner"
-        android:paddingBottom="@dimen/padding_ariel_inner">
-
-        <org.evcs.android.features.profile.wallet.WalletHeaderView
-            android:id="@+id/wallet_header_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
-
-    </LinearLayout>
+        android:padding="@dimen/padding_ariel_inner" />
 
 </LinearLayout>

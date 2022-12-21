@@ -8,7 +8,7 @@
         android:id="@+id/walletFragment"
         android:name="org.evcs.android.features.profile.wallet.WalletFragment"
         android:label="WalletFragment"
-        tools:layout="@layout/fragment_payment_information">
+        tools:layout="@layout/fragment_wallet">
         <action
             android:id="@+id/action_walletFragment_to_addCreditCardFragment"
             app:destination="@id/addCreditCardFragment" />
@@ -17,5 +17,5 @@
         android:id="@+id/addCreditCardFragment"
         android:name="org.evcs.android.features.profile.wallet.AddCreditCardFragment"
         android:label="AddCreditCardFragment"
-        tools:layout="@layout/fragment_payment_information"/>
+        tools:layout="@layout/fragment_wallet"/>
 </navigation>

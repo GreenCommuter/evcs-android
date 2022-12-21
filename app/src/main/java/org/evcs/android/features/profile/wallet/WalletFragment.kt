@@ -3,18 +3,14 @@ package org.evcs.android.features.profile.wallet
 import com.base.core.fragment.BaseFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.features.profile.wallet.WalletHeaderView.WalletHeaderInterface
-import org.evcs.android.features.profile.wallet.IWalletView
 import org.evcs.android.R
-import org.evcs.android.features.profile.wallet.WalletPresenter
 import org.evcs.android.EVCSApplication
-import org.evcs.android.features.profile.wallet.WalletHeaderView
 import androidx.navigation.fragment.NavHostFragment
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.navigation.INavigationListener
-import org.evcs.android.features.profile.wallet.WalletFragment
 import android.os.Bundle
 import android.view.View
-import org.evcs.android.databinding.FragmentPaymentInformationBinding
+import org.evcs.android.databinding.FragmentWalletBinding
 
 class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, IWalletView {
     companion object {
@@ -27,7 +23,7 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
     }
 
     override fun layout(): Int {
-        return R.layout.fragment_payment_information
+        return R.layout.fragment_wallet
     }
 
     override fun createPresenter(): WalletPresenter {
@@ -35,9 +31,10 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
     }
 
     override fun init() {}
+
     override fun setUi(v: View) {
         super.setUi(v)
-        val binding = FragmentPaymentInformationBinding.bind(v)
+        val binding = FragmentWalletBinding.bind(v)
         val headerView = binding.walletHeaderView
         headerView.setParent(this)
     }

@@ -2,11 +2,7 @@ package org.evcs.android.features.profile.wallet
 
 import android.content.Context
 import org.evcs.android.ui.fragment.LoadingFragment
-import org.evcs.android.features.profile.wallet.AddCreditCardPresenter
-import org.evcs.android.features.profile.wallet.IBrainTreeView
-import org.evcs.android.features.profile.wallet.CreditCardView
 import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.features.profile.wallet.AddCreditCardFragment.IBrainTreeListener
 import org.evcs.android.util.validator.ValidatorManager
 import org.evcs.android.R
 import androidx.annotation.CallSuper
@@ -14,21 +10,17 @@ import android.graphics.Typeface
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import androidx.core.view.ViewCompat
 import org.joda.time.format.DateTimeFormat
 import org.evcs.android.EVCSApplication
-import org.evcs.android.features.profile.wallet.WalletNavigationController
 import org.evcs.android.util.validator.CreditCardValidator
 import org.evcs.android.util.validator.DateTextInputValidator
 import org.evcs.android.util.validator.NonEmptyTextInputValidator
-import org.evcs.android.util.validator.ValidatorManager.OnAnyTextChangedListener
-import org.evcs.android.util.validator.TextInputLayoutInterface
 import org.evcs.android.util.watchers.DateFormatWatcher
 import org.evcs.android.util.watchers.FourDigitCardFormatWatcher
 import org.evcs.android.model.shared.RequestError
 import com.base.core.util.ToastUtils
-import com.stripe.android.model.CardParams
-import com.stripe.android.Stripe
-import org.evcs.android.databinding.FragmentBraintreeBinding
+import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.navigation.INavigationListener
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormatter
@@ -39,7 +31,7 @@ import org.joda.time.format.DateTimeFormatter
  *
  * @param <P> Presenter extending [AddCreditCardPresenter]
 </P> */
-class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>?>(), IBrainTreeView {
+class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>>(), IBrainTreeView {
     //        PaymentMethodNonceCreatedListener, BraintreeListener, BraintreeErrorListener {
     private lateinit var mCreditCardView: CreditCardView
     private lateinit var mCardNumber: StandardTextField
@@ -53,7 +45,7 @@ class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>?>(), IBr
     private lateinit var mDateTimeFormatter: DateTimeFormatter
 
     override fun layout(): Int {
-        return R.layout.fragment_braintree
+        return R.layout.fragment_add_credit_card
     }
 
     @CallSuper
@@ -71,20 +63,21 @@ class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>?>(), IBr
 
     override fun setUi(v: View) {
         super.setUi(v)
-        val binding = FragmentBraintreeBinding.bind(v)
+        val binding = FragmentAddCreditCardBinding.bind(v)
         mCreditCardView = binding.fragmentBraintreeCreditCard
         mCardNumber = binding.fragmentBraintreeCardNumber
         mCardExpirationMonth = binding.fragmentBraintreeCardExpirationMonth
         mCvv = binding.fragmentBraintreeCardCvv
         mNext = binding.fragmentBraintreeNext
-    }
 
-    fun setListener() {
-        listener = WalletNavigationController.getInstance()
+        //TODO: replace for the viewutils thing
+        ViewCompat.setOnApplyWindowInsetsListener(binding.fragmentAddCreditCardLayout) { v, insets ->
+            v.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
+            insets.consumeSystemWindowInsets()
+        }
     }
 
     override fun setListeners() {
-        setListener()
         mValidatorManager = ValidatorManager()
         mValidatorManager.addValidator(CreditCardValidator(mCardNumber))
         mValidatorManager.addValidator(

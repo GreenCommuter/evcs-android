@@ -53,6 +53,7 @@
         android:layout_marginEnd="@dimen/spacing_ariel_related"
         android:layout_marginBottom="@dimen/spacing_ariel_sections"
         android:text="@string/payment_method_toolbar_add"
+        android:textAllCaps="false"
         style="@style/Button.Black"/>
 
 </LinearLayout>

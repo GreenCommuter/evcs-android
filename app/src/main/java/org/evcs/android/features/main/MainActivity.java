@@ -9,12 +9,14 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.navigation.Navigation;
 
-import com.base.core.util.NavigationUtils;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.evcs.android.R;
@@ -31,6 +33,14 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
 
     public MainNavigationController mNavigationController;
     private BottomNavigationView mMenu;
+    private ActivityResultLauncher mLoginResult;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mLoginResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
+                (ActivityResultCallback) result -> { populate(); });
+    }
 
     @Override
     @CallSuper
@@ -84,9 +94,17 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     }
 
     @Override
+    protected void populate() {
+        super.populate();
+        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ?
+                "Sign in" :
+                getString(R.string.drawer_menu_profile));
+        mMenu.setSelectedItemId(R.id.menu_drawer_map);
+    }
+
+    @Override
     protected void setListeners() {
         super.setListeners();
-        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ? "Sign in" : "Sign out");
         mMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -99,7 +117,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                         break;
                     case R.id.menu_drawer_profile:
                         if (UserUtils.getLoggedUser() == null)
-                            NavigationUtils.jumpTo(MainActivity.this, AuthActivity.class);
+                            mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
                         else
                             UserUtils.logout(null);
 

@@ -17,14 +17,13 @@
 
     <TextView
         android:id="@+id/adapter_search_name"
-        style="@style/Roboto.Body"
+        style="@style/Roboto.Body.White"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/spacing_large"
         android:layout_toEndOf="@id/adapter_search_icon"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textColor="@color/evcs_white"
         tools:text="WCEH THE Dalles" />
 
     <TextView

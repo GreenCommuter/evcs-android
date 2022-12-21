@@ -26,8 +26,10 @@
     </declare-styleable>
 
     <declare-styleable name="ListButtonView">
+        <attr name="lbv_label" format="string"/>
         <attr name="text" format="string"/>
         <attr name="bottomDivider" format="boolean"/>
+        <attr name="showButton" format="boolean"/>
     </declare-styleable>
 
     <declare-styleable name="SeekBar">

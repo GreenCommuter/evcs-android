@@ -29,23 +29,23 @@ class AccountActivity : BaseActivity2() {
     override fun populate() {
         super.populate()
         val user = UserUtils.getLoggedUser()
-        mBinding.fragmentAccountEmail.text = user.email
-        mBinding.fragmentAccountPhone.text = user.phone
-        mBinding.fragmentAccountCar.text = (user.userCar ?: "").toString()
-        mBinding.fragmentAccountZipcode.text = user.zipCode
-        mBinding.fragmentAccountName.text = UserUtils.getLoggedUser().name;
+        mBinding.fragmentAccountEmail.setText(user.email)
+        mBinding.fragmentAccountPhone.setText(user.phone)
+        mBinding.fragmentAccountCar.setText((user.userCar ?: "").toString())
+        mBinding.fragmentAccountZipcode.setText(user.zipCode)
+        mBinding.fragmentAccountName.setText(UserUtils.getLoggedUser().name)
     }
 
     override fun setListeners() {
         super.setListeners()
-        mBinding.fragmentAccountNameLayout.setOnClickListener {
+        mBinding.fragmentAccountName.setOnClickListener {
             mChangeUserResult.launch(Intent(this, ChangeNameActivity::class.java))
         }
         mBinding.fragmentAccountChangePassword.setOnClickListener { jumpTo(this, ChangePasswordActivity::class.java) }
-        mBinding.fragmentAccountCarLayout.setOnClickListener {
+        mBinding.fragmentAccountCar.setOnClickListener {
             mChangeUserResult.launch(Intent(this, ChangeCarActivity::class.java))
         }
-        mBinding.fragmentAccountZipcodeLayout.setOnClickListener {
+        mBinding.fragmentAccountZipcode.setOnClickListener {
             //TODO: create the activity
             mChangeUserResult.launch(Intent(this, ChangeNameActivity::class.java))
         }

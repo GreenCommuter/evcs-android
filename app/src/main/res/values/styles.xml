@@ -92,6 +92,13 @@
         <item name="android:textColor">@color/button_text_color_selector_white_border</item>
     </style>
 
+    <style name="Button.Orange">
+        <item name="android:background">@drawable/layout_corners_rounded_orange_gradient</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/evcs_white</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="Button.Oval.White">
         <item name="android:background">@drawable/button_circle_white</item>
     </style>

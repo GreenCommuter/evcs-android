@@ -50,7 +50,8 @@
     <string name="sign_in_title">Login</string>
     <string name="sign_in_email">e-mail Address *</string>
 <!--    <string name="sign_in_email">e-mail Address *</string>-->
-    <string name="sign_in_name">Name *</string>
+    <string name="sign_in_name">First Name *</string>
+    <string name="sign_in_last_name">Last Name *</string>
     <string name="sign_in_password">Password *</string>
     <string name="sign_in_forgot_password">Forgot your Password?</string>
     <string name="sign_in_button">Sign in</string>
@@ -408,14 +409,6 @@
     <string name="create_booking_choose_a_diferent_car">Choose a different car</string>
     <string name="create_booking_please_select_a_car">Please select a car</string>
 
-    <!-- Choose Car -->
-    <string name="choose_car_title">Select a car</string>
-    <string name="choose_car_per_hour">Per hour</string>
-    <string name="choose_car_text_format">%1$s %2$s</string>
-    <string name="choose_car_empty_view_wording">No cars at this location are available within the time frame specified. Please try another location or a different time frame.</string>
-    <string name="choose_car_suggestion_format">Available at %s</string>
-    <string name="choose_car_suggestion_header">We did not find any available cars at the desired pickup and dropoff times \n Here are other availabilities that may also work for you</string>
-
     <!-- My Trips -->
     <string name="my_trips_active_reservation"><b>Active reservation</b></string>
     <string name="my_trips_finished_reservation"><b>Finished reservation</b></string>
@@ -504,8 +497,16 @@
     <string name="search_activity_empty">Search for charging sites by name or address</string>
     <string name="search_activity_fail">Cannot find</string>
     <string name="search_activity_fail_description">Try searching again using diferent spelling or keywords.</string>
+    <string name="activity_search_search_history">Search history</string>
+    <string name="activity_search_clear_all">Clear all</string>
+
+    <!-- Location Activity-->
+    <string name="activity_location_connector_type">Connector Type</string>
 
     <!--Stations Activity-->
     <string name="activity_stations_occupancy_clarification">Avoid occupancy fees by unplugging your vehicle within the grace period. You will receive a notification when the energy transfer has ended</string>
+    <string name="activity_stations_charger_details">Charger Details</string>
+    <string name="activity_stations_connection_fee">Connection Fee</string>
+    <string name="activity_stations_occupancy_fee">Occupancy Fee</string>
 
 </resources>

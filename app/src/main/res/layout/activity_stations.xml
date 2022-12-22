@@ -43,7 +43,7 @@
                     style="@style/RobotoBold.Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Connection Fee"
+                    android:text="@string/activity_stations_connection_fee"
                     android:visibility="gone"
                     android:textColor="@color/evcs_white" />
 
@@ -91,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/activity_stations_session_fee"
                     android:visibility="gone"
-                    android:text="Occupancy Fee"
+                    android:text="@string/activity_stations_occupancy_fee"
                     android:textColor="@color/evcs_white" />
 
                 <TextView

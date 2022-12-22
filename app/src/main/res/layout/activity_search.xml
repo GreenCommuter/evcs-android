@@ -27,7 +27,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/spacing_medium"
-                android:text="Search history"
+                android:text="@string/activity_search_search_history"
                 android:textColor="@color/evcs_white" />
 
             <TextView
@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Clear all"
+                android:text="@string/activity_search_clear_all"
                 style="@style/RobotoBold.Body"
                 android:textColor="@color/evcs_red" />
 

@@ -46,8 +46,7 @@ class AccountActivity : BaseActivity2() {
             mChangeUserResult.launch(Intent(this, ChangeCarActivity::class.java))
         }
         mBinding.fragmentAccountZipcode.setOnClickListener {
-            //TODO: create the activity
-            mChangeUserResult.launch(Intent(this, ChangeNameActivity::class.java))
+            mChangeUserResult.launch(Intent(this, ZipCodeActivity::class.java))
         }
         //TODO: add dialog
         mBinding.fragmentAccountSignOut.setOnClickListener { UserUtils.logout(null) }

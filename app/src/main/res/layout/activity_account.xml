@@ -23,14 +23,14 @@
             android:id="@+id/fragment_account_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lbv_label="Email"
+            app:lbv_label="@string/register_email"
             app:showButton="false"/>
 
         <org.evcs.android.ui.view.profile.ListButtonView
             android:id="@+id/fragment_account_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lbv_label="Phone Number"
+            app:lbv_label="@string/my_information_phone_number"
             app:showButton="false"/>
 
         <org.evcs.android.ui.view.profile.ListButtonView

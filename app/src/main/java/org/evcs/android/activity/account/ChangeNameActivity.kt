@@ -2,22 +2,22 @@ package org.evcs.android.activity.account
 
 import android.view.LayoutInflater
 import android.view.View
-import androidx.core.view.ViewCompat
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityChangeNameBinding
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.NonEmptyTextInputValidator
 import org.evcs.android.util.validator.ValidatorManager
 
 
-class ChangeNameActivity : BaseActivity2(), ChangeNameView {
+class ChangeNameActivity : BaseActivity2(), UpdateUserView {
 
     private lateinit var mValidatorManager: ValidatorManager
     private lateinit var mBinding: ActivityChangeNameBinding
-    private lateinit var mPresenter: ChangeNamePresenter
+    private lateinit var mPresenter: UpdateUserPresenter
 
     override fun inflate(layoutInflater: LayoutInflater): View {
         mBinding = ActivityChangeNameBinding.inflate(layoutInflater)
@@ -25,7 +25,7 @@ class ChangeNameActivity : BaseActivity2(), ChangeNameView {
     }
 
     override fun init() {
-        mPresenter = ChangeNamePresenter(this, EVCSApplication.getInstance().retrofitServices)
+        mPresenter = UpdateUserPresenter(this, EVCSApplication.getInstance().retrofitServices)
         mValidatorManager = ValidatorManager()
         mPresenter.onViewCreated()
     }
@@ -48,11 +48,7 @@ class ChangeNameActivity : BaseActivity2(), ChangeNameView {
         }
         mBinding.activityChangeNameToolbar.setNavigationOnClickListener { finish() }
 
-        //Workaround to keep the adjust resize behaviour without ruining the toolbar with fitsSystemWindows
-        ViewCompat.setOnApplyWindowInsetsListener(mBinding.activityAccountLayout) { v, insets ->
-            v.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
-            insets.consumeSystemWindowInsets()
-        }
+        ViewUtils.setAdjustResize(mBinding.activityAccountLayout)
     }
 
     override fun showError(requestError: RequestError) {
@@ -60,7 +56,7 @@ class ChangeNameActivity : BaseActivity2(), ChangeNameView {
         ToastUtils.show(requestError.body)
     }
 
-    override fun onNameUpdate() {
+    override fun onUserUpdate() {
         finish()
     }
 }

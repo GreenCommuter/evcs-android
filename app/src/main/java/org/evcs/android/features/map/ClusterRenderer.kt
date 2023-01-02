@@ -3,6 +3,10 @@ package org.evcs.android.features.map
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.drawable.Drawable
+import android.graphics.drawable.LayerDrawable
+import android.graphics.drawable.ShapeDrawable
+import android.graphics.drawable.shapes.OvalShape
 import android.view.LayoutInflater
 import android.view.View
 import androidx.annotation.DrawableRes
@@ -18,7 +22,6 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import org.evcs.android.R
 import org.evcs.android.databinding.MarkerLayoutBinding
 import org.evcs.android.model.ClusterItemWithText
-import java.util.*
 
 
 class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
@@ -44,6 +47,22 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         marker.setIcon(getBitmap(item, icon))
     }
 
+    override fun onBeforeClusterRendered(cluster: Cluster<T>, markerOptions: MarkerOptions) {
+        super.onBeforeClusterRendered(cluster, markerOptions)
+        val bitmap = createMarker(cluster.size.toString(), R.drawable.ic_map_car_location)
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+    }
+
+//    private fun makeClusterBackground(): LayerDrawable {
+//        val mColoredCircleBackground = ShapeDrawable(OvalShape())
+//        val outline = ShapeDrawable(OvalShape())
+//        outline.paint.color = -2130706433
+//        val background = LayerDrawable(arrayOf<Drawable>(outline, mColoredCircleBackground))
+//        val strokeWidth = 3
+//        background.setLayerInset(1, strokeWidth, strokeWidth, strokeWidth, strokeWidth)
+//        return background
+//    }
+
     private fun getBitmap(item: T, @DrawableRes icon: Int): BitmapDescriptor? {
         if (item is ClusterItemWithText) {
             return BitmapDescriptorFactory.fromBitmap(createMarker(item.markerText, icon))
@@ -66,4 +85,19 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         markerLayout.draw(Canvas(bitmap))
         return bitmap
     }
+
+//    private fun createMarker(text: String, drawable: Drawable): Bitmap? {
+//        val binding = MarkerLayoutBinding.inflate(LayoutInflater.from(mContext))
+//        val markerLayout = binding.root
+//        binding.markerImage.setImageDrawable(drawable)
+//        binding.markerText.text = text
+//        markerLayout.measure(
+//            View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.UNSPECIFIED),
+//            View.MeasureSpec.makeMeasureSpec(100, View.MeasureSpec.UNSPECIFIED))
+//        markerLayout.layout(0, 0, markerLayout.measuredWidth, markerLayout.measuredHeight)
+//        val bitmap = Bitmap.createBitmap(markerLayout.measuredWidth, markerLayout.measuredHeight,
+//            Bitmap.Config.ARGB_8888)
+//        markerLayout.draw(Canvas(bitmap))
+//        return bitmap
+//    }
 }

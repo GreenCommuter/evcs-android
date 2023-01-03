@@ -13,6 +13,7 @@ public class MainNavigationController extends AbstractNavigationController {
     private AbstractNavigationController mCurrentController;
     private @IdRes Integer mRootId;
     private boolean mIsInCharging;
+    private boolean mIsInProfile;
 
     public MainNavigationController(MainActivity mainActivity, boolean hasRoot, NavController navController) {
         super(navController);
@@ -36,13 +37,25 @@ public class MainNavigationController extends AbstractNavigationController {
     public void goToCharging() {
         if (mIsInCharging) return;
         mIsInCharging = true;
+        mIsInProfile = false;
+        startFlow();
         navigate(R.id.chargingFragment);
     }
 
-    public void onMapClicked() {
-        if (!mIsInCharging) return;
+    public void goToProfile() {
+        if (mIsInProfile) return;
+        mIsInProfile = true;
         mIsInCharging = false;
+        startFlow();
+        navigate(R.id.profileFragment);
+    }
+
+    public void onMapClicked() {
+        if (!mIsInCharging && !mIsInProfile) return;
+        mIsInCharging = false;
+        mIsInProfile = false;
         mNavController.popBackStack();
         mActivity.getMenuView().setSelectedItemId(R.id.menu_drawer_map);
     }
+
 }

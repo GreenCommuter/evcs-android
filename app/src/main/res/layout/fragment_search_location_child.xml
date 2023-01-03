@@ -5,15 +5,15 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/evcs_purple"
-    android:paddingTop="@dimen/spacing_medium"
-    android:paddingBottom="@dimen/spacing_medium">
+    android:padding="@dimen/spacing_medium_more">
 
     <ImageView
         android:id="@+id/fragment_search_location_close"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:padding="@dimen/spacing_medium"
+        android:paddingLeft="@dimen/spacing_medium_more"
+        android:paddingRight="@dimen/spacing_medium_more"
         android:src="@drawable/ic_xmark_solid"/>
 
     <org.evcs.android.ui.view.shared.FilterableAutocompleteTextView

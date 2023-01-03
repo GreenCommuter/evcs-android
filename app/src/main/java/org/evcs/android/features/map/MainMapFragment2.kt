@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -43,7 +44,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     private lateinit var mCarouselRecycler: RecyclerView
     private lateinit var mSearchButton: ImageButton
     private lateinit var mFilterButton: ImageButton
-    private lateinit var mCenterButton: Button
+    private lateinit var mCenterButton: ImageView
     private lateinit var mLoading: ProgressBar
 
     fun newInstance(): MainMapFragment2 {
@@ -173,11 +174,11 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
 
     override fun onLocationNotRetrieved() {
         getLocations()
-        mCenterButton.text = "No location"
+        mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.no_location))
     }
 
     override fun onLocationResult(lastLocation: android.location.Location) {
-        mCenterButton.text = "Center"
+        mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.center))
         presenter?.mLastLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
         drawLocationMarker()
         getLocations()

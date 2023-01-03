@@ -30,4 +30,7 @@ public class Extras {
         public static final String LOCATIONS = "Locations";
     }
 
+    public static class PaymentActivity {
+        public static final String CARD = "Card";
+    }
 }

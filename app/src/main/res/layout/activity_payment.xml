@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_purple_gray">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:id="@+id/fragment_payment_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Payment"
+        app:navigationIcon="@drawable/back_arrow"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_large"
+        android:layout_marginStart="@dimen/spacing_large"
+        android:text="Payment method"
+        android:textAllCaps="true"/>
+
+    <LinearLayout
+        android:id="@+id/activity_payment_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/activity_payment_add_credit_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add credit card"
+        android:padding="@dimen/spacing_large"
+        android:background="@color/evcs_white"
+        android:textColor="@color/evcs_orange"/>
+
+</LinearLayout>

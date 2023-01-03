@@ -12,9 +12,9 @@
     <color name="evcs_light_grey">#f6f6f6</color>
     <color name="evcs_white">#ffffff</color>
     <color name="evcs_red">#dc6b6a</color>
-    <color name="evcs_purple">#240031</color>
-    <color name="evcs_dark_purple">#1f002c</color>
-    <color name="evcs_purple_gray">#C2B6CB</color>
+    <color name="evcs_purple">#002D48</color>
+    <color name="evcs_dark_purple">#001B2C</color>
+    <color name="evcs_purple_gray">#B6C3CB</color>
 
     <color name="evcs_baseline_color">#4D4D4D</color>
 

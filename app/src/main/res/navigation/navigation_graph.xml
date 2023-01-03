@@ -19,13 +19,17 @@
         <action
             android:id="@+id/action_mainMapFragmentt_to_chargingFragment"
             app:destination="@id/chargingFragment" />
+        <action
+            android:id="@+id/action_mainMapFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/chargingFragment"
         android:name="org.evcs.android.features.charging.ChargingFragment"
-        tools:layout="@layout/fragment_charging">
-        <action
-            android:id="@+id/action_chargingFragment_to_mainMapFragment"
-            app:destination="@id/mainMapFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_charging"/>
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="org.evcs.android.features.profile.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile"/>
 </navigation>

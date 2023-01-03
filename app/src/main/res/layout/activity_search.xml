@@ -14,8 +14,7 @@
         <FrameLayout
             android:id="@+id/fragment_search_location_address_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_medium"/>
+            android:layout_height="wrap_content"/>
 
         <RelativeLayout
             android:id="@+id/activity_search_history_layout"
@@ -24,18 +23,19 @@
             android:layout_margin="@dimen/spacing_medium">
 
             <TextView
+                style="@style/RobotoBold.Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Search history"
-                android:textColor="@color/evcs_white"
-                style="@style/RobotoBold.Body"/>
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:text="@string/activity_search_search_history"
+                android:textColor="@color/evcs_white" />
 
             <TextView
                 android:id="@+id/activity_search_history_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="Clear all"
+                android:text="@string/activity_search_clear_all"
                 style="@style/RobotoBold.Body"
                 android:textColor="@color/evcs_red" />
 

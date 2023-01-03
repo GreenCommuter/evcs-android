@@ -105,6 +105,9 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     @Override
     protected void setListeners() {
         super.setListeners();
+        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ?
+                "Sign in" :
+                getString(R.string.drawer_menu_profile));
         mMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -119,7 +122,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                         if (UserUtils.getLoggedUser() == null)
                             mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
                         else
-                            UserUtils.logout(null);
+                            mNavigationController.goToProfile();
 
                 }
                 return true;

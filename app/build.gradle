@@ -5,20 +5,20 @@ apply from: '../quality.gradle'
 apply from: '../scripts/warp/warp_task.gradle'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 33
 
     defaultConfig {
         applicationId "org.evcs.android"
         minSdkVersion 21
-        targetSdkVersion 32
+        targetSdkVersion 33
         versionCode 1
         versionName "0.0.1"
         multiDexEnabled true
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath true
-            }
-        }
+//        javaCompileOptions {
+//            annotationProcessorOptions {
+//                includeCompileClasspath true
+//            }
+//        }
     }
 
     compileOptions {
@@ -163,7 +163,7 @@ dependencies {
     implementation 'com.google.firebase:protolite-well-known-types:18.0.0'
 
     // Navigation
-    def nav_version = "2.3.0"
+    def nav_version = "2.5.0"
 
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

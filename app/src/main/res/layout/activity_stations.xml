@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,7 +9,9 @@
     <org.evcs.android.ui.view.shared.EVCSToolbar
         android:id="@+id/activity_stations_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        app:title="Details"
+        app:navigationIcon="@drawable/back_arrow"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -28,7 +30,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#6B5773"
+            android:background="#576873"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -41,7 +43,7 @@
                     style="@style/RobotoBold.Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Connection Fee"
+                    android:text="@string/activity_stations_connection_fee"
                     android:visibility="gone"
                     android:textColor="@color/evcs_white" />
 
@@ -89,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/activity_stations_session_fee"
                     android:visibility="gone"
-                    android:text="Occupancy Fee"
+                    android:text="@string/activity_stations_occupancy_fee"
                     android:textColor="@color/evcs_white" />
 
                 <TextView

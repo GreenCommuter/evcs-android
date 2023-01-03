@@ -19,6 +19,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     private lateinit var mValidatorManager: ValidatorManager
     private lateinit var mBinding: FragmentChangePasswordBinding
     private lateinit var mPasswordInputLayout: StandardTextField
+    private lateinit var mOldPasswordInputLayout: StandardTextField
     private lateinit var mConfirmInputLayout: StandardTextField
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: Button
@@ -27,6 +28,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     override fun inflate(layoutInflater: LayoutInflater): View {
         mBinding = FragmentChangePasswordBinding.inflate(layoutInflater)
         mPasswordInputLayout = mBinding.fragmentChangePasswordNew
+        mOldPasswordInputLayout = mBinding.fragmentChangePasswordOld
         mConfirmInputLayout = mBinding.fragmentChangePasswordConfirm
         mPasswordHint = mBinding.fragmentChangePasswordShortPassword
         mContinueButton = mBinding.fragmentChangePasswordButton
@@ -47,8 +49,9 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
             BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
         )
         mValidatorManager = ValidatorManager()
+        mValidatorManager.addValidator(PasswordTextInputValidator(mOldPasswordInputLayout))
         mValidatorManager.addValidator(PasswordTextInputValidator(mPasswordInputLayout))
-        mValidatorManager.addValidator(MatchingValidator(mPasswordInputLayout, mConfirmInputLayout))
+        mValidatorManager.addValidator(MatchingValidator(mConfirmInputLayout, mPasswordInputLayout))
         mValidatorManager.setOnAnyTextChangedListener { setEnableButton(mValidatorManager.areAllFieldsValid()) }
     }
 
@@ -63,6 +66,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     private fun onButtonClick() {
 //        progressDialog.show()
         mPresenter.changePassword(
+            mOldPasswordInputLayout.text.toString(),
             mPasswordInputLayout.text.toString()
         )
     }

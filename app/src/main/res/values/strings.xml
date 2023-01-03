@@ -197,6 +197,7 @@
 
     <!-- Change password -->
     <string name="change_password_success">Password changed</string>
+    <string name="change_password_old">Current password</string>
     <string name="change_password_new">New password</string>
     <string name="change_password_confirm">Confirm new password</string>
     <string name="change_password_button">Change your password</string>
@@ -285,7 +286,6 @@
     <string name="vanpool_absence_title">Absence</string>
     <string name="vanpool_absence_loaded">Absence successfully registered</string>
     <string name="vanpool_absence_not_going_today">I\'m not going today</string>
-    <string name="vanpool_absence_temporarily">I\'ll be absent temporarily</string>
 
     <!-- Vanpool Checklist -->
     <string name="vanpool_checklist_title">Car checklist</string>

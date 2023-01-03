@@ -12,9 +12,11 @@ import org.evcs.android.model.user.ZipCodeWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface UserService {
 
@@ -56,7 +58,24 @@ public interface UserService {
     @PUT("/members/v1/users/{id}")
     Call<User> updateUser(@Path("id") int id, @Body NameWrapper zipcode);
 
-    @POST ("/members/v1/user_cars")
+    @POST("/members/v1/user_cars")
     Call<UserCar> saveUserCar(@Body UserCar userCar);
+
+    @POST("/members/v1/reset_password")
+    Call<Void> changePassword();
+//    {
+//        "email": "example@gmail.com" - User email (will arrive embedded in the email reset password link)
+//        "identifier": "abc123" - User ResetPasswordToken (will arrive embedded in the email reset password link),
+//            "password": "12345678" - New password
+//        "password_confirmation": "12345678" - Confirm your new password
+//    }
+
+    @POST("/members/v1/update_password")
+    Call<Void> changePassword(@Query("previous_password") String oldPassword,
+                              @Query("password") String newPassword,
+                              @Query("password_confirmation") String confirmation);
+
+    @GET("/members/v1/forgot_password")
+    Call<Void> requestPasswordReset(@Query("email") String email);
 
 }

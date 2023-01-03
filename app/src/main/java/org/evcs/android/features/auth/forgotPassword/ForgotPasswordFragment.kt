@@ -8,13 +8,16 @@ import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentForgotPasswordBinding
+import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.util.validator.EmailTextInputValidator
 import org.evcs.android.util.validator.ValidatorManager
 
 class ForgotPasswordFragment : BaseFragment<ForgotPasswordPresenter>(), ForgotPasswordView {
 
     private lateinit var mValidatorManager: ValidatorManager
     private var mEnableBack = true
+    private lateinit var mText: StandardTextField
     private lateinit var mButton: Button
 
     fun newInstance(): ForgotPasswordFragment {
@@ -39,9 +42,11 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordPresenter>(), ForgotPa
         super.setUi(v)
         val binding = FragmentForgotPasswordBinding.bind(v)
         mButton = binding.fragmentForgotPasswordButton
+        mText = binding.fragmentForgotPasswordText
     }
 
     override fun setListeners() {
+        mValidatorManager.addValidator(EmailTextInputValidator(mText))
         mValidatorManager.setOnAnyTextChangedListener { setEnableButton(mValidatorManager.areAllFieldsValid()) }
         mButton.setOnClickListener { onButtonClick() }
 
@@ -54,10 +59,12 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordPresenter>(), ForgotPa
     fun onButtonClick() {
         mEnableBack = false
         mButton.isEnabled = false
+        presenter?.requestPasswordReset(mText.text.toString())
     }
 
     override fun onResetRequest() {
         mEnableBack = true
+        ToastUtils.show(R.string.forgot_password_dialog)
     }
 
     override fun init() {

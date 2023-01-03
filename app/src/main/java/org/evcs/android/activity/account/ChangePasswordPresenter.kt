@@ -13,21 +13,20 @@ import org.evcs.android.util.UserUtils
 class ChangePasswordPresenter(viewInstance: ChangePasswordView, services: RetrofitServices) :
     ServicesPresenter<ChangePasswordView?>(viewInstance, services) {
 
-    fun changePassword(newPassword: String) {
-//        getService(UserService::class.java).changePassword(newPassword)
-//            .enqueue(object : AuthCallback<User?>(this) {
-//                override fun onResponseSuccessful(response: User?) {
-//                    UserUtils.saveUser(response)
-//                    view?.onPasswordChanged();
-//                }
-//
-//                override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
-//                    view?.showError(ErrorUtils.getError(responseBody))
-//                }
-//
-//                override fun onCallFailure(throwable: Throwable) {
-//                    runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
-//                }
-//            })
+    fun changePassword(oldPassword: String, newPassword: String) {
+        getService(UserService::class.java).changePassword(oldPassword, newPassword, newPassword)
+            .enqueue(object : AuthCallback<Void?>(this) {
+                override fun onResponseSuccessful(response: Void?) {
+                    view?.onPasswordChanged();
+                }
+
+                override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                    view?.showError(ErrorUtils.getError(responseBody))
+                }
+
+                override fun onCallFailure(throwable: Throwable) {
+                    runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+                }
+            })
     }
 }

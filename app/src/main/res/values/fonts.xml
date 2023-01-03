@@ -262,6 +262,10 @@
         <item name="android:textColor">#514f4d</item>
     </style>
 
+    <style name="Roboto.Body.White">
+        <item name="android:textColor">@color/evcs_white</item>
+    </style>
+
     <style name="Roboto.BodySmall">
         <item name="android:textSize">12sp</item>
     </style>

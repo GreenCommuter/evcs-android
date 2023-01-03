@@ -17,6 +17,7 @@ class ChangePasswordPresenter(viewInstance: ChangePasswordView, services: Retrof
 //        getService(UserService::class.java).changePassword(newPassword)
 //            .enqueue(object : AuthCallback<User?>(this) {
 //                override fun onResponseSuccessful(response: User?) {
+//                    UserUtils.saveUser(response)
 //                    view?.onPasswordChanged();
 //                }
 //

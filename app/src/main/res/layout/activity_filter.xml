@@ -159,10 +159,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/spacing_large"
                 android:text="@string/filter_activity_apply"
-                android:textAllCaps="false"
-                android:textColor="@color/evcs_white"
-                android:background="@drawable/layout_corners_rounded_orange_gradient"
-                style="@style/Button" />
+                style="@style/Button.Orange"/>
 
         </LinearLayout>
 

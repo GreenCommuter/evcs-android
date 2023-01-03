@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.base.core.util.ToastUtils
+import com.google.android.gms.maps.CameraUpdate
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -133,10 +136,10 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         if (result.hasExtra(Extras.LocationActivity.LOCATION)) {
             val location = result.getSerializableExtra(Extras.LocationActivity.LOCATION) as Location
             findAndSelectMarker(location)
-        } else if (result.hasExtra(Extras.SearchActivity.LATLNG)) {
-            val latlng = result.getParcelableExtra<LatLng>(Extras.SearchActivity.LATLNG)
-            presenter.getLocations(latlng)
-            mapView!!.getMapAsync { map -> zoomTo(map, latlng!!, ZOOM_LIMIT * 2.0f) }
+//        } else if (result.hasExtra(Extras.SearchActivity.LATLNG)) {
+//            val latlng = result.getParcelableExtra<LatLng>(Extras.SearchActivity.LATLNG)
+//            presenter.getLocations(latlng)
+//            mapView!!.getMapAsync { map -> zoomTo(map, latlng!!, ZOOM_LIMIT * 2.0f) }
         } else {
             val locations = result.extras!!.get(Extras.SearchActivity.LOCATIONS) as Array<Location>
             val newDataset = arrayListOf<Location>()
@@ -151,6 +154,11 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
             mMapAdapter.clear()
             mMapAdapter.appendBottomAll(presenter.populateDistances(newDataset))
             findAndSelectMarker(mMapAdapter[0]!!)
+
+            var viewport = result.extras!!.get(Extras.SearchActivity.VIEWPORT) as LatLngBounds?
+            viewport = viewport!!.including(mMapAdapter[0]!!.latLng)
+            if (viewport != null)
+                applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport, 0))
         }
     }
 

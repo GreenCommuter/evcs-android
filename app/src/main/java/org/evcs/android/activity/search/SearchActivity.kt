@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.base.core.util.ToastUtils
 import com.base.networking.retrofit.serializer.BaseGsonBuilder
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.gson.Gson
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -18,7 +19,6 @@ import org.evcs.android.databinding.ActivitySearchBinding
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.network.service.EVCSRetrofitServices
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.ui.view.shared.SearchLocationChildFragment
@@ -72,8 +72,8 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
     override fun setListeners() {
         super.setListeners()
         mSearchLocationChildFragment.setListener(object : SearchLocationChildFragment.ISearchLocationListener {
-            override fun onLocationChosen(address: String, latLng: LatLng) {
-                this@SearchActivity.onLocationChosen(address, latLng)
+            override fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
+                this@SearchActivity.onLocationChosen(address, latLng, viewport)
             }
 
             override fun onLocationRemoved() {
@@ -129,9 +129,10 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         refreshHistoryView()
     }
 
-    override fun showLocations(page: List<Location?>?) {
+    override fun showLocations(page: List<Location?>?, viewport: LatLngBounds?) {
         val data = Intent()
         data.putExtra(Extras.SearchActivity.LOCATIONS, page!!.toTypedArray())
+        data.putExtra(Extras.SearchActivity.VIEWPORT, viewport)
         setResult(RESULT_OK, data)
         finish()
     }
@@ -152,13 +153,13 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         hideLoading()
         mEmptyView.visibility = View.GONE
         mHistoryLayout.visibility = View.GONE
-        (mFailView.getChildAt(0) as TextView).text = "Cannot find \"" + mAddress + "\""
+        (mFailView.getChildAt(0) as TextView).text = "Cannot find any chargers near " + mAddress
         mFailView.visibility = View.VISIBLE
     }
 
-    private fun onLocationChosen(address: String, latLng: LatLng) {
+    private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
         showLoading()
-        mPresenter.search(latLng)
+        mPresenter.search(latLng, viewport)
         mHistoryLayout.visibility = View.GONE
         mAddress = address
     }

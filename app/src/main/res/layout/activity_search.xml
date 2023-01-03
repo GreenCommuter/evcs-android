@@ -76,13 +76,13 @@
             android:textColor="@color/evcs_white"
             style="@style/RobotoBold.CallToAction"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/search_activity_fail_description"
-            android:textColor="@color/evcs_white"
-            style="@style/Roboto.Body"/>
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:gravity="center"-->
+<!--            android:text="@string/search_activity_fail_description"-->
+<!--            android:textColor="@color/evcs_white"-->
+<!--            style="@style/Roboto.Body"/>-->
 
     </LinearLayout>
 

@@ -496,7 +496,7 @@
     <string name="search_activity_hint">Search by name or address</string>
     <string name="search_activity_empty">Search for charging sites by name or address</string>
     <string name="search_activity_fail">Cannot find</string>
-    <string name="search_activity_fail_description">Try searching again using diferent spelling or keywords.</string>
+    <string name="search_activity_fail_description">Try searching again using different spelling or keywords.</string>
     <string name="activity_search_search_history">Search history</string>
     <string name="activity_search_clear_all">Clear all</string>
 

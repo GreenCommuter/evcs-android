@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.base.core.permission.PermissionListener;
 import com.base.core.permission.PermissionManager;
@@ -17,6 +18,7 @@ import com.base.core.util.ToastUtils;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.model.Place;
 
@@ -149,8 +151,8 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     }
 
     public void onPlaceRetrieved(@NonNull Place response) {
-        mAddress.setText(response.getAddress().toString());
-        onLocationChosen(response.getAddress().toString(), response.getLatLng());
+        mAddress.setText(response.getAddress());
+        onLocationChosen(response.getAddress(), response.getLatLng(), response.getViewport());
         mClearOnDelete = true;
     }
 
@@ -158,7 +160,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setText(mCurrentLocationString);
         if (mCurrentLocation != null) {
             onLocationChosen(mCurrentLocationString,
-                    new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()));
+                    new LatLng(mCurrentLocation.getLatitude(), mCurrentLocation.getLongitude()), null);
 
         } else if (mIsLocationPermissionEnabled) {
             onLocationError();
@@ -168,10 +170,10 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mClearOnDelete = true;
     }
 
-    private void onLocationChosen(String address, LatLng latLng) {
+    private void onLocationChosen(String address, LatLng latLng, @Nullable LatLngBounds viewport) {
         mAddress.dismissDropDown();
         KeyboardUtils.hideKeyboard(getActivity());
-        mListener.onLocationChosen(address, latLng);
+        mListener.onLocationChosen(address, latLng, viewport);
     }
 
     public void onPermissionsGranted() {
@@ -242,7 +244,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
 
     public interface ISearchLocationListener {
 
-        void onLocationChosen(@NonNull String address, @NonNull LatLng latLng);
+        void onLocationChosen(@NonNull String address, @NonNull LatLng latLng, LatLngBounds viewport);
 
         void onLocationRemoved();
 

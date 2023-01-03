@@ -1,7 +1,5 @@
 package org.evcs.android.util;
 
-import org.jetbrains.annotations.Nullable;
-
 public class Extras {
 
     private Extras() {}

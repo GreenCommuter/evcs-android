@@ -92,16 +92,13 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     override fun passwordTextInputLayout(): TextInputLayoutInterface = mPasswordInputLayout
 
     private fun onButtonClick() {
-        //TODO: switch
-//        progressDialog.show()
-//        presenter!!.register(
-//            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),
-//            mEmailInputLayout.text.toString(),
-//            mPasswordInputLayout.text.toString()
-//        )
-        UserUtils.saveAuthUser(TestAuthUser())
-        findNavController()
-//            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentVerify(""))
+        progressDialog.show()
+        presenter!!.register(
+            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),
+            mEmailInputLayout.text.toString(),
+            mPasswordInputLayout.text.toString()
+        )
+//        UserUtils.saveAuthUser(TestAuthUser())
     }
 
     override fun onTokenSent() {

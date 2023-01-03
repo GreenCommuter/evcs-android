@@ -31,7 +31,7 @@ public class PaymentMethodPresenter<T extends IPaymentMethodView> extends Servic
 
             @Override
             public void onResponseFailed(ResponseBody responseBody, int i) {
-                getView().showError(ErrorUtils.getError(responseBody));
+//                getView().showError(ErrorUtils.getError(responseBody));
             }
 
             @Override

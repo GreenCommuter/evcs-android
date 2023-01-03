@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/back_arrow"
-        app:title="@string/profile_billing_information"/>
+        app:title="Payments (mocked)"/>
 
     <org.evcs.android.features.profile.wallet.WalletHeaderView
         android:id="@+id/wallet_header_view"

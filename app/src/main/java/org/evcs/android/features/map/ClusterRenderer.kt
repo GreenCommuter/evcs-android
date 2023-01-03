@@ -52,7 +52,7 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         }
     }
 
-    private fun createMarker(text: String, @DrawableRes icon: Int): Bitmap? {
+    private fun createMarker(text: String, @DrawableRes icon: Int): Bitmap {
         val binding = MarkerLayoutBinding.inflate(LayoutInflater.from(mContext))
         val markerLayout = binding.root
         binding.markerImage.setImageResource(icon)

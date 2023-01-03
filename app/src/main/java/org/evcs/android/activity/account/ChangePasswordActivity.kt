@@ -30,6 +30,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
         mConfirmInputLayout = mBinding.fragmentChangePasswordConfirm
         mPasswordHint = mBinding.fragmentChangePasswordShortPassword
         mContinueButton = mBinding.fragmentChangePasswordButton
+        mBinding.fragmentChangePasswordToolbar.setNavigationOnClickListener { finish() }
         return mBinding.root
     }
 

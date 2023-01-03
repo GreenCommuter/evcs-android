@@ -53,7 +53,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
             })
     }
 
-    private fun populateDistances(locations: List<Location?>): List<Location?> {
+    fun populateDistances(locations: List<Location?>): List<Location?> {
         if (mLastLocation != null) {
             locations.forEach { location ->
                 location!!.distance = LocationUtils.distance(location.latLng, mLastLocation)

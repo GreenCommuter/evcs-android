@@ -131,18 +131,36 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     private fun onSearchResult(result: Intent) {
         if (result.hasExtra(Extras.LocationActivity.LOCATION)) {
             val location = result.getSerializableExtra(Extras.LocationActivity.LOCATION) as Location
-            val marker = mMapAdapter.find(location)
-            if (marker != null)
-                toggleContainerSelection(marker)
-            //Ex: markers didn't load
-            else {
-                centerMap(location.latLng)
-                getLocations()
-            }
-        } else {
+            findAndSelectMarker(location)
+        } else if (result.hasExtra(Extras.SearchActivity.LATLNG)) {
             val latlng = result.getParcelableExtra<LatLng>(Extras.SearchActivity.LATLNG)
             presenter.getLocations(latlng)
             mapView!!.getMapAsync { map -> zoomTo(map, latlng!!, ZOOM_LIMIT * 2.0f) }
+        } else {
+            val locations = result.extras!!.get(Extras.SearchActivity.LOCATIONS) as Array<Location>
+            val newDataset = arrayListOf<Location>()
+            newDataset.addAll(locations)
+            for (i in 0..mMapAdapter.itemCount - 1) {
+                val elem = mMapAdapter.get(i)!!
+                if (!newDataset.any { other -> other.id == elem.id }) {
+                    newDataset.add(elem)
+                }
+            }
+
+            mMapAdapter.clear()
+            mMapAdapter.appendBottomAll(presenter.populateDistances(newDataset))
+            findAndSelectMarker(mMapAdapter[0]!!)
+        }
+    }
+
+    fun findAndSelectMarker(location: Location) {
+        val marker = mMapAdapter.find(location)
+        if (marker != null)
+            toggleContainerSelection(marker)
+        //Ex: markers didn't load
+        else {
+            centerMap(location.latLng)
+            getLocations()
         }
     }
 

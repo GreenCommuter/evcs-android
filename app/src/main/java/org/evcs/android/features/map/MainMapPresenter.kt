@@ -54,15 +54,14 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     fun populateDistances(locations: List<Location?>): List<Location?> {
-        if (mLastLocation != null) {
-            locations.forEach { location ->
-                location!!.distance = LocationUtils.distance(location.latLng, mLastLocation)
-            }
+        locations.forEach { location ->
+            location!!.distance =
+                if (mLastLocation != null) LocationUtils.distance(location.latLng, mLastLocation) else null
         }
         return locations
     }
 
-    fun getLocations(latlng : LatLng? = mLastLocation) {
+    fun getLocations(latlng : LatLng? = null) {
         getLocations(latlng, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
     }
 

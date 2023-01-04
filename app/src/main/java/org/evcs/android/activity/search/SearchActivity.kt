@@ -23,6 +23,7 @@ import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.ui.view.shared.SearchLocationChildFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.LocationUtils
 import org.evcs.android.util.StorageUtils
 
 class SearchActivity : BaseActivity2(), SearchActivityView {
@@ -73,7 +74,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         super.setListeners()
         mSearchLocationChildFragment.setListener(object : SearchLocationChildFragment.ISearchLocationListener {
             override fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
-                this@SearchActivity.onLocationChosen(address, latLng, viewport)
+                this@SearchActivity.onLocationChosen(address, latLng, LocationUtils.addDiagonal(viewport))
             }
 
             override fun onLocationRemoved() {

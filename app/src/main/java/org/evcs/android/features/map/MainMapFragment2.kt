@@ -135,6 +135,8 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     }
 
     private fun showCarousel(show: Boolean) {
+        //It starts as gone
+        if (show) mCarouselRecycler.visibility = View.VISIBLE
         isCarouselShowing = show
         AnimationUtils.animateTranslation(mCarouselRecycler, if (show) 0f else mMapBottomPadding.toFloat())
         AnimationUtils.animateTranslation(mCenterButton, if (show) 0f else mMapBottomPadding.toFloat())
@@ -148,6 +150,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
 
     override fun onLocationResult(lastLocation: android.location.Location) {
         mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.center))
+        //Only for distances
         presenter?.mLastLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
         drawLocationMarker()
         getLocations()

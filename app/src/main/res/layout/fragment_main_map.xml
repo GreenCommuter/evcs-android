@@ -48,6 +48,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:clipToPadding="false"
+        android:visibility="invisible"
         android:paddingLeft="@dimen/spacing_medium"
         android:paddingRight="@dimen/spacing_medium" />
 

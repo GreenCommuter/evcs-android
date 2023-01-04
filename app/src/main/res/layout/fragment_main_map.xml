@@ -41,7 +41,7 @@
 
     </FrameLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <org.evcs.android.features.map.LocationItemView
         android:id="@+id/map_carousel_recycler"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

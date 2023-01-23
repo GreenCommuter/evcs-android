@@ -49,7 +49,8 @@ object BaseConfiguration {
         const val DEFAULT_ZOOM = 10f
     }
 
-    object Notifications {
+    object ChargingHistory {
+        const val ITEMS_PER_PAGE = 15
         const val ITEMS_VISIBLE_THRESHOLD = 15
     }
 

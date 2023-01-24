@@ -5,18 +5,17 @@ import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.network.callback.AuthCallback
 import okhttp3.ResponseBody
 import org.evcs.android.network.service.PaymentMethodsService
-import org.evcs.android.model.CreditCard
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.util.ErrorUtils
+import org.evcs.android.util.UserUtils
 
 class PaymentMethodPresenter<T : IPaymentMethodView>(viewInstance: T, services: RetrofitServices?)
     : ServicesPresenter<T>(viewInstance, services) {
-    private val mPaymentMethodUrlCallback: AuthCallback<List<PaymentMethod>>
 
-    init {
-        mPaymentMethodUrlCallback = object : AuthCallback<List<PaymentMethod>>(this) {
+    fun getCreditCards() {
+        getService(PaymentMethodsService::class.java).paymentMethods.enqueue(object : AuthCallback<List<PaymentMethod>>(this) {
             override fun onResponseSuccessful(creditCardInformations: List<PaymentMethod>) {
-                view.onPaymentMethodsReceived(creditCardInformations.map { cci -> cci.card })
+                view.onPaymentMethodsReceived(creditCardInformations)
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
@@ -26,21 +25,44 @@ class PaymentMethodPresenter<T : IPaymentMethodView>(viewInstance: T, services: 
             override fun onCallFailure(t: Throwable) {
                 runIfViewCreated(Runnable { view.onPaymentMethodsNotReceived() })
             }
-        }
+        })
     }
 
-    fun getCreditCards() {
-        getService(PaymentMethodsService::class.java).paymentMethods.enqueue(mPaymentMethodUrlCallback)
+    fun makeDefaultPaymentMethod(item: PaymentMethod) {
+        getService(PaymentMethodsService::class.java).setDefaultPaymentMethod(item.id)
+            .enqueue(object : AuthCallback<Void?>(this) {
+            override fun onResponseSuccessful(response: Void?) {
+                val user = UserUtils.getLoggedUser()
+                user.defaultPm = item.id
+                UserUtils.saveUser(user)
+                view.onDefaultPaymentMethodSet(item)
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable) {
+                runIfViewCreated(Runnable { view.onPaymentMethodsNotReceived() })
+            }
+        })
     }
 
-    fun makeDefaultPaymentMethod(item: CreditCard?) {
-//        getService(BrainTreeService.class).makeDefaultPaymentMethod(item.getToken())
-//                .enqueue(mPaymentMethodUrlCallback);
-    }
+    fun removePaymentMethod(item: PaymentMethod) {
+        getService(PaymentMethodsService::class.java).removePaymentMethod(item.id)
+            .enqueue(object : AuthCallback<Void?>(this) {
+            override fun onResponseSuccessful(response: Void?) {
+                view.onPaymentMethodRemoved(item)
+            }
 
-    fun removePaymentMethod(item: CreditCard?) {
-//        getService(BrainTreeService.class).removePaymentMethod(item.getToken())
-//                .enqueue(mPaymentMethodUrlCallback);
+            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable) {
+                runIfViewCreated(Runnable { view.onPaymentMethodsNotReceived() })
+            }
+        })
     }
 
 }

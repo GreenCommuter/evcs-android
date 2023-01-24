@@ -15,6 +15,7 @@ public class User implements Serializable {
     private DateTime phoneVerifiedAt;
     private String zipCode;
     private String ccProcessorId;
+    public String defaultPm;
 
     public int getId() {
         return id;

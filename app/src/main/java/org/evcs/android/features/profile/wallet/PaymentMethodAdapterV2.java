@@ -7,17 +7,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import org.evcs.android.R;
-import org.evcs.android.model.CreditCard;
+import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.ui.adapter.BaseRecyclerAdapter;
+import org.evcs.android.util.UserUtils;
 
-public class PaymentMethodAdapterV2 extends BaseRecyclerAdapter<CreditCard, PaymentMethodViewHolderV2> {
+public class PaymentMethodAdapterV2 extends BaseRecyclerAdapter<PaymentMethod, PaymentMethodViewHolderV2> {
 
     private CreditCardListener mListener;
+    private String mDefaultPm;
+
+    public PaymentMethodAdapterV2() {
+        mDefaultPm = UserUtils.getLoggedUser().defaultPm;
+    }
 
     @Override
-    protected void populate(PaymentMethodViewHolderV2 holder, final CreditCard item,
+    protected void populate(PaymentMethodViewHolderV2 holder, final PaymentMethod item,
                             int position) {
-        holder.setPaymentMethod(item);
+        holder.setPaymentMethod(item.card);
+        holder.setDefault(item.id.equals(mDefaultPm));
         holder.setListeners(new CreditCardView.CreditCardViewListener() {
             @Override
             public void onStarClicked() {
@@ -43,22 +50,20 @@ public class PaymentMethodAdapterV2 extends BaseRecyclerAdapter<CreditCard, Paym
         return new PaymentMethodViewHolderV2(v);
     }
 
-    public void setDefault(int adapterPosition) {
-        for (int i = 0; i < getItemCount(); i++) {
-            get(i).setDefault(i == adapterPosition);
-        }
+    public void setDefault(PaymentMethod item) {
+        mDefaultPm = item.id;
         notifyDataSetChanged();
     }
 
-    public CreditCard getDefault() {
-        for (int i = 0; i < getItemCount(); i++) {
-            if (get(i).isDefault()) return get(i);
-        }
-        return null;
-    }
+//    public CreditCard getDefault() {
+//        for (int i = 0; i < getItemCount(); i++) {
+//            if (get(i).card.isDefault()) return get(i).card;
+//        }
+//        return null;
+//    }
 
     public interface CreditCardListener {
-        void onStarClicked(CreditCard item);
-        void onTrashClicked(CreditCard item);
+        void onStarClicked(PaymentMethod item);
+        void onTrashClicked(PaymentMethod item);
     }
 }

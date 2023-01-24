@@ -62,6 +62,8 @@ public class CustomTabLayout extends LinearLayout {
     }
 
     public void setupWithViewPager(@NonNull ViewPager2 viewPager) {
+        mViews.clear();
+        removeAllViewsInLayout();
         for (int i = 0; i < viewPager.getAdapter().getItemCount(); i++) {
             ImageView v = new ImageView(getContext());
             addView(v);

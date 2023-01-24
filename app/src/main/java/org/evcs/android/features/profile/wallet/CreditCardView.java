@@ -66,7 +66,6 @@ public class CreditCardView extends LinearLayout {
         mLast4.setText(creditCard.last4);
         if (creditCard.getProvider() != null)
             mProvider.setImageResource(creditCard.getProvider().getDrawable());
-        mStar.setImageResource(creditCard.isDefault() ? R.drawable.ic_star_filled : R.drawable.ic_star_filled);
     }
 
     public void watchNumber(EditText number) {
@@ -100,6 +99,10 @@ public class CreditCardView extends LinearLayout {
     public void showButtons(boolean show) {
         mStar.setVisibility(show ? VISIBLE : GONE);
         mTrash.setVisibility(show ? VISIBLE : GONE);
+    }
+
+    public void setDefault(boolean def) {
+        mStar.setImageResource(def ? R.drawable.ic_star_filled : R.drawable.ic_clock);
     }
 
     public interface CreditCardViewListener {

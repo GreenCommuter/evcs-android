@@ -30,4 +30,8 @@ public class PaymentMethodViewHolderV2 extends RecyclerView.ViewHolder {
     public void setListeners(CreditCardView.CreditCardViewListener listener) {
         mCreditCardView.setListeners(listener);
     }
+
+    public void setDefault(boolean def) {
+        mCreditCardView.setDefault(def);
+    }
 }

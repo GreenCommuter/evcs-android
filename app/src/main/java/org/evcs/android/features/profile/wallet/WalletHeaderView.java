@@ -3,7 +3,6 @@ package org.evcs.android.features.profile.wallet;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
@@ -16,7 +15,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
 import org.evcs.android.databinding.ViewWalletHeaderBinding;
-import org.evcs.android.model.CreditCard;
+import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.shared.RequestError;
 
 import java.util.List;
@@ -66,7 +65,6 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
 
         if (mInvalidateCreditCards) {
             mCreditCardsAdapter = new PaymentMethodAdapterV2();
-            mCreditCardsAdapter.appendBottom(new CreditCard());
         }
         mEndlessRecyclerView.setAdapter(mCreditCardsAdapter);
 
@@ -90,12 +88,12 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     public void setListeners() {
         mCreditCardsAdapter.setOnItemClickListener(new PaymentMethodAdapterV2.CreditCardListener() {
             @Override
-            public void onStarClicked(CreditCard item) {
+            public void onStarClicked(PaymentMethod item) {
                 showMakeDefaultPaymentMethodDialog(item);
             }
 
             @Override
-            public void onTrashClicked(CreditCard item) {
+            public void onTrashClicked(PaymentMethod item) {
                 showRemovePaymentMethodDialog(item);
             }
         });
@@ -114,7 +112,7 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
         mParent.onAddPaymentMethodSelected();
     }
 
-    public void showAndSavePaymentList(List<CreditCard> creditCardInformationList) {
+    public void showAndSavePaymentList(List<PaymentMethod> creditCardInformationList) {
         int height = mEndlessRecyclerView.getHeight();
         mCreditCardsAdapter.clear();
         if (creditCardInformationList.isEmpty()) {
@@ -125,14 +123,14 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
         }
     }
 
-    private void showRemovePaymentMethodDialog(final CreditCard item) {
+    private void showRemovePaymentMethodDialog(final PaymentMethod item) {
 //        WolmoDialogFragment dialog = new GreenCommuterNewDialogFragment.Builder()
 //            .setTitle(getContext().getString(R.string.payment_method_dialog_remove_title))
 //            .setSubtitle(getString(R.string.payment_method_dialog_remove_subtitle))
 //            .addButton(getString(R.string.payment_method_dialog_remove_button), false, new GreenCommuterDialogFragment.OnClickListener() {
 //                @Override
 //                public void onClick(@NonNull GreenCommuterDialogFragment fragment) {
-//                    getPresenter().removePaymentMethod(item);
+                    getPresenter().removePaymentMethod(item);
 //                    fragment.dismiss();
 //                }
 //            }, R.drawable.button_selector_ariel_red).showCancel(true)
@@ -141,13 +139,13 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
 //        mParent.showDialog(dialog);
     }
 
-    private void showMakeDefaultPaymentMethodDialog(final CreditCard item) {
+    private void showMakeDefaultPaymentMethodDialog(final PaymentMethod item) {
 //        WolmoDialogFragment dialog = new GreenCommuterNewDialogFragment.Builder()
 //            .setSubtitle(getString(R.string.payment_method_dialog_default_subtitle))
 //            .addButton(getString(R.string.app_yes), new GreenCommuterDialogFragment.OnClickListener() {
 //                @Override
 //                public void onClick(@NonNull GreenCommuterDialogFragment fragment) {
-//                    getPresenter().makeDefaultPaymentMethod(item);
+                    getPresenter().makeDefaultPaymentMethod(item);
 //                    fragment.dismiss();
 //                }
 //            }).showCancel(getString(R.string.app_no))
@@ -167,7 +165,7 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     }
 
     @Override
-    public void onPaymentMethodsReceived(List<CreditCard> creditCardInformationList) {
+    public void onPaymentMethodsReceived(List<PaymentMethod> creditCardInformationList) {
         mInvalidateCreditCards = false;
         showAndSavePaymentList(creditCardInformationList);
         mTabLayout.setupWithViewPager(mEndlessRecyclerView);
@@ -175,6 +173,17 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
 
     @Override
     public void onPaymentMethodsNotReceived() {
+    }
+
+    @Override
+    public void onPaymentMethodRemoved(@NonNull PaymentMethod item) {
+        mCreditCardsAdapter.remove(item);
+        mTabLayout.setupWithViewPager(mEndlessRecyclerView);
+    }
+
+    @Override
+    public void onDefaultPaymentMethodSet(@NonNull PaymentMethod item) {
+        mCreditCardsAdapter.setDefault(item);
     }
 
     public void setParent(WalletHeaderInterface parent) {

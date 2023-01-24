@@ -16,7 +16,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
     }
 
     override fun layout(): Int {
-        return R.layout.fragment_charging_history
+        return R.layout.fragment_charging_tab
     }
 
     override fun init() {

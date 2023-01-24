@@ -3,22 +3,20 @@ package org.evcs.android.features.charging
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView.OnItemClickListener
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.SessionInformationActivity
-import org.evcs.android.activity.location.LocationActivity
-import org.evcs.android.activity.search.SearchActivity
 import org.evcs.android.databinding.FragmentChargingHistoryBinding
 import org.evcs.android.model.Charge
-import org.evcs.android.model.Location
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 
 class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), ChargingHistoryView {
 
@@ -26,6 +24,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
     private lateinit var mRecyclerView: EndlessRecyclerView
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
     private lateinit var mEmptyView: View
+    private lateinit var mEmptyText: TextView
 
     companion object {
         fun newInstance(): ChargingHistoryFragment {
@@ -40,6 +39,15 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
         return R.layout.fragment_charging_history
     }
 
+    override fun setUi(v: View) {
+        super.setUi(v)
+        val binding = FragmentChargingHistoryBinding.bind(v)
+        mRecyclerView = binding.fragmentChargingHistoryRecycler
+        mSwipeRefreshLayout = binding.fragmentChargingHistorySwipeRefresh
+        mEmptyView = binding.fragmentChargingHistoryEmptyView
+        mEmptyText = binding.fragmentChargingHistoryEmptyText
+    }
+
     override fun init() {
         val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         mAdapter = ChargingHistoryAdapter()
@@ -48,18 +56,14 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
     }
 
     override fun populate() {
+        if (UserUtils.getLoggedUser() == null) {
+            mEmptyText.text = "Charging history will be shown here once you have an account";
+            showEmpty()
+            return
+        }
         mRecyclerView.setUp(true, { presenter.getNextPage() },
             BaseConfiguration.ChargingHistory.ITEMS_VISIBLE_THRESHOLD)
     }
-
-    override fun setUi(v: View) {
-        super.setUi(v)
-        val binding = FragmentChargingHistoryBinding.bind(v)
-        mRecyclerView = binding.fragmentChargingHistoryRecycler
-        mSwipeRefreshLayout = binding.fragmentChargingHistorySwipeRefresh
-//        mEmptyView = binding.
-    }
-
     override fun setListeners() {
         mSwipeRefreshLayout.setOnRefreshListener { presenter?.reset() }
         mAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Charge>() {
@@ -76,12 +80,12 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
     }
 
     override fun showEmpty() {
-//        mEmptyView.visibility = View.VISIBLE
+        mEmptyView.visibility = View.VISIBLE
         mRecyclerView.visibility = View.GONE
     }
 
     override fun showCharges(chargesList: List<Charge?>, pagesLeft: Boolean, onFirstPage: Boolean) {
-//        mEmptyView.visibility = View.GONE
+        mEmptyView.visibility = View.GONE
         mRecyclerView.visibility = View.VISIBLE
         if (onFirstPage) mAdapter.clear()
         mAdapter.appendBottomAll(chargesList)

@@ -64,6 +64,10 @@ public class Charge implements Serializable {
 //    }
 //    }
 
+    public String getNoodoeId() {
+        return noodoeId;
+    }
+
     public DateTime getStartedAt() {
         return startedAt;
     }

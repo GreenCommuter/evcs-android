@@ -37,12 +37,13 @@
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="30dp"
             android:text="View receipt"
             style="@style/Button.Orange"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:padding="0dp"
+            android:paddingTop="0dp"
+            android:paddingBottom="0dp"
             android:textColor="@color/evcs_purple_gray"/>
 
     </RelativeLayout>
@@ -106,7 +107,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/session_information_charging_site_title"
             android:layout_toEndOf="@id/session_information_charging_site_icon"
-            android:text="Noodoe charging site"
             style="@style/RobotoBold.Body"
             android:textColor="@color/evcs_white"
             />
@@ -117,7 +117,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/session_information_charging_site_subtitle"
             android:layout_toEndOf="@id/session_information_charging_site_icon"
-            android:text="Noodoe charging site"
+            android:text="Station ID:"
             style="@style/Roboto.Body"
             android:textColor="@color/evcs_white"
             />
@@ -128,7 +128,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/session_information_charging_site_id"
             android:layout_toEndOf="@id/session_information_charging_site_icon"
-            android:text="Noodoe charging site"
             style="@style/Roboto.Body"
             android:textColor="@color/evcs_white"
             />

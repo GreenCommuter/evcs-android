@@ -36,7 +36,7 @@ class SessionInformationActivity : BaseActivity2(), LocationActivityView {
         mDateTimeFormatter = DateTimeFormat.forPattern("MMM dd, yyyy 'at' hh:mm a")
 
         val charge = intent.extras!!.getSerializable(Extras.SessionInformationActivity.CHARGE) as Charge
-//        mPresenter.getLocation(charge.locationId)
+        mPresenter.getLocation(charge.locationId)
         mBinding.sessionInformationChargingSiteDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
         val period = Period(0, charge.duration.toLong())
         val periodFormatter = PeriodFormatterBuilder()
@@ -44,7 +44,7 @@ class SessionInformationActivity : BaseActivity2(), LocationActivityView {
             .appendMinutes().appendSuffix("min")
             .toFormatter()
         mBinding.sessionInformationDuration.text = periodFormatter.print(period)
-        mBinding.sessionInformationEnergy.text = String.format("$%.3f kWh", charge.kwh)
+        mBinding.sessionInformationEnergy.text = String.format("%.3f kWh", charge.kwh)
         mBinding.sessionInformationPrice.text = "Total: " + String.format("$%.2f", charge.price)
         mBinding.sessionInformationId.text = "Session ID: " + charge.noodoeId
     }
@@ -54,7 +54,8 @@ class SessionInformationActivity : BaseActivity2(), LocationActivityView {
     }
 
     override fun showLocation(response: Location?) {
-        mBinding.sessionInformationChargingSiteId.text = "Station ID: " + response!!.id.toString()
+        mBinding.sessionInformationChargingSiteSubtitle.text = response!!.name
+        mBinding.sessionInformationChargingSiteId.text = "Station ID: " + response.id.toString()
         mBinding.sessionInformationChargingSiteAddress.text = response.address.toString()
     }
 

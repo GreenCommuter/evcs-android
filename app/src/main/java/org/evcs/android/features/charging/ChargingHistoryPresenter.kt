@@ -11,6 +11,7 @@ import org.evcs.android.network.service.ChargesServices
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 import org.evcs.android.util.PaginationState
+import org.evcs.android.util.UserUtils
 
 class ChargingHistoryPresenter(viewInstance: ChargingHistoryView?, services: RetrofitServices?) :
     ServicesPresenter<ChargingHistoryView>(viewInstance, services) {
@@ -23,7 +24,7 @@ class ChargingHistoryPresenter(viewInstance: ChargingHistoryView?, services: Ret
 
     fun getNextPage() {
         getService(ChargesServices::class.java)
-            .getCharges(mState.page, BaseConfiguration.ChargingHistory.ITEMS_PER_PAGE)
+            .getCharges(UserUtils.getUserId(), mState.page, BaseConfiguration.ChargingHistory.ITEMS_PER_PAGE)
             .enqueue(object : AuthCallback<PaginatedResponse<Charge?>>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Charge?>) {
                     mState.updateTotal(response.totalPages)

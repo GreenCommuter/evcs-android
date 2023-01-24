@@ -2,7 +2,9 @@ package org.evcs.android.model;
 
 import org.joda.time.DateTime;
 
-public class Charge {
+import java.io.Serializable;
+
+public class Charge implements Serializable {
     //        "id": 3,
     private String noodoeId;
     private DateTime startedAt;
@@ -70,7 +72,16 @@ public class Charge {
         return price;
     }
 
+    public int getLocationId() {
+        return locationId;
+    }
+
     public int getDuration() {
         return duration;
     }
+
+    public float getKwh() {
+        return kwh;
+    }
+
 }

@@ -40,4 +40,8 @@ public class Extras {
         public static final String EMAIL = "email";
         public static final String ID = "identifier";
     }
+
+    public static class SessionInformationActivity {
+        public static final String CHARGE = "Charge";
+    }
 }

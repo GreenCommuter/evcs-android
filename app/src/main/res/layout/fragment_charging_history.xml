@@ -5,16 +5,16 @@
     android:layout_height="match_parent"
     android:background="@color/evcs_dark_purple">
 
-<!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
-<!--        android:id="@+id/fragment_charging_history_swipe_refresh"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent">-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/fragment_charging_history_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <org.evcs.android.ui.recycler.EndlessRecyclerView
             android:id="@+id/fragment_charging_history_recycler"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-<!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </FrameLayout>

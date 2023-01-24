@@ -48,5 +48,6 @@ class ChargingHistoryPresenter(viewInstance: ChargingHistoryView?, services: Ret
 
     fun reset() {
         mState = PaginationState()
+        getNextPage()
     }
 }

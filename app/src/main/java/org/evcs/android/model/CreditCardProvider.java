@@ -20,7 +20,7 @@ public enum CreditCardProvider {
     VISA("^4[0-9]{12}(?:[0-9]{3})?$", "^4", R.drawable.cc_visa),
     @SerializedName(value="discover", alternate={"Discover"})
     DISCOVER("^6(?:011|5[0-9]{2})[0-9]{12}$", "^6(?:011|5)", R.drawable.cc_discover),
-    @SerializedName(value = "master_card", alternate ={"MasterCard"})
+    @SerializedName(value = "mastercard", alternate ={"MasterCard"})
     MASTERCARD("^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$", "^(?:5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)", R.drawable.cc_mastercard);
 
     public final String mKey;

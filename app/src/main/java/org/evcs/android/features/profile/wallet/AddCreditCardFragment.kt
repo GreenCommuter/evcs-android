@@ -1,16 +1,15 @@
 package org.evcs.android.features.profile.wallet
 
-import android.content.Context
-import org.evcs.android.ui.fragment.LoadingFragment
+import android.content.Intent
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.util.validator.ValidatorManager
 import org.evcs.android.R
 import androidx.annotation.CallSuper
 import android.graphics.Typeface
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import androidx.core.view.ViewCompat
+import androidx.navigation.fragment.NavHostFragment
 import org.joda.time.format.DateTimeFormat
 import org.evcs.android.EVCSApplication
 import org.evcs.android.util.validator.CreditCardValidator
@@ -20,10 +19,17 @@ import org.evcs.android.util.watchers.DateFormatWatcher
 import org.evcs.android.util.watchers.FourDigitCardFormatWatcher
 import org.evcs.android.model.shared.RequestError
 import com.base.core.util.ToastUtils
+import com.stripe.android.ApiResultCallback
+import com.stripe.android.SetupIntentResult
+import com.stripe.android.Stripe
+import com.stripe.android.model.*
+import org.evcs.android.Configuration
 import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.navigation.INavigationListener
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormatter
+import java.lang.Exception
 
 /**
  * Fragment that helps with the payment using BrainTree.
@@ -31,8 +37,10 @@ import org.joda.time.format.DateTimeFormatter
  *
  * @param <P> Presenter extending [AddCreditCardPresenter]
 </P> */
-class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>>(), IBrainTreeView {
-    //        PaymentMethodNonceCreatedListener, BraintreeListener, BraintreeErrorListener {
+class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
+    AddCreditCardView {
+
+    private lateinit var mZipcode: StandardTextField
     private lateinit var mCreditCardView: CreditCardView
     private lateinit var mCardNumber: StandardTextField
     private lateinit var mCardExpirationMonth: StandardTextField
@@ -44,6 +52,8 @@ class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>>(), IBra
     private lateinit var mValidatorManager: ValidatorManager
     private lateinit var mDateTimeFormatter: DateTimeFormatter
 
+    private lateinit var mStripe: Stripe
+
     override fun layout(): Int {
         return R.layout.fragment_add_credit_card
     }
@@ -51,10 +61,9 @@ class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>>(), IBra
     @CallSuper
     override fun init() {
 //        showProgressDialog();
-        presenter!!.getTokenEndpoint()
-        //        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         mCardNumber.editText!!.typeface = Typeface.MONOSPACE
         mDateTimeFormatter = DateTimeFormat.forPattern("MM/yy")
+        presenter!!.getClientSecret();
     }
 
     override fun createPresenter(): AddCreditCardPresenter<*> {
@@ -68,6 +77,7 @@ class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>>(), IBra
         mCardNumber = binding.fragmentBraintreeCardNumber
         mCardExpirationMonth = binding.fragmentBraintreeCardExpirationMonth
         mCvv = binding.fragmentBraintreeCardCvv
+        mZipcode = binding.fragmentBraintreeCardZipcode
         mNext = binding.fragmentBraintreeNext
 
         //TODO: replace for the viewutils thing
@@ -114,57 +124,52 @@ class AddCreditCardFragment : LoadingFragment<AddCreditCardPresenter<*>>(), IBra
         ToastUtils.show(requestError.body)
     }
 
-    override fun onTokenResponse(token: String) {
-        hideProgressDialog()
-        mCardNumber.requestFocus()
-        //        KeyboardUtils.showKeyboard() doesn't work;
-        val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0)
-    }
-
-    override fun onTokenError() {
-        hideProgressDialog()
-        ToastUtils.show(getString(R.string.braintree_error_token))
-    }
-
     fun onNextClicked() {
         showProgressDialog()
-//        val (brand, loggingTokens, number, expMonth, expYear, cvc, name, address, currency, metadata) = CardParams(
-//            mCardExpirationMonth!!.text.toString(),
-//            date!!.monthOfYear,
-//            date!!.year,
-//            mCvv!!.text.toString()
-//        )
-//        val stripe = Stripe(context!!, "pk_test_6pRNASCoBOKtIshFeQd4XMUh")
+        mStripe = Stripe(requireContext(), Configuration.STRIPE_KEY)
 
-//        stripe.createCardToken(cardParams, "YOUR-API-KEY", new ApiResultCallback<Token>() {
-//            @Override
-//            public void onSuccess(@NonNull Token token) {
-//                onTokenResponse(token);
-//            }
-//
-//            @Override
-//            public void onError(@NonNull Exception e) {
-//
-//            }
-//        });
+        val card = PaymentMethodCreateParams.Card.Builder()
+            .setNumber(mCardNumber.text.toString())
+            .setExpiryYear(getDate().year)
+            .setExpiryMonth(getDate().monthOfYear)
+            .setCvc(mCvv.text.toString())
+            .build()
+
+        val zipcode = mZipcode.text.toString()
+        mStripe.confirmSetupIntent(this, presenter.getConfirmParams(card, zipcode))
     }
 
-    //    @Override
-    //    public void onPaymentMethodNonceCreated(PaymentMethodNonce paymentMethodNonce) {
-    ////        hideProgressDialog();
-    //        onNewNonceCreated(paymentMethodNonce);
-    //        getPresenter().getTokenAndMakeDefaultPaymentMethod(mCardNumber.getText().toString());
-    //    }
     override fun onMakeDefaultFinished() {
         hideProgressDialog()
         listener!!.onAddCreditCardFragmentFinished()
     }
 
-    //    @Override
-    //    public void onError(Exception error) {
-    //        hideProgressDialog();
-    //    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        // Handle the result of stripe.confirmSetupIntent
+        mStripe.onSetupResult(requestCode, data, object : ApiResultCallback<SetupIntentResult> {
+            override fun onSuccess(result: SetupIntentResult) {
+                hideProgressDialog()
+                val setupIntent = result.intent
+                val status = setupIntent.status
+                if (status == StripeIntent.Status.Succeeded) {
+                    // Setup completed successfully
+                    ToastUtils.show("Payment method added")
+                    NavHostFragment.findNavController(this@AddCreditCardFragment).popBackStack()
+
+                } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
+                    ToastUtils.show(setupIntent.lastSetupError!!.message!!)
+                }
+            }
+
+            override fun onError(e: Exception) {
+                hideProgressDialog()
+                ToastUtils.show(e.toString())
+            }
+        })
+    }
+
     interface IBrainTreeListener : INavigationListener {
         /**
          * Method called when the [AddCreditCardFragment] finishes.

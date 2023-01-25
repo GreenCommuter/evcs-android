@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import org.evcs.android.databinding.ViewCreditCardWrapperBinding;
 import org.evcs.android.model.CreditCard;
+import org.evcs.android.model.PaymentMethod;
 
 public class PaymentMethodViewHolderV2 extends RecyclerView.ViewHolder {
 
@@ -21,9 +22,13 @@ public class PaymentMethodViewHolderV2 extends RecyclerView.ViewHolder {
         mLoading = binding.creditCardViewLoading;
     }
 
-    public void setPaymentMethod(CreditCard creditCardInformation) {
-        mLoading.setVisibility(creditCardInformation.last4 == null ? View.VISIBLE : View.GONE);
-        mCreditCardView.setCreditCard(creditCardInformation);
+    public void setPaymentMethod(PaymentMethod creditCardInformation) {
+        if (creditCardInformation.card == null) {
+            mLoading.setVisibility(View.VISIBLE);
+            return;
+        }
+        mLoading.setVisibility(View.GONE);
+        mCreditCardView.setCreditCard(creditCardInformation.card);
         mCreditCardView.showButtons(true);
     }
 

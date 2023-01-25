@@ -65,6 +65,7 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
 
         if (mInvalidateCreditCards) {
             mCreditCardsAdapter = new PaymentMethodAdapterV2();
+            mCreditCardsAdapter.appendBottom(new PaymentMethod());
         }
         mEndlessRecyclerView.setAdapter(mCreditCardsAdapter);
 

@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:background="@drawable/layout_corners_rounded_dark_grey">
+        android:background="@drawable/layout_corners_rounded_purple">
 
         <TextView
             android:layout_width="match_parent"
@@ -27,7 +27,8 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="@string/payment_method_empty"
-            style="@style/RobotoBold.Body.Grey"/>
+            android:textColor="@color/evcs_white"
+            style="@style/RobotoBold.Body"/>
 
     </FrameLayout>
 

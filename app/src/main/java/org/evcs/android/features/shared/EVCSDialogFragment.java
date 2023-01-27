@@ -269,7 +269,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          * @return Builder for further customization
          */
         public Builder addButton(@NonNull String text, @NonNull OnClickListener listener) {
-            return addButton(text, true, listener);
+            return addButton(text, false, listener);
         }
 
         /**

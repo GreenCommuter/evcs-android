@@ -12,9 +12,12 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.base.core.fragment.BaseDialogFragment;
+
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
 import org.evcs.android.databinding.ViewWalletHeaderBinding;
+import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.shared.RequestError;
 
@@ -125,34 +128,34 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     }
 
     private void showRemovePaymentMethodDialog(final PaymentMethod item) {
-//        WolmoDialogFragment dialog = new GreenCommuterNewDialogFragment.Builder()
-//            .setTitle(getContext().getString(R.string.payment_method_dialog_remove_title))
-//            .setSubtitle(getString(R.string.payment_method_dialog_remove_subtitle))
-//            .addButton(getString(R.string.payment_method_dialog_remove_button), false, new GreenCommuterDialogFragment.OnClickListener() {
-//                @Override
-//                public void onClick(@NonNull GreenCommuterDialogFragment fragment) {
+        BaseDialogFragment dialog = new EVCSDialogFragment.Builder()
+            .setTitle(getContext().getString(R.string.payment_method_dialog_remove_title))
+            .setSubtitle(getString(R.string.payment_method_dialog_remove_subtitle))
+            .addButton(getString(R.string.payment_method_dialog_remove_button), new EVCSDialogFragment.OnClickListener() {
+                @Override
+                public void onClick(@NonNull EVCSDialogFragment fragment) {
                     getPresenter().removePaymentMethod(item);
-//                    fragment.dismiss();
-//                }
-//            }, R.drawable.button_selector_ariel_red).showCancel(true)
-//            .setCancelable(true)
-//            .build();
-//        mParent.showDialog(dialog);
+                    fragment.dismiss();
+                }
+            }/*, R.drawable.button_selector_ariel_red*/).showCancel(true)
+            .setCancelable(true)
+            .build();
+        mParent.showDialog(dialog);
     }
 
     private void showMakeDefaultPaymentMethodDialog(final PaymentMethod item) {
-//        WolmoDialogFragment dialog = new GreenCommuterNewDialogFragment.Builder()
-//            .setSubtitle(getString(R.string.payment_method_dialog_default_subtitle))
-//            .addButton(getString(R.string.app_yes), new GreenCommuterDialogFragment.OnClickListener() {
-//                @Override
-//                public void onClick(@NonNull GreenCommuterDialogFragment fragment) {
+        BaseDialogFragment dialog = new EVCSDialogFragment.Builder()
+            .setSubtitle(getString(R.string.payment_method_dialog_default_subtitle))
+            .addButton(getString(R.string.app_yes), new EVCSDialogFragment.OnClickListener() {
+                @Override
+                public void onClick(@NonNull EVCSDialogFragment fragment) {
                     getPresenter().makeDefaultPaymentMethod(item);
-//                    fragment.dismiss();
-//                }
-//            }).showCancel(getString(R.string.app_no))
-//        .setCancelable(true)
-//        .build();
-//        mParent.showDialog(dialog);
+                    fragment.dismiss();
+                }
+            }).showCancel(getString(R.string.app_no))
+        .setCancelable(true)
+        .build();
+        mParent.showDialog(dialog);
     }
 
     @Override
@@ -192,7 +195,7 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     }
 
     public interface WalletHeaderInterface {
-//        void showDialog(WolmoDialogFragment dialog);
+        void showDialog(BaseDialogFragment dialog);
 
         void onAddPaymentMethodSelected();
     }

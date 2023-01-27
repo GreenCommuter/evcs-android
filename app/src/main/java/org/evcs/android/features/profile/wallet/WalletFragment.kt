@@ -10,9 +10,12 @@ import org.evcs.android.model.shared.RequestError
 import org.evcs.android.navigation.INavigationListener
 import android.os.Bundle
 import android.view.View
+import com.base.core.fragment.BaseDialogFragment
 import org.evcs.android.databinding.FragmentWalletBinding
+import org.evcs.android.ui.view.shared.EVCSToolbar
 
 class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, IWalletView {
+
     companion object {
         fun newInstance(): WalletFragment {
             val args = Bundle()
@@ -21,6 +24,8 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
             return fragment
         }
     }
+
+    private lateinit var mToolbar: EVCSToolbar
 
     override fun layout(): Int {
         return R.layout.fragment_wallet
@@ -37,12 +42,17 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
         val binding = FragmentWalletBinding.bind(v)
         val headerView = binding.walletHeaderView
         headerView.setParent(this)
+        mToolbar = binding.walletToolbar
     }
 
-    //    @Override
-    //    public void showDialog(WolmoDialogFragment dialog) {
-    //        dialog.show(getFragmentManager());
-    //    }
+    override fun setListeners() {
+        mToolbar.setNavigationOnClickListener { activity?.finish() }
+    }
+
+    override fun showDialog(dialog: BaseDialogFragment<*>) {
+        dialog.show(fragmentManager)
+    }
+
     override fun onAddPaymentMethodSelected() {
         NavHostFragment.findNavController(this)
             .navigate(WalletFragmentDirections.actionWalletFragmentToAddCreditCardFragment())

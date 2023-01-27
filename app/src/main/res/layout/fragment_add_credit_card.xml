@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:id="@+id/fragment_add_credit_card_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/braintree_title"

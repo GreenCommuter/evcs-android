@@ -27,6 +27,7 @@ import org.evcs.android.Configuration
 import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.ui.view.shared.EVCSToolbar
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormatter
 import java.lang.Exception
@@ -46,6 +47,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
     private lateinit var mCardExpirationMonth: StandardTextField
     private lateinit var mCvv: StandardTextField
     private lateinit var mNext: Button
+    private lateinit var mToolbar: EVCSToolbar
 
     private var listener: IBrainTreeListener? = null
 
@@ -79,6 +81,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
         mCvv = binding.fragmentBraintreeCardCvv
         mZipcode = binding.fragmentBraintreeCardZipcode
         mNext = binding.fragmentBraintreeNext
+        mToolbar = binding.fragmentAddCreditCardToolbar
 
         //TODO: replace for the viewutils thing
         ViewCompat.setOnApplyWindowInsetsListener(binding.fragmentAddCreditCardLayout) { v, insets ->
@@ -101,6 +104,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
         mCardNumber.editText!!.addTextChangedListener(FourDigitCardFormatWatcher())
         mCreditCardView.watchNumber(mCardNumber.editText)
         mNext.setOnClickListener { onNextClicked() }
+        mToolbar.setNavigationOnClickListener { finish() }
     }
 
     private fun getDate() : LocalDate {
@@ -156,7 +160,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
                 if (status == StripeIntent.Status.Succeeded) {
                     // Setup completed successfully
                     ToastUtils.show("Payment method added")
-                    NavHostFragment.findNavController(this@AddCreditCardFragment).popBackStack()
+                    finish()
 
                 } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
                     ToastUtils.show(setupIntent.lastSetupError!!.message!!)
@@ -168,6 +172,10 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
                 ToastUtils.show(e.toString())
             }
         })
+    }
+
+    fun finish() {
+        NavHostFragment.findNavController(this@AddCreditCardFragment).popBackStack()
     }
 
     interface IBrainTreeListener : INavigationListener {

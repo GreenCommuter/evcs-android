@@ -28,6 +28,7 @@ public class Extras {
         public static final String HISTORY = "History";
         public static final String LATLNG = "Latlng";
         public static final String LOCATIONS = "Locations";
+        public static final String VIEWPORT = "Viewport";
     }
 
     public static class PaymentActivity {

@@ -2,6 +2,7 @@ package org.evcs.android.activity.search
 
 import com.base.networking.retrofit.RetrofitServices
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import okhttp3.ResponseBody
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
@@ -18,12 +19,15 @@ class SearchActivityPresenter(viewInstance: SearchActivityView, services: Retrof
     lateinit var mFilterState: FilterState
     private lateinit var mLatlng: LatLng
 
-    fun search(latlng: LatLng) {
+    fun search(latlng: LatLng, viewport: LatLngBounds?) {
         mLatlng = latlng
-        search()
+        search(viewport)
     }
 
-    fun search() {
+    /**
+     * @param viewport: bounds for the map to show the locations
+     */
+    fun search(viewport: LatLngBounds?) {
         getService(LocationService::class.java).getLocations(mLatlng?.latitude,
             mLatlng?.longitude, 200, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase())
             .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
@@ -32,7 +36,7 @@ class SearchActivityPresenter(viewInstance: SearchActivityView, services: Retrof
                     if (locationList!!.size == 0) {
                         view.onEmptyResponse()
                     } else {
-                        view.showLocations(locationList)
+                        view.showLocations(locationList, viewport)
                     }
                 }
 

@@ -28,7 +28,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  */
 public final class LocationUtils {
 
-    private static final double PADDING_DEGREES = 0.003;
+    private static final double PADDING_DEGREES = 0.03;
     public static final int REQUEST_CHECK_SETTINGS = 10000;
 
     /**

@@ -14,6 +14,8 @@ public class User implements Serializable {
     public UserCar userCar;
     private DateTime phoneVerifiedAt;
     private String zipCode;
+    private String ccProcessorId;
+    public String defaultPm;
 
     public int getId() {
         return id;
@@ -33,5 +35,9 @@ public class User implements Serializable {
 
     public String getZipCode() {
         return zipCode;
+    }
+
+    public String getCcProcessorId() {
+        return ccProcessorId;
     }
 }

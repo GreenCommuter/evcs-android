@@ -5,10 +5,10 @@ import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BuildConfig
 import org.evcs.android.R
-import org.evcs.android.activity.payment.PaymentActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.UserUtils
 
@@ -37,7 +37,7 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
 
     override fun setListeners() {
         mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
-        mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), PaymentActivity::class.java) }
+        mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener {  }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener {  }
         mBinding.profileMenuCallCustomerCare.setOnClickListener {  }

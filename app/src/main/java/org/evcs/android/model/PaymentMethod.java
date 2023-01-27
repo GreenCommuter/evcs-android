@@ -4,7 +4,7 @@ package org.evcs.android.model;
 import java.io.Serializable;
 
 public class PaymentMethod implements Serializable {
-//  "id": "pm_1HMK6asdasdsNMuGsX2vb",
+    public String id;
 //  "object": "payment_method",
 //  "billing_details": {
 //      "address": {
@@ -19,7 +19,7 @@ public class PaymentMethod implements Serializable {
 //      "name": null,
 //      "phone": null
 //  },
-    public Card card;
+    public CreditCard card;
 //    "created": 1598907588,
 //    "customer": "cus_aASDNVjf",
 //    "livemode": false,

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/credit_cards_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipChildren="false"/>
+
+    <FrameLayout
+        android:id="@+id/credit_card_view_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="@drawable/layout_corners_rounded_purple">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_large"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@string/payment_method_empty"
+            android:textColor="@color/evcs_white"
+            style="@style/RobotoBold.Body"/>
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="12dp"/>
+
+    <org.evcs.android.features.profile.wallet.CustomTabLayout
+        android:id="@+id/credit_cards_recycler_view_dots"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/spacing_medium"
+        android:layout_marginBottom="12dp"
+        app:selectedTab="@drawable/wallet_pager_selected_dot"
+        app:unselectedTab="@drawable/wallet_pager_default_dot"
+        app:innerMargin="@dimen/spacing_ariel_related"/>
+
+    <Button
+        android:id="@+id/wallet_add_new_payment_method"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/spacing_ariel_related"
+        android:layout_marginEnd="@dimen/spacing_ariel_related"
+        android:layout_marginBottom="@dimen/spacing_ariel_sections"
+        android:text="@string/payment_method_toolbar_add"
+        android:textAllCaps="false"
+        style="@style/Button.Black"/>
+
+</LinearLayout>

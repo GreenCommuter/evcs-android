@@ -10,6 +10,7 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 import com.rollbar.android.Rollbar;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.stripe.android.PaymentConfiguration;
 
 import org.evcs.android.model.user.User;
 import org.evcs.android.network.service.EVCSRetrofitServices;
@@ -56,6 +57,8 @@ public class EVCSApplication extends NetworkingApplication {
         // This is an Android issue, leaking context in the ConnectivityManager
         // For more information see: https://github.com/square/leakcanary/issues/393
         this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        PaymentConfiguration.init(getApplicationContext(), Configuration.STRIPE_KEY);
     }
 
     @Override

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_gray_89">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:navigationIcon="@drawable/back_arrow"
+        app:title="@string/profile_billing_information"/>
+
+    <org.evcs.android.features.profile.wallet.WalletHeaderView
+        android:id="@+id/wallet_header_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/padding_ariel_outer"
+        android:layout_marginRight="@dimen/padding_ariel_outer"
+        android:layout_marginBottom="@dimen/padding_ariel_outer"
+        android:padding="@dimen/padding_ariel_inner" />
+
+</LinearLayout>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/walletFragment">
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="org.evcs.android.features.profile.wallet.WalletFragment"
+        android:label="WalletFragment"
+        tools:layout="@layout/fragment_wallet">
+        <action
+            android:id="@+id/action_walletFragment_to_addCreditCardFragment"
+            app:destination="@id/addCreditCardFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addCreditCardFragment"
+        android:name="org.evcs.android.features.profile.wallet.AddCreditCardFragment"
+        android:label="AddCreditCardFragment"
+        tools:layout="@layout/fragment_wallet"/>
+</navigation>

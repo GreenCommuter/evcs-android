@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "472330493979",
-    "project_id": "evcs-809e4",
-    "storage_bucket": "evcs-809e4.appspot.com"
+    "project_number": "624176431714",
+    "project_id": "evcs-d20b5",
+    "storage_bucket": "evcs-d20b5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:472330493979:android:a3b59d33aaa3eac88018be",
+        "mobilesdk_app_id": "1:624176431714:android:5ef76688e685eeb167073b",
         "android_client_info": {
           "package_name": "org.evcs.android"
         }
       },
       "oauth_client": [
         {
-          "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
+          "client_id": "624176431714-r3q0rn4ik8fhakf4ge6pi82frtnhoe0u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +27,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
+              "client_id": "624176431714-r3q0rn4ik8fhakf4ge6pi82frtnhoe0u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
@@ -36,14 +36,14 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:472330493979:android:e66cb14791902a5c8018be",
+        "mobilesdk_app_id": "1:624176431714:android:5ef76688e685eeb167073b",
         "android_client_info": {
           "package_name": "org.evcs.android.dev"
         }
       },
       "oauth_client": [
         {
-          "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
+          "client_id": "624176431714-r3q0rn4ik8fhakf4ge6pi82frtnhoe0u.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -56,7 +56,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "472330493979-9b827cp589lh6b3o0t0g5mragm5pum5h.apps.googleusercontent.com",
+              "client_id": "624176431714-r3q0rn4ik8fhakf4ge6pi82frtnhoe0u.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -51,7 +51,10 @@ abstract class AbstractAuthFragment<T : AuthPresenter<*>> : LoadingFragment<T>()
         mCallbackManager = CallbackManager.Factory.create()
         LoginManager.getInstance()
             .registerCallback(mCallbackManager, object : FacebookCallback<LoginResult?> {
-                override fun onSuccess(loginResult: LoginResult?) {}
+                override fun onSuccess(loginResult: LoginResult?) {
+                    presenter.logInFacebook(loginResult!!.accessToken)
+                }
+
                 override fun onCancel() {
                     showLoading(false)
                 }
@@ -123,6 +126,7 @@ abstract class AbstractAuthFragment<T : AuthPresenter<*>> : LoadingFragment<T>()
                 val task = GoogleSignIn.getSignedInAccountFromIntent(data)
                 try {
                     val account = task.getResult(ApiException::class.java)
+                    presenter.getAccessToken(account)
                     mGoogleSignInClient.signOut()
                 } catch (e: ApiException) {
                     Log.w("signIn failed code=", e.statusCode.toString())

@@ -8,7 +8,7 @@
     android:gravity="center" >
 
     <LinearLayout
-        android:id="@+id/greencommuter_dialog_fragment_layout"
+        android:id="@+id/evcs_dialog_fragment_layout"
         android:layout_width="@dimen/dialog_width"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_ariel_inner"
@@ -16,10 +16,10 @@
         android:gravity="center_horizontal"
         android:clipChildren="false"
         android:clipToPadding="false"
-        android:background="@drawable/layout_dialog_background_new">
+        android:background="@drawable/layout_dialog_background">
 
         <TextView
-            android:id="@+id/greencommuter_dialog_fragment_title"
+            android:id="@+id/evcs_dialog_fragment_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_ariel_related"
@@ -27,7 +27,7 @@
             style="@style/RobotoBold.SectionTitle"/>
 
         <TextView
-            android:id="@+id/greencommuter_dialog_fragment_subtitle"
+            android:id="@+id/evcs_dialog_fragment_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_ariel_different"

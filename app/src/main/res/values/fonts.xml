@@ -271,7 +271,7 @@
     </style>
 
     <style name="Roboto.ProfileMenu">
-        <item name="android:textColor">@color/button_text_color_selector_green</item>
+        <item name="android:textColor">@color/button_text_color_selector_orange</item>
         <item name="android:textSize">21sp</item>
         <item name="fontFamily">@font/roboto_regular</item>
     </style>

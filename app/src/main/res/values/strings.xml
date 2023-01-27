@@ -25,6 +25,7 @@
     <string name="app_new_line">\n</string>
     <string name="app_from">From</string>
     <string name="app_to">To</string>
+    <string name="app_cancel">Cancel</string>
     <string name="drawer_activity_version_name_prefix_format">v%s</string>
     <string name="facebook_app_id">1238029779934289</string>
     <string name="fb_login_protocol_scheme">fb499944703962223</string>
@@ -129,7 +130,6 @@
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
     <string name="profile_avatar_change_library_button">Choose from library</string>
-    <string name="profile_avatar_change_cancel_button">Cancel</string>
 
     <!-- Account activity -->
     <string name="activity_account_title">Edit Account</string>

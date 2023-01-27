@@ -5,7 +5,7 @@
         android:color="@color/evcs_grey_transparent" />
 
     <item android:state_pressed="true"
-        android:color="@color/evcs_green" />
+        android:color="#fc8305" />
 
     <item
         android:color="@color/evcs_white" />

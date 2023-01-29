@@ -72,12 +72,6 @@ public interface UserService {
                               @Query("identifier") String identifier,
                               @Query("password") String newPassword,
                               @Query("password_confirmation") String confirmation);
-//    {
-//        "email": "example@gmail.com" - User email (will arrive embedded in the email reset password link)
-//        "identifier": "abc123" - User ResetPasswordToken (will arrive embedded in the email reset password link),
-//            "password": "12345678" - New password
-//        "password_confirmation": "12345678" - Confirm your new password
-//    }
 
     @POST("/members/v1/update_password")
     Call<Void> changePassword(@Query("previous_password") String oldPassword,

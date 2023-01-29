@@ -12,6 +12,9 @@ import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.FragmentChangePasswordBinding
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.ui.view.shared.EVCSToolbar
+import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.*
 
 class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
@@ -23,6 +26,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     private lateinit var mConfirmInputLayout: StandardTextField
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: Button
+    private lateinit var mToolbar: EVCSToolbar
     private lateinit var mPresenter: ChangePasswordPresenter
 
     override fun inflate(layoutInflater: LayoutInflater): View {
@@ -32,6 +36,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
         mConfirmInputLayout = mBinding.fragmentChangePasswordConfirm
         mPasswordHint = mBinding.fragmentChangePasswordShortPassword
         mContinueButton = mBinding.fragmentChangePasswordButton
+        mToolbar = mBinding.fragmentChangePasswordToolbar
         return mBinding.root
     }
 
@@ -49,14 +54,27 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
             BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
         )
         mValidatorManager = ValidatorManager()
-        mValidatorManager.addValidator(PasswordTextInputValidator(mOldPasswordInputLayout))
         mValidatorManager.addValidator(PasswordTextInputValidator(mPasswordInputLayout))
         mValidatorManager.addValidator(MatchingValidator(mConfirmInputLayout, mPasswordInputLayout))
         mValidatorManager.setOnAnyTextChangedListener { setEnableButton(mValidatorManager.areAllFieldsValid()) }
+
+        if (isLoggedUser()) {
+            mPresenter.setParamsForReset(intent.getStringExtra(Extras.ForgotPassword.EMAIL)!!,
+                                         intent.getStringExtra(Extras.ForgotPassword.ID)!!)
+        } else {
+            mOldPasswordInputLayout.visibility = View.VISIBLE
+            mValidatorManager.addValidator(PasswordTextInputValidator(mOldPasswordInputLayout))
+        }
+
+    }
+
+    fun isLoggedUser(): Boolean {
+        return intent.hasExtra(Extras.ForgotPassword.EMAIL)
     }
 
     override fun setListeners() {
         mContinueButton.setOnClickListener { onButtonClick() }
+        mToolbar.setOnClickListener { finish() }
     }
 
     fun setEnableButton(validFields: Boolean) {
@@ -65,7 +83,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
 
     private fun onButtonClick() {
 //        progressDialog.show()
-        mPresenter.changePassword(
+        mPresenter.onButtonClick(
             mOldPasswordInputLayout.text.toString(),
             mPasswordInputLayout.text.toString()
         )
@@ -77,6 +95,10 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
 
     override fun onPasswordChanged() {
         ToastUtils.show(R.string.change_password_success)
-        finish()
+        if (isLoggedUser()) {
+            UserUtils.logout(null)
+        } else {
+            finish()
+        }
     }
 }

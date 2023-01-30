@@ -57,7 +57,7 @@
 
         <TextView
             android:id="@+id/station_ac"
-            style="@style/Roboto.Body"
+            style="@style/Roboto.Body.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
@@ -70,8 +70,7 @@
             android:paddingEnd="@dimen/spacing_medium"
             android:paddingBottom="@dimen/spacing_tiny"
             android:text="ac"
-            android:textAllCaps="true"
-            android:textColor="@color/evcs_white" />
+            android:textAllCaps="true"/>
 
         <TextView
             android:id="@+id/station_type"

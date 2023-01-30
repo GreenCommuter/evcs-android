@@ -51,27 +51,24 @@
                     android:id="@+id/activity_location_hint"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/evcs_white"
                     android:layout_marginBottom="@dimen/spacing_medium"
                     android:text="Chargers located at the northwest corner of the Palmdale Park &amp; Ride lot."
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <TextView
                     android:id="@+id/activity_location_type_price"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/evcs_white"
                     android:text="DC fast charge: $0.49/kWh"
                     android:layout_marginBottom="@dimen/spacing_medium"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textColor="@color/evcs_white"
                     android:text="Parking charges may apply"
                     android:layout_marginBottom="@dimen/spacing_medium"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <TextView
                     android:layout_width="match_parent"
@@ -112,8 +109,7 @@
                     android:paddingBottom="@dimen/padding_ariel_standard"
                     android:drawablePadding="@dimen/spacing_medium"
                     android:drawableLeft="@drawable/ic_loc"
-                    android:textColor="@color/evcs_white"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -130,8 +126,7 @@
                     android:drawablePadding="@dimen/spacing_medium"
                     android:text="24 hours (Open hours may differ based on circumstances at the location.)"
                     android:drawableLeft="@drawable/ic_clock"
-                    android:textColor="@color/evcs_white"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -148,8 +143,7 @@
                     android:drawablePadding="@dimen/spacing_medium"
                     android:text="Public locations"
                     android:drawableLeft="@drawable/ic_screw"
-                    android:textColor="@color/evcs_white"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <View
                     android:layout_width="match_parent"

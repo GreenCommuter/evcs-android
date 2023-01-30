@@ -19,8 +19,7 @@
         android:layout_marginStart="@dimen/spacing_medium_extra"
         android:layout_marginTop="@dimen/spacing_medium_extra"
         android:text="Charger Details"
-        android:textColor="@color/evcs_white"
-        style="@style/Roboto.Body"/>
+        style="@style/Roboto.Body.White"/>
 
     <ScrollView
         android:layout_width="wrap_content"
@@ -73,8 +72,7 @@
                     android:layout_below="@id/activity_stations_connection_fee"
                     android:text="0.29 USD/kWh"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/evcs_white"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <View
                     android:id="@+id/activity_stations_occupancy_separator"
@@ -102,29 +100,26 @@
                     android:text="0.00 USD/charge"
                     android:visibility="gone"
                     android:layout_alignParentEnd="true"
-                    android:textColor="@color/evcs_white"
                     android:layout_marginTop="@dimen/spacing_medium_more"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <TextView
                     android:id="@+id/activity_stations_grace_period"
-                    style="@style/Roboto.Body"
+                    style="@style/Roboto.Body.White"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/activity_stations_occupancy_fee"
                     android:text="(Grace period: 0 mins)"
-                    android:visibility="gone"
-                    android:textColor="@color/evcs_white" />
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/activity_stations_grace_period_clarification"
-                    style="@style/Roboto.Body"
+                    style="@style/Roboto.Body.White"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/activity_stations_grace_period"
                     android:layout_marginTop="@dimen/spacing_medium_extra"
                     android:text="@string/activity_stations_occupancy_clarification"
-                    android:textColor="@color/evcs_white"
                     android:visibility="gone" />
 
             </RelativeLayout>

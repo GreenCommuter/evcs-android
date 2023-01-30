@@ -54,9 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/search_activity_empty"
-        android:textColor="@color/evcs_white"
         android:layout_gravity="center"
-        style="@style/Roboto.Body"/>
+        style="@style/Roboto.Body.White"/>
 
     <LinearLayout
         android:id="@+id/activity_search_fail"

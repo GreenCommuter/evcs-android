@@ -14,8 +14,8 @@ import org.evcs.android.network.service.UserService
 class RegisterPresenter(viewInstance: AuthView?, services: RetrofitServices?) :
     AuthPresenter<AuthView?>(viewInstance, services) {
 
-    fun register(name: String, email: String, pass: String) {
-        getService(UserService::class.java).register(UserRequestSignup(name, email, pass))
+    fun register(firstName: String, lastName: String, email: String, pass: String) {
+        getService(UserService::class.java).register(UserRequestSignup(firstName, lastName, email, pass))
             .enqueue(getLoginCallback())
     }
 

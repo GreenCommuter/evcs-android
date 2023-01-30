@@ -28,6 +28,7 @@ import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar
+import org.evcs.android.util.validator.ZipCodeTextInputValidator
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormatter
 import java.lang.Exception
@@ -97,6 +98,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
             DateTextInputValidator(mCardExpirationMonth, mDateTimeFormatter)
         )
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mCvv))
+        mValidatorManager.addValidator(ZipCodeTextInputValidator(mZipcode))
         mValidatorManager.setOnAnyTextChangedListener {
             mNext.isEnabled = mValidatorManager.areAllFieldsValid() && isDateValid()
         }

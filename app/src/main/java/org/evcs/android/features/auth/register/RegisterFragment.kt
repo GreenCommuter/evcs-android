@@ -95,7 +95,8 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         //TODO: switch
 //        progressDialog.show()
 //        presenter!!.register(
-//            mNameInputLayout.text.toString() + " " + mLastNameInputLayout.text.toString(),
+//            mNameInputLayout.text.toString(),
+//            mLastNameInputLayout.text.toString(),
 //            mEmailInputLayout.text.toString(),
 //            mPasswordInputLayout.text.toString()
 //        )

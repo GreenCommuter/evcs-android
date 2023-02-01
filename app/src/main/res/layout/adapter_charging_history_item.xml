@@ -42,17 +42,13 @@
             android:orientation="horizontal"
             android:gravity="center">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/spacing_medium_extra"
-                android:src="@drawable/ic_clock"/>
-
             <TextView
                 android:id="@+id/adapter_charging_history_item_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/evcs_purple_gray"
+                android:drawablePadding="@dimen/spacing_medium_extra"
+                android:drawableStart="@drawable/ic_clock"
                 style="@style/Roboto.Body"/>
 
             <View

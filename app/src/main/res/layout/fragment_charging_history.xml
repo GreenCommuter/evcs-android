@@ -38,8 +38,7 @@
             android:layout_height="wrap_content"
             android:text="No charging history"
             android:gravity="center"
-            android:textColor="@color/evcs_white"
-            style="@style/Roboto.Body"/>
+            style="@style/Roboto.Body.White"/>
 
     </LinearLayout>
 

@@ -1,6 +1,9 @@
 package org.evcs.android.model;
 
 import org.joda.time.DateTime;
+import org.joda.time.Period;
+import org.joda.time.format.PeriodFormatter;
+import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.io.Serializable;
 
@@ -82,6 +85,16 @@ public class Charge implements Serializable {
 
     public int getDuration() {
         return duration;
+    }
+
+    public String getPrintableDuration() {
+        if (getDuration() == 0) return "--";
+        Period period = new Period(0, (long) getDuration());
+        PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
+                .appendHours().appendSuffix("hr ")
+                .appendMinutes().appendSuffix("min")
+                .toFormatter();
+        return periodFormatter.print(period);
     }
 
     public float getKwh() {

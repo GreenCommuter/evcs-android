@@ -22,14 +22,10 @@ class ChargingHistoryViewHolder(itemView : View?) : RecyclerView.ViewHolder(item
 
     fun setCharge(charge: Charge) {
         mCharge = charge
-        mBinding.adapterChargingHistoryItemDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
+        if (charge.startedAt != null)
+            mBinding.adapterChargingHistoryItemDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
         mBinding.adapterChargingHistoryItemPrice.text = "Total: " + String.format("$%.2f", charge.price)
-        val period = Period(0, charge.duration.toLong())
-        val periodFormatter = PeriodFormatterBuilder()
-            .appendHours().appendSuffix("hr ")
-            .appendMinutes().appendSuffix("min")
-            .toFormatter()
-        mBinding.adapterChargingHistoryItemDuration.text = periodFormatter.print(period)
+        mBinding.adapterChargingHistoryItemDuration.text = charge.printableDuration
     }
 
 //    fun setOnXClickListener(onXClickListener: ((Location) -> Unit)?) {

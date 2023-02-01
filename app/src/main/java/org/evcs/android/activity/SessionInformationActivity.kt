@@ -35,15 +35,11 @@ class SessionInformationActivity : BaseActivity2(), LocationActivityView {
     override fun populate() {
         mDateTimeFormatter = DateTimeFormat.forPattern("MMM dd, yyyy 'at' hh:mm a")
 
-        val charge = intent.extras!!.getSerializable(Extras.SessionInformationActivity.CHARGE) as Charge
+        val charge = intent.getSerializableExtra(Extras.SessionInformationActivity.CHARGE) as Charge
         mPresenter.getLocation(charge.locationId)
-        mBinding.sessionInformationChargingSiteDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
-        val period = Period(0, charge.duration.toLong())
-        val periodFormatter = PeriodFormatterBuilder()
-            .appendHours().appendSuffix("hr ")
-            .appendMinutes().appendSuffix("min")
-            .toFormatter()
-        mBinding.sessionInformationDuration.text = periodFormatter.print(period)
+        if (charge.startedAt != null)
+            mBinding.sessionInformationChargingSiteDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
+        mBinding.sessionInformationDuration.text = charge.printableDuration
         mBinding.sessionInformationEnergy.text = String.format("%.3f kWh", charge.kwh)
         mBinding.sessionInformationPrice.text = "Total: " + String.format("$%.2f", charge.price)
         mBinding.sessionInformationId.text = "Session ID: " + charge.noodoeId

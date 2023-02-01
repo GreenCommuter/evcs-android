@@ -22,7 +22,6 @@
             android:id="@+id/session_information_charging_site_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date: date"
             style="@style/Roboto.Body"
             android:textColor="@color/evcs_purple_gray"/>
 

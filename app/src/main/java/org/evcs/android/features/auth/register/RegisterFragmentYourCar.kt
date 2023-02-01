@@ -100,7 +100,7 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
     }
 
     fun skip() {
-        val navOptions: NavOptions = AbstractNavigationController.replaceLastNavOptions(findNavController())
+        val navOptions = AbstractNavigationController.replaceLastNavOptions(findNavController())
         findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
     }
 

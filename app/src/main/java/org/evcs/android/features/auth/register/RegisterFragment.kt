@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
@@ -107,8 +108,9 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     override fun onTokenSent() {
         progressDialog.dismiss()
-        findNavController()
-            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
+        val navOptions = NavOptions.Builder().setPopUpTo(R.id.signInFragment, true).build()
+        findNavController().navigate(
+            RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar(), navOptions)
     }
 
     protected fun onLoginClick() {

@@ -24,8 +24,8 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
     private var mErrorEnabled = false
     private lateinit var mEditText: EditText
     protected lateinit var mLayout: RelativeLayout
-    private lateinit var mLabel: TextView
-    private lateinit var mLabelEmpty: TextView
+    protected lateinit var mLabel: TextView
+    protected lateinit var mLabelEmpty: TextView
     private lateinit var mGreyBorder: Drawable
     private lateinit var mBlackBorder: Drawable
     private lateinit var mRedBorder: Drawable
@@ -153,4 +153,7 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         }
     }
 
+    fun setLabel(label : String) {
+        mLabel.text = label
+    }
 }

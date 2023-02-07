@@ -8,7 +8,6 @@ import androidx.annotation.CallSuper
 import android.graphics.Typeface
 import android.view.View
 import android.widget.Button
-import androidx.core.view.ViewCompat
 import androidx.navigation.fragment.NavHostFragment
 import org.joda.time.format.DateTimeFormat
 import org.evcs.android.EVCSApplication
@@ -28,6 +27,7 @@ import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar
+import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.ZipCodeTextInputValidator
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormatter
@@ -84,11 +84,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
         mNext = binding.fragmentBraintreeNext
         mToolbar = binding.fragmentAddCreditCardToolbar
 
-        //TODO: replace for the viewutils thing
-        ViewCompat.setOnApplyWindowInsetsListener(binding.fragmentAddCreditCardLayout) { v, insets ->
-            v.setPadding(0, 0, 0, insets.systemWindowInsetBottom)
-            insets.consumeSystemWindowInsets()
-        }
+        ViewUtils.setAdjustResize(binding.fragmentAddCreditCardLayout)
     }
 
     override fun setListeners() {

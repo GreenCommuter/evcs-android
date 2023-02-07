@@ -25,11 +25,24 @@
     </fragment>
     <fragment
         android:id="@+id/chargingFragment"
-        android:name="org.evcs.android.features.charging.ChargingFragment"
-        tools:layout="@layout/fragment_charging"/>
+        android:name="org.evcs.android.features.charging.ChargingTabFragment"
+        tools:layout="@layout/fragment_charging_tab">
+        <action
+            android:id="@+id/action_chargingFragment_to_planInfoFragment"
+            app:destination="@id/planInfoFragment" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="org.evcs.android.features.profile.ProfileFragment"
         android:label="ProfileFragment"
         tools:layout="@layout/fragment_profile"/>
+
+    <fragment
+        android:id="@+id/planInfoFragment"
+        android:name="org.evcs.android.features.charging.PlanInfoFragment"
+        android:label="PlanInfoFragment" >
+        <argument
+            android:name="station_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>

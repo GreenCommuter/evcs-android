@@ -5,12 +5,16 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import android.util.SparseArray
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import android.widget.Button
-import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
+import androidx.navigation.fragment.findNavController
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
 import com.base.core.util.ToastUtils
@@ -20,17 +24,19 @@ import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingTabBinding
+import org.evcs.android.features.main.MainNavigationController
+import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.ui.fragment.ErrorFragment
 
 
 class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabView {
 
-    lateinit var surfaceView: SurfaceView
-    lateinit var txtBarcodeValue: TextView
+    lateinit var mSurfaceView: SurfaceView
+    //    lateinit var txtBarcodeValue: TextView
     private lateinit var barcodeDetector: BarcodeDetector
     private lateinit var cameraSource: CameraSource
-    lateinit var button: Button
-    lateinit var intentData: String
+    private lateinit var mTextField: StandardTextField
+    lateinit var mButton: Button
 
     companion object {
         fun newInstance(): ChargingTabFragment {
@@ -48,9 +54,9 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
     override fun setUi(v: View) {
         super.setUi(v)
         val binding = FragmentChargingTabBinding.bind(v)
-        txtBarcodeValue = binding.chargingTabValue
-        surfaceView = binding.chargingTabSurfaceView
-        button = binding.chargingTabButton
+        mSurfaceView = binding.chargingTabSurfaceView
+        mButton = binding.chargingTabButton
+        mTextField = binding.chargingTabStationId
     }
 
     override fun createPresenter(): ChargingTabPresenter {
@@ -60,15 +66,18 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
     override fun init() {}
 
     override fun setListeners() {
-        button.setOnClickListener {
-            if (intentData.length > 0) {
-                startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(intentData)))
+        mButton.setOnClickListener {
+            if (mTextField.editText!!.length() > 0) {
+                goToPlanInfo(mTextField.editText!!.text.toString())
             }
+        }
+        mTextField.editText?.doAfterTextChanged {
+            s -> mButton.isEnabled = !(s!!.isEmpty())
         }
     }
 
     private fun initialiseDetectorsAndSources() {
-        ToastUtils.show("Barcode scanner started")
+        Log.d("Barcode scanner", "started")
         barcodeDetector = BarcodeDetector.Builder(requireContext())
             .setBarcodeFormats(Barcode.ALL_FORMATS)
             .build()
@@ -76,7 +85,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
             .setRequestedPreviewSize(1920, 1080)
             .setAutoFocusEnabled(true) //must
             .build()
-        surfaceView.holder.addCallback(object : SurfaceHolder.Callback {
+        mSurfaceView.holder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
                 requestCameraPermission()
             }
@@ -90,28 +99,31 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
         })
         barcodeDetector.setProcessor(object : Detector.Processor<Barcode> {
             override fun release() {
-                ToastUtils.show("Barcode scanner has been stopped")
+                Log.d("Barcode scanner", "stopped")
             }
 
             override fun receiveDetections(detections: Detector.Detections<Barcode?>) {
                 val barcodes: SparseArray<Barcode?> = detections.detectedItems
                 if (barcodes.size() != 0) {
-//                    txtBarcodeValue.post {
-                        button.text = "LAUNCH URL"
-                        intentData = barcodes.valueAt(0)!!.displayValue
-                        txtBarcodeValue.text = intentData
-//                    }
+                    val id = barcodes.valueAt(0)!!.displayValue
+                    if (id.toIntOrNull() != null) {
+                        goToPlanInfo(id)
+                    }
                 }
             }
         })
     }
 
+    private fun goToPlanInfo(id: String) {
+        findNavController()
+            .navigate(ChargingTabFragmentDirections.actionChargingFragmentToPlanInfoFragment(id.toInt()))
+    }
+
     @SuppressLint("MissingPermission")
     private fun requestCameraPermission() {
-        PermissionManager.getInstance().requestPermission(this@ChargingTabFragment,
-            object : PermissionListener() {
+        PermissionManager.getInstance().requestPermission(this, object : PermissionListener() {
                 override fun onPermissionsGranted() {
-                    cameraSource.start(surfaceView.holder)
+                    cameraSource.start(mSurfaceView.holder)
                 }
             }, Manifest.permission.CAMERA)
     }

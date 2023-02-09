@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.account
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody

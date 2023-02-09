@@ -1,50 +1,54 @@
-package org.evcs.android.activity.location
+package org.evcs.android.features.location
 
-import android.content.Intent
-import android.view.LayoutInflater
 import android.view.View
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
-import org.evcs.android.activity.BaseActivity2
-import org.evcs.android.activity.StationActivity
+import org.evcs.android.R
+import org.evcs.android.activity.SimpleToolbarActivity
+import org.evcs.android.features.StationFragment
 import org.evcs.android.databinding.ActivityLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.StationsView
 import org.evcs.android.util.Extras
 import org.evcs.android.util.LocationUtils
 import java.io.Serializable
 
-class LocationActivity : BaseActivity2(), LocationActivityView {
-    private lateinit var mPresenter: LocationActivityPresenter
+class LocationFragment : ErrorFragment<LocationPresenter>(), LocationView {
     private lateinit var mBinding: ActivityLocationBinding
 
-    override fun inflate(layoutInflater: LayoutInflater): View {
-        mBinding = ActivityLocationBinding.inflate(layoutInflater)
-        return mBinding.root
+    override fun init() {}
+
+    override fun layout(): Int {
+        return R.layout.activity_location
     }
 
-    override fun init() {
-        mPresenter = LocationActivityPresenter(this, EVCSApplication.getInstance().retrofitServices)
-        mPresenter.onViewCreated()
+    override fun setUi(v: View) {
+        super.setUi(v)
+        mBinding = ActivityLocationBinding.bind(v)
+    }
+
+    override fun createPresenter(): LocationPresenter {
+        return LocationPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun populate() {
         super.populate()
-        val l = intent.extras?.get(Extras.LocationActivity.LOCATION) as Location
+        val l = requireActivity().intent.extras?.get(Extras.LocationActivity.LOCATION) as Location
         showLocation(l)
         //the presenter will not retrieve distance
         mBinding.activityLocationDistance.text = l?.printableDistance
-        mPresenter.getLocation(l.id)
+        presenter.getLocation(l.id)
     }
 
     override fun setListeners() {
         mBinding.activityLocationGo.setOnClickListener{
-            if (mPresenter.mLocation != null) {
-                LocationUtils.launchGoogleMapsWithPin(this, mPresenter.mLocation!!.latLng)
+            if (presenter.mLocation != null) {
+                LocationUtils.launchGoogleMapsWithPin(requireContext(), presenter.mLocation!!.latLng)
             }
         }
-        mBinding.activityLocationClose.setOnClickListener { finish() }
+        mBinding.activityLocationClose.setOnClickListener { activity?.finish() }
     }
 
     override fun showLocation(response: Location?) {
@@ -53,10 +57,10 @@ class LocationActivity : BaseActivity2(), LocationActivityView {
 //        mBinding.activityLocationHint.text = response?
         mBinding.activityLocationAddress.text = response?.address.toString()
         mBinding.activityLocationConnectors.removeAllViews()
-        mPresenter.pack(response?.stations!!).forEach{ stations ->
-            val v = StationsView(this, stations.first(), mPresenter.countAvailable(stations), stations.size)
+        presenter.pack(response?.stations!!).forEach{ stations ->
+            val v = StationsView(requireContext(), stations.first(), presenter.countAvailable(stations), stations.size)
             v.setOnClickListener {
-                val intent = Intent(this, StationActivity::class.java)
+                val intent = SimpleToolbarActivity.getIntent(requireContext(), StationFragment::class.java, "Details")
                 intent.putExtra(Extras.StationsActivity.STATIONS, stations as Serializable)
                 startActivity(intent)
             }
@@ -64,7 +68,4 @@ class LocationActivity : BaseActivity2(), LocationActivityView {
         }
     }
 
-    override fun showError(requestError: RequestError) {
-        ToastUtils.show(requestError.body)
-    }
 }

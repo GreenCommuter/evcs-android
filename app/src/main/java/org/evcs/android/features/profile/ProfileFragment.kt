@@ -12,7 +12,8 @@ import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingHistoryActivity
-import org.evcs.android.activity.account.AccountActivity
+import org.evcs.android.activity.SimpleToolbarActivity
+import org.evcs.android.features.account.AccountFragment
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.profile.wallet.WalletActivity
@@ -47,7 +48,11 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun setListeners() {
-        mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
+        mBinding.profileMenuAccount.setOnClickListener {
+            val intent = SimpleToolbarActivity.getIntent(requireContext(), AccountFragment::class.java,
+                    getString(R.string.activity_account_title))
+            startActivity(intent)
+        }
         mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener {  }
         mBinding.profileMenuChargingHistory.setOnClickListener { NavigationUtils.jumpTo(requireContext(), ChargingHistoryActivity::class.java) }

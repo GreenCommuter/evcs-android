@@ -6,17 +6,22 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.Fragment
 import org.evcs.android.R
+import org.evcs.android.features.account.ChangePasswordFragment
 import org.evcs.android.databinding.ActivityToolbarNonavBinding
 import org.evcs.android.ui.view.shared.EVCSToolbar
 
 class SimpleToolbarActivity : BaseActivity2() {
 
-    private lateinit var mToolbar: EVCSToolbar
+    lateinit var mToolbar : EVCSToolbar
 
     override fun init() {
         replaceFragment(R.id.activity_base_content,
                 intent.getSerializableExtra("Fragment") as Class<out Fragment>)
-        mToolbar.title = intent.getStringExtra("ToolbarTitle")
+        val title = intent.getStringExtra("ToolbarTitle")
+        if (title != null && title.length > 0) {
+            mToolbar.visibility = View.VISIBLE
+            mToolbar.title = title
+        }
     }
 
     override fun setListeners() {
@@ -31,6 +36,7 @@ class SimpleToolbarActivity : BaseActivity2() {
     }
 
     companion object {
+        @JvmStatic
         fun getIntent(context: Context, fragment: Class<out Fragment>, toolbarTitle: String): Intent {
             val intent = Intent(context, SimpleToolbarActivity::class.java)
             intent.putExtra("Fragment", fragment)

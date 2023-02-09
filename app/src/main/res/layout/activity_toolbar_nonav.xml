@@ -20,6 +20,7 @@
         app:contentInsetStartWithNavigation="0dp"
         app:titleMarginStart="0dp"
         app:navigationIcon="@drawable/back_arrow"
-        android:theme="@style/ToolbarIconStyle"/>
+        android:theme="@style/ToolbarIconStyle"
+        android:visibility="gone"/>
 
 </RelativeLayout>

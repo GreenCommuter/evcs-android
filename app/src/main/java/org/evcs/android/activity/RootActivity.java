@@ -7,8 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
 
 import org.evcs.android.EVCSApplication;
-import org.evcs.android.activity.account.ChangePasswordActivity;
-import org.evcs.android.features.auth.initialScreen.AuthActivity;
+import org.evcs.android.features.account.ChangePasswordFragment;
 import org.evcs.android.features.main.MainActivity;
 import org.evcs.android.util.Extras;
 
@@ -42,7 +41,7 @@ public class RootActivity extends AppCompatActivity {
     }
 
     private Intent getPasswordIntent() {
-        Intent newIntent = new Intent(this, ChangePasswordActivity.class);
+        Intent newIntent = SimpleToolbarActivity.getIntent(this, ChangePasswordFragment.class, "Change password");
         newIntent.putExtra(Extras.ForgotPassword.EMAIL, getIntent().getData().getQueryParameter(Extras.ForgotPassword.EMAIL));
         newIntent.putExtra(Extras.ForgotPassword.ID, getIntent().getData().getQueryParameter(Extras.ForgotPassword.ID));
         return newIntent;

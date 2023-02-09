@@ -1,4 +1,4 @@
-package org.evcs.android.activity.search
+package org.evcs.android.features.search
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView

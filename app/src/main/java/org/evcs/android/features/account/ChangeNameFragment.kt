@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.account
 
 import android.view.View
 import org.evcs.android.EVCSApplication

@@ -9,6 +9,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import com.base.core.util.ToastUtils
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
@@ -16,9 +17,10 @@ import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.FilterActivity
-import org.evcs.android.activity.location.LocationActivity
-import org.evcs.android.activity.search.SearchActivity
+import org.evcs.android.features.FilterFragment
+import org.evcs.android.activity.SimpleToolbarActivity
+import org.evcs.android.features.location.LocationFragment
+import org.evcs.android.features.search.SearchFragment
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
@@ -86,8 +88,9 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
             registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
                 onFilterResult(result)
             }
-        mSearchButton.setOnClickListener { searchActivityTask.launch(getIntentWithFilterState(SearchActivity::class.java)) }
-        mFilterButton.setOnClickListener { filterActivityTask.launch(getIntentWithFilterState(FilterActivity::class.java)) }
+        mSearchButton.setOnClickListener { searchActivityTask.launch(getIntentWithFilterState(SearchFragment::class.java)) }
+        mFilterButton.setOnClickListener { filterActivityTask.launch(getIntentWithFilterState(FilterFragment::class.java,
+            getString(R.string.filter_activity_title))) }
         mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
         addOnCameraChangeListener {
                 cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
@@ -103,8 +106,8 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
         presenter.onFilterResult(filterState)
     }
 
-    private fun getIntentWithFilterState(activity : Class <*>) : Intent {
-        val intent = Intent(requireContext(), activity)
+    private fun getIntentWithFilterState(fragment: Class <out Fragment>, toolbarTitle: String = "") : Intent {
+        val intent = SimpleToolbarActivity.getIntent(requireContext(), fragment, toolbarTitle)
         intent.putExtra(Extras.FilterActivity.FILTER_STATE, presenter.mFilterState)
         return intent
     }
@@ -168,8 +171,8 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     private fun initializeRecycler() {
         mCarouselRecycler.setOnClickListener {
             val item = mSelectedContainer!!.mapItem
-            SearchActivity.saveToLocationHistory(item)
-            val intent = Intent(requireContext(), LocationActivity::class.java)
+            SearchFragment.saveToLocationHistory(item)
+            val intent = SimpleToolbarActivity.getIntent(requireContext(), LocationFragment::class.java, "")
             intent.putExtra(Extras.LocationActivity.LOCATION, item)
             startActivity(intent)
         }

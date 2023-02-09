@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.account
 
 import android.view.View
 import com.base.core.util.ToastUtils
@@ -55,7 +55,7 @@ class ZipCodeFragment : ErrorFragment<UpdateUserPresenter>(), UpdateUserView {
 
     override fun showError(requestError: RequestError) {
         mBinding.activityZipcodeSave.isEnabled = true
-        ToastUtils.show(requestError.body)
+        super.showError(requestError)
     }
 
     override fun onUserUpdate() {

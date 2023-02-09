@@ -1,29 +1,40 @@
-package org.evcs.android.activity
+package org.evcs.android.features
 
-import android.view.LayoutInflater
 import android.view.View
+import com.base.core.presenter.BasePresenter
+import org.evcs.android.R
 import org.evcs.android.databinding.ActivityStationsBinding
 import org.evcs.android.model.PricingDetail
 import org.evcs.android.model.Station
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.StationView
 import org.evcs.android.util.Extras
 
-class StationActivity : BaseActivity2() {
+class StationFragment : ErrorFragment<BasePresenter<*>>() {
+
     private lateinit var mBinding: ActivityStationsBinding
 
-    override fun inflate(layoutInflater: LayoutInflater): View {
-        mBinding = ActivityStationsBinding.inflate(layoutInflater)
-        return mBinding.root
+    override fun setUi(v: View) {
+        super.setUi(v)
+        mBinding = ActivityStationsBinding.bind(v)
+    }
+
+    override fun createPresenter(): BasePresenter<*> {
+        return BasePresenter(this)
+    }
+
+    override fun layout(): Int {
+        return R.layout.activity_stations
     }
 
     override fun init() {
-        mBinding.activityStationsToolbar.setNavigationOnClickListener { finish() }
-        val stations = intent.getSerializableExtra(Extras.StationsActivity.STATIONS) as ArrayList<Station>
+        val stations = requireActivity().intent.getSerializableExtra(Extras.StationsActivity.STATIONS)
+                as ArrayList<Station>
 
         showPricing(stations.first().pricing!!.detail)
 
         stations.forEach { station ->
-            val v = StationView(this, station)
+            val v = StationView(requireContext(), station)
             mBinding.activityStationsStations.addView(v)
         }
     }

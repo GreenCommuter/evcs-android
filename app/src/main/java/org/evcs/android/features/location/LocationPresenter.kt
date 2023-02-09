@@ -1,4 +1,4 @@
-package org.evcs.android.activity.location
+package org.evcs.android.features.location
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
@@ -10,8 +10,8 @@ import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
-class LocationActivityPresenter(viewInstance: LocationActivityView, services: RetrofitServices) :
-    ServicesPresenter<LocationActivityView>(viewInstance, services) {
+class LocationPresenter(viewInstance: LocationView, services: RetrofitServices) :
+    ServicesPresenter<LocationView>(viewInstance, services) {
 
     var mLocation: Location? = null
 

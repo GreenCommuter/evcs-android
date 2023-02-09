@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.account
 
 import org.evcs.android.activity.BaseActivity2
 import android.view.LayoutInflater

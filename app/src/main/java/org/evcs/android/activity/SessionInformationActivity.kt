@@ -3,9 +3,9 @@ package org.evcs.android.activity
 import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.EVCSApplication
-import org.evcs.android.activity.location.LocationActivityPresenter
-import org.evcs.android.activity.location.LocationActivityView
 import org.evcs.android.databinding.ActivitySessionInformationBinding
+import org.evcs.android.features.location.LocationPresenter
+import org.evcs.android.features.location.LocationView
 import org.evcs.android.model.Charge
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
@@ -15,14 +15,14 @@ import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 import org.joda.time.format.PeriodFormatterBuilder
 
-class SessionInformationActivity : BaseActivity2(), LocationActivityView {
+class SessionInformationActivity : BaseActivity2(), LocationView {
 
-    private lateinit var mPresenter: LocationActivityPresenter
+    private lateinit var mPresenter: LocationPresenter
     private lateinit var mDateTimeFormatter: DateTimeFormatter
     private lateinit var mBinding: ActivitySessionInformationBinding
 
     override fun init() {
-        mPresenter = LocationActivityPresenter(
+        mPresenter = LocationPresenter(
             this, EVCSApplication.getInstance().retrofitServices)
         mPresenter.onViewCreated()
     }

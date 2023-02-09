@@ -6,13 +6,6 @@
     android:orientation="vertical"
     android:background="@color/evcs_dark_purple">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
-        android:id="@+id/activity_stations_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="Details"
-        app:navigationIcon="@drawable/back_arrow"/>
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

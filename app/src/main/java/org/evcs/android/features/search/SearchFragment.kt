@@ -1,7 +1,7 @@
-package org.evcs.android.activity.search
+package org.evcs.android.features.search
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -14,22 +14,21 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.gson.Gson
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivitySearchBinding
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.ui.view.shared.SearchLocationChildFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.LocationUtils
 import org.evcs.android.util.StorageUtils
 
-class SearchActivity : BaseActivity2(), SearchActivityView {
+class SearchFragment : ErrorFragment<SearchPresenter>(), SearchView {
 
     private lateinit var mLoading: ProgressBar
-    private lateinit var mPresenter: SearchActivityPresenter
     private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
     private lateinit var mFailView: LinearLayout
     private lateinit var mEmptyView: TextView
@@ -40,31 +39,38 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
     private lateinit var mHistoryLayout: View
     private lateinit var mHistoryClear: TextView
 
-    override fun inflate(layoutInflater: LayoutInflater?): View {
-        val binding = ActivitySearchBinding.inflate(layoutInflater!!)
+    override fun createPresenter(): SearchPresenter {
+        val presenter = SearchPresenter(this, EVCSApplication.getInstance().retrofitServices)
+        presenter.mFilterState = requireActivity().intent
+                .getSerializableExtra(Extras.FilterActivity.FILTER_STATE) as FilterState
+        return presenter
+    }
+
+    override fun setUi(v: View) {
+        val binding = ActivitySearchBinding.bind(v)
         mFailView = binding.activitySearchFail
         mLoading = binding.activitySearchLoading
         mEmptyView = binding.activitySearchEmpty
         mHistoryRecycler = binding.activitySearchHistory
         mHistoryLayout = binding.activitySearchHistoryLayout
         mHistoryClear = binding.activitySearchHistoryClear
-        return binding.root
     }
 
-    override fun init() {
-        mPresenter = SearchActivityPresenter(this, EVCSApplication.getInstance().retrofitServices)
-        mPresenter.onViewCreated()
-        mPresenter.mFilterState = intent.getSerializableExtra(Extras.FilterActivity.FILTER_STATE) as FilterState
-        super.onStart()
+    override fun layout(): Int {
+        return R.layout.activity_search
     }
+
+    override fun init() {}
 
     override fun populate() {
         super.populate()
         mSearchLocationChildFragment = SearchLocationChildFragment.newInstance()
 //        mSearchLocationChildFragment.setDefault("asdasd")
-        replaceFragment(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment)
+        requireFragmentManager().beginTransaction()
+            .replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment)
+            .commit()
         mHistoryRecycler.layoutManager =
-            LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         refreshHistoryView()
     }
 
@@ -72,7 +78,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         super.setListeners()
         mSearchLocationChildFragment.setListener(object : SearchLocationChildFragment.ISearchLocationListener {
             override fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
-                this@SearchActivity.onLocationChosen(address, latLng, LocationUtils.addDiagonal(viewport))
+                this@SearchFragment.onLocationChosen(address, latLng, LocationUtils.addDiagonal(viewport))
             }
 
             override fun onLocationRemoved() {
@@ -80,7 +86,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
             }
 
             override fun onCloseClicked() {
-                this@SearchActivity.finish()
+                activity?.finish()
             }
         })
         val itemClickListener = object : BaseRecyclerAdapterItemClickListener<Location>() {
@@ -88,8 +94,8 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
                 saveToLocationHistory(item!!)
                 val data = Intent()
                 data.putExtra(Extras.LocationActivity.LOCATION, item)
-                setResult(RESULT_OK, data)
-                finish()
+                activity?.setResult(RESULT_OK, data)
+                activity?.finish()
             }
         }
         mHistoryAdapter.setItemClickListener(itemClickListener)
@@ -132,8 +138,8 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         val data = Intent()
         data.putExtra(Extras.SearchActivity.LOCATIONS, page!!.toTypedArray())
         data.putExtra(Extras.SearchActivity.VIEWPORT, viewport)
-        setResult(RESULT_OK, data)
-        finish()
+        activity?.setResult(RESULT_OK, data)
+        activity?.finish()
     }
 
     override fun showLoading() {
@@ -142,10 +148,6 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
 
     override fun hideLoading() {
         mLoading.visibility = View.GONE
-    }
-
-    override fun showError(requestError: RequestError) {
-        ToastUtils.show(requestError.body)
     }
 
     override fun onEmptyResponse() {
@@ -158,7 +160,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
 
     private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
         showLoading()
-        mPresenter.search(latLng, viewport)
+        presenter.search(latLng, viewport)
         mHistoryLayout.visibility = View.GONE
         mAddress = address
     }

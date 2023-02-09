@@ -1,4 +1,4 @@
-package org.evcs.android.activity.search
+package org.evcs.android.features.search
 
 import com.base.networking.retrofit.RetrofitServices
 import com.google.android.gms.maps.model.LatLng
@@ -13,8 +13,8 @@ import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
-class SearchActivityPresenter(viewInstance: SearchActivityView, services: RetrofitServices) :
-    ServicesPresenter<SearchActivityView>(viewInstance, services) {
+class SearchPresenter(viewInstance: SearchView, services: RetrofitServices) :
+    ServicesPresenter<SearchView>(viewInstance, services) {
 
     lateinit var mFilterState: FilterState
     private lateinit var mLatlng: LatLng

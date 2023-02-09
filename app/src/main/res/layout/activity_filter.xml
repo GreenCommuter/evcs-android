@@ -6,14 +6,6 @@
     android:orientation="vertical"
     android:background="@color/evcs_white">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
-        android:id="@+id/activity_filter_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ToolbarIconStyle"
-        app:title="@string/filter_activity_title"
-        app:navigationIcon="@drawable/ic_xmark_solid"/>
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">

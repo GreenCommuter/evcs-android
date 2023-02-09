@@ -1,31 +1,40 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.account
 
 import android.content.Intent
-import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils.jumpTo
-import org.evcs.android.activity.BaseActivity2
+import org.evcs.android.R
 import org.evcs.android.activity.SimpleToolbarActivity
 import org.evcs.android.databinding.ActivityAccountBinding
 import org.evcs.android.features.profile.ChangeCarFragment
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.UserUtils
 
-class AccountActivity : BaseActivity2() {
+class AccountFragment : ErrorFragment<BasePresenter<*>>() {
 
     private lateinit var mChangeUserResult: ActivityResultLauncher<Intent>
     private lateinit var mBinding: ActivityAccountBinding
-
-    override fun inflate(layoutInflater: LayoutInflater): View {
-        mBinding = ActivityAccountBinding.inflate(layoutInflater)
-        return mBinding.root
-    }
 
     override fun init() {
         mChangeUserResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             populate()
         }
+    }
+
+    override fun layout(): Int {
+        return R.layout.activity_account
+    }
+
+    override fun setUi(v: View) {
+        super.setUi(v)
+        mBinding = ActivityAccountBinding.bind(v)
+    }
+
+    override fun createPresenter(): BasePresenter<*> {
+        return BasePresenter(this)
     }
 
     override fun populate() {
@@ -41,21 +50,23 @@ class AccountActivity : BaseActivity2() {
     override fun setListeners() {
         super.setListeners()
         mBinding.fragmentAccountName.setOnClickListener {
-            val intent = SimpleToolbarActivity.getIntent(this, ChangeNameFragment::class.java, "Edit your name")
+            val intent = SimpleToolbarActivity.getIntent(requireContext(), ChangeNameFragment::class.java, "Edit your name")
             mChangeUserResult.launch(intent)
         }
-        mBinding.fragmentAccountChangePassword.setOnClickListener { jumpTo(this, ChangePasswordActivity::class.java) }
+        mBinding.fragmentAccountChangePassword.setOnClickListener {
+            val intent = SimpleToolbarActivity.getIntent(requireContext(), ChangePasswordFragment::class.java, "Change password")
+            mChangeUserResult.launch(intent)
+        }
         mBinding.fragmentAccountCar.setOnClickListener {
-            val intent = SimpleToolbarActivity.getIntent(this, ChangeCarFragment::class.java, "Edit your car")
+            val intent = SimpleToolbarActivity.getIntent(requireContext(), ChangeCarFragment::class.java, "Edit your car")
             mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountZipcode.setOnClickListener {
-            val intent = SimpleToolbarActivity.getIntent(this, ZipCodeFragment::class.java, "Edit Zipcode")
+            val intent = SimpleToolbarActivity.getIntent(requireContext(), ZipCodeFragment::class.java, "Edit Zipcode")
             mChangeUserResult.launch(intent)
         }
         //TODO: add dialog
         mBinding.fragmentAccountSignOut.setOnClickListener { UserUtils.logout(null) }
-        mBinding.fragmentAccountDelete.setOnClickListener { jumpTo(this, DeleteAccountActivity::class.java)  }
-        mBinding.fragmentAccountToolbar.setNavigationOnClickListener { finish() }
+        mBinding.fragmentAccountDelete.setOnClickListener { jumpTo(requireContext(), DeleteAccountActivity::class.java)  }
     }
 }

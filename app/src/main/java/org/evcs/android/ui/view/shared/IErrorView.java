@@ -7,7 +7,6 @@ import org.evcs.android.model.shared.RequestError;
 /**
  * Allows displaying of an error, typically used for API request errors.
  */
-// TODO: Utilize State render system.
 public interface IErrorView {
 
     /**

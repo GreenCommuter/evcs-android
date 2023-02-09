@@ -35,11 +35,6 @@ class ChangeCarFragment : AbstractCarSelectionFragment<CarSelectionPresenter<*>>
         return mBinding.fragmentChangeCarSave
     }
 
-    override fun init() {
-        super.init()
-        mBinding.fragmentChangeCarToolbar.setNavigationOnClickListener { activity?.finish() }
-    }
-
     override fun layout(): Int {
         return R.layout.fragment_change_car
     }

@@ -66,9 +66,7 @@ abstract class AbstractDrawerActivity : AbstractSupportedVersionActivity() {
         //        setSupportActionBar(mToolbar);
         val versionName = BuildConfig.VERSION_NAME
         mVersionTextView.text = String.format(
-            getString(R.string.drawer_activity_version_name_prefix_format),
-            versionName
-        )
+            getString(R.string.drawer_activity_version_name_prefix_format), versionName)
     }
 
     override fun populate() {
@@ -86,10 +84,8 @@ abstract class AbstractDrawerActivity : AbstractSupportedVersionActivity() {
             } else false
         }
         return
-        mDrawerToggle = object : ActionBarDrawerToggle(
-            this, mDrawerLayout, mToolbar,
-            R.string.drawer_menu_open, R.string.drawer_menu_close
-        ) {
+        mDrawerToggle = object : ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
+            R.string.drawer_menu_open, R.string.drawer_menu_close) {
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
                 KeyboardUtils.hideKeyboard(this@AbstractDrawerActivity, getNavigationView()!!)
                 super.onDrawerSlide(drawerView, slideOffset)
@@ -158,10 +154,8 @@ abstract class AbstractDrawerActivity : AbstractSupportedVersionActivity() {
     private fun configureFragmentManager() {
         supportFragmentManager.registerFragmentLifecycleCallbacks(
             object : FragmentManager.FragmentLifecycleCallbacks() {
-                override fun onFragmentViewCreated(
-                    fm: FragmentManager, f: Fragment, v: View,
-                    savedInstanceState: Bundle?
-                ) {}
+                override fun onFragmentViewCreated(fm: FragmentManager, f: Fragment, v: View,
+                    savedInstanceState: Bundle?) {}
 
                 override fun onFragmentViewDestroyed(fm: FragmentManager, f: Fragment) {
                     if (currentFocus != null) {

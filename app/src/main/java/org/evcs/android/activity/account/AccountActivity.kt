@@ -7,7 +7,9 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.base.core.util.NavigationUtils.jumpTo
 import org.evcs.android.activity.BaseActivity2
+import org.evcs.android.activity.SimpleToolbarActivity
 import org.evcs.android.databinding.ActivityAccountBinding
+import org.evcs.android.features.profile.ChangeCarFragment
 import org.evcs.android.util.UserUtils
 
 class AccountActivity : BaseActivity2() {
@@ -39,14 +41,17 @@ class AccountActivity : BaseActivity2() {
     override fun setListeners() {
         super.setListeners()
         mBinding.fragmentAccountName.setOnClickListener {
-            mChangeUserResult.launch(Intent(this, ChangeNameActivity::class.java))
+            val intent = SimpleToolbarActivity.getIntent(this, ChangeNameFragment::class.java, "Edit your name")
+            mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountChangePassword.setOnClickListener { jumpTo(this, ChangePasswordActivity::class.java) }
         mBinding.fragmentAccountCar.setOnClickListener {
-            mChangeUserResult.launch(Intent(this, ChangeCarActivity::class.java))
+            val intent = SimpleToolbarActivity.getIntent(this, ChangeCarFragment::class.java, "Edit your car")
+            mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountZipcode.setOnClickListener {
-            mChangeUserResult.launch(Intent(this, ZipCodeActivity::class.java))
+            val intent = SimpleToolbarActivity.getIntent(this, ZipCodeFragment::class.java, "Edit Zipcode")
+            mChangeUserResult.launch(intent)
         }
         //TODO: add dialog
         mBinding.fragmentAccountSignOut.setOnClickListener { UserUtils.logout(null) }

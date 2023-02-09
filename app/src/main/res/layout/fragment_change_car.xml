@@ -6,15 +6,6 @@
     android:orientation="vertical"
     android:background="@color/evcs_gray_89">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
-        android:id="@+id/fragment_change_car_toolbar"
-        android:padding="0dp"
-        android:paddingTop="0dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="Edit Your Car"
-        app:navigationIcon="@drawable/back_arrow"/>
-
     <org.evcs.android.features.shared.DropdownWithLabel
         android:id="@+id/fragment_change_car_make"
         android:layout_marginStart="@dimen/spacing_medium_extra"

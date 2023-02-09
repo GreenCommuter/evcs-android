@@ -1,33 +1,38 @@
 package org.evcs.android.activity.account
 
-import android.view.LayoutInflater
 import android.view.View
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
-import org.evcs.android.activity.BaseActivity2
+import org.evcs.android.R
 import org.evcs.android.databinding.ActivityChangeZipcodeBinding
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.ValidatorManager
 import org.evcs.android.util.validator.ZipCodeTextInputValidator
 
 
-class ZipCodeActivity : BaseActivity2(), UpdateUserView {
+class ZipCodeFragment : ErrorFragment<UpdateUserPresenter>(), UpdateUserView {
 
     private lateinit var mValidatorManager: ValidatorManager
     private lateinit var mBinding: ActivityChangeZipcodeBinding
-    private lateinit var mPresenter: UpdateUserPresenter
 
-    override fun inflate(layoutInflater: LayoutInflater): View {
-        mBinding = ActivityChangeZipcodeBinding.inflate(layoutInflater)
-        return mBinding.root
+    override fun createPresenter(): UpdateUserPresenter {
+        return UpdateUserPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun init() {
-        mPresenter = UpdateUserPresenter(this, EVCSApplication.getInstance().retrofitServices)
         mValidatorManager = ValidatorManager()
-        mPresenter.onViewCreated()
+    }
+
+    override fun layout(): Int {
+        return R.layout.activity_change_zipcode
+    }
+
+    override fun setUi(v: View) {
+        mBinding = ActivityChangeZipcodeBinding.bind(v)
+        super.setUi(v)
     }
 
     override fun populate() {
@@ -43,10 +48,8 @@ class ZipCodeActivity : BaseActivity2(), UpdateUserView {
     override fun setListeners() {
         mBinding.activityZipcodeSave.setOnClickListener {
             mBinding.activityZipcodeSave.isEnabled = false
-            mPresenter.changeZipCode(mBinding.activityZipcodeText.text)
+            presenter.changeZipCode(mBinding.activityZipcodeText.text)
         }
-        mBinding.activityChangeZipcodeToolbar.setNavigationOnClickListener { finish() }
-
         ViewUtils.setAdjustResize(mBinding.activityZipcodeLayout)
     }
 
@@ -56,6 +59,6 @@ class ZipCodeActivity : BaseActivity2(), UpdateUserView {
     }
 
     override fun onUserUpdate() {
-        finish()
+        activity?.finish()
     }
 }

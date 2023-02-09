@@ -23,6 +23,7 @@ public class SubscriptionStatus {
     public boolean planCoversTime;
     public Integer remainingKwh;
     public DateTime nextRemainingKwhRestoration;
+    public Plan plan;
 
     //TODO: pero si es null el remaining puede ser unlimited
     //        "monthly_kwh":null,
@@ -66,21 +67,4 @@ public class SubscriptionStatus {
 //        "price_per_kwh":"0.00",
 //        "on_trial_period":true,
 //        "current_bc_kwh_consumed":0,
-//        "plan":{
-//            "id":3,
-//            "name":"Unlimited Anytime",
-//            "monthly_charges":null,
-//            "monthly_price":"199.00",
-//            "yearly_price":null,
-//            "weekly_price":null,
-//            "icon_url":"",
-//            "short_description":"",
-//            "long_description":null,
-//            "start_hour":null,
-//            "finish_hour":null,
-//            "price_per_kwh":"0.00",
-//            "monthly_kwh":null,
-//            "weekly_kwh":null,
-//            "trial_days":7
-//        },
 //        "kwh_usage":0

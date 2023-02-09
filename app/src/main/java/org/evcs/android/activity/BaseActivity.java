@@ -63,6 +63,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         this.getSupportFragmentManager().beginTransaction().replace(resId, f).commit();
     }
 
+    protected void replaceFragment(int resId, Fragment f, String tag) {
+        this.getSupportFragmentManager().beginTransaction().replace(resId, f, tag).commit();
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case 16908332:

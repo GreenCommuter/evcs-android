@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:id="@+id/activity_subscriptions_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Subscription"
+        app:navigationIcon="@drawable/back_arrow"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_ariel_standard"
+        android:background="@color/evcs_gray_89">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:paddingStart="@dimen/spacing_small"
+                android:paddingEnd="@dimen/spacing_small"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:text="A subscription"
+                style="@style/Roboto.BodySmall.Grey"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inactive"
+                style="@style/Roboto.BodySmall.Grey"/>
+
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/activity_subscriptions_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:progress="10"
+            style="@android:style/Widget.ProgressBar.Horizontal" />
+<!--        android:indeterminate="false"-->
+
+        <TextView
+            android:id="@+id/activity_subscriptions_consumption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_large"
+            android:text="85/200 kWh consumed this month"
+            android:textColor="@color/evcs_black"
+            style="@style/Roboto.Body"/>
+
+        <org.evcs.android.features.shared.StandardTextFieldNoBorder
+            android:id="@+id/activity_subscriptions_enrolled"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:label="Enrolled">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"
+                style="@style/Roboto.Body"/>
+
+        </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+        <org.evcs.android.features.shared.StandardTextFieldNoBorder
+            android:id="@+id/activity_subscriptions_free_trial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:label="Free Trial">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="15 days remaining"
+                android:textColor="@color/evcs_black"
+                style="@style/Roboto.Body"/>
+
+
+        </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+        <org.evcs.android.features.shared.StandardTextFieldNoBorder
+            android:id="@+id/activity_subscriptions_payment_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:label="Payment details">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your visa ending in xx will be charged xx per month \nYour next charge is --"
+                android:textColor="@color/evcs_black"
+                style="@style/Roboto.Body"/>
+
+        </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+        <org.evcs.android.ui.view.profile.ListButtonView
+            android:id="@+id/activity_subscriptions_change_payment_method"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:text="Change Payment Method"/>
+
+        <org.evcs.android.ui.view.profile.ListButtonView
+            android:id="@+id/activity_subscriptions_billing_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_large"
+            app:text="Billing History"/>
+
+        <TextView
+            android:id="@+id/activity_subscriptions_view_all_plans"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:text="View all plans"
+            android:textAllCaps="false"
+            android:gravity="center"
+            style="@style/Button.Black"/>
+
+        <TextView
+            android:id="@+id/activity_subscriptions_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:gravity="center"
+            style="@style/Button.Orange"/>
+
+    </LinearLayout>
+
+</LinearLayout>

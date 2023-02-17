@@ -9,14 +9,18 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.iid.FirebaseInstanceId
 import okhttp3.ResponseBody
 import org.evcs.android.BaseConfiguration
-import org.evcs.android.model.DeviceToken
+import org.evcs.android.model.push.DeviceToken
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.AuthUser
 import org.evcs.android.model.user.UserRequestFacebook
 import org.evcs.android.model.user.UserRequestGoogle
+import org.evcs.android.network.service.DeviceTokensService
 import org.evcs.android.network.service.UserService
 import org.evcs.android.util.ErrorUtils
 import org.evcs.android.util.UserUtils
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 open class AuthPresenter<T>(viewInstance: T, services: RetrofitServices?) :
     TermsPresenter<T>(viewInstance, services) where T : AuthView?, T : ITermsView? {
@@ -25,8 +29,7 @@ open class AuthPresenter<T>(viewInstance: T, services: RetrofitServices?) :
         return object : NetworkCallback<AuthUser>() {
             override fun onResponseSuccessful(authUser: AuthUser?) {
                 UserUtils.saveAuthUser(authUser)
-//                getToken()
-                view?.onTokenSent()
+                getToken()
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
@@ -101,5 +104,19 @@ open class AuthPresenter<T>(viewInstance: T, services: RetrofitServices?) :
      */
     fun sendNotifToken(token: String?) {
         val device = DeviceToken(token, BaseConfiguration.DEVICE_TYPE)
+        getService(DeviceTokensService::class.java)
+                .addDeviceToken(device)
+                .enqueue(object : Callback<Void?> {
+                    override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
+//                        val user: User = UserUtils.getLoggedUser()
+//                        Rollbar.setPersonData(Integer.toString(user.getId()), user.getFirstName(),
+//                                user.getEmail())
+                        view.onTokenSent()
+                    }
+
+                    override fun onFailure(call: Call<Void?>, t: Throwable) {
+                        runIfViewCreated(Runnable { view.showError(RequestError.getNetworkError()) })
+                    }
+                })
     }
 }

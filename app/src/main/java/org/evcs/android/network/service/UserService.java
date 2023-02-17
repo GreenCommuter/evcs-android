@@ -14,6 +14,7 @@ import org.evcs.android.model.user.ZipCodeWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.Headers;
@@ -80,5 +81,8 @@ public interface UserService {
 
     @GET("/members/v1/forgot_password")
     Call<Void> requestPasswordReset(@Query("email") String email);
+
+    @DELETE("/members/v1/logout")
+    Call<Void> logOut(@Query("device_token") String token);
 
 }

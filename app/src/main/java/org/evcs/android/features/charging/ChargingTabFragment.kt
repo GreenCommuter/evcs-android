@@ -27,6 +27,7 @@ import org.evcs.android.databinding.FragmentChargingTabBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.ui.fragment.ErrorFragment
+import java.net.URL
 
 
 class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabView {
@@ -105,8 +106,12 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
             override fun receiveDetections(detections: Detector.Detections<Barcode?>) {
                 val barcodes: SparseArray<Barcode?> = detections.detectedItems
                 if (barcodes.size() != 0) {
-                    val id = barcodes.valueAt(0)!!.displayValue
-                    if (id.toIntOrNull() != null) {
+                    val string = barcodes.valueAt(0)!!.displayValue
+                    val uri = Uri.parse(string)
+                    //check host
+                    val id = uri.getQueryParameter("id")?.split(":")?.getOrNull(0)
+                            ?.replace("[^0-9.]", "")
+                    if (id?.toIntOrNull() != null) {
                         goToPlanInfo(id)
                     }
                 }

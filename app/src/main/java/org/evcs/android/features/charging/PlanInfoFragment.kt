@@ -3,11 +3,13 @@ package org.evcs.android.features.charging
 import android.content.Intent
 import android.net.Uri
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.base.core.util.ToastUtils
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.model.SubscriptionStatusWrapper
@@ -124,5 +126,14 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true
         setUpButton()
+    }
+
+    override fun onBackPressed(): Boolean {
+        EVCSDialogFragment.Builder()
+                .setTitle("Cancel charging session?")
+                .addButton(getString(R.string.app_yes)) { findNavController().popBackStack() }
+                .showCancel(true)
+                .show(childFragmentManager)
+        return true
     }
 }

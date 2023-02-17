@@ -2,6 +2,7 @@ package org.evcs.android.features.charging
 
 import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.ToastUtils
@@ -10,13 +11,14 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
 import org.evcs.android.features.shared.EVCSDialogFragment
+import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
-import org.evcs.android.model.SubscriptionStatusWrapper
 import org.joda.time.format.DateTimeFormat
 
 class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
+    private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
 
     override fun layout(): Int {
@@ -39,7 +41,11 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     override fun setListeners() {
-        mBinding.planInfoCreditCardChange.setOnClickListener { }
+        mBinding.planInfoCreditCardChange.setOnClickListener {
+            var args = Bundle()
+            args.putSerializable("payment_methods", presenter?.mPaymentMethods)
+            findNavController().navigate(R.id.changePaymentMethodFragment, args)
+        }
         mBinding.planInfoApplyCoupon.setOnClickListener {  }
     }
 
@@ -84,7 +90,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                     "You’ll be charged a flat rate of \$$.2f/kWh \n" +
                     "Charge anytime from 10pm - 6am at no cost", pricing.priceKwh)
 
-            showPlanDialog( text, true, status.accountUrl)
+            showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
         }
         setUpButton()
@@ -114,11 +120,19 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         }
     }
 
+    override fun showDefaultPM(paymentMethod: PaymentMethod) {
+        mSelectedPM = paymentMethod
+        mBinding.planInfoCreditCard.text = paymentMethod.card.provider.toPrintableString() + " ending in " + paymentMethod.card.last4
+    }
+
     private fun showPaymentInfo() {
         mBinding.planInfoChargeRate.setLabel("Discounted charge rate")
         (mBinding.planInfoCreditCard.parent as View).visibility = View.VISIBLE
         mBinding.planInfoCouponCode.visibility = View.VISIBLE
         //TODO: Poner datos reales de la card
+
+        mBinding.planInfoButton.isEnabled = true
+        mBinding.planInfoButton.setOnClickListener { ToastUtils.show(mSelectedPM?.id ?: "null") }
     }
 
     override fun showFree(freeChargingCode: String) {

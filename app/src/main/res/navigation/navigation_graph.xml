@@ -40,9 +40,17 @@
     <fragment
         android:id="@+id/planInfoFragment"
         android:name="org.evcs.android.features.charging.PlanInfoFragment"
-        android:label="PlanInfoFragment" >
+        android:label="PlanInfoFragment"
+        tools:layout="@layout/fragment_plan_info">
         <argument
             android:name="station_id"
             app:argType="integer" />
+        <action
+            android:id="@+id/action_planInfoFragment_to_changePaymentMethodFragment"
+            app:destination="@id/changePaymentMethodFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/changePaymentMethodFragment"
+        android:name="org.evcs.android.features.charging.ChangePaymentMethodFragment"
+        android:label="ChangePaymentMethodFragment"/>
 </navigation>

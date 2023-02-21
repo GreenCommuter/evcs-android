@@ -2,7 +2,6 @@ package org.evcs.android.features.charging
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.ToastUtils
@@ -16,10 +15,14 @@ import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
 import org.joda.time.format.DateTimeFormat
 
-class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
+class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
+    ChangePaymentMethodFragment.PaymentMethodChangeListener {
 
+    private var mDialogOnBack: Boolean = false
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
+
+    private val mListener = ChargingNavigationController.getInstance()
 
     override fun layout(): Int {
         return R.layout.fragment_plan_info
@@ -42,14 +45,14 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     override fun setListeners() {
         mBinding.planInfoCreditCardChange.setOnClickListener {
-            var args = Bundle()
-            args.putSerializable("payment_methods", presenter?.mPaymentMethods)
-            findNavController().navigate(R.id.changePaymentMethodFragment, args)
+            mListener.setPaymentMethodChangeListener(this)
+            mListener.goToChangePaymentMethods(presenter?.mPaymentMethods)
         }
         mBinding.planInfoApplyCoupon.setOnClickListener {  }
     }
 
     override fun show(station: Station, status: SubscriptionStatus?) {
+        mDialogOnBack = true
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
         mBinding.planInfoSubscriptionName.setText(status?.planName ?: "Pay as you go")
 //        val kWhUsed = status
@@ -94,12 +97,19 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             showPaymentInfo()
         }
         setUpButton()
-        //TODO: status == suspended
-        if (status.issue) {
-            (mBinding.planInfoAlertMessage.parent as View).visibility = View.GONE
-            mBinding.planInfoAlertMessage.text = status.issueMessage
-            mBinding.planInfoButton.isEnabled = false
+        if (status.isSuspended) {
+            showIssue(status.issueMessage)
+            //TODO
         }
+        if (status.issue) {
+            showIssue(status.issueMessage)
+        }
+    }
+
+    private fun showIssue(issueMessage: String) {
+        (mBinding.planInfoAlertMessage.parent as View).visibility = View.VISIBLE
+        mBinding.planInfoAlertMessage.text = issueMessage
+        mBinding.planInfoButton.isEnabled = false
     }
 
     private fun setUpButton() {
@@ -121,21 +131,24 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     override fun showDefaultPM(paymentMethod: PaymentMethod) {
-        mSelectedPM = paymentMethod
-        mBinding.planInfoCreditCard.text = paymentMethod.card.provider.toPrintableString() + " ending in " + paymentMethod.card.last4
+        onPaymentMethodChanged(paymentMethod)
     }
 
     private fun showPaymentInfo() {
         mBinding.planInfoChargeRate.setLabel("Discounted charge rate")
         (mBinding.planInfoCreditCard.parent as View).visibility = View.VISIBLE
         mBinding.planInfoCouponCode.visibility = View.VISIBLE
-        //TODO: Poner datos reales de la card
 
         mBinding.planInfoButton.isEnabled = true
         mBinding.planInfoButton.setOnClickListener { ToastUtils.show(mSelectedPM?.id ?: "null") }
+
+        if (mSelectedPM != null)
+            mBinding.planInfoCreditCard.text =
+                mSelectedPM!!.card.provider.toPrintableString() + " ending in " + mSelectedPM!!.card.last4
     }
 
     override fun showFree(freeChargingCode: String) {
+        mDialogOnBack = true
         mBinding.planInfoFreeCharging.visibility = View.VISIBLE
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true
@@ -143,6 +156,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     override fun onBackPressed(): Boolean {
+        if (!mDialogOnBack) return super.onBackPressed()
         EVCSDialogFragment.Builder()
                 .setTitle("Cancel charging session?")
                 .addButton(getString(R.string.app_yes)) { findNavController().popBackStack() }
@@ -150,4 +164,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                 .show(childFragmentManager)
         return true
     }
+
+    override fun onPaymentMethodChanged(paymentMethod: PaymentMethod) {
+        mSelectedPM = paymentMethod
+    }
+
 }

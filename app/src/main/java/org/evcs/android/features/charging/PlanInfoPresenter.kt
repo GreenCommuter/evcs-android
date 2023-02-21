@@ -27,7 +27,8 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     fun populate(stationId : Int) {
         getSubscriptionStatus()
         getStation(stationId)
-        getPaymentMethods()
+        if (mPaymentMethods.isEmpty())
+            getPaymentMethods()
         fireRequests()
     }
 

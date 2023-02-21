@@ -116,7 +116,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                         mNavigationController.onMapClicked();
                         break;
                     case R.id.menu_drawer_charging:
-                        mNavigationController.goToCharging();
+                        if (UserUtils.getLoggedUser() == null)
+                            mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
+                        else
+                            mNavigationController.goToCharging();
                         break;
                     case R.id.menu_drawer_profile:
                         if (UserUtils.getLoggedUser() == null)

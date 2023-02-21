@@ -19,7 +19,9 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#F8F7F6">
+        android:background="#F8F7F6"
+        android:visibility="gone"
+        >
 
         <TextView
             android:id="@+id/plan_info_alert_message"
@@ -28,7 +30,7 @@
             android:layout_gravity="center"
             android:padding="@dimen/spacing_large"
             android:text="Your monthly subscription payment failed"
-            android:visibility="gone"/>
+            />
 
     </FrameLayout>
 
@@ -165,7 +167,6 @@
             android:id="@+id/plan_info_credit_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Visa ending in 3837"
             />
 
         <TextView

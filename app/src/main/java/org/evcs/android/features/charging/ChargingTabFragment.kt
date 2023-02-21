@@ -39,6 +39,8 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
     private lateinit var mTextField: StandardTextField
     lateinit var mButton: Button
 
+    val mListener = ChargingNavigationController.getInstance()
+
     companion object {
         fun newInstance(): ChargingTabFragment {
             val args = Bundle()
@@ -120,8 +122,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
     }
 
     private fun goToPlanInfo(id: String) {
-        findNavController()
-            .navigate(ChargingTabFragmentDirections.actionChargingFragmentToPlanInfoFragment(id.toInt()))
+        mListener.goToPlanInfo(id.toInt())
     }
 
     @SuppressLint("MissingPermission")

@@ -1,11 +1,10 @@
 package org.evcs.android.features.main;
 
-import android.os.Bundle;
-
 import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
+import org.evcs.android.features.charging.ChargingNavigationController;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
 
 public class MainNavigationController extends AbstractNavigationController {
@@ -13,7 +12,7 @@ public class MainNavigationController extends AbstractNavigationController {
     private static MainNavigationController mInstance;
     private final MainActivity mActivity;
     private AbstractNavigationController mCurrentController;
-    private @IdRes Integer mRootId;
+    private @IdRes Integer mRootId = R.id.mainMapFragment;
     private boolean mIsInCharging;
     private boolean mIsInProfile;
 
@@ -29,7 +28,7 @@ public class MainNavigationController extends AbstractNavigationController {
 
     @Override
     protected @IdRes int getStartingHistoryBuilder() {
-        return R.id.mainMapFragment;
+        return mRootId;
     }
 
     public void startFlow() {
@@ -41,7 +40,9 @@ public class MainNavigationController extends AbstractNavigationController {
         mIsInCharging = true;
         mIsInProfile = false;
         startFlow();
-        navigate(R.id.chargingFragment);
+        ChargingNavigationController controller = new ChargingNavigationController(mRootId, mNavController);
+        controller.startFlow();
+        mCurrentController = controller;
     }
 
     public void goToProfile() {

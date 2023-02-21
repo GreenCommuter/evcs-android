@@ -17,6 +17,7 @@ public class SubscriptionStatus {
 //                    "remaining_kwh": 12,
 //                    "plan_icon_url": "https://media.evcs.com/plan.png"
     //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
+    public String status;
     public int kwhUsage;
     public DateTime renewalDate;
     public boolean planCoversTime;
@@ -37,6 +38,10 @@ public class SubscriptionStatus {
 
     public String printTotalKwh() {
         return (remainingKwh == null) ? "unlimited" : getTotalKwh().toString();
+    }
+
+    public boolean isSuspended() {
+        return "suspended".equals(status);
     }
 }
 //        "plan_id":3,

@@ -1,7 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="@dimen/spacing_medium"
+    android:background="@color/evcs_dark_purple">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <SurfaceView
+        android:id="@+id/charging_tab_surface_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/charging_tab_button"
+        android:layout_below="@id/charging_tab_value"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
+    <TextView
+        android:id="@+id/charging_tab_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="@dimen/spacing_medium"
+        android:text="No QR Detected"
+        android:textColor="@color/evcs_white"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/charging_tab_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/spacing_medium"
+        android:layout_alignParentBottom="true"
+        style="@style/Button.Orange"/>
+
+</RelativeLayout>

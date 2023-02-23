@@ -30,10 +30,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:background="@color/evcs_purple_gray"/>
+        <include layout="@layout/purple_grey_line"/>
 
         <TextView
             android:id="@+id/profile_menu_payments"
@@ -48,10 +45,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:background="@color/evcs_purple_gray"/>
+        <include layout="@layout/purple_grey_line"/>
 
         <TextView
             android:id="@+id/profile_menu_subscription_plan"
@@ -66,10 +60,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:background="@color/evcs_purple_gray"/>
+        <include layout="@layout/purple_grey_line"/>
 
         <TextView
             android:id="@+id/profile_menu_evcs_terms_and_conditions"
@@ -84,10 +75,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:background="@color/evcs_purple_gray"/>
+        <include layout="@layout/purple_grey_line"/>
 
         <TextView
             android:id="@+id/profile_menu_call_customer_care"
@@ -102,10 +90,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:background="@color/evcs_purple_gray"/>
+        <include layout="@layout/purple_grey_line"/>
 
         <TextView
             android:id="@+id/profile_menu_feedback"
@@ -120,10 +105,7 @@
             android:drawablePadding="@dimen/spacing_medium"
             style="@style/RobotoBold.Body"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/spacing_tiniest"
-            android:background="@color/evcs_purple_gray"/>
+        <include layout="@layout/purple_grey_line"/>
 
         <TextView
             android:id="@+id/profile_menu_version"

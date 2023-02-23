@@ -44,15 +44,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="XXXX XXXX XXXX "
-                    android:textColor="@color/evcs_white"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 <TextView
                     android:id="@+id/credit_card_view_last4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/evcs_white"
-                    style="@style/Roboto.Body"/>
+                    style="@style/Roboto.Body.White"/>
 
                 </LinearLayout>
 

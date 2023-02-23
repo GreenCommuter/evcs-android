@@ -69,6 +69,7 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_alignParentBottom="true"
             android:text="Next"
+            android:enabled="false"
             style="@style/Button.Ariel.Grey"/>
 
     </LinearLayout>

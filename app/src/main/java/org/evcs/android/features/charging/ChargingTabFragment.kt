@@ -2,11 +2,8 @@ package org.evcs.android.features.charging
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.util.SparseArray
 import android.view.SurfaceHolder
@@ -14,20 +11,16 @@ import android.view.SurfaceView
 import android.view.View
 import android.widget.Button
 import androidx.core.widget.doAfterTextChanged
-import androidx.navigation.fragment.findNavController
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
-import com.base.core.util.ToastUtils
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingTabBinding
-import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.ui.fragment.ErrorFragment
-import java.net.URL
 
 
 class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabView {

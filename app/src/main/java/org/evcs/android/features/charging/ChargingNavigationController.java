@@ -8,6 +8,7 @@ import androidx.navigation.NavController;
 import org.evcs.android.R;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
+import org.evcs.android.util.Extras;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -38,13 +39,13 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
 
     public void goToPlanInfo(int id) {
         Bundle args = new Bundle();
-        args.putInt("station_id", id);
+        args.putInt(Extras.PlanInfo.STATION_ID, id);
         navigate(R.id.planInfoFragment, args);
     }
 
     public void goToChangePaymentMethods(@Nullable ArrayList<PaymentMethod> paymentMethods) {
         Bundle args = new Bundle();
-        args.putSerializable("payment_methods", paymentMethods);
+        args.putSerializable(Extras.ChangePaymentMethod.PAYMENT_METHODS, paymentMethods);
         navigate(R.id.changePaymentMethodFragment, args);
     }
 

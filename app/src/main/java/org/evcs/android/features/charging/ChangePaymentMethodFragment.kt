@@ -8,6 +8,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChangePaymentMethodBinding
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.Extras
 
 class ChangePaymentMethodFragment : ErrorFragment<BasePresenter<*>>() {
 
@@ -28,7 +29,8 @@ class ChangePaymentMethodFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun init() {
-        val paymentMethods = requireArguments().getSerializable("payment_methods") as List<PaymentMethod>
+        val paymentMethods = requireArguments().getSerializable(Extras.ChangePaymentMethod.PAYMENT_METHODS)
+                as List<PaymentMethod>
         for (paymentMethod in paymentMethods) {
             val tv = TextView(requireContext())
             tv.setPadding(10, 10, 10, 10)

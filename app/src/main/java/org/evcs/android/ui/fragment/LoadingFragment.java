@@ -3,6 +3,7 @@ package org.evcs.android.ui.fragment;
 import android.app.Dialog;
 import android.os.Bundle;
 import androidx.annotation.CallSuper;
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -11,6 +12,7 @@ import com.base.core.presenter.BasePresenter;
 import com.base.core.util.KeyboardUtils;
 
 import org.evcs.android.EVCSApplication;
+import org.evcs.android.R;
 import org.evcs.android.util.SpinnerUtils;
 
 /**
@@ -28,7 +30,7 @@ public abstract class LoadingFragment<T extends BasePresenter> extends BaseFragm
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Progress dialog
-        mProgressDialog = SpinnerUtils.getNewProgressDialog(getContext());
+        mProgressDialog = SpinnerUtils.getNewProgressDialog(getContext(), getProgressDialogLayout());
     }
 
     @Override
@@ -68,7 +70,11 @@ public abstract class LoadingFragment<T extends BasePresenter> extends BaseFragm
      * @return Progress dialog
      */
     @NonNull
-    protected Dialog getProgressDialog() {
+    protected final Dialog getProgressDialog() {
         return mProgressDialog;
+    }
+
+    protected @LayoutRes int getProgressDialogLayout() {
+        return R.layout.spinner_layout;
     }
 }

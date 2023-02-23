@@ -18,25 +18,25 @@ class AddCreditCardPresenter<T : AddCreditCardView?>(brainTreeFragment: T, servi
     : ServicesPresenter<T>(brainTreeFragment, services) {
 
     private var mClientSecret: String? = null
-    
-    fun makeDefaultPaymentMethod(item: String?) {
-//        getService(BrainTreeService.class).makeDefaultPaymentMethod(item)
-//                .enqueue(new AuthCallback<List<CreditCard>>(this) {
-//                    @Override
-//                    public void onResponseSuccessful(List<CreditCard> creditCardInformations) {
-//                        getView().onMakeDefaultFinished();
-//                    }
-//
-//                    @Override
-//                    public void onResponseFailed(ResponseBody responseBody, int i) {
-//                        getView().showError(ErrorUtils.getError(responseBody));
-//                    }
-//
-//                    @Override
-//                    public void onCallFailure(Throwable throwable) {
-//                        getView().showError(RequestError.getNetworkError());
-//                    }
-//                });
+
+    fun makeDefaultPaymentMethod(id: String?) {
+        getService(PaymentMethodsService::class.java).setDefaultPaymentMethod(id)
+                .enqueue(object : AuthCallback<Void?>(this) {
+                    override fun onResponseSuccessful(response: Void?) {
+                        val user = UserUtils.getLoggedUser()
+                        user.defaultPm = id
+                        UserUtils.saveUser(user)
+                        view.onMakeDefaultFinished()
+                    }
+
+                    override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                        view.showError(ErrorUtils.getError(responseBody))
+                    }
+
+                    override fun onCallFailure(t: Throwable) {
+                        view.showError(RequestError.getNetworkError())
+                    }
+                })
     }
 
     fun getClientSecret() {

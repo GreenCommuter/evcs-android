@@ -158,7 +158,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
                 if (status == StripeIntent.Status.Succeeded) {
                     // Setup completed successfully
                     ToastUtils.show("Payment method added")
-                    finish()
+                    presenter.makeDefaultPaymentMethod(result.intent.paymentMethod!!.id)
 
                 } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
                     ToastUtils.show(setupIntent.lastSetupError!!.message!!)
@@ -173,7 +173,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
     }
 
     fun finish() {
-        NavHostFragment.findNavController(this@AddCreditCardFragment).popBackStack()
+        NavHostFragment.findNavController(this).popBackStack()
     }
 
     interface IBrainTreeListener : INavigationListener {

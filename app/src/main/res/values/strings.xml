@@ -29,6 +29,7 @@
     <string name="drawer_activity_version_name_prefix_format">v%s</string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
+    <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
 
     <!-- Progress Dialog -->
     <string name="progress_dialog_loading">Loading&#8230;</string>

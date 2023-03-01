@@ -50,9 +50,9 @@ abstract class AbstractAuthFragment<T : AuthPresenter<*>> : LoadingFragment<T>()
     override fun setListeners() {
         mCallbackManager = CallbackManager.Factory.create()
         LoginManager.getInstance()
-            .registerCallback(mCallbackManager, object : FacebookCallback<LoginResult?> {
-                override fun onSuccess(loginResult: LoginResult?) {
-                    presenter.logInFacebook(loginResult!!.accessToken)
+            .registerCallback(mCallbackManager, object : FacebookCallback<LoginResult> {
+                override fun onSuccess(loginResult: LoginResult) {
+                    presenter.logInFacebook(loginResult.accessToken)
                 }
 
                 override fun onCancel() {

@@ -5,9 +5,7 @@ import com.base.networking.utils.NetworkCodes
 import okhttp3.ResponseBody
 import org.evcs.android.model.Station
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.CommandsService
-import org.evcs.android.network.service.StationsService
 import org.evcs.android.network.service.presenter.PollingManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils

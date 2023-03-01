@@ -63,7 +63,7 @@ public class CreditCardView extends LinearLayout {
     }
 
     public void setCreditCard(CreditCard creditCard) {
-        mLast4.setText(creditCard.last4);
+        mLast4.setText(creditCard.getLast4());
         if (creditCard.getProvider() != null)
             mProvider.setImageResource(creditCard.getProvider().getDrawable());
     }
@@ -82,7 +82,7 @@ public class CreditCardView extends LinearLayout {
             public void afterTextChanged(Editable s) {
                 String numbers = StringUtils.onlyNumbers(s);
                 mLast4.setText(numbers.subSequence(Math.min(12, numbers.length()), numbers.length()));
-                CreditCardProvider provider = CreditCardProvider.getProvider(s, false);
+                CreditCardProvider provider = CreditCardProvider.Companion.getProvider(s, false);
                 if (provider == null) {
                     mProvider.setImageDrawable(null);
                 } else {

@@ -20,11 +20,11 @@ class StationView : LinearLayout {
 
     private fun init(context: Context?) {
         val binding = ViewStationBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.stationType.text = mStation.chargerType.printableName
-        binding.stationAc.text = mStation.chargerType.mAc
+        binding.stationType.text = mStation.getChargerType().printableName
+        binding.stationAc.text = mStation.getChargerType().mAc
         binding.stationPower.text = mStation.printKw()
         binding.stationId.text = String.format("Station ID: %d", mStation.id)
-        binding.stationIcon.setImageDrawable(context!!.getDrawable(mStation.chargerType.mIcon))
+        binding.stationIcon.setImageDrawable(context!!.getDrawable(mStation.getChargerType().mIcon))
         binding.stationAvailable.text = mStation.printAvailableStatus()
         binding.stationAvailableDot.isEnabled = mStation.isAvailable
     }

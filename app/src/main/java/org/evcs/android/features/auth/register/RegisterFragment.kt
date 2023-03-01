@@ -13,7 +13,7 @@ import org.evcs.android.databinding.FragmentRegisterBinding
 import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.model.user.AuthUser.TestAuthUser
+import org.evcs.android.model.user.AuthUser.Companion.TestAuthUser
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.*

@@ -2,7 +2,13 @@ package org.evcs.android.features.shared;
 
 import com.base.networking.retrofit.RetrofitServices;
 
+import org.evcs.android.BaseConfiguration;
+import org.evcs.android.model.SupportedVersion;
+import org.evcs.android.network.callback.AuthCallback;
+import org.evcs.android.network.service.VersionService;
 import org.evcs.android.network.service.presenter.ServicesPresenter;
+
+import okhttp3.ResponseBody;
 
 /**
  * this presenter gets the current version of application.
@@ -18,8 +24,8 @@ public class VersionPresenter extends ServicesPresenter<IVersionView> {
      * @param version application version.
      */
     public void checkSupportedVersion(String version) {
-        /*getService(VersionService.class)
-                .isSupportedVersion(Configuration.DEVICE_TYPE, version)
+        getService(VersionService.class)
+                .isSupportedVersion(BaseConfiguration.DEVICE_TYPE, version)
                 .enqueue(new AuthCallback<SupportedVersion>(this) {
                     @Override
                     public void onResponseSuccessful(SupportedVersion supportedVersion) {
@@ -40,6 +46,6 @@ public class VersionPresenter extends ServicesPresenter<IVersionView> {
                             }
                         });
                     }
-                });*/
+                });
     }
 }

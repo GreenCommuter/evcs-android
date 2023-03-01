@@ -8,18 +8,16 @@ import android.view.View;
 import android.view.WindowManager;
 
 import org.evcs.android.R;
-import org.evcs.android.activity.AbstractSupportedVersionActivity;
+import org.evcs.android.activity.NavGraphActivity;
 import org.evcs.android.databinding.ActivityBaseNavhostBinding;
 import org.evcs.android.features.main.MainActivity;
-import org.evcs.android.features.shared.IVersionView;
 import org.evcs.android.util.Extras;
 
-public class AuthActivity extends AbstractSupportedVersionActivity implements IVersionView {
+public class AuthActivity extends NavGraphActivity {
 
     private int mId;
 
-    //TODO: redo design so we don't need to be so strict
-    private static final float MAX_FONT_SIZE = 1.12f;
+//    private static final float MAX_FONT_SIZE = 1.12f;
 
     @Override
     protected View inflate(LayoutInflater layoutInflater) {
@@ -28,18 +26,14 @@ public class AuthActivity extends AbstractSupportedVersionActivity implements IV
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        adjustFontScale(getResources().getConfiguration());
-        if (getIntent().getExtras() == null) return;
-        mId = getIntent().getIntExtra(Extras.Root.ID, -1);
-    }
+    protected void init() {}
 
     @Override
-    public void isSupportedVersion(boolean isSupported, String versionWording) {
-        if(!isSupported) {
-            showNotSupportedVersion(versionWording);
-        }
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+//        adjustFontScale(getResources().getConfiguration());
+        if (getIntent().getExtras() == null) return;
+        mId = getIntent().getIntExtra(Extras.Root.ID, -1);
     }
 
     public void onAuthFinished() {
@@ -50,16 +44,16 @@ public class AuthActivity extends AbstractSupportedVersionActivity implements IV
         startActivity(intent);
     }
 
-    private void adjustFontScale(android.content.res.Configuration configuration) {
-        if (configuration.fontScale > MAX_FONT_SIZE) {
-            configuration.fontScale = MAX_FONT_SIZE;
-            DisplayMetrics metrics = getResources().getDisplayMetrics();
-            WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-            wm.getDefaultDisplay().getMetrics(metrics);
-            metrics.scaledDensity = configuration.fontScale * metrics.density;
-            getBaseContext().getResources().updateConfiguration(configuration, metrics);
-        }
-    }
+//    private void adjustFontScale(android.content.res.Configuration configuration) {
+//        if (configuration.fontScale > MAX_FONT_SIZE) {
+//            configuration.fontScale = MAX_FONT_SIZE;
+//            DisplayMetrics metrics = getResources().getDisplayMetrics();
+//            WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
+//            wm.getDefaultDisplay().getMetrics(metrics);
+//            metrics.scaledDensity = configuration.fontScale * metrics.density;
+//            getBaseContext().getResources().updateConfiguration(configuration, metrics);
+//        }
+//    }
 
     @Override
     protected int getNavGraphId() {

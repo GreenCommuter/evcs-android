@@ -86,7 +86,9 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
 
     @Override
     public void isSupportedVersion(boolean isSupported, String versionWording) {
-
+        if(!isSupported) {
+            showNotSupportedVersion(versionWording);
+        }
     }
 
     public BottomNavigationView getMenuView() {

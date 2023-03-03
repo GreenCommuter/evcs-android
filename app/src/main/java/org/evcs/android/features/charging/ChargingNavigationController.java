@@ -57,4 +57,12 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
     public void setPaymentMethodChangeListener(@NotNull ChangePaymentMethodFragment.PaymentMethodChangeListener listener) {
         mPaymentMethodChangeListener = listener;
     }
+
+    public void startCharging(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
+        Bundle args = new Bundle();
+        args.putSerializable(Extras.StartCharging.STATION_ID, stationId);
+        args.putSerializable(Extras.StartCharging.PM_ID, pmId);
+        args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        navigate(R.id.startChargingFragment, args);
+    }
 }

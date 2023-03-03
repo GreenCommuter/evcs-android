@@ -148,7 +148,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         mBinding.planInfoCouponCode.visibility = View.VISIBLE
 
         mBinding.planInfoButton.isEnabled = true
-        mBinding.planInfoButton.setOnClickListener { ToastUtils.show(mSelectedPM?.id ?: "null") }
+        mBinding.planInfoButton.setOnClickListener {
+            mListener.startCharging(presenter.getStationId(), mSelectedPM?.id, null)
+        }
 
         if (mSelectedPM != null)
             mBinding.planInfoCreditCard.text =

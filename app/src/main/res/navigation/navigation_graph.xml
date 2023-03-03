@@ -48,9 +48,18 @@
         <action
             android:id="@+id/action_planInfoFragment_to_changePaymentMethodFragment"
             app:destination="@id/changePaymentMethodFragment" />
+        <action
+            android:id="@+id/action_planInfoFragment_to_startChargingFragment"
+            app:destination="@id/startChargingFragment" />
     </fragment>
     <fragment
         android:id="@+id/changePaymentMethodFragment"
         android:name="org.evcs.android.features.charging.ChangePaymentMethodFragment"
         android:label="ChangePaymentMethodFragment"/>
+    <fragment
+        android:id="@+id/startChargingFragment"
+        android:name="org.evcs.android.features.charging.StartChargingFragment"
+        android:label="StartChargingFragment"
+        tools:layout="@layout/fragment_start_charging">
+    </fragment>
 </navigation>

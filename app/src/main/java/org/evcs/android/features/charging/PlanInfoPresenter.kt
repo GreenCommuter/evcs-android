@@ -1,5 +1,6 @@
 package org.evcs.android.features.charging
 
+import android.content.Intent
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaginatedResponse
@@ -95,6 +96,10 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 view.show(mStation!!, mStatus!!.currentSubscription)
             }
         }
+    }
+
+    fun getStationId(): Int {
+        return mStation!!.id
     }
 
 }

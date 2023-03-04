@@ -31,10 +31,6 @@ public class Extras {
         public static final String VIEWPORT = "Viewport";
     }
 
-    public static class PaymentActivity {
-        public static final String CARD = "Card";
-    }
-
     public static final class ForgotPassword {
         public static final String PATH = "/reset_password";
         public static final String EMAIL = "email";
@@ -43,5 +39,13 @@ public class Extras {
 
     public static class SessionInformationActivity {
         public static final String CHARGE = "Charge";
+    }
+
+    public static class PlanInfo {
+        public static final String STATION_ID = "station_id";
+    }
+
+    public class ChangePaymentMethod {
+        public static final String PAYMENT_METHODS = "payment_methods";
     }
 }

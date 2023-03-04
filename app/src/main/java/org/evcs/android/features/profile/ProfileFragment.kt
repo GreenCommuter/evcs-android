@@ -5,6 +5,7 @@ import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BuildConfig
 import org.evcs.android.R
+import org.evcs.android.activity.ChargingHistoryActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController
@@ -39,6 +40,7 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
         mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener {  }
+        mBinding.profileMenuChargingHistory.setOnClickListener { NavigationUtils.jumpTo(requireContext(), ChargingHistoryActivity::class.java) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener {  }
         mBinding.profileMenuCallCustomerCare.setOnClickListener {  }
         mBinding.profileMenuFeedback.setOnClickListener {  }

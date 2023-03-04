@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
@@ -40,10 +41,10 @@ public final class SpinnerUtils {
                 context, R.string.progress_dialog_loading, false);
     }
 
-    public static Dialog getNewProgressDialog(Context context) {
+    public static Dialog getNewProgressDialog(Context context, @LayoutRes int layout) {
         Dialog dialog = new Dialog(context);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        dialog.setContentView(R.layout.spinner_layout);
+        dialog.setContentView(layout);
         dialog.setCancelable(false);
         return dialog;
     }

@@ -1,4 +1,4 @@
-package org.evcs.android.model;
+package org.evcs.android.model.push;
 
 /**
  * Class that represents a unique token that identifies a device. We send this to API so they know

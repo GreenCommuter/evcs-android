@@ -7,17 +7,25 @@ import android.text.TextUtils;
 import androidx.annotation.Nullable;
 
 import com.base.core.util.NavigationUtils;
+import com.base.core.util.ToastUtils;
 import com.base.networking.retrofit.serializer.BaseGsonBuilder;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 
 import org.evcs.android.EVCSApplication;
+import org.evcs.android.R;
 import org.evcs.android.features.auth.initialScreen.AuthActivity;
 import org.evcs.android.features.main.MainActivity;
 import org.evcs.android.model.user.AuthUser;
 import org.evcs.android.model.user.User;
 import org.evcs.android.network.callback.AuthCallback;
 import org.evcs.android.network.serializer.DateTimeDeserializer;
+import org.evcs.android.network.service.UserService;
 import org.joda.time.DateTime;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public final class UserUtils {
     private static final String USER_SESSION_PREF = "UserSessionToken";
@@ -96,9 +104,27 @@ public final class UserUtils {
      * Removes the current user from shared preferences.
      */
     public static void logout(@Nullable final AuthCallback<Void> authCallback) {
-        clearKeys();
+        UserService mUserService = EVCSApplication.getInstance().getRetrofitServices()
+                .getService(UserService.class);
 
-        // Jump to main screen
+        mUserService.logOut(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                clearKeys();
+                jumpToMainScreen();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                if (authCallback != null) {
+                    authCallback.onFailure(call, t);
+                }
+                ToastUtils.show(R.string.app_error_network);
+            }
+        });
+    }
+
+    private static void jumpToMainScreen() {
         Context context = EVCSApplication.getInstance().getApplicationContext();
         Intent intent1 = new Intent(context, MainActivity.class);
         intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

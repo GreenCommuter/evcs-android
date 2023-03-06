@@ -36,7 +36,6 @@
             android:id="@+id/charging_in_progress_energy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="22.013 kWh"
             android:textSize="@dimen/font_huge"
             android:textColor="@color/evcs_white"
             />
@@ -68,14 +67,13 @@
             android:id="@+id/charging_in_progress_session_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3 hr 18 min"
             android:textSize="@dimen/font_huge"
             android:textColor="@color/evcs_white"
             />
 
     </LinearLayout>
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -85,8 +83,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/evcs_purple_gray"
-            android:text="Session Status"
-            />
+            android:text="Session Status"/>
 
         <TextView
             android:id="@+id/charging_in_progress_status"
@@ -95,10 +92,21 @@
             android:textColor="@color/evcs_white"
             android:text="Charging"
             android:textAllCaps="true"
-            android:layout_gravity="end"
+            android:layout_alignParentEnd="true"
             />
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/charging_in_progress_status_icon"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_toStartOf="@+id/charging_in_progress_status"
+            android:src="@drawable/ic_bolt_solid"
+            app:tint="@color/evcs_white"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            />
+
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
@@ -145,12 +153,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/charging_in_progress_site_icon"
-            android:text="Station ID: 12345678"
+            android:text="Station ID: "
             android:layout_below="@id/charging_in_progress_site_name"
             style="@style/Roboto.Body.White"
             />
 
-
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/charging_in_progress_last_update"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:layout_toEndOf="@id/charging_in_progress_site_icon"
+        android:text="Last update: "
+        android:layout_below="@id/charging_in_progress_site_name"
+        style="@style/Roboto.Body.White"
+        />
 
 </LinearLayout>

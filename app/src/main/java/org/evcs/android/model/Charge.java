@@ -8,17 +8,18 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import java.io.Serializable;
 
 public class Charge implements Serializable {
-    //        "id": 3,
+    private int id;
     private String noodoeId;
     private DateTime startedAt;
 //            "completed_at": "2020-08-13T15:01:51.000Z",
     private int locationId;
-    private int duration; //unit? ms?
+    private float duration; //unit? ms?
 
 //            "charger_type": "DC",
 //            "connector": "CHAdeMO",
     private float kwh;
     private float price;
+    private String status;
 
 //            "user_id": 1,
 //            "user_name": "Osvaldo",
@@ -40,7 +41,6 @@ public class Charge implements Serializable {
 //                "plan_id": 2,
 //                "active_since": "2020-08-28T14:36:54Z",
 //                "renewal_date": "2020-09-28T14:36:54Z",
-//                "status": "active"
 //        "valid_from": null,
 //                "valid_to": "2020-09-28T14:36:54Z",
 //                "lockup_time": 10,
@@ -83,7 +83,7 @@ public class Charge implements Serializable {
         return locationId;
     }
 
-    public int getDuration() {
+    public float getDuration() {
         return duration;
     }
 

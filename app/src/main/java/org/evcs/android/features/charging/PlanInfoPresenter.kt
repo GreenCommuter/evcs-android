@@ -51,7 +51,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     }
 
     private fun getStation(id : Int) {
-        mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStation(id),
+        mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStationFromQR(id),
                 object : AuthCallback<PaginatedResponse<Station>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {
                         mStation = response!!.page.getOrNull(0)

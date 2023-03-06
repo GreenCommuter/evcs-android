@@ -149,7 +149,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
         mBinding.planInfoButton.isEnabled = true
         mBinding.planInfoButton.setOnClickListener {
-            mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
+            goToStartCharging()
         }
 
         if (mSelectedPM != null)
@@ -182,6 +182,10 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun getProgressDialogLayout(): Int {
         return R.layout.spinner_layout_black
+    }
+
+    private fun goToStartCharging() {
+        mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
     }
 
 }

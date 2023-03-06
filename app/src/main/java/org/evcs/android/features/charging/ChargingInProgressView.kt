@@ -1,3 +1,8 @@
 package org.evcs.android.features.charging
 
-interface ChargingInProgressView 
+import org.evcs.android.model.Session
+import org.evcs.android.ui.view.shared.IErrorView
+
+interface ChargingInProgressView : IErrorView {
+    fun onChargeRetrieved(response: Session)
+}

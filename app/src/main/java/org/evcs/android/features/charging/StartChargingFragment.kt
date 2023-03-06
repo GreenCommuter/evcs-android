@@ -5,6 +5,7 @@ import android.view.View
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentStartChargingBinding
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 
@@ -25,7 +26,9 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
             )
     }
 
-    override fun init() { }
+    override fun init() {
+        (mBinding.startChargingImage.background as AnimationDrawable).start()
+    }
 
     override fun setUi(v: View) {
         mBinding = FragmentStartChargingBinding.bind(v)
@@ -38,13 +41,24 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     private fun startCharging() {
-//        presenter.startSession()
+        presenter.startSession()
         mBinding.startChargingImage.setBackgroundResource(R.drawable.preparing)
         (mBinding.startChargingImage.background as AnimationDrawable).start()
         mBinding.startChargingText.text = "Preparing to start charging"
         mBinding.startChargingSubtext.text = "This should only take a couple of seconds"
         mBinding.startChargingButton.visibility = View.GONE
+    }
 
+    //TODO: show message
+    override fun showError(requestError: RequestError) {
+        super.showError(requestError)
+        mBinding.startChargingImage.setBackgroundResource(R.drawable.not_charging)
+        mBinding.startChargingText.text = ""
+        mBinding.startChargingSubtext.text = ""
+        mBinding.startChargingButton.visibility = View.VISIBLE
+    }
+
+    override fun onSessionStarted() {
         mListener.onChargingStarted()
     }
 }

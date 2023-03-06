@@ -149,7 +149,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
         mBinding.planInfoButton.isEnabled = true
         mBinding.planInfoButton.setOnClickListener {
-            mListener.startCharging(presenter.getStationId(), mSelectedPM?.id, null)
+            mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
         }
 
         if (mSelectedPM != null)

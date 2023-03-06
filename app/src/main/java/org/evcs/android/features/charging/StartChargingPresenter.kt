@@ -11,14 +11,17 @@ import org.evcs.android.util.ErrorUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.Serializable
 
-class StartChargingPresenter(viewInstance: StartChargingView?, services: RetrofitServices?) :
+class StartChargingPresenter(viewInstance: StartChargingView?, services: RetrofitServices?,
+    val mStationId: Int, val mPmId: String?, val mCoupons: ArrayList<String>?
+) :
         ServicesPresenter<StartChargingView?>(viewInstance, services) {
 
     private val LOCATION_KEY = "location"
 
     fun startSession() {
-        getService(CommandsService::class.java).startSession(0, null, null).enqueue(object : Callback<Void> {
+        getService(CommandsService::class.java).startSession(0, mPmId, mCoupons).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>?, response: Response<Void>?) {
                 val headers = response!!.headers()
                 val url = headers[LOCATION_KEY]
@@ -54,11 +57,4 @@ class StartChargingPresenter(viewInstance: StartChargingView?, services: Retrofi
         })
     }
 
-    fun getCurrentCharge() {
-
-    }
-
-    fun stopSession() {
-
-    }
 }

@@ -2,8 +2,6 @@ package org.evcs.android.features.charging
 
 import android.view.View
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.features.charging.ChargingInProgressPresenter
-import org.evcs.android.features.charging.ChargingInProgressView
 import org.evcs.android.R
 import org.evcs.android.EVCSApplication
 import org.evcs.android.databinding.FragmentChargingInProgressBinding

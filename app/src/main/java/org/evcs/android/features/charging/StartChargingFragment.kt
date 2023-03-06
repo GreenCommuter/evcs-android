@@ -2,13 +2,15 @@ package org.evcs.android.features.charging
 
 import android.graphics.drawable.AnimationDrawable
 import android.view.View
-import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.R
 import org.evcs.android.EVCSApplication
+import org.evcs.android.R
 import org.evcs.android.databinding.FragmentStartChargingBinding
+import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.Extras
 
 class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChargingView {
 
+    private val mListener: ChargingNavigationController = ChargingNavigationController.getInstance()
     private lateinit var mBinding: FragmentStartChargingBinding
 
     override fun layout(): Int {
@@ -16,10 +18,14 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun createPresenter(): StartChargingPresenter {
-        return StartChargingPresenter(this, EVCSApplication.getInstance().retrofitServices)
+        return StartChargingPresenter(this, EVCSApplication.getInstance().retrofitServices,
+                requireArguments().getInt(Extras.StartCharging.STATION_ID),
+                requireArguments().getString(Extras.StartCharging.PM_ID),
+                requireArguments().getSerializable(Extras.StartCharging.COUPONS) as ArrayList<String>?,
+            )
     }
 
-    override fun init() {}
+    override fun init() { }
 
     override fun setUi(v: View) {
         mBinding = FragmentStartChargingBinding.bind(v)
@@ -38,5 +44,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         mBinding.startChargingText.text = "Preparing to start charging"
         mBinding.startChargingSubtext.text = "This should only take a couple of seconds"
         mBinding.startChargingButton.visibility = View.GONE
+
+        mListener.onChargingStarted()
     }
 }

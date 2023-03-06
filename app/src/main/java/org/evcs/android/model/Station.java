@@ -15,6 +15,7 @@ public class Station implements Serializable {
     List<Outlet> outlets;
     String chargerType;
     Pricing pricing;
+    Object connectors;
 
     public int getId() {
         return id;

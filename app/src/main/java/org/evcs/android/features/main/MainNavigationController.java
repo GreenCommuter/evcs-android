@@ -57,7 +57,7 @@ public class MainNavigationController extends AbstractNavigationController {
         if (!mIsInCharging && !mIsInProfile) return;
         mIsInCharging = false;
         mIsInProfile = false;
-        mNavController.popBackStack();
+        mNavController.popBackStack(R.id.mainMapFragment, false);
         mActivity.getMenuView().setSelectedItemId(R.id.menu_drawer_map);
     }
 

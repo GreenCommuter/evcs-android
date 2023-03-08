@@ -1,5 +1,6 @@
 package org.evcs.android.features.charging
 
+import android.content.Intent
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaginatedResponse
@@ -50,7 +51,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     }
 
     private fun getStation(id : Int) {
-        mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStation(id),
+        mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStationFromQR(id),
                 object : AuthCallback<PaginatedResponse<Station>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {
                         mStation = response!!.page.getOrNull(0)
@@ -95,6 +96,10 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 view.show(mStation!!, mStatus!!.currentSubscription)
             }
         }
+    }
+
+    fun getStationId(): Int {
+        return mStation!!.id
     }
 
 }

@@ -48,4 +48,10 @@ public class Extras {
     public class ChangePaymentMethod {
         public static final String PAYMENT_METHODS = "payment_methods";
     }
+
+    public class StartCharging {
+        public static final String STATION_ID = "station_id";
+        public static final String PM_ID = "pm_id";
+        public static final String COUPONS = "coupons";
+    }
 }

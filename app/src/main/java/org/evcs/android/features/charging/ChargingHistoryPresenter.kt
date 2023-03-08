@@ -7,7 +7,7 @@ import org.evcs.android.model.Charge
 import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
-import org.evcs.android.network.service.ChargesServices
+import org.evcs.android.network.service.ChargesService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 import org.evcs.android.util.PaginationState
@@ -23,7 +23,7 @@ class ChargingHistoryPresenter(viewInstance: ChargingHistoryView?, services: Ret
     }
 
     fun getNextPage() {
-        getService(ChargesServices::class.java)
+        getService(ChargesService::class.java)
             .getCharges(UserUtils.getUserId(), mState.page, BaseConfiguration.ChargingHistory.ITEMS_PER_PAGE)
             .enqueue(object : AuthCallback<PaginatedResponse<Charge?>>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Charge?>) {

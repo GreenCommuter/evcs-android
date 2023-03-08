@@ -7,12 +7,16 @@ import org.evcs.android.model.SubscriptionStatusWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface StationsService {
 
     @GET("/members/v1/stations")
-    Call<PaginatedResponse<Station>> getStation(@Query("name") int id);
+    Call<PaginatedResponse<Station>> getStationFromQR(@Query("name") int id);
+
+    @GET("/members/v1/stations/{id}")
+    Call<Station> getStation(@Path("id") int id);
 
 //    STATUS_ENDPOINT:
     @GET("/members/v1/users/status")

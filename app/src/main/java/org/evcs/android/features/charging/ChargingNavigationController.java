@@ -28,6 +28,7 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         return mInstance;
     }
 
+    //TODO: if there's an ongoing charge go straight to it
     @Override
     protected @IdRes int getStartingHistoryBuilder() {
         return R.id.chargingFragment;
@@ -56,5 +57,17 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
 
     public void setPaymentMethodChangeListener(@NotNull ChangePaymentMethodFragment.PaymentMethodChangeListener listener) {
         mPaymentMethodChangeListener = listener;
+    }
+
+    public void goToStartCharging(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
+        Bundle args = new Bundle();
+        args.putInt(Extras.StartCharging.STATION_ID, stationId);
+        args.putString(Extras.StartCharging.PM_ID, pmId);
+        args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        navigate(R.id.startChargingFragment, args);
+    }
+
+    public void onChargingStarted() {
+        navigate(R.id.chargingInProgressFragment);
     }
 }

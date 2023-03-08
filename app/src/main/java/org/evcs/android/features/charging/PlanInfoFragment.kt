@@ -148,7 +148,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         mBinding.planInfoCouponCode.visibility = View.VISIBLE
 
         mBinding.planInfoButton.isEnabled = true
-        mBinding.planInfoButton.setOnClickListener { ToastUtils.show(mSelectedPM?.id ?: "null") }
+        mBinding.planInfoButton.setOnClickListener {
+            goToStartCharging()
+        }
 
         if (mSelectedPM != null)
             mBinding.planInfoCreditCard.text =
@@ -180,6 +182,10 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun getProgressDialogLayout(): Int {
         return R.layout.spinner_layout_black
+    }
+
+    private fun goToStartCharging() {
+        mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
     }
 
 }

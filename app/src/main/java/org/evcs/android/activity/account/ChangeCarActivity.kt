@@ -15,9 +15,7 @@ class ChangeCarActivity : BaseActivity2() {
     }
 
     override fun init() {
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.activity_base_content, ChangeCarFragment::class.java, null)
-            .commit()
+        replaceFragment(R.id.activity_base_content, ChangeCarFragment::class.java)
     }
 
 }

@@ -15,6 +15,7 @@ public class Station implements Serializable {
     List<Outlet> outlets;
     String chargerType;
     Pricing pricing;
+    List<Connector> connectors;
 
     public int getId() {
         return id;
@@ -54,6 +55,10 @@ public class Station implements Serializable {
 
     public boolean isAvailable() {
         return getAvailableStatus().equals(AvailableStatus.AVAILABLE);
+    }
+
+    public int getFirstConnectorId() {
+        return connectors.get(0).id;
     }
 
     public enum AvailableStatus {

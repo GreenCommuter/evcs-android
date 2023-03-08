@@ -36,4 +36,22 @@ public class Extras {
         public static final String EMAIL = "email";
         public static final String ID = "identifier";
     }
+
+    public static class SessionInformationActivity {
+        public static final String CHARGE = "Charge";
+    }
+
+    public static class PlanInfo {
+        public static final String STATION_ID = "station_id";
+    }
+
+    public class ChangePaymentMethod {
+        public static final String PAYMENT_METHODS = "payment_methods";
+    }
+
+    public class StartCharging {
+        public static final String STATION_ID = "station_id";
+        public static final String PM_ID = "pm_id";
+        public static final String COUPONS = "coupons";
+    }
 }

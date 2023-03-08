@@ -62,9 +62,7 @@ class SearchActivity : BaseActivity2(), SearchActivityView {
         super.populate()
         mSearchLocationChildFragment = SearchLocationChildFragment.newInstance()
 //        mSearchLocationChildFragment.setDefault("asdasd")
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment)
-            .commit()
+        replaceFragment(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment)
         mHistoryRecycler.layoutManager =
             LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         refreshHistoryView()

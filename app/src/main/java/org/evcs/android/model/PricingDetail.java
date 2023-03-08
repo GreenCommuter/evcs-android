@@ -5,15 +5,18 @@ import androidx.annotation.Nullable;
 import java.io.Serializable;
 
 public class PricingDetail implements Serializable {
-    private float priceKwh;
+    public Float priceKwh;
     private Float initialFee;
     private Float occupancyFlatFee;
     private Integer bufferTime;
 //    int firstHour;
 //    int firstHourPrice;
-//    int thereafterPrice;
+    public Integer thereafterPrice;
 //    int regularMinimumCost;
+    public boolean showFreeChargingCode;
+    public String freeChargingCode;
 
+    //TODO: chequear que pasa si es null
     public String printPriceKwh() {
         return String.format("%.2f USD/kWh", priceKwh);
     }

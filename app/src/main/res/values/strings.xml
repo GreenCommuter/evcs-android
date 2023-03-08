@@ -86,8 +86,6 @@
     <string name="choose_service_vanpooling_title">Vanpooling</string>
     <string name="choose_service_carsharing_title">Car Sharing</string>
     <string name="choose_service_corporate_title">Corporate</string>
-    <string name="choose_service_vanpooling_description_wording_key">vanpooling_choose_service_description</string>
-    <string name="choose_service_carsharing_description_wording_key">carsharing_choose_service_description</string>
 
     <!--Placeholder Fragment-->
     <string name="placeholder_no_internet_dialog_title">Connection Lost</string>
@@ -311,17 +309,10 @@
     <!-- Vanpool Ongoing ride -->
     <string name="vanpool_ongoing_ride_title">Ongoing Ride</string>
     <string name="vanpool_ongoing_ride_finish_booking">Finish journey</string>
-    <string name="vanpool_ongoing_ride_start_engine">Start Car</string>
-    <string name="vanpool_ongoing_ride_lock_car">Lock car</string>
-    <string name="vanpool_ongoing_ride_unlock_car">Unlock car</string>
-    <string name="vanpool_ongoing_ride_tab_controls">CONTROLS</string>
-    <string name="vanpool_ongoing_ride_tab_end_trip">END TRIP</string>
     <string name="vanpool_ongoing_ride_enable_location_dialog_title">Location error</string>
     <string name="vanpool_ongoing_ride_report_text">Reports can be submitted for any big or small issues \nfound when using the car.</string>
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
-    <string name="vanpool_ongoing_ride_lock_toggle_error">There was an error whilst trying to lock/unlock the car. Please try again or contact customer support!</string>
-    <string name="vanpool_ongoing_ride_start_engine_error">There was an error whilst trying to start the engine of the car. Please try again or contact customer support!</string>
     <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
     <string name="vanpool_ongoing_ride_tracking_enabled">Tracking enabled</string>
     <string name="vanpool_ongoing_ride_tracking_disabled">Tracking disabled</string>
@@ -331,7 +322,6 @@
     <string name="vanpool_ongoing_ride_control_unlock">Unlock</string>
     <string name="vanpool_ongoing_ride_control_lock_unlock">Lock / Unlock</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
-    <string name="vanpool_ongoing_ride_end_trip_return">Return the car to</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
     <string name="vanpool_ongoing_ride_map_uri_format">http://maps.google.com/maps?%s&amp;dirflg=d</string>
@@ -353,9 +343,6 @@
 
     <string name="vanpool_ongoing_ride_dismiss">Dismiss</string>
     <string name="vanpool_ongoing_ride_do_not_show_again">Do not show again</string>
-
-    <!-- Vanpool Post-Checklist -->
-    <string name="vanpool_post_checklist_lock_car">Lock</string>
 
     <!--Book Now-->
     <string name="book_now_parking_space_nearby">Cars nearby</string>
@@ -389,24 +376,17 @@
     <string name="create_booking_toolbar_title">Car sharing</string>
     <string name="create_booking_pick_up">Pick up time</string>
     <string name="create_booking_drop_off">Drop off time</string>
-    <string name="create_booking_choose_your_car">Choose your car</string>
     <string name="create_booking_confirm_booking">Confirm booking</string>
-    <string name="create_booking_issues_car">Any issues with the car?</string>
-    <string name="create_booking_fetch_bookable_cars_error">There was an error while displaying the available cars. Please try again later!</string>
-    <string name="create_booking_create_booking_error">You already have a booking on that date.</string>
-    <string name="create_booking_started_title">This booking has already been started</string>
     <string name="create_booking_car_title">Car</string>
     <string name="create_booking_car_name_format">%1$s %2$s</string>
     <string name="create_booking_car_plate_format">#%s</string>
     <string name="create_booking_plus_tax">+ tax</string>
-    <string name="create_booking_unavailable_plan">You have reached the limit of booking hours allowed by your car share plan.</string>
     <string name="create_booking_wallet_error_title">The payment has failed</string>
     <string name="create_booking_wallet_error_subtitle">Please edit your wallet information</string>
     <string name="create_booking_wallet_error_edit">Go to Wallet</string>
     <string name="create_booking_wallet_error_cancel">Cancel</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
     <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
-    <string name="create_booking_choose_a_diferent_car">Choose a different car</string>
     <string name="create_booking_please_select_a_car">Please select a car</string>
 
     <!-- My Trips -->
@@ -508,5 +488,33 @@
     <string name="activity_stations_charger_details">Charger Details</string>
     <string name="activity_stations_connection_fee">Connection Fee</string>
     <string name="activity_stations_occupancy_fee">Occupancy Fee</string>
+
+    <!-- Plan info-->
+    <string name="plan_info_title">Start charging</string>
+    <string name="plan_info_discounted_charge_rate">Discounted charge rate</string>
+    <string name="plan_info_upgrade_plan">Upgrade plan</string>
+    <string name="plan_info_dialog_cancel">Cancel charging session?</string>
+    <string name="plan_info_upgrade_plan_dialog">Get 30 days free when you upgrade to the Standard Anytime plan!</string>
+    <string name="plan_info_date_pattern">d/M/yyyy</string>
+    <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then</string>
+    <string name="plan_info_peak_hours">It is during peak hours (6am - 10pm) \n You’ll be charged a flat rate of $$.2f/kWh \n Charge anytime from 10pm - 6am at no cost\"</string>
+    <string name="plan_info_pay_as_you_go">Pay as you go</string>
+    <string name="plan_info_start_charging">Start Charging Session</string>
+    <string name="plan_info_free_title">Free Charging!</string>
+    <string name="plan_info_free_subtitle">Charging is free at this location</string>
+
+    <!-- Start Charging-->
+    <string name="start_charging_preparing_subtitle">This should only take a couple of seconds</string>
+    <string name="start_charging_preparing">Preparing to start charging</string>
+    <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
+    <string name="start_charging_button">Start charging</string>
+    <string name="start_charging_title">Start to charge</string>
+
+    <!-- Charging in progress-->
+    <string name="charging_in_progress_title">Charging</string>
+    <string name="charging_in_progress_kwh">Energy Delivered</string>
+    <string name="charging_in_progress_duration">Session Time Elapsed</string>
+    <string name="charging_in_progress_status">Session Status</string>
+    <string name="charging_in_progress_site">Charging Site</string>
 
 </resources>

@@ -28,6 +28,6 @@ public interface LocationService {
                                                    @Query("connector") @Nullable String connector);
 
     @GET("/members/v1/locations/{id}")
-    Call <Location> getLocation(@Path("id") int id);
+    Call<Location> getLocation(@Path("id") int id);
 
 }

@@ -55,12 +55,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void setListeners() {
     }
 
-    protected void replaceFragment(int resId, Fragment f) {
-        this.getSupportFragmentManager().beginTransaction().replace(resId, f).commit();
+    protected void replaceFragment(int resId, Class<? extends Fragment> f) {
+        this.getSupportFragmentManager().beginTransaction().replace(resId, f, null).commit();
     }
 
-    protected void replaceFragment(int resId, Fragment f, String tag) {
-        this.getSupportFragmentManager().beginTransaction().replace(resId, f, tag).commit();
+    protected void replaceFragment(int resId, Fragment f) {
+        this.getSupportFragmentManager().beginTransaction().replace(resId, f).commit();
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {

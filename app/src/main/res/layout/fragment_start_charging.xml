@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/start_charging_title"
+        app:navigationIcon="@drawable/back_arrow"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/spacing_medium"
+        android:background="@color/evcs_dark_purple"
+        android:gravity="center_horizontal">
+
+        <ImageView
+            android:id="@+id/start_charging_image"
+            android:layout_width="392dp"
+            android:layout_height="256dp"
+            android:layout_marginTop="@dimen/spacing_large"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:background="@drawable/not_charging"/>
+
+        <TextView
+            android:id="@+id/start_charging_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_charging_footer"
+            android:textSize="@dimen/font_medium_more"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            style="@style/Roboto.Body.White"/>
+
+        <TextView
+            android:id="@+id/start_charging_subtext"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/evcs_purple_gray"
+            style="@style/Roboto.Body.White"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/start_charging_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/start_charging_button"
+            style="@style/Button.Orange"/>
+
+    </LinearLayout>
+
+</LinearLayout>

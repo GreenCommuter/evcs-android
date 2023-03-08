@@ -8,7 +8,7 @@
     <org.evcs.android.ui.view.shared.EVCSToolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Start to charge"
+        app:title="@string/start_charging_title"
         app:navigationIcon="@drawable/back_arrow"/>
 
     <LinearLayout
@@ -31,7 +31,7 @@
             android:id="@+id/start_charging_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Plug the charging connector into the vehicle"
+            android:text="@string/start_charging_footer"
             android:textSize="@dimen/font_medium_more"
             android:layout_marginBottom="@dimen/spacing_medium"
             style="@style/Roboto.Body.White"/>
@@ -52,7 +52,7 @@
             android:id="@+id/start_charging_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start charging"
+            android:text="@string/start_charging_button"
             style="@style/Button.Orange"/>
 
     </LinearLayout>

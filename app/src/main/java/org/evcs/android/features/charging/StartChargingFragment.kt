@@ -44,8 +44,8 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         presenter.startSession()
         mBinding.startChargingImage.setBackgroundResource(R.drawable.preparing)
         (mBinding.startChargingImage.background as AnimationDrawable).start()
-        mBinding.startChargingText.text = "Preparing to start charging"
-        mBinding.startChargingSubtext.text = "This should only take a couple of seconds"
+        mBinding.startChargingText.text = getString(R.string.start_charging_preparing)
+        mBinding.startChargingSubtext.text = getString(R.string.start_charging_preparing_subtitle)
         mBinding.startChargingButton.visibility = View.GONE
     }
 

@@ -309,17 +309,10 @@
     <!-- Vanpool Ongoing ride -->
     <string name="vanpool_ongoing_ride_title">Ongoing Ride</string>
     <string name="vanpool_ongoing_ride_finish_booking">Finish journey</string>
-    <string name="vanpool_ongoing_ride_start_engine">Start Car</string>
-    <string name="vanpool_ongoing_ride_lock_car">Lock car</string>
-    <string name="vanpool_ongoing_ride_unlock_car">Unlock car</string>
-    <string name="vanpool_ongoing_ride_tab_controls">CONTROLS</string>
-    <string name="vanpool_ongoing_ride_tab_end_trip">END TRIP</string>
     <string name="vanpool_ongoing_ride_enable_location_dialog_title">Location error</string>
     <string name="vanpool_ongoing_ride_report_text">Reports can be submitted for any big or small issues \nfound when using the car.</string>
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
-    <string name="vanpool_ongoing_ride_lock_toggle_error">There was an error whilst trying to lock/unlock the car. Please try again or contact customer support!</string>
-    <string name="vanpool_ongoing_ride_start_engine_error">There was an error whilst trying to start the engine of the car. Please try again or contact customer support!</string>
     <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
     <string name="vanpool_ongoing_ride_tracking_enabled">Tracking enabled</string>
     <string name="vanpool_ongoing_ride_tracking_disabled">Tracking disabled</string>
@@ -329,7 +322,6 @@
     <string name="vanpool_ongoing_ride_control_unlock">Unlock</string>
     <string name="vanpool_ongoing_ride_control_lock_unlock">Lock / Unlock</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
-    <string name="vanpool_ongoing_ride_end_trip_return">Return the car to</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
     <string name="vanpool_ongoing_ride_map_uri_format">http://maps.google.com/maps?%s&amp;dirflg=d</string>
@@ -351,9 +343,6 @@
 
     <string name="vanpool_ongoing_ride_dismiss">Dismiss</string>
     <string name="vanpool_ongoing_ride_do_not_show_again">Do not show again</string>
-
-    <!-- Vanpool Post-Checklist -->
-    <string name="vanpool_post_checklist_lock_car">Lock</string>
 
     <!--Book Now-->
     <string name="book_now_parking_space_nearby">Cars nearby</string>
@@ -398,7 +387,6 @@
     <string name="create_booking_wallet_error_cancel">Cancel</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
     <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
-    <string name="create_booking_choose_a_diferent_car">Choose a different car</string>
     <string name="create_booking_please_select_a_car">Please select a car</string>
 
     <!-- My Trips -->
@@ -514,5 +502,19 @@
     <string name="plan_info_start_charging">Start Charging Session</string>
     <string name="plan_info_free_title">Free Charging!</string>
     <string name="plan_info_free_subtitle">Charging is free at this location</string>
+
+    <!-- Start Charging-->
+    <string name="start_charging_preparing_subtitle">This should only take a couple of seconds</string>
+    <string name="start_charging_preparing">Preparing to start charging</string>
+    <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
+    <string name="start_charging_button">Start charging</string>
+    <string name="start_charging_title">Start to charge</string>
+
+    <!-- Charging in progress-->
+    <string name="charging_in_progress_title">Charging</string>
+    <string name="charging_in_progress_kwh">Energy Delivered</string>
+    <string name="charging_in_progress_duration">Session Time Elapsed</string>
+    <string name="charging_in_progress_status">Session Status</string>
+    <string name="charging_in_progress_site">Charging Site</string>
 
 </resources>

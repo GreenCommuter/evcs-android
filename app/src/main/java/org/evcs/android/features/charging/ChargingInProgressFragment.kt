@@ -12,7 +12,6 @@ import org.joda.time.format.DateTimeFormat
 class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     ChargingInProgressView {
 
-    private lateinit var mCharge: Session
     private lateinit var mBinding: FragmentChargingInProgressBinding
 
     override fun layout(): Int {

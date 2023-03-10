@@ -41,11 +41,13 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter, Location>
     private lateinit var mCenterButton: ImageView
     private lateinit var mLoading: ProgressBar
 
-    fun newInstance(): MainMapFragment2 {
-        val args = Bundle()
-        val fragment = MainMapFragment2()
-        fragment.arguments = args
-        return fragment
+    companion object {
+        fun newInstance(): MainMapFragment2 {
+            val args = Bundle()
+            val fragment = MainMapFragment2()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
     override fun layout(): Int {

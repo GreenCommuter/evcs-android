@@ -8,7 +8,6 @@ import org.evcs.android.R
 import org.evcs.android.activity.ChargingHistoryActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.databinding.FragmentProfileBinding
-import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.UserUtils
@@ -17,7 +16,11 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
 
     private lateinit var mBinding: FragmentProfileBinding
 
-    val mNavigationListener = MainNavigationController.getInstance()
+    companion object {
+        fun newInstance(): ProfileFragment {
+            return ProfileFragment()
+        }
+    }
 
     override fun layout(): Int {
         return R.layout.fragment_profile
@@ -48,8 +51,4 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
         super.setListeners()
     }
 
-    override fun onBackPressed(): Boolean {
-        mNavigationListener.onMapClicked()
-        return true
-    }
 }

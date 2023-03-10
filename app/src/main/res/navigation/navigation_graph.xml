@@ -6,68 +6,6 @@
     app:startDestination="@id/rootFragment">
     <fragment
         android:id="@+id/rootFragment"
-        android:name="org.evcs.android.ui.fragment.EmptyFragment">
-        <action
-            android:id="@+id/action_rootFragment_to_chooseServiceFragment"
-            app:destination="@id/mainMapFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/mainMapFragment"
-        android:name="org.evcs.android.features.map.MainMapFragment2"
-        android:label="ChooseServiceFragment"
-        tools:layout="@layout/fragment_main_map">
-        <action
-            android:id="@+id/action_mainMapFragmentt_to_chargingFragment"
-            app:destination="@id/chargingFragment" />
-        <action
-            android:id="@+id/action_mainMapFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/chargingFragment"
-        android:name="org.evcs.android.features.charging.ChargingTabFragment"
-        tools:layout="@layout/fragment_charging_tab">
-        <action
-            android:id="@+id/action_chargingFragment_to_planInfoFragment"
-            app:destination="@id/planInfoFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/profileFragment"
-        android:name="org.evcs.android.features.profile.ProfileFragment"
-        android:label="ProfileFragment"
-        tools:layout="@layout/fragment_profile"/>
+        android:name="org.evcs.android.ui.fragment.EmptyFragment"/>
 
-    <fragment
-        android:id="@+id/planInfoFragment"
-        android:name="org.evcs.android.features.charging.PlanInfoFragment"
-        android:label="PlanInfoFragment"
-        tools:layout="@layout/fragment_plan_info">
-        <argument
-            android:name="station_id"
-            app:argType="integer" />
-        <action
-            android:id="@+id/action_planInfoFragment_to_changePaymentMethodFragment"
-            app:destination="@id/changePaymentMethodFragment" />
-        <action
-            android:id="@+id/action_planInfoFragment_to_startChargingFragment"
-            app:destination="@id/startChargingFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/changePaymentMethodFragment"
-        android:name="org.evcs.android.features.charging.ChangePaymentMethodFragment"
-        android:label="ChangePaymentMethodFragment"/>
-    <fragment
-        android:id="@+id/startChargingFragment"
-        android:name="org.evcs.android.features.charging.StartChargingFragment"
-        android:label="StartChargingFragment"
-        tools:layout="@layout/fragment_start_charging">
-        <action
-            android:id="@+id/action_startChargingFragment_to_chargingInProgressFragment"
-            app:destination="@id/chargingInProgressFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/chargingInProgressFragment"
-        android:name="org.evcs.android.features.charging.ChargingInProgressFragment"
-        android:label="ChargingInProgressFragment"
-        tools:layout="@layout/fragment_charging_in_progress"/>
 </navigation>

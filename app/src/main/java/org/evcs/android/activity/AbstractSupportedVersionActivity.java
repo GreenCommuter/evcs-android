@@ -24,7 +24,7 @@ import org.greenrobot.eventbus.Subscribe;
 /**
  * This class provides a method to go to play store to update the application.
  */
-public abstract class AbstractSupportedVersionActivity extends NavGraphActivity implements IVersionView {
+public abstract class AbstractSupportedVersionActivity extends BaseActivity2 implements IVersionView {
 
     private static final String CONNECTIVITY_CHANGE_INTENT = "android.net.conn.CONNECTIVITY_CHANGE";
 

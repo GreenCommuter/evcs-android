@@ -6,7 +6,7 @@ import androidx.navigation.NavController;
 import org.evcs.android.R;
 import org.evcs.android.features.charging.ChargingNavigationController;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
-
+/*
 public class MainNavigationController extends AbstractNavigationController {
 
     private static MainNavigationController mInstance;
@@ -61,4 +61,4 @@ public class MainNavigationController extends AbstractNavigationController {
         mActivity.getMenuView().setSelectedItemId(R.id.menu_drawer_map);
     }
 
-}
+}*/

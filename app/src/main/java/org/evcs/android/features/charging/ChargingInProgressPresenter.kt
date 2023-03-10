@@ -21,7 +21,7 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services
 
     private val LOCATION_KEY = "location"
 
-    fun stopSession(sessionId: String) {
+    fun stopSession(sessionId: Int) {
         getService(CommandsService::class.java).stopSession(sessionId).enqueue(object :
             Callback<Void> {
             override fun onResponse(call: Call<Void>?, response: Response<Void>?) {

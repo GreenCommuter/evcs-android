@@ -13,6 +13,7 @@ import org.joda.time.format.DateTimeFormat
 class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     ChargingInProgressView {
 
+    private var mSessionId: Int = 0
     private lateinit var mBinding: FragmentChargingInProgressBinding
 
     override fun layout(): Int {
@@ -46,10 +47,12 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
 
     override fun setListeners() {
         mBinding.chargingInProgressLastUpdate.setOnClickListener { refresh() }
+        mBinding.chargingInProgressStopSession.setOnClickListener { presenter?.stopSession(mSessionId) }
     }
 
     override fun onChargeRetrieved(response: Session?) {
         if (response == null) return
+        mSessionId = response.id
         hideProgressDialog()
         mBinding.chargingInProgressEnergy.text = String.format("%.3f kWh", response.kwh)
         mBinding.chargingInProgressSessionTime.text = response.printableDuration

@@ -169,4 +169,14 @@
         style="@style/Roboto.Body.White"
         />
 
+    <TextView
+        android:id="@+id/charging_in_progress_stop_session"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:text="Stop session"
+        style="@style/Button.Orange"
+        />
+
 </LinearLayout>

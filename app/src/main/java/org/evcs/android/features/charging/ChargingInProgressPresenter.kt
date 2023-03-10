@@ -16,8 +16,8 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ChargingInProgressPresenter(viewInstance: ChargingInProgressView?, services: RetrofitServices?) :
-    ServicesPresenter<ChargingInProgressView?>(viewInstance, services) {
+class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services: RetrofitServices?) :
+    ChargingTabPresenter<ChargingInProgressView>(viewInstance, services) {
 
     private val LOCATION_KEY = "location"
 
@@ -56,23 +56,6 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView?, service
             override fun shouldRetry(response: Response<*>): Boolean {
                 return response.code() == NetworkCodes.ACCEPTED
             }
-        })
-    }
-
-    fun getCurrentCharge() {
-        getService(ChargesService::class.java).current.enqueue(object : AuthCallback<Session>(this) {
-            override fun onResponseSuccessful(response: Session?) {
-                view?.onChargeRetrieved(response!!)
-            }
-
-            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                view?.showError(ErrorUtils.getError(responseBody))
-            }
-
-            override fun onCallFailure(t: Throwable?) {
-                runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
-            }
-
         })
     }
 

@@ -17,13 +17,15 @@ import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
+import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingTabBinding
 import org.evcs.android.features.shared.StandardTextField
+import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 
 
-class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabView {
+class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTabView {
 
     lateinit var mSurfaceView: SurfaceView
     //    lateinit var txtBarcodeValue: TextView
@@ -55,11 +57,16 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
         mTextField = binding.chargingTabStationId
     }
 
-    override fun createPresenter(): ChargingTabPresenter {
-        return ChargingTabPresenter(this, null)
+    override fun createPresenter(): ChargingTabPresenter<ChargingTabView> {
+        return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun init() {}
+
+    override fun populate() {
+        showProgressDialog()
+        presenter?.getCurrentCharge()
+    }
 
     override fun setListeners() {
         mButton.setOnClickListener {
@@ -125,6 +132,14 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter>(), ChargingTabVi
                     cameraSource.start(mSurfaceView.holder)
                 }
             }, Manifest.permission.CAMERA)
+    }
+
+    override fun onChargeRetrieved(response: Session?) {
+        hideProgressDialog()
+        //TODO: uncomment when the charge is no longer mocked
+//        if (response != null) {
+//            mListener.onChargingStarted(response)
+//        }
     }
 
     override fun onPause() {

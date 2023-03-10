@@ -20,10 +20,8 @@ public class ConnectivityListener extends BroadcastReceiver {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         NetworkInfo mobNetInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-        if ((activeNetInfo != null && activeNetInfo.isConnected()) || mobNetInfo.isConnected()) {
-            EventBus.getDefault().post(new ConnectivityEvent(true));
-        } else {
-            EventBus.getDefault().post(new ConnectivityEvent(false));
-        }
+        boolean isConnectedWifi = activeNetInfo != null && activeNetInfo.isConnected();
+        boolean isConnectedData = mobNetInfo != null && mobNetInfo.isConnected();
+        EventBus.getDefault().post(new ConnectivityEvent(isConnectedWifi || isConnectedData));
     }
 }

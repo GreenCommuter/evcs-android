@@ -7,6 +7,7 @@ import androidx.navigation.NavController;
 
 import org.evcs.android.R;
 import org.evcs.android.model.PaymentMethod;
+import org.evcs.android.model.Session;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
 import org.evcs.android.util.Extras;
 import org.jetbrains.annotations.NotNull;
@@ -28,7 +29,6 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         return mInstance;
     }
 
-    //TODO: if there's an ongoing charge go straight to it
     @Override
     protected @IdRes int getStartingHistoryBuilder() {
         return R.id.chargingFragment;
@@ -68,6 +68,12 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
     }
 
     public void onChargingStarted() {
+        navigate(R.id.chargingInProgressFragment);
+    }
+
+    public void onChargingStarted(@NotNull Session response) {
+        Bundle args = new Bundle();
+        args.putSerializable(Extras.StartCharging.SESSION, response);
         navigate(R.id.chargingInProgressFragment);
     }
 }

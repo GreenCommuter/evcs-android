@@ -1,7 +1,5 @@
 package org.evcs.android.util;
 
-import org.jetbrains.annotations.Nullable;
-
 public class Extras {
 
     private Extras() {}
@@ -53,5 +51,6 @@ public class Extras {
         public static final String STATION_ID = "station_id";
         public static final String PM_ID = "pm_id";
         public static final String COUPONS = "coupons";
+        public static final String SESSION = "session";
     }
 }

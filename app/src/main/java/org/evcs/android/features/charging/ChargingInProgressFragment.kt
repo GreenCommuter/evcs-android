@@ -7,6 +7,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 
 class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
@@ -31,15 +32,20 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
 
     override fun populate() {
         showProgressDialog()
-        presenter?.getCurrentCharge()
-//        onChargeRetrieved(Charge())
+        val session = arguments?.getSerializable(Extras.StartCharging.SESSION) as Session?
+        if (session == null) {
+            presenter?.getCurrentCharge()
+        } else {
+            onChargeRetrieved(session)
+        }
     }
 
     override fun setListeners() {
         mBinding.chargingInProgressLastUpdate.setOnClickListener { populate() }
     }
 
-    override fun onChargeRetrieved(response: Session) {
+    override fun onChargeRetrieved(response: Session?) {
+        if (response == null) return
         hideProgressDialog()
         mBinding.chargingInProgressEnergy.text = String.format("%.3f kWh", response.kwh)
         mBinding.chargingInProgressSessionTime.text = response.printableDuration

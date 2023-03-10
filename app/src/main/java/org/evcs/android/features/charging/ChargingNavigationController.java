@@ -3,9 +3,13 @@ package org.evcs.android.features.charging;
 import android.os.Bundle;
 
 import androidx.annotation.IdRes;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 
+import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
+import org.evcs.android.features.main.MainNavigationController;
+import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.Session;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
@@ -19,6 +23,7 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
 
     private static ChargingNavigationController mInstance;
     private ChangePaymentMethodFragment.PaymentMethodChangeListener mPaymentMethodChangeListener;
+    private boolean mIsActiveSession;
 
     public ChargingNavigationController(@IdRes int rootId, NavController navController) {
         super(navController, rootId);
@@ -64,16 +69,50 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         args.putInt(Extras.StartCharging.STATION_ID, stationId);
         args.putString(Extras.StartCharging.PM_ID, pmId);
         args.putSerializable(Extras.StartCharging.COUPONS, coupons);
-        navigate(R.id.startChargingFragment, args);
+        replaceLastKey(R.id.startChargingFragment, args);
     }
 
     public void onChargingStarted() {
         replaceLastKey(R.id.chargingInProgressFragment, null);
     }
 
+    public void cancelSession(FragmentManager fm) {
+        cancelSession(fm, () -> mNavController.popBackStack());
+    }
+
+    public void cancelSession(FragmentManager fm, CancelSessionCallback c) {
+        if (mIsActiveSession) {
+            new EVCSDialogFragment.Builder()
+                    .setTitle(EVCSApplication.getInstance().getString(R.string.plan_info_dialog_cancel))
+                    .addButton(EVCSApplication.getInstance().getString(R.string.app_yes),
+                            fragment -> {
+                                    mIsActiveSession = false;
+                                    fragment.dismiss();
+                                    c.onSessionCanceled();
+                            })
+                    .showCancel(true)
+                    .show(fm);
+        } else {
+            c.onSessionCanceled();
+        }
+    }
+
+    // Needed to update the item in the menu
+    public void finish() {
+        MainNavigationController.getInstance().onMapClicked();
+    }
+
     public void onChargingStarted(@NotNull Session response) {
         Bundle args = new Bundle();
         args.putSerializable(Extras.StartCharging.SESSION, response);
         replaceLastKey(R.id.chargingInProgressFragment, args);
+    }
+
+    public void setActiveSession() {
+        mIsActiveSession = true;
+    }
+
+    public interface CancelSessionCallback {
+        void onSessionCanceled();
     }
 }

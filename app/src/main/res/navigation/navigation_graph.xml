@@ -3,14 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/rootFragment">
-    <fragment
-        android:id="@+id/rootFragment"
-        android:name="org.evcs.android.ui.fragment.EmptyFragment">
-        <action
-            android:id="@+id/action_rootFragment_to_chooseServiceFragment"
-            app:destination="@id/mainMapFragment" />
-    </fragment>
+    app:startDestination="@id/mainMapFragment">
     <fragment
         android:id="@+id/mainMapFragment"
         android:name="org.evcs.android.features.map.MainMapFragment2"

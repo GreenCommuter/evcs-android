@@ -152,4 +152,9 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         super.onResume()
         initialiseDetectorsAndSources()
     }
+
+    override fun onBackPressed(): Boolean {
+        mListener.finish()
+        return true;
+    }
 }

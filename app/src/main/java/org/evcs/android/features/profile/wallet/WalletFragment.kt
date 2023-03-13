@@ -2,23 +2,20 @@ package org.evcs.android.features.profile.wallet
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.base.core.fragment.BaseDialogFragment
-import com.base.core.fragment.BaseFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentWalletBinding
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.navigation.controller.AbstractNavigationController
 import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.Extras
+import org.evcs.android.ui.fragment.ErrorFragment
 
-class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.WalletHeaderInterface, IWalletView {
+class WalletFragment : ErrorFragment<BasePresenter<*>>(), WalletHeaderFragment.WalletHeaderInterface, IWalletView {
 
     companion object {
         fun newInstance(): WalletFragment {

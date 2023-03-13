@@ -6,6 +6,9 @@ import android.view.View
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
@@ -13,9 +16,9 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 
-class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
-    ChangePaymentMethodFragment.PaymentMethodChangeListener {
+class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
+    private lateinit var mChangePaymentResult: ActivityResultLauncher<Intent>
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
 
@@ -34,7 +37,15 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         mBinding = FragmentPlanInfoBinding.bind(v)
     }
 
-    override fun init() {}
+    override fun init() {
+        mChangePaymentResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result ->
+                val paymentMethod = result.data?.getSerializableExtra(Extras.ChangePaymentMethod.PAYMENT_METHODS)
+                if (paymentMethod != null) {
+                    onPaymentMethodChanged(paymentMethod as PaymentMethod)
+                }
+        }
+    }
 
     override fun populate() {
         showProgressDialog()
@@ -43,10 +54,13 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun setListeners() {
         mBinding.planInfoCreditCardChange.setOnClickListener {
-            mListener.setPaymentMethodChangeListener(this)
-            mListener.goToChangePaymentMethods(presenter?.mPaymentMethods)
+            val intent = Intent(requireContext(), WalletActivity::class.java)
+            intent.putExtra(Extras.ChangePaymentMethod.FINISH_ON_CLICK, true)
+            mChangePaymentResult.launch(intent)
         }
-        mBinding.planInfoApplyCoupon.setOnClickListener {  }
+        mBinding.planInfoApplyCoupon.setOnClickListener {
+            //TODO:
+        }
         mBinding.planInfoChargeWithPayg.setOnClickListener {  }
     }
 
@@ -167,8 +181,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         return true
     }
 
-    override fun onPaymentMethodChanged(paymentMethod: PaymentMethod) {
+    fun onPaymentMethodChanged(paymentMethod: PaymentMethod) {
         mSelectedPM = paymentMethod
+        showPaymentInfo()
     }
 
     override fun getProgressDialogLayout(): Int {

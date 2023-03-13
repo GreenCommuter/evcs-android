@@ -84,6 +84,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
             showPaymentInfo()
             return
         }
+        setUpButton()
         if (status.remainingKwh != null && status.remainingKwh <= 0) {
             val resetDate = DateTimeFormat.forPattern(getString(R.string.plan_info_date_pattern))
                     .print(status.nextRemainingKwhRestoration)
@@ -99,7 +100,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
         }
-        setUpButton()
         if (status.isSuspended) {
             showIssue(status.issueMessage)
             mBinding.planInfoButton.text = "Update payment method"
@@ -118,7 +118,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     private fun setUpButton() {
         mBinding.planInfoButton.isEnabled = true
-        mBinding.planInfoButton.setOnClickListener { ToastUtils.show("Button press") }
+        mBinding.planInfoButton.setOnClickListener { goToStartCharging() }
     }
 
     private fun showPlanDialog(message: String, isUpgradePlan: Boolean, accountUrl: String?) {

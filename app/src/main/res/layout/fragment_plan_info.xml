@@ -216,7 +216,7 @@
         android:textAllCaps="false"
         android:textColor="@color/evcs_white"
         android:enabled="true"
-        style="@style/Button.Black.NoBorder"/>
+        style="@style/Button.Orange"/>
 
     <TextView
         android:id="@+id/plan_info_charge_with_payg"

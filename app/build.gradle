@@ -92,6 +92,7 @@ android {
 
     lintOptions {
         abortOnError false
+        checkReleaseBuilds false
     }
 
     repositories {
@@ -100,14 +101,14 @@ android {
         if (githubPropertiesFile.exists()) {
             properties.load(githubPropertiesFile.newDataInputStream())
         }
-        maven {
-            name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Geotab/keyless-sdk-android")
-            credentials {
-                username = properties["GITHUB_USERNAME"] ?: System.getenv("GITHUB_USERNAME")
-                password = properties["GITHUB_PERSONAL_ACCESS_TOKEN"] ?: System.getenv("GITHUB_PERSONAL_ACCESS_TOKEN")
-            }
-        }
+//        maven {
+//            name = "GitHubPackages"
+//            url = uri("https://maven.pkg.github.com/Geotab/keyless-sdk-android")
+//            credentials {
+//                username = properties["GITHUB_USERNAME"] ?: System.getenv("GITHUB_USERNAME")
+//                password = properties["GITHUB_PERSONAL_ACCESS_TOKEN"] ?: System.getenv("GITHUB_PERSONAL_ACCESS_TOKEN")
+//            }
+//        }
     }
     buildFeatures.viewBinding = true
 }
@@ -154,7 +155,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'com.facebook.fresco:fresco:2.6.0'
     implementation 'com.facebook.android:facebook-login:14.1.1'
-    implementation 'com.stripe:stripe-android:20.16.1'
+    implementation 'com.stripe:stripe-android:20.16.1' //17.2 last version wo warnings
 
 //    implementation 'com.braintreepayments.api:drop-in:5.2.0'
     implementation 'joda-time:joda-time:2.9.9'

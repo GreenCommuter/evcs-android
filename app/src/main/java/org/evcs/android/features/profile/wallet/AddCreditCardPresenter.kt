@@ -6,6 +6,7 @@ import com.stripe.android.model.ConfirmSetupIntentParams
 import com.stripe.android.model.PaymentMethod
 import com.stripe.android.model.PaymentMethodCreateParams
 import okhttp3.ResponseBody
+import org.evcs.android.Configuration
 import org.evcs.android.model.ClientSecret
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.network.service.PaymentMethodsService
@@ -40,7 +41,8 @@ class AddCreditCardPresenter<T : AddCreditCardView?>(brainTreeFragment: T, servi
     }
 
     fun getClientSecret() {
-        getService(PaymentMethodsService::class.java).getClientSecret(UserUtils.getLoggedUser().ccProcessorId)
+        val env = if (Configuration.ROLLBAR_ENVIRONMENT == "develop") "dev" else "subscriptions"
+        getService(PaymentMethodsService::class.java).getClientSecret(env, UserUtils.getLoggedUser().ccProcessorId)
             .enqueue(object : AuthCallback<ClientSecret>(this) {
                 override fun onResponseSuccessful(response: ClientSecret) {
                     mClientSecret = response.s

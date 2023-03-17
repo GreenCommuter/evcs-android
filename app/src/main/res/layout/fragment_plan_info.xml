@@ -157,7 +157,7 @@
 
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
@@ -166,6 +166,8 @@
             android:id="@+id/plan_info_credit_card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="visa ending in 1111"
+            android:padding="@dimen/spacing_large"
             />
 
         <TextView
@@ -177,7 +179,15 @@
             android:gravity="end"
             />
 
-    </LinearLayout>
+        <Button
+            android:id="@+id/plan_info_gpay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GPAY"
+            android:layout_below="@id/plan_info_credit_card"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
 
     <org.evcs.android.features.shared.StandardTextField
         android:visibility="gone"

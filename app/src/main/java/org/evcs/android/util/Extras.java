@@ -43,14 +43,23 @@ public class Extras {
         public static final String STATION_ID = "station_id";
     }
 
-    public class ChangePaymentMethod {
+    public static class ChangePaymentMethod {
         public static final String PAYMENT_METHODS = "payment_methods";
     }
 
-    public class StartCharging {
+    public static class StartCharging {
         public static final String STATION_ID = "station_id";
         public static final String PM_ID = "pm_id";
         public static final String COUPONS = "coupons";
         public static final String SESSION = "session";
     }
-}
+
+    public static final class WebView {
+        public static final String URL = "url";
+    }
+
+    public static final class Configuration {
+        public static final String PHONE_NUMBER = "phone_number";
+    }
+
+    }

@@ -59,7 +59,7 @@ object BaseConfiguration {
     }
 
     object EVCSInformation {
-        const val PHONE_NUMBER = "+1 844-474-3342"
+        const val PHONE_NUMBER = "+1 866-300-3827"
     }
 
     object Location {

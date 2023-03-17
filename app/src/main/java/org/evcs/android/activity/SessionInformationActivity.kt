@@ -42,7 +42,7 @@ class SessionInformationActivity : BaseActivity2(), LocationActivityView {
         mBinding.sessionInformationDuration.text = charge.printableDuration
         mBinding.sessionInformationEnergy.text = String.format("%.3f kWh", charge.kwh)
         mBinding.sessionInformationPrice.text = "Total: " + String.format("$%.2f", charge.price)
-        mBinding.sessionInformationId.text = "Session ID: " + charge.noodoeId
+        mBinding.sessionInformationId.text = "Session ID: " + charge.id
     }
 
     override fun setListeners() {

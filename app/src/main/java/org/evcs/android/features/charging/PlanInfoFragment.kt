@@ -74,7 +74,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         }
 
         mBinding.planInfoChargeRate.visibility = View.VISIBLE
-        val pricing = station.pricing.detail
+        val pricing = station.pricing!!.detail
         if (pricing.priceKwh != null || pricing.thereafterPrice != null) {
             mBinding.planInfoChargeRate.setText(
                     String.format("$%.2f", pricing.priceKwh ?: pricing.thereafterPrice))

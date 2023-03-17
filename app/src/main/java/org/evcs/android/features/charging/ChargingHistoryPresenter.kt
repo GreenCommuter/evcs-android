@@ -28,7 +28,7 @@ class ChargingHistoryPresenter(viewInstance: ChargingHistoryView?, services: Ret
             .enqueue(object : AuthCallback<PaginatedResponse<Charge?>>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Charge?>) {
                     mState.updateTotal(response.totalPages)
-                    val carBookingList: List<Charge?> = response.page
+                    val carBookingList: List<Charge?> = response.page!!
                     if (carBookingList.size == 0 && mState.isOnFirstPage) {
                         view.showEmpty()
                     } else {

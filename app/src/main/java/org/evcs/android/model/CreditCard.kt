@@ -13,7 +13,7 @@ class CreditCard : Serializable {
     //          "supported": true
     //      },
     //      "wallet": null
-    lateinit var provider: CreditCardProvider
+    var brand: CreditCardProvider = CreditCardProvider.UNKNOWN
     //      "checks": {
     //          "address_line1_check": null,
     //          "address_postal_code_check": null,

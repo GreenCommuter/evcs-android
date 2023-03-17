@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
@@ -154,7 +153,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
         if (mSelectedPM != null)
             mBinding.planInfoCreditCard.text =
-                mSelectedPM!!.card.provider.toPrintableString() + " ending in " + mSelectedPM!!.card.last4
+                mSelectedPM!!.card.brand.toPrintableString() + " ending in " + mSelectedPM!!.card.last4
     }
 
     override fun showFree(freeChargingCode: String) {

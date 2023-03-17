@@ -64,8 +64,8 @@ public class CreditCardView extends LinearLayout {
 
     public void setCreditCard(CreditCard creditCard) {
         mLast4.setText(creditCard.getLast4());
-        if (creditCard.getProvider() != null)
-            mProvider.setImageResource(creditCard.getProvider().getDrawable());
+        if (creditCard.getBrand() != null)
+            mProvider.setImageResource(creditCard.getBrand().getDrawable());
     }
 
     public void watchNumber(EditText number) {

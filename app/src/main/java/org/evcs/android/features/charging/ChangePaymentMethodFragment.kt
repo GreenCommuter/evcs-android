@@ -34,7 +34,7 @@ class ChangePaymentMethodFragment : ErrorFragment<BasePresenter<*>>() {
         for (paymentMethod in paymentMethods) {
             val tv = TextView(requireContext())
             tv.setPadding(10, 10, 10, 10)
-            tv.text = paymentMethod.card.provider.toPrintableString() + " ending in " + paymentMethod.card.last4
+            tv.text = paymentMethod.card.brand.toPrintableString() + " ending in " + paymentMethod.card.last4
             tv.setOnClickListener { mListener.onPaymentMethodChanged(paymentMethod) }
             mList.addView(tv)
         }

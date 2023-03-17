@@ -7,6 +7,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
 import com.base.core.util.NavigationUtils
 import com.base.core.util.ToastUtils
+import com.stripe.android.PaymentConfiguration
+import com.stripe.android.googlepaylauncher.GooglePayEnvironment
+import com.stripe.android.googlepaylauncher.GooglePayPaymentMethodLauncher
+import org.evcs.android.Configuration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
@@ -54,6 +58,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoAnim.setVideoResource(R.raw.evcs_scene1, requireContext())
         mBinding.planInfoAnim.startAndLoop()
         mExplorePlansText = UserUtils.getLoggedUser().getExplorePlansText(resources)
+        setUpGpay()
     }
 
     override fun populate() {
@@ -209,6 +214,48 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     private fun goToStartCharging() {
         mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
+    }
+
+    fun setUpGpay() {
+        PaymentConfiguration.init(requireContext(), Configuration.STRIPE_KEY)
+
+        val googlePayLauncher = GooglePayPaymentMethodLauncher(
+                fragment = this,
+                config = GooglePayPaymentMethodLauncher.Config(
+                        environment = GooglePayEnvironment.Test,
+                        merchantCountryCode = "US",
+                        merchantName = "EVCS"
+                ),
+                readyCallback = ::onGooglePayReady,
+                resultCallback = ::onGooglePayResult
+        )
+
+        mBinding.planInfoGpay.setOnClickListener {
+            googlePayLauncher.present(
+                    currencyCode = "USD",
+            )
+        }
+    }
+
+    private fun onGooglePayReady(isReady: Boolean) {
+        mBinding.planInfoGpay.isEnabled = isReady
+    }
+
+    private fun onGooglePayResult(result: GooglePayPaymentMethodLauncher.Result) {
+        when (result) {
+            is GooglePayPaymentMethodLauncher.Result.Completed -> {
+                // Payment details successfully captured.
+                // Send the paymentMethodId to your server to finalize payment.
+                mSelectedPM = PaymentMethod()
+                mSelectedPM!!.id = result.paymentMethod.id
+            }
+            GooglePayPaymentMethodLauncher.Result.Canceled -> {
+                // User canceled the operation
+            }
+            is GooglePayPaymentMethodLauncher.Result.Failed -> {
+                // Operation failed; inspect `result.error` for the exception
+            }
+        }
     }
 
 }

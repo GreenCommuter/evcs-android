@@ -41,7 +41,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun populate() {
         showProgressDialog()
-        presenter?.populate(requireArguments().getInt(Extras.PlanInfo.STATION_ID))
+        presenter?.populate(requireArguments().getString(Extras.PlanInfo.STATION_ID)!!)
     }
 
     override fun setListeners() {

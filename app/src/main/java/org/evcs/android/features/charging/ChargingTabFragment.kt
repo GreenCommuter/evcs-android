@@ -112,10 +112,11 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
                     val string = barcodes.valueAt(0)!!.displayValue
                     val uri = Uri.parse(string)
                     //check host
-                    val id = uri.getQueryParameter("id")?.split(":")?.getOrNull(0)
-                            ?.replace("[^0-9.]", "")
-                    if (id?.toIntOrNull() != null) {
-                        goToPlanInfo(id)
+                    try {
+                        val id = uri.getQueryParameter("id")
+                        goToPlanInfo(id.toString())
+                    } catch (e : java.lang.NullPointerException) {
+
                     }
                 }
             }
@@ -123,7 +124,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     }
 
     private fun goToPlanInfo(id: String) {
-        mListener.goToPlanInfo(id.toInt())
+        mListener.goToPlanInfo(id)
     }
 
     @SuppressLint("MissingPermission")

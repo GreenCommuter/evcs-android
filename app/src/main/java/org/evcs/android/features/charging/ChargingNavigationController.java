@@ -38,9 +38,9 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
 //        super.startFlow();
 //    }
 
-    public void goToPlanInfo(int id) {
+    public void goToPlanInfo(String id) {
         Bundle args = new Bundle();
-        args.putInt(Extras.PlanInfo.STATION_ID, id);
+        args.putString(Extras.PlanInfo.STATION_ID, id);
         navigate(R.id.planInfoFragment, args);
     }
 

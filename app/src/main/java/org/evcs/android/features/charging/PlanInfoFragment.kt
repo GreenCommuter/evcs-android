@@ -2,13 +2,13 @@ package org.evcs.android.features.charging
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
 import com.base.core.util.NavigationUtils
 import com.base.core.util.ToastUtils
 import com.stripe.android.PaymentConfiguration
-import com.stripe.android.googlepaylauncher.GooglePayEnvironment
 import com.stripe.android.googlepaylauncher.GooglePayPaymentMethodLauncher
 import org.evcs.android.Configuration
 import org.evcs.android.EVCSApplication
@@ -31,6 +31,7 @@ import org.joda.time.format.DateTimeFormat
 class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     private lateinit var mWalletLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mGooglePayLauncher: GooglePayPaymentMethodLauncher
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
     private lateinit var mExplorePlansText: CharSequence
@@ -144,7 +145,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     private fun setUpButton() {
         mBinding.planInfoButton.isEnabled = true
-        mBinding.planInfoButton.setOnClickListener { goToStartCharging() }
+        mBinding.planInfoButton.setOnClickListener { goToStartCharging(mSelectedPM?.id) }
     }
 
     private fun showPlanDialog(message: CharSequence, isUpgradePlan: Boolean, accountUrl: String?) {
@@ -177,7 +178,13 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
         mBinding.planInfoButton.isEnabled = mSelectedPM != null
         mBinding.planInfoButton.setOnClickListener {
-            goToStartCharging()
+            if (false /*mBinding.planInfoCreditCardRadio.isChecked*/) {
+                goToStartCharging(mSelectedPM?.id)
+            } else {
+                mGooglePayLauncher.present(
+                        currencyCode = "USD",
+                )
+            }
         }
     }
 
@@ -212,17 +219,17 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         return R.layout.spinner_layout_black
     }
 
-    private fun goToStartCharging() {
-        mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
+    private fun goToStartCharging(selectedPMId: String?) {
+        mListener.goToStartCharging(presenter.getStationId(), selectedPMId, null)
     }
 
     fun setUpGpay() {
         PaymentConfiguration.init(requireContext(), Configuration.STRIPE_KEY)
 
-        val googlePayLauncher = GooglePayPaymentMethodLauncher(
+        mGooglePayLauncher = GooglePayPaymentMethodLauncher(
                 fragment = this,
                 config = GooglePayPaymentMethodLauncher.Config(
-                        environment = GooglePayEnvironment.Test,
+                        environment = Configuration.GOOGLE_PAY_ENV,
                         merchantCountryCode = "US",
                         merchantName = "EVCS"
                 ),
@@ -230,24 +237,17 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                 resultCallback = ::onGooglePayResult
         )
 
-        mBinding.planInfoGpay.setOnClickListener {
-            googlePayLauncher.present(
-                    currencyCode = "USD",
-            )
-        }
     }
 
     private fun onGooglePayReady(isReady: Boolean) {
-        mBinding.planInfoGpay.isEnabled = isReady
+        Log.d("Google play ready", isReady.toString())
+//        mBinding.planInfoGpay.isEnabled = isReady
     }
 
     private fun onGooglePayResult(result: GooglePayPaymentMethodLauncher.Result) {
         when (result) {
             is GooglePayPaymentMethodLauncher.Result.Completed -> {
-                // Payment details successfully captured.
-                // Send the paymentMethodId to your server to finalize payment.
-                mSelectedPM = PaymentMethod()
-                mSelectedPM!!.id = result.paymentMethod.id
+                goToStartCharging(result.paymentMethod.id)
             }
             GooglePayPaymentMethodLauncher.Result.Canceled -> {
                 // User canceled the operation

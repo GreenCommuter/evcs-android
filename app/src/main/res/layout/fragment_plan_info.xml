@@ -157,37 +157,41 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:visibility="gone"
+        android:padding="@dimen/spacing_medium">
 
-        <TextView
-            android:id="@+id/plan_info_credit_card"
+        <RadioGroup
+            android:id="@+id/plan_info_radio_group"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="visa ending in 1111"
-            android:padding="@dimen/spacing_large"
-            />
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/plan_info_credit_card_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="visa ending in 1111"/>
+
+            <RadioButton
+                android:id="@+id/plan_info_credit_gpay_radio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="gpay"/>
+
+        </RadioGroup>
 
         <TextView
             android:id="@+id/plan_info_credit_card_change"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Change"
-            android:padding="@dimen/spacing_large"
-            android:gravity="end"
+            android:padding="@dimen/spacing_medium"
+            android:layout_gravity="end|top"
             />
 
-        <Button
-            android:id="@+id/plan_info_gpay"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="GPAY"
-            android:layout_below="@id/plan_info_credit_card"
-            android:visibility="visible"/>
-
-    </RelativeLayout>
+    </FrameLayout>
 
     <org.evcs.android.features.shared.StandardTextField
         android:visibility="gone"

@@ -10,11 +10,11 @@
         android:label="WalletFragment"
         tools:layout="@layout/fragment_wallet">
         <action
-            android:id="@+id/action_walletFragment_to_addCreditCardFragment"
-            app:destination="@id/addCreditCardFragment" />
-        <action
             android:id="@+id/action_walletFragment_to_showCreditCardFragment"
             app:destination="@id/showCreditCardFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_addPaymentMethodFragment"
+            app:destination="@id/addPaymentMethodFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCreditCardFragment"
@@ -26,4 +26,16 @@
         android:name="org.evcs.android.features.profile.wallet.ShowCreditCardFragment"
         android:label="ShowCreditCardFragment"
         tools:layout="@layout/fragment_add_credit_card"/>
+    <fragment
+        android:id="@+id/addPaymentMethodFragment"
+        android:name="org.evcs.android.features.profile.wallet.AddPaymentMethodFragment"
+        android:label="AddPaymentMethodFragment"
+        tools:layout="@layout/fragment_add_payment_method">
+        <action
+            android:id="@+id/action_addPaymentMethodFragment_to_addCreditCardFragment"
+            app:destination="@id/addCreditCardFragment" />
+        <argument
+            android:name="has_google_pay"
+            app:argType="boolean" />
+    </fragment>
 </navigation>

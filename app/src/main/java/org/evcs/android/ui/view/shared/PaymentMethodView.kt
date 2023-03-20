@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import org.evcs.android.R
 import org.evcs.android.databinding.ViewCreditCardItemBinding
 import org.evcs.android.model.PaymentMethod
@@ -32,13 +33,30 @@ class PaymentMethodView : LinearLayout {
     fun setPaymentMethod(paymentMethod: PaymentMethod?) {
         if (paymentMethod == null) {
             setAddPaymentMethod()
-        } else {
-            mBinding.viewListButtonChevron.visibility = View.GONE
-            mBinding.creditCardChange.visibility = View.VISIBLE
+        } else if (paymentMethod.isCreditCard) {
+            showArrow()
             mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(paymentMethod.card.brand.drawable))
             mBinding.creditCardNumber.text = String.format("•••• %s", paymentMethod.card.last4)
-            mBinding.creditCardChange.setOnClickListener{ mListener?.onClick(null) }
+            attachListener(mBinding.creditCardChange)
+        } else {
+            setGooglePay()
         }
+    }
+
+    private fun attachListener(view: View) {
+        view.setOnClickListener{ mListener?.onClick(null) }
+    }
+
+    fun setGeneric() {
+        showArrow()
+        mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(R.drawable.cc_generic))
+        mBinding.creditCardNumber.text = "Credit or Debit"
+        attachListener(mBinding.root)
+    }
+
+    private fun showArrow() {
+        mBinding.viewListButtonChevron.isVisible = true
+        mBinding.creditCardChange.isVisible = false
     }
 
     private fun setAddPaymentMethod() {
@@ -47,7 +65,7 @@ class PaymentMethodView : LinearLayout {
         params.width = LayoutParams.WRAP_CONTENT
         mBinding.creditCardProvider.layoutParams = params
         mBinding.creditCardNumber.text = resources.getString(R.string.payment_method_toolbar_add)
-        mBinding.root.setOnClickListener { mListener?.onClick(null) }
+        attachListener(mBinding.root)
     }
 
     private fun init(context: Context) {
@@ -57,6 +75,13 @@ class PaymentMethodView : LinearLayout {
 
     fun setOnChangeClickListener(function: OnClickListener) {
         mListener = function
+    }
+
+    fun setGooglePay() {
+        mBinding.creditCardChange.isVisible = false
+        mBinding.creditCardNumber.text = "Google Pay"
+        mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(R.drawable.cc_gpay))
+        attachListener(mBinding.root)
     }
 
 }

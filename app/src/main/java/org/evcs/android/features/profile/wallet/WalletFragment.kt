@@ -2,10 +2,8 @@ package org.evcs.android.features.profile.wallet
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import com.base.core.fragment.BaseDialogFragment
 import com.base.core.fragment.BaseFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.EVCSApplication
@@ -13,7 +11,6 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentWalletBinding
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.navigation.controller.AbstractNavigationController
 import org.evcs.android.util.Extras
 
@@ -46,11 +43,11 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.Wa
         fragmentManager?.beginTransaction()?.replace(R.id.wallet_header_view, walletHeaderFragment)?.commit()
     }
 
-    override fun onAddPaymentMethodSelected(clearStack: Boolean) {
+    override fun onAddPaymentMethodSelected(clearStack: Boolean, hasGooglePay: Boolean) {
         val navOptions = if (clearStack) AbstractNavigationController.replaceLastNavOptions(findNavController())
                          else null
         findNavController().
-            navigate(WalletFragmentDirections.actionWalletFragmentToAddCreditCardFragment(), navOptions)
+            navigate(WalletFragmentDirections.actionWalletFragmentToAddPaymentMethodFragment(hasGooglePay), navOptions)
     }
 
     override fun goToDetail(item: PaymentMethod) {

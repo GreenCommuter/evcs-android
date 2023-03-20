@@ -21,8 +21,12 @@ class ChangeWalletHeaderFragment : WalletHeaderFragment() {
 
             override fun onStarClicked(item: PaymentMethod) {
                 if (item.id != UserUtils.getLoggedUser().defaultPm) {
-                    showProgressDialog()
-                    presenter.makeDefaultPaymentMethod(item)
+                    if (item.isCreditCard) {
+                        showProgressDialog();
+                        presenter.makeDefaultPaymentMethod(item);
+                    } else {
+                        showGooglePayDialog(item);
+                    }
                 }
             }
         }

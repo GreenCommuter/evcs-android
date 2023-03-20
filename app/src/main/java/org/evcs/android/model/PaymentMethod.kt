@@ -16,7 +16,12 @@ class PaymentMethod : Serializable {
     //    "customer": "cus_aASDNVjf",
     //    "livemode": false,
     //    "metadata": {},
-    //    "type": "card"
+    var type: Type = Type.CARD
+
+    enum class Type { CARD, GPAY }
+
+    val isCreditCard: Boolean
+        get() = true
 
     companion object {
         fun getDefaultFromSharedPrefs(): PaymentMethod? {

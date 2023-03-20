@@ -10,6 +10,7 @@ import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
 import org.evcs.android.databinding.ViewWalletHeaderBinding;
 import org.evcs.android.features.shared.EVCSDialogFragment;
+import org.evcs.android.features.shared.EVCSSliderDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.shared.RequestError;
 import org.evcs.android.ui.fragment.ErrorFragment;
@@ -65,8 +66,23 @@ public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPre
 
     abstract PaymentMethodAdapterV2.CreditCardListener getOnItemClickListener();
 
+    protected void showGooglePayDialog(PaymentMethod item) {
+        new EVCSSliderDialogFragment.Builder()
+                .setTitle("What would you like to do?")
+                .addButton("Set As Default", fragment -> {
+                    getPresenter().makeDefaultPaymentMethod(item);
+                    fragment.dismiss();
+                }, R.drawable.layout_corners_rounded_blue)
+                .addButton("Remove", fragment -> {
+                    getPresenter().removePaymentMethod(item);
+                    fragment.dismiss();
+                }, R.drawable.layout_corners_rounded_danger)
+                .setCancelable(true)
+                .show(getFragmentManager());
+    }
+
     void onAddPaymentMethodClicked() {
-        mParent.onAddPaymentMethodSelected(false);
+        mParent.onAddPaymentMethodSelected(false, getPresenter().hasGooglePay());
     }
 
     public void showAndSavePaymentList(List<PaymentMethod> creditCardInformationList) {
@@ -74,7 +90,7 @@ public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPre
         if (!creditCardInformationList.isEmpty()) {
             mCreditCardsAdapter.appendTopAll(creditCardInformationList);
         } else {
-            mParent.onAddPaymentMethodSelected(true);
+            mParent.onAddPaymentMethodSelected(true, getPresenter().hasGooglePay());
         }
     }
 
@@ -127,7 +143,7 @@ public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPre
     }
 
     public interface WalletHeaderInterface {
-        void onAddPaymentMethodSelected(boolean clearStack);
+        void onAddPaymentMethodSelected(boolean clearStack, boolean hasGooglePay);
 
         void goToDetail(PaymentMethod item);
     }

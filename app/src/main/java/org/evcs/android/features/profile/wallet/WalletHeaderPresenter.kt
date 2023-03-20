@@ -10,10 +10,15 @@ import org.evcs.android.util.ErrorUtils
 class WalletHeaderPresenter(viewInstance: IWalletHeaderView, services: RetrofitServices?)
     : CreditCardPresenter<IWalletHeaderView>(viewInstance, services) {
 
+    var mHasGooglePay: Boolean = false
+
+    fun hasGooglePay() = mHasGooglePay
+
     fun getCreditCards() {
         getService(PaymentMethodsService::class.java).paymentMethods.enqueue(object : AuthCallback<List<PaymentMethod>>(this) {
             override fun onResponseSuccessful(creditCardInformations: List<PaymentMethod>) {
                 view.onPaymentMethodsReceived(creditCardInformations)
+                mHasGooglePay = creditCardInformations.any { pm -> !pm.isCreditCard }
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, i: Int) {

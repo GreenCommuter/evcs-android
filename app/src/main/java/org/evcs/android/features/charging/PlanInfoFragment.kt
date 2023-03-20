@@ -74,7 +74,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoCouponCode.setListener {  }
         mBinding.planInfoChargeWithPayg.setOnClickListener {
             //TODO: check
-            goToStartCharging()
+            goToStartCharging(mSelectedPM?.id)
         }
     }
 

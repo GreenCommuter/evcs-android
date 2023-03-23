@@ -10,7 +10,4 @@ class Session : Charge(), Serializable {
     val updatedAt: DateTime? = null
     val stationName = 0
 
-    override fun getDuration(): Float {
-        return super.getDuration() * 60
-    }
 }

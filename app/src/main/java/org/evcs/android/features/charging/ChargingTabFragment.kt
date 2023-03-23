@@ -139,12 +139,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     override fun onChargeRetrieved(response: Session?) {
         hideProgressDialog()
         if (response != null) {
-            //TODO: remove dialog when the charge is no longer mocked
-            EVCSDialogFragment.Builder()
-                    .setTitle("There is a charge in progress")
-                    .addButton("Go to charge in progress") { mListener.onChargingStarted(response) }
-                    .showCancel(true)
-                    .show(childFragmentManager)
+            mListener.onChargingStarted(response)
         }
     }
 

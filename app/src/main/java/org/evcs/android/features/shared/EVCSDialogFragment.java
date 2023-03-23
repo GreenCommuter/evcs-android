@@ -183,12 +183,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
     //TODO: replace this for dismissing the dialog every time a button is pressed, unless added somehow else
     public static OnClickListener getDismissOnClickListener() {
-        return new OnClickListener() {
-            @Override
-            public void onClick(@NonNull EVCSDialogFragment fragment) {
-                fragment.dismiss();
-            }
-        };
+        return SingletonDialog::dismiss;
     }
 
     /**

@@ -24,7 +24,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     private var mMultipleRequestsManager: MultipleRequestsManager =
             MultipleRequestsManager(this)
 
-    fun populate(stationId : Int) {
+    fun populate(stationId : String) {
         getSubscriptionStatus()
         getStation(stationId)
         if (mPaymentMethods.isEmpty())
@@ -49,7 +49,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 })
     }
 
-    private fun getStation(id : Int) {
+    private fun getStation(id : String) {
         mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStationFromQR(id),
                 object : AuthCallback<PaginatedResponse<Station>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {

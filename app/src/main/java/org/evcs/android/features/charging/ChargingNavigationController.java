@@ -38,9 +38,9 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
 //        super.startFlow();
 //    }
 
-    public void goToPlanInfo(int id) {
+    public void goToPlanInfo(String id) {
         Bundle args = new Bundle();
-        args.putInt(Extras.PlanInfo.STATION_ID, id);
+        args.putString(Extras.PlanInfo.STATION_ID, id);
         navigate(R.id.planInfoFragment, args);
     }
 
@@ -68,12 +68,12 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
     }
 
     public void onChargingStarted() {
-        navigate(R.id.chargingInProgressFragment);
+        replaceLastKey(R.id.chargingInProgressFragment, null);
     }
 
     public void onChargingStarted(@NotNull Session response) {
         Bundle args = new Bundle();
         args.putSerializable(Extras.StartCharging.SESSION, response);
-        navigate(R.id.chargingInProgressFragment);
+        replaceLastKey(R.id.chargingInProgressFragment, args);
     }
 }

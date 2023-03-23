@@ -31,17 +31,21 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     override fun init() {}
 
     override fun populate() {
-        showProgressDialog()
         val session = arguments?.getSerializable(Extras.StartCharging.SESSION) as Session?
         if (session == null) {
-            presenter?.getCurrentCharge()
+            refresh()
         } else {
             onChargeRetrieved(session)
         }
     }
 
+    fun refresh() {
+        showProgressDialog()
+        presenter?.getCurrentCharge()
+    }
+
     override fun setListeners() {
-        mBinding.chargingInProgressLastUpdate.setOnClickListener { populate() }
+        mBinding.chargingInProgressLastUpdate.setOnClickListener { refresh() }
     }
 
     override fun onChargeRetrieved(response: Session?) {

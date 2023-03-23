@@ -20,6 +20,7 @@ import com.google.android.gms.vision.barcode.BarcodeDetector
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingTabBinding
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
@@ -111,10 +112,11 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
                     val string = barcodes.valueAt(0)!!.displayValue
                     val uri = Uri.parse(string)
                     //check host
-                    val id = uri.getQueryParameter("id")?.split(":")?.getOrNull(0)
-                            ?.replace("[^0-9.]", "")
-                    if (id?.toIntOrNull() != null) {
-                        goToPlanInfo(id)
+                    try {
+                        val id = uri.getQueryParameter("id")
+                        goToPlanInfo(id.toString())
+                    } catch (e : java.lang.NullPointerException) {
+
                     }
                 }
             }
@@ -122,7 +124,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     }
 
     private fun goToPlanInfo(id: String) {
-        mListener.goToPlanInfo(id.toInt())
+        mListener.goToPlanInfo(id)
     }
 
     @SuppressLint("MissingPermission")
@@ -136,10 +138,14 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
 
     override fun onChargeRetrieved(response: Session?) {
         hideProgressDialog()
-        //TODO: uncomment when the charge is no longer mocked
-//        if (response != null) {
-//            mListener.onChargingStarted(response)
-//        }
+        if (response != null) {
+            //TODO: remove dialog when the charge is no longer mocked
+            EVCSDialogFragment.Builder()
+                    .setTitle("There is a charge in progress")
+                    .addButton("Go to charge in progress") { mListener.onChargingStarted(response) }
+                    .showCancel(true)
+                    .show(childFragmentManager)
+        }
     }
 
     override fun onPause() {

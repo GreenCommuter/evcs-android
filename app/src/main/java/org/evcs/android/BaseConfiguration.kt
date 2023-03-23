@@ -7,8 +7,8 @@ object BaseConfiguration {
     const val STATE_NAME_SEPARATOR = ","
     const val DEVICE_TYPE = "android"
     const val ROLLBAR_CLIENT_ID = "46c2f505dec044f9855223be8549a559"
-    const val REQUEST_TRIES = 10
-    const val REQUEST_TRIES_DELAY = 1000
+    const val REQUEST_TRIES = 12
+    const val REQUEST_TRIES_DELAY = 5000
     @JvmField
     val DEFAULT_LOCALE = Locale.US
     const val BASE_URL_PLAY_STORE = "market://details?id="

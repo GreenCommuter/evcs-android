@@ -8,7 +8,7 @@ import org.joda.time.format.PeriodFormatterBuilder;
 import java.io.Serializable;
 
 public class Charge implements Serializable {
-//    private int id;
+    private int id;
     private String noodoeId;
     private DateTime startedAt;
 //            "completed_at": "2020-08-13T15:01:51.000Z",
@@ -67,8 +67,8 @@ public class Charge implements Serializable {
 //    }
 //    }
 
-    public String getNoodoeId() {
-        return noodoeId;
+    public int getId() {
+        return id;
     }
 
     public DateTime getStartedAt() {
@@ -84,7 +84,7 @@ public class Charge implements Serializable {
     }
 
     public float getDuration() {
-        return duration * 60 * 1000;
+        return duration * 1000;
     }
 
     public String getPrintableDuration() {

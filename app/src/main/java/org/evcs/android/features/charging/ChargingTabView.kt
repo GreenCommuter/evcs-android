@@ -5,5 +5,4 @@ import org.evcs.android.ui.view.shared.IErrorView
 
 interface ChargingTabView : IErrorView {
     fun onChargeRetrieved(response: Session?)
-
 }

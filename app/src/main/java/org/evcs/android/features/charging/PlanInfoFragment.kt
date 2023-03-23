@@ -4,7 +4,6 @@ import android.content.Intent
 import android.net.Uri
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
@@ -42,7 +41,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun populate() {
         showProgressDialog()
-        presenter?.populate(requireArguments().getInt(Extras.PlanInfo.STATION_ID))
+        presenter?.populate(requireArguments().getString(Extras.PlanInfo.STATION_ID)!!)
     }
 
     override fun setListeners() {
@@ -84,6 +83,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
             showPaymentInfo()
             return
         }
+        setUpButton()
         if (status.remainingKwh != null && status.remainingKwh <= 0) {
             val resetDate = DateTimeFormat.forPattern(getString(R.string.plan_info_date_pattern))
                     .print(status.nextRemainingKwhRestoration)
@@ -99,7 +99,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
         }
-        setUpButton()
         if (status.isSuspended) {
             showIssue(status.issueMessage)
             mBinding.planInfoButton.text = "Update payment method"
@@ -118,7 +117,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     private fun setUpButton() {
         mBinding.planInfoButton.isEnabled = true
-        mBinding.planInfoButton.setOnClickListener { ToastUtils.show("Button press") }
+        mBinding.planInfoButton.setOnClickListener { goToStartCharging() }
     }
 
     private fun showPlanDialog(message: String, isUpgradePlan: Boolean, accountUrl: String?) {
@@ -154,7 +153,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
         if (mSelectedPM != null)
             mBinding.planInfoCreditCard.text =
-                mSelectedPM!!.card.provider.toPrintableString() + " ending in " + mSelectedPM!!.card.last4
+                mSelectedPM!!.card.brand.toPrintableString() + " ending in " + mSelectedPM!!.card.last4
     }
 
     override fun showFree(freeChargingCode: String) {

@@ -55,7 +55,7 @@
         tools:layout="@layout/fragment_plan_info">
         <argument
             android:name="station_id"
-            app:argType="integer" />
+            app:argType="string" />
         <action
             android:id="@+id/action_planInfoFragment_to_changePaymentMethodFragment"
             app:destination="@id/changePaymentMethodFragment" />

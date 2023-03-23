@@ -17,6 +17,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
 
     private var mSessionId: Int = 0
     private lateinit var mBinding: FragmentChargingInProgressBinding
+    val mListener = ChargingNavigationController.getInstance()
 
     override fun layout(): Int {
         return R.layout.fragment_charging_in_progress
@@ -76,8 +77,9 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     }
 
     override fun sessionStopped() {
+        mListener.setActiveSession(false)
         hideProgressDialog()
         ToastUtils.show("Session finished")
-        findNavController().popBackStack()
+        mListener.finish()
     }
 }

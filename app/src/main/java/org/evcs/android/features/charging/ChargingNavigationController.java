@@ -108,8 +108,8 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         replaceLastKey(R.id.chargingInProgressFragment, args);
     }
 
-    public void setActiveSession() {
-        mIsActiveSession = true;
+    public void setActiveSession(boolean activeSession) {
+        mIsActiveSession = activeSession;
     }
 
     public interface CancelSessionCallback {

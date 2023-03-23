@@ -52,7 +52,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun show(station: Station, status: SubscriptionStatus?) {
         hideProgressDialog()
-        mListener.setActiveSession()
+        mListener.setActiveSession(true)
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
         mBinding.planInfoSubscriptionName.setText(status?.planName ?: getString(R.string.plan_info_pay_as_you_go))
 //        val kWhUsed = status
@@ -155,7 +155,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun showFree(freeChargingCode: String) {
         hideProgressDialog()
-        mListener.setActiveSession()
+        mListener.setActiveSession(true)
         mBinding.planInfoFreeCharging.visibility = View.VISIBLE
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true

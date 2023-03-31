@@ -107,8 +107,8 @@ open class AuthPresenter<T>(viewInstance: T, services: RetrofitServices?) :
                 .addDeviceToken(device)
                 .enqueue(object : Callback<Void?> {
                     override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-                        val user: User = UserUtils.getLoggedUser()
-                        Rollbar.setPersonData(user.id.toString(), user.firstName, user.email)
+                        val user = UserUtils.getLoggedUser()
+                        Rollbar.instance().setPersonData(user.id.toString(), user.name, user.email)
                         view.onTokenSent()
                     }
 

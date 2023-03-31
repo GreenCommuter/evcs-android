@@ -6,7 +6,7 @@ object BaseConfiguration {
     const val SHARED_PREFERENCES = "private-shared-prefs"
     const val STATE_NAME_SEPARATOR = ","
     const val DEVICE_TYPE = "android"
-    const val ROLLBAR_CLIENT_ID = "46c2f505dec044f9855223be8549a559"
+    const val ROLLBAR_CLIENT_ID = "8f045077be25481c874d39b1da7e475b"
     const val REQUEST_TRIES = 12
     const val REQUEST_TRIES_DELAY = 5000
     @JvmField

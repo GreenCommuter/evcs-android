@@ -41,11 +41,10 @@ class AddCreditCardPresenter<T : AddCreditCardView?>(brainTreeFragment: T, servi
     }
 
     fun getClientSecret() {
-        val env = if (Configuration.ROLLBAR_ENVIRONMENT == "develop") "dev" else "subscriptions"
-        getService(PaymentMethodsService::class.java).getClientSecret(env, UserUtils.getLoggedUser().ccProcessorId)
+        getService(PaymentMethodsService::class.java).getClientSecret()
             .enqueue(object : AuthCallback<ClientSecret>(this) {
                 override fun onResponseSuccessful(response: ClientSecret) {
-                    mClientSecret = response.s
+                    mClientSecret = response.clientSecret
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

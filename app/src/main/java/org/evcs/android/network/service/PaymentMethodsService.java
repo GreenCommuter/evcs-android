@@ -23,6 +23,6 @@ public interface PaymentMethodsService {
     @POST("/members/v1/payment_methods/{id}/set_default")
     Call<Void> setDefaultPaymentMethod(@Path("id") String id);
 
-    @GET("https://{env}.evcs.com/nahue.php")
-    Call<ClientSecret> getClientSecret(@Path("env") String env, @Query("id") String customerId);
+    @POST("/members/v1/payment_methods/setup_intent")
+    Call<ClientSecret> getClientSecret();
 }

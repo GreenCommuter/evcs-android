@@ -1,3 +1,3 @@
 package org.evcs.android.model
 
-data class ClientSecret(var s: String)
+data class ClientSecret(var clientSecret: String)

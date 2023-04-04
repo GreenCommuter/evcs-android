@@ -2,6 +2,7 @@ package org.evcs.android.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.splashscreen.SplashScreen;
@@ -34,6 +35,10 @@ public class RootActivity extends AppCompatActivity {
     private Intent buildIntent() {
         Intent newIntent = new Intent(this, MainActivity.class);
 
+        if (getIntent().getData() != null)
+            Log.e("intentdatapath", getIntent().getData().getPath());
+        else
+            Log.e("intentdata", "null");
         if (getIntent().getData() != null &&
                 Extras.ForgotPassword.PATH.equals(getIntent().getData().getPath())) {
             newIntent = getPasswordIntent();

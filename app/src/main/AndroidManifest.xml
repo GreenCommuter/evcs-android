@@ -38,14 +38,12 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
             <intent-filter android:autoVerify="true">
-                <data android:scheme="http"/>
-                <data android:scheme="https"/>
-                <data android:scheme="evcs"/>
-                <data android:host="subscriptions.evcs.com"/>
                 <action android:name="android.intent.action.VIEW"/>
-
                 <category android:name="android.intent.category.DEFAULT"/>
                 <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:scheme="https"
+                    android:host="subscriptions.evcs.com" />
             </intent-filter>
         </activity>
 

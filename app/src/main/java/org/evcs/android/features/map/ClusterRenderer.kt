@@ -3,8 +3,12 @@ package org.evcs.android.features.map
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptor
@@ -15,10 +19,10 @@ import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterItem
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
+import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.MarkerLayoutBinding
 import org.evcs.android.model.ClusterItemWithText
-import java.util.*
 
 
 class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
@@ -44,6 +48,13 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         marker.setIcon(getBitmap(item, icon))
     }
 
+    override fun onBeforeClusterRendered(cluster: Cluster<T>, markerOptions: MarkerOptions) {
+        super.onBeforeClusterRendered(cluster, markerOptions)
+        val bitmap = createMarker(cluster.size.toString(), R.drawable.layout_oval_orange,
+                Gravity.CENTER, Color.WHITE)
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
+    }
+
     private fun getBitmap(item: T, @DrawableRes icon: Int): BitmapDescriptor? {
         if (item is ClusterItemWithText) {
             return BitmapDescriptorFactory.fromBitmap(createMarker(item.markerText, icon))
@@ -52,11 +63,9 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         }
     }
 
-    private fun createMarker(text: String, @DrawableRes icon: Int): Bitmap {
-        val binding = MarkerLayoutBinding.inflate(LayoutInflater.from(mContext))
-        val markerLayout = binding.root
-        binding.markerImage.setImageResource(icon)
-        binding.markerText.text = text
+    private fun createMarker(text: String, @DrawableRes icon: Int,
+                             textAlign: Int = Gravity.CENTER_HORIZONTAL, textColor: Int = Color.BLACK): Bitmap {
+        val markerLayout = buildLayout(text, icon, textAlign, textColor)
         markerLayout.measure(
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
@@ -66,4 +75,23 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         markerLayout.draw(Canvas(bitmap))
         return bitmap
     }
+
+    private fun buildLayout(text: String, @DrawableRes icon: Int, textAlign: Int, textColor: Int): ViewGroup {
+        val binding = MarkerLayoutBinding.inflate(LayoutInflater.from(mContext))
+        val markerLayout = binding.root
+        binding.markerImage.setImageResource(icon)
+        binding.markerText.text = text
+        binding.markerText.setTextColor(textColor)
+        val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT)
+        params.gravity = textAlign
+        binding.markerText.layoutParams = params
+        if (textAlign == Gravity.CENTER_HORIZONTAL) {
+            val paddingTop = EVCSApplication.getInstance().applicationContext
+                    .resources.getDimension(R.dimen.spacing_tiny).toInt()
+            binding.markerText.setPadding(0, paddingTop, 0 ,0)
+        }
+        return markerLayout
+    }
+
 }

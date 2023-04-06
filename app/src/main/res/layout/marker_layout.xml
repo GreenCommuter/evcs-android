@@ -4,8 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:clickable="true"
-    android:focusableInTouchMode="true"
-    android:orientation="vertical">
+    android:focusableInTouchMode="true">
 
     <ImageView
         android:id="@+id/marker_image"
@@ -19,7 +18,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/spacing_tiny"
         android:textColor="@android:color/black"
         android:textStyle="bold" />
 

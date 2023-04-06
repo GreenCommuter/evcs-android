@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/evcs_white"
-            android:text="Charging"
+            android:text=""
             android:textAllCaps="true"
             android:layout_alignParentEnd="true"
             />
@@ -99,12 +99,11 @@
             android:id="@+id/charging_in_progress_status_icon"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:layout_toStartOf="@+id/charging_in_progress_status"
-            android:src="@drawable/ic_bolt_solid"
-            app:tint="@color/evcs_white"
             android:layout_centerInParent="true"
             android:layout_marginEnd="@dimen/spacing_medium"
-            />
+            android:layout_toStartOf="@+id/charging_in_progress_status"
+            android:src="@drawable/ic_bolt_solid"
+            app:tint="@color/evcs_white" />
 
     </RelativeLayout>
 
@@ -167,6 +166,16 @@
         android:text="Last update: "
         android:layout_below="@id/charging_in_progress_site_name"
         style="@style/Roboto.Body.White"
+        />
+
+    <TextView
+        android:id="@+id/charging_in_progress_stop_session"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:text="Stop session"
+        style="@style/Button.Orange"
         />
 
 </LinearLayout>

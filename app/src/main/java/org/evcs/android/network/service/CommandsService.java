@@ -20,6 +20,6 @@ public interface CommandsService {
 //    {"intent":"abc123","coupon_codes":null,"authorization_reference":"ZU63Qa3wwIgRRv2IhE8NmnZwVolDOBWUQBR5"}
 
     @POST("/members/v1/commands/stop_session")
-    Call<Void> stopSession(@Query("session_id") String sessionId);
+    Call<Void> stopSession(@Query("session_id") int sessionId);
 
 }

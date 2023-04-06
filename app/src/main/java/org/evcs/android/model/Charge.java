@@ -101,4 +101,11 @@ public class Charge implements Serializable {
         return kwh;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public boolean isCharging() {
+        return status.equalsIgnoreCase("active");
+    }
 }

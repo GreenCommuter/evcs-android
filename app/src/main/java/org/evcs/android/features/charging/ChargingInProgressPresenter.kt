@@ -3,14 +3,9 @@ package org.evcs.android.features.charging
 import com.base.networking.retrofit.RetrofitServices
 import com.base.networking.utils.NetworkCodes
 import okhttp3.ResponseBody
-import org.evcs.android.model.Charge
-import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.network.callback.AuthCallback
-import org.evcs.android.network.service.ChargesService
 import org.evcs.android.network.service.CommandsService
 import org.evcs.android.network.service.presenter.PollingManager
-import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 import retrofit2.Call
 import retrofit2.Callback
@@ -21,7 +16,7 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services
 
     private val LOCATION_KEY = "location"
 
-    fun stopSession(sessionId: String) {
+    fun stopSession(sessionId: Int) {
         getService(CommandsService::class.java).stopSession(sessionId).enqueue(object :
             Callback<Void> {
             override fun onResponse(call: Call<Void>?, response: Response<Void>?) {
@@ -43,6 +38,7 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services
     private fun pollStopSession(url: String) {
         PollingManager(this).poll(getService(CommandsService::class.java).startSession(url), object : PollingManager.PollingCallback {
             override fun onResponseSuccessful(response: Response<*>?) {
+                view.sessionStopped()
             }
 
             override fun onResponseFailed(responseBody: ResponseBody?, responseCode: Int) {

@@ -12,6 +12,7 @@ object BaseConfiguration {
     @JvmField
     val DEFAULT_LOCALE = Locale.US
     const val BASE_URL_PLAY_STORE = "market://details?id="
+    const val AUTOCOMPLETE_ADAPTER_THRESHOLD = 2;
 
     object Validations {
         const val PASSWORD_MIN_LENGTH = 6

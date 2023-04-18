@@ -17,7 +17,9 @@ import androidx.annotation.Nullable;
 
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 
+import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
+import org.evcs.android.ui.view.shared.SearchLocationChildFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,9 +92,13 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                 FilterResults results = new FilterResults();
                 List<AutocompletePrediction> resultValues = new ArrayList<>();
 
-                if (query != null) {
+                if (query.length() >= BaseConfiguration.AUTOCOMPLETE_ADAPTER_THRESHOLD) {
                     //This is a blocking call, but performFiltering() is called in a worker thread
                     resultValues = mPresenter.getResults(query);
+                }
+                else {
+                    results.count = showHistory();
+                    return results;
                 }
 
                 mResultList.clear();
@@ -138,6 +144,18 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
             }
 
         };
+    }
+
+    public int showHistory() {
+        List<SearchLocationChildFragment.LocationHistoryItem> history =
+                SearchLocationChildFragment.getLocationHistory();
+        mResultList.clear();
+        mResultNames.clear();
+        for (int i = 0; i < Math.min(history.size(), MAX_RESULTS); i++) {
+           mResultNames.add(new CustomLocation(history.get(i).query, R.drawable.ic_clock));
+           mResultList.add(AutocompletePrediction.builder(history.get(i).placeId).setFullText(history.get(i).query).build());
+        }
+        return mResultList.size();
     }
 
     private AutocompletePrediction getCurrentLocationPrediction() {

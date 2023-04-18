@@ -22,15 +22,25 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.libraries.places.api.model.Place;
 
+import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
 import org.evcs.android.databinding.FragmentSearchLocationChildBinding;
 import org.evcs.android.features.ISearchLocationView;
+import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.features.shared.places.PlaceCurrentAutocompleteAdapter;
 import org.evcs.android.model.shared.RequestError;
+import org.evcs.android.network.serializer.GenericListDeserializer;
 import org.evcs.android.ui.fragment.LoadingFragment;
+import org.evcs.android.util.Extras;
+import org.evcs.android.util.StorageUtils;
 import org.evcs.android.util.WordingUtils;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Fragment with FilterableAutoCompleteTextView used specifically for lists of places. The current
@@ -134,12 +144,25 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
             @Override
             public void afterTextChanged(Editable editable) {}
         });
+        //Yes I need both
+        mAddress.setOnClickListener(v -> showHistory());
+        mAddress.setOnFocusChangeListener((v, hasFocus) -> {
+            if (hasFocus) showHistory();
+        });
         mClose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onCloseClicked();
             }
         });
+    }
+
+    private void showHistory() {
+        if (mAddress.length() <= BaseConfiguration.AUTOCOMPLETE_ADAPTER_THRESHOLD) {
+            mAdapter.showHistory();
+            mAdapter.notifyDataSetChanged();
+//            mAddress.showDropDown();
+        }
     }
 
     public void setClearOnDelete(boolean clear) {
@@ -154,6 +177,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setText(response.getAddress());
         onLocationChosen(response.getAddress(), response.getLatLng(), response.getViewport());
         mClearOnDelete = true;
+        saveToLocationHistory(new LocationHistoryItem(response.getAddress(), response.getId()));
     }
 
     public void onCurrentLocationRetrieved() {
@@ -211,16 +235,16 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     }
 
     public void showPopUp(String title, String subtitle) {
-//        new GreenCommuterDialogFragment.Builder()
-//                .setTitle(title)
-//                .setSubtitle(subtitle)
-//                .addButton(getString(R.string.app_ok), new GreenCommuterDialogFragment.OnClickListener() {
-//                    @Override
-//                    public void onClick(@NonNull GreenCommuterDialogFragment fragment) {
-//                        onBackPressed();
-//                        fragment.dismiss();
-//                    }
-//                }).show(getFragmentManager());
+        new EVCSDialogFragment.Builder()
+                .setTitle(title)
+                .setSubtitle(subtitle)
+                .addButton(getString(R.string.app_ok), new EVCSDialogFragment.OnClickListener() {
+                    @Override
+                    public void onClick(@NonNull EVCSDialogFragment fragment) {
+                        onBackPressed();
+                        fragment.dismiss();
+                    }
+                }).show(getFragmentManager());
     }
 
     private void requestLocationPermission() {
@@ -235,6 +259,36 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
                 SearchLocationChildFragment.this.onPermissionsDenied();
             }
         }, ACCESS_FINE_LOCATION);
+
+    }
+
+    static void saveToLocationHistory(LocationHistoryItem item) {
+        List<LocationHistoryItem> history = getLocationHistory();
+        history.remove(item);
+        history.add(0, item);
+        StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, new ArrayList<>(history));
+    }
+
+    public static List<LocationHistoryItem> getLocationHistory() {
+        String json = StorageUtils.getStringFromSharedPreferences(Extras.SearchActivity.HISTORY, "");
+        List<LocationHistoryItem> result = GenericListDeserializer.deserialize(json, LocationHistoryItem.class);
+        return result == null ? new ArrayList<>() : result;
+    }
+
+    public class LocationHistoryItem implements Serializable {
+        public String query;
+        public String placeId;
+
+        public LocationHistoryItem(String address, String id) {
+            query = address;
+            placeId = id;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (o == null || getClass() != o.getClass()) return false;
+            return Objects.equals(query, ((LocationHistoryItem) o).query);
+        }
 
     }
 

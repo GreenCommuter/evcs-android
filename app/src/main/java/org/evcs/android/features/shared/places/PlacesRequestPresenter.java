@@ -80,7 +80,7 @@ public class PlacesRequestPresenter<V extends ISearchLocationView> extends BaseP
         if (!placeId.equals(mCurrentLocationString)) {
 
             List<Place.Field> placeFields = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG,
-                    Place.Field.VIEWPORT);
+                    Place.Field.VIEWPORT, Place.Field.ID);
             FetchPlaceRequest request = FetchPlaceRequest.builder(placeId, placeFields).build();
             Task<FetchPlaceResponse> placeResult = mGoogleApiClient.fetchPlace(request);
             placeResult.addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {

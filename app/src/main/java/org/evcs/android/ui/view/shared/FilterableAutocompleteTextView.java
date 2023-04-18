@@ -47,11 +47,11 @@ public class FilterableAutocompleteTextView extends AppCompatAutoCompleteTextVie
 
     /**
      * Overriden so that if we don't want to filter this returns false
-     * @return true if there are enough chars to filter AND filtering is enabled
+     * @return true if filtering is enabled (we are going to show a dropdown even with 0 chars)
      */
     @Override
     public boolean enoughToFilter() {
-        return enableFilter && super.enoughToFilter();
+        return enableFilter;
     }
 
     /**

@@ -4,50 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <org.evcs.android.ui.recycler.EndlessRecyclerView
+        android:id="@+id/activity_search_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:background="@color/evcs_dark_purple"
-        android:paddingTop="@dimen/status_bar_height">
-
-        <FrameLayout
-            android:id="@+id/fragment_search_location_address_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <RelativeLayout
-            android:id="@+id/activity_search_history_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_medium">
-
-            <TextView
-                style="@style/RobotoBold.Body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/spacing_medium"
-                android:text="@string/activity_search_search_history"
-                android:textColor="@color/evcs_white" />
-
-            <TextView
-                android:id="@+id/activity_search_history_clear"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:text="@string/activity_search_clear_all"
-                style="@style/RobotoBold.Body"
-                android:textColor="@color/evcs_red" />
-
-            <org.evcs.android.ui.recycler.EndlessRecyclerView
-                android:id="@+id/activity_search_history"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/activity_search_history_clear"/>
-
-        </RelativeLayout>
-
-    </LinearLayout>
+        android:padding="@dimen/spacing_medium"/>
 
     <TextView
         android:id="@+id/activity_search_empty"
@@ -84,13 +46,4 @@
 <!--            style="@style/Roboto.Body"/>-->
 
     </LinearLayout>
-
-    <ProgressBar
-        android:id="@+id/activity_search_loading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:indeterminateTint="@color/evcs_white"/>
-
 </FrameLayout>

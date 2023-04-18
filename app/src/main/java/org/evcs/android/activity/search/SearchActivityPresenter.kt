@@ -16,38 +16,5 @@ import org.evcs.android.util.ErrorUtils
 class SearchActivityPresenter(viewInstance: SearchActivityView, services: RetrofitServices) :
     ServicesPresenter<SearchActivityView>(viewInstance, services) {
 
-    lateinit var mFilterState: FilterState
-    private lateinit var mLatlng: LatLng
-
-    fun search(latlng: LatLng, viewport: LatLngBounds?) {
-        mLatlng = latlng
-        search(viewport)
-    }
-
-    /**
-     * @param viewport: bounds for the map to show the locations
-     */
-    fun search(viewport: LatLngBounds?) {
-        getService(LocationService::class.java).getLocations(mLatlng?.latitude,
-            mLatlng?.longitude, 200, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase())
-            .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
-                override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
-                    val locationList: List<Location?>? = response!!.page
-                    if (locationList!!.size == 0) {
-                        view.onEmptyResponse()
-                    } else {
-                        view.showLocations(locationList, viewport)
-                    }
-                }
-
-                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                    view.showError(ErrorUtils.getError(responseBody))
-                }
-
-                override fun onCallFailure(t: Throwable) {
-                    view.showError(RequestError.getNetworkError())
-                }
-            })
-    }
 
 }

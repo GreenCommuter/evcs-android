@@ -4,19 +4,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/map_view"
+    <FrameLayout
+        android:id="@+id/fragment_list_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/fragment_search_location_address_layout"
+        />
+
+    <FrameLayout
+        android:id="@+id/fragment_main_map_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <ImageView
-        android:id="@+id/map_center"
-        android:layout_width="wrap_content"
+    <FrameLayout
+        android:id="@+id/fragment_search_location_address_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/map_carousel_recycler"
-        android:layout_alignParentEnd="true"
-        android:src="@drawable/no_location"
-        android:layout_gravity="end|bottom"/>
+        android:paddingTop="@dimen/status_bar_height"/>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -25,32 +29,24 @@
         android:padding="@dimen/spacing_medium">
 
         <ImageButton
-            android:id="@+id/map_search"
-            android:layout_width="@dimen/spacing_big_extra"
-            android:layout_height="@dimen/spacing_big_extra"
-            android:background="@drawable/layout_oval_black"
-            android:src="@drawable/ic_magnifying_glass_solid"/>
-
-        <ImageButton
             android:id="@+id/map_filter"
             android:layout_width="@dimen/spacing_big_extra"
             android:layout_height="@dimen/spacing_big_extra"
             android:layout_gravity="end"
             android:src="@drawable/ic_sliders_solid"
-            android:background="@drawable/layout_oval_black"/>
+            android:background="@null"/>
 
     </FrameLayout>
 
-    <org.evcs.android.features.map.LocationItemView
-        android:id="@+id/map_carousel_recycler"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/map_search"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="@dimen/spacing_medium"
+        android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/spacing_medium"
-        android:clipToPadding="false"
-        android:visibility="invisible"
-        android:paddingLeft="@dimen/spacing_medium"
-        android:paddingRight="@dimen/spacing_medium" />
+        android:background="@color/evcs_white"
+        android:text="List"/>
 
     <ProgressBar
         android:id="@+id/map_loading"

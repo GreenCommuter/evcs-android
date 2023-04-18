@@ -6,7 +6,7 @@
     app:startDestination="@id/mainMapFragment">
     <fragment
         android:id="@+id/mainMapFragment"
-        android:name="org.evcs.android.features.map.MainMapFragment2"
+        android:name="org.evcs.android.features.map.MainMapFragment"
         android:label="ChooseServiceFragment"
         tools:layout="@layout/fragment_main_map">
         <action

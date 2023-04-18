@@ -5,7 +5,7 @@ import org.evcs.android.model.Location
 import org.evcs.android.ui.view.shared.IErrorView
 import org.evcs.android.ui.view.shared.ILoadingView
 
-interface SearchActivityView : IErrorView, ILoadingView {
+interface SearchActivityView : IErrorView {
     fun showLocations(page: List<Location?>?, viewport: LatLngBounds?)
     fun onEmptyResponse();
 }

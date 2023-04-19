@@ -21,7 +21,7 @@ class SearchResultsLocationViewHolder(itemView: View?) : RecyclerView.ViewHolder
     }
 
     fun setOnXClickListener(onXClickListener: ((Location) -> Unit)?) {
-        mBinding.adapterSearchRemove.setOnClickListener { onXClickListener?.invoke(mLocation) }
+        mBinding.adapterSearchGo.setOnClickListener { onXClickListener?.invoke(mLocation) }
     }
 
 }

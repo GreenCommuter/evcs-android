@@ -474,8 +474,8 @@
     <string name="filter_activity_apply">Apply</string>
 
     <!--Search Activity-->
-    <string name="search_activity_hint">Search by name or address</string>
-    <string name="search_activity_empty">Search for charging sites by name or address</string>
+    <string name="search_activity_hint">Location or zipcode</string>
+    <string name="search_activity_empty">Search for charging sites by location or zipcode</string>
     <string name="search_activity_fail">Cannot find</string>
     <string name="search_activity_fail_description">Try searching again using different spelling or keywords.</string>
     <string name="activity_search_search_history">Search history</string>

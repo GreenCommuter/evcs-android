@@ -14,6 +14,7 @@ import org.evcs.android.model.Location
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.recycler.EndlessRecyclerView
+import org.evcs.android.util.LocationUtils
 
 class SearchActivity : ErrorFragment<SearchActivityPresenter>(), SearchActivityView {
 
@@ -74,11 +75,9 @@ class SearchActivity : ErrorFragment<SearchActivityPresenter>(), SearchActivityV
     private fun refreshHistoryView() {
         mHistoryAdapter = SearchResultsAdapter()
         mHistoryRecycler.adapter = mHistoryAdapter
-//        mHistoryAdapter.setOnXClickListener { item ->
-//            val history = getLocationHistory()
-//            history.removeAll { location -> location.latLng == item.latLng }
-//            setLocationHistory(history.toTypedArray())
-//        }
+        mHistoryAdapter.setOnXClickListener { item ->
+            LocationUtils.launchGoogleMapsWithPin(context, item.latLng)
+        }
 //        mEmptyView.visibility = if (mHistoryAdapter.itemCount == 0) View.VISIBLE else View.GONE
     }
 

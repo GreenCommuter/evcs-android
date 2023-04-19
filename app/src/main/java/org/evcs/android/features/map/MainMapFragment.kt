@@ -11,13 +11,12 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
-import com.base.networking.retrofit.serializer.BaseGsonBuilder
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
-import com.google.gson.Gson
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.FilterActivity
+import org.evcs.android.activity.location.LocationActivity
 import org.evcs.android.activity.search.SearchActivity
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.FilterState
@@ -31,7 +30,6 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         MainMapFragment2.LocationClickListener {
 
     private lateinit var mToggleButton: TextView
-    private lateinit var mLoading: ProgressBar
     private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
     private lateinit var mMainMapFragment2: MainMapFragment2
     private lateinit var mListFragment: SearchActivity
@@ -57,12 +55,10 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         val binding = FragmentMainMapBinding.bind(v)
         mToggleButton = binding.mapSearch
         mFilterButton = binding.mapFilter
-        mLoading = binding.mapLoading
     }
 
     override fun init() {
         LocationHelper().init(this)
-        initializeRecycler()
     }
 
     override fun populate() {
@@ -111,10 +107,6 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
     }
 
-    private fun setLocationHistory(history: Array<Location>) {
-        StorageUtils.storeInSharedPreferences(Extras.SearchActivity.HISTORY, history)
-    }
-
     private fun onFilterResult(result: ActivityResult) {
         if (result.data == null) return
         showLoading()
@@ -155,23 +147,9 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     override fun onEmptyResponse() {
-//        mMainMapFragment2.onEmptyResponse()
+        hideLoading()
+        showError(RequestError("No chargers found"))
         mListFragment.onEmptyResponse()
-    }
-
-//    override fun onContainerClicked(container: Container) {
-//        mCarouselRecycler.setLocation(container.mapItem)
-//        showCarousel(true)
-//    }
-
-    private fun initializeRecycler() {
-//        mCarouselRecycler.setOnClickListener {
-//            val item = mSelectedContainer!!.mapItem
-//            SearchActivity.saveToLocationHistory(item)
-//            val intent = Intent(requireContext(), LocationActivity::class.java)
-//            intent.putExtra(Extras.LocationActivity.LOCATION, item)
-//            startActivity(intent)
-//        }
     }
 
     override fun showInitialLocations(response: List<Location?>) {
@@ -189,29 +167,30 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
         showLoading()
         presenter.search(latLng, viewport)
-//        mAddress = address
-//        saveToLocationHistory(address)
-    }
-
-//    fun getDefaultSelectedMapItem(): Int {
-//        return DEFAULT_SELECTED_ITEM
-//    }
-
-    override fun showError(requestError: RequestError) {
-        hideLoading()
-        ToastUtils.show(requestError.body)
     }
 
     override fun showLoading() {
-        mLoading.visibility = View.VISIBLE
+        showProgressDialog()
     }
 
     override fun hideLoading() {
-        mLoading.visibility = View.GONE
+        hideProgressDialog()
+    }
+
+    override fun getProgressDialogLayout(): Int {
+        return R.layout.spinner_layout_black
     }
 
     override fun onLocationClicked(location: Location) {
-        TODO("Not yet implemented")
+        val view = requireView().findViewById<FrameLayout>(R.id.fragment_main_map_layout)
+        if (view.isVisible) {
+            val locationDialog = LocationItemView(location)
+            locationDialog.show(fragmentManager)
+        } else {
+            val intent = Intent(requireContext(), LocationActivity::class.java)
+            intent.putExtra(Extras.LocationActivity.LOCATION, location)
+            startActivity(intent)
+        }
     }
 
 }

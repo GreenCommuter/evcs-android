@@ -5,12 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
-import com.base.core.util.ToastUtils
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
@@ -24,6 +22,7 @@ import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.SearchLocationChildFragment
+import org.evcs.android.ui.view.shared.SearchLocationChildFragment.LocationHistoryItem
 import org.evcs.android.util.*
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
@@ -92,8 +91,13 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 //        }
 
         mSearchLocationChildFragment.setListener(object : SearchLocationChildFragment.ISearchLocationListener {
-            override fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
+            override fun onLatLngChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
                 this@MainMapFragment.onLocationChosen(address, latLng, LocationUtils.addDiagonal(viewport))
+            }
+
+            override fun onLocationChosen(location: Location) {
+                //TODO: seleccionar pin
+                this@MainMapFragment.onLocationClicked(location)
             }
 
             override fun onLocationRemoved() {
@@ -182,6 +186,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     override fun onLocationClicked(location: Location) {
+        SearchLocationChildFragment.saveToLocationHistory(location)
         val view = requireView().findViewById<FrameLayout>(R.id.fragment_main_map_layout)
         if (view.isVisible) {
             val locationDialog = LocationItemView(location)

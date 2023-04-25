@@ -152,8 +152,8 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
         mResultList.clear();
         mResultNames.clear();
         for (int i = 0; i < Math.min(history.size(), MAX_RESULTS); i++) {
-           mResultNames.add(new CustomLocation(history.get(i).query, R.drawable.ic_clock));
-           mResultList.add(AutocompletePrediction.builder(history.get(i).placeId).setFullText(history.get(i).query).build());
+           mResultNames.add(new CustomLocation(history.get(i).location.getName(), R.drawable.ic_clock));
+           mResultList.add(AutocompletePrediction.builder(history.get(i).key).setFullText(history.get(i).location.getName()).build());
         }
         return mResultList.size();
     }

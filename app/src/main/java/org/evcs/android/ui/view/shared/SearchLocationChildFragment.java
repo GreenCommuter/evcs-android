@@ -125,7 +125,12 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
-                getPresenter().getPlaceFromId(mAdapter.getPlaceId(position));
+                String placeId = mAdapter.getPlaceId(position);
+                org.evcs.android.model.Location location = findInLocationHistory(placeId);
+                if (location == null)
+                    getPresenter().getPlaceFromId(placeId);
+                else
+                    mListener.onLocationChosen(location);
             }
         });
         mAddress.addTextChangedListener(new TextWatcher() {
@@ -177,7 +182,6 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setText(response.getAddress());
         onLocationChosen(response.getAddress(), response.getLatLng(), response.getViewport());
         mClearOnDelete = true;
-        saveToLocationHistory(new LocationHistoryItem(response.getAddress(), response.getId()));
     }
 
     public void onCurrentLocationRetrieved() {
@@ -197,7 +201,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     private void onLocationChosen(String address, LatLng latLng, @Nullable LatLngBounds viewport) {
         mAddress.dismissDropDown();
         KeyboardUtils.hideKeyboard(getActivity());
-        mListener.onLocationChosen(address, latLng, viewport);
+        mListener.onLatLngChosen(address, latLng, viewport);
     }
 
     public void onPermissionsGranted() {
@@ -262,6 +266,10 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
 
     }
 
+    public static void saveToLocationHistory(org.evcs.android.model.Location location) {
+        saveToLocationHistory(new LocationHistoryItem(location, Integer.toString(location.hashCode())));
+    }
+
     static void saveToLocationHistory(LocationHistoryItem item) {
         List<LocationHistoryItem> history = getLocationHistory();
         history.remove(item);
@@ -275,19 +283,27 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         return result == null ? new ArrayList<>() : result;
     }
 
-    public class LocationHistoryItem implements Serializable {
-        public String query;
-        public String placeId;
+    public static @Nullable org.evcs.android.model.Location findInLocationHistory(String key) {
+        List<LocationHistoryItem> locationHistory = getLocationHistory();
+        for (LocationHistoryItem i : locationHistory) {
+            if (i.key.equals(key)) return i.location;
+        }
+        return null;
+    }
 
-        public LocationHistoryItem(String address, String id) {
-            query = address;
-            placeId = id;
+    public static class LocationHistoryItem implements Serializable {
+        public org.evcs.android.model.Location location;
+        public String key;
+
+        public LocationHistoryItem(org.evcs.android.model.Location location, String id) {
+            this.location = location;
+            key = id;
         }
 
         @Override
         public boolean equals(Object o) {
             if (o == null || getClass() != o.getClass()) return false;
-            return Objects.equals(query, ((LocationHistoryItem) o).query);
+            return Objects.equals(this.location.getId(), ((LocationHistoryItem) o).location.getId());
         }
 
     }
@@ -298,7 +314,9 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
 
     public interface ISearchLocationListener {
 
-        void onLocationChosen(@NonNull String address, @NonNull LatLng latLng, LatLngBounds viewport);
+        void onLatLngChosen(@NonNull String address, @NonNull LatLng latLng, LatLngBounds viewport);
+
+        void onLocationChosen(@NonNull org.evcs.android.model.Location location);
 
         void onLocationRemoved();
 

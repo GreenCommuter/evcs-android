@@ -62,7 +62,7 @@ class SearchActivity : ErrorFragment<SearchActivityPresenter>(), SearchActivityV
         super.setListeners()
         val itemClickListener = object : BaseRecyclerAdapterItemClickListener<Location>() {
             override fun onItemClicked(item: Location?, adapterPosition: Int) {
-                mParent.onLocationClicked(item!!)
+                mParent.onLocationClicked(item!!, false)
             }
         }
         mHistoryAdapter.setItemClickListener(itemClickListener)

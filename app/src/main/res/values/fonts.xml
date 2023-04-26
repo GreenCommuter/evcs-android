@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Sansation Regular styles -->
     <style name="SansationRegular" parent="@android:style/TextAppearance">
@@ -303,6 +303,146 @@
 
     <style name="RobotoBold.Body.Grey">
         <item name="android:textColor">#514f4d</item>
+    </style>
+
+    <style name="Inter" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/evcs_gray_800</item>
+        <item name="android:fontFamily">inter</item>
+    </style>
+
+    <style name="Display" parent="Inter"/>
+
+    <style name="Display.Large">
+        <item name="android:textSize">57sp</item>
+        <item name="android:minHeight">64sp</item>
+    </style>
+
+    <style name="Display.Medium">
+        <item name="android:textSize">45sp</item>
+        <item name="android:minHeight">52sp</item>
+    </style>
+
+    <style name="Display.Small">
+        <item name="android:textSize">36sp</item>
+        <item name="android:minHeight">44sp</item>
+    </style>
+
+    <style name="Headline" parent="Inter"/>
+
+    <style name="Headline.Large">
+        <item name="android:textSize">32sp</item>
+        <item name="android:minHeight">40sp</item>
+    </style>
+
+    <style name="Headline.Medium">
+        <item name="android:textSize">28sp</item>
+        <item name="android:minHeight">36sp</item>
+    </style>
+
+    <style name="Headline.Small">
+        <item name="android:textSize">24sp</item>
+        <item name="android:minHeight">32sp</item>
+    </style>
+
+    <style name="Title" parent="Inter">
+        <item name="android:fontWeight" tools:targetApi="o">500</item>
+    </style>
+
+    <style name="Title.Large">
+        <item name="android:textSize">22sp</item>
+        <item name="android:minHeight">28sp</item>
+    </style>
+
+    <style name="Title.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:minHeight">24sp</item>
+        <item name="android:letterSpacing">0.15</item>
+    </style>
+
+    <style name="Title.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">20sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="Label" parent="Inter">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Label.Large">
+        <item name="android:textSize">18sp</item>
+        <item name="android:minHeight">20sp</item>
+        <item name="android:letterSpacing">0.1</item>
+    </style>
+
+    <style name="Label.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:minHeight">18sp</item>
+        <item name="android:letterSpacing">0.5</item>
+    </style>
+
+    <style name="Label.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">16sp</item>
+        <item name="android:letterSpacing">0.5</item>
+    </style>
+
+    <style name="Body" parent="Inter"/>
+
+    <style name="Body.Large">
+        <item name="android:textSize">18sp</item>
+        <item name="android:minHeight">24sp</item>
+        <item name="android:letterSpacing">0.5</item>
+    </style>
+
+    <style name="Body.Large.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Body.Medium">
+        <item name="android:textSize">16sp</item>
+        <item name="android:minHeight">26sp</item>
+        <item name="android:letterSpacing">0.25</item>
+    </style>
+
+    <style name="Body.Medium.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Body.Small">
+        <item name="android:textSize">14sp</item>
+        <item name="android:minHeight">22sp</item>
+        <item name="android:letterSpacing">0.4</item>
+    </style>
+
+    <style name="Body.Small.Bold">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Body.ExtraSmall">
+        <item name="android:textSize">12sp</item>
+        <item name="android:minHeight">16sp</item>
+        <item name="android:letterSpacing">0.4</item>
+    </style>
+
+    <style name="WebBody" parent="Inter"/>
+
+    <style name="WebBody.Large">
+        <item name="android:textSize">24sp</item>
+        <item name="android:minHeight">32sp</item>
+        <item name="android:letterSpacing">0.5</item>
+    </style>
+
+    <style name="WebBody.Medium">
+        <item name="android:textSize">20sp</item>
+        <item name="android:minHeight">28sp</item>
+        <item name="android:letterSpacing">0.25</item>
+    </style>
+
+    <style name="WebBody.Small">
+        <item name="android:textSize">16sp</item>
+        <item name="android:minHeight">20sp</item>
+        <item name="android:letterSpacing">0.4</item>
     </style>
 
 </resources>

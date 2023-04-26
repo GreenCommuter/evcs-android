@@ -31,7 +31,7 @@
         android:textColorHint="@color/evcs_grey"
         style="@style/SansationRegular.MediumMore"
         android:textColor="@color/evcs_white"
-        android:background="@drawable/layout_corners_rounded_purple_orange_border"/>
+        android:background="@drawable/layout_corners_rounded_grey_border"/>
 
 <!--    <ImageView-->
 <!--        android:layout_width="wrap_content"-->

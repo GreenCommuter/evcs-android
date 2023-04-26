@@ -97,7 +97,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
             override fun onLocationChosen(location: Location) {
                 //TODO: seleccionar pin
-                this@MainMapFragment.onLocationClicked(location)
+                this@MainMapFragment.onLocationClicked(location, true)
             }
 
             override fun onLocationRemoved() {
@@ -185,10 +185,9 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         return R.layout.spinner_layout_black
     }
 
-    override fun onLocationClicked(location: Location) {
+    override fun onLocationClicked(location: Location, showAsSlider: Boolean) {
         SearchLocationChildFragment.saveToLocationHistory(location)
-        val view = requireView().findViewById<FrameLayout>(R.id.fragment_main_map_layout)
-        if (view.isVisible) {
+        if (showAsSlider) {
             val locationDialog = LocationItemView(location)
             locationDialog.show(fragmentManager)
         } else {

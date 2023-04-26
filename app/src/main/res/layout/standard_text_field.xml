@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/standard_text_field_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/spacing_small"
+        android:paddingEnd="@dimen/spacing_small"
+        android:layout_marginEnd="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_medium"
+        style="@style/Label.Small"/>
 
     <RelativeLayout
         android:id="@+id/standard_text_field_layout"
@@ -18,20 +29,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            style="@style/Roboto.Body.Grey"
+            style="@style/Body.Medium"
             android:visibility="gone"/>
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/standard_text_field_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingStart="@dimen/spacing_small"
-        android:paddingEnd="@dimen/spacing_small"
-        android:layout_marginEnd="@dimen/spacing_medium"
-        android:layout_marginStart="@dimen/spacing_medium"
-        android:background="@color/evcs_white"
-        style="@style/Roboto.BodySmall.Grey"/>
-
-</RelativeLayout>
+</LinearLayout>

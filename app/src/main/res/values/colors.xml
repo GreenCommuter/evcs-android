@@ -18,6 +18,12 @@
 
     <color name="evcs_baseline_color">#4D4D4D</color>
 
+    <color name="evcs_secondary_400">#749FC5</color>
+    <color name="evcs_secondary_700">#00619C</color>
+
+    <color name="evcs_gray_400">#7a7f75</color>
+    <color name="evcs_gray_800">#1F2730</color>
+
     <!-- Tint colors -->
     <color name="evcs_splash_tint">#d9333333</color>
     <color name="evcs_profile_tint">#d9333333</color>

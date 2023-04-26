@@ -33,7 +33,7 @@
             android:layout_width="@dimen/spacing_big_extra"
             android:layout_height="@dimen/spacing_big_extra"
             android:layout_gravity="end"
-            android:src="@drawable/ic_sliders_solid"
+            android:src="@drawable/ic_filter"
             android:background="@null"/>
 
     </FrameLayout>
@@ -46,6 +46,7 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         android:background="@color/evcs_white"
+        android:layout_marginBottom="@dimen/spacing_big_extra"
         android:text="List"/>
 
 </RelativeLayout>

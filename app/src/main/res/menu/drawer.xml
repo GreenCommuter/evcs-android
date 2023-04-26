@@ -8,11 +8,11 @@
 
     <item
         android:id="@+id/menu_drawer_charging"
-        android:icon="@drawable/ic_bolt_solid"
+        android:icon="@drawable/ic_charge"
         android:title="@string/drawer_menu_charging" />
 
     <item
         android:id="@+id/menu_drawer_profile"
-        android:icon="@drawable/ic_user_solid"
+        android:icon="@drawable/ic_profile"
         android:title="@string/drawer_menu_profile" />
 </menu>

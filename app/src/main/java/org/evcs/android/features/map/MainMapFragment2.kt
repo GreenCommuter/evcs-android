@@ -79,7 +79,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter2, Location
     }
 
     override fun onContainerClicked(container: Container) {
-        mParent.onLocationClicked(container.mapItem)
+        mParent.onLocationClicked(container.mapItem, true)
     }
 
     fun showInitialLocations(response: List<Location?>) {
@@ -131,7 +131,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter2, Location
     }
 
     interface LocationClickListener {
-        fun onLocationClicked(location: Location)
+        fun onLocationClicked(location: Location, showAsSlider: Boolean)
     }
 
 }

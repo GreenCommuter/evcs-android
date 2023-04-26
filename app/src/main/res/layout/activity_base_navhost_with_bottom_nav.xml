@@ -22,7 +22,7 @@
         android:theme="@style/SelectableItemTheme"
         app:itemIconTint="@color/icon_color_selector"
         app:itemTextColor="@color/icon_color_selector"
-        app:backgroundTint="@color/evcs_purple"
+        app:backgroundTint="@color/evcs_white"
         app:menu="@menu/drawer"/>
 
 </LinearLayout>

@@ -206,8 +206,8 @@
     <string name="drawer_header_user_format">%1$s %2$s</string>
     <string name="drawer_menu_open">Open</string>
     <string name="drawer_menu_close">Close</string>
-    <string name="drawer_menu_map">Map</string>
-    <string name="drawer_menu_charging">Charging</string>
+    <string name="drawer_menu_map">Stations</string>
+    <string name="drawer_menu_charging">Charge</string>
     <string name="drawer_menu_profile">Profile</string>
 
     <!-- Monthly Fee View -->

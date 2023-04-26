@@ -9,29 +9,28 @@ import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.FilterActivity
-import org.evcs.android.activity.location.LocationActivity
-import org.evcs.android.activity.search.SearchActivity
+import org.evcs.android.activity.location_list.LocationListFragment
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.SearchLocationChildFragment
-import org.evcs.android.ui.view.shared.SearchLocationChildFragment.LocationHistoryItem
 import org.evcs.android.util.*
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
-        MainMapFragment2.LocationClickListener {
+        InnerMapFragment.LocationClickListener {
 
     private lateinit var mToggleButton: TextView
     private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
-    private lateinit var mMainMapFragment2: MainMapFragment2
-    private lateinit var mListFragment: SearchActivity
+    private lateinit var mInnerMapFragment: InnerMapFragment
+    private lateinit var mListFragment: LocationListFragment
 
     private lateinit var mFilterButton: ImageButton
 
@@ -66,10 +65,10 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 //        mSearchLocationChildFragment.setDefault("asdasd")
         requireFragmentManager().beginTransaction().replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment).commit()
 
-        mMainMapFragment2 = MainMapFragment2.newInstance()
-        mMainMapFragment2.setLocationClickListener(this)
-        requireFragmentManager().beginTransaction().replace(R.id.fragment_main_map_layout, mMainMapFragment2).commit()
-        mListFragment = SearchActivity.newInstance()
+        mInnerMapFragment = InnerMapFragment.newInstance()
+        mInnerMapFragment.setLocationClickListener(this)
+        requireFragmentManager().beginTransaction().replace(R.id.fragment_main_map_layout, mInnerMapFragment).commit()
+        mListFragment = LocationListFragment.newInstance()
         mListFragment.setLocationClickListener(this)
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
@@ -96,17 +95,13 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             }
 
             override fun onLocationChosen(location: Location) {
-                //TODO: seleccionar pin
-                this@MainMapFragment.onLocationClicked(location, true)
+                mInnerMapFragment.findAndSelectMarker(location)
             }
 
             override fun onLocationRemoved() {
 //                clear()
             }
 
-            override fun onCloseClicked() {
-//                this@MainMapFragment.finish()
-            }
         })
 
     }
@@ -135,19 +130,19 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     override fun onLocationNotRetrieved() {
-        getLocations()
-        mMainMapFragment2.onLocationNotRetrieved()
+        getInitialLocations()
+        mInnerMapFragment.onLocationNotRetrieved()
     }
 
     override fun onLocationResult(lastLocation: android.location.Location) {
         //Only for distances
         presenter?.mLastLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
-        mMainMapFragment2.onLocationResult(lastLocation)
-        getLocations()
+        mInnerMapFragment.onLocationResult(lastLocation)
+        getInitialLocations()
     }
 
-    private fun getLocations() {
-        presenter?.getLocations()
+    private fun getInitialLocations() {
+        presenter?.getInitialLocations()
     }
 
     override fun onEmptyResponse() {
@@ -156,21 +151,29 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mListFragment.onEmptyResponse()
     }
 
-    override fun showInitialLocations(response: List<Location?>) {
+    override fun showInitialLocations(response: List<Location?>, showInList: Boolean) {
         hideLoading()
-        mMainMapFragment2.showInitialLocations(response)
-//        mListFragment.showLocations(response, viewport)
+        mInnerMapFragment.showInitialLocations(response)
+        if (showInList)
+            mListFragment.showLocations(response, null)
+        else
+            showHistoryInList()
+    }
+
+    private fun showHistoryInList() {
+        val history = SearchLocationChildFragment.getLocationHistory().map { item -> item.location }
+        mListFragment.showLocations(history, null)
     }
 
     override fun showLocations(response: List<Location?>, viewport: LatLngBounds?) {
         hideLoading()
-        mListFragment.showLocations(response, viewport)
-        mMainMapFragment2.showLocations(response, viewport)
+        mListFragment.showLocations(response, null)
+        mInnerMapFragment.showLocations(response, viewport)
     }
 
     private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
         showLoading()
-        presenter.search(latLng, viewport)
+        presenter.searchFromQuery(latLng, viewport)
     }
 
     override fun showLoading() {
@@ -188,12 +191,12 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     override fun onLocationClicked(location: Location, showAsSlider: Boolean) {
         SearchLocationChildFragment.saveToLocationHistory(location)
         if (showAsSlider) {
-            val locationDialog = LocationItemView(location)
+            val locationDialog = LocationSliderFragment(location)
             locationDialog.show(fragmentManager)
         } else {
-            val intent = Intent(requireContext(), LocationActivity::class.java)
-            intent.putExtra(Extras.LocationActivity.LOCATION, location)
-            startActivity(intent)
+            val args = Bundle()
+            args.putSerializable(Extras.LocationActivity.LOCATION, location)
+            findNavController().navigate(R.id.locationFragment, args)
         }
     }
 

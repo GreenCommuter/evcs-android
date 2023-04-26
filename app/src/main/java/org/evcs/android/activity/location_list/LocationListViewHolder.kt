@@ -1,11 +1,11 @@
-package org.evcs.android.activity.search
+package org.evcs.android.activity.location_list
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import org.evcs.android.databinding.AdapterSearchResultsBinding
 import org.evcs.android.model.Location
 
-class SearchResultsLocationViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
+class LocationListViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
     private lateinit var mLocation: Location
     private val mBinding: AdapterSearchResultsBinding

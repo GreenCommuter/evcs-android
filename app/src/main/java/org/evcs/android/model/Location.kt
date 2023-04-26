@@ -4,7 +4,7 @@ import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
 import java.util.*
 
-class Location : Serializable, ClusterItemWithText {
+class Location : Serializable, ClusterItemWithText, ClusterItemWithValue {
     var id = 0
     var name: String? = null
     var latitude = 0.0
@@ -19,6 +19,10 @@ class Location : Serializable, ClusterItemWithText {
     var distance: Float? = null
     var stations: List<Station>? = null
     var address: Address? = null
+    var comingSoon: Boolean? = null
+    var gatecode: Int? = null
+//        get() = 1000
+
 
     //       "directions":"TO BE DEFINED",
     //               "open_247":true,
@@ -52,6 +56,10 @@ class Location : Serializable, ClusterItemWithText {
 
     override fun getMarkerText(): String {
         return stations!!.size.toString()
+    }
+
+    override fun getMarkerValue(): Int {
+        return stations!!.size
     }
 
     val printableDistance: CharSequence

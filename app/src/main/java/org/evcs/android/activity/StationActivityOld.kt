@@ -8,7 +8,7 @@ import org.evcs.android.model.Station
 import org.evcs.android.ui.view.shared.StationView
 import org.evcs.android.util.Extras
 
-class StationActivity : BaseActivity2() {
+class StationActivityOld : BaseActivity2() {
     private lateinit var mBinding: ActivityStationsBinding
 
     override fun inflate(layoutInflater: LayoutInflater): View {

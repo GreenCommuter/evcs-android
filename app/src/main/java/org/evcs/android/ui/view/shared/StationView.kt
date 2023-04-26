@@ -1,9 +1,11 @@
 package org.evcs.android.ui.view.shared
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import org.evcs.android.EVCSApplication
 import org.evcs.android.databinding.ViewStationBinding
 import org.evcs.android.model.Station
 
@@ -26,7 +28,9 @@ class StationView : LinearLayout {
         binding.stationId.text = String.format("Station ID: %d", mStation.id)
         binding.stationIcon.setImageDrawable(context!!.getDrawable(mStation.getChargerType().mIcon))
         binding.stationAvailable.text = mStation.printAvailableStatus()
-        binding.stationAvailableDot.isEnabled = mStation.isAvailable
+        val color = EVCSApplication.getInstance().resources.getColor(mStation.getAvailableStatus().color)
+        binding.stationAvailableDot.backgroundTintList = ColorStateList.valueOf(color)
+        binding.stationAvailable.setTextColor(color)
     }
 
 

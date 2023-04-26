@@ -9,10 +9,10 @@ import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.databinding.FragmentMainMap2Binding
+import org.evcs.android.databinding.FragmentInnerMapBinding
 import org.evcs.android.model.Location
 
-class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter2, Location>(), IMainMapView2 {
+class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location>(), InnerMapView {
 
     private var mCarouselItemSpacing = 0
     private var mMapTopPadding = 0
@@ -21,24 +21,24 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter2, Location
     private lateinit var mParent: LocationClickListener
 
     companion object {
-        fun newInstance(): MainMapFragment2 {
+        fun newInstance(): InnerMapFragment {
             val args = Bundle()
-            val fragment = MainMapFragment2()
+            val fragment = InnerMapFragment()
             fragment.arguments = args
             return fragment
         }
     }
 
     override fun layout(): Int {
-        return R.layout.fragment_main_map_2
+        return R.layout.fragment_inner_map
     }
 
-    override fun createPresenter(): MainMapPresenter2 {
-        return MainMapPresenter2(this, EVCSApplication.getInstance().retrofitServices)
+    override fun createPresenter(): InnerMapPresenter {
+        return InnerMapPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun setUi(v: View) {
-        val binding = FragmentMainMap2Binding.bind(v)
+        val binding = FragmentInnerMapBinding.bind(v)
         mCenterButton = binding.mapCenter
     }
 
@@ -104,6 +104,7 @@ class MainMapFragment2 : ClusterSelectionMapFragment<MainMapPresenter2, Location
     }
 
     override fun onMapReady() {
+        mRenderer.setSumItems(true)
 //        showCarousel(false)
     }
 

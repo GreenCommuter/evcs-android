@@ -2,6 +2,7 @@ package org.evcs.android.features.shared.places;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +77,7 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
         }
         CustomLocation customLocation = getItem(position);
         TextView name = view.findViewById(R.id.adapter_autocomplete_custom_text);
+        name.setTypeface(Typeface.DEFAULT);
         ImageView imageView = view.findViewById(R.id.adapter_autocomplete_custom_icon);
         imageView.setImageResource(customLocation.getDrawable());
         name.setText(customLocation.getLocation());
@@ -98,6 +100,8 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                 }
                 else {
                     results.count = showHistory();
+                    //Without this it crashes when erasing for modifying in a worker thread
+                    notifyDataSetChanged();
                     return results;
                 }
 
@@ -151,7 +155,7 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                 SearchLocationChildFragment.getLocationHistory();
         mResultList.clear();
         mResultNames.clear();
-        for (int i = 0; i < Math.min(history.size(), MAX_RESULTS); i++) {
+        for (int i = 0; i < Math.min(history.size(), MAX_RESULTS - 1); i++) {
            mResultNames.add(new CustomLocation(history.get(i).location.getName(), R.drawable.ic_clock_light_blue));
            mResultList.add(AutocompletePrediction.builder(history.get(i).key).setFullText(history.get(i).location.getName()).build());
         }

@@ -1,6 +1,7 @@
 package org.evcs.android.ui.view.shared;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
@@ -54,7 +55,6 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     private String mNoPermissionsSubtitlePath;
 
     private FilterableAutocompleteTextView mAddress;
-    private View mClose;
 
     protected ISearchLocationListener mListener;
     private PlaceCurrentAutocompleteAdapter mAdapter;
@@ -80,8 +80,10 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
                 mCurrentLocationString);
         mAddress.setAdapter(mAdapter);
         mAddress.setText(mDefaultText);
+        mAddress.setTypeface(Typeface.DEFAULT);
         if (mHint != null)
             mAddress.setHint(mHint);
+        mAddress.setDropDownVerticalOffset(7);
         getPresenter().setGoogleApiClient(getContext());
         requestLocationPermission();
     }
@@ -94,7 +96,6 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mNoLocationSubtitlePath = getString(R.string.carsharing_location_error_subtitle_path);
         mNoPermissionsSubtitlePath = getString(R.string.carsharing_gps_permissions_error_subtitle_path);
         mAddress = binding.fragmentSearchLocationAddress;
-        mClose = binding.fragmentSearchLocationClose;
     }
 
     @Override
@@ -154,19 +155,13 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) showHistory();
         });
-        mClose.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mListener.onCloseClicked();
-            }
-        });
     }
 
     private void showHistory() {
         if (mAddress.length() <= BaseConfiguration.AUTOCOMPLETE_ADAPTER_THRESHOLD) {
             mAdapter.showHistory();
             mAdapter.notifyDataSetChanged();
-//            mAddress.showDropDown();
+            mAddress.showDropDown();
         }
     }
 
@@ -319,8 +314,6 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         void onLocationChosen(@NonNull org.evcs.android.model.Location location);
 
         void onLocationRemoved();
-
-        void onCloseClicked();
     }
 
 }

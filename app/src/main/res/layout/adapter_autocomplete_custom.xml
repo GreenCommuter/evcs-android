@@ -20,7 +20,7 @@
             android:id="@+id/adapter_autocomplete_custom_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/spacing_small"
+            android:layout_marginRight="@dimen/spacing_medium"
             android:gravity="center"
             tools:src="@drawable/ic_map_car_location"/>
 
@@ -29,7 +29,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/spacing_tiny"
             android:maxLines="1"
             android:ellipsize="end"
             tools:text="Example, Text, Location"

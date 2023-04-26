@@ -10,8 +10,8 @@ import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
-class LocationActivityPresenter(viewInstance: LocationActivityView, services: RetrofitServices) :
-    ServicesPresenter<LocationActivityView>(viewInstance, services) {
+class LocationPresenter(viewInstance: LocationView, services: RetrofitServices) :
+    ServicesPresenter<LocationView>(viewInstance, services) {
 
     var mLocation: Location? = null
 
@@ -31,22 +31,6 @@ class LocationActivityPresenter(viewInstance: LocationActivityView, services: Re
                     view.showError(RequestError.getNetworkError())
                 }
             })
-    }
-
-    fun pack(stations: List<Station>): ArrayList<List<Station>> {
-//        val res = ArrayList<Triple<Station, Int, Int>>()
-        val map = stations.groupBy { station -> station.chargerType }
-        return ArrayList(map.values)
-//        res.addAll(map.map { entry ->
-//            Triple(entry.value.first(),
-//                   entry.value.count { station -> station.availableStatus == "AVAILABLE" },
-//                   entry.value.size)
-//        })
-//        return res
-    }
-
-    fun countAvailable(stations: List<Station>): Int {
-        return stations.count { station -> station.isAvailable }
     }
 
 }

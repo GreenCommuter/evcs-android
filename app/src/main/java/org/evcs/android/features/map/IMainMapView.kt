@@ -7,6 +7,6 @@ import org.evcs.android.ui.view.shared.ILoadingView
 
 interface IMainMapView : ILoadingView, IErrorView {
     fun showLocations(response: List<Location?>, viewport: LatLngBounds?)
-    fun showInitialLocations(populateDistances: List<Location?>)
+    fun showInitialLocations(response: List<Location?>, showInList: Boolean)
     fun onEmptyResponse()
 }

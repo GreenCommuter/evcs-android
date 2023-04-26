@@ -1,50 +1,47 @@
-package org.evcs.android.activity.search
+package org.evcs.android.activity.location_list
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.databinding.ActivitySearchBinding
-import org.evcs.android.features.map.MainMapFragment2
+import org.evcs.android.databinding.FragmentLocationListBinding
+import org.evcs.android.features.map.InnerMapFragment
 import org.evcs.android.model.Location
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.util.LocationUtils
 
-class SearchActivity : ErrorFragment<SearchActivityPresenter>(), SearchActivityView {
+class LocationListFragment : ErrorFragment<LocationListPresenter>(), LocationListView {
 
-    private lateinit var mFailView: LinearLayout
-    private lateinit var mEmptyView: TextView
-    private lateinit var mAddress: String
+    private lateinit var mFailView: View
+    private lateinit var mEmptyView: View
 
     private lateinit var mHistoryRecycler: EndlessRecyclerView
-    private lateinit var mHistoryAdapter: SearchResultsAdapter
-    private lateinit var mParent: MainMapFragment2.LocationClickListener
+    private lateinit var mHistoryAdapter: LocationListAdapter
+    private lateinit var mParent: InnerMapFragment.LocationClickListener
 
     companion object {
-        fun newInstance(): SearchActivity {
+        fun newInstance(): LocationListFragment {
             val args = Bundle()
-            val fragment = SearchActivity()
+            val fragment = LocationListFragment()
             fragment.arguments = args
             return fragment
         }
     }
 
     override fun layout(): Int {
-        return R.layout.activity_search
+        return R.layout.fragment_location_list
     }
 
     override fun setUi(v: View?) {
         super.setUi(v)
-        val binding = ActivitySearchBinding.bind(v!!)
-        mFailView = binding.activitySearchFail
-        mEmptyView = binding.activitySearchEmpty
-        mHistoryRecycler = binding.activitySearchHistory
+        val binding = FragmentLocationListBinding.bind(v!!)
+        mFailView = binding.fragmentLocationListFail
+        mEmptyView = binding.fragmentLocationListEmpty
+        mHistoryRecycler = binding.fragmentLocationListHistory
     }
 
     override fun init() {
@@ -68,15 +65,15 @@ class SearchActivity : ErrorFragment<SearchActivityPresenter>(), SearchActivityV
         mHistoryAdapter.setItemClickListener(itemClickListener)
     }
 
-    override fun createPresenter(): SearchActivityPresenter {
-        return SearchActivityPresenter(this, EVCSApplication.getInstance().retrofitServices)
+    override fun createPresenter(): LocationListPresenter {
+        return LocationListPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     private fun refreshHistoryView() {
-        mHistoryAdapter = SearchResultsAdapter()
+        mHistoryAdapter = LocationListAdapter()
         mHistoryRecycler.adapter = mHistoryAdapter
         mHistoryAdapter.setOnXClickListener { item ->
-            LocationUtils.launchGoogleMapsWithPin(context, item.latLng)
+            LocationUtils.launchGoogleMapsWithPin(context, item.latLng, item.gatecode, childFragmentManager)
         }
 //        mEmptyView.visibility = if (mHistoryAdapter.itemCount == 0) View.VISIBLE else View.GONE
     }
@@ -91,11 +88,10 @@ class SearchActivity : ErrorFragment<SearchActivityPresenter>(), SearchActivityV
     override fun onEmptyResponse() {
         mEmptyView.visibility = View.GONE
         mHistoryAdapter.clear()
-        (mFailView.getChildAt(0) as TextView).text = "Cannot find any chargers"// near " + mAddress
         mFailView.visibility = View.VISIBLE
     }
 
-    fun setLocationClickListener(listener: MainMapFragment2.LocationClickListener) {
+    fun setLocationClickListener(listener: InnerMapFragment.LocationClickListener) {
         mParent = listener
     }
 

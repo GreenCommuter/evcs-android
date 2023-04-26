@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <FrameLayout
         android:id="@+id/fragment_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/fragment_search_location_address_layout"
-        />
+        android:layout_below="@id/fragment_search_location_address_layout"/>
 
     <FrameLayout
         android:id="@+id/fragment_main_map_layout"
@@ -38,15 +37,25 @@
 
     </FrameLayout>
 
-    <TextView
-        android:id="@+id/map_search"
+    <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_medium"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:background="@color/evcs_white"
         android:layout_marginBottom="@dimen/spacing_big_extra"
-        android:text="List"/>
+        android:elevation="@dimen/spacing_medium"
+        app:cardCornerRadius="@dimen/radius_text">
+
+        <TextView
+            android:id="@+id/map_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="14dp"
+            android:textAllCaps="false"
+            android:drawableLeft="@drawable/ic_list"
+            android:drawablePadding="6dp"
+            android:text="List"/>
+
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

@@ -32,13 +32,10 @@
             android:id="@+id/view_location_go"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/evcs_secondary_700"
-            android:drawablePadding="@dimen/spacing_medium_more"
             android:drawableStart="@drawable/ic_go"
             android:text="Go"
-            android:textColor="@color/evcs_white"
-            android:padding="14dp"
-            android:layout_gravity="end"/>
+            android:layout_gravity="end"
+            style="@style/Button.Blue"/>
 
     </FrameLayout>
 
@@ -58,7 +55,7 @@
         style="@style/Roboto.Body"/>
 
     <TextView
-        android:id="@+id/viEw_location_type_price"
+        android:id="@+id/view_location_type_price"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="DC fast charge: $0.49/kWh"
@@ -72,10 +69,19 @@
         android:layout_marginBottom="@dimen/spacing_medium"
         style="@style/Roboto.Body"/>
 
+    <TextView
+        android:id="@+id/view_location_start_charging"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Start charging"
+        android:layout_margin="0dp"
+        style="@style/Button.OrangeOutline"/>
+
     <LinearLayout
         android:id="@+id/activity_location_connectors"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/spacing_large"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:orientation="vertical"/>
 

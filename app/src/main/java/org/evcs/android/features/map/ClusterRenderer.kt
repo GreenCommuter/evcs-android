@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
+import android.graphics.Typeface
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -23,13 +24,16 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.MarkerLayoutBinding
 import org.evcs.android.model.ClusterItemWithText
+import org.evcs.android.model.ClusterItemWithValue
 
 
-class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
+open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
     DefaultClusterRenderer<T>(mContext, map, clusterManager) {
 
+    private var mSumItems: Boolean = false
+
     override fun onBeforeClusterItemRendered(item: T, markerOptions: MarkerOptions) {
-        markerOptions.icon(getBitmap(item, R.drawable.ic_map_pin_unselected))
+        markerOptions.icon(getBitmap(item, R.drawable.ic_map_pin))
         //If items have the same z index the one at the back is selected, for some reason
 //        markerOptions.zIndex((90 - item.position.latitude).toFloat())
     }
@@ -44,13 +48,18 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
     }
 
     fun onClusterItemChange(item: T, marker: Marker, isSelected : Boolean) {
-        val icon = if (isSelected) R.drawable.ic_map_orange else R.drawable.ic_map_pin_unselected
+        val icon = if (isSelected) R.drawable.ic_map_pin_selected else R.drawable.ic_map_pin
         marker.setIcon(getBitmap(item, icon))
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<T>, markerOptions: MarkerOptions) {
         super.onBeforeClusterRendered(cluster, markerOptions)
-        val bitmap = createMarker(cluster.size.toString(), R.drawable.layout_oval_orange,
+        var text = cluster.size.toString()
+        if (mSumItems && cluster.items.first() is ClusterItemWithValue) {
+            text = (cluster.items as Collection<ClusterItemWithValue>)
+                .sumOf { item -> item.markerValue }.toString()
+        }
+        val bitmap = createMarker(text, R.drawable.layout_oval_orange,
                 Gravity.CENTER, Color.WHITE)
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
     }
@@ -64,7 +73,7 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
     }
 
     private fun createMarker(text: String, @DrawableRes icon: Int,
-                             textAlign: Int = Gravity.CENTER_HORIZONTAL, textColor: Int = Color.BLACK): Bitmap {
+                             textAlign: Int = Gravity.CENTER_HORIZONTAL, textColor: Int = Color.WHITE): Bitmap {
         val markerLayout = buildLayout(text, icon, textAlign, textColor)
         markerLayout.measure(
             View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
@@ -85,13 +94,18 @@ class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: Googl
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         params.gravity = textAlign
+        binding.markerText.typeface = Typeface.DEFAULT
         binding.markerText.layoutParams = params
         if (textAlign == Gravity.CENTER_HORIZONTAL) {
             val paddingTop = EVCSApplication.getInstance().applicationContext
-                    .resources.getDimension(R.dimen.spacing_tiny).toInt()
+                    .resources.getDimension(R.dimen.spacing_medium).toInt()
             binding.markerText.setPadding(0, paddingTop, 0 ,0)
         }
         return markerLayout
+    }
+
+    fun setSumItems(sumItems: Boolean) {
+        mSumItems = sumItems
     }
 
 }

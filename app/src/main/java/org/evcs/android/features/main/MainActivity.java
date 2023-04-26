@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -34,6 +35,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     public MainNavigationController mNavigationController;
     private BottomNavigationView mMenu;
     private ActivityResultLauncher mLoginResult;
+    private TextView mButton;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,6 +66,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                 ActivityBaseNavhostWithBottomNavBinding.inflate(layoutInflater);
         setContentView(binding.getRoot());
         mMenu = binding.bottomNavigation;
+        mButton = binding.bottomNavigationButton;
         return binding.getRoot();
     }
 
@@ -98,18 +101,16 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     @Override
     protected void populate() {
         super.populate();
-        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ?
-                "Sign in" :
-                getString(R.string.drawer_menu_profile));
+        mButton.setText("Get 30 Days Free Charging");
+        mButton.setVisibility(UserUtils.getLoggedUser() == null ? View.VISIBLE : View.GONE);
         mMenu.setSelectedItemId(R.id.menu_drawer_map);
     }
 
     @Override
     protected void setListeners() {
         super.setListeners();
-        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ?
-                "Sign in" :
-                getString(R.string.drawer_menu_profile));
+        mButton.setOnClickListener(v ->
+                mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class)));
         mMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -118,16 +119,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                         mNavigationController.onMapClicked();
                         break;
                     case R.id.menu_drawer_charging:
-                        if (UserUtils.getLoggedUser() == null)
-                            mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
-                        else
-                            mNavigationController.goToCharging();
+                        mNavigationController.goToCharging();
                         break;
                     case R.id.menu_drawer_profile:
-                        if (UserUtils.getLoggedUser() == null)
-                            mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
-                        else
-                            mNavigationController.goToProfile();
+                         mNavigationController.goToProfile();
                 }
                 //will be updated after canceling session
                 return false;

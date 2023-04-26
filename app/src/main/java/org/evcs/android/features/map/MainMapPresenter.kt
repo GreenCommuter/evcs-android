@@ -29,12 +29,12 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     }
 
-    fun getLocations(latlng: LatLng?, minKw: Int?, connector: String?) {
+    fun getInitialLocations(latlng: LatLng?, minKw: Int?, connector: String?) {
         view?.showLoading()
         getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
             .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
-                    view.showInitialLocations(populateDistances(response?.page!!))
+                    view.showInitialLocations(populateDistances(response?.page!!), latlng == null)
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -55,24 +55,24 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
         return locations
     }
 
-    fun getLocations(latlng : LatLng? = null) {
-        getLocations(latlng, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
+    fun getInitialLocations(latlng : LatLng? = null) {
+        getInitialLocations(latlng, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase());
     }
 
     fun onFilterResult(result: FilterState) {
         mFilterState = result
-        getLocations()
+        getInitialLocations()
     }
 
-    fun search(latlng: LatLng, viewport: LatLngBounds?) {
+    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
         mLastLocation = latlng
-        search(viewport)
+        searchFromQuery(viewport)
     }
 
     /**
      * @param viewport: bounds for the map to show the locations
      */
-    fun search(viewport: LatLngBounds?) {
+    fun searchFromQuery(viewport: LatLngBounds?) {
         getService(LocationService::class.java).getLocations(mLastLocation?.latitude,
                 mLastLocation?.longitude, 200, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase())
                 .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {

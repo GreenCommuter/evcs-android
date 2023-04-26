@@ -1,5 +1,7 @@
 package org.evcs.android.model
 
+import androidx.annotation.ColorRes
+import org.evcs.android.R
 import org.evcs.android.util.StringUtils
 import java.io.Serializable
 import java.util.*
@@ -46,8 +48,8 @@ class Station : Serializable {
     val firstConnectorId: Int
         get() = connectors!![0].id
 
-    enum class AvailableStatus {
-        AVAILABLE, BLOCKED, IN_USE, INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN
+    enum class AvailableStatus(@ColorRes val color: Int = R.color.evcs_gray_300) {
+        AVAILABLE(R.color.evcs_success_500), BLOCKED, IN_USE(R.color.evcs_warning_600), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN
     }
 
 }

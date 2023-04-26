@@ -1,11 +1,10 @@
-package org.evcs.android.activity.search
+package org.evcs.android.activity.location_list
 
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.model.Location
 import org.evcs.android.ui.view.shared.IErrorView
-import org.evcs.android.ui.view.shared.ILoadingView
 
-interface SearchActivityView : IErrorView {
+interface LocationListView : IErrorView {
     fun showLocations(page: List<Location?>?, viewport: LatLngBounds?)
     fun onEmptyResponse();
 }

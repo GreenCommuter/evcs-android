@@ -475,7 +475,7 @@
 
     <!--Search Activity-->
     <string name="search_activity_hint">Location or zipcode</string>
-    <string name="search_activity_empty">Search for charging sites by location or zipcode</string>
+    <string name="search_activity_empty">Enable location services in system settings to see nearby locations or search a location.</string>
     <string name="search_activity_fail">Cannot find</string>
     <string name="search_activity_fail_description">Try searching again using different spelling or keywords.</string>
     <string name="activity_search_search_history">Search history</string>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/evcs_white">
+
+    <org.evcs.android.ui.recycler.EndlessRecyclerView
+        android:id="@+id/fragment_location_list_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/spacing_medium"/>
+
+    <LinearLayout
+        android:id="@+id/fragment_location_list_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large"
+        android:padding="@dimen/spacing_large"
+        android:background="@drawable/layout_corners_rounded_filter_filled"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/search_activity_empty"
+            android:gravity="center"
+            style="@style/Roboto.Body"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_large_extra"
+            android:layout_gravity="center"
+            android:text="Open Settings"
+            android:gravity="center"
+            style="@style/Button.Blue"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/fragment_location_list_fail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_large"
+        android:gravity="center"
+        android:padding="@dimen/spacing_large"
+        android:text="We currently don\'t have any chargers around here"
+        android:background="@drawable/layout_corners_rounded_filter_filled"
+        android:visibility="gone"
+        style="@style/RobotoBold.CallToAction"/>
+
+</FrameLayout>

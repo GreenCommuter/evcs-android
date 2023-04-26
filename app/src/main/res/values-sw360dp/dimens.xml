@@ -28,7 +28,4 @@
     <dimen name="font_big">24sp</dimen>
     <dimen name="font_huge">28sp</dimen>
 
-    <!-- Radius -->
-    <dimen name="button_radius">24dp</dimen>
-
 </resources>

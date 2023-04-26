@@ -61,25 +61,13 @@
             android:theme="@style/AppTheme.Transparent" />
 
         <activity
-            android:name="org.evcs.android.activity.search.SearchActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/SplashTheme" />
-
-        <activity
             android:name="org.evcs.android.activity.FilterActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/SplashTheme" />
 
         <activity
-            android:name="org.evcs.android.activity.location.LocationActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/SplashTheme" />
-
-        <activity
-            android:name="org.evcs.android.activity.StationActivity"
+            android:name="org.evcs.android.activity.StationActivityOld"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/SplashTheme" />

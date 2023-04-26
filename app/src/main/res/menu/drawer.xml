@@ -3,16 +3,16 @@
 
     <item
         android:id="@+id/menu_drawer_map"
-        android:icon="@drawable/ic_map_solid"
+        android:icon="@drawable/ic_drawer_stations"
         android:title="@string/drawer_menu_map" />
 
     <item
         android:id="@+id/menu_drawer_charging"
-        android:icon="@drawable/ic_charge"
+        android:icon="@drawable/ic_drawer_charge"
         android:title="@string/drawer_menu_charging" />
 
     <item
         android:id="@+id/menu_drawer_profile"
-        android:icon="@drawable/ic_profile"
+        android:icon="@drawable/ic_drawer_profile"
         android:title="@string/drawer_menu_profile" />
 </menu>

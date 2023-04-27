@@ -32,7 +32,6 @@
             android:maxLines="1"
             android:ellipsize="end"
             tools:text="Example, Text, Location"
-            tools:textColor="@color/evcs_gray_800"
             style="@style/Body.Medium"/>
 
     </LinearLayout>
@@ -40,6 +39,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_tiniest"
-        android:background="@color/evcs_grey_transparent" />
+        android:background="@color/evcs_gray_100" />
 
 </LinearLayout>

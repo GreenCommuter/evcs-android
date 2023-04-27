@@ -94,7 +94,6 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
         val params = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT)
         params.gravity = textAlign
-        binding.markerText.typeface = Typeface.DEFAULT
         binding.markerText.layoutParams = params
         if (textAlign == Gravity.CENTER_HORIZONTAL) {
             val paddingTop = EVCSApplication.getInstance().applicationContext

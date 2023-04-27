@@ -1,6 +1,6 @@
 package org.evcs.android.model
 
-import androidx.annotation.ColorRes
+import androidx.annotation.AttrRes
 import org.evcs.android.R
 import org.evcs.android.util.StringUtils
 import java.io.Serializable
@@ -19,14 +19,7 @@ class Station : Serializable {
     var connectors: List<Connector>? = null
 
     fun printKw(): String {
-        return String.format("%.0fkW", kw)
-    }
-
-    fun getChargerType(): ConnectorType {
-        for (ct in ConnectorType.values()) {
-            if (ct.toString() == chargerType) return ct
-        }
-        return ConnectorType.TYPE1
+        return String.format("%.0f kW", kw)
     }
 
     fun getAvailableStatus(): AvailableStatus {
@@ -48,8 +41,25 @@ class Station : Serializable {
     val firstConnectorId: Int
         get() = connectors!![0].id
 
-    enum class AvailableStatus(@ColorRes val color: Int = R.color.evcs_gray_300) {
-        AVAILABLE(R.color.evcs_success_500), BLOCKED, IN_USE(R.color.evcs_warning_600), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN
+    enum class AvailableStatus(@AttrRes val state: Int = R.attr.state_offline) {
+        AVAILABLE(R.attr.state_active), BLOCKED, IN_USE(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN
+    }
+
+    fun getChargerType(): ChargerType {
+        for (ct in ChargerType.values()) {
+            if (ct.toString().lowercase() == chargerType?.lowercase()) return ct
+        }
+        return ChargerType.AC
+    }
+
+    fun getConnectorType(): ConnectorType {
+        return outlets!![0].getConnectorType()
+    }
+
+    enum class ChargerType(val printableName: String) : Serializable {
+        AC("Level 2"),
+        DC50KW("DC Fast"),
+        DC100KW("DC Fast")
     }
 
 }

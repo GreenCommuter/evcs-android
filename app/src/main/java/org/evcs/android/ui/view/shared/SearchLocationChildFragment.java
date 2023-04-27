@@ -80,7 +80,6 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
                 mCurrentLocationString);
         mAddress.setAdapter(mAdapter);
         mAddress.setText(mDefaultText);
-        mAddress.setTypeface(Typeface.DEFAULT);
         if (mHint != null)
             mAddress.setHint(mHint);
         mAddress.setDropDownVerticalOffset(7);

@@ -40,10 +40,13 @@ public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresente
         applyCameraUpdate(CameraUpdateFactory.newLatLng(latLng), true);
     }
 
-    @SuppressLint("MissingPermission")
+    @SuppressLint({"MissingPermission", "ResourceType"})
     protected void drawLocationMarker() {
         if (getMapView() != null)
-            getMapView().getMapAsync(googleMap -> googleMap.setMyLocationEnabled(true));
+            getMapView().getMapAsync(googleMap -> {
+                googleMap.setMyLocationEnabled(true);
+                ((View) (getMapView().findViewById(1).getParent())).findViewById(2).setVisibility(View.GONE);
+            });
         /*View locationButton = ((View) getMapView().findViewById(Integer.parseInt("1")).getParent())
                 .findViewById(Integer.parseInt("2"));
         RelativeLayout.LayoutParams rlp = (RelativeLayout.LayoutParams) locationButton.getLayoutParams();

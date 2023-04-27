@@ -1,26 +1,20 @@
 package org.evcs.android.features.map
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import com.base.core.fragment.BaseDialogFragment
 import com.base.core.presenter.BasePresenter
-import com.base.core.util.ToastUtils
-import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.location.LocationPresenter
-import org.evcs.android.activity.location.LocationView
-import org.evcs.android.databinding.FragmentMapItemBinding
+import org.evcs.android.databinding.FragmentLocationSliderBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.model.Location
-import org.evcs.android.model.shared.RequestError
 
 
 class LocationSliderFragment(private var location: Location) : BaseDialogFragment<BasePresenter<*>>() {
 
-    private lateinit var mBinding: FragmentMapItemBinding
+    private lateinit var mBinding: FragmentLocationSliderBinding
     private var mLastY = 0
 
     override fun init() {
@@ -28,12 +22,12 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
     }
 
     override fun layout(): Int {
-        return R.layout.fragment_map_item
+        return R.layout.fragment_location_slider
     }
 
     override fun setUi(v: View) {
         super.setUi(v)
-        mBinding = FragmentMapItemBinding.bind(v)
+        mBinding = FragmentLocationSliderBinding.bind(v)
     }
 
     @SuppressLint("ClickableViewAccessibility")

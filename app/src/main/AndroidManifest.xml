@@ -67,12 +67,6 @@
             android:theme="@style/SplashTheme" />
 
         <activity
-            android:name="org.evcs.android.activity.StationActivityOld"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/SplashTheme" />
-
-        <activity
             android:name="org.evcs.android.activity.account.AccountActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"

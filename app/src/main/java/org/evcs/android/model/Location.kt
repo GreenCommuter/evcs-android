@@ -10,12 +10,7 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue {
     var latitude = 0.0
     var longitude = 0.0
     var imageUrls: List<String>? = null
-
-    /*        "station_count": {
-        "dc50kw": 4,
-                "dc": 0,
-                "ac": 0
-    },*/
+    var stationCount: StationCount? = null
     var distance: Float? = null
     var stations: List<Station>? = null
     var address: Address? = null
@@ -64,4 +59,22 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue {
 
     val printableDistance: CharSequence
         get() = if (distance == null) "-- mi" else String.format("%.1f mi", distance)
+
+    val connectorTypes: Set<ConnectorType>
+        get() = stations!!.map { station -> station.getConnectorType() }.toSet()
+
+    val acPrice: Float
+        get() = priceOfFirstStationMatching { station ->
+            station.getChargerType() == Station.ChargerType.AC }
+
+    val dcPrice: Float
+        get() = priceOfFirstStationMatching { station ->
+            station.getChargerType() == Station.ChargerType.DC100KW
+                    || station.getChargerType() == Station.ChargerType.DC50KW
+        }
+
+    fun priceOfFirstStationMatching(condition: (Station) -> Boolean) : Float {
+        return stations!!.filter(condition).getOrNull(0)?.pricing?.detail?.priceKwh ?: 0f
+    }
+
 }

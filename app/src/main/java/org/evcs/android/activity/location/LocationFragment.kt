@@ -11,11 +11,12 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 
 class LocationFragment : ErrorFragment<LocationPresenter>(), LocationView {
+
     private lateinit var mBinding: FragmentLocationBinding
 
-    override fun setUi(v: View?) {
+    override fun setUi(v: View) {
         super.setUi(v)
-        mBinding = FragmentLocationBinding.inflate(layoutInflater)
+        mBinding = FragmentLocationBinding.bind(v)
     }
 
     override fun layout(): Int {
@@ -30,7 +31,7 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), LocationView {
         showLocation(l)
         //the presenter will not retrieve distance
 //        mBinding.activityLocationDistance.text = l?.printableDistance
-        presenter.getLocation(l.id)
+//        presenter.getLocation(l.id)
     }
 
     override fun createPresenter(): LocationPresenter {
@@ -39,14 +40,15 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), LocationView {
 
     override fun setListeners() {
         mBinding.activityLocationClose.setOnClickListener { findNavController().popBackStack() }
+        mBinding.activityLocationLocation.setStartChargingListener {
+            MainNavigationController.getInstance().goToCharging()
+        }
     }
 
     override fun showLocation(response: Location?) {
         mBinding.activityLocationLocation.setLocation(response!!)
-        mBinding.activityLocationLocation.resizePicture(200)
-        mBinding.activityLocationLocation.setStartChargingListener {
-            MainNavigationController.getInstance().goToCharging()
-        }
+        mBinding.activityLocationLocation.resizePicture(
+            resources.getDimension(R.dimen.location_fragment_image_height).toInt())
     }
 
 }

@@ -64,7 +64,7 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         mLayout = binding.standardTextFieldLayout
         mLabel = binding.standardTextFieldLabel
         mGreyBorder = resources.getDrawable(R.drawable.layout_corners_rounded_grey_border)
-        mBlackBorder = resources.getDrawable(R.drawable.layout_corners_rounded_black_border)
+        mBlackBorder = resources.getDrawable(R.drawable.layout_corners_rounded_blue_outline)
         mRedBorder = resources.getDrawable(R.drawable.layout_corners_rounded_red_border)
     }
 

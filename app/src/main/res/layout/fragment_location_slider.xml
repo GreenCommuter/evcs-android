@@ -14,7 +14,7 @@
         <View
             android:id="@+id/map_item_fragment_empty"
             android:layout_width="wrap_content"
-            android:layout_height="390dp"/>
+            android:layout_height="360dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,16 +38,13 @@
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/spacing_medium_extra"
                 android:text="Location Detail"
-                />
+                android:textColor="#0C141D"
+                style="@style/Title.Medium"/>
 
             <org.evcs.android.features.map.LocationView
                 android:id="@+id/map_item_fragment_location_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="500dp" />
 
         </LinearLayout>
 

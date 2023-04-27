@@ -27,7 +27,7 @@ import java.util.List;
 
 public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation> implements Filterable {
 
-    private static final int MAX_RESULTS = 6;
+    private static final int MAX_RESULTS = 5;
 
     private final PlacesRequestPresenter mPresenter;
     private final ArrayList<AutocompletePrediction> mResultList;
@@ -77,7 +77,6 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
         }
         CustomLocation customLocation = getItem(position);
         TextView name = view.findViewById(R.id.adapter_autocomplete_custom_text);
-        name.setTypeface(Typeface.DEFAULT);
         ImageView imageView = view.findViewById(R.id.adapter_autocomplete_custom_icon);
         imageView.setImageResource(customLocation.getDrawable());
         name.setText(customLocation.getLocation());
@@ -155,7 +154,7 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                 SearchLocationChildFragment.getLocationHistory();
         mResultList.clear();
         mResultNames.clear();
-        for (int i = 0; i < Math.min(history.size(), MAX_RESULTS - 1); i++) {
+        for (int i = 0; i < Math.min(history.size(), MAX_RESULTS); i++) {
            mResultNames.add(new CustomLocation(history.get(i).location.getName(), R.drawable.ic_clock_light_blue));
            mResultList.add(AutocompletePrediction.builder(history.get(i).key).setFullText(history.get(i).location.getName()).build());
         }

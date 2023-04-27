@@ -51,7 +51,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
     override fun setUi(v: View) {
         val binding = FragmentMainMapBinding.bind(v)
-        mToggleButton = binding.mapSearch
+        mToggleButton = binding.mapToggle
         mFilterButton = binding.mapFilter
     }
 
@@ -120,24 +120,15 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         return intent
     }
 
-    private fun showCarousel(show: Boolean) {
-        //It starts as gone
-//        if (show) mCarouselRecycler.visibility = View.VISIBLE
-//        isCarouselShowing = show
-//        AnimationUtils.animateTranslation(mCarouselRecycler, if (show) 0f else mMapBottomPadding.toFloat())
-//        AnimationUtils.animateTranslation(mCenterButton, if (show) 0f else mMapBottomPadding.toFloat())
-//        setMapPadding(0, mMapTopPadding, 0, if (show) mMapBottomPadding else 0)
-    }
-
     override fun onLocationNotRetrieved() {
         getInitialLocations()
         mInnerMapFragment.onLocationNotRetrieved()
     }
 
     override fun onLocationResult(lastLocation: android.location.Location) {
-        //Only for distances
+        //Only for distances?
         presenter?.mLastLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
-        mInnerMapFragment.onLocationResult(lastLocation)
+        mInnerMapFragment.onLocationResult(presenter.mLastLocation!!)
         getInitialLocations()
     }
 

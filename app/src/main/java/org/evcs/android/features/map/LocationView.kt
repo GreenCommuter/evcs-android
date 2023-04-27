@@ -6,7 +6,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.FragmentManager
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
@@ -40,19 +42,33 @@ class LocationView : LinearLayout {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
+        if (location.gatecode != null) {
+            mBinding.viewLocationGatecode.text = "Gatecode: " + location.gatecode.toString()
+            mBinding.viewLocationGatecode.visibility = VISIBLE
+        }
+        showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, "Level 2 Member Price: \$%.2f/kWh")
+        showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, "DC Fast Member Price: \$%.2f/kWh")
+
         mBinding.viewLocationGo.setOnClickListener {
-            LocationUtils.launchGoogleMapsWithPin(context, location.latLng, location.gatecode,
-                ((context as ContextWrapper).baseContext as FragmentActivity).supportFragmentManager
-            )
+            LocationUtils.launchGoogleMapsWithPin(context, location.latLng, location.gatecode, getFragmentManager())
         }
 
         //        mBinding.activityLocationHint.text = response?
-        mBinding.activityLocationConnectors.removeAllViews()
-        location?.stations!!.forEach { station ->
+        mBinding.viewLocationConnectors.removeAllViews()
+        location.stations!!.forEach { station ->
             val v = StationView(context, station)
-            mBinding.activityLocationConnectors.addView(v)
+            mBinding.viewLocationConnectors.addView(v)
         }
 
+    }
+
+    private fun showPriceIfExists(textView: TextView, price: Float, format: String) {
+        textView.text = String.format(format, price)
+        textView.visibility = if (price > 0) VISIBLE else GONE
+    }
+
+    private fun getFragmentManager(): FragmentManager {
+        return ((context as ContextWrapper).baseContext as FragmentActivity).supportFragmentManager
     }
 
     /*static*/ fun resize(view: View, height: Int) {

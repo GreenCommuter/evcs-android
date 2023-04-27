@@ -52,7 +52,7 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
     }
 
     override fun setListeners() {
-//        mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
+        mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
         addOnCameraChangeListener {
 //                cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
         }
@@ -70,11 +70,13 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
     }
 
     fun onLocationNotRetrieved() {
-        mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.no_location))
+//        mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.no_location))
     }
 
-    fun onLocationResult(lastLocation: android.location.Location) {
-        mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.center))
+    fun onLocationResult(lastLocation: LatLng) {
+        presenter.mLastLocation = lastLocation
+        (mCenterButton.parent as View).visibility = View.VISIBLE
+        mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.ic_map_center))
         drawLocationMarker()
     }
 

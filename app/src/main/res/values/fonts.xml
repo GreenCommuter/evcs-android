@@ -130,79 +130,6 @@
         <item name="android:textColor">@color/evcs_green</item>
     </style>
 
-    <!-- Proxima Nova Bold styles -->
-    <style name="ProximaNovaBold" parent="@android:style/TextAppearance">
-        <item name="fontPath">fonts/ProximaNova-Bold.otf</item>
-    </style>
-
-    <style name="ProximaNovaBold.SmallMore">
-        <item name="android:textSize">@dimen/font_small_more</item>
-    </style>
-
-    <style name="ProximaNovaBold.Medium">
-        <item name="android:textSize">@dimen/font_medium</item>
-    </style>
-
-    <style name="ProximaNovaBold.Medium.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumMore">
-        <item name="android:textSize">@dimen/font_medium_more</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumMore.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumMore.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumExtra">
-        <item name="android:textSize">@dimen/font_medium_extra</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumExtra.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumExtra.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="ProximaNovaBold.MediumExtra.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="ProximaNovaBold.Large">
-        <item name="android:textSize">@dimen/font_large</item>
-    </style>
-
-    <style name="ProximaNovaBold.Large.Switch">
-        <item name="android:textColor">@color/switch_color</item>
-    </style>
-
-    <style name="ProximaNovaBold.Large.Switch.Caps">
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="ProximaNovaBold.Large.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="ProximaNovaBold.Large.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="ProximaNovaBold.Large.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="ProximaNovaBold.Huge">
-        <item name="android:textSize">@dimen/font_huge</item>
-    </style>
-
     <!-- Title text styles -->
     <style name="TitleFont" parent="@android:style/TextAppearance">
         <item name="fontPath">fonts/ProximaNova-Bold.otf</item>
@@ -307,7 +234,8 @@
 
     <style name="Inter" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/evcs_gray_800</item>
-<!--        <item name="android:fontFamily">inter</item>-->
+        <item name="android:textStyle">normal</item>
+        <!--        <item name="android:fontFamily">inter</item>-->
     </style>
 
     <style name="Display" parent="Inter"/>
@@ -346,6 +274,7 @@
 
     <style name="Title" parent="Inter">
         <item name="android:fontWeight" tools:targetApi="o">500</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="Title.Large">

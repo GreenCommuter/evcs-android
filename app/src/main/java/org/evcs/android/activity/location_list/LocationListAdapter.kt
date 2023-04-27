@@ -10,7 +10,7 @@ class LocationListAdapter : BaseRecyclerAdapter<Location, LocationListViewHolder
     private var mOnXClickListener: ((Location) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LocationListViewHolder {
-        return LocationListViewHolder(inflateView(parent, R.layout.adapter_search_results))
+        return LocationListViewHolder(inflateView(parent, R.layout.adapter_list_locations))
     }
 
     override fun populate(holder: LocationListViewHolder?, item: Location?, position: Int) {

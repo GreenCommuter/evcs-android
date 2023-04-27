@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item app:state_active="true"
-            android:color="@color/evcs_success_500" />
+        android:color="@color/evcs_secondary_700" />
 
     <item app:state_busy="true"
-        android:color="@color/evcs_warning_600" />
+        android:color="@color/evcs_secondary_700" />
 
     <item app:state_offline="true"
         android:color="@color/evcs_gray_300" />

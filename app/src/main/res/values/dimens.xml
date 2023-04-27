@@ -67,6 +67,9 @@
     <dimen name="font_big">22sp</dimen>
     <dimen name="font_huge">24sp</dimen>
 
+    <!-- Location Fragment -->
+    <dimen name="location_fragment_image_height">228dp</dimen>
+
     <!-- General -->
     <dimen name="app_avatar_border_width">1dp</dimen>
 
@@ -110,12 +113,6 @@
 
     <!-- Image Checkbox -->
     <dimen name="image_checkbox_image_size">44dp</dimen>
-
-    <!-- My Trips -->
-    <dimen name="my_trips_cards_margin_left_right">12dp</dimen>
-    <dimen name="my_trips_cards_margin_top_bottom">8dp</dimen>
-    <dimen name="my_trips_corporate_label">5dp</dimen>
-    <dimen name="my_trips_images_height">100dp</dimen>
 
     <!--Payment Methods-->
     <dimen name="payment_methods_credit_font_size">50sp</dimen>

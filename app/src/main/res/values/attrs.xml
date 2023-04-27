@@ -64,4 +64,11 @@
         <attr name="innerMargin" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="AvailableState">
+        <attr name="state_active" format="boolean" />
+        <attr name="state_busy" format="boolean" />
+        <attr name="state_offline" format="boolean" />
+    </declare-styleable>
+
+
 </resources>

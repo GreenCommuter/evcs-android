@@ -473,22 +473,12 @@
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
     <string name="filter_activity_apply">Apply</string>
 
-    <!--Search Activity-->
+    <!--Search Location Child-->
     <string name="search_activity_hint">Location or zipcode</string>
-    <string name="search_activity_empty">Enable location services in system settings to see nearby locations or search a location.</string>
-    <string name="search_activity_fail">Cannot find</string>
-    <string name="search_activity_fail_description">Try searching again using different spelling or keywords.</string>
-    <string name="activity_search_search_history">Search history</string>
-    <string name="activity_search_clear_all">Clear all</string>
 
-    <!-- Location Activity-->
-    <string name="activity_location_connector_type">Connector Type</string>
-
-    <!--Stations Activity-->
-    <string name="activity_stations_occupancy_clarification">Avoid occupancy fees by unplugging your vehicle within the grace period. You will receive a notification when the energy transfer has ended</string>
-    <string name="activity_stations_charger_details">Charger Details</string>
-    <string name="activity_stations_connection_fee">Connection Fee</string>
-    <string name="activity_stations_occupancy_fee">Occupancy Fee</string>
+    <!--Location List-->
+    <string name="loction_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
+    <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
     <!-- Plan info-->
     <string name="plan_info_title">Start charging</string>

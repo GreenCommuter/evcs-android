@@ -91,7 +91,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
         mSearchLocationChildFragment.setListener(object : SearchLocationChildFragment.ISearchLocationListener {
             override fun onLatLngChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
-                this@MainMapFragment.onLocationChosen(address, latLng, LocationUtils.addDiagonal(viewport))
+                this@MainMapFragment.onLocationChosen(address, latLng, viewport)
             }
 
             override fun onLocationChosen(location: Location) {
@@ -133,7 +133,12 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     private fun getInitialLocations() {
-        presenter?.getInitialLocations()
+        if (presenter.mCachedLocations != null) {
+            showInitialLocations(presenter.mCachedLocations!!, presenter.mLastLocation != null)
+        } else {
+            showProgressDialog()
+            presenter?.getInitialLocations()
+        }
     }
 
     override fun onEmptyResponse() {
@@ -142,7 +147,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mListFragment.onEmptyResponse()
     }
 
-    override fun showInitialLocations(response: List<Location?>, showInList: Boolean) {
+    override fun showInitialLocations(response: List<Location>, showInList: Boolean) {
         hideLoading()
         mInnerMapFragment.showInitialLocations(response)
         if (showInList)
@@ -153,13 +158,14 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
     private fun showHistoryInList() {
         val history = SearchLocationChildFragment.getLocationHistory().map { item -> item.location }
-        mListFragment.showLocations(history, null)
+        if (history.size > 0)
+            mListFragment.showLocations(history, null)
     }
 
-    override fun showLocations(response: List<Location?>, viewport: LatLngBounds?) {
+    override fun showLocations(response: List<Location>, viewport: LatLngBounds?) {
         hideLoading()
         mListFragment.showLocations(response, null)
-        mInnerMapFragment.showLocations(response, viewport)
+        mInnerMapFragment.zoomToLocations(response, viewport)
     }
 
     private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {

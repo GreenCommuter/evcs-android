@@ -26,14 +26,15 @@
         app:itemTextColor="@color/icon_color_selector"
         app:itemTextAppearanceActive="@style/BottomNavigation.ActiveItemTextAppearance"
         app:backgroundTint="@color/evcs_white"
-        app:menu="@menu/drawer"
         app:elevation="4dp">
 
         <TextView
             android:id="@+id/bottom_navigation_button"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/spacing_medium"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_medium"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:text="Get 30 Days Free Charging"
             style="@style/ButtonK.Orange"/>
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

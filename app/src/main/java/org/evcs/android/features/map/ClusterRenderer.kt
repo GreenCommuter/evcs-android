@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
-import android.graphics.Typeface
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -105,6 +104,10 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
 
     fun setSumItems(sumItems: Boolean) {
         mSumItems = sumItems
+    }
+
+    override fun shouldRenderAsCluster(cluster: Cluster<T>): Boolean {
+        return cluster.size > 1
     }
 
 }

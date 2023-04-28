@@ -11,6 +11,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentInnerMapBinding
 import org.evcs.android.model.Location
+import org.evcs.android.util.LocationUtils
 
 class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location>(), InnerMapView {
 
@@ -64,8 +65,9 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
             toggleContainerSelection(location)
         //Ex: markers didn't load
         else {
-            centerMap(location.latLng)
-//            getLocations()
+            applyCameraUpdate(CameraUpdateFactory.newLatLngZoom(location.latLng, 18f))
+            mParent.onLocationClicked(location, true)
+        //            getLocations()
         }
     }
 
@@ -88,16 +90,14 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         showMapItems(response)
     }
 
-    fun showLocations(locations: List<Location?>, viewport: LatLngBounds?) {
-//        if (result.hasExtra(Extras.LocationActivity.LOCATION)) {
-//            val location = result.getSerializableExtra(Extras.LocationActivity.LOCATION) as Location
-//            findAndSelectMarker(location)
-//        } else {
-//            findAndSelectMarker(locations[0]!!)
-            val viewport2 = viewport?.including(locations[0]!!.latLng)
-            if (viewport2 != null)
-                applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport2, 0))
-//        }
+    fun zoomToLocations(locations: List<Location?>, viewport: LatLngBounds?) {
+        val closest = locations[0]!!.latLng
+        if (viewport!!.contains(closest)) {
+            applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport, 20))
+        } else {
+            //I want to try to make sure that at list something is shown, and if there is a single point it may get clustered
+            applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport.including(closest), 200))
+        }
     }
 
     override fun showMapItems(mapItems: List<Location?>) {

@@ -15,11 +15,11 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue {
     var stations: List<Station>? = null
     var address: Address? = null
     var comingSoon: Boolean? = null
-    var gatecode: Int? = null
+    var gatecode: String? = null
+    var directions: String? = null
 //        get() = 1000
 
 
-    //       "directions":"TO BE DEFINED",
     //               "open_247":true,
     //               "authority":"public",
     //        "noodoe_id": "abc123",

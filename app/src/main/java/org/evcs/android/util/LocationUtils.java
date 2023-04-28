@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.view.Gravity;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -32,7 +33,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  */
 public final class LocationUtils {
 
-    private static final double PADDING_DEGREES = 0.03;
+    private static final double PADDING_DEGREES = 0.004;
     public static final int REQUEST_CHECK_SETTINGS = 10000;
 
     /**
@@ -113,13 +114,15 @@ public final class LocationUtils {
         });
     }
 
-    public static void launchGoogleMapsWithPin(Context context, LatLng latLng, Integer gatecode, FragmentManager fm) {
+    public static void launchGoogleMapsWithPin(Context context, LatLng latLng, String gatecode, FragmentManager fm) {
         if (gatecode == null) {
             launchGoogleMapsWithPin(context, latLng);
             return;
         }
         TextView gatecodeView = new TextView(context);
-        gatecodeView.setText(Integer.toString(gatecode));
+        gatecodeView.setText("Gate code: " + gatecode);
+        gatecodeView.setGravity(Gravity.CENTER);
+
         new EVCSDialogFragment.Builder()
                 .setTitle("Access requirement")
                 .setSubtitle("This location requires a gate code to access it. You can always view the code in the location details.")

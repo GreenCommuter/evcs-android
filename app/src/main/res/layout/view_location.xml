@@ -60,7 +60,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:text="HARDCODED: Chargers located at the northwest corner of the Palmdale Park &amp; Ride lot."
         style="@style/Body.Small"/>
 
     <TextView

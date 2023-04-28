@@ -17,6 +17,7 @@ import org.evcs.android.util.LocationUtils
 class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?) :
     ServicesPresenter<IMainMapView?>(viewInstance, services) {
 
+    var mCachedLocations: List<Location>? = null
     var mFilterState: FilterState = FilterState()
     var mLastLocation: LatLng? = null
 
@@ -30,11 +31,11 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     fun getInitialLocations(latlng: LatLng?, minKw: Int?, connector: String?) {
-        view?.showLoading()
         getService(LocationService::class.java).getLocations(1, latlng?.latitude, latlng?.longitude, minKw, connector)
-            .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
-                override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
-                    view.showInitialLocations(populateDistances(response?.page!!), latlng == null)
+            .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
+                override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
+                    mCachedLocations = response?.page
+                    view.showInitialLocations(populateDistances(mCachedLocations!!), latlng != null)
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -47,9 +48,9 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
             })
     }
 
-    fun populateDistances(locations: List<Location?>): List<Location?> {
+    fun populateDistances(locations: List<Location>): List<Location> {
         locations.forEach { location ->
-            location!!.distance =
+            location.distance =
                 if (mLastLocation != null) LocationUtils.distance(location.latLng, mLastLocation) else null
         }
         return locations
@@ -75,9 +76,9 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     fun searchFromQuery(viewport: LatLngBounds?) {
         getService(LocationService::class.java).getLocations(mLastLocation?.latitude,
                 mLastLocation?.longitude, 200, mFilterState.minKw, mFilterState.connectorType?.name?.lowercase())
-                .enqueue(object : AuthCallback<PaginatedResponse<Location?>?>(this) {
-                    override fun onResponseSuccessful(response: PaginatedResponse<Location?>?) {
-                        val locationList: List<Location?>? = response!!.page
+                .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
+                    override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
+                        val locationList: List<Location>? = response!!.page
                         if (locationList!!.size == 0) {
                             view.onEmptyResponse()
                         } else {

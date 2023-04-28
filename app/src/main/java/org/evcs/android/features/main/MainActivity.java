@@ -101,8 +101,13 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     @Override
     protected void populate() {
         super.populate();
-        mButton.setText("Get 30 Days Free Charging");
-        mButton.setVisibility(UserUtils.getLoggedUser() == null ? View.VISIBLE : View.GONE);
+        if (UserUtils.getLoggedUser() == null) {
+            mMenu.getMenu().clear();
+            mButton.setVisibility(View.VISIBLE);
+        } else {
+            mMenu.inflateMenu(R.menu.drawer);
+            mButton.setVisibility(View.GONE);
+        }
         mMenu.setSelectedItemId(R.id.menu_drawer_map);
     }
 

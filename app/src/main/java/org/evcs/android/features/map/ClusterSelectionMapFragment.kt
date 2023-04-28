@@ -10,6 +10,7 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.maps.android.clustering.ClusterItem
 import com.google.maps.android.clustering.ClusterManager
+import com.google.maps.android.clustering.algo.NonHierarchicalDistanceBasedAlgorithm
 import org.evcs.android.network.service.presenter.ServicesPresenter
 
 
@@ -28,7 +29,7 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         super.onViewCreated(view, savedInstanceState)
         mapView?.getMapAsync { map ->
             mClusterManager = ClusterManager<T>(requireContext(), map)
-            mClusterManager.setAlgorithm(ZoomLimitedNonHDistanceAlgorithm(ZOOM_LIMIT))
+            mClusterManager.setAlgorithm(NonHierarchicalDistanceBasedAlgorithm())
             mRenderer = ClusterRenderer(requireContext(), map, mClusterManager)
             mClusterManager.setRenderer(mRenderer)
             setListeners(map)
@@ -42,15 +43,15 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         }
         map.setOnMarkerClickListener(mClusterManager)
         mClusterManager.setOnClusterItemClickListener { selectedLocation ->
-            if (map.cameraPosition.zoom >= ZOOM_LIMIT) {
+//            if (map.cameraPosition.zoom >= ZOOM_LIMIT) {
                 toggleContainerSelection2(selectedLocation)
-            } else {
-                zoomTo(map, selectedLocation.position)
-            }
+//            } else {
+//                zoomTo(map, selectedLocation.position)
+//            }
             true
         }
         mClusterManager.setOnClusterClickListener { cluster ->
-            zoomTo(map, cluster.position)
+            zoomTo(map, cluster.position, map.cameraPosition.zoom + 2.5f)
             true
         }
     }

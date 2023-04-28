@@ -43,9 +43,10 @@ class LocationView : LinearLayout {
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
         if (location.gatecode != null) {
-            mBinding.viewLocationGatecode.text = "Gatecode: " + location.gatecode.toString()
+            mBinding.viewLocationGatecode.text = "Gatecode: " + location.gatecode
             mBinding.viewLocationGatecode.visibility = VISIBLE
         }
+        mBinding.viewLocationHint.text = location.directions
         showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, "Level 2 Member Price: \$%.2f/kWh")
         showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, "DC Fast Member Price: \$%.2f/kWh")
 

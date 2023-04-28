@@ -128,9 +128,9 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                             mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
                         else
                             mNavigationController.goToProfile();
-
                 }
-                return true;
+                //will be updated after canceling session
+                return false;
             }
         });
     }
@@ -140,4 +140,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
         //Handled by fragment
     }
 
+    public void setSelectedItem(int item) {
+        for (int i = 0; i < mMenu.getChildCount(); i++) {
+            mMenu.getMenu().getItem(i).setChecked(false);
+        }
+        mMenu.getMenu().findItem(item).setChecked(true);
+    }
 }

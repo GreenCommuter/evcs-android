@@ -3,11 +3,9 @@ package org.evcs.android.features.charging
 import android.content.Intent
 import android.net.Uri
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
-import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
@@ -18,7 +16,6 @@ import org.joda.time.format.DateTimeFormat
 class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
     ChangePaymentMethodFragment.PaymentMethodChangeListener {
 
-    private var mDialogOnBack: Boolean = false
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
 
@@ -55,7 +52,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun show(station: Station, status: SubscriptionStatus?) {
         hideProgressDialog()
-        mDialogOnBack = true
+        mListener.setActiveSession()
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
         mBinding.planInfoSubscriptionName.setText(status?.planName ?: getString(R.string.plan_info_pay_as_you_go))
 //        val kWhUsed = status
@@ -158,7 +155,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     override fun showFree(freeChargingCode: String) {
         hideProgressDialog()
-        mDialogOnBack = true
+        mListener.setActiveSession()
         mBinding.planInfoFreeCharging.visibility = View.VISIBLE
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true
@@ -166,12 +163,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
     }
 
     override fun onBackPressed(): Boolean {
-        if (!mDialogOnBack) return super.onBackPressed()
-        EVCSDialogFragment.Builder()
-                .setTitle(getString(R.string.plan_info_dialog_cancel))
-                .addButton(getString(R.string.app_yes)) { findNavController().popBackStack() }
-                .showCancel(true)
-                .show(childFragmentManager)
+        mListener.cancelSession(childFragmentManager)
         return true
     }
 

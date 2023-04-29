@@ -22,8 +22,6 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.MarkerLayoutBinding
-import org.evcs.android.model.ClusterItemWithText
-import org.evcs.android.model.ClusterItemWithValue
 
 
 open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
@@ -32,7 +30,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     private var mSumItems: Boolean = false
 
     override fun onBeforeClusterItemRendered(item: T, markerOptions: MarkerOptions) {
-        markerOptions.icon(getBitmap(item, R.drawable.ic_map_pin))
+        markerOptions.icon(getBitmap(item, chooseIcon(item, false)))
         //If items have the same z index the one at the back is selected, for some reason
 //        markerOptions.zIndex((90 - item.position.latitude).toFloat())
     }
@@ -47,8 +45,18 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     }
 
     fun onClusterItemChange(item: T, marker: Marker, isSelected : Boolean) {
-        val icon = if (isSelected) R.drawable.ic_map_pin_selected else R.drawable.ic_map_pin
-        marker.setIcon(getBitmap(item, icon))
+        marker.setIcon(getBitmap(item, chooseIcon(item, isSelected)))
+    }
+
+    @DrawableRes
+    fun chooseIcon(item: T, isSelected: Boolean): Int {
+        var icon = if (isSelected) R.drawable.ic_map_pin_selected else R.drawable.ic_map_pin
+
+        if (item is ClusterItemWithDisabling && !item.isMarkerEnabled()) {
+            icon = if (isSelected) R.drawable.ic_map_pin_coming_soon_selected
+            else R.drawable.ic_map_pin_coming_soon
+        }
+        return icon
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<T>, markerOptions: MarkerOptions) {
@@ -56,21 +64,35 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
         var text = cluster.size.toString()
         if (mSumItems && cluster.items.first() is ClusterItemWithValue) {
             text = (cluster.items as Collection<ClusterItemWithValue>)
-                .sumOf { item -> item.markerValue }.toString()
+                .sumOf { item -> item.getMarkerValue() }.toString()
         }
-        val bitmap = createMarker(text, R.drawable.layout_oval_orange,
-                Gravity.CENTER, Color.WHITE)
+
+        var icon = R.drawable.layout_oval_orange
+        if (cluster.items.first() is ClusterItemWithDisabling) {
+            if (!isClusterEnabled(cluster.items as Collection<ClusterItemWithDisabling>)) {
+                icon = R.drawable.layout_oval_gray
+            }
+        }
+
+        val bitmap = createMarker(text, icon, Gravity.CENTER, Color.WHITE)
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
     }
 
-    private fun getBitmap(item: T, @DrawableRes icon: Int): BitmapDescriptor? {
+    private fun isClusterEnabled(items: Collection<ClusterItemWithDisabling>): Boolean {
+        return items.fold(items.first().isMarkerEnabled()) { acc, item -> item.isClusterEnabled(acc) }
+    }
+
+    private fun getBitmap(item: T, @DrawableRes icon: Int): BitmapDescriptor {
         if (item is ClusterItemWithText) {
-            return BitmapDescriptorFactory.fromBitmap(createMarker(item.markerText, icon))
+            return BitmapDescriptorFactory.fromBitmap(createMarker(item.getMarkerText(), icon))
         } else {
             return BitmapDescriptorFactory.fromResource(icon)
         }
     }
 
+    /**
+     * Creates a Bitmap with the specified icon, text and text params for use as a marker
+     */
     private fun createMarker(text: String, @DrawableRes icon: Int,
                              textAlign: Int = Gravity.CENTER_HORIZONTAL, textColor: Int = Color.WHITE): Bitmap {
         val markerLayout = buildLayout(text, icon, textAlign, textColor)
@@ -84,6 +106,9 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
         return bitmap
     }
 
+    /**
+     * Creates a layout for the above method
+     */
     private fun buildLayout(text: String, @DrawableRes icon: Int, textAlign: Int, textColor: Int): ViewGroup {
         val binding = MarkerLayoutBinding.inflate(LayoutInflater.from(mContext))
         val markerLayout = binding.root
@@ -102,6 +127,10 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
         return markerLayout
     }
 
+    /**
+     * @param sumItems: if true, clusters will show the sum of the value of every item (if they have one)
+     * if false, clusters will show their item count.
+     */
     fun setSumItems(sumItems: Boolean) {
         mSumItems = sumItems
     }

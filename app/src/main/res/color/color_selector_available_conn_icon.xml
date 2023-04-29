@@ -9,4 +9,9 @@
 
     <item app:state_offline="true"
         android:color="@color/evcs_gray_300" />
+
+    <item android:state_selected="true"
+        android:color="@color/evcs_secondary_700" />
+
+    <item android:color="@color/evcs_gray_300" />
 </selector>

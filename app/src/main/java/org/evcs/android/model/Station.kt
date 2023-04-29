@@ -31,10 +31,6 @@ class Station : Serializable {
         return AvailableStatus.UNKNOWN
     }
 
-    fun printAvailableStatus(): CharSequence {
-        return StringUtils.capitalize(availableStatus!!.lowercase(Locale.getDefault()).replace("_", " "))
-    }
-
     val isAvailable: Boolean
         get() = getAvailableStatus() == AvailableStatus.AVAILABLE
 
@@ -42,7 +38,11 @@ class Station : Serializable {
         get() = connectors!![0].id
 
     enum class AvailableStatus(@AttrRes val state: Int = R.attr.state_offline) {
-        AVAILABLE(R.attr.state_active), BLOCKED, IN_USE(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN
+        AVAILABLE(R.attr.state_active), BLOCKED, IN_USE(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN;
+
+        fun toPrintableString(): String {
+            return StringUtils.capitalize(super.toString().lowercase(Locale.getDefault()).replace("_", " ")).toString()
+        }
     }
 
     fun getChargerType(): ChargerType {
@@ -51,6 +51,9 @@ class Station : Serializable {
         }
         return ChargerType.AC
     }
+
+    val connectorTypes: Set<ConnectorType>
+        get() = outlets!!.map { outlets -> outlets.getConnectorType() }.toSet()
 
     fun getConnectorType(): ConnectorType {
         return outlets!![0].getConnectorType()

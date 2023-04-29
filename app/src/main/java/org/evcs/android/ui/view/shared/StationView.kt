@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
-import android.widget.TextView
 import org.evcs.android.databinding.ViewStationBinding
 import org.evcs.android.model.Station
 
@@ -15,27 +14,22 @@ class StationView : LinearLayout {
         mStation = station
         init(context)
     }
+
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context, attrs, defStyleAttr)
 
     private fun init(context: Context) {
         val binding = ViewStationBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.stationType.text = mStation.getConnectorType().printableName
         binding.stationPower.text = mStation.getChargerType().printableName + ": " + mStation.printKw()
         binding.stationId.text = String.format("Station ID: %d", mStation.id)
-        binding.stationIcon.setImageDrawable(context.getDrawable(mStation.getConnectorType().mIcon))
-        binding.stationAvailable.text = mStation.printAvailableStatus()
 
-        val state = intArrayOf(mStation.getAvailableStatus().state)
-        binding.stationAvailableDot.setImageState(state, false)
-        binding.stationIcon.setImageState(state, false)
-        setTextViewState(binding.stationType, state)
-        setTextViewState(binding.stationAvailable, state)
-    }
-
-    private fun setTextViewState(textView: TextView, state: IntArray) {
-        textView.setTextColor(textView.textColors.getColorForState(state, 0))
+        mStation.connectorTypes.forEach { connectorType ->
+            val cv = ConnectorView(context, connectorType, mStation.getAvailableStatus())
+            val param = LayoutParams(0, LayoutParams.WRAP_CONTENT, 1f)
+            cv.layoutParams = param
+            binding.stationConnectors.addView(cv)
+        }
     }
 
 }

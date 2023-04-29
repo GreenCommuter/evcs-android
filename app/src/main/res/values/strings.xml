@@ -468,7 +468,7 @@
 
     <!--Filter Activity-->
     <string name="filter_activity_title">Filters</string>
-    <string name="filter_activity_available_only">Available charging sites only</string>
+    <string name="filter_activity_available_only">Show locations coming soon</string>
     <string name="filter_activity_connector_types">Connector types</string>
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
     <string name="filter_activity_apply">Apply</string>

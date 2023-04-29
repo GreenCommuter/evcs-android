@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/station_icon"
+        android:layout_below="@id/station_type"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/station_available_dot"
+            android:layout_width="@dimen/spacing_medium"
+            android:layout_height="@dimen/spacing_medium"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:src="@drawable/layout_oval_orange"
+            app:tint="@color/color_selector_available"/>
+
+        <TextView
+            android:id="@+id/station_available"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Available"
+            android:textColor="@color/color_selector_available"
+            style="@style/Body.Small.Bold"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/station_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="12dp"
+        app:tint="@color/color_selector_available_conn_icon"/>
+
+    <TextView
+        android:id="@+id/station_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
+        android:layout_toEndOf="@id/station_icon"
+        style="@style/Body.Medium.Bold"
+        android:textColor="@color/color_selector_available_text"/>
+
+</RelativeLayout>

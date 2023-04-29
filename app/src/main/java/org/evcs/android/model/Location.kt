@@ -1,10 +1,13 @@
 package org.evcs.android.model
 
 import com.google.android.gms.maps.model.LatLng
+import org.evcs.android.features.map.ClusterItemWithDisabling
+import org.evcs.android.features.map.ClusterItemWithText
+import org.evcs.android.features.map.ClusterItemWithValue
 import java.io.Serializable
 import java.util.*
 
-class Location : Serializable, ClusterItemWithText, ClusterItemWithValue {
+class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, ClusterItemWithDisabling {
     var id = 0
     var name: String? = null
     var latitude = 0.0
@@ -57,11 +60,19 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue {
         return stations!!.size
     }
 
+    override fun isMarkerEnabled(): Boolean {
+        return !(comingSoon ?: false)
+    }
+
+    override fun isClusterEnabled(other: Boolean): Boolean {
+        return isMarkerEnabled() || other
+    }
+
     val printableDistance: CharSequence
         get() = if (distance == null) "-- mi" else String.format("%.1f mi", distance)
 
     val connectorTypes: Set<ConnectorType>
-        get() = stations!!.map { station -> station.getConnectorType() }.toSet()
+        get() = stations!!.flatMap { station -> station.connectorTypes }.toSet()
 
     val acPrice: Float
         get() = priceOfFirstStationMatching { station ->

@@ -1,4 +1,4 @@
-package org.evcs.android.activity.location
+package org.evcs.android.features.map.location
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody

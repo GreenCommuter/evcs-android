@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.view.View.MeasureSpec
 import com.base.core.fragment.BaseDialogFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.R
@@ -14,11 +15,16 @@ import org.evcs.android.model.Location
 
 class LocationSliderFragment(private var location: Location) : BaseDialogFragment<BasePresenter<*>>() {
 
+    private var mMaxScroll: Int = 0
     private lateinit var mBinding: FragmentLocationSliderBinding
     private var mLastY = 0
 
     override fun init() {
         setLocation(location)
+        mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
+        val height = mBinding.mapItemFragmentEmpty.measuredHeight
+        mMaxScroll = height - resources.getDimension(R.dimen.status_bar_height).toInt()
+        mBinding.mapItemFragmentScroll.setMinFling(mMaxScroll)
     }
 
     override fun layout(): Int {
@@ -67,8 +73,9 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
     }
 
     private fun getMaxScroll(): Int {
-        return (mBinding.mapItemFragmentEmpty.height - resources.getDimension(R.dimen.status_bar_height))
-                .toInt()
+        return mMaxScroll
+//        return (mBinding.mapItemFragmentEmpty.height - resources.getDimension(R.dimen.status_bar_height))
+//                .toInt()
     }
 
     private fun currentY(): Int {

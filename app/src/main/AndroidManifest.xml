@@ -61,7 +61,7 @@
             android:theme="@style/AppTheme.Transparent" />
 
         <activity
-            android:name="org.evcs.android.activity.FilterActivity"
+            android:name="org.evcs.android.activity.FilterDialogFragment"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/SplashTheme" />

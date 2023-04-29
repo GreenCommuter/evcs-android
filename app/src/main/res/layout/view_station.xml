@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:padding="@dimen/spacing_large"
     android:layout_marginBottom="@dimen/spacing_large"
-    android:background="@drawable/layout_corners_rounded_blue_outline">
+    android:background="@drawable/layout_corners_rounded_blue_outline"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/station_id"
@@ -15,57 +15,18 @@
         style="@style/Body.Small.Bold"
         android:textColor="@color/evcs_gray_600" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@id/station_icon"
-        android:layout_below="@id/station_type"
-        android:gravity="center">
-
-        <ImageView
-            android:id="@+id/station_available_dot"
-            android:layout_width="@dimen/spacing_medium"
-            android:layout_height="@dimen/spacing_medium"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:src="@drawable/layout_oval_orange"
-            app:tint="@color/color_selector_available"/>
-
-        <TextView
-            android:id="@+id/station_available"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Available"
-            android:textColor="@color/color_selector_available"
-            style="@style/Body.Small.Bold"/>
-
-    </LinearLayout>
-
-    <ImageView
-        android:id="@+id/station_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginEnd="12dp"
-        android:layout_below="@id/station_power"
-        app:tint="@color/color_selector_available_conn_icon"/>
-
-    <TextView
-        android:id="@+id/station_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/station_power"
-        android:layout_marginBottom="@dimen/spacing_small"
-        android:layout_toEndOf="@id/station_icon"
-        style="@style/Body.Medium.Bold"
-        android:textColor="@color/color_selector_available_text"/>
-
     <TextView
         android:id="@+id/station_power"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_large_extra"
-        android:layout_below="@id/station_id"
         android:paddingBottom="@dimen/spacing_tiny"
         style="@style/Body.Medium.Bold"/>
 
-</RelativeLayout>
+    <LinearLayout
+        android:id="@+id/station_connectors"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"/>
+
+</LinearLayout>

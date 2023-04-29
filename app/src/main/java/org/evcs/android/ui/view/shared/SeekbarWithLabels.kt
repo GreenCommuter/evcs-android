@@ -40,7 +40,7 @@ class SeekbarWithLabels : LinearLayout {
             mLabelLayout.addView(view)
             if (i < labels.size - 1) {
                 val spacing = View(context)
-                val params = LayoutParams(-2, -2, 1f)
+                val params = LayoutParams(0, -1, 1f)
                 mLabelLayout.addView(spacing, params)
             }
         }

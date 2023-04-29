@@ -1,21 +1,18 @@
 package org.evcs.android.features.map
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.activity.result.ActivityResult
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.FilterActivity
-import org.evcs.android.activity.location_list.LocationListFragment
+import org.evcs.android.activity.FilterDialogFragment
+import org.evcs.android.features.map.location_list.LocationListFragment
 import org.evcs.android.databinding.FragmentMainMapBinding
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
@@ -25,7 +22,7 @@ import org.evcs.android.ui.view.shared.SearchLocationChildFragment
 import org.evcs.android.util.*
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
-        InnerMapFragment.LocationClickListener {
+        InnerMapFragment.LocationClickListener, FilterDialogFragment.FilterDialogListener {
 
     private lateinit var mToggleButton: TextView
     private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
@@ -75,16 +72,14 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     override fun setListeners() {
-        val filterActivityTask =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                onFilterResult(result)
-            }
         mToggleButton.setOnClickListener {
             val view = requireView().findViewById<FrameLayout>(R.id.fragment_main_map_layout)
             mToggleButton.text = if (view.isVisible) "Map" else "List"
             view.visibility = if (view.isVisible) View.GONE else View.VISIBLE
         }
-        mFilterButton.setOnClickListener { filterActivityTask.launch(getIntentWithFilterState(FilterActivity::class.java)) }
+        mFilterButton.setOnClickListener {
+            FilterDialogFragment(presenter.mFilterState).withListener(this).show(fragmentManager)
+        }
 //        addOnCameraChangeListener {
 //                cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
 //        }
@@ -101,23 +96,13 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             override fun onLocationRemoved() {
 //                clear()
             }
-
         })
-
     }
 
-    private fun onFilterResult(result: ActivityResult) {
-        if (result.data == null) return
+    override fun onFilterResult(filterState: FilterState) {
         showLoading()
-        val filterState = result.data!!.getSerializableExtra(Extras.FilterActivity.FILTER_STATE) as FilterState
         mFilterButton.isSelected = !filterState.isEmpty()
         presenter.onFilterResult(filterState)
-    }
-
-    private fun getIntentWithFilterState(activity : Class <*>) : Intent {
-        val intent = Intent(requireContext(), activity)
-        intent.putExtra(Extras.FilterActivity.FILTER_STATE, presenter.mFilterState)
-        return intent
     }
 
     override fun onLocationNotRetrieved() {

@@ -86,12 +86,12 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         mParent.onLocationClicked(container.mapItem, true)
     }
 
-    fun showInitialLocations(response: List<Location?>) {
+    fun showInitialLocations(response: List<Location>) {
         showMapItems(response)
     }
 
-    fun zoomToLocations(locations: List<Location?>, viewport: LatLngBounds?) {
-        val closest = locations[0]!!.latLng
+    fun zoomToLocations(locations: List<Location>, viewport: LatLngBounds?) {
+        val closest = locations[0].latLng
         if (viewport!!.contains(closest)) {
             applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport, 20))
         } else {

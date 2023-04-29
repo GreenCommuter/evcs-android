@@ -32,7 +32,9 @@
             android:id="@+id/map_filter"
             android:layout_width="@dimen/spacing_big_extra"
             android:layout_height="@dimen/spacing_big_extra"
-            android:layout_gravity="end"
+            android:layout_gravity="end|center_vertical"
+            android:layout_marginEnd="@dimen/spacing_large"
+            android:paddingTop="@dimen/spacing_tiniest"
             android:src="@drawable/ic_filter"
             android:background="@null"/>
 

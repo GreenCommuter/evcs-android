@@ -79,7 +79,7 @@
         tools:layout="@layout/fragment_charging_in_progress"/>
     <fragment
         android:id="@+id/locationFragment"
-        android:name="org.evcs.android.activity.location.LocationFragment"
+        android:name="org.evcs.android.features.map.location.LocationFragment"
         android:label="LocationFragment"
         tools:layout="@layout/fragment_location"/>
 </navigation>

@@ -3,8 +3,8 @@ package org.evcs.android.activity
 import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.EVCSApplication
-import org.evcs.android.activity.location.LocationPresenter
-import org.evcs.android.activity.location.LocationView
+import org.evcs.android.features.map.location.LocationPresenter
+import org.evcs.android.features.map.location.LocationView
 import org.evcs.android.databinding.ActivitySessionInformationBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.model.Location

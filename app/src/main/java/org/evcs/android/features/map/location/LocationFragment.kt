@@ -1,4 +1,4 @@
-package org.evcs.android.activity.location
+package org.evcs.android.features.map.location
 
 import android.view.View
 import androidx.navigation.fragment.findNavController

@@ -1,4 +1,4 @@
-package org.evcs.android.activity.location_list
+package org.evcs.android.features.map.location_list
 
 import com.base.networking.retrofit.RetrofitServices
 import org.evcs.android.network.service.presenter.ServicesPresenter

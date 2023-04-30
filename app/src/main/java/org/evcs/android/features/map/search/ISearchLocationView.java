@@ -1,4 +1,4 @@
-package org.evcs.android.features;
+package org.evcs.android.features.map.search;
 
 import org.evcs.android.features.shared.places.IPlacesView;
 import org.evcs.android.ui.view.shared.IErrorView;

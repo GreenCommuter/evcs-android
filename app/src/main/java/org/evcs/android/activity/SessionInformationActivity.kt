@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.EVCSApplication
 import org.evcs.android.features.map.location.LocationPresenter
-import org.evcs.android.features.map.location.LocationView
+import org.evcs.android.features.map.location.ILocationView
 import org.evcs.android.databinding.ActivitySessionInformationBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.model.Location
@@ -13,7 +13,7 @@ import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-class SessionInformationActivity : BaseActivity2(), LocationView {
+class SessionInformationActivity : BaseActivity2(), ILocationView {
 
     private lateinit var mPresenter: LocationPresenter
     private lateinit var mDateTimeFormatter: DateTimeFormatter

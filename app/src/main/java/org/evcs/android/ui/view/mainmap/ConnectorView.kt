@@ -1,4 +1,4 @@
-package org.evcs.android.ui.view.shared
+package org.evcs.android.ui.view.mainmap
 
 import android.content.Context
 import android.util.AttributeSet

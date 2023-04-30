@@ -3,15 +3,14 @@ package org.evcs.android.features.map.location
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.Location
-import org.evcs.android.model.Station
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
-class LocationPresenter(viewInstance: LocationView, services: RetrofitServices) :
-    ServicesPresenter<LocationView>(viewInstance, services) {
+class LocationPresenter(viewInstance: ILocationView, services: RetrofitServices) :
+    ServicesPresenter<ILocationView>(viewInstance, services) {
 
     var mLocation: Location? = null
 

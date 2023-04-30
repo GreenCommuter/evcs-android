@@ -11,7 +11,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
-import org.evcs.android.features.ISearchLocationView;
+import org.evcs.android.features.map.search.ISearchLocationView;
 
 import java.util.Arrays;
 import java.util.List;

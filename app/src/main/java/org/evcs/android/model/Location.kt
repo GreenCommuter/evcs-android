@@ -1,9 +1,9 @@
 package org.evcs.android.model
 
 import com.google.android.gms.maps.model.LatLng
-import org.evcs.android.features.map.ClusterItemWithDisabling
-import org.evcs.android.features.map.ClusterItemWithText
-import org.evcs.android.features.map.ClusterItemWithValue
+import org.evcs.android.features.map.clustermap.ClusterItemWithDisabling
+import org.evcs.android.features.map.clustermap.ClusterItemWithText
+import org.evcs.android.features.map.clustermap.ClusterItemWithValue
 import java.io.Serializable
 import java.util.*
 

@@ -1,4 +1,4 @@
-package org.evcs.android.features.map
+package org.evcs.android.ui.view.mainmap
 
 import android.content.Context
 import android.content.ContextWrapper
@@ -12,7 +12,6 @@ import androidx.fragment.app.FragmentManager
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
-import org.evcs.android.ui.view.shared.StationView
 import org.evcs.android.util.LocationUtils
 
 class LocationView : LinearLayout {

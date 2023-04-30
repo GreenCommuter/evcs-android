@@ -41,7 +41,7 @@
                 android:textColor="#0C141D"
                 style="@style/Title.Medium"/>
 
-            <org.evcs.android.features.map.LocationView
+            <org.evcs.android.ui.view.mainmap.LocationView
                 android:id="@+id/map_item_fragment_location_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

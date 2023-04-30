@@ -1,4 +1,4 @@
-package org.evcs.android.activity
+package org.evcs.android.features.map
 
 import android.view.View
 import android.widget.LinearLayout
@@ -8,7 +8,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.DialogFilterBinding
 import org.evcs.android.model.ConnectorType
 import org.evcs.android.model.FilterState
-import org.evcs.android.ui.view.shared.ConnectorTypeView
+import org.evcs.android.ui.view.mainmap.ConnectorTypeView
 
 
 class FilterDialogFragment(private var mFilterState: FilterState = FilterState()) : BaseDialogFragment<BasePresenter<*>>() {

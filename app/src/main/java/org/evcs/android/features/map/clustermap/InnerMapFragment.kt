@@ -1,4 +1,4 @@
-package org.evcs.android.features.map
+package org.evcs.android.features.map.clustermap
 
 import android.os.Bundle
 import android.view.View
@@ -11,7 +11,6 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentInnerMapBinding
 import org.evcs.android.model.Location
-import org.evcs.android.util.LocationUtils
 
 class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location>(), InnerMapView {
 

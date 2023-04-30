@@ -30,7 +30,7 @@
             android:layout_centerHorizontal="true"
             style="@style/Title.Medium"/>
 
-        <org.evcs.android.features.map.LocationView
+        <org.evcs.android.ui.view.mainmap.LocationView
             android:id="@+id/activity_location_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

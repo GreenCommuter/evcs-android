@@ -1,4 +1,4 @@
-package org.evcs.android.features.map;
+package org.evcs.android.features.map.clustermap;
 
 import android.annotation.SuppressLint;
 import android.view.View;

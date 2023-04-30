@@ -1,4 +1,4 @@
-package org.evcs.android.ui.view.shared;
+package org.evcs.android.features.map.search;
 
 import android.content.Context;
 
@@ -6,7 +6,7 @@ import com.base.core.presenter.BasePresenter;
 import com.google.android.libraries.places.api.Places;
 
 import org.evcs.android.R;
-import org.evcs.android.features.ISearchLocationView;
+import org.evcs.android.features.map.search.ISearchLocationView;
 import org.evcs.android.features.shared.places.PlacesRequestPresenter;
 
 public class SearchLocationChildPresenter extends BasePresenter<ISearchLocationView> {

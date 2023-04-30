@@ -2,7 +2,6 @@ package org.evcs.android.features.shared.places;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Typeface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,7 +19,7 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction;
 
 import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
-import org.evcs.android.ui.view.shared.SearchLocationChildFragment;
+import org.evcs.android.features.map.search.SearchLocationChildFragment;
 
 import java.util.ArrayList;
 import java.util.List;

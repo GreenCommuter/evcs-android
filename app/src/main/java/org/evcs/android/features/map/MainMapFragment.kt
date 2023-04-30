@@ -11,14 +11,14 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.FilterDialogFragment
 import org.evcs.android.features.map.location_list.LocationListFragment
 import org.evcs.android.databinding.FragmentMainMapBinding
+import org.evcs.android.features.map.clustermap.InnerMapFragment
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.ui.view.shared.SearchLocationChildFragment
+import org.evcs.android.features.map.search.SearchLocationChildFragment
 import org.evcs.android.util.*
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,

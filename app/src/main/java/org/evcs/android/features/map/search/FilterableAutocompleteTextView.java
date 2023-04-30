@@ -1,4 +1,4 @@
-package org.evcs.android.ui.view.shared;
+package org.evcs.android.features.map.search;
 
 import android.content.Context;
 import androidx.appcompat.widget.AppCompatAutoCompleteTextView;

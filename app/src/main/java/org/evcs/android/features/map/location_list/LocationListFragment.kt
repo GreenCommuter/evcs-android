@@ -7,7 +7,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentLocationListBinding
-import org.evcs.android.features.map.InnerMapFragment
+import org.evcs.android.features.map.clustermap.InnerMapFragment
 import org.evcs.android.model.Location
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.fragment.ErrorFragment

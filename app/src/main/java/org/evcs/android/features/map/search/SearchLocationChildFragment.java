@@ -1,7 +1,6 @@
-package org.evcs.android.ui.view.shared;
+package org.evcs.android.features.map.search;
 
 import android.annotation.SuppressLint;
-import android.graphics.Typeface;
 import android.location.Location;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,7 +25,6 @@ import com.google.android.libraries.places.api.model.Place;
 import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
 import org.evcs.android.databinding.FragmentSearchLocationChildBinding;
-import org.evcs.android.features.ISearchLocationView;
 import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.features.shared.places.PlaceCurrentAutocompleteAdapter;
 import org.evcs.android.model.shared.RequestError;

@@ -10,7 +10,7 @@ import org.evcs.android.model.Location
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 
-class LocationFragment : ErrorFragment<LocationPresenter>(), LocationView {
+class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
 
     private lateinit var mBinding: FragmentLocationBinding
 

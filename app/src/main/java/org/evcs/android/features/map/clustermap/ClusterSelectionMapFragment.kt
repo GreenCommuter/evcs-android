@@ -1,4 +1,4 @@
-package org.evcs.android.features.map
+package org.evcs.android.features.map.clustermap
 
 import android.os.Bundle
 import android.view.View

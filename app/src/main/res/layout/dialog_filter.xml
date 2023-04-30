@@ -105,7 +105,7 @@
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 style="@style/Title.Medium"/>
 
-            <org.evcs.android.ui.view.shared.SeekbarWithLabels
+            <org.evcs.android.ui.view.mainmap.SeekbarWithLabels
                 android:id="@+id/activity_filter_min_power"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

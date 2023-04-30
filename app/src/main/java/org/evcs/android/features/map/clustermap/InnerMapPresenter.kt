@@ -1,4 +1,4 @@
-package org.evcs.android.features.map
+package org.evcs.android.features.map.clustermap
 
 import com.base.maps.IMapPresenter
 import com.base.networking.retrofit.RetrofitServices

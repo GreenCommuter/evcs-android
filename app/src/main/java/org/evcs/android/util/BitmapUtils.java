@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+
 import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 
@@ -32,6 +34,17 @@ public final class BitmapUtils {
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
         drawable.draw(canvas);
 
+        return bitmap;
+    }
+
+    public static Bitmap bitmapFromView(View layout) {
+        layout.measure(
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
+                View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+        layout.layout(0, 0, layout.getMeasuredWidth(), layout.getMeasuredHeight());
+        Bitmap bitmap = Bitmap.createBitmap(layout.getMeasuredWidth(), layout.getMeasuredHeight(),
+                Bitmap.Config.ARGB_8888);
+        layout.draw(new Canvas(bitmap));
         return bitmap;
     }
 

@@ -25,6 +25,7 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
         val height = mBinding.mapItemFragmentEmpty.measuredHeight
         mMaxScroll = height - resources.getDimension(R.dimen.status_bar_height).toInt()
         mBinding.mapItemFragmentScroll.setMinFling(mMaxScroll)
+        keepStatusBar(mBinding.root)
     }
 
     override fun layout(): Int {

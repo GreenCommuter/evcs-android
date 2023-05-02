@@ -16,6 +16,7 @@ import org.evcs.android.R;
 public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresenter>
         extends com.base.maps.AbstractMapFragment<T> {
 
+    //These are not used, as the logic for selecting/unselecting is handled by the cluster renderer
     @Override
     public int getSelectedPolylineColorId() {
         return 0;
@@ -28,12 +29,12 @@ public abstract class AbstractMapFragment<T extends BasePresenter & IMapPresente
 
     @Override
     public int getSelectedPinRes() {
-        return R.drawable.ic_map_pin_selected;
+        return 0;
     }
 
     @Override
     public int getUnselectedPinRes() {
-        return R.drawable.ic_map_pin_unselected;
+        return 0;
     }
 
     protected void centerMap(@NonNull LatLng latLng) {

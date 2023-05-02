@@ -24,11 +24,11 @@ import org.evcs.android.R;
 import org.evcs.android.activity.AbstractSupportedVersionActivity;
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding;
 import org.evcs.android.features.auth.initialScreen.AuthActivity;
-
 import org.evcs.android.features.shared.IVersionView;
 import org.evcs.android.util.Extras;
 import org.evcs.android.util.PushNotificationUtils;
 import org.evcs.android.util.UserUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AbstractSupportedVersionActivity implements IVersionView {
 
@@ -36,12 +36,14 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     private BottomNavigationView mMenu;
     private ActivityResultLauncher mLoginResult;
     private TextView mButton;
+    private boolean mIsBottom;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLoginResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 (ActivityResultCallback) result -> { populate(); });
+        mIsBottom = getIntent().getBooleanExtra(Extras.MainActivity.IS_BOTTOM, true);
     }
 
     @Override
@@ -89,7 +91,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
 
     @Override
     public void isSupportedVersion(boolean isSupported, String versionWording) {
-        if(!isSupported) {
+        if (!isSupported) {
             showNotSupportedVersion(versionWording);
         }
     }
@@ -145,5 +147,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
             mMenu.getMenu().getItem(i).setChecked(false);
         }
         mMenu.getMenu().findItem(item).setChecked(true);
+    }
+
+    @NotNull
+    public boolean isBottomOfStack() {
+        return mIsBottom;
     }
 }

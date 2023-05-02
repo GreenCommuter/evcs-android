@@ -1,7 +1,9 @@
 package org.evcs.android.features.map
 
 import android.view.View
+import android.view.WindowManager
 import android.widget.LinearLayout
+import androidx.fragment.app.DialogFragment
 import com.base.core.fragment.BaseDialogFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.R
@@ -9,7 +11,6 @@ import org.evcs.android.databinding.DialogFilterBinding
 import org.evcs.android.model.ConnectorType
 import org.evcs.android.model.FilterState
 import org.evcs.android.ui.view.mainmap.ConnectorTypeView
-
 
 class FilterDialogFragment(private var mFilterState: FilterState = FilterState()) : BaseDialogFragment<BasePresenter<*>>() {
 
@@ -25,8 +26,8 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
         return BasePresenter(this)
     }
 
-    override fun setUi(v: View?) {
-        mBinding = DialogFilterBinding.bind(v!!)
+    override fun setUi(v: View) {
+        mBinding = DialogFilterBinding.bind(v)
     }
 
     override fun init() {}
@@ -52,6 +53,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
         mBinding.activityFilterMinPower.seekbar.progressDrawable =
             resources.getDrawable(R.drawable.progress_bar_background)
         setFiltersFromState()
+        keepStatusBar(mBinding.root)
     }
 
     private fun setFiltersFromState() {
@@ -98,4 +100,13 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
         fun onFilterResult(mFilterState: FilterState)
     }
 
+}
+
+fun DialogFragment.keepStatusBar(rootView: View) {
+    rootView.fitsSystemWindows = true
+    val window = dialog!!.window!!
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 }

@@ -16,7 +16,7 @@ public interface LocationService {
     @GET("/members/v1/locations")
     Call<PaginatedResponse<Location>> getLocations(@Query("latitude") @Nullable Double latitude,
                                                    @Query("longitude") @Nullable Double longitude,
-                                                   @Query("coming_soon") @Nullable Boolean comingSoon,
+                                                   @Query("with_coming_soon") @Nullable Boolean comingSoon,
                                                    @Query("min_kw") @Nullable Integer minKw,
                                                    @Query("connector") @Nullable String connector);
 
@@ -24,7 +24,7 @@ public interface LocationService {
     Call<PaginatedResponse<Location>> getLocations(@Query("latitude") @Nullable Double latitude,
                                                    @Query("longitude") @Nullable Double longitude,
                                                    @Query("miles") int miles,
-                                                   @Query("coming_soon") @Nullable Boolean comingSoon,
+                                                   @Query("with_coming_soon") @Nullable Boolean comingSoon,
                                                    @Query("min_kw") @Nullable Integer minKw,
                                                    @Query("connector") @Nullable String connector);
 

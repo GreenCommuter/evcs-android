@@ -71,14 +71,15 @@ class LocationView : LinearLayout {
         return ((context as ContextWrapper).baseContext as FragmentActivity).supportFragmentManager
     }
 
-    /*static*/ fun resize(view: View, height: Int) {
-        val params = view.layoutParams
+    //Gotta love extensions
+    fun View.resize(height: Int) {
+        val params = this.layoutParams
         params.height = height
-        view.layoutParams = params
+        this.layoutParams = params
     }
 
     fun resizePicture(height: Int) {
-        resize(mBinding.viewLocationPicture, height)
+        mBinding.viewLocationPicture.resize(height)
     }
 
     fun pack(stations: List<Station>): ArrayList<List<Station>> {

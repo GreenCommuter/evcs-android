@@ -33,7 +33,12 @@ public class RootActivity extends AppCompatActivity {
     }
 
     private Intent buildIntent() {
-        Intent newIntent = new Intent(this, MainActivity.class);
+        Intent newIntent;
+        if (mRootActivityPresenter.isLoggedUser()) {
+            newIntent = new Intent(this, MainActivity.class);
+        } else {
+            newIntent = new Intent(this, AuthActivity.class);
+        }
 
         if (getIntent().getData() != null)
             Log.e("intentdatapath", getIntent().getData().getPath());

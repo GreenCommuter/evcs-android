@@ -1,33 +1,40 @@
 package org.evcs.android.features.map
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.widget.FrameLayout
-import android.widget.ImageButton
-import android.widget.TextView
+import android.view.Window
+import android.view.WindowManager
+import android.widget.*
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.features.map.location_list.LocationListFragment
 import org.evcs.android.databinding.FragmentMainMapBinding
+import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.map.clustermap.InnerMapFragment
+import org.evcs.android.features.map.location_list.LocationListFragment
+import org.evcs.android.features.map.search.SearchLocationChildFragment
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.features.map.search.SearchLocationChildFragment
 import org.evcs.android.util.*
+
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
         InnerMapFragment.LocationClickListener, FilterDialogFragment.FilterDialogListener {
 
+    private var mIsMapShowing: Boolean = true
+    private lateinit var mToolbarBackground: View
+    private lateinit var mMapLayout: FrameLayout
     private lateinit var mToggleButton: TextView
     private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
     private lateinit var mInnerMapFragment: InnerMapFragment
     private lateinit var mListFragment: LocationListFragment
+    private lateinit var mBackButton: ImageView
 
     private lateinit var mFilterButton: ImageButton
 
@@ -50,6 +57,9 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         val binding = FragmentMainMapBinding.bind(v)
         mToggleButton = binding.mapToggle
         mFilterButton = binding.mapFilter
+        mBackButton = binding.fragmentMainMapBack
+        mToolbarBackground = binding.fragmentSearchLocationAddressParent
+        mMapLayout = binding.fragmentMainMapLayout
     }
 
     override fun init() {
@@ -69,13 +79,40 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mListFragment.setLocationClickListener(this)
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
+        setStatusBarColor(Color.TRANSPARENT)
+
+        if ((activity as MainActivity).isBottomOfStack) return
+        mBackButton.visibility = View.VISIBLE
+        mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
+        setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))
+    }
+
+    fun setStatusBarColor(color: Int) {
+        val window: Window = requireActivity().window
+        window.statusBarColor = color
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+
+    fun isMapShowing(): Boolean {
+        return mMapLayout.isVisible
+    }
+
+    fun showMap() {
+        mToggleButton.text = "List"
+        mMapLayout.visibility = View.VISIBLE
+    }
+
+    fun hideMap() {
+        mToggleButton.text = "Map"
+        mMapLayout.visibility = View.GONE
     }
 
     override fun setListeners() {
         mToggleButton.setOnClickListener {
-            val view = requireView().findViewById<FrameLayout>(R.id.fragment_main_map_layout)
-            mToggleButton.text = if (view.isVisible) "Map" else "List"
-            view.visibility = if (view.isVisible) View.GONE else View.VISIBLE
+            if (isMapShowing()) hideMap() else showMap()
         }
         mFilterButton.setOnClickListener {
             FilterDialogFragment(presenter.mFilterState).withListener(this).show(fragmentManager)
@@ -97,6 +134,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 //                clear()
             }
         })
+        mBackButton.setOnClickListener { requireActivity().finish() }
     }
 
     override fun onFilterResult(filterState: FilterState) {
@@ -122,7 +160,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             showInitialLocations(presenter.mCachedLocations!!, presenter.mLastLocation != null)
         } else {
             showProgressDialog()
-            presenter?.getInitialLocations()
+            presenter?.getInitialLocations(presenter.mLastLocation)
         }
     }
 
@@ -171,6 +209,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     override fun onLocationClicked(location: Location, showAsSlider: Boolean) {
+        mIsMapShowing = isMapShowing()
         SearchLocationChildFragment.saveToLocationHistory(location)
         if (showAsSlider) {
             val locationDialog = LocationSliderFragment(location)
@@ -182,4 +221,8 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (mIsMapShowing) showMap() else hideMap()
+    }
 }

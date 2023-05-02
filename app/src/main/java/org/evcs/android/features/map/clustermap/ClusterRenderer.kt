@@ -2,11 +2,9 @@ package org.evcs.android.features.map.clustermap
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.graphics.Color
 import android.view.Gravity
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.DrawableRes
@@ -22,6 +20,7 @@ import com.google.maps.android.clustering.view.DefaultClusterRenderer
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.MarkerLayoutBinding
+import org.evcs.android.util.BitmapUtils
 
 
 open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: GoogleMap, clusterManager: ClusterManager<T>) :
@@ -96,14 +95,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     private fun createMarker(text: String, @DrawableRes icon: Int,
                              textAlign: Int = Gravity.CENTER_HORIZONTAL, textColor: Int = Color.WHITE): Bitmap {
         val markerLayout = buildLayout(text, icon, textAlign, textColor)
-        markerLayout.measure(
-            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED),
-            View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED))
-        markerLayout.layout(0, 0, markerLayout.measuredWidth, markerLayout.measuredHeight)
-        val bitmap = Bitmap.createBitmap(markerLayout.measuredWidth, markerLayout.measuredHeight,
-            Bitmap.Config.ARGB_8888)
-        markerLayout.draw(Canvas(bitmap))
-        return bitmap
+        return BitmapUtils.bitmapFromView(markerLayout)
     }
 
     /**

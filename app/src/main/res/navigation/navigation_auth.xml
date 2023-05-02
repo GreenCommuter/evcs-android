@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_auth.xml"
-    app:startDestination="@id/signInFragment">
+    app:startDestination="@id/rootFragment">
 
     <fragment
         android:id="@+id/signInFragment"
@@ -66,5 +66,17 @@
             android:name="previous_number"
             app:argType="string"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/rootFragment"
+        android:name="org.evcs.android.features.auth.initialScreen.RootFragment"
+        android:label="RootFragment"
+        tools:layout="@layout/fragment_root">
+        <action
+            android:id="@+id/action_rootFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
 </navigation>

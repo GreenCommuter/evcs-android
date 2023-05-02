@@ -37,25 +37,17 @@
 
     <!-- Tint colors -->
     <color name="evcs_splash_tint">#d9333333</color>
-    <color name="evcs_profile_tint">#d9333333</color>
     <color name="evcs_dialog_tint">#d9333333</color>
     <color name="evcs_green_transparent">#d909ca87</color>
     <color name="evcs_green_transparent_new">#9a09ca87</color>
     <color name="evcs_drawer_tint">#99333333</color>
     <color name="evcs_transparent_black">#7f000000</color>
-    <color name="evcs_transparent_red">#ccdc6b6a</color>
 
     <!-- Common colors -->
     <color name="evcs_transparent">#00000000</color>
+    <color name="evcs_transparent_white">#80FFFFFF</color>
 
     <!-- Button color -->
     <color name="evcs_grey_transparent">#80808080</color>
-
-    <!-- Spinner disabled color -->
-    <color name="material_spinner_disabled_color">#474747</color>
-    
-    <!-- Map Colors -->
-    <color name="circle_blue_transparent">#8800CCFF</color>
-    <color name="polyline_grey">#808080</color>
 
 </resources>

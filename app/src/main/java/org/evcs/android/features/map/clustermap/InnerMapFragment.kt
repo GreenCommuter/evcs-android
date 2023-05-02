@@ -94,7 +94,7 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         if (viewport!!.contains(closest)) {
             applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport, 20))
         } else {
-            //I want to try to make sure that at list something is shown, and if there is a single point it may get clustered
+            //I want to try to make sure that at least something is shown, and if there is a single point it may get clustered
             applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport.including(closest), 200))
         }
     }
@@ -106,7 +106,10 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
 
     override fun onMapReady() {
         mRenderer.setSumItems(true)
-//        showCarousel(false)
+//        mRenderer.setIcons(R.drawable.ic_map_pin,
+//                R.drawable.ic_map_pin_selected,
+//                R.drawable.ic_map_pin_coming_soon,
+//                R.drawable.ic_map_pin_coming_soon_selected)
     }
 
 //    fun getDefaultSelectedMapItem(): Int {

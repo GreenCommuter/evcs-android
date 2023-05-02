@@ -1,5 +1,6 @@
 package org.evcs.android.features.map.clustermap
 
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import com.base.maps.IMapPresenter
@@ -30,10 +31,14 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         mapView?.getMapAsync { map ->
             mClusterManager = ClusterManager<T>(requireContext(), map)
             mClusterManager.setAlgorithm(NonHierarchicalDistanceBasedAlgorithm())
-            mRenderer = ClusterRenderer(requireContext(), map, mClusterManager)
+            mRenderer = createClusterRenderer(requireContext(), map, mClusterManager)
             mClusterManager.setRenderer(mRenderer)
             setListeners(map)
         }
+    }
+
+    protected open fun createClusterRenderer(context: Context, map: GoogleMap, clusterManager: ClusterManager<T>): ClusterRenderer<T> {
+        return ClusterRenderer(requireContext(), map, this.mClusterManager)
     }
 
     private fun setListeners(map : GoogleMap) {

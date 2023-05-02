@@ -2,18 +2,16 @@ package org.evcs.android.features.auth.initialScreen;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 
 import org.evcs.android.R;
-import org.evcs.android.activity.NavGraphActivity;
+import org.evcs.android.activity.AbstractSupportedVersionActivity;
 import org.evcs.android.databinding.ActivityBaseNavhostBinding;
 import org.evcs.android.features.main.MainActivity;
 import org.evcs.android.util.Extras;
 
-public class AuthActivity extends NavGraphActivity {
+public class AuthActivity extends AbstractSupportedVersionActivity {
 
     private int mId;
 
@@ -26,14 +24,18 @@ public class AuthActivity extends NavGraphActivity {
     }
 
     @Override
-    protected void init() {}
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        adjustFontScale(getResources().getConfiguration());
         if (getIntent().getExtras() == null) return;
         mId = getIntent().getIntExtra(Extras.Root.ID, -1);
+    }
+
+    @Override
+    public void isSupportedVersion(boolean isSupported, String versionWording) {
+        if (!isSupported) {
+            showNotSupportedVersion(versionWording);
+        }
     }
 
     public void onAuthFinished() {

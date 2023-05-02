@@ -10,23 +10,16 @@ public class Extras {
         public static final String OPENING_KEY = "opened_app";
     }
 
-    public static final class FilterActivity {
-        public static final String FILTER_STATE = "Filter state";
+    public static class MainActivity {
+        public static final String IS_BOTTOM = "is_bottom";
     }
 
     public static final class LocationActivity {
         public static final String LOCATION = "Location";
     }
 
-    public static final class StationsActivity {
-        public static final String STATIONS = "Stations";
-    }
-
     public static final class SearchActivity {
         public static final String HISTORY = "History";
-        public static final String LATLNG = "Latlng";
-        public static final String LOCATIONS = "Locations";
-        public static final String VIEWPORT = "Viewport";
     }
 
     public static final class ForgotPassword {
@@ -62,4 +55,4 @@ public class Extras {
         public static final String PHONE_NUMBER = "phone_number";
     }
 
-    }
+}

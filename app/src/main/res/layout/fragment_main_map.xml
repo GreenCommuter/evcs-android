@@ -5,40 +5,56 @@
     android:layout_height="match_parent"
     android:background="@color/evcs_white">
 
+    <View
+        android:id="@+id/fragment_main_map_status_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/status_bar_height"/>
+
     <FrameLayout
         android:id="@+id/fragment_list_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/fragment_search_location_address_layout"/>
+        android:layout_below="@id/fragment_search_location_address_parent"/>
 
     <FrameLayout
         android:id="@+id/fragment_main_map_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"/>
 
-    <FrameLayout
-        android:id="@+id/fragment_search_location_address_layout"
+    <RelativeLayout
+        android:id="@+id/fragment_search_location_address_parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/status_bar_height"/>
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/status_bar_height"
+        android:layout_below="@id/fragment_main_map_status_bar"
         android:padding="@dimen/spacing_medium">
+
+        <FrameLayout
+            android:id="@+id/fragment_search_location_address_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/fragment_main_map_back"/>
 
         <ImageButton
             android:id="@+id/map_filter"
             android:layout_width="@dimen/spacing_big_extra"
             android:layout_height="@dimen/spacing_big_extra"
-            android:layout_gravity="end|center_vertical"
             android:layout_marginEnd="@dimen/spacing_large"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
             android:paddingTop="@dimen/spacing_tiniest"
-            android:src="@drawable/ic_filter"
-            android:background="@null"/>
+            android:src="@drawable/ic_filter"/>
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/fragment_main_map_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_back"
+            android:layout_marginStart="21dp"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
 
     <androidx.cardview.widget.CardView
         android:layout_width="wrap_content"
@@ -58,7 +74,6 @@
             android:layout_marginLeft="13dp"
             android:layout_marginRight="13dp"
             android:gravity="center"
-            android:textAllCaps="false"
             android:drawableLeft="@drawable/ic_list"
             android:drawablePadding="6dp"
             android:text="List"

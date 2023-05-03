@@ -49,7 +49,8 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
         map.setOnMarkerClickListener(mClusterManager)
         mClusterManager.setOnClusterItemClickListener { selectedLocation ->
 //            if (map.cameraPosition.zoom >= ZOOM_LIMIT) {
-                toggleContainerSelection2(selectedLocation)
+            toggleContainerSelection2(selectedLocation)
+            centerMap(selectedLocation.position)
 //            } else {
 //                zoomTo(map, selectedLocation.position)
 //            }
@@ -83,6 +84,8 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
             toggleContainerSelection2(selectedLocation)
         } else {
             //Should only happen when clusters are in place
+            //Maybe instead of doing this we should go to the renderer and set the selected item,
+            //so that it's rendered as selected. But that means keeping it clustered now.
             unselectCurrent()
 //            mapView!!.getMapAsync { _ -> mClusterManager.cluster() }
         }

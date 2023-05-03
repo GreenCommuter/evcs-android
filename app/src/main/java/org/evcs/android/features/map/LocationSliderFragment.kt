@@ -18,6 +18,7 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
     private var mMaxScroll: Int = 0
     private lateinit var mBinding: FragmentLocationSliderBinding
     private var mLastY = 0
+    private var mLastAction: MotionEvent? = null
 
     override fun init() {
         setLocation(location)
@@ -50,9 +51,22 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
                 MotionEvent.ACTION_UP -> {
                     snap()
                 }
-                else -> {}
             }
+            mLastAction = MotionEvent.obtain(event)
             false
+        }
+        //Touches on the empty part can be a click on the map.
+        mBinding.mapItemFragmentEmpty.setOnTouchListener { _, event ->
+            when (event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    requireActivity().dispatchTouchEvent(event)
+                }
+                MotionEvent.ACTION_UP -> {
+                    dismiss()
+                    requireActivity().dispatchTouchEvent(event)
+                }
+            }
+            true
         }
     }
 
@@ -63,7 +77,7 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
                 resizePicture(getMaxScroll()/2)
             }
         } else {
-            if (currentY() == 0) {
+            if (currentY() == 0 && mLastAction?.action == MotionEvent.ACTION_MOVE) {
                 dismiss()
             }
             else if (currentY() <= getMaxScroll()) {

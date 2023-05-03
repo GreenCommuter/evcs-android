@@ -36,9 +36,6 @@
 
     </LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_tiniest"
-        android:background="@color/evcs_gray_100" />
+    <include layout="@layout/divider"/>
 
 </LinearLayout>

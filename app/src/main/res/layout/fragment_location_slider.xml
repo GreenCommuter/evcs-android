@@ -21,16 +21,17 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/layout_top_corners_rounded"
-            android:padding="@dimen/spacing_large">
+            android:padding="@dimen/spacing_medium_extra"
+            android:elevation="@dimen/spacing_medium">
 
             <ImageView
                 android:id="@+id/activity_location_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:layout_margin="@dimen/spacing_medium_extra"
-                android:src="@drawable/down_chev_circle"
-                android:visibility="gone"/>
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:src="@drawable/handle"
+                android:visibility="visible"/>
 
             <TextView
                 android:layout_width="wrap_content"

@@ -35,8 +35,9 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private lateinit var mInnerMapFragment: InnerMapFragment
     private lateinit var mListFragment: LocationListFragment
     private lateinit var mBackButton: ImageView
-
     private lateinit var mFilterButton: ImageButton
+
+    private var mLocationDialog: LocationSliderFragment? = null
 
     fun newInstance(): MainMapFragment {
         val args = Bundle()

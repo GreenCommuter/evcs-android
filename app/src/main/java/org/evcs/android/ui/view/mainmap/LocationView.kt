@@ -46,6 +46,7 @@ class LocationView : LinearLayout {
             mBinding.viewLocationGatecode.visibility = VISIBLE
         }
         mBinding.viewLocationHint.text = location.directions
+        if (location.directions == null) mBinding.viewLocationHint.visibility = View.GONE
         showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, "Level 2 Member Price: \$%.2f/kWh")
         showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, "DC Fast Member Price: \$%.2f/kWh")
 

@@ -57,7 +57,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
     }
 
     private fun setFiltersFromState() {
-        mBinding.activityFilterSwitch.isChecked = mFilterState.comingSoon
+        mBinding.activityFilterSwitch.isChecked = mFilterState.comingSoon ?: false
         mBinding.activityFilterMinPower.seekbar.progress = mMinKwValues.indexOf(mFilterState.minKw)
         for (i in 0..mBinding.activityFilterConnectorTypes.childCount - 1) {
             val view = mBinding.activityFilterConnectorTypes.getChildAt(i)

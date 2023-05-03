@@ -390,13 +390,6 @@
     <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
     <string name="create_booking_please_select_a_car">Please select a car</string>
 
-    <!-- My Trips -->
-    <string name="my_trips_active_reservation"><b>Active reservation</b></string>
-    <string name="my_trips_finished_reservation"><b>Finished reservation</b></string>
-    <string name="my_trips_future_reservation"><b>Future reservation</b></string>
-    <string name="my_trips_canceled_reservation"><b>Canceled reservation</b></string>
-    <string name="my_trips_car_formatter">%1$s %2$s</string>
-
     <!-- Coupons -->
     <string name="coupons_toolbar_title">Coupons</string>
     <string name="coupons_format_discount_percentage">%.0f%% off</string>
@@ -432,10 +425,10 @@
     <string name="invoice_total_price">Total price</string>
     <string name="invoice_title">Invoice</string>
 
-    <!--Image Gallery-->
+    <!-- Image Gallery -->
     <string name="image_gallery_title">Image Gallery</string>
 
-    <!--Search Location-->
+    <!-- Search Location -->
     <string name="fragment_search_current_location">Current Location</string>
     <string name="fragment_search_pickup_on">Pick up on %s</string>
     <string-array name="fragment_search_dropoff_dialog">
@@ -466,21 +459,26 @@
     <string name="fragment_register_enter_code_subtitle">Please enter the code you received on your cellphone (818) 660-6219</string>
     <string name="fragment_register_enter_code_button">Validate it</string>
 
-    <!--Filter Activity-->
+    <!-- Filter Activity -->
     <string name="filter_activity_title">Filters</string>
     <string name="filter_activity_available_only">Show locations coming soon</string>
     <string name="filter_activity_connector_types">Connector types</string>
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
     <string name="filter_activity_apply">Apply</string>
 
-    <!--Search Location Child-->
+    <!-- Search Location Child -->
     <string name="search_activity_hint">Location or zipcode</string>
 
-    <!--Location List-->
+    <!-- Location List -->
     <string name="loction_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
     <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
-    <!-- Plan info-->
+    <!-- Location View -->
+    <string name="location_view_ac_price_format">Level 2 Member Price: \$%.2f/kWh</string>
+    <string name="location_view_dc_price_format">DC Fast Member Price: $%.2f/kWh</string>
+    <string name="location_view_gatecode">\"Gatecode: \"</string>
+
+    <!-- Plan info -->
     <string name="plan_info_title">Start charging</string>
     <string name="plan_info_discounted_charge_rate">Discounted charge rate</string>
     <string name="plan_info_upgrade_plan">Upgrade plan</string>

@@ -9,6 +9,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import org.evcs.android.R
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
@@ -41,14 +42,21 @@ class LocationView : LinearLayout {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
+
+        if (location.comingSoon!!) {
+            mBinding.viewLocationGo.visibility = View.GONE
+            mBinding.viewLocationStartCharging.visibility = View.GONE
+            return
+        }
+
         if (location.gatecode != null) {
-            mBinding.viewLocationGatecode.text = "Gatecode: " + location.gatecode
+            mBinding.viewLocationGatecode.text = context.getString(R.string.location_view_gatecode) + location.gatecode
             mBinding.viewLocationGatecode.visibility = VISIBLE
         }
         mBinding.viewLocationHint.text = location.directions
         if (location.directions == null) mBinding.viewLocationHint.visibility = View.GONE
-        showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, "Level 2 Member Price: \$%.2f/kWh")
-        showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, "DC Fast Member Price: \$%.2f/kWh")
+        showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, context.getString(R.string.location_view_ac_price_format))
+        showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, context.getString(R.string.location_view_dc_price_format))
 
         mBinding.viewLocationGo.setOnClickListener {
             LocationUtils.launchGoogleMapsWithPin(context, location.latLng, location.gatecode, getFragmentManager())

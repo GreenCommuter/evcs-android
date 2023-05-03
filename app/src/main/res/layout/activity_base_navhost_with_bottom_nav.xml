@@ -34,6 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/spacing_medium_extra"
             android:layout_marginRight="@dimen/spacing_medium_extra"
+            android:layout_gravity="center"
             android:text="Get 30 Days Free Charging"
             style="@style/ButtonK.Orange"/>
 

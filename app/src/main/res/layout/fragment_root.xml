@@ -3,30 +3,49 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/bg_root_tinted"
+    android:padding="@dimen/spacing_medium_extra">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo_white_splash"
+        android:layout_marginTop="@dimen/status_bar_height"
+        android:paddingTop="@dimen/spacing_medium_extra"
+        android:gravity="center"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:gravity="center"/>
 
     <TextView
         android:id="@+id/fragment_root_sign_up"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
         android:text="Sign up"
-        android:gravity="center"/>
+        android:gravity="center"
+        style="@style/ButtonK.Orange"/>
 
     <TextView
         android:id="@+id/fragment_root_log_in"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium"
         android:text="Log in"
-        android:gravity="center"/>
+        android:gravity="center"
+        style="@style/ButtonK.OrangeOutline"/>
 
     <TextView
         android:id="@+id/fragment_root_find_a_location"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="Find a location"
-        android:gravity="center"/>
+        android:layout_height="wrap_content"
+        android:text="Find a station"
+        android:gravity="center"
+        android:textColor="@color/evcs_white"
+        style="@style/ButtonK"/>
 
 </LinearLayout>

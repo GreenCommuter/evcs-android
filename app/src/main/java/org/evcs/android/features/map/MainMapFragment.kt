@@ -7,6 +7,7 @@ import android.view.Window
 import android.view.WindowManager
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
@@ -86,15 +87,6 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mBackButton.visibility = View.VISIBLE
         mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
         setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))
-    }
-
-    fun setStatusBarColor(color: Int) {
-        val window: Window = requireActivity().window
-        window.statusBarColor = color
-        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-        window.decorView.systemUiVisibility =
-                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
     }
 
     fun isMapShowing(): Boolean {
@@ -226,4 +218,13 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         super.onResume()
         if (mIsMapShowing) showMap() else hideMap()
     }
+}
+
+fun Fragment.setStatusBarColor(color: Int) {
+    val window: Window = requireActivity().window
+    window.statusBarColor = color
+    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    window.decorView.systemUiVisibility =
+        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 }

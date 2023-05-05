@@ -55,4 +55,7 @@ public class Extras {
         public static final String PHONE_NUMBER = "phone_number";
     }
 
+    public static class CreditCard {
+        public static final String CREDIT_CARD = "credit_card";
+    }
 }

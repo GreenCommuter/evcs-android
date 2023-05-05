@@ -19,8 +19,10 @@ public class PaymentMethodViewHolderV2 extends RecyclerView.ViewHolder {
     }
 
     public void setPaymentMethod(PaymentMethod creditCardInformation) {
-        if (creditCardInformation.card != null)
+        if (creditCardInformation.card != null) {
             mBinding.creditCardNumber.setText(creditCardInformation.card.getLast4());
+            mBinding.creditCardProvider.setImageResource(creditCardInformation.card.getBrand().getDrawable());
+        }
     }
 
     public void setListeners(CreditCardViewListener listener) {

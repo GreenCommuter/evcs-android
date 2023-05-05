@@ -11,9 +11,9 @@ import com.base.core.util.NavigationUtils
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.R
-import org.evcs.android.activity.ChargingHistoryActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.activity.subscription.SubscriptionActivity
+import org.evcs.android.activity.account.VehicleInformationActivity
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.profile.wallet.WalletActivity
@@ -56,6 +56,7 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
         mBinding.profileMenuFeedback.setOnClickListener {  }
         mBinding.profileMenuSignOut.setOnClickListener { UserUtils.logout(null) }
+        mBinding.profileMenuVehicleInfo.setOnClickListener { NavigationUtils.jumpTo(requireContext(), VehicleInformationActivity::class.java) }
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         super.setListeners()
@@ -66,16 +67,17 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     fun goToCallUs() {
+        goToPhone(StorageUtils.getStringFromSharedPreferences(
+            Extras.Configuration.PHONE_NUMBER,
+            BaseConfiguration.EVCSInformation.PHONE_NUMBER))
+    }
+
+    fun goToPhone(phone: String) {
         PermissionManager.getInstance().requestPermission(this, object : PermissionListener() {
             override fun onPermissionsGranted() {
                 super.onPermissionsGranted()
                 val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse(
-                    "tel:" + StorageUtils.getStringFromSharedPreferences(
-                        Extras.Configuration.PHONE_NUMBER,
-                        BaseConfiguration.EVCSInformation.PHONE_NUMBER
-                    )
-                )
+                intent.data = Uri.parse("tel:" + phone)
                 startActivity(intent)
             }
 

@@ -125,19 +125,38 @@
     <string name="profile_billing_information">Payment Methods</string>
     <string name="profile_plan">Manage Plan</string>
     <string name="profile_account">Account Details</string>
+
+    <string name="profile_support_section">Support</string>
+    <string name="profile_support_contact">Contact Support</string>
+    <string name="profile_support_faq">Help Center FAQ</string>
+    <string name="profile_support_feedback">Submit a request</string>
+    <string name="profile_privacy_section">Privacy</string>
+    <string name="profile_privacy_notifications">Notifications</string>
+    <string name="profile_privacy_tandc">Terms and Conditions</string>
+    <string name="profile_account_section">Account</string>
+    <string name="profile_charge_history">Charge history</string>
+    <string name="profile_account_vehicle_info">Vehicle Information</string>
+    <string name="profile_account_plans">Plans</string>
+    <string name="profile_account_payment_methods">Payment Methods</string>
+
     <string name="show_password">Show</string>
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
     <string name="profile_avatar_change_library_button">Choose from library</string>
 
-    <!-- Account activity -->
+    <!-- Vehicle Information -->
+    <string name="vehicle_info_car">Make &amp; Model</string>
+    <string name="vehicle_info_zipcde">Zipcode</string>
+
+    <!-- Account -->
     <string name="activity_account_title">Account Detail</string>
     <string name="activity_account_email">Email</string>
     <string name="activity_account_save">Save Account Details</string>
     <string name="activity_account_name">Name</string>
-    <string name="activity_account_change_password">Change password</string>
+    <string name="activity_account_change_password">Password</string>
     <string name="activity_account_sign_out">Sign Out</string>
     <string name="activity_account_delete_account">Delete account</string>
+    <string name="account_fragment_email_updated">Email updated</string>
 
     <!-- Personal Information -->
     <string name="personal_information_update_successful">User updated</string>
@@ -173,6 +192,7 @@
     <string name="add_credit_card_zip_code">Zipcode</string>
     <string name="add_credit_card_cvv">CVV</string>
     <string name="add_credit_card_ok">Save card</string>
+    <string name="add_credit_card_name">Cardholder name</string>
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>
@@ -189,8 +209,8 @@
     <string name="payment_details_amount">Amount</string>
     <string name="payment_details_authorization_code">Authorization #</string>
 
-    <!--Account-->
-    <string name="account_fragment_email_updated">Email updated</string>
+    <!-- Charging History -->
+    <string name="charging_history_empty">Charge your EV to see you history here.</string>
 
     <!--Search Location-->
     <string name="search_location_explanation">Start typing the address and then select from \n the results</string>
@@ -213,13 +233,6 @@
 
     <!-- Monthly Fee View -->
     <string name="monthly_fee_text">Monthly fee</string>
-
-    <!-- Passenger Item View -->
-    <string name="passenger_item_view_me">%1$s (me)</string>
-    <string name="passenger_item_view_absent">%1$s (absent)</string>
-
-    <!-- Passengers View -->
-    <string name="passengers_view_collapsed_format">%d people</string>
 
     <!-- Notifications -->
     <string name="notifications_title">Notifications</string>
@@ -257,9 +270,6 @@
     <string name="my_vanpools_title">Vanpools you applied</string>
 
     <!-- Vanpool Travel Information View -->
-    <string name="vanpool_travel_information_time">Travel time</string>
-    <string name="vanpool_travel_information_estimated_distance">Estimated Distance</string>
-    <string name="vanpool_travel_information_travel_distance">Travel Distance</string>
     <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
     <string name="vanpool_travel_information_km_distance_format">%1$.1f Km</string>
     <string name="vanpool_travel_information_time_format">%1$d min</string>
@@ -274,18 +284,11 @@
 
     <!-- Vanpool Status -->
     <string name="vanpool_status_cancelled">Canceled</string>
-    <string name="vanpool_status_missing_vanpoolers">Not enough vanpoolers</string>
-    <string name="vanpool_status_waiting_preapproval">Pending preapproval</string>
     <string name="vanpool_status_waiting_approval">Pending approval</string>
     <string name="vanpool_status_waiting_payment">Waiting for driver\'s payment</string>
     <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
     <string name="vanpool_status_active">Active</string>
     <string name="vanpool_status_inactive">Inactive</string>
-
-    <!-- Vanpool Absence -->
-    <string name="vanpool_absence_title">Absence</string>
-    <string name="vanpool_absence_loaded">Absence successfully registered</string>
-    <string name="vanpool_absence_not_going_today">I\'m not going today</string>
 
     <!-- Vanpool Checklist -->
     <string name="vanpool_checklist_title">Car checklist</string>

@@ -67,8 +67,7 @@ public class CreditCardView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String numbers = StringUtils.onlyNumbers(s);
-                mLast4.setText(numbers.subSequence(Math.min(12, numbers.length()), numbers.length()));
+                mLast4.setText(s);
                 CreditCardProvider provider = CreditCardProvider.Companion.getProvider(s, false);
                 if (provider == null) {
                     mProvider.setImageDrawable(null);

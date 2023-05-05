@@ -25,10 +25,9 @@
                 android:id="@+id/profile_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Arya Stark"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                style="@style/Headline.Medium"
-                />
+                android:text="Arya Stark"
+                style="@style/Headline.Medium"/>
 
             <TextView
                 android:id="@+id/profile_plan_name"
@@ -36,8 +35,7 @@
                 android:layout_height="wrap_content"
                 android:text="Standard anytime"
                 android:layout_marginBottom="@dimen/spacing_big"
-                style="@style/Body.Large"
-                />
+                style="@style/Body.Large"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_subscription_plan"
@@ -49,13 +47,13 @@
                 android:id="@+id/profile_menu_charging_history"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Charge history"/>
+                app:text="@string/profile_charge_history"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_big"
-                android:text="Account"
+                android:text="@string/profile_account_section"
                 style="@style/ProfileSection"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
@@ -68,19 +66,19 @@
                 android:id="@+id/profile_menu_vehicle_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Vehicle Information"/>
+                app:text="@string/profile_account_vehicle_info"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_show_plans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Plans"/>
+                app:text="@string/profile_account_plans"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_payment_methods"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Payment Methods"/>
+                app:text="@string/profile_account_payment_methods"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_payments"
@@ -91,25 +89,25 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Privacy"
+                android:text="@string/profile_privacy_section"
                 style="@style/ProfileSection"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_notifications"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Notifications"/>
+                app:text="@string/profile_privacy_notifications"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_evcs_terms_and_conditions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Terms and Conditions"/>
+                app:text="@string/profile_privacy_tandc"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Support"
+                android:text="@string/profile_support_section"
                 android:layout_marginTop="@dimen/spacing_big"
                 style="@style/ProfileSection"/>
 
@@ -117,13 +115,19 @@
                 android:id="@+id/profile_menu_call_customer_care"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Contact Support"/>
+                app:text="@string/profile_support_contact"/>
+
+            <org.evcs.android.ui.view.profile.ListButtonView
+                android:id="@+id/profile_menu_request"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:text="@string/profile_support_faq"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
                 android:id="@+id/profile_menu_feedback"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:text="Help Center FAQ"/>
+                app:text="@string/profile_support_feedback"/>
 
             <TextView
                 android:id="@+id/profile_menu_sign_out"
@@ -132,7 +136,7 @@
                 android:layout_marginTop="@dimen/spacing_large"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 android:layout_gravity="center_horizontal"
-                android:text="Sign Out"
+                android:text="@string/activity_account_sign_out"
                 android:padding="@dimen/spacing_medium"
                 android:textColor="@color/evcs_gray_800"
                 style="@style/ButtonK"/>

@@ -6,6 +6,7 @@ import org.evcs.android.util.validator.ValidatorManager
 import org.evcs.android.R
 import androidx.annotation.CallSuper
 import android.graphics.Typeface
+import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import androidx.navigation.fragment.NavHostFragment
@@ -24,9 +25,11 @@ import com.stripe.android.Stripe
 import com.stripe.android.model.*
 import org.evcs.android.Configuration
 import org.evcs.android.databinding.FragmentAddCreditCardBinding
+import org.evcs.android.model.CreditCard
 import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar2
+import org.evcs.android.util.Extras
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.ZipCodeTextInputValidator
 import org.joda.time.LocalDate
@@ -57,6 +60,16 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
 
     private lateinit var mStripe: Stripe
 
+    companion object {
+        fun newInstance(cc: CreditCard): AddCreditCardFragment {
+            val args = Bundle()
+            args.putSerializable(Extras.CreditCard.CREDIT_CARD, cc)
+            val fragment = AddCreditCardFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun layout(): Int {
         return R.layout.fragment_add_credit_card
     }
@@ -85,6 +98,16 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
         mToolbar = binding.fragmentAddCreditCardToolbar
 
         ViewUtils.setAdjustResize(binding.fragmentAddCreditCardLayout)
+    }
+
+    override fun populate() {
+        val cc = arguments?.getSerializable(Extras.CreditCard.CREDIT_CARD) as CreditCard?
+        if (cc == null) return
+//        mCreditCardView.setCreditCard(cc)
+        mCardNumber.editText?.setText(cc.last4!!)
+        mCardExpirationMonth.editText?.setText(cc.expL)
+        mZipcode.editText?.setText("·····")
+        mCvv.editText?.setText("···")
     }
 
     override fun setListeners() {

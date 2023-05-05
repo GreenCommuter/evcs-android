@@ -8,7 +8,7 @@
         android:id="@+id/fragment_charging_history_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Charge history"/>
+        app:title="@string/profile_charge_history"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_charging_history_swipe_refresh"
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="Charge your EV to see you history here."
+        android:text="@string/charging_history_empty"
         android:textColor="#ADB0B4"
         style="@style/EmptyView"/>
 

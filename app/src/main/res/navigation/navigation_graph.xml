@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_profileFragment_to_webViewFragment"
             app:destination="@id/webViewFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_plansFragment"
+            app:destination="@id/plansFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_chargingHistoryFragment"
+            app:destination="@id/chargingHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
@@ -82,4 +88,14 @@
         android:name="org.evcs.android.features.map.location.LocationFragment"
         android:label="LocationFragment"
         tools:layout="@layout/fragment_location"/>
+    <fragment
+        android:id="@+id/plansFragment"
+        android:name="org.evcs.android.features.profile.plans.PlansFragment"
+        tools:layout="@layout/fragment_plans"
+        android:label="PlansFragment" />
+    <fragment
+        android:id="@+id/chargingHistoryFragment"
+        android:name="org.evcs.android.features.charging.ChargingHistoryFragment"
+        tools:layout="@layout/fragment_charging_history"
+        android:label="ChargingHistoryFragment" />
 </navigation>

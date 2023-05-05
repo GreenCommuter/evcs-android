@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/status_bar_height"
+    android:paddingTop="@dimen/spacing_medium"
+    android:paddingBottom="@dimen/spacing_medium"
+    android:paddingStart="@dimen/spacing_medium_extra"
+    android:paddingEnd="@dimen/spacing_medium_extra">
+
+    <TextView
+        android:id="@+id/toolbar_evcs_navbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="@string/back"
+        android:layout_gravity="center_vertical"
+        android:paddingLeft="@dimen/spacing_medium"
+        android:paddingRight="@dimen/spacing_medium"
+        android:textColor="@color/evcs_secondary_700"
+        style="@style/Label.Small"/>
+
+    <TextView
+        android:id="@+id/toolbar_evcs_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="title"
+        style="@style/Title.Medium"/>
+
+</FrameLayout>

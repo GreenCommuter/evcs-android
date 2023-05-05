@@ -7,7 +7,7 @@
     android:clipChildren="false"
     android:clipToPadding="false">
 
-    <androidx.viewpager2.widget.ViewPager2
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/credit_cards_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,15 +35,6 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="12dp"/>
-
-    <org.evcs.android.features.profile.wallet.CustomTabLayout
-        android:id="@+id/credit_cards_recycler_view_dots"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_medium"
-        android:layout_marginBottom="12dp"
-        app:selectedTab="@drawable/wallet_pager_selected_dot"
-        app:unselectedTab="@drawable/wallet_pager_default_dot"
-        app:innerMargin="@dimen/spacing_ariel_related"/>
 
     <Button
         android:id="@+id/wallet_add_new_payment_method"

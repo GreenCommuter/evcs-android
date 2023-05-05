@@ -4,6 +4,7 @@ import com.base.networking.retrofit.RetrofitServices
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import okhttp3.ResponseBody
+import org.evcs.android.BaseConfiguration
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.PaginatedResponse
@@ -42,7 +43,9 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
             .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
                     mCachedLocations = response?.page
-                    view.showInitialLocations(populateDistances(mCachedLocations!!), latlng != null)
+                    if (mCachedLocations!!.isEmpty() && latlng?.latitude != BaseConfiguration.Map.DEFAULT_LATITUDE)
+                        retryInitialLocations(comingSoon, minKw, connector)
+                    else view.showInitialLocations(populateDistances(mCachedLocations!!), latlng != null)
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -53,6 +56,14 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                     view.showError(RequestError.getNetworkError())
                 }
             })
+    }
+
+    /**
+     * It seems that there's a 3000-something mile cap when searching, so this is mostly for me when
+     * I test this from Argentina without mocking my location
+     */
+    private fun retryInitialLocations(comingSoon: Boolean?, minKw: Int?, connector: String?) {
+        getInitialLocations(LatLng(BaseConfiguration.Map.DEFAULT_LATITUDE, BaseConfiguration.Map.DEFAULT_LONGITUDE), comingSoon, minKw, connector)
     }
 
     fun populateDistances(locations: List<Location>): List<Location> {

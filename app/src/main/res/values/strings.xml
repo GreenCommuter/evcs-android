@@ -115,24 +115,25 @@
     <string name="my_information_email_taken">Email has already been taken</string>
 
     <!-- BrainTree -->
-    <string name="braintree_title">Add a new credit card</string>
+    <string name="braintree_title">Add credit or debit card</string>
     <string name="braintree_error_token">Error retrieving token</string>
     <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
 
     <!-- Profile -->
     <string name="profile_title">Profile</string>
     <string name="profile_username_format">%1$s %2$s</string> <!-- 1: First Name | 2: Last Name -->
-    <string name="profile_billing_information">Payments</string>
-    <string name="profile_employer">Subscription Plan</string>
-    <string name="profile_change_password">Account</string>
+    <string name="profile_billing_information">Payment Methods</string>
+    <string name="profile_plan">Manage Plan</string>
+    <string name="profile_account">Account Details</string>
     <string name="show_password">Show</string>
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
     <string name="profile_avatar_change_library_button">Choose from library</string>
 
     <!-- Account activity -->
-    <string name="activity_account_title">Edit Account</string>
+    <string name="activity_account_title">Account Detail</string>
     <string name="activity_account_email">Email</string>
+    <string name="activity_account_save">Save Account Details</string>
     <string name="activity_account_name">Name</string>
     <string name="activity_account_change_password">Change password</string>
     <string name="activity_account_sign_out">Sign Out</string>
@@ -165,13 +166,13 @@
     <string name="payment_method_empty">No credit card found. Add yours to start using our services!</string>
 
     <!--Add credit card-->
-    <string name="payment_method_toolbar_add">Add a new credit card</string>
+    <string name="payment_method_toolbar_add">Add payment method</string>
     <string name="profile_billing_information_braintree_success">New payment method registered</string>
-    <string name="add_credit_card_number">Credit Card Number</string>
+    <string name="add_credit_card_number">Card Number</string>
     <string name="add_credit_card_expiration">Expiration</string>
-    <string name="add_credit_card_zip_code">Billing Zip Code</string>
+    <string name="add_credit_card_zip_code">Zipcode</string>
     <string name="add_credit_card_cvv">CVV</string>
-    <string name="add_credit_card_ok">Add card</string>
+    <string name="add_credit_card_ok">Save card</string>
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>

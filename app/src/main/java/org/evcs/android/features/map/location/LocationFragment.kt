@@ -39,7 +39,7 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
     }
 
     override fun setListeners() {
-//        mBinding.activityLocationClose.setOnClickListener { findNavController().popBackStack() }
+        mBinding.fragmentLocationToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         mBinding.activityLocationLocation.setStartChargingListener {
             MainNavigationController.getInstance().goToCharging()
         }

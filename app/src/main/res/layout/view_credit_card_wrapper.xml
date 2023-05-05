@@ -1,20 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content"
+    android:background="@drawable/button_selector_black_transparent"
+    android:orientation="vertical">
 
-    <org.evcs.android.features.profile.wallet.CreditCardView
-        android:id="@+id/credit_card_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_medium_extra"
+        android:paddingBottom="@dimen/spacing_medium_extra">
 
-    <ProgressBar
-        android:id="@+id/credit_card_view_loading"
-        android:layout_width="@dimen/spacing_big"
-        android:layout_height="@dimen/spacing_big"
-        android:layout_gravity="center"
-        android:visibility="gone"
-        android:indeterminateTint="@color/evcs_white"/>
+        <ImageView
+            android:id="@+id/credit_card_provider"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_medium"
+            android:src="@drawable/ic_arrow_right" />
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/credit_card_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4567"
+            style="@style/Body.Small" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:id="@+id/credit_card_default"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_medium_extra"
+            android:src="@drawable/ic_arrow_right" />
+
+        <ImageView
+            android:id="@+id/view_list_button_chevron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right" />
+
+    </LinearLayout>
+
+    <include layout="@layout/divider"/>
+
+</LinearLayout>

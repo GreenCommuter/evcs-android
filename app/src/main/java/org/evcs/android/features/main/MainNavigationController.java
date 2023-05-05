@@ -55,6 +55,11 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
         });
     }
 
+    public void goToPlanSelection() {
+        goToProfile();
+        navigate(R.id.plansFragment);
+    }
+
     public void onMapClicked() {
         if (!mIsInCharging && !mIsInProfile) return;
         cancelSession(() -> {

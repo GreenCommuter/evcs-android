@@ -12,7 +12,7 @@ import android.os.Bundle
 import android.view.View
 import com.base.core.fragment.BaseDialogFragment
 import org.evcs.android.databinding.FragmentWalletBinding
-import org.evcs.android.ui.view.shared.EVCSToolbar
+import org.evcs.android.ui.view.shared.EVCSToolbar2
 
 class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, IWalletView {
 
@@ -25,7 +25,7 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
         }
     }
 
-    private lateinit var mToolbar: EVCSToolbar
+    private lateinit var mToolbar: EVCSToolbar2
 
     override fun layout(): Int {
         return R.layout.fragment_wallet

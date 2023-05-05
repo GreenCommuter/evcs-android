@@ -25,9 +25,8 @@ class LocationView : LinearLayout {
         init(context)
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context, attrs, defStyleAttr) {
-    }
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+            super(context, attrs, defStyleAttr) {}
 
     fun init(context: Context?) {
         mBinding = ViewLocationBinding.inflate(LayoutInflater.from(context), this, true)

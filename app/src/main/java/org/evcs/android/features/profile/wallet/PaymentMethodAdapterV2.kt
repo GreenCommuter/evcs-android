@@ -2,7 +2,6 @@ package org.evcs.android.features.profile.wallet
 
 import org.evcs.android.ui.adapter.BaseRecyclerAdapter
 import org.evcs.android.util.UserUtils
-import org.evcs.android.features.profile.wallet.CreditCardView.CreditCardViewListener
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import org.evcs.android.R
@@ -20,7 +19,7 @@ class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodV
     override fun populate(holder: PaymentMethodViewHolderV2, item: PaymentMethod, position: Int) {
         holder.setPaymentMethod(item)
         holder.setDefault(item.id == mDefaultPm)
-        holder.setListeners(object : CreditCardViewListener {
+        holder.setListeners(object : PaymentMethodViewHolderV2.CreditCardViewListener {
             override fun onStarClicked() {
                 if (mListener != null) mListener!!.onStarClicked(item)
             }

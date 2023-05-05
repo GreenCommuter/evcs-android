@@ -26,7 +26,7 @@ import org.evcs.android.Configuration
 import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.ui.view.shared.EVCSToolbar
+import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.ZipCodeTextInputValidator
 import org.joda.time.LocalDate
@@ -48,7 +48,7 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
     private lateinit var mCardExpirationMonth: StandardTextField
     private lateinit var mCvv: StandardTextField
     private lateinit var mNext: Button
-    private lateinit var mToolbar: EVCSToolbar
+    private lateinit var mToolbar: EVCSToolbar2
 
     private var listener: IBrainTreeListener? = null
 

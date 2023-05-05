@@ -6,7 +6,7 @@
     android:orientation="vertical"
     android:background="@color/evcs_gray_89">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/wallet_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -10,9 +10,11 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
-import androidx.viewpager2.widget.ViewPager2;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.base.core.fragment.BaseDialogFragment;
+import com.base.core.util.ToastUtils;
 
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
@@ -25,8 +27,7 @@ import java.util.List;
 
 public class WalletHeaderView extends LinearLayout implements IPaymentMethodView {
 
-    ViewPager2 mEndlessRecyclerView;
-    CustomTabLayout mTabLayout;
+    RecyclerView mEndlessRecyclerView;
     FrameLayout mCreditCardsEmpty;
 
     private PaymentMethodAdapterV2 mCreditCardsAdapter;
@@ -56,7 +57,8 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     public void init(Context context) {
         @NonNull ViewWalletHeaderBinding binding = ViewWalletHeaderBinding.inflate(LayoutInflater.from(context), this, true);
         mEndlessRecyclerView = binding.creditCardsRecyclerView;
-        mTabLayout = binding.creditCardsRecyclerViewDots;
+        mEndlessRecyclerView.setLayoutManager(
+                new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         mCreditCardsEmpty = binding.creditCardViewEmpty;
         binding.walletAddNewPaymentMethod.setOnClickListener(view -> onAddPaymentMethodClicked());
 
@@ -68,7 +70,6 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
 
         if (mInvalidateCreditCards) {
             mCreditCardsAdapter = new PaymentMethodAdapterV2();
-            mCreditCardsAdapter.appendBottom(new PaymentMethod());
         }
         mEndlessRecyclerView.setAdapter(mCreditCardsAdapter);
 
@@ -101,13 +102,6 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
                 showRemovePaymentMethodDialog(item);
             }
         });
-
-        mEndlessRecyclerView.setOffscreenPageLimit(1);
-
-        final float spacing = getResources().getDimension(R.dimen.spacing_ariel_related) * 1.5f;
-        mEndlessRecyclerView.setPageTransformer((page, position)
-                -> page.setTranslationX(spacing * position));
-
 
     }
 
@@ -160,10 +154,11 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
 
     @Override
     public void showError(@NonNull RequestError error) {
-//        WolmoDialogFragment dialog = new GreenCommuterDialogFragment.Builder()
+        ToastUtils.show(error.getBody());
+//        EVCSDialogFragment dialog = new EVCSDialogFragment.Builder()
 //                .setTitle(error.getTitle())
 //                .setSubtitle(error.getBody())
-//                .addButton(getString(R.string.app_ok), GreenCommuterDialogFragment.getDismissOnClickListener())
+//                .addButton(getString(R.string.app_ok), EVCSDialogFragment.getDismissOnClickListener())
 //                .build();
 //        mParent.showDialog(dialog);
     }
@@ -172,7 +167,6 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     public void onPaymentMethodsReceived(List<PaymentMethod> creditCardInformationList) {
         mInvalidateCreditCards = false;
         showAndSavePaymentList(creditCardInformationList);
-        mTabLayout.setupWithViewPager(mEndlessRecyclerView);
     }
 
     @Override
@@ -182,7 +176,6 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     @Override
     public void onPaymentMethodRemoved(@NonNull PaymentMethod item) {
         mCreditCardsAdapter.remove(item);
-        mTabLayout.setupWithViewPager(mEndlessRecyclerView);
     }
 
     @Override

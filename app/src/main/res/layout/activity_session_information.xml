@@ -1,203 +1,186 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:background="@color/evcs_dark_purple">
+    android:orientation="vertical">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/session_information_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Session information"
+        app:title="Session detail"
         app:navigationIcon="@drawable/back_arrow"/>
 
-    <RelativeLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_ariel_standard">
+        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/session_information_charging_site_date"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_purple_gray"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/session_information_charging_site_payment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/session_information_charging_site_date"
-            android:text="Payment: credit card "
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_purple_gray"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_ariel_standard">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:text="View receipt"
-            style="@style/Button.Orange"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:paddingLeft="22dp"
-            android:paddingRight="22dp"
-            android:textColor="@color/evcs_purple_gray"/>
+                <TextView
+                    android:id="@+id/session_information_charging_site_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/Body.Medium" />
 
-    </RelativeLayout>
+            </RelativeLayout>
 
-    <include layout="@layout/purple_grey_line"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_ariel_standard">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_ariel_standard">
+                <TextView
+                    android:id="@+id/session_information_charging_site_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/Title.Large"
+                    />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            style="@style/Roboto.Body"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:textColor="@color/evcs_purple_gray"/>
+                <TextView
+                    android:id="@+id/session_information_charging_site_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/session_information_charging_site_subtitle"
+                    style="@style/Title.Medium"/>
 
-        <TextView
-            android:id="@+id/session_information_duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            style="@style/RobotoBold.Body"
-            android:drawableStart="@drawable/ic_clock"
-            android:drawablePadding="@dimen/spacing_medium"
-            android:textColor="@color/evcs_white"/>
+            </RelativeLayout>
 
-    </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_ariel_standard">
 
-    <include layout="@layout/purple_grey_line"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Energy Delivered"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    style="@style/Label.Small"
+                    />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_ariel_standard">
+                <TextView
+                    android:id="@+id/session_information_energy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duration"
+                    style="@style/Body.Medium"
+                    android:drawablePadding="@dimen/spacing_medium" />
 
-        <TextView
-            android:id="@+id/session_information_charging_site_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Charging Site"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_purple_gray"/>
+            </LinearLayout>
 
-        <ImageView
-            android:id="@+id/session_information_charging_site_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/session_information_charging_site_title"
-            android:layout_marginEnd="@dimen/spacing_medium"
-            android:src="@drawable/ic_clock"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_ariel_standard">
 
-        <TextView
-            android:id="@+id/session_information_charging_site_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/session_information_charging_site_title"
-            android:layout_toEndOf="@id/session_information_charging_site_icon"
-            style="@style/RobotoBold.Body"
-            android:textColor="@color/evcs_white"
-            />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Elapsed time"
+                    style="@style/Label.Small"
+                    android:layout_marginBottom="@dimen/spacing_medium" />
 
-        <TextView
-            android:id="@+id/session_information_charging_site_id"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/session_information_charging_site_subtitle"
-            android:layout_toEndOf="@id/session_information_charging_site_icon"
-            android:text="Station ID:"
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_white"
-            />
+                <TextView
+                    android:id="@+id/session_information_duration"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duration"
+                    style="@style/Body.Medium"
+                    android:drawablePadding="@dimen/spacing_medium" />
 
-        <TextView
-            android:id="@+id/session_information_charging_site_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/session_information_charging_site_id"
-            android:layout_toEndOf="@id/session_information_charging_site_icon"
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_white"
-            />
+            </LinearLayout>
 
-    </RelativeLayout>
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:label="@string/payment_history_title">
 
-    <include layout="@layout/purple_grey_line"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Duration"
+                    style="@style/Body.Medium"
+                    android:drawablePadding="@dimen/spacing_medium" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_ariel_standard">
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Energy Delivered"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_purple_gray"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/padding_ariel_standard">
 
-        <TextView
-            android:id="@+id/session_information_energy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Duration"
-            style="@style/RobotoBold.Body"
-            android:drawableStart="@drawable/ic_clock"
-            android:drawablePadding="@dimen/spacing_medium"
-            android:textColor="@color/evcs_white"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Payment method"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    style="@style/Roboto.Body"
+                    />
 
-    </LinearLayout>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Card Number"
+                    style="@style/Roboto.Body"
+                    />
 
-    <include layout="@layout/purple_grey_line"/>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="@dimen/padding_ariel_standard">
+            <TextView
+                android:id="@+id/session_information_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_ariel_standard"
+                style="@style/Body.Medium" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Card Number"
-            style="@style/Roboto.Body"
-            android:textColor="@color/evcs_purple_gray"/>
+            <TextView
+                android:id="@+id/session_information_charging_site_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Station ID:"
+                style="@style/Body.Medium"
+                />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/session_information_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_ariel_standard"
+                style="@style/Body.Medium"
+                />
 
-    <include layout="@layout/purple_grey_line"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="View receipt"
+                android:layout_marginBottom="@dimen/spacing_large_extra"
+                style="@style/ButtonK.Blue" />
 
-    <TextView
-        android:id="@+id/session_information_price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_ariel_standard"
-        style="@style/RobotoBold.CallToAction"
-        android:textColor="@color/evcs_white"/>
 
-    <include layout="@layout/purple_grey_line"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:padding="@dimen/spacing_medium"
+                android:text="Need help? Contact Customer Support"
+                />
 
-    <TextView
-        android:id="@+id/session_information_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/padding_ariel_standard"
-        android:textColor="@color/evcs_purple_gray"
-        style="@style/Roboto.Body" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

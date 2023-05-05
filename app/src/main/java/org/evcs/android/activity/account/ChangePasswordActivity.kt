@@ -12,7 +12,7 @@ import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.FragmentChangePasswordBinding
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.ui.view.shared.EVCSToolbar
+import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.*
@@ -26,7 +26,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     private lateinit var mConfirmInputLayout: StandardTextField
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: Button
-    private lateinit var mToolbar: EVCSToolbar
+    private lateinit var mToolbar: EVCSToolbar2
     private lateinit var mPresenter: ChangePasswordPresenter
 
     override fun inflate(layoutInflater: LayoutInflater): View {

@@ -26,10 +26,6 @@ public class CreditCardView extends LinearLayout {
 
     TextView mLast4;
     SimpleDraweeView mProvider;
-    ImageView mStar;
-    ImageView mTrash;
-
-    private CreditCardViewListener mListener;
 
     public CreditCardView(Context context) {
         super(context);
@@ -50,16 +46,7 @@ public class CreditCardView extends LinearLayout {
         @NonNull ViewCreditCardBinding binding = ViewCreditCardBinding.inflate(LayoutInflater.from(context), this, true);
         mLast4 = binding.creditCardViewLast4;
         mProvider = binding.creditCardViewProvider;
-        mStar = binding.creditCardViewStar;
-        mTrash = binding.creditCardViewTrash;
         mLast4.setTypeface(Typeface.MONOSPACE);
-
-        mStar.setOnClickListener(view -> {
-            if (mListener != null) mListener.onStarClicked();
-        });
-        mTrash.setOnClickListener(view -> {
-            if (mListener != null) mListener.onTrashClicked();
-        });
     }
 
     public void setCreditCard(CreditCard creditCard) {
@@ -92,21 +79,4 @@ public class CreditCardView extends LinearLayout {
         });
     }
 
-    public void setListeners(CreditCardViewListener listener) {
-        mListener = listener;
-    }
-
-    public void showButtons(boolean show) {
-        mStar.setVisibility(show ? VISIBLE : GONE);
-        mTrash.setVisibility(show ? VISIBLE : GONE);
-    }
-
-    public void setDefault(boolean def) {
-        mStar.setImageResource(def ? R.drawable.ic_star_filled : R.drawable.ic_clock);
-    }
-
-    public interface CreditCardViewListener {
-        void onStarClicked();
-        void onTrashClicked();
-    }
 }

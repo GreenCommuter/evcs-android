@@ -4,10 +4,8 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import org.evcs.android.databinding.AdapterChargingHistoryItemBinding
 import org.evcs.android.model.Charge
-import org.joda.time.Period
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
-import org.joda.time.format.PeriodFormatterBuilder
 
 class ChargingHistoryViewHolder(itemView : View?) : RecyclerView.ViewHolder(itemView!!) {
 
@@ -25,7 +23,6 @@ class ChargingHistoryViewHolder(itemView : View?) : RecyclerView.ViewHolder(item
         if (charge.startedAt != null)
             mBinding.adapterChargingHistoryItemDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
         mBinding.adapterChargingHistoryItemPrice.text = "Total: " + String.format("$%.2f", charge.price)
-        mBinding.adapterChargingHistoryItemDuration.text = charge.printableDuration
     }
 
 //    fun setOnXClickListener(onXClickListener: ((Location) -> Unit)?) {

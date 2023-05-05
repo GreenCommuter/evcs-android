@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/fragment_add_credit_card_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,6 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/evcs_gray_89"
         android:fillViewport="true">
 
         <LinearLayout
@@ -35,19 +34,33 @@
                 android:layout_marginBottom="@dimen/spacing_ariel_sections"/>
 
             <org.evcs.android.features.shared.StandardTextField
+                android:id="@+id/fragment_braintree_card_name"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/StandardEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Cardholder name"
+                    android:inputType="number"
+                    android:maxLength="19" />
+
+            </org.evcs.android.features.shared.StandardTextField>
+
+            <org.evcs.android.features.shared.StandardTextField
                 android:id="@+id/fragment_braintree_card_number"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent"
-                app:label="@string/add_credit_card_number">
+                android:layout_width="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/StandardEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:digits="01234 56789"
-                    android:hint="0000 0000 0000 0000"
+                    android:hint="@string/add_credit_card_number"
                     android:inputType="number"
-                    android:maxLength="19" />
+                    android:maxLength="19"/>
 
             </org.evcs.android.features.shared.StandardTextField>
 
@@ -62,15 +75,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/spacing_ariel_related"
-                        app:label="@string/add_credit_card_expiration">
+                        android:layout_marginEnd="@dimen/spacing_ariel_related">
 
                         <com.google.android.material.textfield.TextInputEditText
                             style="@style/StandardEditText"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:digits="1234567890/"
-                            android:hint="MM/YY"
+                            android:hint="@string/add_credit_card_expiration"
                             android:inputType="number"
                             android:maxLength="5"
                             android:textColorHint="@color/evcs_grey" />
@@ -80,36 +92,34 @@
                     android:id="@+id/fragment_braintree_card_cvv"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:label="@string/add_credit_card_cvv">
+                    android:layout_weight="1">
 
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/StandardEditText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:digits="0123456789"
-                        android:hint="000"
+                        android:hint="@string/add_credit_card_cvv"
                         android:inputType="number"
                         android:maxLength="19" />
                 </org.evcs.android.features.shared.StandardTextField>
 
-            </LinearLayout>
-
-            <org.evcs.android.features.shared.StandardTextField
-                android:id="@+id/fragment_braintree_card_zipcode"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_ariel_related"
-                app:label="@string/add_credit_card_zip_code">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
+                <org.evcs.android.features.shared.StandardTextField
+                    android:id="@+id/fragment_braintree_card_zipcode"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:maxLength="5"
-                    android:inputType="number"
-                    android:hint="00000"
-                    style="@style/StandardEditText"/>
-            </org.evcs.android.features.shared.StandardTextField>
+                    android:layout_weight="1">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLength="5"
+                        android:inputType="number"
+                        android:hint="@string/add_credit_card_zip_code"
+                        style="@style/StandardEditText"/>
+                </org.evcs.android.features.shared.StandardTextField>
+
+            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -124,7 +134,7 @@
                 android:text="@string/add_credit_card_ok"
                 android:enabled="false"
                 android:textAllCaps="false"
-                style="@style/Button.Black"/>
+                style="@style/ButtonK.Orange"/>
 
         </LinearLayout>
 

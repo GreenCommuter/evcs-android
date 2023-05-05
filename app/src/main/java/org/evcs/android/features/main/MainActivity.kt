@@ -1,0 +1,125 @@
+package org.evcs.android.features.main
+
+import androidx.navigation.Navigation.findNavController
+import org.evcs.android.activity.AbstractSupportedVersionActivity
+import org.evcs.android.features.shared.IVersionView
+import org.evcs.android.features.main.MainNavigationController
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import android.widget.TextView
+import android.os.Bundle
+import android.content.Intent
+import org.evcs.android.R
+import android.view.LayoutInflater
+import android.os.Build
+import android.app.NotificationManager
+import android.app.NotificationChannel
+import android.view.View
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultCallback
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.CallSuper
+import com.base.core.util.NavigationUtils
+import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
+import org.evcs.android.features.profile.plans.PlansActivity
+import org.evcs.android.util.Extras
+import org.evcs.android.util.PushNotificationUtils
+import org.evcs.android.util.UserUtils
+
+class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
+    var mNavigationController: MainNavigationController? = null
+    private lateinit var menuView: BottomNavigationView
+    private var mPlanResult: ActivityResultLauncher<*>? = null
+    private lateinit var mButton: TextView
+    var isBottomOfStack = false
+        private set
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        mPlanResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            populate()
+        }
+        isBottomOfStack = intent.getBooleanExtra(Extras.MainActivity.IS_BOTTOM, true)
+    }
+
+    @CallSuper
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+        createNotificationChannel()
+        mNavigationController = MainNavigationController(this, true,
+            findNavController(this, R.id.activity_base_content))
+        mNavigationController!!.startFlow()
+
+        if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
+            return
+        }
+    }
+
+    override fun inflate(layoutInflater: LayoutInflater): View {
+        val binding = ActivityBaseNavhostWithBottomNavBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        menuView = binding.bottomNavigation
+        mButton = binding.bottomNavigationButton
+        return binding.root
+    }
+
+    private fun createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.notifications_channel_name)
+            val description = getString(R.string.notifications_channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(PushNotificationUtils.CHANNEL_ID, name, importance)
+            channel.description = description
+            val notificationManager = getSystemService(NotificationManager::class.java)
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    override fun getNavGraphId(): Int {
+        return R.navigation.navigation_graph
+    }
+
+    override fun isSupportedVersion(isSupported: Boolean, versionWording: String?) {
+        if (!isSupported) {
+            showNotSupportedVersion(versionWording)
+        }
+    }
+
+    override fun populate() {
+        super.populate()
+        if (UserUtils.getLoggedUser() == null) {
+            menuView.menu.clear()
+            mButton.visibility = View.VISIBLE
+        } else {
+            menuView.inflateMenu(R.menu.drawer)
+            mButton.visibility = View.GONE
+        }
+        menuView.selectedItemId = R.id.menu_drawer_map
+    }
+
+    override fun setListeners() {
+        super.setListeners()
+        mButton.setOnClickListener { NavigationUtils.jumpTo(this, PlansActivity::class.java) }
+        menuView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.menu_drawer_map -> mNavigationController!!.onMapClicked()
+                R.id.menu_drawer_charging -> mNavigationController!!.goToCharging()
+                R.id.menu_drawer_profile -> mNavigationController!!.goToProfile()
+            }
+            //will be updated after canceling session
+            false
+        }
+    }
+
+    override fun onNetworkError() {
+        //Handled by fragment
+    }
+
+    fun setSelectedItem(item: Int) {
+        for (i in 0 until menuView.menu.size()) {
+            menuView.menu.getItem(i).isChecked = false
+        }
+        menuView.menu.findItem(item)?.isChecked = true
+    }
+
+}

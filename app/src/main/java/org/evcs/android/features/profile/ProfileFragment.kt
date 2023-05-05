@@ -49,13 +49,15 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
 
     override fun setListeners() {
         mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
-        mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
+        mBinding.profileMenuPaymentMethods.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener { NavigationUtils.jumpTo(requireContext(), SubscriptionActivity::class.java) }
-        mBinding.profileMenuChargingHistory.setOnClickListener { NavigationUtils.jumpTo(requireContext(), ChargingHistoryActivity::class.java) }
+        mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("https://www.evcs.com/terms-of-use") }
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
         mBinding.profileMenuFeedback.setOnClickListener {  }
         mBinding.profileMenuSignOut.setOnClickListener { UserUtils.logout(null) }
+
+        mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         super.setListeners()
     }
 

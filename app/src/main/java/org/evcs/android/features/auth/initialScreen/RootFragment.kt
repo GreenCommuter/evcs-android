@@ -21,8 +21,7 @@ class RootFragment : ErrorFragment<BasePresenter<*>>() {
         return BasePresenter(this)
     }
 
-    override fun init() {
-    }
+    override fun init() {}
 
     override fun setUi(v: View) {
         mBinding = FragmentRootBinding.bind(v)

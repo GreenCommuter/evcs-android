@@ -19,6 +19,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="@dimen/spacing_medium_extra"
             android:paddingEnd="@dimen/spacing_medium_extra"
+            android:paddingTop="@dimen/spacing_toolbar_bottom_extra"
             android:orientation="vertical">
 
             <TextView

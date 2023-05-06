@@ -20,7 +20,7 @@ class CreditCard : Serializable {
     //          "cvc_check": "pass"
     //      },
     //      "country": "US",
-    var expL = 0
+    var expMonth = 0
     var expYear = 0
 
     //      "fingerprint": "jsdakjfie",

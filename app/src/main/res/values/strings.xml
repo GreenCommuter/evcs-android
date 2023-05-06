@@ -319,8 +319,6 @@
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
     <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
-    <string name="vanpool_ongoing_ride_tracking_enabled">Tracking enabled</string>
-    <string name="vanpool_ongoing_ride_tracking_disabled">Tracking disabled</string>
     <string name="vanpool_ongoing_ride_file_report_button">File report</string>
     <string name="vanpool_ongoing_ride_call_us">Call us</string>
     <string name="vanpool_ongoing_ride_control_lock">Lock</string>
@@ -337,11 +335,7 @@
     <string name="vanpool_ongoing_ride_spinner">Finishing the ride, please wait</string>
     <string-array name="vanpool_ongoing_ride_spinner">
         <item>Beginning the process to finish your ride, please wait</item>
-        <item>Communicating with vehicle</item>
-        <item>Checking GPS location</item>
-        <item>Gathering trip data</item>
         <item>Running security checks</item>
-        <item>Ending the ride</item>
     </string-array>
     <string name="ongoing_ride_offline">You need to be online to perform this action</string>
     <string name="ongoing_ride_offline_2">You are offline. Some features may not be available</string>
@@ -362,7 +356,6 @@
     <string name="book_now_error_google_api_connection">Could not connect to Google API Client</string>
 
     <!-- Future Reservation -->
-    <string name="future_reservation_tab">Future Reservation</string>
     <string name="future_reservation_error_no_cars_found">Sorry, no cars found for current location, please try another one.</string>
     <string name="future_reservation_pick_up">Pick up</string>
     <string name="future_reservation_drop_off">Drop off</string>
@@ -379,9 +372,6 @@
 
     <!-- Create Booking -->
     <string name="create_booking_toolbar_title">Car sharing</string>
-    <string name="create_booking_pick_up">Pick up time</string>
-    <string name="create_booking_drop_off">Drop off time</string>
-    <string name="create_booking_confirm_booking">Confirm booking</string>
     <string name="create_booking_car_title">Car</string>
     <string name="create_booking_car_name_format">%1$s %2$s</string>
     <string name="create_booking_car_plate_format">#%s</string>
@@ -511,5 +501,17 @@
     <string name="charging_in_progress_duration">Session Time Elapsed</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
+
+    <!-- Session information -->
+    <string name="session_information_energy">Energy Delivered</string>
+    <string name="session_information_time">Elapsed time</string>
+    <string name="session_information_payment_method">Payment Method</string>
+    <string name="session_information_plan">Plan type</string>
+    <string name="session_information_id">Session ID</string>
+    <string name="session_information_station_id">Station ID</string>
+    <string name="session_information_price">Total</string>
+    <string name="session_information_receipt">View receipt</string>
+    <string name="session_information_help">Need help? Contact Customer Support</string>
+    <string name="session_information_title">Session detail</string>
 
 </resources>

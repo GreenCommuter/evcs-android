@@ -12,8 +12,8 @@
         android:paddingTop="0dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Edit Your Name"
-        app:navigationIcon="@drawable/back_arrow"/>
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
+        app:title="Edit Your Name" />
 
     <org.evcs.android.features.shared.StandardTextField
         android:id="@+id/fragment_change_name_first"

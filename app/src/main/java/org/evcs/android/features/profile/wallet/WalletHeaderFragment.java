@@ -1,104 +1,92 @@
 package org.evcs.android.features.profile.wallet;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.base.core.fragment.BaseDialogFragment;
-import com.base.core.util.ToastUtils;
 
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
 import org.evcs.android.databinding.ViewWalletHeaderBinding;
 import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
-import org.evcs.android.model.shared.RequestError;
+import org.evcs.android.ui.fragment.ErrorFragment;
 
 import java.util.List;
 
-public class WalletHeaderView extends LinearLayout implements IPaymentMethodView {
+public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> implements IPaymentMethodView {
 
     RecyclerView mEndlessRecyclerView;
     FrameLayout mCreditCardsEmpty;
 
     private PaymentMethodAdapterV2 mCreditCardsAdapter;
     private boolean mInvalidateCreditCards = true;
-    private PaymentMethodPresenter mPresenter;
     private WalletHeaderInterface mParent;
 
-    public WalletHeaderView(Context context) {
-        super(context);
-        init(context);
-    }
+    public static WalletHeaderFragment newInstance() {
 
-    public WalletHeaderView(Context context, @Nullable AttributeSet attrs) {
-        super(context, attrs);
-        init(context);
-    }
+        Bundle args = new Bundle();
 
-    public WalletHeaderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context);
+        WalletHeaderFragment fragment = new WalletHeaderFragment();
+        fragment.setArguments(args);
+        return fragment;
     }
 
     public PaymentMethodPresenter createPresenter() {
         return new PaymentMethodPresenter(this, EVCSApplication.getInstance().getRetrofitServices());
     }
 
-    public void init(Context context) {
-        @NonNull ViewWalletHeaderBinding binding = ViewWalletHeaderBinding.inflate(LayoutInflater.from(context), this, true);
+    @Override
+    public int layout() {
+        return R.layout.view_wallet_header;
+    }
+
+    @Override
+    public void setUi(View v) {
+        super.setUi(v);
+        @NonNull ViewWalletHeaderBinding binding = ViewWalletHeaderBinding.bind(v);
         mEndlessRecyclerView = binding.creditCardsRecyclerView;
         mEndlessRecyclerView.setLayoutManager(
-                new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
+                new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         mCreditCardsEmpty = binding.creditCardViewEmpty;
         binding.walletAddNewPaymentMethod.setOnClickListener(view -> onAddPaymentMethodClicked());
+    }
 
-        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        setClipChildren(false);
-        setClipToPadding(false);
+    @Override
+    public void init() {
 
-        mPresenter = createPresenter();
+//        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
         if (mInvalidateCreditCards) {
             mCreditCardsAdapter = new PaymentMethodAdapterV2();
         }
         mEndlessRecyclerView.setAdapter(mCreditCardsAdapter);
-
-        populate();
-        setListeners();
     }
 
     public void populate() {
-        getPresenter().onViewCreated();
-        if (mInvalidateCreditCards) getPresenter().getCreditCards();
-    }
-
-    private PaymentMethodPresenter getPresenter() {
-        return mPresenter;
-    }
-
-    private String getString(@StringRes int id) {
-        return getContext().getString(id);
+        if (mInvalidateCreditCards) {
+            showProgressDialog();
+            getPresenter().getCreditCards();
+        }
     }
 
     public void setListeners() {
         mCreditCardsAdapter.setOnItemClickListener(new PaymentMethodAdapterV2.CreditCardListener() {
             @Override
-            public void onStarClicked(PaymentMethod item) {
+            public void onDetailClicked(@NonNull PaymentMethod item) {
+                mParent.goToDetail(item);
+            }
+
+            @Override
+            public void onStarClicked(@NonNull PaymentMethod item) {
                 showMakeDefaultPaymentMethodDialog(item);
             }
 
             @Override
-            public void onTrashClicked(PaymentMethod item) {
+            public void onTrashClicked(@NonNull PaymentMethod item) {
                 showRemovePaymentMethodDialog(item);
             }
         });
@@ -114,7 +102,7 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
         int height = mEndlessRecyclerView.getHeight();
         mCreditCardsAdapter.clear();
         if (creditCardInformationList.isEmpty()) {
-            mCreditCardsEmpty.setVisibility(VISIBLE);
+            mCreditCardsEmpty.setVisibility(View.VISIBLE);
             mCreditCardsEmpty.setMinimumHeight(height);
         } else {
             mCreditCardsAdapter.appendTopAll(creditCardInformationList);
@@ -122,7 +110,7 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     }
 
     private void showRemovePaymentMethodDialog(final PaymentMethod item) {
-        BaseDialogFragment dialog = new EVCSDialogFragment.Builder()
+        new EVCSDialogFragment.Builder()
             .setTitle(getContext().getString(R.string.payment_method_dialog_remove_title))
             .setSubtitle(getString(R.string.payment_method_dialog_remove_subtitle))
             .addButton(getString(R.string.payment_method_dialog_remove_button), new EVCSDialogFragment.OnClickListener() {
@@ -133,12 +121,11 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
                 }
             }/*, R.drawable.button_selector_ariel_red*/).showCancel(true)
             .setCancelable(true)
-            .build();
-        mParent.showDialog(dialog);
+            .show(getFragmentManager());
     }
 
     private void showMakeDefaultPaymentMethodDialog(final PaymentMethod item) {
-        BaseDialogFragment dialog = new EVCSDialogFragment.Builder()
+        new EVCSDialogFragment.Builder()
             .setSubtitle(getString(R.string.payment_method_dialog_default_subtitle))
             .addButton(getString(R.string.app_yes), new EVCSDialogFragment.OnClickListener() {
                 @Override
@@ -148,38 +135,30 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
                 }
             }).showCancel(getString(R.string.app_no))
         .setCancelable(true)
-        .build();
-        mParent.showDialog(dialog);
-    }
-
-    @Override
-    public void showError(@NonNull RequestError error) {
-        ToastUtils.show(error.getBody());
-//        EVCSDialogFragment dialog = new EVCSDialogFragment.Builder()
-//                .setTitle(error.getTitle())
-//                .setSubtitle(error.getBody())
-//                .addButton(getString(R.string.app_ok), EVCSDialogFragment.getDismissOnClickListener())
-//                .build();
-//        mParent.showDialog(dialog);
+        .show(getFragmentManager());
     }
 
     @Override
     public void onPaymentMethodsReceived(List<PaymentMethod> creditCardInformationList) {
+        hideProgressDialog();
         mInvalidateCreditCards = false;
         showAndSavePaymentList(creditCardInformationList);
     }
 
     @Override
     public void onPaymentMethodsNotReceived() {
+        hideProgressDialog();
     }
 
     @Override
     public void onPaymentMethodRemoved(@NonNull PaymentMethod item) {
+        hideProgressDialog();
         mCreditCardsAdapter.remove(item);
     }
 
     @Override
     public void onDefaultPaymentMethodSet(@NonNull PaymentMethod item) {
+        hideProgressDialog();
         mCreditCardsAdapter.setDefault(item);
     }
 
@@ -188,8 +167,8 @@ public class WalletHeaderView extends LinearLayout implements IPaymentMethodView
     }
 
     public interface WalletHeaderInterface {
-        void showDialog(BaseDialogFragment dialog);
-
         void onAddPaymentMethodSelected();
+
+        void goToDetail(PaymentMethod item);
     }
 }

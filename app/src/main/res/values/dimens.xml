@@ -32,12 +32,8 @@
     <dimen name="spacing_largest_extra">64dp</dimen>
 
     <!-- Px Spacing -->
-    <dimen name="spacing_ariel_dense">4dp</dimen>
     <dimen name="spacing_ariel_related">8dp</dimen>
-    <dimen name="spacing_ariel_leftpadding">12dp</dimen>
-    <dimen name="spacing_ariel_icons">16dp</dimen>
     <dimen name="spacing_ariel_different">28dp</dimen>
-    <dimen name="spacing_ariel_sections">56dp</dimen>
 
     <dimen name="padding_ariel_standard">16dp</dimen>
     <dimen name="padding_ariel_outer">0dp</dimen>
@@ -85,8 +81,8 @@
     <dimen name="profile_background_height">180dp</dimen>
     <dimen name="profile_avatar_size">80dp</dimen>
 
-    <!-- My Information -->
-    <dimen name="my_information_zip_width">160dp</dimen>
+    <!-- Toolbar -->
+    <dimen name="spacing_toolbar_bottom_extra">16dp</dimen>
 
     <!-- Drawer height -->
     <dimen name="drawer_height">192dp</dimen>

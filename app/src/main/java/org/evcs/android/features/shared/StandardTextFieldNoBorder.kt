@@ -21,13 +21,14 @@ open class StandardTextFieldNoBorder : StandardTextField {
     override fun init(context: Context) {
         super.init(context)
         mLayout.background = null
+        mLayout.setPadding(0, 0, 0, 0)
         mLabel.background = null
     }
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
         if (child is TextView) {
             val childParams = LayoutParams(params)
-            childParams.setMargins(0, resources.getDimension(R.dimen.spacing_small).toInt(), 0, 0)
+            childParams.setMargins(0, 0, 0, 0)
             childParams.addRule(BELOW, R.id.standard_text_field_label)
             mLayout.addView(child, index, childParams)
             mText = child

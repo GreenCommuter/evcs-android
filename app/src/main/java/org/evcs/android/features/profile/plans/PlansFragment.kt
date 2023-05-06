@@ -1,6 +1,5 @@
 package org.evcs.android.features.profile.plans
 
-import android.graphics.Color
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
@@ -10,7 +9,6 @@ import com.base.core.presenter.BasePresenter
 import com.google.android.material.tabs.TabLayout
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlansBinding
-import org.evcs.android.features.map.setStatusBarColor
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar2
 
@@ -63,8 +61,6 @@ class PlansFragment : ErrorFragment<BasePresenter<*>>() {
         mTabLayout.getTabAt(0)?.customView = getTab(tabStandard)
         mTabLayout.getTabAt(1)?.customView = getTab(tabHigh)
         mViewPager.currentItem = 0
-
-        setStatusBarColor(Color.TRANSPARENT)
     }
 
     override fun setListeners() {

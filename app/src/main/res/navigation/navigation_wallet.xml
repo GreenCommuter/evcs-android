@@ -12,10 +12,18 @@
         <action
             android:id="@+id/action_walletFragment_to_addCreditCardFragment"
             app:destination="@id/addCreditCardFragment" />
+        <action
+            android:id="@+id/action_walletFragment_to_showCreditCardFragment"
+            app:destination="@id/showCreditCardFragment" />
     </fragment>
     <fragment
         android:id="@+id/addCreditCardFragment"
         android:name="org.evcs.android.features.profile.wallet.AddCreditCardFragment"
         android:label="AddCreditCardFragment"
-        tools:layout="@layout/fragment_wallet"/>
+        tools:layout="@layout/fragment_add_credit_card"/>
+    <fragment
+        android:id="@+id/showCreditCardFragment"
+        android:name="org.evcs.android.features.profile.wallet.ShowCreditCardFragment"
+        android:label="ShowCreditCardFragment"
+        tools:layout="@layout/fragment_add_credit_card"/>
 </navigation>

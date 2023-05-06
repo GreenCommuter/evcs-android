@@ -27,6 +27,10 @@ class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodV
             override fun onTrashClicked() {
                 if (mListener != null) mListener!!.onTrashClicked(item)
             }
+
+            override fun onDetailClicked() {
+                if (mListener != null) mListener!!.onDetailClicked(item)
+            }
         })
     }
 
@@ -52,7 +56,8 @@ class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodV
     //        return null;
     //    }
     interface CreditCardListener {
-        fun onStarClicked(item: PaymentMethod?)
-        fun onTrashClicked(item: PaymentMethod?)
+        fun onStarClicked(item: PaymentMethod)
+        fun onTrashClicked(item: PaymentMethod)
+        fun onDetailClicked(item: PaymentMethod)
     }
 }

@@ -4,14 +4,14 @@
     android:id="@+id/fragment_add_credit_card_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/fragment_add_credit_card_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/braintree_title"
-        app:navigationIcon="@drawable/back_arrow"/>
+        app:title="@string/braintree_title" />
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,10 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginLeft="@dimen/padding_ariel_outer"
-            android:layout_marginRight="@dimen/padding_ariel_outer"
-            android:layout_marginBottom="@dimen/padding_ariel_outer"
-            android:padding="@dimen/padding_ariel_inner">
+            android:layout_marginTop="@dimen/spacing_toolbar_bottom_extra"
+            android:padding="@dimen/padding_ariel_standard">
 
             <org.evcs.android.features.profile.wallet.CreditCardView
                 android:id="@+id/fragment_braintree_credit_card"
@@ -36,7 +34,8 @@
             <org.evcs.android.features.shared.StandardTextField
                 android:id="@+id/fragment_braintree_card_name"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent">
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/StandardEditText"
@@ -51,7 +50,8 @@
             <org.evcs.android.features.shared.StandardTextField
                 android:id="@+id/fragment_braintree_card_number"
                 android:layout_height="wrap_content"
-                android:layout_width="match_parent">
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
 
                 <com.google.android.material.textfield.TextInputEditText
                     style="@style/StandardEditText"
@@ -67,7 +67,6 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_ariel_related"
                 android:orientation="horizontal">
 
                     <org.evcs.android.features.shared.StandardTextField
@@ -132,7 +131,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium_extra"
-                android:text="@string/add_credit_card_ok"
                 android:enabled="false"
                 android:textAllCaps="false"
                 style="@style/ButtonK.Orange"/>

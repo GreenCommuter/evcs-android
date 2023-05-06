@@ -37,7 +37,7 @@
 <!--    </style>-->
 
     <style name="AppTheme.Transparent">
-        <item name="android:windowTranslucentStatus">true</item>
+<!--        <item name="android:windowTranslucentStatus">true</item>-->
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 

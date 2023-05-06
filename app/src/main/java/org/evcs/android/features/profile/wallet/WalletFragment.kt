@@ -1,20 +1,21 @@
 package org.evcs.android.features.profile.wallet
 
-import com.base.core.fragment.BaseFragment
-import com.base.core.presenter.BasePresenter
-import org.evcs.android.features.profile.wallet.WalletHeaderView.WalletHeaderInterface
-import org.evcs.android.R
-import org.evcs.android.EVCSApplication
-import androidx.navigation.fragment.NavHostFragment
-import org.evcs.android.model.shared.RequestError
-import org.evcs.android.navigation.INavigationListener
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.NavHostFragment
 import com.base.core.fragment.BaseDialogFragment
+import com.base.core.fragment.BaseFragment
+import com.base.core.presenter.BasePresenter
+import org.evcs.android.EVCSApplication
+import org.evcs.android.R
 import org.evcs.android.databinding.FragmentWalletBinding
+import org.evcs.android.model.PaymentMethod
+import org.evcs.android.model.shared.RequestError
+import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.view.shared.EVCSToolbar2
+import org.evcs.android.util.Extras
 
-class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, IWalletView {
+class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.WalletHeaderInterface, IWalletView {
 
     companion object {
         fun newInstance(): WalletFragment {
@@ -40,8 +41,9 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
     override fun setUi(v: View) {
         super.setUi(v)
         val binding = FragmentWalletBinding.bind(v)
-        val headerView = binding.walletHeaderView
-        headerView.setParent(this)
+        val walletHeaderFragment = WalletHeaderFragment.newInstance()
+        walletHeaderFragment.setParent(this)
+        fragmentManager?.beginTransaction()?.replace(R.id.wallet_header_view, walletHeaderFragment)?.commit()
         mToolbar = binding.walletToolbar
     }
 
@@ -49,16 +51,17 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderInterface, 
         mToolbar.setNavigationOnClickListener { activity?.finish() }
     }
 
-    override fun showDialog(dialog: BaseDialogFragment<*>) {
-        dialog.show(fragmentManager)
-    }
-
     override fun onAddPaymentMethodSelected() {
         NavHostFragment.findNavController(this)
             .navigate(WalletFragmentDirections.actionWalletFragmentToAddCreditCardFragment())
     }
 
+    override fun goToDetail(item: PaymentMethod?) {
+        var args = Bundle()
+        args.putSerializable(Extras.CreditCard.CREDIT_CARD, item!!.card)
+        NavHostFragment.findNavController(this).navigate(R.id.showCreditCardFragment, args)
+    }
+
     override fun showError(requestError: RequestError) {}
 
-    interface IPaymentMethodsFragmentListener : INavigationListener
 }

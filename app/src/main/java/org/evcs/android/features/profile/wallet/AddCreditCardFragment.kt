@@ -1,40 +1,19 @@
 package org.evcs.android.features.profile.wallet
 
 import android.content.Intent
-import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.util.validator.ValidatorManager
-import org.evcs.android.R
-import androidx.annotation.CallSuper
-import android.graphics.Typeface
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
-import androidx.navigation.fragment.NavHostFragment
-import org.joda.time.format.DateTimeFormat
-import org.evcs.android.EVCSApplication
-import org.evcs.android.util.validator.CreditCardValidator
-import org.evcs.android.util.validator.DateTextInputValidator
-import org.evcs.android.util.validator.NonEmptyTextInputValidator
-import org.evcs.android.util.watchers.DateFormatWatcher
-import org.evcs.android.util.watchers.FourDigitCardFormatWatcher
-import org.evcs.android.model.shared.RequestError
+import androidx.annotation.CallSuper
 import com.base.core.util.ToastUtils
 import com.stripe.android.ApiResultCallback
 import com.stripe.android.SetupIntentResult
 import com.stripe.android.Stripe
 import com.stripe.android.model.*
 import org.evcs.android.Configuration
-import org.evcs.android.databinding.FragmentAddCreditCardBinding
-import org.evcs.android.model.CreditCard
-import org.evcs.android.navigation.INavigationListener
-import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.ui.view.shared.EVCSToolbar2
-import org.evcs.android.util.Extras
-import org.evcs.android.util.ViewUtils
-import org.evcs.android.util.validator.ZipCodeTextInputValidator
-import org.joda.time.LocalDate
-import org.joda.time.format.DateTimeFormatter
-import java.lang.Exception
+import org.evcs.android.R
+import org.evcs.android.util.validator.*
+import org.evcs.android.util.watchers.DateFormatWatcher
+import org.evcs.android.util.watchers.FourDigitCardFormatWatcher
 
 /**
  * Fragment that helps with the payment using BrainTree.
@@ -42,75 +21,31 @@ import java.lang.Exception
  *
  * @param <P> Presenter extending [AddCreditCardPresenter]
 </P> */
-class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
+class AddCreditCardFragment : AbstractCreditCardFragment(),
     AddCreditCardView {
 
-    private lateinit var mZipcode: StandardTextField
-    private lateinit var mCreditCardView: CreditCardView
-    private lateinit var mCardNumber: StandardTextField
-    private lateinit var mCardExpirationMonth: StandardTextField
-    private lateinit var mCvv: StandardTextField
-    private lateinit var mNext: Button
-    private lateinit var mToolbar: EVCSToolbar2
-
-    private var listener: IBrainTreeListener? = null
-
     private lateinit var mValidatorManager: ValidatorManager
-    private lateinit var mDateTimeFormatter: DateTimeFormatter
 
     private lateinit var mStripe: Stripe
 
     companion object {
-        fun newInstance(cc: CreditCard): AddCreditCardFragment {
+        fun newInstance(): AddCreditCardFragment {
             val args = Bundle()
-            args.putSerializable(Extras.CreditCard.CREDIT_CARD, cc)
             val fragment = AddCreditCardFragment()
             fragment.arguments = args
             return fragment
         }
     }
 
-    override fun layout(): Int {
-        return R.layout.fragment_add_credit_card
-    }
-
     @CallSuper
     override fun init() {
 //        showProgressDialog();
-        mCardNumber.editText!!.typeface = Typeface.MONOSPACE
-        mDateTimeFormatter = DateTimeFormat.forPattern("MM/yy")
+        super.init()
         presenter!!.getClientSecret();
     }
 
-    override fun createPresenter(): AddCreditCardPresenter<*> {
-        return AddCreditCardPresenter(this, EVCSApplication.getInstance().retrofitServices)
-    }
-
-    override fun setUi(v: View) {
-        super.setUi(v)
-        val binding = FragmentAddCreditCardBinding.bind(v)
-        mCreditCardView = binding.fragmentBraintreeCreditCard
-        mCardNumber = binding.fragmentBraintreeCardNumber
-        mCardExpirationMonth = binding.fragmentBraintreeCardExpirationMonth
-        mCvv = binding.fragmentBraintreeCardCvv
-        mZipcode = binding.fragmentBraintreeCardZipcode
-        mNext = binding.fragmentBraintreeNext
-        mToolbar = binding.fragmentAddCreditCardToolbar
-
-        ViewUtils.setAdjustResize(binding.fragmentAddCreditCardLayout)
-    }
-
-    override fun populate() {
-        val cc = arguments?.getSerializable(Extras.CreditCard.CREDIT_CARD) as CreditCard?
-        if (cc == null) return
-//        mCreditCardView.setCreditCard(cc)
-        mCardNumber.editText?.setText(cc.last4!!)
-        mCardExpirationMonth.editText?.setText(cc.expL)
-        mZipcode.editText?.setText("·····")
-        mCvv.editText?.setText("···")
-    }
-
     override fun setListeners() {
+        super.setListeners()
         mValidatorManager = ValidatorManager()
         mValidatorManager.addValidator(CreditCardValidator(mCardNumber))
         mValidatorManager.addValidator(
@@ -124,17 +59,11 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
         mCardExpirationMonth.editText!!.addTextChangedListener(DateFormatWatcher())
         mCardNumber.editText!!.addTextChangedListener(FourDigitCardFormatWatcher())
         mCreditCardView.watchNumber(mCardNumber.editText)
-        mNext.setOnClickListener { onNextClicked() }
-        mToolbar.setNavigationOnClickListener { finish() }
     }
 
-    private fun getDate() : LocalDate {
-        return mDateTimeFormatter.parseLocalDate(mCardExpirationMonth.text.toString())
-    }
-
-    private fun isDateValid(): Boolean {
-        return getDate() != null && getDate().isAfter(LocalDate())
-    }
+//    private fun getDate() : LocalDate {
+//        return mDateTimeFormatter.parseLocalDate(mCardExpirationMonth.text.toString())
+//    }
 
     /**
      * Method called when the payment was successfully processed.
@@ -144,12 +73,20 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
     //    protected void onNewNonceCreated(PaymentMethodNonce paymentMethodNonce) {
     //        ToastUtils.show(getString(R.string.profile_billing_information_braintree_success));
     //    }
-    override fun showError(requestError: RequestError) {
-        hideProgressDialog()
-        ToastUtils.show(requestError.body)
+
+    override fun getButtonColor(): ColorStateList {
+        return ColorStateList.valueOf(resources.getColor(R.color.evcs_primary_600))
     }
 
-    fun onNextClicked() {
+    override fun getButtonText(): String {
+        return getString(R.string.add_credit_card_ok)
+    }
+
+    override fun areFieldsEditable(): Boolean {
+        return true
+    }
+
+    override fun onNextClicked() {
         showProgressDialog()
         mStripe = Stripe(requireContext(), Configuration.STRIPE_KEY)
 
@@ -162,11 +99,6 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
 
         val zipcode = mZipcode.text.toString()
         mStripe.confirmSetupIntent(this, presenter.getConfirmParams(card, zipcode))
-    }
-
-    override fun onMakeDefaultFinished() {
-        hideProgressDialog()
-        listener!!.onAddCreditCardFragmentFinished()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -195,14 +127,4 @@ class AddCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
         })
     }
 
-    fun finish() {
-        NavHostFragment.findNavController(this).popBackStack()
-    }
-
-    interface IBrainTreeListener : INavigationListener {
-        /**
-         * Method called when the [AddCreditCardFragment] finishes.
-         */
-        fun onAddCreditCardFragmentFinished()
-    }
 }

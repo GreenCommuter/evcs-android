@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/profile_account_vehicle_info"
-        app:navigationIcon="@drawable/back_arrow"/>
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"/>
 
     <LinearLayout
         android:orientation="vertical"

@@ -29,6 +29,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         InnerMapFragment.LocationClickListener, FilterDialogFragment.FilterDialogListener {
 
     private var mIsMapShowing: Boolean = true
+    private lateinit var mStatusBarSpacing: View
     private lateinit var mToolbarBackground: View
     private lateinit var mMapLayout: FrameLayout
     private lateinit var mToggleButton: TextView
@@ -61,6 +62,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mFilterButton = binding.mapFilter
         mBackButton = binding.fragmentMainMapBack
         mToolbarBackground = binding.fragmentSearchLocationAddressParent
+        mStatusBarSpacing = binding.fragmentMainMapStatusBar
         mMapLayout = binding.fragmentMainMapLayout
     }
 
@@ -81,12 +83,14 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mListFragment.setLocationClickListener(this)
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
-        setStatusBarColor(Color.TRANSPARENT)
-
         if ((activity as MainActivity).isBottomOfStack) return
         mBackButton.visibility = View.VISIBLE
         mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
         setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))
+    }
+
+    private fun setStatusBarColor(color: Int) {
+        mStatusBarSpacing.setBackgroundColor(color)
     }
 
     fun isMapShowing(): Boolean {
@@ -218,13 +222,4 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         super.onResume()
         if (mIsMapShowing) showMap() else hideMap()
     }
-}
-
-fun Fragment.setStatusBarColor(color: Int) {
-    val window: Window = requireActivity().window
-    window.statusBarColor = color
-    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-    window.decorView.systemUiVisibility =
-        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 }

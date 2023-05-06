@@ -9,15 +9,15 @@
         android:id="@+id/fragment_account_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/activity_account_title"
-        app:navigationIcon="@drawable/back_arrow"/>
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
+        app:title="@string/activity_account_title"/>
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/evcs_white"
-        android:padding="@dimen/spacing_medium_extra">
+        android:padding="@dimen/padding_ariel_standard">
 
         <org.evcs.android.ui.view.profile.ListButtonView
             android:id="@+id/fragment_account_name"

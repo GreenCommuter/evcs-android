@@ -23,9 +23,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/loction_list_empty"
+            android:text="@string/location_list_empty"
             android:gravity="center"
-            android:textColor="@color/evcs_gray_400"
+            android:textColor="@color/evcs_black"
             style="@style/Body.Medium.Bold"/>
 
         <TextView
@@ -33,7 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_large_extra"
             android:layout_gravity="center"
-            android:text="Open Settings"
+            android:text="Update Location Permissions"
             android:gravity="center"
             style="@style/ButtonK.Blue"
             android:visibility="gone"/>

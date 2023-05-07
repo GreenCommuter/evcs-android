@@ -1,11 +1,11 @@
 package org.evcs.android.features.map
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
@@ -21,7 +21,9 @@ import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.util.*
+import org.evcs.android.util.Extras
+import org.evcs.android.util.FragmentLocationReceiver
+import org.evcs.android.util.LocationHelper
 
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
@@ -37,8 +39,6 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private lateinit var mListFragment: LocationListFragment
     private lateinit var mBackButton: ImageView
     private lateinit var mFilterButton: ImageButton
-
-    private var mLocationDialog: LocationSliderFragment? = null
 
     fun newInstance(): MainMapFragment {
         val args = Bundle()

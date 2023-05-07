@@ -27,10 +27,6 @@ class ChangeCarFragment : AbstractCarSelectionFragment<CarSelectionPresenter<*>>
         return mBinding.fragmentChangeCarModel
     }
 
-    override fun getYearField(): DropdownWithLabel {
-        return mBinding.fragmentChangeCarYear
-    }
-
     override fun getButton(): TextView {
         return mBinding.fragmentChangeCarSave
     }

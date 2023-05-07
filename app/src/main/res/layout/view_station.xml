@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/spacing_large"
     android:layout_marginBottom="@dimen/spacing_large"
-    android:background="@drawable/layout_corners_rounded_blue_outline"
+    android:background="@drawable/layout_station_view_background"
     android:orientation="vertical">
 
     <TextView

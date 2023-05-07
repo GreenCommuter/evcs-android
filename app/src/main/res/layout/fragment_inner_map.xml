@@ -17,6 +17,7 @@
         android:layout_marginEnd="@dimen/spacing_large"
         android:elevation="@dimen/spacing_medium"
         app:cardCornerRadius="@dimen/radius_text"
+        android:backgroundTint="@color/color_selector_fab_white"
         android:visibility="gone">
 
         <ImageView

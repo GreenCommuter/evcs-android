@@ -1,136 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true"
-    android:background="@color/evcs_light_grey">
+    android:background="@color/evcs_white"
+    android:orientation="vertical">
 
-    <LinearLayout
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_medium"
-        android:padding="@dimen/spacing_medium_extra"
-        android:background="@drawable/layout_corners_rounded_white"
-        android:orientation="vertical">
+        custom:title="@string/sign_in_title"/>
 
-        <TextView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/sign_in_title"
-            android:textAllCaps="true"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:gravity="center"
-            android:padding="@dimen/spacing_medium_extra"
-            android:textSize="@dimen/font_huge"
-            android:textColor="@color/evcs_dark_grey"
-            style="@style/TitleFont.Large"/>
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/padding_ariel_standard"
+            android:paddingTop="64dp"
+            android:paddingBottom="34dp"
+            android:orientation="vertical">
 
-        <org.evcs.android.features.shared.StandardTextField
-            android:id="@+id/fragment_sign_in_email_input"
-            android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
-            android:layout_marginBottom="@dimen/spacing_medium_extra"
-            custom:label="@string/sign_in_email"
-            style="@style/TextInputStyle"
-            android:layout_height="wrap_content">
+            <org.evcs.android.features.shared.StandardTextField
+                android:id="@+id/fragment_sign_in_email_input"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                custom:label="@string/register_email"
+                style="@style/TextInputStyle"
+                android:layout_height="wrap_content">
 
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Roboto.Body.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress" />
+
+            </org.evcs.android.features.shared.StandardTextField>
+
+            <org.evcs.android.features.shared.PasswordTextField
+                android:id="@+id/fragment_sign_in_password_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                custom:label="@string/register_password"
+                style="@style/TextInputStyle">
 
-        </org.evcs.android.features.shared.StandardTextField>
+                <com.google.android.material.textfield.TextInputEditText
+                    style="@style/Roboto.Body.Grey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
 
-        <org.evcs.android.features.shared.PasswordTextField
-            android:id="@+id/fragment_sign_in_password_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
-            custom:label="@string/sign_in_password"
-            style="@style/TextInputStyle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </org.evcs.android.features.shared.PasswordTextField>
-
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium_extra"
-            android:layout_gravity="center">
+            </org.evcs.android.features.shared.PasswordTextField>
 
             <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large"
                 android:layout_gravity="center">
 
-                <org.evcs.android.features.shared.ThinButton
+                <TextView
                     android:id="@+id/fragment_sign_in_button"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="normal"
+                    android:layout_margin="0dp"
                     android:enabled="false"
-                    style="@style/Button.Black"
+                    style="@style/ButtonK.Orange"
                     android:text="@string/sign_in_button" />
+
+                <ProgressBar
+                    android:id="@+id/fragment_sign_in_progress_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/spacing_huge"
+                    android:indeterminateTint="@color/evcs_white"
+                    android:layout_gravity="center"
+                    android:visibility="invisible"/>
 
             </FrameLayout>
 
-            <ProgressBar
-                android:id="@+id/fragment_sign_in_progress_bar"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/spacing_huge"
-                android:indeterminateTint="@color/evcs_white"
-                android:layout_gravity="center"
-                android:visibility="invisible"/>
-
-        </FrameLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:orientation="horizontal">
-
             <TextView
+                android:id="@+id/fragment_sign_in_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginEnd="@dimen/spacing_small"
-                android:text="@string/sign_in_goto_sign_up"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                android:text="@string/sign_in_forgot_password"
                 android:textAppearance="@style/Roboto.Body.Grey" />
 
-            <TextView
-                android:id="@+id/fragment_sign_in_sign_up"
+            <include android:id="@+id/fragment_sign_in_social"
+                layout="@layout/fragment_sign_in_social"/>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/auth_register"
-                android:textAppearance="@style/Roboto.Body.Grey"/>
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:gravity="bottom"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spacing_small"
+                    android:text="@string/sign_in_goto_sign_up"
+                    android:textAppearance="@style/Roboto.Body.Grey" />
+
+                <TextView
+                    android:id="@+id/fragment_sign_in_sign_up"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/auth_register"
+                    android:textAppearance="@style/Roboto.Body.Grey"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/fragment_sign_in_forgot_password"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:text="@string/sign_in_forgot_password"
-            android:textAppearance="@style/Roboto.Body.Grey" />
+    </ScrollView>
 
-        <include android:id="@+id/fragment_sign_in_social"
-            layout="@layout/fragment_sign_in_social"/>
-
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

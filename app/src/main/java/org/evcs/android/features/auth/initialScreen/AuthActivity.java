@@ -58,6 +58,11 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
 //    }
 
     @Override
+    public void onNetworkError() {
+        //Handled by fragment
+    }
+
+    @Override
     protected int getNavGraphId() {
         return R.navigation.navigation_auth;
     }

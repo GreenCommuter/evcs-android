@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.view.View.INVISIBLE
 import android.view.View.VISIBLE
-import android.widget.Button
+import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.KeyboardUtils
 import org.evcs.android.EVCSApplication
@@ -24,9 +24,9 @@ import org.evcs.android.util.validator.TextInputLayoutInterface
 class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     private lateinit var mEmailInputLayout: StandardTextField
     private lateinit var mPasswordInputLayout: StandardTextField
-    private lateinit var mLoginButton: Button
-    private lateinit var mLoginFacebook: Button
-    private lateinit var mLoginGoogle: Button
+    private lateinit var mLoginButton: View
+    private lateinit var mLoginFacebook: ImageButton
+    private lateinit var mLoginGoogle: ImageButton
     private lateinit var binding: FragmentSignInBinding
 
     /**
@@ -124,12 +124,12 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
 
     override fun onTokenSent() {
         showLoading(false)
-        if (hasCompletedRegistration()) {
+//        if (hasCompletedRegistration()) {
             (activity as AuthActivity).onAuthFinished()
-        } else {
-            findNavController()
-                .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragmentYourCar())
-        }
+//        } else {
+//            findNavController()
+//                .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragmentYourCar())
+//        }
     }
 
     private fun hasCompletedRegistration(): Boolean {

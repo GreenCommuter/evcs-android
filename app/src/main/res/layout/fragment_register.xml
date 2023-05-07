@@ -12,41 +12,19 @@
         android:paddingLeft="@dimen/spacing_large"
         android:paddingRight="@dimen/spacing_large">
 
-        <TextView
-            android:id="@+id/fragment_register_step"
+        <org.evcs.android.ui.view.shared.EVCSToolbar2
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"/>
-
-        <TextView
-            style="@style/TitleFont.Large"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
-            android:gravity="center"
-            android:padding="@dimen/spacing_large"
-            android:text="@string/register_title"
-            android:textAllCaps="false"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:gravity="center"
-            android:text="@string/register_subtitle"
-            style="@style/Roboto.Body"
-            />
+            custom:title="@string/register_title"
+            android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"/>
 
         <org.evcs.android.features.shared.StandardTextField
             android:id="@+id/fragment_register_first_name_input"
             style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
-            custom:label="First Name *">
+            custom:label="First Name">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/Roboto.Body.Grey"
@@ -60,10 +38,8 @@
             style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
-            custom:label="Last Name *">
+            custom:label="Last Name">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/Roboto.Body.Grey"
@@ -77,28 +53,8 @@
             style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
-            custom:label="@string/sign_in_email">
-
-            <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
-
-        </org.evcs.android.features.shared.StandardTextField>
-
-        <org.evcs.android.features.shared.StandardTextField
-            android:id="@+id/fragment_register_confirm_email_input"
-            style="@style/TextInputStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
-            android:layout_marginBottom="@dimen/spacing_medium_extra"
-            custom:label="@string/register_email_confirm">
+            custom:label="@string/register_email">
 
             <com.google.android.material.textfield.TextInputEditText
                 style="@style/Roboto.Body.Grey"
@@ -113,8 +69,6 @@
             style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:layout_marginEnd="@dimen/spacing_medium_extra"
             android:layout_marginBottom="@dimen/spacing_medium_more"
             custom:label="@string/register_password">
 
@@ -127,42 +81,27 @@
 
         <TextView
             android:id="@+id/fragment_register_password_hint"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
             android:layout_marginBottom="@dimen/spacing_large_extra"
-            style="@style/Roboto.BodySmall"/>
+            android:gravity="center"
+            style="@style/Body.Small"/>
 
-        <org.evcs.android.features.shared.ThinButton
+        <TextView
             android:id="@+id/fragment_register_button"
-            style="@style/Button.Black"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:layout_gravity="center"
             android:enabled="false"
-            android:text="@string/register_button" />
+            style="@style/ButtonK.Orange"
+            android:text="@string/app_continue" />
 
-        <TextView
+        <include layout="@layout/fragment_sign_in_social"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_gotologin"
-            android:layout_gravity="center"
-            style="@style/Roboto.Body.Grey"
-            />
-
-        <TextView
-            android:id="@+id/fragment_register_gotologin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large"
-            android:layout_gravity="center"
-            android:text="Log in"
-            android:textColor="@color/evcs_orange"
-            style="@style/RobotoBold.Body"/>
-
-        <include layout="@layout/fragment_sign_in_social"/>
+            android:layout_marginBottom="@dimen/spacing_large_extra"/>
 
     </LinearLayout>
 

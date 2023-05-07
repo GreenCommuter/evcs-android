@@ -62,7 +62,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/spacing_big_extra"
         android:elevation="@dimen/spacing_medium"
-        app:cardCornerRadius="@dimen/radius_text">
+        app:cardCornerRadius="@dimen/radius_text"
+        android:backgroundTint="@color/color_selector_fab_white">
 
         <TextView
             android:id="@+id/map_toggle"

@@ -37,7 +37,7 @@
     <!-- Auth -->
     <string name="auth_sign_in">Log In</string>
     <string name="auth_register">Sign Up</string>
-    <string name="auth_or">Or</string>
+    <string name="auth_or">or continue with</string>
 
     <!-- Choose Plan -->
     <string name="choose_plan_title">Choose plan</string>
@@ -48,13 +48,17 @@
     <string name="choose_plan_premium_title">Premium membership</string>
     <string name="choose_plan_premium_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
 
+    <!-- Gatecode dialog -->
+    <string name="gatecode_dialog_title">Access requirement</string>
+    <string name="gatecode_dialog_subtitle">This location requires a gate code to access it. You can always view the code in the location details.</string>
+
     <!-- Sign In -->
     <string name="sign_in_title">Login</string>
-    <string name="sign_in_email">e-mail Address *</string>
+    <string name="sign_in_email">e-mail Address</string>
 <!--    <string name="sign_in_email">e-mail Address *</string>-->
-    <string name="sign_in_name">First Name *</string>
-    <string name="sign_in_last_name">Last Name *</string>
-    <string name="sign_in_password">Password *</string>
+    <string name="sign_in_name">First Name</string>
+    <string name="sign_in_last_name">Last Name</string>
+    <string name="sign_in_password">Password</string>
     <string name="sign_in_forgot_password">Forgot your Password?</string>
     <string name="sign_in_button">Sign in</string>
     <string name="sign_in_social">Sign in with Google or Facebook account</string>
@@ -69,11 +73,11 @@
     <string name="forgot_password_wrong_email">Invalid email address</string>
 
     <!-- Register -->
-    <string name="register_title">Finish setting up your account</string>
+    <string name="register_title">Sign up</string>
     <string name="register_subtitle">Sign up with your name and email</string>
     <string name="register_email">Email</string>
-    <string name="register_email_confirm">Confirm E-mail *</string>
-    <string name="register_password">Password *</string>
+    <string name="register_email_confirm">Confirm E-mail</string>
+    <string name="register_password">Password</string>
     <string name="register_password_confirm">Re-enter the password</string>
     <string name="register_password_hint">Must be at least %1d characters long</string>
     <string name="register_button">Create account</string>
@@ -110,7 +114,7 @@
     </string-array>
     <string name="my_information_birthdate">Birthdate</string>
     <string name="my_information_street_address">Street Address</string>
-    <string name="my_information_zip_code">Zip Code *</string>
+    <string name="my_information_zip_code">Zip Code</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
 
@@ -441,9 +445,10 @@
     <string name="notifications_channel_description">All notifications sent by the app</string>
 
     <string name="register_your_car_title">Your car</string>
-    <string name="register_your_car_subtitle">Knowing what type of car you drive, we can personalize your experience with EVCS</string>
+    <string name="register_your_car_subtitle">Your vehicle information helps us improve our services and helps us troubleshoot issues.</string>
     <string name="register_your_car_year">Year</string>
-    <string name="register_your_car_model">Model *</string>
+    <string name="register_your_car_model">Model</string>
+    <string name="register_your_car_make">Make</string>
 
     <string name="fragment_register_cell_phone_title">One last thing</string>
     <string name="fragment_register_cell_phone_subtitle">Let\'s validate your account using your phone number</string>
@@ -464,7 +469,7 @@
     <string name="search_activity_hint">Location or zipcode</string>
 
     <!-- Location List -->
-    <string name="loction_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
+    <string name="location_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
     <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
     <!-- Location View -->

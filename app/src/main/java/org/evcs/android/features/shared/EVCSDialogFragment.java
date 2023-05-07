@@ -269,7 +269,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
         /**
          * Adds a new {@link Button} to the dialog with the text and click listener passed as argument.
-         * You can set whether you want te button text as upper case or not.
+         * You can set whether you want the button text as upper case or not.
          * If not upper case is used, the button will not change the text.
          *
          * @param text Text to show in the button

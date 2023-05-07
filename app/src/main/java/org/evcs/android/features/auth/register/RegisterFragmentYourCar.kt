@@ -3,9 +3,7 @@ package org.evcs.android.features.auth.register
 import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
-import androidx.appcompat.widget.AppCompatButton
 import androidx.core.widget.doOnTextChanged
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -53,11 +51,7 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
         return mBinding.fragmentRegisterYourCarModel
     }
 
-    override fun getYearField(): DropdownWithLabel {
-        return mBinding.fragmentRegisterYourCarYear
-    }
-
-    override fun getButton(): AppCompatButton {
+    override fun getButton(): View {
         return mBinding.fragmentRegisterYourCarButton
     }
 
@@ -67,7 +61,6 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
             return
         }
         super.init()
-        mBinding.fragmentRegisterStep.text = String.format(getString(R.string.fragment_register_step), 2)
     }
 
     private fun hasCompletedCarScreen(): Boolean {

@@ -3,6 +3,7 @@ package org.evcs.android.model;
 import org.joda.time.DateTime;
 
 public class SubscriptionStatus {
+    public String id;
     public String planName;
     public boolean issue;
     public String issueMessage;
@@ -14,7 +15,6 @@ public class SubscriptionStatus {
 //                    "renewal_period": "month",
 //                    "price": "49.90",
 //                    "remaining_charges": null,
-//                    "remaining_kwh": 12,
 //                    "plan_icon_url": "https://media.evcs.com/plan.png"
     //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
     public String status;
@@ -24,6 +24,25 @@ public class SubscriptionStatus {
     public Integer remainingKwh;
     public DateTime nextRemainingKwhRestoration;
     public Plan plan;
+    //on_trial_period
+
+    //        "issue_url": null,
+//        "issue_url_title": null,
+//        "issue_title": null,
+//        "referral_link": "https://dev.evcs.com/refer/abc123",
+//        "renewal_period": "month",
+//        "price": 49.99,
+//        "remaining_charges": 8,
+//        "unlimited": false,
+//        "plan_id": 2,
+    public DateTime activeSince;
+    //        "valid_from": null,
+    public DateTime validTo;
+//        "lockup_time": 10,
+//        "min_valid_charge_duration": 5,
+//        "monthly_kwh": 10,
+//        "weekly_kwh": null,
+//        "price_per_kwh": 9,
 
     //TODO: pero si es null el remaining puede ser unlimited
     //        "monthly_kwh":null,
@@ -45,26 +64,3 @@ public class SubscriptionStatus {
         return "suspended".equals(status);
     }
 }
-//        "plan_id":3,
-//        "status":"active",
-//        "active_since":"2022-10-17T13:10:16.805-07:00",
-//        "plan_public":true,
-//        "valid_from":"2022-10-11T13:10:00.000-07:00",
-//        "valid_to":null,
-//        "canceled_at":null,
-//        "unlimited":true,
-//        "monthly_charges":null,
-//        "lockup_time":30,
-//        "min_valid_charge_duration":30,
-//        "referral_link":"http://subscriptions.evcs.com/refer/39",
-//        "remaining_charges_restored_at":"2023-01-13T00:02:03.639-08:00",
-//        "next_remaining_charge_restoration":"2023-02-13T00:02:03.639-08:00",
-//        "available_locations":[],
-//        "remaining_kwh_restored_at":"2023-01-13T00:02:03.639-08:00",
-//        "next_remaining_kwh_restoration":"2023-02-13T00:02:03.639-08:00",
-//        "start_hour":null,
-//        "finish_hour":null,
-//        "price_per_kwh":"0.00",
-//        "on_trial_period":true,
-//        "current_bc_kwh_consumed":0,
-//        "kwh_usage":0

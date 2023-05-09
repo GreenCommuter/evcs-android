@@ -9,7 +9,7 @@ public class Plan {
 //            "monthly_price":"199.00",
 //            "yearly_price":null,
 //            "weekly_price":null,
-//            "icon_url":"",
+    public String iconUrl;
 //            "short_description":"",
 //            "long_description":null,
 //            "price_per_kwh":"0.00",
@@ -17,3 +17,4 @@ public class Plan {
 //            "weekly_kwh":null,
 //            "trial_days":7
 }
+//        "pay_per_charge": false,

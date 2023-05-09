@@ -10,6 +10,7 @@ import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.PaymentMethodsService
 import org.evcs.android.network.service.StationsService
+import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.presenter.MultipleRequestsManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
@@ -33,7 +34,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     }
 
     private fun getSubscriptionStatus() {
-        mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStatus(),
+        mMultipleRequestsManager.addRequest(getService(SubscriptionService::class.java).getStatus(),
                 object : AuthCallback<SubscriptionStatusWrapper?>(this) {
                     override fun onResponseSuccessful(response: SubscriptionStatusWrapper?) {
                         mStatus = response

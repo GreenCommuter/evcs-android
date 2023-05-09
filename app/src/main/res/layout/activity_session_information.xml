@@ -171,7 +171,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_large_extra"
                 android:text="@string/session_information_receipt"
-                style="@style/ButtonK.Blue"/>
+                style="@style/ButtonK.BlueOutline"/>
 
 
             <TextView

@@ -1,5 +1,7 @@
 package org.evcs.android.model.user
 
+import org.evcs.android.model.Subscription
+import org.evcs.android.model.SubscriptionStatus
 import org.joda.time.DateTime
 import java.io.Serializable
 
@@ -18,4 +20,7 @@ open class User : Serializable {
         get() = "$firstName $lastName"
     val isPhoneVerified: Boolean
         get() = phoneVerifiedAt != null
+
+    val activeSubscription: Subscription? = null
+    val pendingSubscription: Subscription? = null
 }

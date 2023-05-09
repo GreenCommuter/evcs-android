@@ -10,19 +10,7 @@
 
         <include
             android:id="@+id/image_checkbox"
-            layout="@layout/view_green_checkbox" />
-
-        <com.facebook.drawee.view.SimpleDraweeView
-            android:id="@+id/image_checkbox_image"
-            android:layout_width="@dimen/image_checkbox_image_size"
-            android:layout_height="@dimen/image_checkbox_image_size"
-            android:layout_marginStart="@dimen/spacing_medium_extra"
-            fresco:roundAsCircle="true"
-            fresco:actualImageScaleType="centerCrop"
-            fresco:placeholderImage="@drawable/ic_profile_placeholder"
-            fresco:placeholderImageScaleType="fitCenter"
-            fresco:roundingBorderWidth="@dimen/app_avatar_border_width"
-            fresco:roundingBorderColor="@color/evcs_white" />
+            layout="@layout/view_checkbox" />
 
         <TextView
             android:id="@+id/image_checkbox_description"
@@ -30,16 +18,8 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/spacing_medium_extra"
-            android:singleLine="true"
-            style="@style/SansationRegular.MediumMore.White" />
+            style="@style/Body.Medium" />
 
     </LinearLayout>
-
-    <View
-        android:id="@+id/image_checkbox_separator"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/spacing_tiniest"
-        android:background="@color/evcs_grey"
-        android:visibility="gone"/>
 
 </merge>

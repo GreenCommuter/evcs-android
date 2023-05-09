@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/cancel_plan_trial_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
+        app:title="@string/cancel_plan_title"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_ariel_standard">
+
+            <com.facebook.drawee.view.SimpleDraweeView
+                android:id="@+id/cancel_plan_image"
+                android:layout_width="match_parent"
+                android:layout_height="215dp"
+                android:layout_marginBottom="@dimen/spacing_large"/>
+
+            <TextView
+                android:id="@+id/cancel_plan_bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_plan_sad"
+                android:layout_marginBottom="@dimen/spacing_large"
+                style="@style/Body.Large.Bold"/>
+
+            <FrameLayout
+                android:id="@+id/cancel_plan_child_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/cancel_plan_confirmation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_plan_confirmation"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                style="@style/Body.Medium"/>
+            
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <TextView
+                android:id="@+id/cancel_plan_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel_plan_continue"
+                android:layout_marginStart="0dp"
+                android:layout_marginBottom="@dimen/spacing_large"
+                style="@style/ButtonK.Danger"/>
+
+            <TextView
+                android:id="@+id/cancel_plan_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="0dp"
+                android:text="@string/cancel_plan_cancel"
+                style="@style/ButtonK.BlueOutline"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

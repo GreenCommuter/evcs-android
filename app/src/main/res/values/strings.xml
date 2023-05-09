@@ -143,7 +143,6 @@
     <string name="profile_account_plans">Plans</string>
     <string name="profile_account_payment_methods">Payment Methods</string>
 
-    <string name="show_password">Show</string>
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
     <string name="profile_avatar_change_library_button">Choose from library</string>
@@ -243,18 +242,13 @@
     <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
     <string name="notifications_downgraded">You were downgraded. Please check your license information.</string>
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
-    <string name="notifications_mvr_approved">Congratulations! Your MVR has been approved. You can now start using our services.</string>
     <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>
-    <string name="notifications_drivers_license_information_filled_out">We are now reviewing your driving record. It should take 24–48 hours. Look for an update shortly.</string>
     <string name="notifications_plug_in_reminder">Did you remember to plug in the car?</string>
     <string name="notifications_vanpool_already_left">Your vanpool already left today.</string>
-    <string name="notifications_user_added">%@ has joined your vanpool.</string>
-    <string name="notifications_user_quit">%@ has quit your vanpool.</string>
     <string name="notifications_vanpool_problems">We had a problem with the car. For more information contact us.</string>
     <string name="notifications_car_assigned">Awesome! A car has been assigned to your vanpool.</string>
     <string name="notifications_user_not_coming">%@ is not coming today.</string>
     <string name="notifications_user_late">%@ is running a little late.</string>
-    <string name="notifications_driver_not_coming">The assigned driver can´t make it on %@. You will be the driver that day.</string>
     <string name="notifications_vanpool_created">Your vanpool has been created.</string>
     <string name="notifications_vanpool_in_next_minutes">Your vanpool will start in %@ minutes.</string>
     <string name="notifications_vanpool_preapproved">Your vanpool has been preapproved.</string>
@@ -263,15 +257,10 @@
     <string name="notifications_vanpool_payment_required">Your vanpool has been approved and the payment is required.</string>
     <string name="notifications_invitation">%@ has invited you to a vanpool.</string>
     <string name="notifications_forgot_password">You have requested to change your password. Please check your email.</string>
-    <string name="notifications_cancellation_confirmation">As per your request, your reservation has been canceled.</string>
-    <string name="notifications_reservation_reminder">Your reservation starts in %@ minutes.</string>
     <string name="notifications_reservation_ending_soon">Your reservation ends in %@ minutes. Please head back to the parking lot to return the car.</string>
     <string name="notifications_you_left_vanpool">You have left your vanpool.</string>
     <string name="notifications_complete_vanpool_poll">Please complete your vanpool checklist.</string>
     <string name="notifications_complete_carshare_poll">Please go to My Trips and complete your booking checklist.</string>
-
-    <!-- My Vanpools -->
-    <string name="my_vanpools_title">Vanpools you applied</string>
 
     <!-- Vanpool Travel Information View -->
     <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
@@ -293,24 +282,6 @@
     <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
     <string name="vanpool_status_active">Active</string>
     <string name="vanpool_status_inactive">Inactive</string>
-
-    <!-- Vanpool Checklist -->
-    <string name="vanpool_checklist_title">Car checklist</string>
-    <string name="vanpool_checklist_hood_text">You must answer this checklist to be able to finish your ride.</string>
-    <string name="vanpool_checklist_damage_item_question">Any vehicle damage to report?</string>
-    <string name="vanpool_checklist_damage_item_note">Note</string>
-    <string name="vanpool_checklist_clean_item_question">Is the vehicle dirty?</string>
-    <string name="vanpool_checklist_clean_item_note">Note</string>
-    <string name="vanpool_checklist_equipment_item_question">Is all vehicle equipment still on board?</string>
-    <string name="vanpool_checklist_equipment_item_select_missing">Please select any missing equipment</string>
-    <string name="vanpool_checklist_equipment_item_select_missing_subtitle">Tap the picture to see what each item looks like</string>
-    <string name="vanpool_checklist_equipment_charging_kit">Vehicle charging kit</string>
-    <string name="vanpool_checklist_equipment_safety_equipment">Safety equipment</string>
-    <string name="vanpool_checklist_equipment_charging_cards">Charging cords</string>
-    <string name="vanpool_checklist_equipment_vehicle_documents">Vehicle documents</string>
-    <string name="vanpool_checklist_passengers_item_question">Are all passengers today?</string>
-    <string name="vanpool_checklist_passengers_item_not_riding">Who is not riding?</string>
-    <string name="vanpool_checklist_equipment_format">%1$s</string>
 
     <!-- Vanpool Pre-Checklist -->
     <string name="vanpool_pre_checklist_unlock_car">Unlock</string>
@@ -339,7 +310,6 @@
     <string name="vanpool_ongoing_ride_spinner">Finishing the ride, please wait</string>
     <string-array name="vanpool_ongoing_ride_spinner">
         <item>Beginning the process to finish your ride, please wait</item>
-        <item>Running security checks</item>
     </string-array>
     <string name="ongoing_ride_offline">You need to be online to perform this action</string>
     <string name="ongoing_ride_offline_2">You are offline. Some features may not be available</string>
@@ -518,5 +488,38 @@
     <string name="session_information_receipt">View receipt</string>
     <string name="session_information_help">Need help? Contact Customer Support</string>
     <string name="session_information_title">Session detail</string>
+
+    <!-- Manage Plan-->
+    <string name="manage_plan_enrolled">Enrolled</string>
+    <string name="manage_plan_free_trial">Free Trial</string>
+    <string name="manage_plan_payment_details">Payment details</string>
+    <string name="manage_plan_change">Change plan</string>
+    <string name="manage_plan_cancel">Cancel Plan</string>
+    <string name="manage_plan_payment_info">Payment info</string>
+    <string name="manage_plan_change_pm">Change</string>
+
+    <!-- Cancel Plan -->
+    <string name="cancel_plan_sad">We\'re sad to see you go</string>
+    <string name="cancel_plan_subscription_details">Subscription Details</string>
+    <string name="cancel_plan_title">Cancel plan</string>
+    <string name="cancel_plan_continue">Continue Cancellation</string>
+    <string name="cancel_plan_cancel">Keep Plan</string>
+    <string name="cancel_plan_confirmation">Do you want to continue canceling?</string>
+    <string name="cancel_plan_subscription_end">Subscription End Date</string>
+    <string name="cancel_plan_active_days">Active Days</string>
+    <string name="cancel_plan_billing_cycle">Billing Cycle</string>
+    <string name="cancel_plan_active_until">This will end your monthly subscription to the %1$s plan.\nYour plan will stay active through the remainder of your last billing cycle and end on %2$s.</string>
+    <string name="cancel_plan_days_remaining">%d days remaining</string>
+    <string name="cancel_plan_trial_cancel">Keep Trial</string>
+    <string name="cancel_plan_trial_bold">You have %d days left in your Standard Anytime trial</string>
+    <string name="cancel_plan_trial_warning">Canceling your free trials means that you will immediately lose access to your plan benefits.</string>
+    <string name="cancel_plan_trial_confirmation">Do you want to keep your Trial?</string>
+
+    <!-- Survey-->
+    <string name="survey_comment_hint">Provide any other details you would like to share with us.</string>
+    <string name="survey_title">Plan Canceled</string>
+    <string name="survey_love_feedback">We’d love your feedback!</string>
+    <string name="survey_subtitle">We’re always looking to improve your experience. Please let us know why you’ve decided to cancel your plan:</string>
+    <string name="survey_confirm">Confirm cancelation</string>
 
 </resources>

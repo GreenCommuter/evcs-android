@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/cancel_plan_active_until"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="@string/cancel_plan_active_until"
+        android:layout_marginBottom="@dimen/spacing_medium_extra"
+        style="@style/Body.Medium"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/cancel_plan_subscription_details"
+        android:layout_marginBottom="@dimen/spacing_medium_extra"
+        style="@style/Title.Medium"/>
+
+    <org.evcs.android.features.shared.StandardTextFieldNoBorder
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:label="@string/cancel_plan_billing_cycle">
+
+        <TextView
+            android:id="@+id/cancel_plan_billing_cycle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="01/01/2023-01/31/2023"
+            style="@style/Body.Medium"/>
+
+    </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+    <org.evcs.android.features.shared.StandardTextFieldNoBorder
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:label="@string/cancel_plan_active_days">
+
+        <TextView
+            android:id="@+id/cancel_plan_active_days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="15 days remaining"
+            style="@style/Body.Medium"/>
+
+    </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+    <org.evcs.android.features.shared.StandardTextFieldNoBorder
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium_extra"
+        app:label="@string/cancel_plan_subscription_end">
+
+        <TextView
+            android:id="@+id/cancel_plan_subscription_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="01/31/2023"
+            style="@style/Body.Medium"/>
+
+    </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+</LinearLayout>

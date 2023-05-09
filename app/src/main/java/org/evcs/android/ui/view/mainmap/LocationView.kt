@@ -40,6 +40,19 @@ class LocationView : LinearLayout {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
+
+        mBinding.viewLocationConnectors.removeAllViews()
+        location.stations!!.forEach { station ->
+            val v = StationView(context, station)
+            mBinding.viewLocationConnectors.addView(v)
+        }
+
+        if (location.comingSoon!!) {
+            mBinding.viewLocationGo.visibility = View.GONE
+            mBinding.viewLocationStartCharging.visibility = View.GONE
+            return
+        }
+
         if (location.gatecode != null) {
             mBinding.viewLocationGatecode.text = "Gatecode: " + location.gatecode
             mBinding.viewLocationGatecode.visibility = VISIBLE
@@ -54,11 +67,6 @@ class LocationView : LinearLayout {
         }
 
         //        mBinding.activityLocationHint.text = response?
-        mBinding.viewLocationConnectors.removeAllViews()
-        location.stations!!.forEach { station ->
-            val v = StationView(context, station)
-            mBinding.viewLocationConnectors.addView(v)
-        }
 
     }
 

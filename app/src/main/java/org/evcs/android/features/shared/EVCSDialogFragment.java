@@ -124,7 +124,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     protected Button getButton(final String label) {
         Button button = new Button(new ContextThemeWrapper(getContext(), R.style.Button_Orange));
         button.setTextColor(ContextCompat
-            .getColorStateList(getContext(), R.color.button_text_color_selector_orange));
+            .getColorStateList(getContext(), R.color.button_text_color_selector_filled));
         button.setBackground(getResources().getDrawable(mButtons.get(label).background));
         button.setAllCaps(mButtons.get(label).upperCase);
         LinearLayout.LayoutParams layoutParams =

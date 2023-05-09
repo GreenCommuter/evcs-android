@@ -63,7 +63,7 @@
 
     <style name="Button.Green">
         <item name="android:background">@drawable/button_selector_green</item>
-        <item name="android:textColor">@color/button_text_color_selector_orange</item>
+        <item name="android:textColor">@color/button_text_color_selector_filled</item>
     </style>
 
     <style name="Button.Black.RightBullet">
@@ -96,7 +96,7 @@
     <style name="Button.Orange">
         <item name="android:background">@drawable/layout_corners_rounded_orange_gradient</item>
         <item name="android:textAllCaps">false</item>
-        <item name="android:textColor">@color/button_text_color_selector_orange</item>
+        <item name="android:textColor">@color/button_text_color_selector_filled</item>
         <item name="android:gravity">center</item>
     </style>
 
@@ -111,7 +111,7 @@
 
     <style name="ButtonK.Orange">
         <item name="android:background">@drawable/layout_corners_rounded_orange</item>
-        <item name="android:textColor">@color/button_text_color_selector_orange</item>
+        <item name="android:textColor">@color/button_text_color_selector_filled</item>
     </style>
 
     <style name="ButtonK.OrangeOutline">
@@ -121,9 +121,19 @@
 
     <style name="ButtonK.Blue">
         <item name="android:background">@drawable/layout_corners_rounded_blue</item>
-        <item name="android:textColor">@color/button_text_color_selector_orange</item>
+        <item name="android:textColor">@color/button_text_color_selector_filled</item>
         <item name="android:padding">12dp</item>
         <item name="android:drawablePadding">@dimen/spacing_medium_more</item>
+    </style>
+
+    <style name="ButtonK.BlueOutline">
+        <item name="android:background">@drawable/layout_corners_rounded_blue_outline</item>
+        <item name="android:textColor">@color/button_text_color_selector_blue_outline</item>
+    </style>
+
+    <style name="ButtonK.Danger">
+        <item name="android:background">@drawable/layout_corners_rounded_danger</item>
+        <item name="android:textColor">@color/button_text_color_selector_filled</item>
     </style>
 
     <style name="ButtonK.BlackOutline">

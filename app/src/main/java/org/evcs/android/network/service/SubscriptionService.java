@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface SubscriptionService {
 
-    @POST("/members/v1/survey_items")
+    @GET("/members/v1/survey_items")
     Call<ArrayList<SurveyItem>> getQuestions();
 
     @POST("/members/v1/subscription_surveys")

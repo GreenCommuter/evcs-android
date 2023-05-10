@@ -20,6 +20,7 @@ abstract class AbstractCancelPlanFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun init() {
+        mBinding.cancelPlanChildLayout.addView(getChildLayout(mBinding.cancelPlanChildLayout))
     }
 
     override fun setUi(v: View) {
@@ -30,11 +31,11 @@ abstract class AbstractCancelPlanFragment : ErrorFragment<BasePresenter<*>>() {
         super.setListeners()
         mBinding.cancelPlanImage.setImageURI(UserUtils.getLoggedUser().activeSubscription?.plan?.iconUrl)
         mBinding.cancelPlanBold.text = getBoldText()
-        mBinding.cancelPlanChildLayout.addView(getChildLayout(mBinding.cancelPlanChildLayout))
 
         mBinding.cancelPlanContinue.setOnClickListener { onContinueClicked() }
+        mBinding.cancelPlanCancel.setOnClickListener { requireActivity().finish() }
         mBinding.cancelPlanCancel.text = getCancelText()
-        mBinding.cancelPlanTrialToolbar.setNavigationOnClickListener { requireActivity().finish() }
+        mBinding.cancelPlanTrialToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mBinding.cancelPlanConfirmation.text = getConfirmationText()
     }
 

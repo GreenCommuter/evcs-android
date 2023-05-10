@@ -2,11 +2,13 @@ package org.evcs.android.features.subscriptions
 
 import android.app.Activity
 import android.view.View
+import android.widget.LinearLayout
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentSurveyBinding
 import org.evcs.android.model.SurveyItem
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.ViewUtils.setMargins
 
 class SurveyFragment : ErrorFragment<SurveyPresenter>(), SurveyView {
 
@@ -44,14 +46,18 @@ class SurveyFragment : ErrorFragment<SurveyPresenter>(), SurveyView {
             presenter?.sendSurveyResults(mCheckedItems, mOtherId, mBinding.surveyComments.text)
             presenter?.cancelSubscription()
         }
+        mBinding.surveyCancel.setOnClickListener { requireActivity().finish() }
     }
 
     override fun showQuestions(response: ArrayList<SurveyItem>) {
+        hideProgressDialog()
         response.forEach { item ->
             if (item.text == "Other") {
                 mOtherId = item.id!!
             } else {
+                //Set margins should be defined in viewutils as extension
                 val view = ImageCheckBoxLayout(requireContext())
+                view.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
                 view.setDescription(item.text)
 //                mViewIds[view] = item.id!!
                 view.setOnClickListener { toggle(item.id!!) }

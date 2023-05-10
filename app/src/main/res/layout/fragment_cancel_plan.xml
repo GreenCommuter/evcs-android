@@ -24,7 +24,8 @@
     <org.evcs.android.features.shared.StandardTextFieldNoBorder
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:label="@string/cancel_plan_billing_cycle">
+        app:label="@string/cancel_plan_billing_cycle"
+        android:layout_marginBottom="@dimen/spacing_medium_extra">
 
         <TextView
             android:id="@+id/cancel_plan_billing_cycle"
@@ -38,7 +39,8 @@
     <org.evcs.android.features.shared.StandardTextFieldNoBorder
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:label="@string/cancel_plan_active_days">
+        app:label="@string/cancel_plan_active_days"
+        android:layout_marginBottom="@dimen/spacing_medium_extra">
 
         <TextView
             android:id="@+id/cancel_plan_active_days"

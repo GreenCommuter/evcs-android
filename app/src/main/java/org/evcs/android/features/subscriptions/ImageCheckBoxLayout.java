@@ -52,7 +52,6 @@ public class ImageCheckBoxLayout extends LinearLayout {
         @NonNull LayoutImageCheckboxBinding binding =
                 LayoutImageCheckboxBinding.inflate(LayoutInflater.from(getContext()), this);
 
-
         mCheckbox = binding.imageCheckbox.getRoot();
         mDescriptionText = binding.imageCheckboxDescription;
 

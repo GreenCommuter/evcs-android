@@ -20,47 +20,47 @@
 
         <org.evcs.android.features.shared.StandardTextField
             android:id="@+id/fragment_register_first_name_input"
-            style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
+            style="@style/TextInputStyle"
             custom:label="First Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/Body.Medium.Gray800"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 
         <org.evcs.android.features.shared.StandardTextField
             android:id="@+id/fragment_register_last_name_input"
-            style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
+            style="@style/TextInputStyle"
             custom:label="Last Name">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                style="@style/Body.Medium.Gray800"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 
         <org.evcs.android.features.shared.StandardTextField
             android:id="@+id/fragment_register_email_input"
-            style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
+            style="@style/TextInputStyle"
             custom:label="@string/register_email">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                style="@style/Body.Medium.Gray800"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 
@@ -73,9 +73,9 @@
             custom:label="@string/register_password">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                style="@style/Body.Medium.Gray800"/>
 
         </org.evcs.android.features.shared.PasswordTextField>
 

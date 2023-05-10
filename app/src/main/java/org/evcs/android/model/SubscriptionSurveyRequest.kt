@@ -1,7 +1,5 @@
 package org.evcs.android.model
 
-import android.text.Editable
-
 class SubscriptionSurveyRequest {
     var subscriptionId: String? = null
     var items: ArrayList<SurveyAnswer> = ArrayList()

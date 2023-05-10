@@ -500,7 +500,7 @@
     <string name="cancel_plan_sad">We\'re sad to see you go</string>
     <string name="cancel_plan_subscription_details">Subscription Details</string>
     <string name="cancel_plan_title">Cancel plan</string>
-    <string name="cancel_plan_continue">Continue Cancellation</string>
+    <string name="cancel_plan_continue">Continue Cancelation</string>
     <string name="cancel_plan_cancel">Keep Plan</string>
     <string name="cancel_plan_confirmation">Do you want to continue canceling?</string>
     <string name="cancel_plan_subscription_end">Subscription End Date</string>
@@ -513,9 +513,9 @@
     <string name="cancel_plan_trial_warning">Canceling your free trials means that you will immediately lose access to your plan benefits.</string>
     <string name="cancel_plan_trial_confirmation">Do you want to keep your Trial?</string>
 
-    <!-- Survey-->
+    <!-- Survey -->
     <string name="survey_comment_hint">Provide any other details you would like to share with us.</string>
-    <string name="survey_title">Plan Canceled</string>
+    <string name="survey_title">Plan Canceled?</string>
     <string name="survey_love_feedback">We’d love your feedback!</string>
     <string name="survey_subtitle">We’re always looking to improve your experience. Please let us know why you’ve decided to cancel your plan:</string>
     <string name="survey_confirm">Confirm cancelation</string>

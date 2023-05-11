@@ -29,44 +29,8 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TitleFont.MediumMore">
-         <item name="android:textSize">@dimen/font_medium_more</item>
-    </style>
-
-    <style name="TitleFont.MediumMore.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="TitleFont.MediumMore.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra">
-         <item name="android:textSize">@dimen/font_medium_extra</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
     <style name="TitleFont.Large">
         <item name="android:textSize">@dimen/font_huge</item>
-    </style>
-
-    <style name="TitleFont.Large.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="TitleFont.Large.White">
-        <item name="android:textColor">@color/evcs_white</item>
     </style>
 
     <style name="Roboto" parent="@android:style/TextAppearance">

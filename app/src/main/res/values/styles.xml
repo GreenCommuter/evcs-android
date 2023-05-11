@@ -156,9 +156,20 @@
         <item name="android:minHeight">52dp</item>
     </style>
 
-
     <style name="Button.Ariel.Grey">
         <item name="android:background">@drawable/button_selector_grey_border</item>
+    </style>
+
+    <style name="Chip" parent="Label.Medium">
+    </style>
+
+    <style name="Chip.Small">
+        <item name="android:background">@drawable/layout_chip</item>
+        <item name="android:textColor">@color/evcs_white</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:paddingLeft">12dp</item>
+        <item name="android:paddingRight">12dp</item>
     </style>
 
     <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">

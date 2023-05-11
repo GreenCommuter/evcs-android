@@ -40,7 +40,7 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
 
     public void onAuthFinished() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra(Extras.Root.ID, mId);
         intent.putExtra(Extras.Root.OPENING_KEY, true);
         startActivity(intent);

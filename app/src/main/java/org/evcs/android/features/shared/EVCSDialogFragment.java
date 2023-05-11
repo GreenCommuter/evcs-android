@@ -145,8 +145,8 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
     protected Button getCancelButton(String cancel) {
         Button button = new Button(getContext());
-        button.setBackgroundColor(mTransparent);
-        button.setTextColor(mGrey);
+        button.setBackground(getResources().getDrawable(R.drawable.layout_corners_rounded_blue_outline));
+        button.setTextColor(getResources().getColor(R.color.button_text_color_selector_blue_outline));
         button.setAllCaps(false);
         LinearLayout.LayoutParams layoutParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

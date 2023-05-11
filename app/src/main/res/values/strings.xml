@@ -86,12 +86,6 @@
     <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
     <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
 
-    <!-- Choose service -->
-    <string name="choose_service_title">Choose Service</string>
-    <string name="choose_service_vanpooling_title">Vanpooling</string>
-    <string name="choose_service_carsharing_title">Car Sharing</string>
-    <string name="choose_service_corporate_title">Corporate</string>
-
     <!--Placeholder Fragment-->
     <string name="placeholder_no_internet_dialog_title">Connection Lost</string>
     <string name="placeholder_no_internet_dialog_subtitle">We will try again as soon as the connection reestablishes</string>
@@ -142,6 +136,12 @@
     <string name="profile_account_vehicle_info">Vehicle Information</string>
     <string name="profile_account_plans">Plans</string>
     <string name="profile_account_payment_methods">Payment Methods</string>
+    <string name="profile_version">Version %s</string>
+    <string-array name="profile_explore_plans_text">
+        <item>Get</item>
+        <item>30 days free</item>
+        <item>when you upgrade to Standard Anytime plan!</item>
+    </string-array>
 
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
@@ -497,6 +497,11 @@
     <string name="manage_plan_cancel">Cancel Plan</string>
     <string name="manage_plan_payment_info">Payment info</string>
     <string name="manage_plan_change_pm">Change</string>
+    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s</string>
+    <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
+    <string name="manage_plan_days_remaining">%d days remaining</string>
+    <string name="manage_plan_activate">Activate Plan</string>
+    <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
 
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>
@@ -514,6 +519,8 @@
     <string name="cancel_plan_trial_bold">You have %d days left in your Standard Anytime trial</string>
     <string name="cancel_plan_trial_warning">Canceling your free trials means that you will immediately lose access to your plan benefits.</string>
     <string name="cancel_plan_trial_confirmation">Do you want to keep your Trial?</string>
+    <string name="cancellation_dialog_title">Your %s subscription has been canceled.</string>
+    <string name="cancellation_dialog_subtitle">You will still receive discounted “Pay As You Go” pricing with when this billing cycle ends.\n\nYou can always reactivate the plan if you change your mind.</string>
 
     <!-- Survey -->
     <string name="survey_comment_hint">Provide any other details you would like to share with us.</string>

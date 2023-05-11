@@ -201,4 +201,21 @@
         <item name="itemTextAppearance">@style/Roboto.ProfileMenu</item>
     </style>
 
+    <style name="BottomNavigationView">
+        <item name="android:layout_height">86dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:theme">@style/SelectableItemTheme</item>
+        <item name="itemIconTint">@color/icon_color_selector</item>
+        <item name="itemTextColor">@color/icon_color_selector</item>
+        <item name="itemTextAppearanceActive">@style/BottomNavigation.ActiveItemTextAppearance</item>
+        <item name="backgroundTint">@color/evcs_white</item>
+        <item name="elevation">4dp</item>
+    </style>
+
+    <style name="Body.Medium.WithCheck">
+        <item name="android:drawableStart">@drawable/ic_check</item>
+        <item name="android:drawablePadding">@dimen/spacing_medium_extra</item>
+    </style>
+
 </resources>

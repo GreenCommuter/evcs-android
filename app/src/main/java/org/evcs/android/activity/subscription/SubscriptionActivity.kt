@@ -89,7 +89,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsViewAllPlans.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsViewAllPlans2.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsActivate.setOnClickListener {  }
-        mBinding.activitySubscriptionsChangePaymentMethod.setOnClickListener {  }
+        mBinding.activitySubscriptionsPaymentInfo.setOnChangeClickListener {  }
         mBinding.activitySubscriptionsToolbar.setNavigationOnClickListener { finish() }
     }
 

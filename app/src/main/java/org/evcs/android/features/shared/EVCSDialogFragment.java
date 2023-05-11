@@ -143,6 +143,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         return button;
     }
 
+    //TODO: volver a la versión anterior y en el que necesita el blue outline (subscription cancel) ponerle close
     protected Button getCancelButton(String cancel) {
         Button button = new Button(getContext());
         button.setBackground(getResources().getDrawable(R.drawable.layout_corners_rounded_blue_outline));

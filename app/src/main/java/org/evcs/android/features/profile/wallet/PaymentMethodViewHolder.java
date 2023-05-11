@@ -5,17 +5,17 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.evcs.android.databinding.ViewCreditCardWrapperBinding;
+import org.evcs.android.databinding.ViewCreditCardItemBinding;
 import org.evcs.android.model.PaymentMethod;
 
-public class PaymentMethodViewHolderV2 extends RecyclerView.ViewHolder {
+public class PaymentMethodViewHolder extends RecyclerView.ViewHolder {
 
     private CreditCardViewListener mListener;
-    @NonNull ViewCreditCardWrapperBinding mBinding;
+    @NonNull ViewCreditCardItemBinding mBinding;
 
-    public PaymentMethodViewHolderV2(View itemView) {
+    public PaymentMethodViewHolder(View itemView) {
         super(itemView);
-        mBinding = ViewCreditCardWrapperBinding.bind(itemView);
+        mBinding = ViewCreditCardItemBinding.bind(itemView);
     }
 
     public void setPaymentMethod(PaymentMethod creditCardInformation) {

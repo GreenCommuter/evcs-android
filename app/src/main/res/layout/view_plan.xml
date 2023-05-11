@@ -42,6 +42,7 @@
                 android:padding="@dimen/spacing_medium"
                 android:textColor="@color/evcs_primary_800"
                 tools:text="Most popular"
+                android:visibility="invisible"
                 style="@style/Body.Small.Bold"/>
 
             <TextView
@@ -75,7 +76,6 @@
                 android:textColor="@color/evcs_gray_600"
                 tools:text="Approximately 760 miles"
                 style="@style/Body.Small"/>
-
 
             <TextView
                 android:id="@+id/view_plan_flat_rate"

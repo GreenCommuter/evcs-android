@@ -12,7 +12,6 @@ import org.evcs.android.databinding.FragmentPlansBinding
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar2
-import java.util.ArrayList
 
 class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
 
@@ -35,7 +34,8 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         super.setUi(v)
         val binding = FragmentPlansBinding.bind(v)
         mToolbar = binding.fragmentPlansToolbar2
-
+        mTabLayout = binding.fragmentPlansTabLayout
+        mViewPager = binding.fragmentPlansViewPager
     }
 
     override fun init() {
@@ -49,7 +49,7 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
 //                    .setParent(this)
             mStandardMileageFragment =
                 PlansTabFragment.newInstance()//.setListener(mFragmentListener)
-//            mCorporateTripsFragment.setParent(this)
+//                    .setParent(this)
         }
         mPagerAdapter = BaseFragmentStatePagerAdapter(childFragmentManager)
         mPagerAdapter.addItem(mStandardMileageFragment, tabStandard)

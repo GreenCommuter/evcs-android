@@ -298,7 +298,6 @@
     <string name="vanpool_ongoing_ride_call_us">Call us</string>
     <string name="vanpool_ongoing_ride_control_lock">Lock</string>
     <string name="vanpool_ongoing_ride_control_unlock">Unlock</string>
-    <string name="vanpool_ongoing_ride_control_lock_unlock">Lock / Unlock</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
@@ -501,6 +500,10 @@
     <string name="manage_plan_activate">Activate Plan</string>
     <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
 
+    <!-- Get Plan -->
+    <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://learntodroid.com">Terms of Use</a>,
+        <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a></string>
+
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>
     <string name="cancel_plan_subscription_details">Subscription Details</string>
@@ -511,14 +514,16 @@
     <string name="cancel_plan_subscription_end">Subscription End Date</string>
     <string name="cancel_plan_active_days">Active Days</string>
     <string name="cancel_plan_billing_cycle">Billing Cycle</string>
-    <string name="cancel_plan_active_until">This will end your monthly subscription to the %1$s plan.\nYour plan will stay active through the remainder of your last billing cycle and end on %2$s.</string>
+    <string name="cancel_plan_active_until">This will end your monthly subscription to the %1$s plan.\n
+        Your plan will stay active through the remainder of your last billing cycle and end on %2$s.</string>
     <string name="cancel_plan_days_remaining">%d days remaining</string>
     <string name="cancel_plan_trial_cancel">Keep Trial</string>
     <string name="cancel_plan_trial_bold">You have %d days left in your Standard Anytime trial</string>
     <string name="cancel_plan_trial_warning">Canceling your free trials means that you will immediately lose access to your plan benefits.</string>
     <string name="cancel_plan_trial_confirmation">Do you want to keep your Trial?</string>
     <string name="cancellation_dialog_title">Your %s subscription has been canceled.</string>
-    <string name="cancellation_dialog_subtitle">You will still receive discounted “Pay As You Go” pricing with when this billing cycle ends.\n\nYou can always reactivate the plan if you change your mind.</string>
+    <string name="cancellation_dialog_subtitle">You will still receive discounted “Pay As You Go” pricing with when this billing cycle ends.\n\n
+        You can always reactivate the plan if you change your mind.</string>
 
     <!-- Survey -->
     <string name="survey_comment_hint">Provide any other details you would like to share with us.</string>

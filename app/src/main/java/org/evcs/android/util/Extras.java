@@ -58,4 +58,8 @@ public class Extras {
     public static class CreditCard {
         public static final String CREDIT_CARD = "credit_card";
     }
+
+    public static class PlanActivity {
+        public static final String PLAN = "plan";
+    }
 }

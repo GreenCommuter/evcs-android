@@ -35,5 +35,7 @@ class EVCSToolbar2 : LinearLayout {
         mBinding.toolbarEvcsNavbutton.setOnClickListener { function.invoke() }
     }
 
-//    fun setTitle(resId: Int) {}
+    fun setTitle(title: String) {
+        mBinding.toolbarEvcsTitle.text = title
+    }
 }

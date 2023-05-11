@@ -1,5 +1,6 @@
 package org.evcs.android.network.service;
 
+import org.evcs.android.model.SubscriptionRequest;
 import org.evcs.android.model.SubscriptionStatusWrapper;
 import org.evcs.android.model.SubscriptionSurveyRequest;
 import org.evcs.android.model.SurveyItem;
@@ -19,6 +20,12 @@ public interface SubscriptionService {
 
     @POST("/members/v1/subscription_surveys")
     Call<Void> createSubscriptionSurvey(@Body SubscriptionSurveyRequest request);
+
+    @POST("/members/v1/subscriptions")
+    Call<Void> createSubscription(@Body SubscriptionRequest subscriptionRequest);
+
+    @POST("/members/v1/subscriptions/{id}/change_plan")
+    Call<Void> changePlan(@Query("id") String subscriptionId, @Body SubscriptionRequest subscriptionRequest);
 
     @POST("/members/v1/subscriptions/{id}/cancel")
     Call<Void> cancelSubscription(@Query("id") String id);

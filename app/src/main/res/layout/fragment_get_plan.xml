@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/get_plan_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/padding_ariel_standard"
+            android:orientation="vertical">
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:label="Plan"
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
+
+                <TextView
+                    android:id="@+id/get_plan_plan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="Standard anytime"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/get_plan_free_trial"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                app:label="30 Day Offer - New Members Only">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00 per month"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/get_plan_monthly_rate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:label="Monthly Rate - Starting 5/2/2023"
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="$49.99 per month"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_big"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/get_plan_flat_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium_extra"
+                    tools:text="Flat rate for Level 2 and DC fast $0.29/kWh after 200 kWh exceeded"
+                    style="@style/Body.Medium.WithCheck"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="No commitments. Cancel anytime."
+                    style="@style/Body.Medium.WithCheck"/>
+
+            </LinearLayout>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/get_plan_payg_start_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:label="Start date"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="04/30/2023"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/get_plan_previous_plan_active_until"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_big"
+                app:label="Previous plan active until"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="04/30/2023"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/manage_plan_payment_info"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                style="@style/Label.Small"/>
+
+            <org.evcs.android.ui.view.shared.PaymentMethodView
+                android:id="@+id/get_plan_payment_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <org.evcs.android.features.shared.StandardTextField
+                android:id="@+id/get_plan_payment_coupon_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="Coupon code"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextField>
+
+            <TextView
+                android:id="@+id/get_plan_monthly_cost_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_big"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                tools:text="Monthly Cost (Starting 5/2/2023)"
+                style="@style/Label.Small"/>
+
+            <RelativeLayout
+                android:id="@+id/get_plan_cost_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subtotal"
+                    style="@style/Body.Medium"/>
+
+                <TextView
+                    android:id="@+id/get_plan_subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium_extra"
+                    android:layout_alignParentEnd="true"
+                    tools:text="$49.99"
+                    style="@style/Body.Medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:layout_below="@id/get_plan_subtotal"
+                    android:text="Total"
+                    style="@style/Body.Medium.Bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="$49.99"
+                    android:layout_below="@id/get_plan_subtotal"
+                    android:layout_alignParentEnd="true"
+                    style="@style/Body.Medium.Bold"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/get_plan_today_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:padding="@dimen/spacing_medium_extra"
+                android:background="#FFFAF8">
+
+                <TextView
+                    android:id="@+id/get_plan_today_cost_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Today's cost"
+                    android:layout_marginBottom="@dimen/spacing_medium_extra"
+                    style="@style/Label.Medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Subtotal"
+                    android:layout_below="@id/get_plan_today_cost_title"
+                    style="@style/Body.Medium"/>
+
+                <TextView
+                    android:id="@+id/get_plan_today_subtotal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium_extra"
+                    android:layout_below="@id/get_plan_today_cost_title"
+                    android:layout_alignParentEnd="true"
+                    android:text="$0.00"
+                    style="@style/Body.Medium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total"
+                    android:layout_below="@id/get_plan_today_subtotal"
+                    style="@style/Body.Medium.Bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/get_plan_today_subtotal"
+                    android:layout_alignParentEnd="true"
+                    android:text="$0.00"
+                    style="@style/Body.Medium.Bold"/>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/get_plan_tandc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_big"
+                android:gravity="center"
+                android:textColor="@color/evcs_black"
+                tools:text="By clicking ‘Agree &amp; Subscribe’, you agree to our Terms of Use, Subscription Terms and Conditions and Privacy Policy."
+                style="@style/Body.ExtraSmall"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        style="@style/BottomNavigationView">
+
+        <TextView
+            android:id="@+id/bottom_navigation_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_medium_extra"
+            android:layout_marginRight="@dimen/spacing_medium_extra"
+            android:layout_gravity="center"
+            style="@style/ButtonK.Orange"/>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</LinearLayout>

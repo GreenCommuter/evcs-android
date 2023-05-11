@@ -44,6 +44,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
         mRecyclerView = binding.fragmentChargingHistoryRecycler
         mSwipeRefreshLayout = binding.fragmentChargingHistorySwipeRefresh
         mEmptyView = binding.fragmentChargingHistoryEmptyView
+        binding.fragmentChargingHistoryToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     override fun init() {
@@ -71,6 +72,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
                 startActivity(intent)
             }
         })
+
     }
 
     override fun createPresenter(): ChargingHistoryPresenter {

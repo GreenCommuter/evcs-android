@@ -21,8 +21,8 @@ class CancelPlanFragment : AbstractCancelPlanFragment() {
         mBinding.cancelPlanSubscriptionEnd.text = DateTimeFormat.forPattern("MM/dd/yyyy")
                 .print(subscription.renewalDate)
 //        mBinding.cancelPlanBillingCycle
-        val activeDays = Period(DateTime(), subscription.renewalDate)
-        mBinding.cancelPlanActiveDays.text = String.format(getString(R.string.cancel_plan_days_remaining), activeDays.days)
+        val activeDays = subscription.activeDaysLeft
+        mBinding.cancelPlanActiveDays.text = String.format(getString(R.string.cancel_plan_days_remaining), activeDays)
         val dateTimeFormat = DateTimeFormat.forPattern("MMM d, yyyy")
         val activeUntil = String.format(getString(R.string.cancel_plan_active_until), subscription.planName,
                 dateTimeFormat.print(subscription.renewalDate))

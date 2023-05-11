@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <ProgressBar
+        android:id="@+id/activity_subscriptions_progress"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:layout_marginBottom="@dimen/spacing_medium_extra"
+        android:progress="10"
+        android:progressTint="@color/evcs_secondary_700"
+        android:progressBackgroundTint="#E7EFF6"
+        style="@android:style/Widget.ProgressBar.Horizontal"/>
+    <!--        android:indeterminate="false"-->
+
+    <TextView
+        android:id="@+id/activity_subscriptions_consumption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="85/200 kWh consumed this month"
+        android:textColor="@color/evcs_black"
+        style="@style/Body.Medium"/>
+
+</LinearLayout>

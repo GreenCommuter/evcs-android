@@ -7,11 +7,13 @@ import com.facebook.AccessToken
 import com.facebook.login.LoginManager
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.iid.FirebaseInstanceId
+import com.rollbar.android.Rollbar
 import okhttp3.ResponseBody
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.model.push.DeviceToken
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.AuthUser
+import org.evcs.android.model.user.User
 import org.evcs.android.model.user.UserRequestFacebook
 import org.evcs.android.model.user.UserRequestGoogle
 import org.evcs.android.network.service.DeviceTokensService
@@ -108,9 +110,8 @@ open class AuthPresenter<T>(viewInstance: T, services: RetrofitServices?) :
                 .addDeviceToken(device)
                 .enqueue(object : Callback<Void?> {
                     override fun onResponse(call: Call<Void?>, response: Response<Void?>) {
-//                        val user: User = UserUtils.getLoggedUser()
-//                        Rollbar.setPersonData(Integer.toString(user.getId()), user.getFirstName(),
-//                                user.getEmail())
+                        val user: User = UserUtils.getLoggedUser()
+                        Rollbar.setPersonData(user.id.toString(), user.firstName, user.email)
                         view.onTokenSent()
                     }
 

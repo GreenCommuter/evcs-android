@@ -56,8 +56,8 @@ public interface UserService {
     @POST("/members/v1/users/verify_phone")
     Call<Void> sendCode(@Body CodeWrapper code);
 
-//    @GET("/api/v1/users/me")
-//    Call<User> getCurrentUser();
+    @GET("/api/v1/users/me")
+    Call<User> getCurrentUser();
 
     @PUT("/members/v1/users/{id}")
     Call<User> updateUser(@Path("id") int id, @Body ZipCodeWrapper zipcode);

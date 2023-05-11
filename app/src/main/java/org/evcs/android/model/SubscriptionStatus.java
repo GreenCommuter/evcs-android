@@ -1,6 +1,12 @@
 package org.evcs.android.model;
 
+import androidx.annotation.NonNull;
+
+import com.google.gson.annotations.SerializedName;
+
+import org.evcs.android.util.StringUtils;
 import org.joda.time.DateTime;
+import org.joda.time.Period;
 
 public class SubscriptionStatus {
     public String id;
@@ -8,43 +14,53 @@ public class SubscriptionStatus {
     public boolean issue;
     public String issueMessage;
     public String accountUrl;
-//            "id": 670
 //                    "issue_title": null
 //                    "issue_url_title": null
 //                    "issue_url": null,
-//                    "renewal_period": "month",
-//                    "price": "49.90",
-//                    "remaining_charges": null,
+    public String renewalPeriod;
+    public float price;
 //                    "plan_icon_url": "https://media.evcs.com/plan.png"
     //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
-    public String status;
+    public Status status;
     public int kwhUsage;
     public DateTime renewalDate;
     public boolean planCoversTime;
     public Integer remainingKwh;
     public DateTime nextRemainingKwhRestoration;
     public Plan plan;
-    //on_trial_period
+    public boolean onTrialPeriod;
 
     //        "issue_url": null,
 //        "issue_url_title": null,
 //        "issue_title": null,
 //        "referral_link": "https://dev.evcs.com/refer/abc123",
-//        "renewal_period": "month",
-//        "price": 49.99,
 //        "remaining_charges": 8,
-//        "unlimited": false,
+    public boolean unlimited;
 //        "plan_id": 2,
     public DateTime activeSince;
     //        "valid_from": null,
     public DateTime validTo;
 //        "lockup_time": 10,
 //        "min_valid_charge_duration": 5,
-//        "monthly_kwh": 10,
-//        "weekly_kwh": null,
 //        "price_per_kwh": 9,
+    //        "plan_start_hour":0,
+//        "plan_finish_hour":0,
+//        "plan_public":true,
+//        "canceled_at":"2022-09-27T13:44:09.207-07:00",
+//        "created_from":null,
+//        "created_from_description":null,
+//        "unlimited":true,
+//        "plan_icon_url":"http://admin.evcs.com/media/60d231925328c_md.png",
+//        "available_locations":[],
+//        "remaining_kwh_restored_at":"2023-04-13T00:01:07.717-07:00",
+//        "start_hour":0,
+//        "finish_hour":0,
+//        "current_bc_kwh_consumed":0,
+//        "monthly_charges":"200.0",
+//        "remaining_charges_restored_at":"2023-04-13T00:01:07.717-07:00",
+//        "next_remaining_charge_restoration":"2023-05-13T00:01:07.717-07:00",
 
-    //TODO: pero si es null el remaining puede ser unlimited
+    //si es null el remaining puede ser unlimited
     //        "monthly_kwh":null,
     //        "weekly_kwh":null,
 
@@ -57,10 +73,22 @@ public class SubscriptionStatus {
     }
 
     public String printTotalKwh() {
-        return (remainingKwh == null) ? "unlimited" : getTotalKwh().toString();
+        return (unlimited) ? "unlimited" : getTotalKwh().toString();
     }
 
     public boolean isSuspended() {
-        return "suspended".equals(status);
+        return status.equals(Status.SUSPENDED);
+    }
+
+    public enum Status { @SerializedName("active") ACTIVE, @SerializedName("suspended") SUSPENDED, @SerializedName("canceled") CANCELED;
+        @NonNull
+        @Override
+        public String toString() {
+            return StringUtils.capitalize(super.toString().toLowerCase()).toString();
+        }
+    }
+
+    public int getActiveDaysLeft() {
+        return new Period(new DateTime(), renewalDate).getDays();
     }
 }

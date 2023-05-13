@@ -37,9 +37,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/manage_plan_change_pm"
-            android:textColor="@color/evcs_secondary_700"
             android:visibility="gone"
-            style="@style/Label.Small"/>
+            style="@style/TextButton.Blue"/>
 
         <ImageView
             android:id="@+id/credit_card_default"

@@ -20,6 +20,7 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
     private var mHighMileageFragment: PlansTabFragment? = null
     private lateinit var mViewPager: ViewPager
     private lateinit var mTabLayout: TabLayout
+    private lateinit var mTabLayoutDivider: View
     private lateinit var mPagerAdapter: BaseFragmentStatePagerAdapter
 
     override fun layout(): Int {
@@ -35,12 +36,12 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         val binding = FragmentPlansBinding.bind(v)
         mToolbar = binding.fragmentPlansToolbar2
         mTabLayout = binding.fragmentPlansTabLayout
+        mTabLayoutDivider = binding.fragmentPlansTabLayoutDivider
         mViewPager = binding.fragmentPlansViewPager
     }
 
     override fun init() {
         val tabStandard = "Standard Mileage"
-        val tabHigh = "High Mileage"
 
         mPagerAdapter = BaseFragmentStatePagerAdapter(childFragmentManager)
         if (mHighMileageFragment == null) {
@@ -53,17 +54,24 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         }
         mPagerAdapter = BaseFragmentStatePagerAdapter(childFragmentManager)
         mPagerAdapter.addItem(mStandardMileageFragment, tabStandard)
-        mPagerAdapter.addItem(mHighMileageFragment!!, tabHigh)
-
-        mTabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.evcs_secondary_700))
         mViewPager.adapter = mPagerAdapter
-        mViewPager.offscreenPageLimit = mPagerAdapter.count
-        mTabLayout.setupWithViewPager(mViewPager)
         mTabLayout.getTabAt(0)?.customView = getTab(tabStandard)
-        mTabLayout.getTabAt(1)?.customView = getTab(tabHigh)
-        mViewPager.currentItem = 0
+//        showTabs()
+
         showProgressDialog()
         presenter.getPlans()
+    }
+
+    fun showTabs() {
+        mTabLayout.visibility = View.VISIBLE
+        mTabLayoutDivider.visibility = View.VISIBLE
+        val tabHigh = "High Mileage"
+        mPagerAdapter.addItem(mHighMileageFragment!!, tabHigh)
+        mTabLayout.setSelectedTabIndicatorColor(resources.getColor(R.color.evcs_secondary_700))
+        mViewPager.offscreenPageLimit = mPagerAdapter.count
+        mTabLayout.setupWithViewPager(mViewPager)
+        mTabLayout.getTabAt(1)?.customView = getTab(tabHigh)
+        mViewPager.currentItem = 0
     }
 
     override fun setListeners() {

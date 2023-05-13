@@ -47,16 +47,16 @@ class DropdownWithLabel : RelativeLayout {
 
     private fun init(context: Context) {
         val binding = DropdownWithLabelBinding.inflate(LayoutInflater.from(context), this, true)
-        mLayout = binding.dropdowWithLabelLayout
-        mDropdown = binding.dropdowWithLabelDropdown
-        mLabel = binding.dropdowWithLabelLabel
+        mLayout = binding.dropdownWithLabelLayout
+        mDropdown = binding.dropdownWithLabelDropdown
+        mDropdown.dropDownVerticalOffset = 7
+        mLabel = binding.dropdownWithLabelLabel
         mGreyBorder = resources.getDrawable(R.drawable.layout_corners_rounded_grey_border)
         mBlackBorder = resources.getDrawable(R.drawable.layout_corners_rounded_black_border)
     }
 
     fun <T> setItems(items: List<T>) {
-        adapter = ArrayAdapterWithPrompt<T>(context,
-            R.layout.dropdown_head, items)
+        adapter = ArrayAdapterWithPrompt(context, R.layout.dropdown_head, items)
         adapter.setDropDownViewResource(R.layout.dropdown_item)
         mDropdown.adapter = adapter
     }

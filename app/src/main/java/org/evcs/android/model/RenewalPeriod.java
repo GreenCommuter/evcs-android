@@ -1,6 +1,6 @@
 package org.evcs.android.model;
 
-public enum RenewalPeriod { MONTH("mo"), YEAR("yr"), WEEK("wk");
+public enum RenewalPeriod { MONTH("mo"), YEAR("yr"), WEEK("week");
 
     private final String mSmall;
 
@@ -8,11 +8,16 @@ public enum RenewalPeriod { MONTH("mo"), YEAR("yr"), WEEK("wk");
         mSmall = small;
     }
 
-    String toAdverb() {
-        return toString() + "ly";
+    public String toAdverb() {
+        return this + "ly";
     }
 
-    String toSmall() {
+    public String toSmall() {
         return mSmall;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString().toLowerCase();
     }
 }

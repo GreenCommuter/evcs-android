@@ -172,6 +172,12 @@
         <item name="android:letterSpacing">0.0312</item>
     </style>
 
+    <style name="TextButton" parent="Label.Small"/>
+
+    <style name="TextButton.Blue">
+        <item name="android:textColor">@color/evcs_secondary_700</item>
+    </style>
+
     <style name="Body" parent="Inter"/>
 
     <style name="Body.Large">

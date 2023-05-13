@@ -71,7 +71,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         mLayout = binding.evcsDialogFragmentLayout;
         mTitle = binding.evcsDialogFragmentTitle;
         mSubtitle = binding.evcsDialogFragmentSubtitle;
-        mGrey = getResources().getColor(R.color.evcs_grey);
+        mGrey = getResources().getColor(R.color.evcs_gray_800);
         mTransparent = getResources().getColor(R.color.evcs_transparent);
         mButtonMargin = (int) getResources().getDimension(R.dimen.spacing_medium);
     }
@@ -146,8 +146,8 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     //TODO: volver a la versión anterior y en el que necesita el blue outline (subscription cancel) ponerle close
     protected Button getCancelButton(String cancel) {
         Button button = new Button(getContext());
-        button.setBackground(getResources().getDrawable(R.drawable.layout_corners_rounded_blue_outline));
-        button.setTextColor(getResources().getColor(R.color.button_text_color_selector_blue_outline));
+        button.setBackgroundColor(mTransparent);
+        button.setTextColor(mGrey);
         button.setAllCaps(false);
         LinearLayout.LayoutParams layoutParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

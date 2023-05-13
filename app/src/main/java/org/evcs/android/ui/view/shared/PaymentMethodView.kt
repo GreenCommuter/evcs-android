@@ -30,7 +30,7 @@ class PaymentMethodView : LinearLayout {
 
     fun setPaymentMethod(paymentMethod: PaymentMethod) {
         mPaymentMethod = paymentMethod
-//        mBinding.creditCardProvider.text = mPaymentMethod.card.brand.name
+        mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(mPaymentMethod.card.brand.drawable))
         mBinding.creditCardNumber.text = mPaymentMethod.card.last4
     }
 

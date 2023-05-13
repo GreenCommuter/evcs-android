@@ -17,8 +17,7 @@
         android:layout_gravity="center_vertical"
         android:paddingLeft="@dimen/spacing_medium"
         android:paddingRight="@dimen/spacing_medium"
-        android:textColor="@color/evcs_secondary_700"
-        style="@style/Label.Small"/>
+        style="@style/TextButton.Blue"/>
 
     <TextView
         android:id="@+id/toolbar_evcs_title"

@@ -1,5 +1,8 @@
 package org.evcs.android.model
 
+import com.base.networking.retrofit.serializer.BaseGsonBuilder
+import org.evcs.android.util.Extras
+import org.evcs.android.util.StorageUtils
 import java.io.Serializable
 
 class PaymentMethod : Serializable {
@@ -25,4 +28,12 @@ class PaymentMethod : Serializable {
     //    "livemode": false,
     //    "metadata": {},
     //    "type": "card"
+
+    companion object {
+        fun getDefaultFromSharedPrefs(): PaymentMethod? {
+            val json = StorageUtils.getStringFromSharedPreferences(Extras.ChangePaymentMethod.PAYMENT_METHODS, "")
+            val gson = BaseGsonBuilder.getBaseGsonBuilder().create()
+            return gson.fromJson(json, PaymentMethod::class.java)
+        }
+    }
 }

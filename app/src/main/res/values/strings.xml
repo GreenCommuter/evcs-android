@@ -358,16 +358,16 @@
     <string name="coupons_format_discount_percentage">%.0f%% off</string>
     <string name="coupons_format_wallet_credit">$%.2f wallet credit</string>
     <string name="coupons_format_weekend">Weekend plan</string>
-    <string name="coupons_add_code_button">Add coupon code</string>
-    <string name="coupons_empty_text">Coupon code</string>
     <string name="coupon_invalid_dialog_title">Invalid Coupon</string>
-    <string name="coupon_invalid_dialog_button">Retry</string>
     <string name="coupon_add_hint">Type the coupon code</string>
     <string name="coupon_item_expires">Expires: %s</string>
     <string name="coupon_item_does_not_expires">This promo code does not expire</string>
     <string name="coupon_redeemed_title">Promo code Redeemed</string>
     <string name="coupon_redeemed_description">You have successfully redeemed your coupon. It will be applied to your next purchase.</string>
     <string name="promo_codes_dialog_unused">%d unused</string>
+    <string name="coupon_code_apply">Apply</string>
+    <string name="coupon_code_hint">Coupon code</string>
+    <string name="coupon_code_remove">Remove</string>
 
     <!--Promo Code details-->
     <string name="promo_code_details_title">Promo code details</string>
@@ -510,8 +510,8 @@
     <string name="cancel_plan_subscription_end">Subscription End Date</string>
     <string name="cancel_plan_active_days">Active Days</string>
     <string name="cancel_plan_billing_cycle">Billing Cycle</string>
-    <string name="cancel_plan_active_until">This will end your monthly subscription to the %1$s plan.\n
-        Your plan will stay active through the remainder of your last billing cycle and end on %2$s.</string>
+    <string name="cancel_plan_active_until">This will end your %1$s subscription to the %2$s plan.\n
+        Your plan will stay active through the remainder of your last billing cycle and end on %3$s.</string>
     <string name="cancel_plan_days_remaining">%d days remaining</string>
     <string name="cancel_plan_trial_cancel">Keep Trial</string>
     <string name="cancel_plan_trial_bold">You have %d days left in your Standard Anytime trial</string>

@@ -14,7 +14,9 @@ import org.evcs.android.activity.CancelPlanActivity
 import org.evcs.android.databinding.ActivitySubscriptionBinding
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
+import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.SubscriptionStatus
+import org.evcs.android.model.user.User
 import org.evcs.android.util.UserUtils
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -54,9 +56,11 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsPlanName.text = response.planName
         mBinding.activitySubscriptionsPlanProgress.setPlan(response)
         val date = mLongDateFormatter.print(response.renewalDate)
+        val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()!!
         mBinding.activitySubscriptionsPaymentDetails.setText(String.format(
-                getString(R.string.manage_plan_payment_details_format, "[visa]",
-                        "[1234]", response.price, response.renewalPeriod, date)))
+                getString(R.string.manage_plan_payment_details_format, defaultPm.card.brand,
+                    defaultPm.card.last4, response.price, response.renewalPeriod, date)))
+        mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(defaultPm)
 
         val format = DateTimeFormat.forPattern("MM/dd/yyyy")
         mBinding.activitySubscriptionsEnrolled.setText(format.print(response.activeSince))
@@ -103,8 +107,9 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         EVCSDialogFragment.Builder()
                 .setTitle(title)
                 .setSubtitle(getString(R.string.cancellation_dialog_subtitle))
-                .showCancel(true)
-                .show(supportFragmentManager)
+                .addButton("Close", false, { dialog -> dialog.dismiss() },
+                    R.drawable.layout_corners_rounded_blue_outline)
+            .show(supportFragmentManager)
     }
 
 }

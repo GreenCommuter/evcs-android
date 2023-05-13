@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
-        app:title="Edit Your Name" />
+        app:title="@string/activity_account_title" />
 
     <org.evcs.android.features.shared.StandardTextField
         android:id="@+id/fragment_change_name_first"
@@ -25,26 +25,26 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textfield.TextInputEditText
-            style="@style/Roboto.Body.Grey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="@style/Body.Medium"/>
 
     </org.evcs.android.features.shared.StandardTextField>
 
     <org.evcs.android.features.shared.StandardTextField
         android:id="@+id/fragment_change_name_last"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/spacing_medium_extra"
         android:layout_marginEnd="@dimen/spacing_medium_extra"
         android:layout_marginBottom="@dimen/spacing_medium_extra"
-        style="@style/TextInputStyle"
         app:label="Last name"
-        android:layout_height="wrap_content">
+        style="@style/TextInputStyle">
 
         <com.google.android.material.textfield.TextInputEditText
-            style="@style/Roboto.Body.Grey"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            style="@style/Body.Medium"/>
 
     </org.evcs.android.features.shared.StandardTextField>
 

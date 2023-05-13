@@ -56,7 +56,7 @@ public interface UserService {
     @POST("/members/v1/users/verify_phone")
     Call<Void> sendCode(@Body CodeWrapper code);
 
-    @GET("/api/v1/users/me")
+    @GET("/members/v1/users/me")
     Call<User> getCurrentUser();
 
     @PUT("/members/v1/users/{id}")

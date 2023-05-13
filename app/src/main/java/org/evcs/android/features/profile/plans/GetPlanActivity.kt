@@ -16,8 +16,9 @@ class GetPlanActivity : BaseActivity2() {
 
     override fun init() {
         val plan = intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Plan
-        val fragment = if (true /*tiene plan*/) GetPlanFragment.newInstance(plan)
-                       else SwitchPlanFragment.newInstance(plan)
+        val fragment = if (intent.getBooleanExtra(Extras.PlanActivity.HAS_PLAN, false))
+                            SwitchPlanFragment.newInstance(plan)
+                       else GetPlanFragment.newInstance(plan)
         replaceFragment(R.id.activity_base_content, fragment)
     }
 

@@ -49,6 +49,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     override fun init() {
         presenter.refreshUser()
+        presenter.refreshDefaultPaymentMethod()
     }
 
     override fun onUserRefreshed(response: User) {

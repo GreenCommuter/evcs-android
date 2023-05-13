@@ -9,6 +9,7 @@ import org.evcs.android.databinding.FragmentPlanLearnMoreBinding
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 
 class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
 
@@ -47,13 +48,13 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         super.populate()
         mBinding.planLearnMoreToolbar.setTitle(mPlan.name)
         //if plan and user both have free days
-        mBinding.planLearnMoreDaysFree.text = String.format("%d Days Free!*", mPlan.trialDays)
+        mBinding.planLearnMoreDaysFree.text = String.format("${mPlan.trialDays} Days Free!*", mPlan.trialDays)
         //if plan doesn't:
         //mBinding.planLearnMoreDaysFree.text = "Simple Flat Rate Member Pricing"
         //if user doesn't:
         //mBinding.planLearnMoreDaysFree.setVisibility(View.GONE)
         //show price in title.large
-        mBinding.planLearnMorePrice.text = String.format("\$%.2f/%s", mPlan.price, "month")
+        mBinding.planLearnMorePrice.text = String.format("\$%.2f/%s", mPlan.price, mPlan.renewalPeriod)
 
         //for basic anytime and standard anytime
         //unlimited anytime: Unlimited fast charging, no kWh caps
@@ -86,6 +87,13 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         //Pay as you go, no payment: "Add payment method"
         //Pay as you go, else: hide and show planslearnmoreexplore
         mBinding.planLearnMoreButton.text = "Get Started"
+
+        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.id
+        //TODO: PAYG case (no plan)
+        if (currentPlanId == mPlan.id) {
+            mBinding.planLearnMoreButton.isEnabled = false
+            mBinding.planLearnMoreButton.text = "Current plan"
+        }
 
     }
 

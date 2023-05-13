@@ -6,6 +6,7 @@ import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
+import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
@@ -35,14 +36,14 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     override fun populate() {
-        val dateFormatter = DateTimeFormat.forPattern("m/d/yyyy")
+        val dateFormatter = DateTimeFormat.forPattern("M/d/yyyy")
         mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
         mBinding.getPlanFreeTrial.visibility = if (showFreeTrial()) View.VISIBLE else View.GONE
         mBinding.getPlanFreeTrial.setLabel("%d Day Offer - New Members Only")
 
-        //TODO: el payg no tiene monthly rate y esconte el check, muestra el start date
-        mBinding.getPlanMonthlyRate.setLabel("Monthly Rate - Starting %s")
+        //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
+        mBinding.getPlanMonthlyRate.setLabel("%1\$sly Rate - Starting %2\$s")
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
         mBinding.getPlanFlatRate.text = "Flat rate for Level 2 and DC fast \$%.2f/kWh after %d kWh exceeded"
 
@@ -55,6 +56,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
                 String.format(getString(R.string.get_plan_tandc), getButtonText())
         mBinding.getPlanTandc.movementMethod = LinkMovementMethod.getInstance()
         mBinding.getPlanTodayLayout.visibility = if (showToday()) View.VISIBLE else View.GONE
+        //if no PM?
+        mBinding.getPlanPaymentInfo.setPaymentMethod(PaymentMethod.getDefaultFromSharedPrefs()!!)
         mBinding.getPlanPaymentCouponCode.visibility = if (showCouponCode()) View.VISIBLE else View.GONE
         mBinding.getPlanPreviousPlanActiveUntil.visibility = if (getActiveUntil() == null) View.VISIBLE else View.GONE
         mBinding.getPlanPreviousPlanActiveUntil.setText(dateFormatter.print(getActiveUntil()))
@@ -88,10 +91,13 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mBinding.bottomNavigationButton.setOnClickListener {
             showProgressDialog()
-            presenter.subscribe(mPlan, "")
+            presenter.subscribe(mPlan, PaymentMethod.getDefaultFromSharedPrefs()!!.id!!)
         }
         mBinding.getPlanPaymentInfo.setOnChangeClickListener {
             //TODO: go to change
+        }
+        mBinding.getPlanPaymentCouponCode.setListener {
+            //TODO: apply
         }
     }
 

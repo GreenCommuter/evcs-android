@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/dropdow_with_label_label"
+        android:id="@+id/dropdown_with_label_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Label.Small"/>
 
     <RelativeLayout
-        android:id="@+id/dropdow_with_label_layout"
+        android:id="@+id/dropdown_with_label_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/spacing_small"
@@ -21,7 +21,7 @@
         android:background="@drawable/layout_corners_rounded_grey_border">
 
         <Spinner
-            android:id="@+id/dropdow_with_label_dropdown"
+            android:id="@+id/dropdown_with_label_dropdown"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:spinnerMode="dropdown"

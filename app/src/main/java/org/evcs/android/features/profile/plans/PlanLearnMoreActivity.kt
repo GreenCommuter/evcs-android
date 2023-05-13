@@ -5,6 +5,8 @@ import android.view.View
 import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityBaseBinding
+import org.evcs.android.model.Plan
+import org.evcs.android.util.Extras
 
 class PlanLearnMoreActivity : BaseActivity2() {
 
@@ -13,7 +15,9 @@ class PlanLearnMoreActivity : BaseActivity2() {
     }
 
     override fun init() {
-        replaceFragment(R.id.activity_base_content, PlanLearnMoreFragment::class.java)
+        val plan = intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Plan
+        val fragment = PlanLearnMoreFragment.newInstance(plan)
+        replaceFragment(R.id.activity_base_content, fragment)
     }
 
 }

@@ -244,14 +244,11 @@
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
     <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>
     <string name="notifications_plug_in_reminder">Did you remember to plug in the car?</string>
-    <string name="notifications_vanpool_already_left">Your vanpool already left today.</string>
     <string name="notifications_vanpool_problems">We had a problem with the car. For more information contact us.</string>
-    <string name="notifications_car_assigned">Awesome! A car has been assigned to your vanpool.</string>
     <string name="notifications_user_not_coming">%@ is not coming today.</string>
     <string name="notifications_user_late">%@ is running a little late.</string>
     <string name="notifications_vanpool_created">Your vanpool has been created.</string>
     <string name="notifications_vanpool_in_next_minutes">Your vanpool will start in %@ minutes.</string>
-    <string name="notifications_vanpool_preapproved">Your vanpool has been preapproved.</string>
     <string name="notifications_vanpool_approved">Your vanpool has been approved.</string>
     <string name="notifications_vanpool_activated">Your vanpool has been activated.</string>
     <string name="notifications_vanpool_payment_required">Your vanpool has been approved and the payment is required.</string>
@@ -278,7 +275,6 @@
     <!-- Vanpool Status -->
     <string name="vanpool_status_cancelled">Canceled</string>
     <string name="vanpool_status_waiting_approval">Pending approval</string>
-    <string name="vanpool_status_waiting_payment">Waiting for driver\'s payment</string>
     <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
     <string name="vanpool_status_active">Active</string>
     <string name="vanpool_status_inactive">Inactive</string>
@@ -368,7 +364,6 @@
     <string name="coupons_toolbar_title">Coupons</string>
     <string name="coupons_format_discount_percentage">%.0f%% off</string>
     <string name="coupons_format_wallet_credit">$%.2f wallet credit</string>
-    <string name="coupons_format_register_company">Register company</string>
     <string name="coupons_format_weekend">Weekend plan</string>
     <string name="coupons_add_code_button">Add coupon code</string>
     <string name="coupons_empty_text">Coupon code</string>
@@ -503,6 +498,7 @@
     <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
 
     <!-- Get Plan -->
+    <string name="get_plan_started">Your plan has started</string>
     <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://learntodroid.com">Terms of Use</a>,
         <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a></string>
 
@@ -533,5 +529,11 @@
     <string name="survey_love_feedback">We’d love your feedback!</string>
     <string name="survey_subtitle">We’re always looking to improve your experience. Please let us know why you’ve decided to cancel your plan:</string>
     <string name="survey_confirm">Confirm cancelation</string>
+
+    <!-- Plan Learn More -->
+    <string name="plan_learn_more_unrestricted_network_access">Unrestricted network access in CA, OR, WA</string>
+    <string name="plan_learn_more_hikes">No time-of-day price hikes on charging over 200 kWh</string>
+    <string name="plan_learn_more_locate">Locate stations with the EVCS, PlugShare, Google MapsTM and Apple MapsTM apps</string>
+    <string name="plan_learn_more_track">Track monthly charging sessions and kWh consumed</string>
 
 </resources>

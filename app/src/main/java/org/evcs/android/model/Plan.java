@@ -47,5 +47,12 @@ public class Plan implements Serializable {
         if (weeklyPrice != null) return RenewalPeriod.WEEK;
         return RenewalPeriod.MONTH;
     }
+
+    public Float getPrice() {
+        if (yearlyPrice != null) return yearlyPrice;
+        if (monthlyPrice != null) return monthlyPrice;
+        if (weeklyPrice != null) return weeklyPrice;
+        return null;
+    }
 }
 //        "pay_per_charge": false,

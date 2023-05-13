@@ -36,19 +36,20 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     override fun populate() {
         val dateFormatter = DateTimeFormat.forPattern("m/d/yyyy")
-        mBinding.getPlanToolbar.setTitle(mPlan.name)
+        mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
         mBinding.getPlanFreeTrial.visibility = if (showFreeTrial()) View.VISIBLE else View.GONE
         mBinding.getPlanFreeTrial.setLabel("%d Day Offer - New Members Only")
 
         //TODO: el payg no tiene monthly rate y esconte el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel("Monthly Rate - Starting %s")
-        mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per month", mPlan.monthlyPrice))
+        mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
         mBinding.getPlanFlatRate.text = "Flat rate for Level 2 and DC fast \$%.2f/kWh after %d kWh exceeded"
 
+        mBinding.getPlanCostLayout.visibility = if (showCostLayout()) View.VISIBLE else View.GONE
         //Todo: puede ser weekly
-        mBinding.getPlanMonthlyCostTitle.text = "Monthly Cost (Starting %s)"
-        mBinding.getPlanSubtotal.text = String.format("\$%.2f", mPlan.monthlyPrice)
+        mBinding.getPlanMonthlyCostTitle.text = "%\$1s Cost (Starting %\$2s)"
+        mBinding.getPlanSubtotal.text = String.format("\$%.2f", mPlan.price)
         mBinding.bottomNavigationButton.text = getButtonText()
         mBinding.getPlanTandc.text =
                 String.format(getString(R.string.get_plan_tandc), getButtonText())
@@ -57,6 +58,19 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanPaymentCouponCode.visibility = if (showCouponCode()) View.VISIBLE else View.GONE
         mBinding.getPlanPreviousPlanActiveUntil.visibility = if (getActiveUntil() == null) View.VISIBLE else View.GONE
         mBinding.getPlanPreviousPlanActiveUntil.setText(dateFormatter.print(getActiveUntil()))
+        mBinding.getPlanStarted.visibility = if (showPlanStarted()) View.VISIBLE else View.GONE
+    }
+
+    protected open fun showPlanStarted(): Boolean {
+        return false
+    }
+
+    protected open fun showCostLayout(): Boolean {
+        return true
+    }
+
+    protected open fun getToolbarTitle(): String {
+        return mPlan.name
     }
 
     abstract fun getActiveUntil(): DateTime?

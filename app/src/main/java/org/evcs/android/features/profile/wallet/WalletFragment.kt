@@ -56,9 +56,9 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.Wa
             .navigate(WalletFragmentDirections.actionWalletFragmentToAddCreditCardFragment())
     }
 
-    override fun goToDetail(item: PaymentMethod?) {
+    override fun goToDetail(item: PaymentMethod) {
         var args = Bundle()
-        args.putSerializable(Extras.CreditCard.CREDIT_CARD, item!!.card)
+        args.putSerializable(Extras.CreditCard.CREDIT_CARD, item)
         NavHostFragment.findNavController(this).navigate(R.id.showCreditCardFragment, args)
     }
 

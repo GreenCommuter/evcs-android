@@ -50,6 +50,7 @@
 
     <declare-styleable name="StandardTextField">
         <attr name="label" format="string|reference" />
+        <attr name="labelColor" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="CustomTabLayout">

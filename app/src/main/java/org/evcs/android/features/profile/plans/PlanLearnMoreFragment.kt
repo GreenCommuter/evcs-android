@@ -88,7 +88,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         //Pay as you go, else: hide and show planslearnmoreexplore
         mBinding.planLearnMoreButton.text = "Get Started"
 
-        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.id
+        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.plan?.id
         //TODO: PAYG case (no plan)
         if (currentPlanId == mPlan.id) {
             mBinding.planLearnMoreButton.isEnabled = false

@@ -41,9 +41,7 @@
                     style="@style/StandardEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/add_credit_card_name"
-                    android:inputType="number"
-                    android:maxLength="19" />
+                    android:hint="@string/add_credit_card_name"/>
 
             </org.evcs.android.features.shared.StandardTextField>
 

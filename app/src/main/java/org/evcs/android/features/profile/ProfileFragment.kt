@@ -60,11 +60,15 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileName.text = user.name
         val subscription = user.activeSubscription
         if (subscription == null) {
-            mBinding.profilePlanName.text = getString(R.string.plan_info_pay_as_you_go) + " membership"
+            if (false /*user is verified*/) {
+                mBinding.profilePlanName.text = "Account not activated"
+            } else {
+                mBinding.profilePlanName.text = getString(R.string.plan_info_pay_as_you_go) + " membership"
+                mBinding.profileExplorePlansText.text =
+                        FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
+                (mBinding.profileExplorePlans.parent as View).visibility = View.VISIBLE
+            }
             mBinding.profileMenuSubscriptionPlan.visibility = View.GONE
-            mBinding.profileExplorePlansText.text =
-                    FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
-            (mBinding.profileExplorePlans.parent as View).visibility = View.VISIBLE
         } else {
             mBinding.profilePlanName.text = subscription.planName
             mBinding.profilePlanProgress.visibility = View.VISIBLE

@@ -23,7 +23,6 @@
             android:id="@+id/credit_card_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="4567"
             style="@style/Title.Medium" />
 
         <View

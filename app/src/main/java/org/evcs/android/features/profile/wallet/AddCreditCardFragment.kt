@@ -1,7 +1,7 @@
 package org.evcs.android.features.profile.wallet
 
 import android.content.Intent
-import android.content.res.ColorStateList
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import com.base.core.util.ToastUtils
@@ -47,6 +47,7 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
     override fun setListeners() {
         super.setListeners()
         mValidatorManager = ValidatorManager()
+        mValidatorManager.addValidator(NonEmptyTextInputValidator(mCardName))
         mValidatorManager.addValidator(CreditCardValidator(mCardNumber))
         mValidatorManager.addValidator(
             DateTextInputValidator(mCardExpirationMonth, mDateTimeFormatter)
@@ -55,27 +56,18 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
         mValidatorManager.addValidator(ZipCodeTextInputValidator(mZipcode))
         mValidatorManager.setOnAnyTextChangedListener {
             mNext.isEnabled = mValidatorManager.areAllFieldsValid() && isDateValid()
+
+            mCreditCardView.setName(mCardName.text.toString())
+            mCreditCardView.setExpiration(mCardExpirationMonth.text.toString())
+            mCreditCardView.setCode(mCvv.text.toString())
         }
         mCardExpirationMonth.editText!!.addTextChangedListener(DateFormatWatcher())
         mCardNumber.editText!!.addTextChangedListener(FourDigitCardFormatWatcher())
         mCreditCardView.watchNumber(mCardNumber.editText)
     }
 
-//    private fun getDate() : LocalDate {
-//        return mDateTimeFormatter.parseLocalDate(mCardExpirationMonth.text.toString())
-//    }
-
-    /**
-     * Method called when the payment was successfully processed.
-     *
-     * @param paymentMethodNonce Payment method nonce
-     */
-    //    protected void onNewNonceCreated(PaymentMethodNonce paymentMethodNonce) {
-    //        ToastUtils.show(getString(R.string.profile_billing_information_braintree_success));
-    //    }
-
-    override fun getButtonColor(): ColorStateList {
-        return ColorStateList.valueOf(resources.getColor(R.color.evcs_primary_600))
+    override fun getButtonBackground(): Drawable {
+        return resources.getDrawable(R.drawable.layout_corners_rounded_orange)
     }
 
     override fun getButtonText(): String {

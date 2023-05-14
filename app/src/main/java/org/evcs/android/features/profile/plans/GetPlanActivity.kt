@@ -22,4 +22,9 @@ class GetPlanActivity : BaseActivity2() {
         replaceFragment(R.id.activity_base_content, fragment)
     }
 
+    fun onPlanSubscribed(plan: Plan) {
+        val fragment = PlanStartedFragment.newInstance(plan)
+        replaceFragment(R.id.activity_base_content, fragment)
+    }
+
 }

@@ -26,8 +26,8 @@ class SwitchPlanFragment : AbstractGetPlanFragment() {
         return true;
     }
 
-    override fun showFreeTrial(): Boolean {
-        return false
+    override fun getTrialLabel(): String? {
+        return null
     }
 
     override fun getButtonText(): String {

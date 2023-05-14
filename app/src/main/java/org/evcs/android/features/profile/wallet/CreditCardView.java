@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -16,16 +15,17 @@ import androidx.annotation.Nullable;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
-import org.evcs.android.R;
 import org.evcs.android.databinding.ViewCreditCardBinding;
 import org.evcs.android.model.CreditCard;
 import org.evcs.android.model.CreditCardProvider;
-import org.evcs.android.util.StringUtils;
 
 public class CreditCardView extends LinearLayout {
 
-    TextView mLast4;
-    SimpleDraweeView mProvider;
+    private TextView mLast4;
+    private SimpleDraweeView mProvider;
+    private TextView mName;
+    private TextView mExpiration;
+    private TextView mCode;
 
     public CreditCardView(Context context) {
         super(context);
@@ -46,13 +46,28 @@ public class CreditCardView extends LinearLayout {
         @NonNull ViewCreditCardBinding binding = ViewCreditCardBinding.inflate(LayoutInflater.from(context), this, true);
         mLast4 = binding.creditCardViewLast4;
         mProvider = binding.creditCardViewProvider;
+        mName = binding.creditCardViewName;
+        mExpiration = binding.creditCardViewExpiration;
+        mCode = binding.creditCardViewCvv;
         mLast4.setTypeface(Typeface.MONOSPACE);
     }
 
     public void setCreditCard(CreditCard creditCard) {
         mLast4.setText(creditCard.getLast4());
-        if (creditCard.getBrand() != null)
-            mProvider.setImageResource(creditCard.getBrand().getDrawable());
+        if (creditCard.getBrand() != CreditCardProvider.UNKNOWN)
+            mProvider.setImageResource(creditCard.getBrand().getLogo());
+    }
+
+    public void setName(String name) {
+        mName.setText(name);
+    }
+
+    public void setExpiration(String expiration) {
+        mExpiration.setText(expiration);
+    }
+
+    public void setCode(String code) {
+        mCode.setText(code);
     }
 
     public void watchNumber(EditText number) {
@@ -72,7 +87,7 @@ public class CreditCardView extends LinearLayout {
                 if (provider == null) {
                     mProvider.setImageDrawable(null);
                 } else {
-                    mProvider.setImageResource(provider.getDrawable());
+                    mProvider.setImageResource(provider.getLogo());
                 }
             }
         });

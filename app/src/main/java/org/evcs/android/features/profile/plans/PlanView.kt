@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.LinearLayout
 import org.evcs.android.databinding.ViewPlanBinding
 import org.evcs.android.model.Plan
@@ -60,11 +61,12 @@ class PlanView : LinearLayout {
 
         //unlimited anytime: hide
         mBinding.viewPlanDcPrice.text = "DC fast: \$%.2f"
-        mBinding.viewPlanDcPrice.text = "Level 2: \$%.2f"
+        mBinding.viewPlanAcPrice.text = "Level 2: \$%.2f"
 
-        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.id
+        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.plan?.id
         if (currentPlanId == mPlan.id) {
             mBinding.viewPlanButton.isEnabled = false
+            mBinding.viewPlanAd.visibility = View.VISIBLE
             mBinding.viewPlanAd.text = "Current plan"
             mBinding.viewPlanAd.setTextColor(Color.parseColor("#005387"))
             mBinding.viewPlanAd.setBackgroundColor(Color.parseColor("#E7EFF6"))

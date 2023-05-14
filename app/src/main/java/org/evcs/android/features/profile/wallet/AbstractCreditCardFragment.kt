@@ -1,7 +1,7 @@
 package org.evcs.android.features.profile.wallet
 
-import android.content.res.ColorStateList
 import android.graphics.Typeface
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Button
 import androidx.annotation.CallSuper
@@ -83,7 +83,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
     override fun setListeners() {
         mNext.setOnClickListener { onNextClicked() }
         mToolbar.setNavigationOnClickListener { finish() }
-        mNext.backgroundTintList = getButtonColor()
+        mNext.background = getButtonBackground()
         mNext.text = getButtonText()
     }
     protected fun getDate() : LocalDate {
@@ -101,7 +101,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
 
     abstract fun getButtonText(): String
 
-    abstract fun getButtonColor(): ColorStateList
+    abstract fun getButtonBackground(): Drawable
 
     abstract fun onNextClicked()
 

@@ -29,10 +29,9 @@
 
     </FrameLayout>
 
-    <org.evcs.android.ui.view.profile.ListButtonView
+    <org.evcs.android.ui.view.shared.PaymentMethodView
         android:id="@+id/wallet_add_new_payment_method"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:text="@string/payment_method_toolbar_add" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>

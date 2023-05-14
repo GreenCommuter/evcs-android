@@ -78,6 +78,22 @@
 
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/get_plan_next_billing_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:label="Next Billing Date"
+                android:visibility="gone"
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    tools:text="05/02/2023"
+                    style="@style/Body.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

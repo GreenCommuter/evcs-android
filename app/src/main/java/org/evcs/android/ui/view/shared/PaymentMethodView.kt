@@ -5,22 +5,23 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import org.evcs.android.R
 import org.evcs.android.databinding.ViewCreditCardItemBinding
 import org.evcs.android.model.PaymentMethod
 
 class PaymentMethodView : LinearLayout {
 
     private lateinit var mBinding: ViewCreditCardItemBinding
-    private lateinit var mPaymentMethod: PaymentMethod
 
     constructor(paymentMethod: PaymentMethod, context: Context) : super(context) {
-        setPaymentMethod(paymentMethod)
         init(context)
+        setPaymentMethod(paymentMethod)
     }
 
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(context)
+        setPaymentMethod(null)
     }
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
@@ -28,17 +29,28 @@ class PaymentMethodView : LinearLayout {
         init(context)
     }
 
-    fun setPaymentMethod(paymentMethod: PaymentMethod) {
-        mPaymentMethod = paymentMethod
-        mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(mPaymentMethod.card.brand.drawable))
-        mBinding.creditCardNumber.text = mPaymentMethod.card.last4
+    fun setPaymentMethod(paymentMethod: PaymentMethod?) {
+        if (paymentMethod == null) {
+            setAddPaymentMethod()
+        } else {
+            mBinding.viewListButtonChevron.visibility = View.GONE
+            mBinding.creditCardChange.visibility = View.VISIBLE
+            mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(paymentMethod.card.brand.drawable))
+            mBinding.creditCardNumber.text = paymentMethod.card.last4
+        }
+    }
+
+    private fun setAddPaymentMethod() {
+        mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(R.drawable.ic_add))
+        val params = mBinding.creditCardProvider.layoutParams
+        params.width = LayoutParams.WRAP_CONTENT
+        mBinding.creditCardProvider.layoutParams = params
+        mBinding.creditCardNumber.text = resources.getString(R.string.payment_method_toolbar_add)
     }
 
     private fun init(context: Context) {
         mBinding = ViewCreditCardItemBinding.inflate(LayoutInflater.from(context), this, true)
         mBinding.creditCardDefault.visibility = View.GONE
-        mBinding.viewListButtonChevron.visibility = View.GONE
-        mBinding.creditCardChange.visibility = View.VISIBLE
     }
 
     fun setOnChangeClickListener(function: () -> Unit) {

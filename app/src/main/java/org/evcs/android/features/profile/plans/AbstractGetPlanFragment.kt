@@ -12,6 +12,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 
 abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetPlanView {
 
@@ -39,11 +40,11 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         val dateFormatter = DateTimeFormat.forPattern("M/d/yyyy")
         mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
-        mBinding.getPlanFreeTrial.visibility = if (showFreeTrial()) View.VISIBLE else View.GONE
-        mBinding.getPlanFreeTrial.setLabel("%d Day Offer - New Members Only")
+        mBinding.getPlanFreeTrial.visibility = if (getTrialLabel() != null) View.VISIBLE else View.GONE
+        mBinding.getPlanFreeTrial.setLabel(getTrialLabel() ?: "")
 
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
-        mBinding.getPlanMonthlyRate.setLabel("%1\$sly Rate - Starting %2\$s")
+        mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
         mBinding.getPlanFlatRate.text = "Flat rate for Level 2 and DC fast \$%.2f/kWh after %d kWh exceeded"
 
@@ -56,12 +57,21 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
                 String.format(getString(R.string.get_plan_tandc), getButtonText())
         mBinding.getPlanTandc.movementMethod = LinkMovementMethod.getInstance()
         mBinding.getPlanTodayLayout.visibility = if (showToday()) View.VISIBLE else View.GONE
-        //if no PM?
-        mBinding.getPlanPaymentInfo.setPaymentMethod(PaymentMethod.getDefaultFromSharedPrefs()!!)
+        mBinding.getPlanPaymentInfo.setPaymentMethod(PaymentMethod.getDefaultFromSharedPrefs())
         mBinding.getPlanPaymentCouponCode.visibility = if (showCouponCode()) View.VISIBLE else View.GONE
-        mBinding.getPlanPreviousPlanActiveUntil.visibility = if (getActiveUntil() == null) View.VISIBLE else View.GONE
+        mBinding.getPlanPreviousPlanActiveUntil.visibility = if (getActiveUntil() != null) View.VISIBLE else View.GONE
         mBinding.getPlanPreviousPlanActiveUntil.setText(dateFormatter.print(getActiveUntil()))
         mBinding.getPlanStarted.visibility = if (showPlanStarted()) View.VISIBLE else View.GONE
+        mBinding.getPlanNextBillingDate.visibility = if (getNextBillingDate() != null) View.VISIBLE else View.GONE
+        mBinding.getPlanNextBillingDate.setText(dateFormatter.print(getNextBillingDate()))
+    }
+
+    protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
+        return "%1\$sly Rate - Starting %2\$s"
+    }
+
+    protected open fun getNextBillingDate(): DateTime? {
+        return null
     }
 
     protected open fun showPlanStarted(): Boolean {
@@ -80,7 +90,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     abstract fun showCouponCode(): Boolean
 
-    abstract fun showFreeTrial(): Boolean
+    abstract fun getTrialLabel(): String?
 
     abstract fun getButtonText(): String
 
@@ -89,10 +99,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     override fun setListeners() {
         super.setListeners()
         mBinding.getPlanToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-        mBinding.bottomNavigationButton.setOnClickListener {
-            showProgressDialog()
-            presenter.subscribe(mPlan, PaymentMethod.getDefaultFromSharedPrefs()!!.id!!)
-        }
+        mBinding.bottomNavigationButton.setOnClickListener { getBottomNavigationListener() }
         mBinding.getPlanPaymentInfo.setOnChangeClickListener {
             //TODO: go to change
         }
@@ -101,7 +108,13 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         }
     }
 
+    protected open fun getBottomNavigationListener() {
+        showProgressDialog()
+        presenter.subscribe(mPlan, PaymentMethod.getDefaultFromSharedPrefs()!!.id!!)
+    }
+
     override fun onSubscriptionSuccess(response: Void) {
         ToastUtils.show("Subscription success")
+        (requireActivity() as GetPlanActivity).onPlanSubscribed(mPlan)
     }
 }

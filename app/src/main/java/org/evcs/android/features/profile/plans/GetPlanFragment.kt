@@ -36,12 +36,12 @@ class GetPlanFragment : AbstractGetPlanFragment() {
         return false
     }
 
-    override fun showFreeTrial(): Boolean {
-        return true;
+    override fun getTrialLabel(): String? {
+        return String.format("%d Day Offer - New Members Only", mPlan.trialDays)
     }
 
     override fun getButtonText(): String {
-        return "Agree & subscribe"
+        return "Agree & Subscribe"
     }
 
     override fun showToday(): Boolean {

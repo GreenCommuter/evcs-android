@@ -1,6 +1,8 @@
 package org.evcs.android.features.shared
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.widget.RelativeLayout
 import org.evcs.android.util.validator.TextInputLayoutInterface
 import android.widget.EditText
@@ -25,6 +27,7 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
     private lateinit var mEditText: EditText
     protected lateinit var mLayout: RelativeLayout
     protected lateinit var mLabel: TextView
+    protected var mLabelColor: Int = 0
     protected lateinit var mLabelEmpty: TextView
     private lateinit var mGreyBorder: Drawable
     private lateinit var mBlackBorder: Drawable
@@ -53,7 +56,10 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         val typedArray =
             context.obtainStyledAttributes(attrs, R.styleable.StandardTextField, defStyleAttr, 0)
         mLabelString = typedArray.getString(R.styleable.StandardTextField_label)
+        mLabelColor = typedArray.getColor(R.styleable.StandardTextField_labelColor,
+                resources.getColor(R.color.evcs_gray_800))
         mLabel.text = mLabelString
+        mLabel.setTextColor(mLabelColor)
         mLabel.visibility = if (TextUtils.isEmpty(mLabelString)) GONE else VISIBLE
         mLabelEmpty.text = mLabelString
     }

@@ -13,6 +13,7 @@ import org.evcs.android.util.Extras
 import org.evcs.android.util.ViewUtils.setVisibility
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 
 class PlanStartedFragment : AbstractGetPlanFragment() {
 
@@ -27,7 +28,7 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
         }
     }
 
-    override fun getActiveUntil(): DateTime? {
+    override fun getActiveUntil(): DateTime {
         return DateTime()
     }
 
@@ -35,8 +36,8 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
         return false
     }
 
-    override fun showFreeTrial(): Boolean {
-        return false
+    override fun getTrialLabel(): String? {
+        return if (true /* is on trial*/) null else String.format("%d Day Offer", mPlan.trialDays)
     }
 
     override fun getButtonText(): String {
@@ -57,5 +58,17 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
 
     override fun showPlanStarted(): Boolean {
         return true
+    }
+
+    override fun getNextBillingDate(): DateTime? {
+        return DateTime()
+    }
+
+    override fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
+        return "%1\$sly Rate"
+    }
+
+    override fun getBottomNavigationListener() {
+        requireActivity().finish()
     }
 }

@@ -22,11 +22,8 @@ enum class CreditCardProvider(val mKey: String, val mPossible: String, @Drawable
             R.drawable.cc_mastercard, R.drawable.cc_mastercard_logo),
     UNKNOWN("", "", 0, 0);
 
-    val uri: String
-        get() = String.format("https://assets.braintreegateway.com/payment_method_logo/%s.png", toString().lowercase(Locale.getDefault()))
-
     fun toPrintableString(): String {
-        return toString().replace("_", " ")
+        return toString().toLowerCase().replace("_", " ")
     }
 
     companion object {

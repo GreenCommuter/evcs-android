@@ -14,9 +14,14 @@
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
         app:title="@string/profile_plan" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="@dimen/padding_ariel_standard">
 
@@ -97,12 +102,13 @@
 
         </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
-        <RelativeLayout
+        <LinearLayout
             android:id="@+id/manage_plans_active_layout"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
-            android:visibility="visible">
+            android:visibility="visible"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/activity_subscriptions_payment_info_title"
@@ -115,14 +121,18 @@
                 android:id="@+id/activity_subscriptions_payment_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/activity_subscriptions_payment_info_title"/>
+                android:layout_marginBottom="@dimen/spacing_medium_extra"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
 
             <TextView
                 android:id="@+id/activity_subscriptions_view_all_plans"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_large"
-                android:layout_above="@id/activity_subscriptions_cancel"
                 android:text="@string/manage_plan_change"
                 style="@style/ButtonK.BlueOutline"/>
 
@@ -131,10 +141,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/manage_plan_cancel"
-                android:layout_alignParentBottom="true"
                 style="@style/ButtonK.Danger"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/manage_plans_canceled_layout"
@@ -163,5 +172,7 @@
         </RelativeLayout>
 
     </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

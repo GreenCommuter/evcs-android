@@ -121,7 +121,6 @@
                 android:layout_height="wrap_content"
                 android:text="Learn more"
                 android:layout_marginBottom="@dimen/spacing_big"
-                android:textColor="@color/evcs_gray_800"
                 style="@style/ButtonK"/>
 
         </LinearLayout>

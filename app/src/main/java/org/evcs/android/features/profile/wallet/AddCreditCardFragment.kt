@@ -56,10 +56,7 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
         mValidatorManager.addValidator(ZipCodeTextInputValidator(mZipcode))
         mValidatorManager.setOnAnyTextChangedListener {
             mNext.isEnabled = mValidatorManager.areAllFieldsValid() && isDateValid()
-
-            mCreditCardView.setName(mCardName.text.toString())
-            mCreditCardView.setExpiration(mCardExpirationMonth.text.toString())
-            mCreditCardView.setCode(mCvv.text.toString())
+            setFields()
         }
         mCardExpirationMonth.editText!!.addTextChangedListener(DateFormatWatcher())
         mCardNumber.editText!!.addTextChangedListener(FourDigitCardFormatWatcher())

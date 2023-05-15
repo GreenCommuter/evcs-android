@@ -77,6 +77,12 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
         ViewUtils.setAdjustResize(binding.fragmentAddCreditCardLayout)
     }
 
+    fun setFields() {
+        mCreditCardView.setName(mCardName.text.toString())
+        mCreditCardView.setExpiration(mCardExpirationMonth.text.toString())
+        mCreditCardView.setCode(mCvv.text.toString())
+    }
+
     abstract fun areFieldsEditable(): Boolean
 
     @CallSuper

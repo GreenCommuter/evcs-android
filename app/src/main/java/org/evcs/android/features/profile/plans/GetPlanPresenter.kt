@@ -4,6 +4,7 @@ import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionRequest
+import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.SubscriptionService
@@ -18,8 +19,8 @@ class GetPlanPresenter(viewInstance: GetPlanView?, services: RetrofitServices?) 
         val request = SubscriptionRequest(plan.id, paymentMethod)
         val call = if (id == null) getService(SubscriptionService::class.java).createSubscription(request)
                    else getService(SubscriptionService::class.java).changePlan(id, request)
-        call.enqueue(object : AuthCallback<Void>(this) {
-                override fun onResponseSuccessful(response: Void) {
+        call.enqueue(object : AuthCallback<SubscriptionStatus>(this) {
+                override fun onResponseSuccessful(response: SubscriptionStatus) {
                     view.onSubscriptionSuccess(response)
                 }
 

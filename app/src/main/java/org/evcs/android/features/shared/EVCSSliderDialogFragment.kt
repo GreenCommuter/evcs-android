@@ -10,7 +10,7 @@ class EVCSSliderDialogFragment : EVCSDialogFragment() {
 
     class Builder : EVCSDialogFragment.Builder() {
         override fun addButton(text: String, listener: OnClickListener): EVCSDialogFragment.Builder {
-            return addButton(text, false, listener)
+            return addButton(text, listener)
         }
 
         override fun build(): EVCSSliderDialogFragment {

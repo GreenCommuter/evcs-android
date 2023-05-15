@@ -14,7 +14,8 @@ class SubscriptionActivityPresenter(viewInstance: SubscriptionActivityView, serv
             getService(SubscriptionService::class.java).getStatus().enqueue(
                     object : AuthCallback<SubscriptionStatusWrapper>(this) {
                         override fun onResponseSuccessful(response: SubscriptionStatusWrapper) {
-                            view.onSubscriptionPlanRetrieved(response.currentSubscription!!)
+                            if (response.currentSubscription != null)
+                                view.onSubscriptionPlanRetrieved(response.currentSubscription!!)
                         }
 
                         override fun onResponseFailed(responseBody: ResponseBody, code: Int) {}

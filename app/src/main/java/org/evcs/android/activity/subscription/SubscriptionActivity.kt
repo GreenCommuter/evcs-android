@@ -58,7 +58,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         val date = mLongDateFormatter.print(response.renewalDate)
         val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()!!
         mBinding.activitySubscriptionsPaymentDetails.setText(String.format(
-                getString(R.string.manage_plan_payment_details_format, defaultPm.card.brand,
+                getString(R.string.manage_plan_payment_details_format, defaultPm.card.brand.toPrintableString(),
                     defaultPm.card.last4, response.price, response.renewalPeriod, date)))
         mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(defaultPm)
 
@@ -67,7 +67,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         if (response.onTrialPeriod) {
             mBinding.activitySubscriptionsFreeTrial.visibility = View.VISIBLE
             mBinding.activitySubscriptionsFreeTrial.setText(
-                    String.format(getString(R.string.manage_plan_days_remaining), response.activeDaysLeft))
+                    getString(R.string.manage_plan_days_remaining, response.activeDaysLeft))
         }
         if (response.status.equals(SubscriptionStatus.Status.CANCELED)) {
             populateCanceled(response)
@@ -75,6 +75,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsPlanStatus.text = response.status.toString()
     }
 
+    //TODO: save subscription to be able to show this
     private fun populateCanceled(response: SubscriptionStatus) {
         mBinding.managePlansCanceledLayout.visibility = View.VISIBLE
         mBinding.managePlansActiveLayout.visibility = View.GONE
@@ -103,12 +104,13 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
 
     private fun showCancellationDialog() {
         mPresenter.refreshSubscription()
-        val title = String.format(getString(R.string.cancellation_dialog_title), UserUtils.getLoggedUser().activeSubscription?.planName)
+        val title = getString(R.string.cancellation_dialog_title, UserUtils.getLoggedUser().activeSubscription?.planName)
+
         EVCSDialogFragment.Builder()
                 .setTitle(title)
                 .setSubtitle(getString(R.string.cancellation_dialog_subtitle))
-                .addButton("Close", false, { dialog -> dialog.dismiss() },
-                    R.drawable.layout_corners_rounded_blue_outline)
+                .addButton("Close", { dialog -> dialog.dismiss() },
+                    R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
             .show(supportFragmentManager)
     }
 

@@ -6,11 +6,11 @@ import java.util.List;
 
 public class Plan implements Serializable {
     //Setting an enum would prevent gson from parsing this as an object
+    public static Plan PAY_AS_YOU_GO = new Plan("0", 0, 0, "Pay as you go", 0f, 0);
     public static Plan STANDARD_ANYTIME = new Plan("1", 0, 0, "Standard Anytime" ,49.99f, 30);
-    public static Plan BASIC_ANYTIME = new Plan("2", 0, 0, "Basic Anytime", 9.99f, 30);
-    public static Plan PAY_AS_YOU_GO = new Plan("3", 0, 0, "Pay as you go", 0f, 0);
-    public static Plan UNLIMITED_ANYTIME = new Plan("4", 0, 0, "Unlimited anytime", 199.99f, 7);
-    public static Plan UNLIMITED_OFFPEAK = new Plan("5", 10, 18, "Unlimited offpeak", 99.99f, 7);
+    public static Plan UNLIMITED_OFFPEAK = new Plan("2", 20, 6, "Unlimited offpeak", 99.99f, 7);
+    public static Plan UNLIMITED_ANYTIME = new Plan("3", 0, 0, "Unlimited anytime", 199.99f, 7);
+    public static Plan BASIC_ANYTIME = new Plan("4", 0, 0, "Basic Anytime", 9.99f, 30);
 
     public static List<Plan> values() {
         return Arrays.asList(STANDARD_ANYTIME, BASIC_ANYTIME, PAY_AS_YOU_GO, UNLIMITED_ANYTIME, UNLIMITED_OFFPEAK);

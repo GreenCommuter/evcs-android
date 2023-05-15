@@ -107,6 +107,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:textAllCaps">false</item>
         <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/list_button_selector</item>
     </style>
 
     <style name="ButtonK.Orange">

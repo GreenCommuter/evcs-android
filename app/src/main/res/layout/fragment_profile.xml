@@ -203,7 +203,6 @@
                 android:layout_gravity="center_horizontal"
                 android:text="@string/activity_account_sign_out"
                 android:padding="@dimen/spacing_medium"
-                android:textColor="@color/evcs_gray_800"
                 style="@style/ButtonK"/>
 
             <TextView

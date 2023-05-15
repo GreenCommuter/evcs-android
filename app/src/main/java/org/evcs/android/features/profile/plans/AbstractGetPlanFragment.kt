@@ -1,5 +1,7 @@
 package org.evcs.android.features.profile.plans
 
+import android.content.Context
+import android.text.*
 import android.text.method.LinkMovementMethod
 import android.view.View
 import com.base.core.util.ToastUtils
@@ -8,8 +10,10 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Plan
+import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.ViewUtils.setVisibility
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -40,7 +44,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         val dateFormatter = DateTimeFormat.forPattern("M/d/yyyy")
         mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
-        mBinding.getPlanFreeTrial.visibility = if (getTrialLabel() != null) View.VISIBLE else View.GONE
+        mBinding.getPlanFreeTrial.setVisibility(getTrialLabel() != null)
         mBinding.getPlanFreeTrial.setLabel(getTrialLabel() ?: "")
 
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
@@ -48,22 +52,36 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
         mBinding.getPlanFlatRate.text = "Flat rate for Level 2 and DC fast \$%.2f/kWh after %d kWh exceeded"
 
-        mBinding.getPlanCostLayout.visibility = if (showCostLayout()) View.VISIBLE else View.GONE
+        mBinding.getPlanCostLayout.setVisibility(showCostLayout())
         //Todo: puede ser weekly
         mBinding.getPlanMonthlyCostTitle.text = "%\$1s Cost (Starting %\$2s)"
         mBinding.getPlanSubtotal.text = String.format("\$%.2f", mPlan.price)
         mBinding.bottomNavigationButton.text = getButtonText()
-        mBinding.getPlanTandc.text =
-                String.format(getString(R.string.get_plan_tandc), getButtonText())
+
+        mBinding.getPlanTandc.text = getTandCText()
+        mBinding.getPlanTandc.setVisibility(getTandCText() != null)
         mBinding.getPlanTandc.movementMethod = LinkMovementMethod.getInstance()
-        mBinding.getPlanTodayLayout.visibility = if (showToday()) View.VISIBLE else View.GONE
-        mBinding.getPlanPaymentInfo.setPaymentMethod(PaymentMethod.getDefaultFromSharedPrefs())
-        mBinding.getPlanPaymentCouponCode.visibility = if (showCouponCode()) View.VISIBLE else View.GONE
-        mBinding.getPlanPreviousPlanActiveUntil.visibility = if (getActiveUntil() != null) View.VISIBLE else View.GONE
+        mBinding.getPlanTodayLayout.setVisibility(showToday())
+        val pm = PaymentMethod.getDefaultFromSharedPrefs()
+        mBinding.bottomNavigationButton.isEnabled = pm != null
+        mBinding.getPlanPaymentInfo.setPaymentMethod(pm)
+        mBinding.getPlanPaymentCouponCode.setVisibility(showCouponCode())
+        mBinding.getPlanPreviousPlanActiveUntil.setVisibility(getActiveUntil() != null)
         mBinding.getPlanPreviousPlanActiveUntil.setText(dateFormatter.print(getActiveUntil()))
-        mBinding.getPlanStarted.visibility = if (showPlanStarted()) View.VISIBLE else View.GONE
-        mBinding.getPlanNextBillingDate.visibility = if (getNextBillingDate() != null) View.VISIBLE else View.GONE
+        mBinding.getPlanStarted.setVisibility(showPlanStarted())
+        mBinding.getPlanNextBillingDate.setVisibility(getNextBillingDate() != null)
         mBinding.getPlanNextBillingDate.setText(dateFormatter.print(getNextBillingDate()))
+    }
+
+    protected open fun getTandCText(): CharSequence? {
+        return requireContext().getText(R.string.get_plan_tandc, getButtonText())
+    }
+
+    fun Context.getText(id: Int, vararg args: Any): CharSequence {
+        val escapedArgs = args.map {
+            if (it is String) TextUtils.htmlEncode(it) else it
+        }.toTypedArray()
+        return Html.fromHtml(String.format(Html.toHtml(SpannedString(getText(id))), *escapedArgs))
     }
 
     protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
@@ -113,8 +131,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         presenter.subscribe(mPlan, PaymentMethod.getDefaultFromSharedPrefs()!!.id!!)
     }
 
-    override fun onSubscriptionSuccess(response: Void) {
+    override fun onSubscriptionSuccess(response: SubscriptionStatus) {
         ToastUtils.show("Subscription success")
-        (requireActivity() as GetPlanActivity).onPlanSubscribed(mPlan)
+        (requireActivity() as GetPlanActivity).onPlanSubscribed(response)
     }
 }

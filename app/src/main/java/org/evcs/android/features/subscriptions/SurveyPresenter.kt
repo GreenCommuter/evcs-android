@@ -37,8 +37,9 @@ class SurveyPresenter(viewInstance: SurveyView?, services: RetrofitServices?)
 
     fun sendSurveyResults(checkedItems: HashSet<String>, otherId: String, text: Editable) {
         val request = SubscriptionSurveyRequest(subscriptionId, checkedItems, otherId, text.toString())
-        getService(SubscriptionService::class.java).createSubscriptionSurvey(request).enqueue(object : AuthCallback<Void>(this) {
-            override fun onResponseSuccessful(response: Void) {
+        getService(SubscriptionService::class.java).createSubscriptionSurvey(request)
+                .enqueue(object : AuthCallback<Void?>(this) {
+            override fun onResponseSuccessful(response: Void?) {
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -53,8 +54,8 @@ class SurveyPresenter(viewInstance: SurveyView?, services: RetrofitServices?)
     }
 
     fun cancelSubscription() {
-        getService(SubscriptionService::class.java).cancelSubscription(subscriptionId).enqueue(object : AuthCallback<Void>(this) {
-            override fun onResponseSuccessful(response: Void) {
+        getService(SubscriptionService::class.java).cancelSubscription(subscriptionId).enqueue(object : AuthCallback<Void?>(this) {
+            override fun onResponseSuccessful(response: Void?) {
                 view.onSubscriptionCanceled()
             }
 

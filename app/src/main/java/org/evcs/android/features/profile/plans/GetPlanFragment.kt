@@ -27,16 +27,15 @@ class GetPlanFragment : AbstractGetPlanFragment() {
         }
     }
 
-    override fun getActiveUntil(): DateTime {
-        //todo: set
-        return DateTime()
+    override fun getActiveUntil(): DateTime? {
+        return null
     }
 
     override fun showCouponCode(): Boolean {
         return false
     }
 
-    override fun getTrialLabel(): String? {
+    override fun getTrialLabel(): String {
         return String.format("%d Day Offer - New Members Only", mPlan.trialDays)
     }
 

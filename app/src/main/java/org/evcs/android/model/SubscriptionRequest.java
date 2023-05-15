@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class SubscriptionRequest {
     public String planId;
-    public RenewalPeriod renewalPeriod;
+    public String renewalPeriod;
     public String paymentMethod;
     public ArrayList<String> couponCodes;
     public String referrerNodooeId;
@@ -15,7 +15,7 @@ public class SubscriptionRequest {
 
     public SubscriptionRequest(String planId, String paymentMethod) {
         this.planId = planId;
-        this.renewalPeriod = RenewalPeriod.MONTH;
+        this.renewalPeriod = RenewalPeriod.MONTH.toString();
         this.couponCodes = new ArrayList<>();
         this.paymentMethod = paymentMethod;
     }

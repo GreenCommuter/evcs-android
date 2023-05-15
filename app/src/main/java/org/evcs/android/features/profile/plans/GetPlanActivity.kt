@@ -6,6 +6,7 @@ import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityBaseBinding
 import org.evcs.android.model.Plan
+import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.util.Extras
 
 class GetPlanActivity : BaseActivity2() {
@@ -22,8 +23,8 @@ class GetPlanActivity : BaseActivity2() {
         replaceFragment(R.id.activity_base_content, fragment)
     }
 
-    fun onPlanSubscribed(plan: Plan) {
-        val fragment = PlanStartedFragment.newInstance(plan)
+    fun onPlanSubscribed(subscription: SubscriptionStatus) {
+        val fragment = PlanStartedFragment.newInstance(subscription.plan)
         replaceFragment(R.id.activity_base_content, fragment)
     }
 

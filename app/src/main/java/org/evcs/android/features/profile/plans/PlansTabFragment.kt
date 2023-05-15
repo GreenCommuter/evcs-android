@@ -53,7 +53,8 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
     }
 
     override fun onGetPlanClicked(plan: Plan) {
-        if (UserUtils.getLoggedUser().activeSubscription != null) {
+        //TODO: Check
+        if (UserUtils.getLoggedUser().hasAnySubscription) {
             val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan"
             val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing"
             val paragraph3 = "Do you want to continue changing plans?"
@@ -63,7 +64,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             EVCSDialogFragment.Builder()
                 .setTitle("Are you sure you want to change plans?")
                 .setSubtitle(paragraph1 + "\n\n" + paragraph2 + "\n\n" + paragraph3)
-                .addButton("Continue", false, {
+                .addButton("Continue", {
                         dialog -> dialog.dismiss()
                         gotoPlan(plan, true)
                     }, R.drawable.layout_corners_rounded_blue)

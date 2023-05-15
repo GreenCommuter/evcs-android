@@ -168,7 +168,7 @@
     <!-- Billing information -->
     <string name="profile_billing_information_braintree_description">Choose your payment method</string>
     <string name="billing_information_credit_card_formatter">... %1$s</string>
-    <string name="billing_information_credit_card_formatter_full">···· ···· ···· %1$s</string>
+    <string name="billing_information_credit_card_formatter_full">•••• •••• •••• %1$s</string>
     <string name="payment_method_fragment_title">Payment method</string>
     <string name="payment_methods_account_credit">Account Credit</string>
     <string name="payment_method_dialog_card_information">Card information</string>
@@ -496,9 +496,9 @@
     <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
 
     <!-- Get Plan -->
-    <string name="get_plan_started">Your plan has started</string>
+    <string name="get_plan_started">Your plan has started!</string>
     <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://learntodroid.com">Terms of Use</a>,
-        <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a></string>
+        <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a>.</string>
 
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>

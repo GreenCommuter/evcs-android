@@ -3,6 +3,7 @@ package org.evcs.android.features.shared;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -143,7 +144,6 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         return button;
     }
 
-    //TODO: volver a la versión anterior y en el que necesita el blue outline (subscription cancel) ponerle close
     protected Button getCancelButton(String cancel) {
         Button button = new Button(getContext());
         button.setBackgroundColor(mTransparent);
@@ -258,32 +258,23 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
         /**
          * Adds a new {@link Button} to the dialog with the text and click listener passed as argument.
-         * By default this method sets the text as upper case.
-         *
-         * @param text Text to show in the button
-         * @param listener Click listener for the button.
-         * @return Builder for further customization
-         */
-        public Builder addButton(@NonNull String text, @NonNull OnClickListener listener) {
-            return addButton(text, false, listener);
-        }
-
-        /**
-         * Adds a new {@link Button} to the dialog with the text and click listener passed as argument.
          * You can set whether you want the button text as upper case or not.
-         * If not upper case is used, the button will not change the text.
          *
          * @param text Text to show in the button
          * @param upperCase <b>true</b> to set the text to upper case, <b>false</b> to keep it unchanged
          * @param listener Click listener for the button.
          * @return Builder for further customization
          */
-        public Builder addButton(String text, boolean upperCase, OnClickListener listener) {
-            return addButton(text, upperCase, listener, R.drawable.layout_corners_rounded_orange_gradient);
+        public Builder addButton(String text, OnClickListener listener) {
+            return addButton(text, listener, R.drawable.layout_corners_rounded_orange_gradient);
         }
 
-        public Builder addButton(String text, boolean upperCase, OnClickListener listener, @DrawableRes int background) {
-            mButtons.put(text, new ButtonInfo(upperCase, listener, background));
+        public Builder addButton(String text, OnClickListener listener, @DrawableRes int background) {
+            return addButton(text, listener, background, R.color.button_text_color_selector_filled);
+        }
+
+        public Builder addButton(String text, OnClickListener listener, @DrawableRes int background, @ColorRes int textColor) {
+            mButtons.put(text, new ButtonInfo(false, listener, background, textColor));
             return this;
         }
 
@@ -339,11 +330,14 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         OnClickListener listener;
         boolean upperCase;
         @DrawableRes int background;
+        @DrawableRes int textColor;
 
-        public ButtonInfo(boolean upperCase, OnClickListener listener, @DrawableRes int background) {
+        public ButtonInfo(boolean upperCase, OnClickListener listener, @DrawableRes int background,
+                          @ColorRes int textColor) {
             this.listener = listener;
             this.upperCase = upperCase;
             this.background = background;
+            this.textColor = textColor;
         }
     }
 

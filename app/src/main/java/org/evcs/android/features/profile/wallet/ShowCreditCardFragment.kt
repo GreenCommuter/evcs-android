@@ -33,12 +33,12 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(),
         if (cc == null) return
 
         mCreditCardView.setCreditCard(cc)
-        mCreditCardView.setName(paymentMethod.billingDetails?.name)
         mCardName.editText?.setText(paymentMethod.billingDetails?.name)
-        mCardNumber.editText?.setText(cc.last4!!)
-        mCardExpirationMonth.editText?.setText(cc.expMonth.toString() + "/" + cc.expYear.toString())
-        mZipcode.editText?.setText("·····")
-        mCvv.editText?.setText("···")
+        mCardNumber.editText?.setText("•••• " + cc.last4!!)
+        mCardExpirationMonth.editText?.setText("${cc.expMonth}/${cc.expYear}")
+        mZipcode.editText?.setText("•••••")
+        mCvv.editText?.setText("•••")
+        setFields()
         mNext.isEnabled = true //What if only card?
     }
 

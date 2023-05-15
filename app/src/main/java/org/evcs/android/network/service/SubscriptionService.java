@@ -1,6 +1,7 @@
 package org.evcs.android.network.service;
 
 import org.evcs.android.model.SubscriptionRequest;
+import org.evcs.android.model.SubscriptionStatus;
 import org.evcs.android.model.SubscriptionStatusWrapper;
 import org.evcs.android.model.SubscriptionSurveyRequest;
 import org.evcs.android.model.SurveyItem;
@@ -11,7 +12,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface SubscriptionService {
 
@@ -22,13 +23,13 @@ public interface SubscriptionService {
     Call<Void> createSubscriptionSurvey(@Body SubscriptionSurveyRequest request);
 
     @POST("/members/v1/subscriptions")
-    Call<Void> createSubscription(@Body SubscriptionRequest subscriptionRequest);
+    Call<SubscriptionStatus> createSubscription(@Body SubscriptionRequest subscriptionRequest);
 
     @POST("/members/v1/subscriptions/{id}/change_plan")
-    Call<Void> changePlan(@Query("id") String subscriptionId, @Body SubscriptionRequest subscriptionRequest);
+    Call<SubscriptionStatus> changePlan(@Path("id") String subscriptionId, @Body SubscriptionRequest subscriptionRequest);
 
     @POST("/members/v1/subscriptions/{id}/cancel")
-    Call<Void> cancelSubscription(@Query("id") String id);
+    Call<Void> cancelSubscription(@Path("id") String id);
 
     //    STATUS_ENDPOINT:
     @GET("/members/v1/users/status")

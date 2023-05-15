@@ -25,6 +25,7 @@ import org.evcs.android.util.Extras
 import org.evcs.android.util.FontUtils
 import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils.setVisibility
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
@@ -59,30 +60,31 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setUser(user: User) {
         mBinding.profileName.text = user.name
         val subscription = user.activeSubscription
+
+        (mBinding.profileExplorePlans.parent as View).setVisibility(subscription == null)
+
+        mBinding.profileMenuSubscriptionPlan.setVisibility(subscription != null)
+        mBinding.profilePlanProgress.setVisibility(subscription!= null)
+        (mBinding.profileIssueButton.parent as View).setVisibility(subscription?.issue ?: false)
+        mBinding.profileIssueButton.setVisibility(subscription?.isSuspended?:false)
+
+        mBinding.profileExplorePlansText.text =
+                FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
         if (subscription == null) {
             if (false /*user is verified*/) {
                 mBinding.profilePlanName.text = "Account not activated"
             } else {
                 mBinding.profilePlanName.text = getString(R.string.plan_info_pay_as_you_go) + " membership"
-                mBinding.profileExplorePlansText.text =
-                        FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
-                (mBinding.profileExplorePlans.parent as View).visibility = View.VISIBLE
             }
-            mBinding.profileMenuSubscriptionPlan.visibility = View.GONE
         } else {
             mBinding.profilePlanName.text = subscription.planName
-            mBinding.profilePlanProgress.visibility = View.VISIBLE
             mBinding.profilePlanProgress.setPlan(subscription)
             if (subscription.issue) {
-                (mBinding.profileIssueButton.parent as View).visibility = View.VISIBLE
                 mBinding.profileIssueMessage.text = subscription.issueMessage
-                if (subscription.isSuspended) {
-                    mBinding.profileIssueButton.visibility = View.VISIBLE
-                }
             }
         }
         mBinding.profileMenuVersion.text =
-                String.format(getString(R.string.profile_version), BuildConfig.VERSION_NAME)
+                getString(R.string.profile_version, BuildConfig.VERSION_NAME)
     }
 
     override fun populate() {

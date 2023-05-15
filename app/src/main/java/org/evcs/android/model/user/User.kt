@@ -23,6 +23,8 @@ open class User : Serializable {
 
     val activeSubscription: Subscription? = null
     val pendingSubscription: Subscription? = null
+    val hasAnySubscription: Boolean
+        get() = activeSubscription != null || pendingSubscription != null
 
 //    "noodoe_id":"24",
 //    "charges_last_thirty_days":null,

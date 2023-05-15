@@ -127,7 +127,7 @@ public final class LocationUtils {
                 .setTitle(context.getString(R.string.gatecode_dialog_title))
                 .setSubtitle(context.getString(R.string.gatecode_dialog_subtitle))
                 .addView(gatecodeView)
-                .addButton(context.getString(R.string.app_continue), false, fragment -> {
+                .addButton(context.getString(R.string.app_continue), fragment -> {
                     launchGoogleMapsWithPin(context, latLng);
                     fragment.dismiss();
                 }, R.drawable.layout_corners_rounded_blue)

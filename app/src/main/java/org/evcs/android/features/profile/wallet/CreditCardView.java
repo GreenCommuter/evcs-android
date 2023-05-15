@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 
+import org.evcs.android.R;
 import org.evcs.android.databinding.ViewCreditCardBinding;
 import org.evcs.android.model.CreditCard;
 import org.evcs.android.model.CreditCardProvider;
@@ -53,7 +54,7 @@ public class CreditCardView extends LinearLayout {
     }
 
     public void setCreditCard(CreditCard creditCard) {
-        mLast4.setText(creditCard.getLast4());
+        mLast4.setText(getContext().getString(R.string.billing_information_credit_card_formatter_full, creditCard.getLast4()));
         if (creditCard.getBrand() != CreditCardProvider.UNKNOWN)
             mProvider.setImageResource(creditCard.getBrand().getLogo());
     }

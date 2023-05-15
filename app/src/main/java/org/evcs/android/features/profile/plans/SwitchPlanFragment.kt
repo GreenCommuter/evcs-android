@@ -18,8 +18,9 @@ class SwitchPlanFragment : AbstractGetPlanFragment() {
         }
     }
 
-    override fun getActiveUntil(): DateTime? {
-        return null
+    override fun getActiveUntil(): DateTime {
+        //todo: set
+        return DateTime()
     }
 
     override fun showCouponCode(): Boolean {

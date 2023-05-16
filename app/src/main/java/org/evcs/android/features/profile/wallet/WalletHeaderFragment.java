@@ -49,7 +49,7 @@ public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> i
         mEndlessRecyclerView = binding.creditCardsRecyclerView;
         mEndlessRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        binding.walletAddNewPaymentMethod.setOnClickListener(view -> onAddPaymentMethodClicked());
+        binding.walletAddNewPaymentMethod.setOnChangeClickListener(view -> onAddPaymentMethodClicked());
     }
 
     @Override

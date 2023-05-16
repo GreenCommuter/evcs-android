@@ -37,7 +37,10 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
     override fun init() {
         mLauncher =
                 registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                    result -> if (result.resultCode == RESULT_OK) showCancellationDialog()
+                    result -> if (result.resultCode == RESULT_OK) {
+                        mPresenter.refreshSubscription()
+                        showCancellationDialog()
+                    }
                 }
         mChangePmLauncher = WalletActivity.getDefaultLauncher(this,
                 mBinding.activitySubscriptionsPaymentInfo)
@@ -47,7 +50,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
     override fun populate() {
         createPresenter()
         mPresenter.refreshSubscription()
-        onSubscriptionPlanRetrieved(UserUtils.getLoggedUser().activeSubscription!!)
+        UserUtils.getLoggedUser().activeSubscription?.let { onSubscriptionPlanRetrieved(it) }
     }
 
     fun createPresenter() {
@@ -78,7 +81,6 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsPlanStatus.text = response.status.toString()
     }
 
-    //TODO: save subscription to be able to show this
     private fun populateCanceled(response: SubscriptionStatus) {
         mBinding.managePlansCanceledLayout.visibility = View.VISIBLE
         mBinding.managePlansActiveLayout.visibility = View.GONE
@@ -109,7 +111,6 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
     }
 
     private fun showCancellationDialog() {
-        mPresenter.refreshSubscription()
         val title = getString(R.string.cancellation_dialog_title, UserUtils.getLoggedUser().activeSubscription?.planName)
 
         EVCSDialogFragment.Builder()

@@ -55,8 +55,8 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         mPagerAdapter = BaseFragmentStatePagerAdapter(childFragmentManager)
         mPagerAdapter.addItem(mStandardMileageFragment, tabStandard)
         mViewPager.adapter = mPagerAdapter
+        showTabs()
         mTabLayout.getTabAt(0)?.customView = getTab(tabStandard)
-//        showTabs()
 
         showProgressDialog()
         presenter.getPlans()

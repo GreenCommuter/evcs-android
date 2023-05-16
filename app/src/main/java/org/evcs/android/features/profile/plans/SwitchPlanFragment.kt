@@ -1,6 +1,7 @@
 package org.evcs.android.features.profile.plans
 
 import android.os.Bundle
+import org.evcs.android.R
 import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
 import org.joda.time.DateTime
@@ -32,7 +33,7 @@ class SwitchPlanFragment : AbstractGetPlanFragment() {
     }
 
     override fun getButtonText(): String {
-        return "Agree & Switch Plans"
+        return getString(R.string.get_plan_agree_switch)
     }
 
     override fun showToday(): Boolean {

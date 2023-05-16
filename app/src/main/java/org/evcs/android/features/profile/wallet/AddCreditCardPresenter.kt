@@ -40,7 +40,7 @@ class AddCreditCardPresenter(viewInstance: AddCreditCardView, services: Retrofit
     fun getConfirmParams(name: String, card: PaymentMethodCreateParams.Card, zipcode: String): ConfirmSetupIntentParams {
         val billingDetails = PaymentMethod.BillingDetails.Builder()
             .setName(name)
-            .setEmail(UserUtils.getUserEmail())
+//            .setEmail(UserUtils.getUserEmail())
             .setAddress(Address.Builder().setPostalCode(zipcode).build())
             .build()
 

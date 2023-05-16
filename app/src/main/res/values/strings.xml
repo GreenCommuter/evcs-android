@@ -266,11 +266,6 @@
     <string name="vanpool_travel_information_km_distance_format">%1$.1f Km</string>
     <string name="vanpool_travel_information_time_format">%1$d min</string>
 
-    <!-- Billing confirmation Dialog -->
-    <string name="vanpool_detail_billing_confirmation_dialog_title">Billing confirmation</string>
-    <string name="vanpool_detail_billing_confirmation_dialog_subtitle">A monthly subscription will be billed to your credit card once the vanpool is active</string>
-    <string name="vanpool_detail_billing_confirmation_dialog_button">Send payment</string>
-
     <!-- Congratulations Fragment -->
     <string name="vanpool_detail_congratulations_fragment_description">Thank you for your payment. Your vanpool is scheduled to begin on %1$s. $%2$.2f will be deducted monthly from your credit card on file.</string>
 
@@ -280,9 +275,6 @@
     <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
     <string name="vanpool_status_active">Active</string>
     <string name="vanpool_status_inactive">Inactive</string>
-
-    <!-- Vanpool Pre-Checklist -->
-    <string name="vanpool_pre_checklist_unlock_car">Unlock</string>
 
     <!-- Vanpool Ongoing ride -->
     <string name="vanpool_ongoing_ride_title">Ongoing Ride</string>
@@ -388,7 +380,6 @@
 
     <!-- Help -->
     <string name="help_title">Help</string>
-    <string name="help_description">EVCS is here to help! \nIf you have any questions or concerns please send an email to help@evcs.org or call us at (844)&#8211;4RIDE&#8211;GC. That\'s \n (844) 474&#8211;3342.</string>
     <string name="help_terms_of_use"><a href="https://greencommuter.org/term_of_use">Terms Of Use</a></string>
     <string name="help_privacy_policy"><a href="https://greencommuter.org/privacy">Privacy Policy</a></string>
 
@@ -445,7 +436,12 @@
     <string name="location_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
     <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
-    <!-- Plan info-->
+    <!-- Location View -->
+    <string name="location_view_ac_price_format">Level 2 Member Price: \$%.2f/kWh</string>
+    <string name="location_view_dc_price_format">DC Fast Member Price: $%.2f/kWh</string>
+    <string name="location_view_gatecode">Gatecode: </string>
+
+    <!-- Plan info -->
     <string name="plan_info_title">Start charging</string>
     <string name="plan_info_discounted_charge_rate">Discounted charge rate</string>
     <string name="plan_info_upgrade_plan">Upgrade plan</string>
@@ -503,6 +499,10 @@
     <string name="get_plan_started">Your plan has started!</string>
     <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://learntodroid.com">Terms of Use</a>,
         <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a>.</string>
+    <string name="get_plan_name">Plan</string>
+    <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
+    <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
+    <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
 
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>

@@ -21,8 +21,10 @@ open class User : Serializable {
     val isPhoneVerified: Boolean
         get() = phoneVerifiedAt != null
 
-    val activeSubscription: Subscription? = null
+    var activeSubscription: Subscription? = null
     val pendingSubscription: Subscription? = null
+    val previousSubscription: Subscription? = null
+
     val hasAnySubscription: Boolean
         get() = activeSubscription != null || pendingSubscription != null
 

@@ -42,7 +42,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     override fun init() {
         mPlan = requireArguments().getSerializable(Extras.PlanActivity.PLAN) as Plan
-        mLauncher = WalletActivity.getDefaultLauncher(requireActivity(), mBinding.getPlanPaymentInfo)
+        mLauncher = WalletActivity.getDefaultLauncher(this, mBinding.getPlanPaymentInfo)
     }
 
     override fun populate() {

@@ -26,6 +26,7 @@ class GetPlanActivity : BaseActivity2() {
     fun onPlanSubscribed(subscription: SubscriptionStatus) {
         val fragment = PlanStartedFragment.newInstance(subscription.plan)
         replaceFragment(R.id.activity_base_content, fragment)
+        setResult(RESULT_OK)
     }
 
 }

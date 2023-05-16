@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
@@ -31,6 +33,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private val CALL_PERMISSION = "android.permission.CALL_PHONE"
 
+    private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mBinding: FragmentProfileBinding
 
     val mNavigationListener = MainNavigationController.getInstance()
@@ -51,6 +54,9 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     override fun init() {
         presenter.refreshUser()
         presenter.refreshDefaultPaymentMethod()
+        mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            presenter.refreshUser()
+        }
     }
 
     override fun onUserRefreshed(response: User) {
@@ -94,7 +100,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     override fun setListeners() {
         mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
         mBinding.profileMenuPaymentMethods.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
-        mBinding.profileMenuSubscriptionPlan.setOnClickListener { NavigationUtils.jumpTo(requireContext(), SubscriptionActivity::class.java) }
+        mBinding.profileMenuSubscriptionPlan.setOnClickListener { mLauncher.launch(Intent(context, SubscriptionActivity::class.java)) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("https://www.evcs.com/terms-of-use") }
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
@@ -104,7 +110,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
-        mBinding.profileIssueButton.setOnClickListener {  }
+        mBinding.profileIssueButton.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
         super.setListeners()
     }
 
@@ -132,7 +138,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
             }
         }, CALL_PERMISSION)
     }
-
 
     override fun onBackPressed(): Boolean {
         mNavigationListener.onMapClicked()

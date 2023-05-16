@@ -196,6 +196,8 @@
     <string name="add_credit_card_cvv">CVV</string>
     <string name="add_credit_card_ok">Save card</string>
     <string name="add_credit_card_name">Cardholder name</string>
+    <string name="add_credit_card_set_default">Set as default payment method</string>
+    <string name="add_credit_card_success">Your card was successfully added</string>
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>

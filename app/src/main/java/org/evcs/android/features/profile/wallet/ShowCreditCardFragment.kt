@@ -1,21 +1,16 @@
 package org.evcs.android.features.profile.wallet
 
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import org.evcs.android.R
+import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.model.CreditCard
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.util.Extras
 
-/**
- * Fragment that helps with the payment using BrainTree.
- * It shows a message and a popup to pay, and notifies its children when the payment was accepted.
- *
- * @param <P> Presenter extending [AddCreditCardPresenter]
-</P> */
-class ShowCreditCardFragment : AbstractCreditCardFragment(),
-    AddCreditCardView {
+class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
+
+    private var mPaymentMethod: PaymentMethod? = null
 
     companion object {
         fun newInstance(cc: CreditCard): ShowCreditCardFragment {
@@ -28,12 +23,12 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(),
     }
 
     override fun populate() {
-        val paymentMethod = arguments?.getSerializable(Extras.CreditCard.CREDIT_CARD) as PaymentMethod?
-        val cc = paymentMethod?.card
+        mPaymentMethod = arguments?.getSerializable(Extras.CreditCard.CREDIT_CARD) as PaymentMethod?
+        val cc = mPaymentMethod?.card
         if (cc == null) return
 
         mCreditCardView.setCreditCard(cc)
-        mCardName.editText?.setText(paymentMethod.billingDetails?.name)
+        mCardName.editText?.setText(mPaymentMethod!!.billingDetails?.name)
         mCardNumber.editText?.setText("•••• " + cc.last4!!)
         mCardExpirationMonth.editText?.setText("${cc.expMonth}/${cc.expYear}")
         mZipcode.editText?.setText("•••••")
@@ -55,7 +50,15 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(),
     }
 
     override fun onNextClicked() {
-        //TODO: add slider dialog, do remove
+        EVCSSliderDialogFragment.Builder()
+                .setTitle(getString(R.string.payment_method_dialog_remove_subtitle))
+                .addButton(getString(R.string.payment_method_dialog_remove_button), { fragment ->
+                    presenter.removePaymentMethod(mPaymentMethod!!)
+                    fragment.dismiss()
+                }, R.drawable.layout_corners_rounded_danger)
+                .showCancel(true)
+                .setCancelable(true)
+                .show(requireFragmentManager())
     }
 
 }

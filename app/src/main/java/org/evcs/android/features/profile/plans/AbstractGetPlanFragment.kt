@@ -1,13 +1,16 @@
 package org.evcs.android.features.profile.plans
 
 import android.content.Context
+import android.content.Intent
 import android.text.*
 import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionStatus
@@ -20,6 +23,7 @@ import org.joda.time.format.DateTimeFormatter
 
 abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetPlanView {
 
+    private lateinit var mLauncher: ActivityResultLauncher<Intent>
     protected lateinit var mBinding: FragmentGetPlanBinding
     protected lateinit var mPlan: Plan
 
@@ -38,6 +42,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     override fun init() {
         mPlan = requireArguments().getSerializable(Extras.PlanActivity.PLAN) as Plan
+        mLauncher = WalletActivity.getDefaultLauncher(requireActivity(), mBinding.getPlanPaymentInfo)
     }
 
     override fun populate() {
@@ -119,7 +124,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mBinding.bottomNavigationButton.setOnClickListener { getBottomNavigationListener() }
         mBinding.getPlanPaymentInfo.setOnChangeClickListener {
-            //TODO: go to change
+            val intent = WalletActivity.buildIntent(context, true)
+            mLauncher.launch(intent)
         }
         mBinding.getPlanPaymentCouponCode.setListener {
             //TODO: apply

@@ -27,8 +27,10 @@ public class PaymentMethodViewHolder extends RecyclerView.ViewHolder {
 
     public void setListeners(CreditCardViewListener listener) {
         mListener = listener;
-        ((View) mBinding.creditCardProvider.getParent()).setOnClickListener(
+        mBinding.viewListButtonChevron.setOnClickListener(
                 view -> mListener.onDetailClicked());
+        ((View) mBinding.creditCardProvider.getParent()).setOnClickListener(
+                view -> mListener.onStarClicked());
     }
 
     public void setDefault(boolean def) {
@@ -37,7 +39,7 @@ public class PaymentMethodViewHolder extends RecyclerView.ViewHolder {
 
     public interface CreditCardViewListener {
         void onStarClicked();
-        void onTrashClicked();
+//        void onTrashClicked();
         void onDetailClicked();
     }
 

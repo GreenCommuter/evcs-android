@@ -15,30 +15,10 @@ import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.ErrorUtils
 
-class AddCreditCardPresenter<T : AddCreditCardView?>(brainTreeFragment: T, services: RetrofitServices?)
-    : ServicesPresenter<T>(brainTreeFragment, services) {
+class AddCreditCardPresenter(viewInstance: AddCreditCardView, services: RetrofitServices?)
+    : CreditCardPresenter<AddCreditCardView>(viewInstance, services) {
 
     private var mClientSecret: String? = null
-
-    fun makeDefaultPaymentMethod(id: String?) {
-        getService(PaymentMethodsService::class.java).setDefaultPaymentMethod(id)
-                .enqueue(object : AuthCallback<Void?>(this) {
-                    override fun onResponseSuccessful(response: Void?) {
-                        val user = UserUtils.getLoggedUser()
-                        user.defaultPm = id
-                        UserUtils.saveUser(user)
-                        view.onMakeDefaultFinished()
-                    }
-
-                    override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
-                    }
-
-                    override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
-                    }
-                })
-    }
 
     fun getClientSecret() {
         getService(PaymentMethodsService::class.java).getClientSecret()
@@ -57,8 +37,9 @@ class AddCreditCardPresenter<T : AddCreditCardView?>(brainTreeFragment: T, servi
             })
         }
 
-    fun getConfirmParams(card: PaymentMethodCreateParams.Card, zipcode: String): ConfirmSetupIntentParams {
+    fun getConfirmParams(name: String, card: PaymentMethodCreateParams.Card, zipcode: String): ConfirmSetupIntentParams {
         val billingDetails = PaymentMethod.BillingDetails.Builder()
+            .setName(name)
             .setEmail(UserUtils.getUserEmail())
             .setAddress(Address.Builder().setPostalCode(zipcode).build())
             .build()

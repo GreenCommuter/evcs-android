@@ -33,7 +33,7 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
         getService(PaymentMethodsService::class.java).paymentMethods.enqueue(
             object : AuthCallback<List<PaymentMethod>>(this) {
                 override fun onResponseSuccessful(response: List<PaymentMethod>) {
-                    val pm = response.filter { pm -> pm.id == UserUtils.getLoggedUser().defaultPm }.firstOrNull()
+                    val pm = response.firstOrNull { pm -> pm.id == UserUtils.getLoggedUser().defaultPm }
                     StorageUtils.storeInSharedPreferences(Extras.ChangePaymentMethod.PAYMENT_METHODS, pm)
                 }
 

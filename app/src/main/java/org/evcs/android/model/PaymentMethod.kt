@@ -6,6 +6,7 @@ import org.evcs.android.util.StorageUtils
 import java.io.Serializable
 
 class PaymentMethod : Serializable {
+
     var id: String? = null
 
     //  "object": "payment_method",

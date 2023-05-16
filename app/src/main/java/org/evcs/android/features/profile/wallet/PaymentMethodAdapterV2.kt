@@ -24,9 +24,9 @@ class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodV
                 if (mListener != null) mListener!!.onStarClicked(item)
             }
 
-            override fun onTrashClicked() {
-                if (mListener != null) mListener!!.onTrashClicked(item)
-            }
+//            override fun onTrashClicked() {
+//                if (mListener != null) mListener!!.onTrashClicked(item)
+//            }
 
             override fun onDetailClicked() {
                 if (mListener != null) mListener!!.onDetailClicked(item)
@@ -44,20 +44,24 @@ class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodV
         return PaymentMethodViewHolder(v)
     }
 
-    fun setDefault(item: PaymentMethod) {
-        mDefaultPm = item.id
+    fun setDefault(id: String) {
+        mDefaultPm = id
         notifyDataSetChanged()
     }
 
-    //    public CreditCard getDefault() {
-    //        for (int i = 0; i < getItemCount(); i++) {
-    //            if (get(i).card.isDefault()) return get(i).card;
-    //        }
-    //        return null;
-    //    }
+    fun setDefault(item: PaymentMethod) {
+        setDefault(item.id!!)
+    }
+
+    fun getDefault(): PaymentMethod? {
+        //Ugly
+        val items = IntRange(0, itemCount - 1).map { i -> get(i) }
+        return items.firstOrNull { item -> item.id == mDefaultPm }
+    }
+
     interface CreditCardListener {
         fun onStarClicked(item: PaymentMethod)
-        fun onTrashClicked(item: PaymentMethod)
+//        fun onTrashClicked(item: PaymentMethod)
         fun onDetailClicked(item: PaymentMethod)
     }
 }

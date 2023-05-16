@@ -11,8 +11,9 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentAddCreditCardBinding
 import org.evcs.android.features.shared.StandardTextField
+import org.evcs.android.features.subscriptions.ImageCheckBoxLayout
+import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.ViewUtils
@@ -20,13 +21,7 @@ import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-/**
- * Fragment that helps with the payment using BrainTree.
- * It shows a message and a popup to pay, and notifies its children when the payment was accepted.
- *
- * @param <P> Presenter extending [AddCreditCardPresenter]
-</P> */
-abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter<*>>(),
+abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter>(),
     AddCreditCardView {
 
     protected lateinit var mCardName: StandardTextField
@@ -37,8 +32,9 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
     protected lateinit var mCvv: StandardTextField
     protected lateinit var mNext: Button
     protected lateinit var mToolbar: EVCSToolbar2
+    protected lateinit var mSetDefault: ImageCheckBoxLayout
 
-    protected var listener: IBrainTreeListener? = null
+//    protected var listener: IBrainTreeListener? = null
 
     protected lateinit var mDateTimeFormatter: DateTimeFormatter
 
@@ -48,13 +44,11 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
 
     @CallSuper
     override fun init() {
-//        showProgressDialog();
         mCardNumber.editText!!.typeface = Typeface.MONOSPACE
         mDateTimeFormatter = DateTimeFormat.forPattern("MM/yy")
-//        presenter!!.getClientSecret();
     }
 
-    override fun createPresenter(): AddCreditCardPresenter<*> {
+    override fun createPresenter(): AddCreditCardPresenter {
         return AddCreditCardPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
@@ -69,6 +63,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
         mZipcode = binding.fragmentBraintreeCardZipcode
         mNext = binding.fragmentBraintreeNext
         mToolbar = binding.fragmentAddCreditCardToolbar
+        mSetDefault = binding.fragmentAddCreditCardSetDefault
 
         for (view in arrayListOf (mCardName, mCardNumber, mCardExpirationMonth, mCvv, mZipcode)) {
             view.isEnabled = areFieldsEditable()
@@ -111,19 +106,25 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
 
     abstract fun onNextClicked()
 
-    override fun onMakeDefaultFinished() {
+    override fun onDefaultPaymentMethodSet(item: PaymentMethod) {
         hideProgressDialog()
-        listener!!.onAddCreditCardFragmentFinished()
+        finish()
+//        listener!!.onAddCreditCardFragmentFinished()
+    }
+
+    override fun onPaymentMethodRemoved(item: PaymentMethod) {
+        hideProgressDialog()
+        finish()
     }
 
     fun finish() {
         NavHostFragment.findNavController(this).popBackStack()
     }
 
-    interface IBrainTreeListener : INavigationListener {
+//    interface IBrainTreeListener : INavigationListener {
         /**
          * Method called when the [AbstractCreditCardFragment] finishes.
          */
-        fun onAddCreditCardFragmentFinished()
-    }
+//        fun onAddCreditCardFragmentFinished()
+//    }
 }

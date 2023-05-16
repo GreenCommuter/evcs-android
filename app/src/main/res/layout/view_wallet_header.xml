@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -9,25 +8,6 @@
         android:id="@+id/credit_cards_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-
-    <FrameLayout
-        android:id="@+id/credit_card_view_empty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:background="@drawable/layout_corners_rounded_purple">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/spacing_large"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/payment_method_empty"
-            android:textColor="@color/evcs_white"
-            style="@style/RobotoBold.Body"/>
-
-    </FrameLayout>
 
     <org.evcs.android.ui.view.shared.PaymentMethodView
         android:id="@+id/wallet_add_new_payment_method"

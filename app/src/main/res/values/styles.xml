@@ -219,4 +219,9 @@
         <item name="android:drawablePadding">@dimen/spacing_medium_extra</item>
     </style>
 
+    <style name="CheckBox" parent="AppTheme">
+        <item name="colorAccent">@color/evcs_secondary_700</item>
+        <item name="android:textColorSecondary">#61686E</item>
+    </style>
+
 </resources>

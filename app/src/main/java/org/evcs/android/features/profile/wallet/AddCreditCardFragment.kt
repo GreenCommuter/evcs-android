@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.CallSuper
+import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
 import com.stripe.android.ApiResultCallback
 import com.stripe.android.SetupIntentResult
@@ -11,18 +12,13 @@ import com.stripe.android.Stripe
 import com.stripe.android.model.*
 import org.evcs.android.Configuration
 import org.evcs.android.R
+import org.evcs.android.model.PaymentMethod
+import org.evcs.android.util.ViewUtils.setVisibility
 import org.evcs.android.util.validator.*
 import org.evcs.android.util.watchers.DateFormatWatcher
 import org.evcs.android.util.watchers.FourDigitCardFormatWatcher
 
-/**
- * Fragment that helps with the payment using BrainTree.
- * It shows a message and a popup to pay, and notifies its children when the payment was accepted.
- *
- * @param <P> Presenter extending [AddCreditCardPresenter]
-</P> */
-class AddCreditCardFragment : AbstractCreditCardFragment(),
-    AddCreditCardView {
+class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
     private lateinit var mValidatorManager: ValidatorManager
 
@@ -42,6 +38,11 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
 //        showProgressDialog();
         super.init()
         presenter!!.getClientSecret();
+    }
+
+    override fun populate() {
+        mSetDefault.setVisibility(!(activity as WalletActivity).mFinishOnClick)
+        mSetDefault.setDescription(getString(R.string.add_credit_card_set_default))
     }
 
     override fun setListeners() {
@@ -87,7 +88,8 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
             .build()
 
         val zipcode = mZipcode.text.toString()
-        mStripe.confirmSetupIntent(this, presenter.getConfirmParams(card, zipcode))
+        val name = mCardName.text.toString()
+        mStripe.confirmSetupIntent(this, presenter.getConfirmParams(name, card, zipcode))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,8 +103,7 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
                 val status = setupIntent.status
                 if (status == StripeIntent.Status.Succeeded) {
                     // Setup completed successfully
-                    ToastUtils.show("Payment method added")
-                    presenter.makeDefaultPaymentMethod(result.intent.paymentMethod!!.id)
+                    onSetupCompletedSuccessfully(result.intent.paymentMethod!!.id!!)
 
                 } else if (status == StripeIntent.Status.RequiresPaymentMethod) {
                     ToastUtils.show(setupIntent.lastSetupError!!.message!!)
@@ -114,6 +115,20 @@ class AddCreditCardFragment : AbstractCreditCardFragment(),
                 ToastUtils.show(e.toString())
             }
         })
+    }
+
+    private fun onSetupCompletedSuccessfully(id: String) {
+        ToastUtils.show(getString(R.string.add_credit_card_success))
+        if (mSetDefault.isChecked or !mSetDefault.isVisible) {
+            presenter.makeDefaultPaymentMethod(id)
+        } else {
+            finish()
+        }
+    }
+
+    override fun onDefaultPaymentMethodSet(item: PaymentMethod) {
+        finish()
+        (activity as WalletActivity).onPaymentMethodChanged(item)
     }
 
 }

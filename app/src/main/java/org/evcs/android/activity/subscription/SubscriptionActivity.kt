@@ -13,10 +13,10 @@ import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.activity.CancelPlanActivity
 import org.evcs.android.databinding.ActivitySubscriptionBinding
 import org.evcs.android.features.profile.plans.PlansActivity
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.SubscriptionStatus
-import org.evcs.android.model.user.User
 import org.evcs.android.util.UserUtils
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -26,6 +26,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
     private lateinit var mLongDateFormatter: DateTimeFormatter
     private lateinit var mPresenter: SubscriptionActivityPresenter
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mChangePmLauncher: ActivityResultLauncher<Intent>
     private lateinit var mBinding: ActivitySubscriptionBinding
 
     override fun inflate(layoutInflater: LayoutInflater): View {
@@ -38,6 +39,8 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
                 registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
                     result -> if (result.resultCode == RESULT_OK) showCancellationDialog()
                 }
+        mChangePmLauncher = WalletActivity.getDefaultLauncher(this,
+                mBinding.activitySubscriptionsPaymentInfo)
         mLongDateFormatter = DateTimeFormat.forPattern("MMM dd, yyyy")
     }
 
@@ -94,7 +97,10 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsViewAllPlans.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsViewAllPlans2.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsActivate.setOnClickListener {  }
-        mBinding.activitySubscriptionsPaymentInfo.setOnChangeClickListener {  }
+        mBinding.activitySubscriptionsPaymentInfo.setOnChangeClickListener {
+            WalletActivity.buildIntent(this, true)
+            mChangePmLauncher.launch(intent)
+        }
         mBinding.activitySubscriptionsToolbar.setNavigationOnClickListener { finish() }
     }
 

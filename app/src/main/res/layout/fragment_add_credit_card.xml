@@ -65,7 +65,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/spacing_big">
 
                     <org.evcs.android.features.shared.StandardTextField
                         android:id="@+id/fragment_braintree_card_expiration_month"
@@ -119,6 +120,13 @@
 
             </LinearLayout>
 
+            <org.evcs.android.features.subscriptions.ImageCheckBoxLayout
+                android:id="@+id/fragment_add_credit_card_set_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:visibility="gone"/>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -129,6 +137,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium_extra"
+                android:layout_marginBottom="@dimen/spacing_medium"
                 android:enabled="false"
                 android:textAllCaps="false"
                 style="@style/ButtonK.Orange"/>

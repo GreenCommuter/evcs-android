@@ -55,7 +55,6 @@ class SurveyFragment : ErrorFragment<SurveyPresenter>(), SurveyView {
             if (item.text == "Other") {
                 mOtherId = item.id!!
             } else {
-                //Set margins should be defined in viewutils as extension
                 val view = ImageCheckBoxLayout(requireContext())
                 view.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
                 view.setDescription(item.text)

@@ -2,7 +2,6 @@ package org.evcs.android.features.profile.wallet;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.FrameLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,16 +13,15 @@ import org.evcs.android.databinding.ViewWalletHeaderBinding;
 import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.ui.fragment.ErrorFragment;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> implements IPaymentMethodView {
+public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> implements IWalletHeaderView {
 
     RecyclerView mEndlessRecyclerView;
-    FrameLayout mCreditCardsEmpty;
 
     private PaymentMethodAdapterV2 mCreditCardsAdapter;
-    private boolean mInvalidateCreditCards = true;
     private WalletHeaderInterface mParent;
 
     public static WalletHeaderFragment newInstance() {
@@ -35,8 +33,8 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
         return fragment;
     }
 
-    public PaymentMethodPresenter createPresenter() {
-        return new PaymentMethodPresenter(this, EVCSApplication.getInstance().getRetrofitServices());
+    public WalletHeaderPresenter createPresenter() {
+        return new WalletHeaderPresenter(this, EVCSApplication.getInstance().getRetrofitServices());
     }
 
     @Override
@@ -51,7 +49,6 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
         mEndlessRecyclerView = binding.creditCardsRecyclerView;
         mEndlessRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        mCreditCardsEmpty = binding.creditCardViewEmpty;
         binding.walletAddNewPaymentMethod.setOnClickListener(view -> onAddPaymentMethodClicked());
     }
 
@@ -60,17 +57,13 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
 
 //        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        if (mInvalidateCreditCards) {
-            mCreditCardsAdapter = new PaymentMethodAdapterV2();
-        }
+        mCreditCardsAdapter = new PaymentMethodAdapterV2();
         mEndlessRecyclerView.setAdapter(mCreditCardsAdapter);
     }
 
     public void populate() {
-        if (mInvalidateCreditCards) {
-            showProgressDialog();
-            getPresenter().getCreditCards();
-        }
+        showProgressDialog();
+        getPresenter().getCreditCards();
     }
 
     public void setListeners() {
@@ -82,46 +75,30 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
 
             @Override
             public void onStarClicked(@NonNull PaymentMethod item) {
-                showMakeDefaultPaymentMethodDialog(item);
+                showProgressDialog();
+                getPresenter().makeDefaultPaymentMethod(item);
             }
 
-            @Override
-            public void onTrashClicked(@NonNull PaymentMethod item) {
-                showRemovePaymentMethodDialog(item);
-            }
+//            @Override
+//            public void onTrashClicked(@NonNull PaymentMethod item) {
+//                showRemovePaymentMethodDialog(item);
+//            }
         });
 
     }
 
     void onAddPaymentMethodClicked() {
-        mInvalidateCreditCards = true;
-        mParent.onAddPaymentMethodSelected();
+        mParent.onAddPaymentMethodSelected(false);
     }
 
     public void showAndSavePaymentList(List<PaymentMethod> creditCardInformationList) {
-        int height = mEndlessRecyclerView.getHeight();
+//        int height = mEndlessRecyclerView.getHeight();
         mCreditCardsAdapter.clear();
-        if (creditCardInformationList.isEmpty()) {
-            mCreditCardsEmpty.setVisibility(View.VISIBLE);
-            mCreditCardsEmpty.setMinimumHeight(height);
-        } else {
+        if (!creditCardInformationList.isEmpty()) {
             mCreditCardsAdapter.appendTopAll(creditCardInformationList);
+        } else {
+            mParent.onAddPaymentMethodSelected(true);
         }
-    }
-
-    private void showRemovePaymentMethodDialog(final PaymentMethod item) {
-        new EVCSDialogFragment.Builder()
-            .setTitle(getContext().getString(R.string.payment_method_dialog_remove_title))
-            .setSubtitle(getString(R.string.payment_method_dialog_remove_subtitle))
-            .addButton(getString(R.string.payment_method_dialog_remove_button), new EVCSDialogFragment.OnClickListener() {
-                @Override
-                public void onClick(@NonNull EVCSDialogFragment fragment) {
-                    getPresenter().removePaymentMethod(item);
-                    fragment.dismiss();
-                }
-            }/*, R.drawable.button_selector_ariel_red*/).showCancel(true)
-            .setCancelable(true)
-            .show(getFragmentManager());
     }
 
     private void showMakeDefaultPaymentMethodDialog(final PaymentMethod item) {
@@ -141,7 +118,6 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
     @Override
     public void onPaymentMethodsReceived(List<PaymentMethod> creditCardInformationList) {
         hideProgressDialog();
-        mInvalidateCreditCards = false;
         showAndSavePaymentList(creditCardInformationList);
     }
 
@@ -157,9 +133,10 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
     }
 
     @Override
-    public void onDefaultPaymentMethodSet(@NonNull PaymentMethod item) {
+    public void onDefaultPaymentMethodSet(@NotNull PaymentMethod item) {
         hideProgressDialog();
         mCreditCardsAdapter.setDefault(item);
+        ((WalletActivity) getActivity()).onPaymentMethodChanged(mCreditCardsAdapter.getDefault());
     }
 
     public void setParent(WalletHeaderInterface parent) {
@@ -167,7 +144,7 @@ public class WalletHeaderFragment extends ErrorFragment<PaymentMethodPresenter> 
     }
 
     public interface WalletHeaderInterface {
-        void onAddPaymentMethodSelected();
+        void onAddPaymentMethodSelected(boolean clearStack);
 
         void goToDetail(PaymentMethod item);
     }

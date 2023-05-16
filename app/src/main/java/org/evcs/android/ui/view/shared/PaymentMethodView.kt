@@ -11,6 +11,7 @@ import org.evcs.android.model.PaymentMethod
 
 class PaymentMethodView : LinearLayout {
 
+    private lateinit var mListener: () -> Unit
     private lateinit var mBinding: ViewCreditCardItemBinding
 
     constructor(paymentMethod: PaymentMethod, context: Context) : super(context) {
@@ -37,6 +38,7 @@ class PaymentMethodView : LinearLayout {
             mBinding.creditCardChange.visibility = View.VISIBLE
             mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(paymentMethod.card.brand.drawable))
             mBinding.creditCardNumber.text = paymentMethod.card.last4
+            mBinding.creditCardChange.setOnClickListener { mListener.invoke() }
         }
     }
 
@@ -46,6 +48,7 @@ class PaymentMethodView : LinearLayout {
         params.width = LayoutParams.WRAP_CONTENT
         mBinding.creditCardProvider.layoutParams = params
         mBinding.creditCardNumber.text = resources.getString(R.string.payment_method_toolbar_add)
+        mBinding.root.setOnClickListener { mListener.invoke() }
     }
 
     private fun init(context: Context) {
@@ -54,7 +57,7 @@ class PaymentMethodView : LinearLayout {
     }
 
     fun setOnChangeClickListener(function: () -> Unit) {
-        mBinding.creditCardChange.setOnClickListener { function.invoke() }
+        mListener = function
     }
 
 }

@@ -38,6 +38,7 @@ public class Extras {
 
     public static class ChangePaymentMethod {
         public static final String PAYMENT_METHODS = "payment_methods";
+        public static final String FINISH_ON_CLICK = "finish_on_click";
     }
 
     public static class StartCharging {

@@ -5,8 +5,10 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.ComponentActivity
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.fragment.app.Fragment
 import org.evcs.android.R
 import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.ActivityBaseNavhostBinding
@@ -50,10 +52,20 @@ class WalletActivity : NavGraphActivity() {
 
         fun getDefaultLauncher(activity: ComponentActivity, paymentMethodView: PaymentMethodView): ActivityResultLauncher<Intent> {
             return activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                result -> if (result.resultCode == RESULT_OK) {
-                    val pm = result.data!!.getSerializableExtra(Extras.ChangePaymentMethod.PAYMENT_METHODS)
-                    paymentMethodView.setPaymentMethod(pm as PaymentMethod)
-                }
+                result -> onActivityResult(paymentMethodView, result)
+            }
+        }
+
+        fun getDefaultLauncher(fragment: Fragment, paymentMethodView: PaymentMethodView): ActivityResultLauncher<Intent> {
+            return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result -> onActivityResult(paymentMethodView, result)
+            }
+        }
+
+        fun onActivityResult(paymentMethodView: PaymentMethodView, result: ActivityResult) {
+            if (result.resultCode == RESULT_OK) {
+                val pm = result.data!!.getSerializableExtra(Extras.ChangePaymentMethod.PAYMENT_METHODS)
+                paymentMethodView.setPaymentMethod(pm as PaymentMethod)
             }
         }
     }

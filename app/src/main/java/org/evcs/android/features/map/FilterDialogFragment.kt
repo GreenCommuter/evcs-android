@@ -51,7 +51,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
         mBinding.activityFilterMinPower.setLabels(
             mMinKwValues.map{ i -> if (i > 0) "$i"+"kW" else "Any"}.toTypedArray())
         mBinding.activityFilterMinPower.seekbar.progressDrawable =
-            resources.getDrawable(R.drawable.progress_bar_background)
+            context?.getDrawable(R.drawable.progress_bar_background)
         setFiltersFromState()
         keepStatusBar(mBinding.root)
     }

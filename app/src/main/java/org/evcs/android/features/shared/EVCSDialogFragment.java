@@ -127,6 +127,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         button.setTextColor(ContextCompat
             .getColorStateList(getContext(), R.color.button_text_color_selector_filled));
         button.setBackground(getResources().getDrawable(mButtons.get(label).background));
+        button.setTextColor(getResources().getColor(mButtons.get(label).textColor));
         button.setAllCaps(mButtons.get(label).upperCase);
         LinearLayout.LayoutParams layoutParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -330,7 +331,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         OnClickListener listener;
         boolean upperCase;
         @DrawableRes int background;
-        @DrawableRes int textColor;
+        @ColorRes int textColor;
 
         public ButtonInfo(boolean upperCase, OnClickListener listener, @DrawableRes int background,
                           @ColorRes int textColor) {

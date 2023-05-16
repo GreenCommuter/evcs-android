@@ -11,14 +11,13 @@ import org.evcs.android.model.PaymentMethod
 
 class PaymentMethodView : LinearLayout {
 
-    private lateinit var mListener: () -> Unit
+    private var mListener: OnClickListener? = null
     private lateinit var mBinding: ViewCreditCardItemBinding
 
     constructor(paymentMethod: PaymentMethod, context: Context) : super(context) {
         init(context)
         setPaymentMethod(paymentMethod)
     }
-
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
         init(context)
@@ -37,8 +36,8 @@ class PaymentMethodView : LinearLayout {
             mBinding.viewListButtonChevron.visibility = View.GONE
             mBinding.creditCardChange.visibility = View.VISIBLE
             mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(paymentMethod.card.brand.drawable))
-            mBinding.creditCardNumber.text = paymentMethod.card.last4
-            mBinding.creditCardChange.setOnClickListener { mListener.invoke() }
+            mBinding.creditCardNumber.text = String.format("•••• %s", paymentMethod.card.last4)
+            mBinding.creditCardChange.setOnClickListener{ mListener?.onClick(null) }
         }
     }
 
@@ -48,7 +47,7 @@ class PaymentMethodView : LinearLayout {
         params.width = LayoutParams.WRAP_CONTENT
         mBinding.creditCardProvider.layoutParams = params
         mBinding.creditCardNumber.text = resources.getString(R.string.payment_method_toolbar_add)
-        mBinding.root.setOnClickListener { mListener.invoke() }
+        mBinding.root.setOnClickListener { mListener?.onClick(null) }
     }
 
     private fun init(context: Context) {
@@ -56,7 +55,7 @@ class PaymentMethodView : LinearLayout {
         mBinding.creditCardDefault.visibility = View.GONE
     }
 
-    fun setOnChangeClickListener(function: () -> Unit) {
+    fun setOnChangeClickListener(function: OnClickListener) {
         mListener = function
     }
 

@@ -1,11 +1,17 @@
 package org.evcs.android.features.profile.plans
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.LinearLayout
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.navigation.fragment.findNavController
 import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.R
+import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlansTabBinding
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.Plan
@@ -15,6 +21,7 @@ import org.evcs.android.util.UserUtils
 
 class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewListener {
 
+    private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mLayout: LinearLayout
 
     companion object {
@@ -40,7 +47,18 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         mLayout = FragmentPlansTabBinding.bind(v).fragmentPlansTabList
     }
 
-    override fun init() {}
+    override fun init() {
+        mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result -> if (result.resultCode == Activity.RESULT_OK) finish()
+        }
+    }
+
+    private fun finish() {
+        if (activity is NavGraphActivity)
+            findNavController().popBackStack()
+        else
+            requireActivity().finish()
+    }
 
     //TODO: bring from API
     override fun populate() {
@@ -64,7 +82,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             EVCSDialogFragment.Builder()
                 .setTitle("Are you sure you want to change plans?")
                 .setSubtitle(paragraph1 + "\n\n" + paragraph2 + "\n\n" + paragraph3)
-                .addButton("Continue", {
+                .addButton(getString(R.string.app_continue), {
                         dialog -> dialog.dismiss()
                         gotoPlan(plan, true)
                     }, R.drawable.layout_corners_rounded_blue)
@@ -76,9 +94,10 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
     }
 
     fun gotoPlan(plan: Plan, hasPlan: Boolean) {
-        NavigationUtils.jumpTo(requireContext(), GetPlanActivity::class.java,
-            NavigationUtils.IntentExtra(Extras.PlanActivity.PLAN, plan),
-            NavigationUtils.IntentExtra(Extras.PlanActivity.HAS_PLAN, hasPlan))
+        val intent = Intent(context, GetPlanActivity::class.java)
+        intent.putExtra(Extras.PlanActivity.PLAN, plan)
+        intent.putExtra(Extras.PlanActivity.HAS_PLAN, hasPlan)
+        mLauncher.launch(intent)
     }
 
     override fun onLearnMoreClicked(plan: Plan) {

@@ -6,15 +6,17 @@ import android.net.Uri
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
-import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.features.profile.notifications.NotificationsActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.activity.subscription.SubscriptionActivity
 import org.evcs.android.activity.account.VehicleInformationActivity
@@ -32,6 +34,9 @@ import org.evcs.android.util.ViewUtils.setVisibility
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private val CALL_PERMISSION = "android.permission.CALL_PHONE"
+    private val TERMS_URL = "https://www.evcs.com/terms-of-use"
+    private val FAQ_URL = "www.evcs.com/ev-drivers/faqs"
+    private val REQUEST_URL = "support.evcs.com/hc/en-us/requests/new"
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mBinding: FragmentProfileBinding
@@ -67,12 +72,12 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileName.text = user.name
         val subscription = user.activeSubscription
 
-        (mBinding.profileExplorePlans.parent as View).setVisibility(subscription == null)
+        (mBinding.profileExplorePlans.parent as View).isVisible = subscription == null
 
-        mBinding.profileMenuSubscriptionPlan.setVisibility(subscription != null)
-        mBinding.profilePlanProgress.setVisibility(subscription!= null)
-        (mBinding.profileIssueButton.parent as View).setVisibility(subscription?.issue ?: false)
-        mBinding.profileIssueButton.setVisibility(subscription?.isSuspended?:false)
+        mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
+        mBinding.profilePlanProgress.isVisible = subscription!= null
+        (mBinding.profileIssueButton.parent as View).isVisible = subscription?.issue ?: false
+        mBinding.profileIssueButton.isVisible = subscription?.isSuspended?:false
 
         mBinding.profileExplorePlansText.text =
                 FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
@@ -98,20 +103,27 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     override fun setListeners() {
-        mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
-        mBinding.profileMenuPaymentMethods.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
+        mBinding.profileMenuAccount.setOnClickListener { goToActivity(AccountActivity::class.java) }
+        mBinding.profileMenuPaymentMethods.setOnClickListener { goToActivity(WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener { mLauncher.launch(Intent(context, SubscriptionActivity::class.java)) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
-        mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("https://www.evcs.com/terms-of-use") }
+        mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView(TERMS_URL) }
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
-        mBinding.profileMenuFeedback.setOnClickListener {  }
+        mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
         mBinding.profileMenuSignOut.setOnClickListener { UserUtils.logout(null) }
-        mBinding.profileMenuVehicleInfo.setOnClickListener { NavigationUtils.jumpTo(requireContext(), VehicleInformationActivity::class.java) }
+        mBinding.profileMenuVehicleInfo.setOnClickListener { goToActivity(VehicleInformationActivity::class.java) }
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
-        mBinding.profileIssueButton.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
+        mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
+        mBinding.profileMenuNotifications.setOnClickListener { goToActivity(NotificationsActivity::class.java) }
+        mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
+        mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }
         super.setListeners()
+    }
+
+    private fun <T : FragmentActivity> goToActivity(activity: Class<T>) {
+        NavigationUtils.jumpTo(requireContext(), activity)
     }
 
     private fun goToWebView(url: String) {

@@ -38,12 +38,6 @@ object BaseConfiguration {
         const val IMAGE_QUALITY = 35
     }
 
-    object FontPaths {
-        const val PROXIMA_NOVA_BOLD = "fonts/ProximaNova-Bold.otf"
-        const val SANSATION_REGULAR = "fonts/Sansation-Regular.ttf"
-        const val ROBOTO_BOLD = "fonts/Roboto-Bold.ttf"
-    }
-
     object Map {
         const val DEFAULT_LATITUDE = 34.0223187
         const val DEFAULT_LONGITUDE = -118.3104457

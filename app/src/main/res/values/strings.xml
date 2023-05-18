@@ -82,7 +82,6 @@
     <string name="register_password_hint">Must be at least %1d characters long</string>
     <string name="register_button">Create account</string>
     <string name="register_gotologin">Do you already have an account with us?</string>
-    <string name="fragment_register_step">Step %d of 4</string>
     <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
     <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
 
@@ -241,14 +240,12 @@
 
     <!-- Notifications -->
     <string name="notifications_title">Notifications</string>
+    <string name="notifications_marketing">Marketing communications</string>
     <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
-    <string name="notifications_downgraded">You were downgraded. Please check your license information.</string>
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
     <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>
     <string name="notifications_plug_in_reminder">Did you remember to plug in the car?</string>
     <string name="notifications_vanpool_problems">We had a problem with the car. For more information contact us.</string>
-    <string name="notifications_user_not_coming">%@ is not coming today.</string>
-    <string name="notifications_user_late">%@ is running a little late.</string>
     <string name="notifications_vanpool_created">Your vanpool has been created.</string>
     <string name="notifications_vanpool_in_next_minutes">Your vanpool will start in %@ minutes.</string>
     <string name="notifications_vanpool_approved">Your vanpool has been approved.</string>
@@ -421,6 +418,7 @@
     <string name="filter_activity_connector_types">Connector types</string>
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
     <string name="filter_activity_apply">Apply</string>
+    <string name="dialog_filter_reset">Clear all</string>
 
     <!-- Search Location Child -->
     <string name="search_activity_hint">Location or zipcode</string>
@@ -487,6 +485,9 @@
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>
     <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
+
+    <string name="go_to_monthly_plans_title">EVCS Monthly Plans</string>
+    <string name="go_to_monthly_plans_subtitle">Learn more about our discounted plans.</string>
 
     <!-- Get Plan -->
     <string name="get_plan_started">Your plan has started!</string>

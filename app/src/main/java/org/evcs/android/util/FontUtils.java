@@ -45,11 +45,11 @@ public final class FontUtils {
      * @param context Context of the application
      * @param menu Menu to apply font
      */
-    public static void applyFontToMenu(Context context, Menu menu) {
+    public static void applyFontToMenu(Context context, Menu menu, String fontpath) {
         for (int i = 0; i < menu.size(); i++) {
             CharSequence title = menu.getItem(i).getTitle();
             menu.getItem(i).setTitle(
-                FontUtils.applyFont(context, title, BaseConfiguration.FontPaths.SANSATION_REGULAR));
+                FontUtils.applyFont(context, title, fontpath));
         }
     }
 

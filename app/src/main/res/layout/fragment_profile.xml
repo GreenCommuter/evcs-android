@@ -184,13 +184,13 @@
                 app:text="@string/profile_support_contact"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
-                android:id="@+id/profile_menu_request"
+                android:id="@+id/profile_menu_faq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/profile_support_faq"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
-                android:id="@+id/profile_menu_feedback"
+                android:id="@+id/profile_menu_request"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/profile_support_feedback"/>

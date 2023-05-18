@@ -101,12 +101,9 @@
     <dimen name="progress_dialog_height">92dp</dimen>
 
     <!-- Rectangle Switch -->
-    <dimen name="switch_rectangle_thumb_width">104dp</dimen>
-    <dimen name="switch_rectangle_thumb_height">40dp</dimen>
-    <dimen name="switch_rectangle_radius">6dp</dimen>
-
-    <!--Tab Switch-->
-    <dimen name="switch_tab_thumb_height">148dp</dimen>
+    <dimen name="switch_rectangle_thumb_width">28dp</dimen>
+    <dimen name="switch_rectangle_thumb_height">28dp</dimen>
+    <dimen name="switch_rectangle_radius">100dp</dimen>
 
     <!-- Image Checkbox -->
     <dimen name="image_checkbox_image_size">44dp</dimen>

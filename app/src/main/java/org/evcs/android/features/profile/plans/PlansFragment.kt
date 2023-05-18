@@ -1,5 +1,6 @@
 package org.evcs.android.features.profile.plans
 
+import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
@@ -12,6 +13,8 @@ import org.evcs.android.databinding.FragmentPlansBinding
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.view.shared.EVCSToolbar2
+import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 
 class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
 
@@ -22,6 +25,18 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
     private lateinit var mTabLayout: TabLayout
     private lateinit var mTabLayoutDivider: View
     private lateinit var mPagerAdapter: BaseFragmentStatePagerAdapter
+    private var mShowCorporatePlans: Boolean = false
+
+    companion object {
+        fun newInstance(showCorporatePlans: Boolean = false): PlansFragment {
+            val args = Bundle()
+            args.putBoolean(Extras.PlanActivity.IS_CORPORATE, showCorporatePlans)
+
+            val fragment = PlansFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun layout(): Int {
         return R.layout.fragment_plans
@@ -55,7 +70,11 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         mPagerAdapter = BaseFragmentStatePagerAdapter(childFragmentManager)
         mPagerAdapter.addItem(mStandardMileageFragment, tabStandard)
         mViewPager.adapter = mPagerAdapter
-        showTabs()
+
+        mShowCorporatePlans = arguments?.getBoolean(Extras.PlanActivity.IS_CORPORATE, true) ?: true
+                && UserUtils.getLoggedUser().isCorporateUser
+        if (!mShowCorporatePlans)
+            showTabs()
         mTabLayout.getTabAt(0)?.customView = getTab(tabStandard)
 
         showProgressDialog()
@@ -91,9 +110,18 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
 
     override fun showPlans(response: ArrayList<Plan>) {
         hideProgressDialog()
-        response.forEach { plan ->
-//            mLayout.addView(PlanView(requireContext(), plan))
+        if (mShowCorporatePlans) {
+            mStandardMileageFragment.showPlans(response)
+            mStandardMileageFragment.addGoToMonthlyView()
+        } else {
+            val isHighMileage = { plan: Plan -> plan.isUnlimited }
+            mHighMileageFragment?.showPlans(response.filter(isHighMileage))
+            mStandardMileageFragment.showPlans(response.filterNot(isHighMileage))
+            if (isHighMileage.invoke(UserUtils.getLoggedUser().activeSubscription?.plan ?: return)) {
+                mViewPager.currentItem = 1
+            }
         }
+
     }
 
 }

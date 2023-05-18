@@ -92,7 +92,15 @@
         android:id="@+id/plansFragment"
         android:name="org.evcs.android.features.profile.plans.PlansFragment"
         tools:layout="@layout/fragment_plans"
-        android:label="PlansFragment" />
+        android:label="PlansFragment" >
+        <action
+            android:id="@+id/action_plansFragment_self"
+            app:destination="@id/plansFragment" />
+        <argument
+            android:name="show_corporate_plans"
+            app:argType="boolean"
+            android:defaultValue="false"/>
+    </fragment>
     <fragment
         android:id="@+id/chargingHistoryFragment"
         android:name="org.evcs.android.features.charging.ChargingHistoryFragment"

@@ -3,6 +3,7 @@ package org.evcs.android.features.profile.plans
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import androidx.activity.result.ActivityResultLauncher
@@ -13,11 +14,14 @@ import com.base.core.util.NavigationUtils
 import org.evcs.android.R
 import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlansTabBinding
+import org.evcs.android.databinding.ViewGoToMonthlyPlansBinding
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils.setMargins
+import java.util.ArrayList
 
 class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewListener {
 
@@ -60,21 +64,11 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             requireActivity().finish()
     }
 
-    //TODO: bring from API
-    override fun populate() {
-        Plan.values().forEach { plan ->
-            val view = PlanView(requireContext(), plan)
-            view.setListener(this)
-            mLayout.addView(view)
-        }
-        //TODO: mLayout.addView(monthly plans view)
-    }
-
     override fun onGetPlanClicked(plan: Plan) {
         //TODO: Check
         if (UserUtils.getLoggedUser().hasAnySubscription) {
-            val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan"
-            val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing"
+            val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan."
+            val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
             val paragraph3 = "Do you want to continue changing plans?"
             val paragraph4 = "This will end your %1\$ %2\$s plan. It will stay active until %3\$s."
             val paragraph5 = "Your new %1\$s plan will start on %2\$s. You will be billed $%.2f per month until you cancel."
@@ -103,5 +97,31 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
     override fun onLearnMoreClicked(plan: Plan) {
         NavigationUtils.jumpTo(requireContext(), PlanLearnMoreActivity::class.java,
             NavigationUtils.IntentExtra(Extras.PlanActivity.PLAN, plan))
+    }
+
+    fun showPlans(response: List<Plan>) {
+        response.forEach { plan ->
+            val view = PlanView(requireContext(), plan)
+            view.setListener(this)
+            mLayout.addView(view)
+        }
+    }
+
+    fun addGoToMonthlyView() {
+        val goToMonthlyPlansView = ViewGoToMonthlyPlansBinding.inflate(LayoutInflater.from(context)).root
+        goToMonthlyPlansView.layoutParams = LinearLayout.LayoutParams(-1, -2)
+        val margin = resources.getDimension(R.dimen.padding_ariel_standard).toInt()
+        goToMonthlyPlansView.setMargins(margin, margin, margin, margin)
+
+        goToMonthlyPlansView.setOnClickListener {
+            if (activity is NavGraphActivity) {
+                findNavController().navigate(PlansFragmentDirections.actionPlansFragmentSelf(false))
+            } else {
+                val intent = Intent(requireContext(), PlansActivity::class.java)
+                intent.putExtra(Extras.PlanActivity.IS_CORPORATE, false)
+                startActivity(intent)
+            }
+        }
+        mLayout.addView(goToMonthlyPlansView)
     }
 }

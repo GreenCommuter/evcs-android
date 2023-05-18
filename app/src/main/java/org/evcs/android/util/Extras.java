@@ -63,5 +63,6 @@ public class Extras {
     public static class PlanActivity {
         public static final String PLAN = "plan";
         public static final String HAS_PLAN = "has_plan";
+        public static final String IS_CORPORATE = "show_corporate_plans";
     }
 }

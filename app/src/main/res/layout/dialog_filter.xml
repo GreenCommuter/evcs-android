@@ -39,8 +39,9 @@
                 android:id="@+id/dialog_filter_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/evcs_gray_300"
                 android:layout_gravity="center_vertical"
+                android:textColor="@color/evcs_gray_300"
+                style="@style/Label.Small"
                 android:text="Clear all"/>
 
             <TextView

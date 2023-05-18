@@ -11,6 +11,7 @@ import androidx.annotation.StringRes
 import org.evcs.android.databinding.ViewListButtonBinding
 
 class ListButtonView : LinearLayout {
+
     private lateinit var mText: TextView
 
     constructor(context: Context?) : super(context) {}

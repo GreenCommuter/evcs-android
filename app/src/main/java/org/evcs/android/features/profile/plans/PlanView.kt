@@ -38,7 +38,7 @@ class PlanView : LinearLayout {
         val period = plan.renewalPeriod.toSmall()
         mBinding.viewPlanPrice.text =
                 formatIfPositive(plan.monthlyPrice, "\$%.2f/$period", "\$0 Membership Fee")
-        mBinding.viewPlanButton.isEnabled = true //TODO: is current plan
+
         mBinding.viewPlanButton.text =
                 formatIfPositive(plan.trialDays, "Get %d Days Free", "Get Started")
 

@@ -30,9 +30,13 @@
             android:layout_margin="@dimen/spacing_medium_extra"
             android:gravity="center"
             android:text="title"
-            style="@style/RobotoBold.SectionTitle"/>
+            style="@style/Title.Medium"/>
 
         <include layout="@layout/divider"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"/>
 
         <TextView
             android:id="@+id/evcs_dialog_fragment_subtitle"
@@ -41,6 +45,7 @@
             android:layout_marginBottom="@dimen/spacing_ariel_different"
             android:gravity="center"
             android:text="subtitle"
+            android:visibility="gone"
             style="@style/RobotoBold.Body.Grey"/>
 
     </LinearLayout>

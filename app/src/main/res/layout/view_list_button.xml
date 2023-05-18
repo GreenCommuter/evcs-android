@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/list_button_selector"
             android:layout_below="@id/view_list_button_label"
-            style="@style/Body.Small" />
+            style="@style/Body.Small"/>
 
         <ImageView
             android:id="@+id/view_list_button_chevron"
@@ -32,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"/>
 
     </RelativeLayout>
 

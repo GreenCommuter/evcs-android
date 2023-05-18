@@ -35,8 +35,8 @@
         <item name="android:layout_marginBottom">@dimen/spacing_small</item>
         <item name="android:layout_marginLeft">@dimen/spacing_small</item>
         <item name="android:layout_marginRight">@dimen/spacing_small</item>
-        <item name="android:paddingTop">14dp</item>
-        <item name="android:paddingBottom">14dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingLeft">@dimen/spacing_big</item>
         <item name="android:paddingRight">@dimen/spacing_big</item>
     </style>
@@ -197,10 +197,10 @@
         <item name="android:textColorHint">@color/evcs_grey</item>
     </style>
 
-    <style name="NavigationViewStyle">
-        <item name="android:listPreferredItemHeightSmall">34dp</item>
-        <item name="itemTextAppearance">@style/Roboto.ProfileMenu</item>
-    </style>
+<!--    <style name="NavigationViewStyle">-->
+<!--        <item name="android:listPreferredItemHeightSmall">34dp</item>-->
+<!--        <item name="itemTextAppearance">@style/Roboto.ProfileMenu</item>-->
+<!--    </style>-->
 
     <style name="BottomNavigationView">
         <item name="android:layout_height">86dp</item>

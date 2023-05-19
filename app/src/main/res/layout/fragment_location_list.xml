@@ -46,10 +46,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_large"
         android:gravity="center"
-        android:padding="@dimen/spacing_large"
         android:text="@string/location_list_fail"
-        android:background="@drawable/layout_corners_rounded_filter_filled"
         android:visibility="gone"
-        style="@style/RobotoBold.CallToAction"/>
+        style="@style/EmptyView"/>
 
 </FrameLayout>

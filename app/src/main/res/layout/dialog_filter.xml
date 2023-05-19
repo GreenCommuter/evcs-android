@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/filter_activity_available_only"
                 android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 style="@style/Body.Medium"/>
 
             <androidx.appcompat.widget.SwitchCompat

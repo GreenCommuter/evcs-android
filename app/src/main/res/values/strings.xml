@@ -404,12 +404,12 @@
     <string name="register_your_car_model">Model</string>
     <string name="register_your_car_make">Make</string>
 
-    <string name="fragment_register_cell_phone_title">One last thing</string>
-    <string name="fragment_register_cell_phone_subtitle">Let\'s validate your account using your phone number</string>
+    <string name="fragment_register_cell_phone_title">Welcome %s.\nAlmost there!</string>
+    <string name="fragment_register_cell_phone_subtitle">To activate your account we need you to validate your phone number</string>
     <string name="fragment_register_cell_phone_button">Send me a code</string>
 
-    <string name="fragment_register_enter_code_title">Enter your code</string>
-    <string name="fragment_register_enter_code_subtitle">Please enter the code you received on your cellphone (818) 660-6219</string>
+    <string name="fragment_register_enter_code_title">Code Sent!</string>
+    <string name="fragment_register_enter_code_subtitle">Enter the code that was sent to your phone</string>
     <string name="fragment_register_enter_code_button">Validate it</string>
 
     <!-- Filter Activity -->

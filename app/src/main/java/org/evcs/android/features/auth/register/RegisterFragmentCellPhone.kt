@@ -46,6 +46,10 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
             BaseConfiguration.DEFAULT_LOCALE.country))
     }
 
+    override fun populate() {
+        mBinding.fragmentRegisterCellPhoneTitle.text = getString(R.string.fragment_register_cell_phone_title)
+    }
+
     override fun setListeners() {
         mBinding.fragmentRegisterCellphoneSend.setOnClickListener { onButtonClick() }
         val validatorManager = ValidatorManager()

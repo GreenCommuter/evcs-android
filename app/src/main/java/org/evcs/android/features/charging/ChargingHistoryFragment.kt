@@ -1,22 +1,21 @@
 package org.evcs.android.features.charging
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.SessionInformationActivity
 import org.evcs.android.databinding.FragmentChargingHistoryBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.util.Extras
-import org.evcs.android.util.UserUtils
 
 class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), ChargingHistoryView {
 
@@ -55,21 +54,18 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
     }
 
     override fun populate() {
-        if (UserUtils.getLoggedUser() == null) {
-            mEmptyView.text = "Charging history will be shown here once you have an account";
-            showEmpty()
-            return
-        }
+        mSwipeRefreshLayout.isRefreshing = true
         mRecyclerView.setUp(true, { presenter.getNextPage() },
             BaseConfiguration.ChargingHistory.ITEMS_VISIBLE_THRESHOLD)
     }
+
     override fun setListeners() {
         mSwipeRefreshLayout.setOnRefreshListener { presenter?.reset() }
         mAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Charge>() {
             override fun onItemClicked(item: Charge, adapterPosition: Int) {
-                val intent = Intent(requireContext(), SessionInformationActivity::class.java)
-                intent.putExtra(Extras.SessionInformationActivity.CHARGE, item)
-                startActivity(intent)
+                val args = Bundle()
+                args.putSerializable(Extras.SessionInformationActivity.CHARGE, item)
+                findNavController().navigate(R.id.sessionInformationFragment, args)
             }
         })
 
@@ -93,6 +89,11 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
         mRecyclerView.notifyLoadingFinished()
         mSwipeRefreshLayout.isRefreshing = false
         hideProgressDialog()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        presenter.reset()
     }
 
 }

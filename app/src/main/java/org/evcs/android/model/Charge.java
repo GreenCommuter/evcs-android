@@ -13,6 +13,7 @@ public class Charge implements Serializable {
     private DateTime startedAt;
 //            "completed_at": "2020-08-13T15:01:51.000Z",
     private int locationId;
+    private String locationName;
     private float duration; //unit? ms?
 
 //            "charger_type": "DC",
@@ -20,6 +21,7 @@ public class Charge implements Serializable {
     private float kwh;
     private float price;
     private String status;
+    private Subscription subscription;
 
     public int getId() {
         return id;
@@ -35,6 +37,10 @@ public class Charge implements Serializable {
 
     public int getLocationId() {
         return locationId;
+    }
+
+    public String getLocationName() {
+        return locationName;
     }
 
     public float getDuration() {
@@ -61,5 +67,9 @@ public class Charge implements Serializable {
 
     public boolean isCharging() {
         return status.equalsIgnoreCase("active");
+    }
+
+    public String getPlanName() {
+        return subscription.planName;
     }
 }

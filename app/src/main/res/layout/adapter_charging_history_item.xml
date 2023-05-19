@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -8,31 +8,50 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/spacing_large"
+        android:padding="@dimen/padding_ariel_standard"
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/adapter_charging_history_item_date"
+            android:id="@+id/adapter_charging_history_item_station"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_small"
-            android:text="date"
-            style="@style/Body.Small"/>
+            android:text="station"
+            android:textColor="@color/list_button_selector"
+            style="@style/Title.Medium"/>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_marginBottom="@dimen/spacing_small">
+
+            <TextView
+                android:id="@+id/adapter_charging_history_item_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="date"
+                android:textColor="@color/list_button_selector"
+                style="@style/Body.Small"/>
+
+            <ImageView
+                android:id="@+id/view_list_button_chevron"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:src="@drawable/ic_arrow_right"
+                app:tint="@color/list_button_selector"/>
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/adapter_charging_history_item_price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium"
             android:text="price"
+            android:textColor="@color/list_button_selector"
             style="@style/Body.Small"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_small"
-                android:text="View Details"
-                style="@style/Button.Orange"/>
 
     </LinearLayout>
 

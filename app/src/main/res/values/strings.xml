@@ -469,7 +469,7 @@
     <string name="session_information_station_id">Station ID</string>
     <string name="session_information_price">Total</string>
     <string name="session_information_receipt">View receipt</string>
-    <string name="session_information_help">Need help? Contact Customer Support</string>
+    <string name="session_information_help">Need help? <a href="https://learntodroid.com">Contact Customer Support</a></string>
     <string name="session_information_title">Session detail</string>
 
     <!-- Manage Plan-->

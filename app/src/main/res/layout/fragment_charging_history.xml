@@ -27,9 +27,10 @@
         android:id="@+id/fragment_charging_history_empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:text="@string/charging_history_empty"
-        android:textColor="#ADB0B4"
+        android:textColor="#61686E"
+        android:visibility="gone"
         style="@style/EmptyView"/>
 
 </RelativeLayout>

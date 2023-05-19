@@ -6,7 +6,6 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
-import com.base.core.util.NavigationUtils;
 import com.base.core.util.ToastUtils;
 import com.base.networking.retrofit.serializer.BaseGsonBuilder;
 import com.google.firebase.iid.FirebaseInstanceId;

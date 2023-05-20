@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_profileFragment_to_chargingHistoryFragment"
             app:destination="@id/chargingHistoryFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_paymentHistoryFragment"
+            app:destination="@id/paymentHistoryFragment" />
     </fragment>
     <fragment
         android:id="@+id/webViewFragment"
@@ -112,7 +115,7 @@
     </fragment>
     <fragment
         android:id="@+id/sessionInformationFragment"
-        android:name="org.evcs.android.activity.SessionInformationFragment"
+        android:name="org.evcs.android.features.profile.sessioninformation.SessionInformationFragment"
         android:label="SessionInformationFragment"
         tools:layout="@layout/activity_session_information">
         <action
@@ -122,5 +125,17 @@
     <fragment
         android:id="@+id/receiptFragment"
         android:name="org.evcs.android.features.profile.sessioninformation.ReceiptFragment"
-        android:label="ReceiptFragment" />
+        android:label="ReceiptFragment"
+        tools:layout="@layout/fragment_receipt"/>
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="org.evcs.android.features.profile.payments.PaymentHistoryFragment"
+        android:label="PaymentHistoryFragment" >
+        <action
+            android:id="@+id/action_paymentHistoryFragment_to_sessionInformationFragment"
+            app:destination="@id/sessionInformationFragment" />
+        <action
+            android:id="@+id/action_paymentHistoryFragment_to_receiptFragment"
+            app:destination="@id/receiptFragment" />
+    </fragment>
 </navigation>

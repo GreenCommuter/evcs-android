@@ -1,4 +1,4 @@
-package org.evcs.android.activity
+package org.evcs.android.features.profile.sessioninformation
 
 import android.os.Bundle
 import android.text.method.LinkMovementMethod

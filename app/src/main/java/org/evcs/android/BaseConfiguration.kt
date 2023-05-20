@@ -45,8 +45,8 @@ object BaseConfiguration {
     }
 
     object ChargingHistory {
-        const val ITEMS_PER_PAGE = 15
-        const val ITEMS_VISIBLE_THRESHOLD = 15
+        const val ITEMS_PER_PAGE = 20
+        const val ITEMS_VISIBLE_THRESHOLD = 10
     }
 
     object UserConditions {

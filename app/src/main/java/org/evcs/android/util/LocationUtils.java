@@ -124,10 +124,10 @@ public final class LocationUtils {
         gatecodeView.setGravity(Gravity.CENTER);
 
         new EVCSDialogFragment.Builder()
-                .setTitle("Access requirement")
-                .setSubtitle("This location requires a gate code to access it. You can always view the code in the location details.")
+                .setTitle(context.getString(R.string.gatecode_dialog_title))
+                .setSubtitle(context.getString(R.string.gatecode_dialog_subtitle))
                 .addView(gatecodeView)
-                .addButton(context.getString(R.string.app_continue), false, fragment -> {
+                .addButton(context.getString(R.string.app_continue), fragment -> {
                     launchGoogleMapsWithPin(context, latLng);
                     fragment.dismiss();
                 }, R.drawable.layout_corners_rounded_blue)

@@ -2,7 +2,6 @@ package org.evcs.android.features.auth.register
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
 import android.widget.TextView
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
@@ -15,19 +14,16 @@ import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.user.AuthUser.Companion.TestAuthUser
 import org.evcs.android.util.UserUtils
-import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.*
 
 class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     private lateinit var mLastNameInputLayout: StandardTextField
     private lateinit var mNameInputLayout: StandardTextField
-    private lateinit var mConfirmEmailInputLayout: StandardTextField
     private lateinit var mEmailInputLayout: StandardTextField
     private lateinit var mPasswordInputLayout: StandardTextField
-    private lateinit var mGoToLogin: TextView
     private lateinit var mPasswordHint: TextView
-    private lateinit var mContinueButton: Button
+    private lateinit var mContinueButton: TextView
 
     /**
      * Returns a new RegisterFragment instance.
@@ -55,12 +51,9 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mNameInputLayout = binding.fragmentRegisterFirstNameInput
         mLastNameInputLayout = binding.fragmentRegisterFirstNameInput
         mEmailInputLayout = binding.fragmentRegisterEmailInput
-        mConfirmEmailInputLayout = binding.fragmentRegisterConfirmEmailInput
         mPasswordInputLayout = binding.fragmentRegisterPasswordInput
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
-        mGoToLogin = binding.fragmentRegisterGotologin
-        binding.fragmentRegisterStep.text = String.format(getString(R.string.fragment_register_step), 1)
     }
 
     override fun init() {
@@ -69,19 +62,15 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
             R.string.register_password_hint,
             BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
         )
-        ViewUtils.addUnderlines(mGoToLogin)
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mNameInputLayout))
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mLastNameInputLayout))
         mValidatorManager.addValidator(EmailTextInputValidator(mEmailInputLayout))
-        mValidatorManager.addValidator(MatchingValidator(mConfirmEmailInputLayout, mEmailInputLayout))
         mValidatorManager.addValidator(PasswordTextInputValidator(mPasswordInputLayout))
         mValidatorManager.setOnAnyTextChangedListener { setEnableButton(mValidatorManager.areAllFieldsValid()) }
     }
 
     override fun setListeners() {
         mContinueButton.setOnClickListener { onButtonClick() }
-        mGoToLogin.setOnClickListener { onLoginClick() }
-
     }
 
     //TODO: replace for validFields
@@ -111,10 +100,6 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         val navOptions = NavOptions.Builder().setPopUpTo(R.id.signInFragment, true).build()
         findNavController().navigate(
             RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar(), navOptions)
-    }
-
-    protected fun onLoginClick() {
-        findNavController().popBackStack()
     }
 
     //Ver password

@@ -3,18 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/button_selector_black_transparent"
     android:orientation="vertical">
+<!--    android:background="@drawable/button_selector_black_transparent"-->
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/spacing_medium_extra">
+        android:paddingTop="@dimen/spacing_medium_extra"
+        android:paddingBottom="@dimen/spacing_medium_extra">
 
         <TextView
             android:id="@+id/view_list_button_label"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            style="@style/Title.Medium"/>
 
         <TextView
             android:id="@+id/view_list_button_text"
@@ -22,7 +24,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/list_button_selector"
             android:layout_below="@id/view_list_button_label"
-            style="@style/Roboto.Body" />
+            style="@style/Body.Small" />
 
         <ImageView
             android:id="@+id/view_list_button_chevron"
@@ -30,7 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/list_button_icon_selector" />
+            android:src="@drawable/ic_arrow_right" />
 
     </RelativeLayout>
 
@@ -38,7 +40,6 @@
         android:id="@+id/view_list_button_bottom_line"
         android:layout_width="match_parent"
         android:layout_height="@dimen/spacing_tiniest"
-        android:background="@android:color/darker_gray"
-        android:layout_marginStart="@dimen/spacing_medium_extra"/>
+        android:background="@color/evcs_gray_100"/>
 
 </LinearLayout>

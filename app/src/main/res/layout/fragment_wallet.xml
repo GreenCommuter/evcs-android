@@ -4,20 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/evcs_gray_89">
+    android:background="@color/evcs_white">
 
-    <org.evcs.android.ui.view.shared.EVCSToolbar
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/wallet_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:navigationIcon="@drawable/back_arrow"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
         app:title="@string/profile_billing_information"/>
 
-    <org.evcs.android.features.profile.wallet.WalletHeaderView
+    <FrameLayout
         android:id="@+id/wallet_header_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/padding_ariel_outer"
-        android:padding="@dimen/padding_ariel_inner" />
+        android:padding="@dimen/padding_ariel_standard" />
 
 </LinearLayout>

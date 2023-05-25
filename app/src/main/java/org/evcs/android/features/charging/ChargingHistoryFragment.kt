@@ -23,8 +23,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
     private lateinit var mAdapter: ChargingHistoryAdapter
     private lateinit var mRecyclerView: EndlessRecyclerView
     private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var mEmptyView: View
-    private lateinit var mEmptyText: TextView
+    private lateinit var mEmptyView: TextView
 
     companion object {
         fun newInstance(): ChargingHistoryFragment {
@@ -45,7 +44,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
         mRecyclerView = binding.fragmentChargingHistoryRecycler
         mSwipeRefreshLayout = binding.fragmentChargingHistorySwipeRefresh
         mEmptyView = binding.fragmentChargingHistoryEmptyView
-        mEmptyText = binding.fragmentChargingHistoryEmptyText
+        binding.fragmentChargingHistoryToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     override fun init() {
@@ -57,7 +56,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
 
     override fun populate() {
         if (UserUtils.getLoggedUser() == null) {
-            mEmptyText.text = "Charging history will be shown here once you have an account";
+            mEmptyView.text = "Charging history will be shown here once you have an account";
             showEmpty()
             return
         }
@@ -73,6 +72,7 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
                 startActivity(intent)
             }
         })
+
     }
 
     override fun createPresenter(): ChargingHistoryPresenter {

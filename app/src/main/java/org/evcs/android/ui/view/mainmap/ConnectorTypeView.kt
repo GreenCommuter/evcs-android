@@ -29,7 +29,7 @@ class ConnectorTypeView : FrameLayout {
 
     protected fun init(context: Context) {
         val binding = ViewConnectorTypeBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.connectorTypeIcon.setImageDrawable(context.resources.getDrawable(connectorType.mTextIcon!!))
+        binding.connectorTypeIcon.setImageDrawable(context.getDrawable(connectorType.mTextIcon!!))
         mLayout = binding.root
         isSelected = true
     }

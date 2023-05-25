@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/evcs_dark_purple"
-    android:paddingTop="@dimen/status_bar_height">
+    android:layout_height="match_parent">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/fragment_charging_history_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/profile_charge_history"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_charging_history_swipe_refresh"
+        android:layout_below="@id/fragment_charging_history_toolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,29 +23,13 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
-    <LinearLayout
+    <TextView
         android:id="@+id/fragment_charging_history_empty_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_margin="@dimen/spacing_huge"
-        android:gravity="center"
-        android:orientation="vertical">
+        android:layout_centerInParent="true"
+        android:text="@string/charging_history_empty"
+        android:textColor="#ADB0B4"
+        style="@style/EmptyView"/>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium"
-            android:src="@drawable/ic_map_pin_unselected"/>
-
-        <TextView
-            android:id="@+id/fragment_charging_history_empty_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="No charging history"
-            android:gravity="center"
-            style="@style/Roboto.Body.White"/>
-
-    </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

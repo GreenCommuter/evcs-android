@@ -7,7 +7,6 @@ import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -20,16 +19,14 @@ import org.evcs.android.R;
 import org.evcs.android.databinding.ViewCreditCardBinding;
 import org.evcs.android.model.CreditCard;
 import org.evcs.android.model.CreditCardProvider;
-import org.evcs.android.util.StringUtils;
 
 public class CreditCardView extends LinearLayout {
 
-    TextView mLast4;
-    SimpleDraweeView mProvider;
-    ImageView mStar;
-    ImageView mTrash;
-
-    private CreditCardViewListener mListener;
+    private TextView mLast4;
+    private SimpleDraweeView mProvider;
+    private TextView mName;
+    private TextView mExpiration;
+    private TextView mCode;
 
     public CreditCardView(Context context) {
         super(context);
@@ -50,22 +47,28 @@ public class CreditCardView extends LinearLayout {
         @NonNull ViewCreditCardBinding binding = ViewCreditCardBinding.inflate(LayoutInflater.from(context), this, true);
         mLast4 = binding.creditCardViewLast4;
         mProvider = binding.creditCardViewProvider;
-        mStar = binding.creditCardViewStar;
-        mTrash = binding.creditCardViewTrash;
+        mName = binding.creditCardViewName;
+        mExpiration = binding.creditCardViewExpiration;
+        mCode = binding.creditCardViewCvv;
         mLast4.setTypeface(Typeface.MONOSPACE);
-
-        mStar.setOnClickListener(view -> {
-            if (mListener != null) mListener.onStarClicked();
-        });
-        mTrash.setOnClickListener(view -> {
-            if (mListener != null) mListener.onTrashClicked();
-        });
     }
 
     public void setCreditCard(CreditCard creditCard) {
-        mLast4.setText(creditCard.getLast4());
-        if (creditCard.getBrand() != null)
-            mProvider.setImageResource(creditCard.getBrand().getDrawable());
+        mLast4.setText(getContext().getString(R.string.billing_information_credit_card_formatter_full, creditCard.getLast4()));
+        if (creditCard.getBrand() != CreditCardProvider.UNKNOWN)
+            mProvider.setImageResource(creditCard.getBrand().getLogo());
+    }
+
+    public void setName(String name) {
+        mName.setText(name);
+    }
+
+    public void setExpiration(String expiration) {
+        mExpiration.setText(expiration);
+    }
+
+    public void setCode(String code) {
+        mCode.setText(code);
     }
 
     public void watchNumber(EditText number) {
@@ -80,33 +83,15 @@ public class CreditCardView extends LinearLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String numbers = StringUtils.onlyNumbers(s);
-                mLast4.setText(numbers.subSequence(Math.min(12, numbers.length()), numbers.length()));
+                mLast4.setText(s);
                 CreditCardProvider provider = CreditCardProvider.Companion.getProvider(s, false);
                 if (provider == null) {
                     mProvider.setImageDrawable(null);
                 } else {
-                    mProvider.setImageResource(provider.getDrawable());
+                    mProvider.setImageResource(provider.getLogo());
                 }
             }
         });
     }
 
-    public void setListeners(CreditCardViewListener listener) {
-        mListener = listener;
-    }
-
-    public void showButtons(boolean show) {
-        mStar.setVisibility(show ? VISIBLE : GONE);
-        mTrash.setVisibility(show ? VISIBLE : GONE);
-    }
-
-    public void setDefault(boolean def) {
-        mStar.setImageResource(def ? R.drawable.ic_star_filled : R.drawable.ic_clock);
-    }
-
-    public interface CreditCardViewListener {
-        void onStarClicked();
-        void onTrashClicked();
-    }
 }

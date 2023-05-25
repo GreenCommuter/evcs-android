@@ -17,8 +17,8 @@ open class CarSelectionPresenter<V : CarSelectionView>(viewInstance: V, services
 
     private lateinit var mCarMakers: List<CarMaker>
 
-    fun register(carId: Int, year: String?) {
-        getService(UserService::class.java).saveUserCar(UserCar(carId, year))
+    fun register(carId: Int) {
+        getService(UserService::class.java).saveUserCar(UserCar(carId))
             .enqueue(object : AuthCallback<UserCar>(this) {
             override fun onResponseSuccessful(response: UserCar?) {
                 view?.onCarsAdded(response!!)

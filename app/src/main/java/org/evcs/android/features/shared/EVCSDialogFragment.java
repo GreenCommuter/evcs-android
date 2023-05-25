@@ -3,6 +3,7 @@ package org.evcs.android.features.shared;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,7 +72,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         mLayout = binding.evcsDialogFragmentLayout;
         mTitle = binding.evcsDialogFragmentTitle;
         mSubtitle = binding.evcsDialogFragmentSubtitle;
-        mGrey = getResources().getColor(R.color.evcs_grey);
+        mGrey = getResources().getColor(R.color.evcs_gray_800);
         mTransparent = getResources().getColor(R.color.evcs_transparent);
         mButtonMargin = (int) getResources().getDimension(R.dimen.spacing_medium);
     }
@@ -124,8 +125,9 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     protected Button getButton(final String label) {
         Button button = new Button(new ContextThemeWrapper(getContext(), R.style.Button_Orange));
         button.setTextColor(ContextCompat
-            .getColorStateList(getContext(), R.color.button_text_color_selector_orange));
+            .getColorStateList(getContext(), R.color.button_text_color_selector_filled));
         button.setBackground(getResources().getDrawable(mButtons.get(label).background));
+        button.setTextColor(getResources().getColor(mButtons.get(label).textColor));
         button.setAllCaps(mButtons.get(label).upperCase);
         LinearLayout.LayoutParams layoutParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -257,32 +259,23 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
         /**
          * Adds a new {@link Button} to the dialog with the text and click listener passed as argument.
-         * By default this method sets the text as upper case.
-         *
-         * @param text Text to show in the button
-         * @param listener Click listener for the button.
-         * @return Builder for further customization
-         */
-        public Builder addButton(@NonNull String text, @NonNull OnClickListener listener) {
-            return addButton(text, false, listener);
-        }
-
-        /**
-         * Adds a new {@link Button} to the dialog with the text and click listener passed as argument.
-         * You can set whether you want te button text as upper case or not.
-         * If not upper case is used, the button will not change the text.
+         * You can set whether you want the button text as upper case or not.
          *
          * @param text Text to show in the button
          * @param upperCase <b>true</b> to set the text to upper case, <b>false</b> to keep it unchanged
          * @param listener Click listener for the button.
          * @return Builder for further customization
          */
-        public Builder addButton(String text, boolean upperCase, OnClickListener listener) {
-            return addButton(text, upperCase, listener, R.drawable.layout_corners_rounded_orange_gradient);
+        public Builder addButton(String text, OnClickListener listener) {
+            return addButton(text, listener, R.drawable.layout_corners_rounded_orange_gradient);
         }
 
-        public Builder addButton(String text, boolean upperCase, OnClickListener listener, @DrawableRes int background) {
-            mButtons.put(text, new ButtonInfo(upperCase, listener, background));
+        public Builder addButton(String text, OnClickListener listener, @DrawableRes int background) {
+            return addButton(text, listener, background, R.color.button_text_color_selector_filled);
+        }
+
+        public Builder addButton(String text, OnClickListener listener, @DrawableRes int background, @ColorRes int textColor) {
+            mButtons.put(text, new ButtonInfo(false, listener, background, textColor));
             return this;
         }
 
@@ -338,11 +331,14 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         OnClickListener listener;
         boolean upperCase;
         @DrawableRes int background;
+        @ColorRes int textColor;
 
-        public ButtonInfo(boolean upperCase, OnClickListener listener, @DrawableRes int background) {
+        public ButtonInfo(boolean upperCase, OnClickListener listener, @DrawableRes int background,
+                          @ColorRes int textColor) {
             this.listener = listener;
             this.upperCase = upperCase;
             this.background = background;
+            this.textColor = textColor;
         }
     }
 

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/plan_learn_more_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_ariel_standard">
+            
+            <TextView
+                android:id="@+id/plan_learn_more_days_free"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/evcs_gray_300"
+                tools:text="30 Days Free!*"
+                style="@style/Title.Large"/>
+
+            <TextView
+                android:id="@+id/plan_learn_more_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
+                tools:text="49.99/month"
+                style="@style/Title.Medium"/>
+
+            <TextView
+                android:id="@+id/plan_learn_more_cap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Up to 200 kWh/month"
+                android:layout_marginTop="@dimen/spacing_big"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:id="@+id/plan_learn_more_flat_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Flat rate of $0.29/kWh on DC fast charging and $0.25/kWh on Level 2 after cap is exceeded"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:id="@+id/plan_learn_more_24_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:text="24/7 charging, no time-of-day restrictions"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/plan_learn_more_unrestricted_network_access"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:id="@+id/plan_learn_more_hikes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:text="@string/plan_learn_more_hikes"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:text="@string/plan_learn_more_locate"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:text="@string/plan_learn_more_track"
+                style="@style/Body.Medium.WithCheck"/>
+
+            <TextView
+                android:id="@+id/plan_learn_more_sidenote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:layout_marginStart="@dimen/spacing_medium_extra"
+                android:layout_marginEnd="@dimen/spacing_medium_extra"
+                android:textColor="#424B5A"
+                tools:text="*30 days free not available for users who have already tried Standard Anytime"
+                style="@style/Body.Small"/>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                android:gravity="center"
+                android:padding="@dimen/spacing_medium_extra"
+                android:background="@drawable/layout_station_view_background"
+                android:visibility="gone"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Get 30 Days free when you upgrade to the Standard Plan."
+                    android:layout_marginBottom="@dimen/spacing_large"/>
+
+                <TextView
+                    android:id="@+id/plans_learn_more_explore"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:text="Explore plans"
+                    style="@style/ButtonK.BlackOutline"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/plan_learn_more_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large"
+                style="@style/ButtonK.Orange"/>
+
+        </LinearLayout>
+        
+    </ScrollView>
+
+</LinearLayout>

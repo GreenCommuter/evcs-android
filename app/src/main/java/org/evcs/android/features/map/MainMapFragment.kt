@@ -1,11 +1,11 @@
 package org.evcs.android.features.map
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import android.view.Window
-import android.view.WindowManager
-import android.widget.*
+import android.widget.FrameLayout
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -22,13 +22,16 @@ import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.util.*
+import org.evcs.android.util.Extras
+import org.evcs.android.util.FragmentLocationReceiver
+import org.evcs.android.util.LocationHelper
 
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
         InnerMapFragment.LocationClickListener, FilterDialogFragment.FilterDialogListener {
 
     private var mIsMapShowing: Boolean = true
+    private lateinit var mStatusBarSpacing: View
     private lateinit var mToolbarBackground: View
     private lateinit var mMapLayout: FrameLayout
     private lateinit var mToggleButton: TextView
@@ -37,8 +40,6 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private lateinit var mListFragment: LocationListFragment
     private lateinit var mBackButton: ImageView
     private lateinit var mFilterButton: ImageButton
-
-    private var mLocationDialog: LocationSliderFragment? = null
 
     fun newInstance(): MainMapFragment {
         val args = Bundle()
@@ -61,6 +62,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mFilterButton = binding.mapFilter
         mBackButton = binding.fragmentMainMapBack
         mToolbarBackground = binding.fragmentSearchLocationAddressParent
+        mStatusBarSpacing = binding.fragmentMainMapStatusBar
         mMapLayout = binding.fragmentMainMapLayout
     }
 
@@ -81,12 +83,14 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mListFragment.setLocationClickListener(this)
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
-        setStatusBarColor(Color.TRANSPARENT)
-
         if ((activity as MainActivity).isBottomOfStack) return
         mBackButton.visibility = View.VISIBLE
         mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
         setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))
+    }
+
+    private fun setStatusBarColor(color: Int) {
+        mStatusBarSpacing.setBackgroundColor(color)
     }
 
     fun isMapShowing(): Boolean {
@@ -218,13 +222,4 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         super.onResume()
         if (mIsMapShowing) showMap() else hideMap()
     }
-}
-
-fun Fragment.setStatusBarColor(color: Int) {
-    val window: Window = requireActivity().window
-    window.statusBarColor = color
-    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
-    window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-    window.decorView.systemUiVisibility =
-        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
 }

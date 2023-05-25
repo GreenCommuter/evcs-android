@@ -2,8 +2,6 @@ package org.evcs.android.network.service;
 
 import org.evcs.android.model.PaginatedResponse;
 import org.evcs.android.model.Station;
-import org.evcs.android.model.SubscriptionStatus;
-import org.evcs.android.model.SubscriptionStatusWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -18,13 +16,6 @@ public interface StationsService {
     @GET("/members/v1/stations/{id}")
     Call<Station> getStation(@Path("id") int id);
 
-//    STATUS_ENDPOINT:
-    @GET("/members/v1/users/status")
-    Call<SubscriptionStatusWrapper> getStatus();
-
-//    Nombre de la subscription:  STATUS_ENDPOINT -> current_subscription -> plan_name
-//    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
-//    Renewal date: STATUS_ENDPOINT -> current_subscription -> renewal_date
 //    Charge rate (precio por kwh): STATION_ENDPOINT -> pricing -> detail -> price_kwh
 //    Charge rate (precio por hora): STATION_ENDPOINT -> pricing -> detail -> thereafter_price (price_kwh es null)
 //    Charge rate (charging free at location): STATION_ENDPOINT -> pricing -> detail -> Mostrar en el prompt “free_charging_code” siendo show_free_charging_code == TRUE

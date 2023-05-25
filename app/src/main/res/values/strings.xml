@@ -37,7 +37,7 @@
     <!-- Auth -->
     <string name="auth_sign_in">Log In</string>
     <string name="auth_register">Sign Up</string>
-    <string name="auth_or">Or</string>
+    <string name="auth_or">or continue with</string>
 
     <!-- Choose Plan -->
     <string name="choose_plan_title">Choose plan</string>
@@ -48,13 +48,17 @@
     <string name="choose_plan_premium_title">Premium membership</string>
     <string name="choose_plan_premium_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
 
+    <!-- Gatecode dialog -->
+    <string name="gatecode_dialog_title">Access requirement</string>
+    <string name="gatecode_dialog_subtitle">This location requires a gate code to access it. You can always view the code in the location details.</string>
+
     <!-- Sign In -->
     <string name="sign_in_title">Login</string>
-    <string name="sign_in_email">e-mail Address *</string>
+    <string name="sign_in_email">e-mail Address</string>
 <!--    <string name="sign_in_email">e-mail Address *</string>-->
-    <string name="sign_in_name">First Name *</string>
-    <string name="sign_in_last_name">Last Name *</string>
-    <string name="sign_in_password">Password *</string>
+    <string name="sign_in_name">First Name</string>
+    <string name="sign_in_last_name">Last Name</string>
+    <string name="sign_in_password">Password</string>
     <string name="sign_in_forgot_password">Forgot your Password?</string>
     <string name="sign_in_button">Sign in</string>
     <string name="sign_in_social">Sign in with Google or Facebook account</string>
@@ -69,11 +73,11 @@
     <string name="forgot_password_wrong_email">Invalid email address</string>
 
     <!-- Register -->
-    <string name="register_title">Finish setting up your account</string>
+    <string name="register_title">Sign up</string>
     <string name="register_subtitle">Sign up with your name and email</string>
     <string name="register_email">Email</string>
-    <string name="register_email_confirm">Confirm E-mail *</string>
-    <string name="register_password">Password *</string>
+    <string name="register_email_confirm">Confirm E-mail</string>
+    <string name="register_password">Password</string>
     <string name="register_password_confirm">Re-enter the password</string>
     <string name="register_password_hint">Must be at least %1d characters long</string>
     <string name="register_button">Create account</string>
@@ -81,12 +85,6 @@
     <string name="fragment_register_step">Step %d of 4</string>
     <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
     <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
-
-    <!-- Choose service -->
-    <string name="choose_service_title">Choose Service</string>
-    <string name="choose_service_vanpooling_title">Vanpooling</string>
-    <string name="choose_service_carsharing_title">Car Sharing</string>
-    <string name="choose_service_corporate_title">Corporate</string>
 
     <!--Placeholder Fragment-->
     <string name="placeholder_no_internet_dialog_title">Connection Lost</string>
@@ -110,33 +108,58 @@
     </string-array>
     <string name="my_information_birthdate">Birthdate</string>
     <string name="my_information_street_address">Street Address</string>
-    <string name="my_information_zip_code">Zip Code *</string>
+    <string name="my_information_zip_code">Zip Code</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
 
     <!-- BrainTree -->
-    <string name="braintree_title">Add a new credit card</string>
+    <string name="braintree_title">Add credit or debit card</string>
     <string name="braintree_error_token">Error retrieving token</string>
     <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
 
     <!-- Profile -->
     <string name="profile_title">Profile</string>
     <string name="profile_username_format">%1$s %2$s</string> <!-- 1: First Name | 2: Last Name -->
-    <string name="profile_billing_information">Payments</string>
-    <string name="profile_employer">Subscription Plan</string>
-    <string name="profile_change_password">Account</string>
-    <string name="show_password">Show</string>
+    <string name="profile_billing_information">Payment Methods</string>
+    <string name="profile_plan">Manage Plan</string>
+    <string name="profile_account">Account Details</string>
+
+    <string name="profile_support_section">Support</string>
+    <string name="profile_support_contact">Contact Support</string>
+    <string name="profile_support_faq">Help Center FAQ</string>
+    <string name="profile_support_feedback">Submit a request</string>
+    <string name="profile_privacy_section">Privacy</string>
+    <string name="profile_privacy_notifications">Notifications</string>
+    <string name="profile_privacy_tandc">Terms and Conditions</string>
+    <string name="profile_account_section">Account</string>
+    <string name="profile_charge_history">Charge history</string>
+    <string name="profile_account_vehicle_info">Vehicle Information</string>
+    <string name="profile_account_plans">Plans</string>
+    <string name="profile_account_payment_methods">Payment Methods</string>
+    <string name="profile_version">Version %s</string>
+    <string-array name="profile_explore_plans_text">
+        <item>Get</item>
+        <item>30 days free</item>
+        <item>when you upgrade to Standard Anytime plan!</item>
+    </string-array>
+
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
     <string name="profile_avatar_change_library_button">Choose from library</string>
 
-    <!-- Account activity -->
-    <string name="activity_account_title">Edit Account</string>
+    <!-- Vehicle Information -->
+    <string name="vehicle_info_car">Make &amp; Model</string>
+    <string name="vehicle_info_zipcde">Zipcode</string>
+
+    <!-- Account -->
+    <string name="activity_account_title">Account Detail</string>
     <string name="activity_account_email">Email</string>
+    <string name="activity_account_save">Save Account Details</string>
     <string name="activity_account_name">Name</string>
-    <string name="activity_account_change_password">Change password</string>
+    <string name="activity_account_change_password">Password</string>
     <string name="activity_account_sign_out">Sign Out</string>
     <string name="activity_account_delete_account">Delete account</string>
+    <string name="account_fragment_email_updated">Email updated</string>
 
     <!-- Personal Information -->
     <string name="personal_information_update_successful">User updated</string>
@@ -145,7 +168,7 @@
     <!-- Billing information -->
     <string name="profile_billing_information_braintree_description">Choose your payment method</string>
     <string name="billing_information_credit_card_formatter">... %1$s</string>
-    <string name="billing_information_credit_card_formatter_full">···· ···· ···· %1$s</string>
+    <string name="billing_information_credit_card_formatter_full">•••• •••• •••• %1$s</string>
     <string name="payment_method_fragment_title">Payment method</string>
     <string name="payment_methods_account_credit">Account Credit</string>
     <string name="payment_method_dialog_card_information">Card information</string>
@@ -165,13 +188,16 @@
     <string name="payment_method_empty">No credit card found. Add yours to start using our services!</string>
 
     <!--Add credit card-->
-    <string name="payment_method_toolbar_add">Add a new credit card</string>
+    <string name="payment_method_toolbar_add">Add payment method</string>
     <string name="profile_billing_information_braintree_success">New payment method registered</string>
-    <string name="add_credit_card_number">Credit Card Number</string>
+    <string name="add_credit_card_number">Card Number</string>
     <string name="add_credit_card_expiration">Expiration</string>
-    <string name="add_credit_card_zip_code">Billing Zip Code</string>
+    <string name="add_credit_card_zip_code">Zipcode</string>
     <string name="add_credit_card_cvv">CVV</string>
-    <string name="add_credit_card_ok">Add card</string>
+    <string name="add_credit_card_ok">Save card</string>
+    <string name="add_credit_card_name">Cardholder name</string>
+    <string name="add_credit_card_set_default">Set as default payment method</string>
+    <string name="add_credit_card_success">Your card was successfully added</string>
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>
@@ -188,8 +214,8 @@
     <string name="payment_details_amount">Amount</string>
     <string name="payment_details_authorization_code">Authorization #</string>
 
-    <!--Account-->
-    <string name="account_fragment_email_updated">Email updated</string>
+    <!-- Charging History -->
+    <string name="charging_history_empty">Charge your EV to see you history here.</string>
 
     <!--Search Location-->
     <string name="search_location_explanation">Start typing the address and then select from \n the results</string>
@@ -213,99 +239,42 @@
     <!-- Monthly Fee View -->
     <string name="monthly_fee_text">Monthly fee</string>
 
-    <!-- Passenger Item View -->
-    <string name="passenger_item_view_me">%1$s (me)</string>
-    <string name="passenger_item_view_absent">%1$s (absent)</string>
-
-    <!-- Passengers View -->
-    <string name="passengers_view_collapsed_format">%d people</string>
-
     <!-- Notifications -->
     <string name="notifications_title">Notifications</string>
     <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
     <string name="notifications_downgraded">You were downgraded. Please check your license information.</string>
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
-    <string name="notifications_mvr_approved">Congratulations! Your MVR has been approved. You can now start using our services.</string>
     <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>
-    <string name="notifications_drivers_license_information_filled_out">We are now reviewing your driving record. It should take 24–48 hours. Look for an update shortly.</string>
     <string name="notifications_plug_in_reminder">Did you remember to plug in the car?</string>
-    <string name="notifications_vanpool_already_left">Your vanpool already left today.</string>
-    <string name="notifications_user_added">%@ has joined your vanpool.</string>
-    <string name="notifications_user_quit">%@ has quit your vanpool.</string>
     <string name="notifications_vanpool_problems">We had a problem with the car. For more information contact us.</string>
-    <string name="notifications_car_assigned">Awesome! A car has been assigned to your vanpool.</string>
     <string name="notifications_user_not_coming">%@ is not coming today.</string>
     <string name="notifications_user_late">%@ is running a little late.</string>
-    <string name="notifications_driver_not_coming">The assigned driver can´t make it on %@. You will be the driver that day.</string>
     <string name="notifications_vanpool_created">Your vanpool has been created.</string>
     <string name="notifications_vanpool_in_next_minutes">Your vanpool will start in %@ minutes.</string>
-    <string name="notifications_vanpool_preapproved">Your vanpool has been preapproved.</string>
     <string name="notifications_vanpool_approved">Your vanpool has been approved.</string>
     <string name="notifications_vanpool_activated">Your vanpool has been activated.</string>
     <string name="notifications_vanpool_payment_required">Your vanpool has been approved and the payment is required.</string>
     <string name="notifications_invitation">%@ has invited you to a vanpool.</string>
     <string name="notifications_forgot_password">You have requested to change your password. Please check your email.</string>
-    <string name="notifications_cancellation_confirmation">As per your request, your reservation has been canceled.</string>
-    <string name="notifications_reservation_reminder">Your reservation starts in %@ minutes.</string>
     <string name="notifications_reservation_ending_soon">Your reservation ends in %@ minutes. Please head back to the parking lot to return the car.</string>
     <string name="notifications_you_left_vanpool">You have left your vanpool.</string>
     <string name="notifications_complete_vanpool_poll">Please complete your vanpool checklist.</string>
     <string name="notifications_complete_carshare_poll">Please go to My Trips and complete your booking checklist.</string>
 
-    <!-- My Vanpools -->
-    <string name="my_vanpools_title">Vanpools you applied</string>
-
     <!-- Vanpool Travel Information View -->
-    <string name="vanpool_travel_information_time">Travel time</string>
-    <string name="vanpool_travel_information_estimated_distance">Estimated Distance</string>
-    <string name="vanpool_travel_information_travel_distance">Travel Distance</string>
     <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
     <string name="vanpool_travel_information_km_distance_format">%1$.1f Km</string>
     <string name="vanpool_travel_information_time_format">%1$d min</string>
-
-    <!-- Billing confirmation Dialog -->
-    <string name="vanpool_detail_billing_confirmation_dialog_title">Billing confirmation</string>
-    <string name="vanpool_detail_billing_confirmation_dialog_subtitle">A monthly subscription will be billed to your credit card once the vanpool is active</string>
-    <string name="vanpool_detail_billing_confirmation_dialog_button">Send payment</string>
 
     <!-- Congratulations Fragment -->
     <string name="vanpool_detail_congratulations_fragment_description">Thank you for your payment. Your vanpool is scheduled to begin on %1$s. $%2$.2f will be deducted monthly from your credit card on file.</string>
 
     <!-- Vanpool Status -->
     <string name="vanpool_status_cancelled">Canceled</string>
-    <string name="vanpool_status_missing_vanpoolers">Not enough vanpoolers</string>
-    <string name="vanpool_status_waiting_preapproval">Pending preapproval</string>
     <string name="vanpool_status_waiting_approval">Pending approval</string>
-    <string name="vanpool_status_waiting_payment">Waiting for driver\'s payment</string>
     <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
     <string name="vanpool_status_active">Active</string>
     <string name="vanpool_status_inactive">Inactive</string>
-
-    <!-- Vanpool Absence -->
-    <string name="vanpool_absence_title">Absence</string>
-    <string name="vanpool_absence_loaded">Absence successfully registered</string>
-    <string name="vanpool_absence_not_going_today">I\'m not going today</string>
-
-    <!-- Vanpool Checklist -->
-    <string name="vanpool_checklist_title">Car checklist</string>
-    <string name="vanpool_checklist_hood_text">You must answer this checklist to be able to finish your ride.</string>
-    <string name="vanpool_checklist_damage_item_question">Any vehicle damage to report?</string>
-    <string name="vanpool_checklist_damage_item_note">Note</string>
-    <string name="vanpool_checklist_clean_item_question">Is the vehicle dirty?</string>
-    <string name="vanpool_checklist_clean_item_note">Note</string>
-    <string name="vanpool_checklist_equipment_item_question">Is all vehicle equipment still on board?</string>
-    <string name="vanpool_checklist_equipment_item_select_missing">Please select any missing equipment</string>
-    <string name="vanpool_checklist_equipment_item_select_missing_subtitle">Tap the picture to see what each item looks like</string>
-    <string name="vanpool_checklist_equipment_charging_kit">Vehicle charging kit</string>
-    <string name="vanpool_checklist_equipment_safety_equipment">Safety equipment</string>
-    <string name="vanpool_checklist_equipment_charging_cards">Charging cords</string>
-    <string name="vanpool_checklist_equipment_vehicle_documents">Vehicle documents</string>
-    <string name="vanpool_checklist_passengers_item_question">Are all passengers today?</string>
-    <string name="vanpool_checklist_passengers_item_not_riding">Who is not riding?</string>
-    <string name="vanpool_checklist_equipment_format">%1$s</string>
-
-    <!-- Vanpool Pre-Checklist -->
-    <string name="vanpool_pre_checklist_unlock_car">Unlock</string>
 
     <!-- Vanpool Ongoing ride -->
     <string name="vanpool_ongoing_ride_title">Ongoing Ride</string>
@@ -315,13 +284,10 @@
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
     <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
-    <string name="vanpool_ongoing_ride_tracking_enabled">Tracking enabled</string>
-    <string name="vanpool_ongoing_ride_tracking_disabled">Tracking disabled</string>
     <string name="vanpool_ongoing_ride_file_report_button">File report</string>
     <string name="vanpool_ongoing_ride_call_us">Call us</string>
     <string name="vanpool_ongoing_ride_control_lock">Lock</string>
     <string name="vanpool_ongoing_ride_control_unlock">Unlock</string>
-    <string name="vanpool_ongoing_ride_control_lock_unlock">Lock / Unlock</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
@@ -333,11 +299,6 @@
     <string name="vanpool_ongoing_ride_spinner">Finishing the ride, please wait</string>
     <string-array name="vanpool_ongoing_ride_spinner">
         <item>Beginning the process to finish your ride, please wait</item>
-        <item>Communicating with vehicle</item>
-        <item>Checking GPS location</item>
-        <item>Gathering trip data</item>
-        <item>Running security checks</item>
-        <item>Ending the ride</item>
     </string-array>
     <string name="ongoing_ride_offline">You need to be online to perform this action</string>
     <string name="ongoing_ride_offline_2">You are offline. Some features may not be available</string>
@@ -358,7 +319,6 @@
     <string name="book_now_error_google_api_connection">Could not connect to Google API Client</string>
 
     <!-- Future Reservation -->
-    <string name="future_reservation_tab">Future Reservation</string>
     <string name="future_reservation_error_no_cars_found">Sorry, no cars found for current location, please try another one.</string>
     <string name="future_reservation_pick_up">Pick up</string>
     <string name="future_reservation_drop_off">Drop off</string>
@@ -375,9 +335,6 @@
 
     <!-- Create Booking -->
     <string name="create_booking_toolbar_title">Car sharing</string>
-    <string name="create_booking_pick_up">Pick up time</string>
-    <string name="create_booking_drop_off">Drop off time</string>
-    <string name="create_booking_confirm_booking">Confirm booking</string>
     <string name="create_booking_car_title">Car</string>
     <string name="create_booking_car_name_format">%1$s %2$s</string>
     <string name="create_booking_car_plate_format">#%s</string>
@@ -394,18 +351,17 @@
     <string name="coupons_toolbar_title">Coupons</string>
     <string name="coupons_format_discount_percentage">%.0f%% off</string>
     <string name="coupons_format_wallet_credit">$%.2f wallet credit</string>
-    <string name="coupons_format_register_company">Register company</string>
     <string name="coupons_format_weekend">Weekend plan</string>
-    <string name="coupons_add_code_button">Add coupon code</string>
-    <string name="coupons_empty_text">Coupon code</string>
     <string name="coupon_invalid_dialog_title">Invalid Coupon</string>
-    <string name="coupon_invalid_dialog_button">Retry</string>
     <string name="coupon_add_hint">Type the coupon code</string>
     <string name="coupon_item_expires">Expires: %s</string>
     <string name="coupon_item_does_not_expires">This promo code does not expire</string>
     <string name="coupon_redeemed_title">Promo code Redeemed</string>
     <string name="coupon_redeemed_description">You have successfully redeemed your coupon. It will be applied to your next purchase.</string>
     <string name="promo_codes_dialog_unused">%d unused</string>
+    <string name="coupon_code_apply">Apply</string>
+    <string name="coupon_code_hint">Coupon code</string>
+    <string name="coupon_code_remove">Remove</string>
 
     <!--Promo Code details-->
     <string name="promo_code_details_title">Promo code details</string>
@@ -417,7 +373,6 @@
 
     <!-- Help -->
     <string name="help_title">Help</string>
-    <string name="help_description">EVCS is here to help! \nIf you have any questions or concerns please send an email to help@evcs.org or call us at (844)&#8211;4RIDE&#8211;GC. That\'s \n (844) 474&#8211;3342.</string>
     <string name="help_terms_of_use"><a href="https://greencommuter.org/term_of_use">Terms Of Use</a></string>
     <string name="help_privacy_policy"><a href="https://greencommuter.org/privacy">Privacy Policy</a></string>
 
@@ -447,9 +402,10 @@
     <string name="notifications_channel_description">All notifications sent by the app</string>
 
     <string name="register_your_car_title">Your car</string>
-    <string name="register_your_car_subtitle">Knowing what type of car you drive, we can personalize your experience with EVCS</string>
+    <string name="register_your_car_subtitle">Your vehicle information helps us improve our services and helps us troubleshoot issues.</string>
     <string name="register_your_car_year">Year</string>
-    <string name="register_your_car_model">Model *</string>
+    <string name="register_your_car_model">Model</string>
+    <string name="register_your_car_make">Make</string>
 
     <string name="fragment_register_cell_phone_title">One last thing</string>
     <string name="fragment_register_cell_phone_subtitle">Let\'s validate your account using your phone number</string>
@@ -470,13 +426,13 @@
     <string name="search_activity_hint">Location or zipcode</string>
 
     <!-- Location List -->
-    <string name="loction_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
+    <string name="location_list_empty">Enable location services in system settings to see nearby locations or search a location.</string>
     <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
     <!-- Location View -->
     <string name="location_view_ac_price_format">Level 2 Member Price: \$%.2f/kWh</string>
     <string name="location_view_dc_price_format">DC Fast Member Price: $%.2f/kWh</string>
-    <string name="location_view_gatecode">\"Gatecode: \"</string>
+    <string name="location_view_gatecode">Gatecode: </string>
 
     <!-- Plan info -->
     <string name="plan_info_title">Start charging</string>
@@ -505,5 +461,74 @@
     <string name="charging_in_progress_duration">Session Time Elapsed</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
+
+    <!-- Session information -->
+    <string name="session_information_energy">Energy Delivered</string>
+    <string name="session_information_time">Elapsed time</string>
+    <string name="session_information_payment_method">Payment Method</string>
+    <string name="session_information_plan">Plan type</string>
+    <string name="session_information_id">Session ID</string>
+    <string name="session_information_station_id">Station ID</string>
+    <string name="session_information_price">Total</string>
+    <string name="session_information_receipt">View receipt</string>
+    <string name="session_information_help">Need help? Contact Customer Support</string>
+    <string name="session_information_title">Session detail</string>
+
+    <!-- Manage Plan-->
+    <string name="manage_plan_enrolled">Enrolled</string>
+    <string name="manage_plan_free_trial">Free Trial</string>
+    <string name="manage_plan_payment_details">Payment details</string>
+    <string name="manage_plan_change">Change plan</string>
+    <string name="manage_plan_cancel">Cancel Plan</string>
+    <string name="manage_plan_payment_info">Payment info</string>
+    <string name="manage_plan_change_pm">Change</string>
+    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s</string>
+    <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
+    <string name="manage_plan_days_remaining">%d days remaining</string>
+    <string name="manage_plan_activate">Activate Plan</string>
+    <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
+
+    <!-- Get Plan -->
+    <string name="get_plan_started">Your plan has started!</string>
+    <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://learntodroid.com">Terms of Use</a>,
+        <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a>.</string>
+    <string name="get_plan_name">Plan</string>
+    <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
+    <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
+    <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
+
+    <!-- Cancel Plan -->
+    <string name="cancel_plan_sad">We\'re sad to see you go</string>
+    <string name="cancel_plan_subscription_details">Subscription Details</string>
+    <string name="cancel_plan_title">Cancel plan</string>
+    <string name="cancel_plan_continue">Continue Cancelation</string>
+    <string name="cancel_plan_cancel">Keep Plan</string>
+    <string name="cancel_plan_confirmation">Do you want to continue canceling?</string>
+    <string name="cancel_plan_subscription_end">Subscription End Date</string>
+    <string name="cancel_plan_active_days">Active Days</string>
+    <string name="cancel_plan_billing_cycle">Billing Cycle</string>
+    <string name="cancel_plan_active_until">This will end your %1$s subscription to the %2$s plan.\n
+        Your plan will stay active through the remainder of your last billing cycle and end on %3$s.</string>
+    <string name="cancel_plan_days_remaining">%d days remaining</string>
+    <string name="cancel_plan_trial_cancel">Keep Trial</string>
+    <string name="cancel_plan_trial_bold">You have %d days left in your Standard Anytime trial</string>
+    <string name="cancel_plan_trial_warning">Canceling your free trials means that you will immediately lose access to your plan benefits.</string>
+    <string name="cancel_plan_trial_confirmation">Do you want to keep your Trial?</string>
+    <string name="cancellation_dialog_title">Your %s subscription has been canceled.</string>
+    <string name="cancellation_dialog_subtitle">You will still receive discounted “Pay As You Go” pricing with when this billing cycle ends.\n\n
+        You can always reactivate the plan if you change your mind.</string>
+
+    <!-- Survey -->
+    <string name="survey_comment_hint">Provide any other details you would like to share with us.</string>
+    <string name="survey_title">Plan Canceled?</string>
+    <string name="survey_love_feedback">We’d love your feedback!</string>
+    <string name="survey_subtitle">We’re always looking to improve your experience. Please let us know why you’ve decided to cancel your plan:</string>
+    <string name="survey_confirm">Confirm cancelation</string>
+
+    <!-- Plan Learn More -->
+    <string name="plan_learn_more_unrestricted_network_access">Unrestricted network access in CA, OR, WA</string>
+    <string name="plan_learn_more_hikes">No time-of-day price hikes on charging over 200 kWh</string>
+    <string name="plan_learn_more_locate">Locate stations with the EVCS, PlugShare, Google MapsTM and Apple MapsTM apps</string>
+    <string name="plan_learn_more_track">Track monthly charging sessions and kWh consumed</string>
 
 </resources>

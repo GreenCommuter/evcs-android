@@ -26,9 +26,8 @@ class LocationView : LinearLayout {
         init(context)
     }
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context, attrs, defStyleAttr) {
-    }
+    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+            super(context, attrs, defStyleAttr) {}
 
     fun init(context: Context?) {
         mBinding = ViewLocationBinding.inflate(LayoutInflater.from(context), this, true)
@@ -42,6 +41,12 @@ class LocationView : LinearLayout {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
+
+        mBinding.viewLocationConnectors.removeAllViews()
+        location.stations!!.forEach { station ->
+            val v = StationView(context, station)
+            mBinding.viewLocationConnectors.addView(v)
+        }
 
         if (location.comingSoon!!) {
             mBinding.viewLocationGo.visibility = View.GONE
@@ -63,11 +68,6 @@ class LocationView : LinearLayout {
         }
 
         //        mBinding.activityLocationHint.text = response?
-        mBinding.viewLocationConnectors.removeAllViews()
-        location.stations!!.forEach { station ->
-            val v = StationView(context, station)
-            mBinding.viewLocationConnectors.addView(v)
-        }
 
     }
 

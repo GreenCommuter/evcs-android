@@ -38,6 +38,7 @@ public class Extras {
 
     public static class ChangePaymentMethod {
         public static final String PAYMENT_METHODS = "payment_methods";
+        public static final String FINISH_ON_CLICK = "finish_on_click";
     }
 
     public static class StartCharging {
@@ -55,4 +56,12 @@ public class Extras {
         public static final String PHONE_NUMBER = "phone_number";
     }
 
+    public static class CreditCard {
+        public static final String CREDIT_CARD = "credit_card";
+    }
+
+    public static class PlanActivity {
+        public static final String PLAN = "plan";
+        public static final String HAS_PLAN = "has_plan";
+    }
 }

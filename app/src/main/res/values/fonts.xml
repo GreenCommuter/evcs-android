@@ -14,120 +14,12 @@
         <item name="android:textColor">@color/evcs_grey</item>
     </style>
 
-    <style name="SansationRegular.SmallMore.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="SansationRegular.Small">
-        <item name="android:textSize">@dimen/font_small</item>
-    </style>
-
-    <style name="SansationRegular.Small.Switch">
-        <item name="android:textColor">@color/switch_color</item>
-    </style>
-
-    <style name="SansationRegular.Small.Switch.Caps">
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="SansationRegular.Medium">
-        <item name="android:textSize">@dimen/font_medium</item>
-    </style>
-
-    <style name="SansationRegular.Medium.Switch">
-        <item name="android:textColor">@color/switch_color</item>
-    </style>
-
-    <style name="SansationRegular.Medium.Switch.Caps">
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="SansationRegular.Medium.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="SansationRegular.Medium.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="SansationRegular.Medium.Grey">
-        <item name="android:textColor">@color/evcs_grey</item>
-    </style>
-
-    <style name="SansationRegular.Medium.Transparent">
-        <item name="android:textColor">@color/evcs_transparent</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.Red">
-        <item name="android:textColor">@color/evcs_red</item>
-    </style>
-
     <style name="SansationRegular.MediumMore">
         <item name="android:textSize">@dimen/font_medium_more</item>
     </style>
 
     <style name="SansationRegular.MediumMore.White">
         <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.White.Clickable">
-        <item name="android:textColor">@color/clickable_text_color_white</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.Grey">
-        <item name="android:textColor">@color/evcs_grey</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.LightGrey">
-        <item name="android:textColor">@color/evcs_light_grey</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.Green.Caps">
-        <item name="android:textAllCaps">true</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.DarkGrey">
-        <item name="android:textColor">@color/evcs_dark_grey</item>
-    </style>
-
-    <style name="SansationRegular.MediumMore.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="SansationRegular.MediumExtra">
-        <item name="android:textSize">@dimen/font_medium_extra</item>
-    </style>
-
-    <style name="SansationRegular.MediumExtra.Grey">
-       <item name="android:textColor">@color/evcs_grey</item>
-    </style>
-
-    <style name="SansationRegular.MediumExtra.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="SansationRegular.Large">
-        <item name="android:textSize">@dimen/font_large</item>
-    </style>
-
-    <style name="SansationRegular.Large.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="SansationRegular.Large.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
-    <style name="SansationRegular.Huge">
-        <item name="android:textSize">@dimen/font_huge</item>
-    </style>
-
-    <style name="SansationRegular.Huge.Green">
-        <item name="android:textColor">@color/evcs_green</item>
     </style>
 
     <!-- Title text styles -->
@@ -137,44 +29,8 @@
         <item name="android:textAllCaps">true</item>
     </style>
 
-    <style name="TitleFont.MediumMore">
-         <item name="android:textSize">@dimen/font_medium_more</item>
-    </style>
-
-    <style name="TitleFont.MediumMore.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="TitleFont.MediumMore.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra">
-         <item name="android:textSize">@dimen/font_medium_extra</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
-    <style name="TitleFont.MediumExtra.Green">
-        <item name="android:textColor">@color/evcs_green</item>
-    </style>
-
     <style name="TitleFont.Large">
         <item name="android:textSize">@dimen/font_huge</item>
-    </style>
-
-    <style name="TitleFont.Large.Black">
-        <item name="android:textColor">@color/evcs_black</item>
-    </style>
-
-    <style name="TitleFont.Large.White">
-        <item name="android:textColor">@color/evcs_white</item>
     </style>
 
     <style name="Roboto" parent="@android:style/TextAppearance">
@@ -202,7 +58,7 @@
     </style>
 
     <style name="Roboto.ProfileMenu">
-        <item name="android:textColor">@color/button_text_color_selector_orange</item>
+        <item name="android:textColor">@color/button_text_color_selector_filled</item>
         <item name="android:textSize">21sp</item>
         <item name="fontFamily">@font/roboto_regular</item>
     </style>
@@ -316,6 +172,12 @@
         <item name="android:letterSpacing">0.0312</item>
     </style>
 
+    <style name="TextButton" parent="Label.Small"/>
+
+    <style name="TextButton.Blue">
+        <item name="android:textColor">@color/evcs_secondary_700</item>
+    </style>
+
     <style name="Body" parent="Inter"/>
 
     <style name="Body.Large">
@@ -336,6 +198,10 @@
 
     <style name="Body.Medium.Bold">
         <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Body.Medium.Gray800">
+        <item name="android:textColor">#1F2730</item>
     </style>
 
     <style name="Body.Small">
@@ -372,6 +238,18 @@
         <item name="android:textSize">16sp</item>
         <item name="android:minHeight">20sp</item>
         <item name="android:letterSpacing">0.2496</item>
+    </style>
+
+    <style name="ProfileSection" parent="Label.Large">
+        <item name="android:layout_marginTop">@dimen/spacing_big</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_medium</item>
+        <item name="android:textColor">@color/evcs_black</item>
+    </style>
+
+    <style name="EmptyView" parent="Body.Medium.Bold">
+        <item name="android:layout_margin">@dimen/spacing_medium_extra</item>
+        <item name="android:textColor">#7A7F85</item>
+        <item name="android:background">@drawable/layout_corners_rounded_empty_view</item>
     </style>
 
 </resources>

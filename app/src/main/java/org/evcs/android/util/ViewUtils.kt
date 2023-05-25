@@ -6,12 +6,11 @@ import android.widget.TextView
 import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.URLSpan
-import org.evcs.android.util.ViewUtils.URLSpanNoUnderline
 import android.text.style.UnderlineSpan
 import android.text.TextPaint
-import android.os.Parcelable.Creator
-import android.os.Parcel
 import android.view.View
+import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.view.ViewCompat
 
 /**
@@ -34,6 +33,12 @@ object ViewUtils {
      */
     fun getWindowWidth(context: Context): Float {
         return (context as Activity).windowManager.defaultDisplay.width.toFloat()
+    }
+
+    fun View.setMargins(left: Int, top: Int, right: Int, bottom: Int) {
+        val lp = ViewGroup.MarginLayoutParams(layoutParams)
+        lp.setMargins(left, top, right, bottom)
+        layoutParams = lp
     }
 
     /**
@@ -71,7 +76,7 @@ object ViewUtils {
     }
 
     fun showIfTheresScrolling(shadow: View, scrollView: View) {
-        scrollView.addOnLayoutChangeListener { view, i, i1, i2, i3, i4, i5, i6, i7 ->
+        scrollView.addOnLayoutChangeListener { _, _, _, _, _, _, _, _, _ ->
             val canScroll = scrollView.canScrollVertically(1) || scrollView.canScrollVertically(-1)
             shadow.visibility = if (canScroll) View.VISIBLE else View.GONE
         }

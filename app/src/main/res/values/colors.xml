@@ -35,6 +35,8 @@
 
     <color name="evcs_warning_600">#DEA22A</color>
 
+    <color name="evcs_danger_700">#9E030E</color>
+
     <!-- Tint colors -->
     <color name="evcs_splash_tint">#d9333333</color>
     <color name="evcs_dialog_tint">#d9333333</color>

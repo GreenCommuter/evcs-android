@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_cancel_plan.xml"
+    app:startDestination="@id/cancelPlanTrialFragment">
+
+    <fragment
+        android:id="@+id/cancelPlanTrialFragment"
+        android:name="org.evcs.android.features.subscriptions.CancelPlanTrialFragment"
+        android:label="CancelPlanTrialFragment"
+        tools:layout="@layout/fragment_cancel_plan_trial">
+        <action
+            android:id="@+id/action_cancelPlanTrialFragment_to_cancelPlanFragment"
+            app:destination="@id/cancelPlanFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cancelPlanFragment"
+        android:name="org.evcs.android.features.subscriptions.CancelPlanFragment"
+        android:label="CancelPlanFragment"
+        tools:layout="@layout/fragment_cancel_plan_base">
+        <action
+            android:id="@+id/action_cancelPlanFragment_to_surveyFragment"
+            app:destination="@id/surveyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/surveyFragment"
+        android:name="org.evcs.android.features.subscriptions.SurveyFragment"
+        android:label="SurveyFragment"
+        tools:layout="@layout/fragment_survey"/>
+</navigation>

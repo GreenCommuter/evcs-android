@@ -13,6 +13,7 @@ import org.evcs.android.BuildConfig
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingHistoryActivity
 import org.evcs.android.activity.account.AccountActivity
+import org.evcs.android.activity.subscription.SubscriptionActivity
 import org.evcs.android.databinding.FragmentProfileBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.profile.wallet.WalletActivity
@@ -49,7 +50,7 @@ class ProfileFragment : ErrorFragment<BasePresenter<*>>() {
     override fun setListeners() {
         mBinding.profileMenuAccount.setOnClickListener { NavigationUtils.jumpTo(requireContext(), AccountActivity::class.java) }
         mBinding.profileMenuPayments.setOnClickListener { NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java) }
-        mBinding.profileMenuSubscriptionPlan.setOnClickListener {  }
+        mBinding.profileMenuSubscriptionPlan.setOnClickListener { NavigationUtils.jumpTo(requireContext(), SubscriptionActivity::class.java) }
         mBinding.profileMenuChargingHistory.setOnClickListener { NavigationUtils.jumpTo(requireContext(), ChargingHistoryActivity::class.java) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("https://www.evcs.com/terms-of-use") }
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }

@@ -6,9 +6,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.net.Uri;
+import android.view.Gravity;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 
 import com.base.core.permission.PermissionListener;
 import com.base.core.permission.PermissionManager;
@@ -20,6 +23,8 @@ import com.google.android.gms.tasks.Task;
 
 import org.evcs.android.BaseConfiguration;
 import org.evcs.android.Configuration;
+import org.evcs.android.R;
+import org.evcs.android.features.shared.EVCSDialogFragment;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
@@ -28,7 +33,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
  */
 public final class LocationUtils {
 
-    private static final double PADDING_DEGREES = 0.03;
+    private static final double PADDING_DEGREES = 0.004;
     public static final int REQUEST_CHECK_SETTINGS = 10000;
 
     /**
@@ -109,11 +114,31 @@ public final class LocationUtils {
         });
     }
 
+    public static void launchGoogleMapsWithPin(Context context, LatLng latLng, String gatecode, FragmentManager fm) {
+        if (gatecode == null) {
+            launchGoogleMapsWithPin(context, latLng);
+            return;
+        }
+        TextView gatecodeView = new TextView(context);
+        gatecodeView.setText("Gate code: " + gatecode);
+        gatecodeView.setGravity(Gravity.CENTER);
+
+        new EVCSDialogFragment.Builder()
+                .setTitle("Access requirement")
+                .setSubtitle("This location requires a gate code to access it. You can always view the code in the location details.")
+                .addView(gatecodeView)
+                .addButton(context.getString(R.string.app_continue), false, fragment -> {
+                    launchGoogleMapsWithPin(context, latLng);
+                    fragment.dismiss();
+                }, R.drawable.layout_corners_rounded_blue)
+                .show(fm);
+    }
+
     public static void launchGoogleMapsWithPin(Context context, LatLng latLng) {
         Uri gmmIntentUri = Uri.parse("geo:" + latLng.latitude +"," + latLng.longitude
                 + "?q=" + latLng.latitude + "," + latLng.longitude);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
-        mapIntent.setPackage("com.google.android.apps.maps");
+//        mapIntent.setPackage("com.google.android.apps.maps");
         context.startActivity(mapIntent);
     }
 

@@ -24,8 +24,8 @@ object ViewUtils {
      * @param view Target [View].
      * @param show If true the visibility will be [View.VISIBLE], else [View.GONE].
      */
-    fun setViewVisibility(view: View, show: Boolean) {
-        view.visibility = if (show) View.VISIBLE else View.GONE
+    fun View.setVisibility(show: Boolean) {
+        this.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     /**

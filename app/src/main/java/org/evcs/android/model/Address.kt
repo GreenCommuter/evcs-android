@@ -11,6 +11,6 @@ class Address : Serializable {
     var country: String? = null
 
     override fun toString(): String {
-        return "$streetAddress, $city, $state $zipCode"
+        return "$streetAddress,\n$city, $state $zipCode"
     }
 }

@@ -11,7 +11,7 @@ import com.google.android.libraries.places.api.net.FindAutocompletePredictionsRe
 import com.google.android.libraries.places.api.net.FindAutocompletePredictionsResponse;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
-import org.evcs.android.features.ISearchLocationView;
+import org.evcs.android.features.map.search.ISearchLocationView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -80,7 +80,7 @@ public class PlacesRequestPresenter<V extends ISearchLocationView> extends BaseP
         if (!placeId.equals(mCurrentLocationString)) {
 
             List<Place.Field> placeFields = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG,
-                    Place.Field.VIEWPORT);
+                    Place.Field.VIEWPORT, Place.Field.ID);
             FetchPlaceRequest request = FetchPlaceRequest.builder(placeId, placeFields).build();
             Task<FetchPlaceResponse> placeResult = mGoogleApiClient.fetchPlace(request);
             placeResult.addOnSuccessListener(new OnSuccessListener<FetchPlaceResponse>() {

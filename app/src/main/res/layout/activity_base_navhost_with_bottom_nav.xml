@@ -18,11 +18,25 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="86dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:theme="@style/SelectableItemTheme"
         app:itemIconTint="@color/icon_color_selector"
         app:itemTextColor="@color/icon_color_selector"
-        app:backgroundTint="@color/evcs_purple"
-        app:menu="@menu/drawer"/>
+        app:itemTextAppearanceActive="@style/BottomNavigation.ActiveItemTextAppearance"
+        app:backgroundTint="@color/evcs_white"
+        app:elevation="4dp">
+
+        <TextView
+            android:id="@+id/bottom_navigation_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/spacing_medium_extra"
+            android:layout_marginRight="@dimen/spacing_medium_extra"
+            android:text="Get 30 Days Free Charging"
+            style="@style/ButtonK.Orange"/>
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
 
 </LinearLayout>

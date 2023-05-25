@@ -17,14 +17,16 @@ import androidx.annotation.Nullable;
 
 import com.google.android.libraries.places.api.model.AutocompletePrediction;
 
+import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
+import org.evcs.android.features.map.search.SearchLocationChildFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation> implements Filterable {
 
-    private static final int MAX_RESULTS = 6;
+    private static final int MAX_RESULTS = 5;
 
     private final PlacesRequestPresenter mPresenter;
     private final ArrayList<AutocompletePrediction> mResultList;
@@ -90,9 +92,15 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                 FilterResults results = new FilterResults();
                 List<AutocompletePrediction> resultValues = new ArrayList<>();
 
-                if (query != null) {
+                if (query.length() >= BaseConfiguration.AUTOCOMPLETE_ADAPTER_THRESHOLD) {
                     //This is a blocking call, but performFiltering() is called in a worker thread
                     resultValues = mPresenter.getResults(query);
+                }
+                else {
+                    results.count = showHistory();
+                    //Without this it crashes when erasing for modifying in a worker thread
+                    notifyDataSetChanged();
+                    return results;
                 }
 
                 mResultList.clear();
@@ -138,6 +146,18 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
             }
 
         };
+    }
+
+    public int showHistory() {
+        List<SearchLocationChildFragment.LocationHistoryItem> history =
+                SearchLocationChildFragment.getLocationHistory();
+        mResultList.clear();
+        mResultNames.clear();
+        for (int i = 0; i < Math.min(history.size(), MAX_RESULTS); i++) {
+           mResultNames.add(new CustomLocation(history.get(i).location.getName(), R.drawable.ic_clock_light_blue));
+           mResultList.add(AutocompletePrediction.builder(history.get(i).key).setFullText(history.get(i).location.getName()).build());
+        }
+        return mResultList.size();
     }
 
     private AutocompletePrediction getCurrentLocationPrediction() {

@@ -4,35 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/evcs_purple"
     android:padding="@dimen/spacing_medium_more">
 
-    <ImageView
-        android:id="@+id/fragment_search_location_close"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        android:paddingLeft="@dimen/spacing_medium_more"
-        android:paddingRight="@dimen/spacing_medium_more"
-        android:src="@drawable/ic_xmark_solid"/>
-
-    <org.evcs.android.ui.view.shared.FilterableAutocompleteTextView
+    <org.evcs.android.features.map.search.FilterableAutocompleteTextView
         android:id="@+id/fragment_search_location_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/spacing_small"
-        android:drawableStart="@drawable/ic_magnifying_glass_solid"
-        android:paddingStart="@dimen/spacing_medium_more"
-        android:drawablePadding="@dimen/spacing_medium"
-        android:paddingTop="@dimen/spacing_medium"
-        android:paddingBottom="@dimen/spacing_medium"
+        android:layout_marginStart="@dimen/spacing_medium_more"
+        android:layout_marginEnd="@dimen/spacing_medium_more"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="17dp"
+        android:paddingStart="18dp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:paddingEnd="@dimen/spacing_big"
+        android:textSize="14sp"
         android:hint="@string/search_activity_hint"
         android:inputType="textPostalAddress"
-        android:textColorHint="@color/evcs_grey"
-        style="@style/SansationRegular.MediumMore"
-        android:textColor="@color/evcs_white"
-        android:background="@drawable/layout_corners_rounded_purple_orange_border"/>
+        android:textColorHint="@color/evcs_gray_400"
+        android:background="@drawable/search_location_child_border"
+        style="@style/Body.Medium"/>
 
 <!--    <ImageView-->
 <!--        android:layout_width="wrap_content"-->

@@ -1,0 +1,229 @@
+package org.evcs.android.features.map
+
+import android.graphics.Color
+import android.os.Bundle
+import android.view.View
+import android.view.Window
+import android.view.WindowManager
+import android.widget.*
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import org.evcs.android.EVCSApplication
+import org.evcs.android.R
+import org.evcs.android.databinding.FragmentMainMapBinding
+import org.evcs.android.features.main.MainActivity
+import org.evcs.android.features.map.clustermap.InnerMapFragment
+import org.evcs.android.features.map.location_list.LocationListFragment
+import org.evcs.android.features.map.search.SearchLocationChildFragment
+import org.evcs.android.model.FilterState
+import org.evcs.android.model.Location
+import org.evcs.android.model.shared.RequestError
+import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.*
+
+
+class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
+        InnerMapFragment.LocationClickListener, FilterDialogFragment.FilterDialogListener {
+
+    private var mIsMapShowing: Boolean = true
+    private lateinit var mToolbarBackground: View
+    private lateinit var mMapLayout: FrameLayout
+    private lateinit var mToggleButton: TextView
+    private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
+    private lateinit var mInnerMapFragment: InnerMapFragment
+    private lateinit var mListFragment: LocationListFragment
+    private lateinit var mBackButton: ImageView
+    private lateinit var mFilterButton: ImageButton
+
+    private var mLocationDialog: LocationSliderFragment? = null
+
+    fun newInstance(): MainMapFragment {
+        val args = Bundle()
+        val fragment = MainMapFragment()
+        fragment.arguments = args
+        return fragment
+    }
+
+    override fun layout(): Int {
+        return R.layout.fragment_main_map
+    }
+
+    override fun createPresenter(): MainMapPresenter {
+        return MainMapPresenter(this, EVCSApplication.getInstance().retrofitServices)
+    }
+
+    override fun setUi(v: View) {
+        val binding = FragmentMainMapBinding.bind(v)
+        mToggleButton = binding.mapToggle
+        mFilterButton = binding.mapFilter
+        mBackButton = binding.fragmentMainMapBack
+        mToolbarBackground = binding.fragmentSearchLocationAddressParent
+        mMapLayout = binding.fragmentMainMapLayout
+    }
+
+    override fun init() {
+        LocationHelper().init(this)
+    }
+
+    override fun populate() {
+        super.populate()
+        mSearchLocationChildFragment = SearchLocationChildFragment.newInstance()
+//        mSearchLocationChildFragment.setDefault("asdasd")
+        requireFragmentManager().beginTransaction().replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment).commit()
+
+        mInnerMapFragment = InnerMapFragment.newInstance()
+        mInnerMapFragment.setLocationClickListener(this)
+        requireFragmentManager().beginTransaction().replace(R.id.fragment_main_map_layout, mInnerMapFragment).commit()
+        mListFragment = LocationListFragment.newInstance()
+        mListFragment.setLocationClickListener(this)
+        requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
+
+        setStatusBarColor(Color.TRANSPARENT)
+
+        if ((activity as MainActivity).isBottomOfStack) return
+        mBackButton.visibility = View.VISIBLE
+        mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
+        setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))
+    }
+
+    fun setStatusBarColor(color: Int) {
+        val window: Window = requireActivity().window
+        window.statusBarColor = color
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        window.decorView.systemUiVisibility =
+                View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+    }
+
+    fun isMapShowing(): Boolean {
+        return mMapLayout.isVisible
+    }
+
+    fun showMap() {
+        mToggleButton.text = "List"
+        mMapLayout.visibility = View.VISIBLE
+    }
+
+    fun hideMap() {
+        mToggleButton.text = "Map"
+        mMapLayout.visibility = View.GONE
+    }
+
+    override fun setListeners() {
+        mToggleButton.setOnClickListener {
+            if (isMapShowing()) hideMap() else showMap()
+        }
+        mFilterButton.setOnClickListener {
+            FilterDialogFragment(presenter.mFilterState).withListener(this).show(fragmentManager)
+        }
+//        addOnCameraChangeListener {
+//                cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
+//        }
+
+        mSearchLocationChildFragment.setListener(object : SearchLocationChildFragment.ISearchLocationListener {
+            override fun onLatLngChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
+                this@MainMapFragment.onLocationChosen(address, latLng, viewport)
+            }
+
+            override fun onLocationChosen(location: Location) {
+                mInnerMapFragment.findAndSelectMarker(location)
+            }
+
+            override fun onLocationRemoved() {
+//                clear()
+            }
+        })
+        mBackButton.setOnClickListener { requireActivity().finish() }
+    }
+
+    override fun onFilterResult(filterState: FilterState) {
+        showLoading()
+        mFilterButton.isSelected = !filterState.isEmpty()
+        presenter.onFilterResult(filterState)
+    }
+
+    override fun onLocationNotRetrieved() {
+        getInitialLocations()
+        mInnerMapFragment.onLocationNotRetrieved()
+    }
+
+    override fun onLocationResult(lastLocation: android.location.Location) {
+        //Only for distances?
+        presenter?.mLastLocation = LatLng(lastLocation.latitude, lastLocation.longitude)
+        mInnerMapFragment.onLocationResult(presenter.mLastLocation!!)
+        getInitialLocations()
+    }
+
+    private fun getInitialLocations() {
+        if (presenter.mCachedLocations != null) {
+            showInitialLocations(presenter.mCachedLocations!!, presenter.mLastLocation != null)
+        } else {
+            showProgressDialog()
+            presenter?.getInitialLocations(presenter.mLastLocation)
+        }
+    }
+
+    override fun onEmptyResponse() {
+        hideLoading()
+        showError(RequestError("No chargers found"))
+        mListFragment.onEmptyResponse()
+    }
+
+    override fun showInitialLocations(response: List<Location>, showInList: Boolean) {
+        hideLoading()
+        mInnerMapFragment.showInitialLocations(response)
+        if (showInList)
+            mListFragment.showLocations(response, null)
+        else
+            showHistoryInList()
+    }
+
+    private fun showHistoryInList() {
+        val history = SearchLocationChildFragment.getLocationHistory().map { item -> item.location }
+        if (history.size > 0)
+            mListFragment.showLocations(history, null)
+    }
+
+    override fun showLocations(response: List<Location>, viewport: LatLngBounds?) {
+        hideLoading()
+        mListFragment.showLocations(response, null)
+        mInnerMapFragment.zoomToLocations(response, viewport)
+    }
+
+    private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {
+        showLoading()
+        presenter.searchFromQuery(latLng, viewport)
+    }
+
+    override fun showLoading() {
+        showProgressDialog()
+    }
+
+    override fun hideLoading() {
+        hideProgressDialog()
+    }
+
+    override fun getProgressDialogLayout(): Int {
+        return R.layout.spinner_layout_black
+    }
+
+    override fun onLocationClicked(location: Location, showAsSlider: Boolean) {
+        mIsMapShowing = isMapShowing()
+        SearchLocationChildFragment.saveToLocationHistory(location)
+        if (showAsSlider) {
+            val locationDialog = LocationSliderFragment(location)
+            locationDialog.show(fragmentManager)
+        } else {
+            val args = Bundle()
+            args.putSerializable(Extras.LocationActivity.LOCATION, location)
+            findNavController().navigate(R.id.locationFragment, args)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (mIsMapShowing) showMap() else hideMap()
+    }
+}

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -23,23 +24,26 @@ import org.evcs.android.R;
 import org.evcs.android.activity.AbstractSupportedVersionActivity;
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding;
 import org.evcs.android.features.auth.initialScreen.AuthActivity;
-
 import org.evcs.android.features.shared.IVersionView;
 import org.evcs.android.util.Extras;
 import org.evcs.android.util.PushNotificationUtils;
 import org.evcs.android.util.UserUtils;
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AbstractSupportedVersionActivity implements IVersionView {
 
     public MainNavigationController mNavigationController;
     private BottomNavigationView mMenu;
     private ActivityResultLauncher mLoginResult;
+    private TextView mButton;
+    private boolean mIsBottom;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mLoginResult = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
                 (ActivityResultCallback) result -> { populate(); });
+        mIsBottom = getIntent().getBooleanExtra(Extras.MainActivity.IS_BOTTOM, true);
     }
 
     @Override
@@ -64,6 +68,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                 ActivityBaseNavhostWithBottomNavBinding.inflate(layoutInflater);
         setContentView(binding.getRoot());
         mMenu = binding.bottomNavigation;
+        mButton = binding.bottomNavigationButton;
         return binding.getRoot();
     }
 
@@ -86,7 +91,7 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
 
     @Override
     public void isSupportedVersion(boolean isSupported, String versionWording) {
-        if(!isSupported) {
+        if (!isSupported) {
             showNotSupportedVersion(versionWording);
         }
     }
@@ -98,18 +103,21 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
     @Override
     protected void populate() {
         super.populate();
-        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ?
-                "Sign in" :
-                getString(R.string.drawer_menu_profile));
+        if (UserUtils.getLoggedUser() == null) {
+            mMenu.getMenu().clear();
+            mButton.setVisibility(View.VISIBLE);
+        } else {
+            mMenu.inflateMenu(R.menu.drawer);
+            mButton.setVisibility(View.GONE);
+        }
         mMenu.setSelectedItemId(R.id.menu_drawer_map);
     }
 
     @Override
     protected void setListeners() {
         super.setListeners();
-        mMenu.getMenu().findItem(R.id.menu_drawer_profile).setTitle((UserUtils.getLoggedUser() == null) ?
-                "Sign in" :
-                getString(R.string.drawer_menu_profile));
+        mButton.setOnClickListener(v ->
+                mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class)));
         mMenu.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -118,16 +126,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
                         mNavigationController.onMapClicked();
                         break;
                     case R.id.menu_drawer_charging:
-                        if (UserUtils.getLoggedUser() == null)
-                            mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
-                        else
-                            mNavigationController.goToCharging();
+                        mNavigationController.goToCharging();
                         break;
                     case R.id.menu_drawer_profile:
-                        if (UserUtils.getLoggedUser() == null)
-                            mLoginResult.launch(new Intent(MainActivity.this, AuthActivity.class));
-                        else
-                            mNavigationController.goToProfile();
+                         mNavigationController.goToProfile();
                 }
                 //will be updated after canceling session
                 return false;
@@ -145,5 +147,10 @@ public class MainActivity extends AbstractSupportedVersionActivity implements IV
             mMenu.getMenu().getItem(i).setChecked(false);
         }
         mMenu.getMenu().findItem(item).setChecked(true);
+    }
+
+    @NotNull
+    public boolean isBottomOfStack() {
+        return mIsBottom;
     }
 }

@@ -1,26 +1,28 @@
 package org.evcs.android.model
 
 import com.google.android.gms.maps.model.LatLng
+import org.evcs.android.features.map.clustermap.ClusterItemWithDisabling
+import org.evcs.android.features.map.clustermap.ClusterItemWithText
+import org.evcs.android.features.map.clustermap.ClusterItemWithValue
 import java.io.Serializable
 import java.util.*
 
-class Location : Serializable, ClusterItemWithText {
+class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, ClusterItemWithDisabling {
     var id = 0
     var name: String? = null
     var latitude = 0.0
     var longitude = 0.0
     var imageUrls: List<String>? = null
-
-    /*        "station_count": {
-        "dc50kw": 4,
-                "dc": 0,
-                "ac": 0
-    },*/
+    var stationCount: StationCount? = null
     var distance: Float? = null
     var stations: List<Station>? = null
     var address: Address? = null
+    var comingSoon: Boolean? = null
+    var gatecode: String? = null
+    var directions: String? = null
+//        get() = 1000
 
-    //       "directions":"TO BE DEFINED",
+
     //               "open_247":true,
     //               "authority":"public",
     //        "noodoe_id": "abc123",
@@ -54,6 +56,36 @@ class Location : Serializable, ClusterItemWithText {
         return stations!!.size.toString()
     }
 
+    override fun getMarkerValue(): Int {
+        return stations!!.size
+    }
+
+    override fun isMarkerEnabled(): Boolean {
+        return !(comingSoon ?: false)
+    }
+
+    override fun isClusterEnabled(other: Boolean): Boolean {
+        return isMarkerEnabled() || other
+    }
+
     val printableDistance: CharSequence
         get() = if (distance == null) "-- mi" else String.format("%.1f mi", distance)
+
+    val connectorTypes: Set<ConnectorType>
+        get() = stations!!.flatMap { station -> station.connectorTypes }.toSet()
+
+    val acPrice: Float
+        get() = priceOfFirstStationMatching { station ->
+            station.getChargerType() == Station.ChargerType.AC }
+
+    val dcPrice: Float
+        get() = priceOfFirstStationMatching { station ->
+            station.getChargerType() == Station.ChargerType.DC100KW
+                    || station.getChargerType() == Station.ChargerType.DC50KW
+        }
+
+    fun priceOfFirstStationMatching(condition: (Station) -> Boolean) : Float {
+        return stations!!.filter(condition).getOrNull(0)?.pricing?.detail?.priceKwh ?: 0f
+    }
+
 }

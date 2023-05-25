@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item app:state_active="true"
+        android:color="@color/evcs_black" />
+
+    <item app:state_busy="true"
+        android:color="@color/evcs_black" />
+
+    <item app:state_offline="true"
+        android:color="@color/evcs_gray_300" />
+</selector>

@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:state_enabled="false"
-        android:color="@color/evcs_grey_transparent" />
+        android:color="@color/evcs_gray_300" />
 
     <item android:state_pressed="true"
-        android:color="#fc8305" />
+        android:color="@color/evcs_white" />
 
     <item
         android:color="@color/evcs_white" />

@@ -6,7 +6,7 @@
     app:startDestination="@id/mainMapFragment">
     <fragment
         android:id="@+id/mainMapFragment"
-        android:name="org.evcs.android.features.map.MainMapFragment2"
+        android:name="org.evcs.android.features.map.MainMapFragment"
         android:label="ChooseServiceFragment"
         tools:layout="@layout/fragment_main_map">
         <action
@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_mainMapFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_mainMapFragment_to_locationFragment"
+            app:destination="@id/locationFragment" />
     </fragment>
     <fragment
         android:id="@+id/chargingFragment"
@@ -74,4 +77,9 @@
         android:name="org.evcs.android.features.charging.ChargingInProgressFragment"
         android:label="ChargingInProgressFragment"
         tools:layout="@layout/fragment_charging_in_progress"/>
+    <fragment
+        android:id="@+id/locationFragment"
+        android:name="org.evcs.android.features.map.location.LocationFragment"
+        android:label="LocationFragment"
+        tools:layout="@layout/fragment_location"/>
 </navigation>

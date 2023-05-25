@@ -30,10 +30,10 @@ class LocationHelper {
             mReceiver.registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) {
                 permissions ->
                     when {
-                        permissions[Manifest.permission.ACCESS_FINE_LOCATION]!! -> {
+                        permissions[Manifest.permission.ACCESS_FINE_LOCATION]?:false -> {
                             onLocationPermissionGranted()
                         }
-                        permissions[Manifest.permission.ACCESS_COARSE_LOCATION]!! -> {
+                        permissions[Manifest.permission.ACCESS_COARSE_LOCATION]?:false -> {
                             onLocationPermissionGranted()
                         } else -> {
                             mReceiver.onLocationNotRetrieved()

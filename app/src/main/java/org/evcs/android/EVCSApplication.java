@@ -45,14 +45,6 @@ public class EVCSApplication extends NetworkingApplication {
 
         Rollbar.setPersonData(id, null, email);
         Fresco.initialize(this);
-        ViewPump.init(ViewPump.builder()
-                .addInterceptor(new CalligraphyInterceptor(
-                        new CalligraphyConfig.Builder()
-                                .setDefaultFontPath("fonts/ProximaNova-Bold.otf")
-                                .setFontAttrId(R.attr.fontPath)
-                                .build()))
-                .build()
-        );
         // We need to initialize the SystemService with the Application Context to avoid memory leaks
         // This is an Android issue, leaking context in the ConnectivityManager
         // For more information see: https://github.com/square/leakcanary/issues/393

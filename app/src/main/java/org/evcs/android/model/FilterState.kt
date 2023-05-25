@@ -1,13 +1,12 @@
 package org.evcs.android.model
 
 import java.io.Serializable
-import java.util.ArrayList
 
 class FilterState : Serializable {
     var minKw = 0
     var connectorType: ConnectorType? = null
-    var onlyAvailable = false
-    var authorities: ArrayList<Any>? = null
+    var comingSoon: Boolean? = null
+        set(value) {field = if (value!!) true else null}
 
     fun isEmpty() : Boolean {
         return this == FilterState()
@@ -18,8 +17,7 @@ class FilterState : Serializable {
         return other is FilterState
                 && minKw == other.minKw
                 && connectorType == other.connectorType
-                && onlyAvailable == other.onlyAvailable
-                && authorities == other.authorities
+                && comingSoon == other.comingSoon
     }
 
 }

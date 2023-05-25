@@ -37,6 +37,9 @@ class ReceiptFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.sessionInformationEnergy.text = String.format("%.3f kWh", charge.kwh)
         mBinding.sessionInformationPrice.text = String.format("$%.2f", charge.price)
         mBinding.sessionInformationChargingSiteSubtitle.text = charge.locationName
+        mBinding.receiptFee.text = String.format("$%.2f", charge.price)
+        mBinding.receiptRate.text = String.format("$%.2f/kWh", charge.ppkwh)
+        mBinding.sessionInformationPlanType.text = charge.planName
     }
 
     override fun setListeners() {

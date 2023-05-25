@@ -51,6 +51,7 @@ class SessionInformationFragment : ErrorFragment<LocationPresenter>(), ILocation
         mBinding.sessionInformationId.text = mCharge.id.toString()
         mBinding.sessionInformationChargingSiteSubtitle.text = mCharge.locationName
         mBinding.sessionInformationPlanType.text = mCharge.planName
+        mBinding.sessionInformationChargingSiteId.text = mCharge.stationName
     }
 
     override fun setListeners() {
@@ -64,8 +65,9 @@ class SessionInformationFragment : ErrorFragment<LocationPresenter>(), ILocation
     }
 
     override fun showLocation(response: Location?) {
-        mBinding.sessionInformationChargingSiteId.text = response!!.id.toString()
-        mBinding.sessionInformationChargingSiteAddress.text = response.address.toString()
+        mBinding.sessionInformationChargingSiteAddress.text = response!!.address.toString()
+        //TODO: no traer esto, usar la location que debería venir en la carga
+        //Para esto y para la img
     }
 
 }

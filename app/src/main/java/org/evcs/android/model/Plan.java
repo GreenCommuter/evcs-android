@@ -38,7 +38,8 @@ public class Plan implements Serializable {
 //            "price_per_kwh":"0.00",
 //            "monthly_kwh":null,
 //            "weekly_kwh":null,
-    public final int trialDays;
+    public int trialDays;
+    public String cta;
 
     public RenewalPeriod getRenewalPeriod() {
         if (yearlyPrice != null) return RenewalPeriod.YEAR;
@@ -58,5 +59,6 @@ public class Plan implements Serializable {
         //TODO
         return false;
     }
+
 }
 //        "pay_per_charge": false,

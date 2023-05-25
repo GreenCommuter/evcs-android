@@ -48,7 +48,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         super.populate()
         mBinding.planLearnMoreToolbar.setTitle(mPlan.name)
         //if plan and user both have free days
-        mBinding.planLearnMoreDaysFree.text = String.format("${mPlan.trialDays} Days Free!*", mPlan.trialDays)
+//        mBinding.planLearnMoreDaysFree.text = String.format("${mPlan.trialDays} Days Free!*", mPlan.trialDays)
         //if plan doesn't:
         //mBinding.planLearnMoreDaysFree.text = "Simple Flat Rate Member Pricing"
         //if user doesn't:
@@ -71,7 +71,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         //hikes: visible en standard anytime, basic anytime, pay as you go no payment
 
 
-        if (mPlan.trialDays > 0) {
+        if (/*mPlan.trialDays > 0*/ false) {
             //unlimited anytime / unlimited offpeak
             val unlimited = "Unlimited Anytime or"
             mBinding.planLearnMoreSidenote.text = String.format(

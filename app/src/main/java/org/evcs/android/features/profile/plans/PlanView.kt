@@ -39,8 +39,7 @@ class PlanView : LinearLayout {
         mBinding.viewPlanPrice.text =
                 formatIfPositive(plan.monthlyPrice, "\$%.2f/$period", "\$0 Membership Fee")
 
-        mBinding.viewPlanButton.text =
-                formatIfPositive(plan.trialDays, "Get %d Days Free", "Get Started")
+        mBinding.viewPlanButton.text = plan.cta
 
         mBinding.viewPlanFreq.text = "I charge publicly %d+ times/%s"
         //PAYG: I charge infrequently/I don't need a plan

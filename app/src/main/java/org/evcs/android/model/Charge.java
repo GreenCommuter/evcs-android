@@ -21,7 +21,9 @@ public class Charge implements Serializable {
     private float kwh;
     private float price;
     private String status;
+    private String stationName;
     private Subscription subscription;
+    private Float ppkwh;
 
     public int getId() {
         return id;
@@ -71,5 +73,13 @@ public class Charge implements Serializable {
 
     public String getPlanName() {
         return subscription.planName;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public Float getPpkwh() {
+        return ppkwh;
     }
 }

@@ -2,6 +2,7 @@ package org.evcs.android.features.charging
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import org.evcs.android.R
 import org.evcs.android.databinding.AdapterChargingHistoryItemBinding
 import org.evcs.android.model.Charge
 import org.joda.time.format.DateTimeFormat
@@ -15,7 +16,7 @@ class ChargingHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemV
 
     init {
         mBinding = AdapterChargingHistoryItemBinding.bind(itemView)
-        mDateTimeFormatter = DateTimeFormat.forPattern("MM/dd/yyyy")
+        mDateTimeFormatter = DateTimeFormat.forPattern(itemView.context.getString(R.string.app_date_format))
     }
 
     fun setCharge(charge: Charge) {
@@ -23,7 +24,7 @@ class ChargingHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemV
         if (charge.startedAt != null)
             mBinding.adapterChargingHistoryItemDate.text = mDateTimeFormatter.print(charge.startedAt)
         mBinding.adapterChargingHistoryItemStation.text = charge.locationName
-        mBinding.adapterChargingHistoryItemPrice.text = String.format("$%.2f", charge.price)
+        mBinding.adapterChargingHistoryItemPrice.text = itemView.context.getString(R.string.app_price_format, charge.price)
     }
 
 }

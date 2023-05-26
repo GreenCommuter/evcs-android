@@ -3,27 +3,28 @@ package org.evcs.android.features.profile.sessioninformation
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.ActivitySessionInformationBinding
-import org.evcs.android.features.map.location.ILocationView
 import org.evcs.android.features.map.location.LocationPresenter
 import org.evcs.android.model.Charge
 import org.evcs.android.model.Location
+import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-class SessionInformationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
+class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(), ISessionInformationView {
 
     private lateinit var mCharge: Charge
     private lateinit var mDateTimeFormatter: DateTimeFormatter
     private lateinit var mBinding: ActivitySessionInformationBinding
 
-    override fun createPresenter(): LocationPresenter {
-        return LocationPresenter(
+    override fun createPresenter(): SessionInformationPresenter {
+        return SessionInformationPresenter(
             this, EVCSApplication.getInstance().retrofitServices)
     }
 
@@ -39,19 +40,31 @@ class SessionInformationFragment : ErrorFragment<LocationPresenter>(), ILocation
     override fun init() {}
 
     override fun populate() {
-        mDateTimeFormatter = DateTimeFormat.forPattern("MM/dd/yyyy, h:mm a")
+        showProgressDialog()
+        mDateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
+        val chargeId = requireArguments().getInt(Extras.SessionInformationActivity.CHARGE)
+        presenter.getCharge(chargeId)
+    }
 
-        mCharge = requireArguments().getSerializable(Extras.SessionInformationActivity.CHARGE) as Charge
-        presenter.getLocation(mCharge.locationId)
+    override fun showCharge(charge: Charge) {
+        hideProgressDialog()
+        mCharge = charge
         if (mCharge.startedAt != null)
             mBinding.sessionInformationChargingSiteDate.text = mDateTimeFormatter.print(mCharge.startedAt)
         mBinding.sessionInformationDuration.text = mCharge.printableDuration
-        mBinding.sessionInformationEnergy.text = String.format("%.3f kWh", mCharge.kwh)
-        mBinding.sessionInformationPrice.text = String.format("$%.2f", mCharge.price)
+        mBinding.sessionInformationEnergy.text = mCharge.printKwh()
+        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, mCharge.price)
         mBinding.sessionInformationId.text = mCharge.id.toString()
         mBinding.sessionInformationChargingSiteSubtitle.text = mCharge.locationName
         mBinding.sessionInformationPlanType.text = mCharge.planName
         mBinding.sessionInformationChargingSiteId.text = mCharge.stationName
+        mBinding.sessionInformationPaymentMethod.text = getString(R.string.app_payment_method_format)
+
+        mBinding.sessionInformationChargingSiteAddress.text = mCharge.address
+        if (mCharge.image != null) {
+            mBinding.sessionInformationImage.isVisible = true
+            mBinding.sessionInformationImage.setImageURI(mCharge.image)
+        }
     }
 
     override fun setListeners() {
@@ -62,12 +75,6 @@ class SessionInformationFragment : ErrorFragment<LocationPresenter>(), ILocation
             args.putSerializable(Extras.SessionInformationActivity.CHARGE, mCharge)
             findNavController().navigate(R.id.receiptFragment, args)
         }
-    }
-
-    override fun showLocation(response: Location?) {
-        mBinding.sessionInformationChargingSiteAddress.text = response!!.address.toString()
-        //TODO: no traer esto, usar la location que debería venir en la carga
-        //Para esto y para la img
     }
 
 }

@@ -8,6 +8,5 @@ class Session : Charge(), Serializable {
     //    "kwh":"0.0",
     //    "status":"active",
     val updatedAt: DateTime? = null
-    val stationName = 0
 
 }

@@ -27,7 +27,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:text="Sign up"
-        android:gravity="center"
         style="@style/ButtonK.Orange"/>
 
     <TextView
@@ -36,7 +35,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
         android:text="Log in"
-        android:gravity="center"
         style="@style/ButtonK.OrangeOutline"/>
 
     <TextView
@@ -44,7 +42,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Find a station"
-        android:gravity="center"
         android:textColor="@color/evcs_white"
         style="@style/ButtonK"/>
 

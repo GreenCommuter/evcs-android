@@ -46,9 +46,9 @@ public class InstanceIdListenerService extends FirebaseMessagingService {
 
         DeviceToken device = new DeviceToken(refreshedToken, BaseConfiguration.DEVICE_TYPE);
 
-        EVCSRetrofitServices greenCommmuterRetrofitServices = EVCSApplication.getInstance()
+        EVCSRetrofitServices retrofitServices = EVCSApplication.getInstance()
                 .getRetrofitServices();
-        greenCommmuterRetrofitServices.getService(DeviceTokensService.class)
+        retrofitServices.getService(DeviceTokensService.class)
                 .addDeviceToken(device)
                 .enqueue(new Callback<Void>() {
                     @Override

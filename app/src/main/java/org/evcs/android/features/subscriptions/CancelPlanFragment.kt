@@ -18,7 +18,7 @@ class CancelPlanFragment : AbstractCancelPlanFragment() {
     override fun populate() {
         super.populate()
         val subscription = UserUtils.getLoggedUser().activeSubscription!!
-        mBinding.cancelPlanSubscriptionEnd.text = DateTimeFormat.forPattern("MM/dd/yyyy")
+        mBinding.cancelPlanSubscriptionEnd.text = DateTimeFormat.forPattern(getString(R.string.app_date_format))
                 .print(subscription.renewalDate)
 //        mBinding.cancelPlanBillingCycle
         val activeDays = subscription.activeDaysLeft

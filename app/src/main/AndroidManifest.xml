@@ -61,12 +61,6 @@
             android:theme="@style/AppTheme.Transparent" />
 
         <activity
-            android:name="org.evcs.android.features.map.FilterDialogFragment"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:theme="@style/SplashTheme" />
-
-        <activity
             android:name="org.evcs.android.activity.account.AccountActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"

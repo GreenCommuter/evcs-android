@@ -2,26 +2,28 @@ package org.evcs.android.model;
 
 import org.joda.time.DateTime;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class Payment {
+public class Payment implements Serializable {
 //                "id": 12,
 //                        "ch_processor_id": "ch_idle",
 //                        "last_4": null,
     public DateTime createdAt;
-//                        "scheduled_at": "2021-07-28T00:00:00.000Z",
+    public DateTime scheduledAt;
 //                        "charged": true,
 //                        "declined": false,
 //                        "error_message": null,
-//                        "subscription_id": 3,
+    public Integer subscriptionId;
 //                        "p_type": "credit_card",
 //                        "processed_by": "user",
 //                        "scheduled": true,
 //                        "user_name": "Nahuel Gladstein",
 //                        "user_id": 7,
-//                        "last_4": 1111,
+    public String last4;
 //                        "refunded_at": null,
     public Float amount;
+    public String description;
     List<InvoiceLine> invoiceLines;
-
+    public Integer chargeId;
 }

@@ -24,6 +24,7 @@ public class Charge implements Serializable {
     private String stationName;
     private Subscription subscription;
     private Float ppkwh;
+    private Location location;
 
     public int getId() {
         return id;
@@ -35,10 +36,6 @@ public class Charge implements Serializable {
 
     public float getPrice() {
         return price;
-    }
-
-    public int getLocationId() {
-        return locationId;
     }
 
     public String getLocationName() {
@@ -59,8 +56,8 @@ public class Charge implements Serializable {
         return periodFormatter.print(period);
     }
 
-    public float getKwh() {
-        return kwh;
+    public String printKwh() {
+        return String.format("%.3f kW", kwh);
     }
 
     public String getStatus() {
@@ -81,5 +78,16 @@ public class Charge implements Serializable {
 
     public Float getPpkwh() {
         return ppkwh;
+    }
+
+    public String getImage() {
+        if (location.getImageUrls() != null && location.getImageUrls().size() > 0) {
+            return location.getImageUrls().get(0);
+        }
+        return null;
+    }
+
+    public String getAddress() {
+        return location.getAddress().toString();
     }
 }

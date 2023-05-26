@@ -45,7 +45,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/spacing_large"
-        android:gravity="center"
         android:text="@string/location_list_fail"
         android:visibility="gone"
         style="@style/EmptyView"/>

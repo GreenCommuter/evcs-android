@@ -29,17 +29,18 @@ class ReceiptFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun populate() {
-        val dateTimeFormatter = DateTimeFormat.forPattern("MM/dd/yyyy, h:mm a")
+        val dateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
 
         val charge = requireArguments().getSerializable(Extras.SessionInformationActivity.CHARGE) as Charge
         if (charge.startedAt != null)
             mBinding.sessionInformationChargingSiteDate.text = dateTimeFormatter.print(charge.startedAt)
-        mBinding.sessionInformationEnergy.text = String.format("%.3f kWh", charge.kwh)
-        mBinding.sessionInformationPrice.text = String.format("$%.2f", charge.price)
+        mBinding.sessionInformationEnergy.text = charge.printKwh()
+        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, charge.price)
         mBinding.sessionInformationChargingSiteSubtitle.text = charge.locationName
-        mBinding.receiptFee.text = String.format("$%.2f", charge.price)
+        mBinding.receiptFee.text = getString(R.string.app_price_format, charge.price)
         mBinding.receiptRate.text = String.format("$%.2f/kWh", charge.ppkwh)
         mBinding.sessionInformationPlanType.text = charge.planName
+        mBinding.sessionInformationPaymentMethod.text = getString(R.string.app_payment_method_format)
     }
 
     override fun setListeners() {

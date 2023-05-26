@@ -23,9 +23,7 @@ class ChargingHistoryFragment : PaginationFragment<Charge, ChargingHistoryPresen
     override fun setListeners() {
         super.setListeners()
         setItemClickListener { item ->
-            val args = Bundle()
-            args.putSerializable(Extras.SessionInformationActivity.CHARGE, item)
-            findNavController().navigate(R.id.sessionInformationFragment, args)
+            findNavController().navigate(ChargingHistoryFragmentDirections.actionChargingHistoryFragmentToSessionInformationFragment(item.id))
         }
     }
 

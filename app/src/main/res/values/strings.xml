@@ -8,8 +8,10 @@
     <string name="app_error_unknown">There was an unknown error. Try again later.</string>
     <string name="app_error_oom">"Error: out of memory.</string>
     <string name="app_price_format">$%.2f</string>
+    <string name="app_payment_method_format">%1$s •••• %2$s</string>
     <string name="app_time_format">hh:mm a</string>
-    <string name="app_long_date_format">MMMM d</string>
+    <string name="app_date_format">MM/dd/yyyy</string>
+    <string name="app_datetime_format">MM/dd/yyyy, h:mm a</string>
     <string name="app_edit">Edit</string>
     <string name="app_save">Save</string>
     <string name="app_search">Search</string>
@@ -26,7 +28,6 @@
     <string name="app_from">From</string>
     <string name="app_to">To</string>
     <string name="app_cancel">Cancel</string>
-    <string name="drawer_activity_version_name_prefix_format">v%s</string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
     <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
@@ -200,11 +201,7 @@
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>
-    <string name="payment_history_month_formatter">MMMM yyyy</string>
-    <string name="payment_history_date_formatter">MMM d, yyyy</string>
-    <string name="payment_history_formatter">%1$s (%2$s)</string>
     <string name="payment_history_empty">No trips done yet</string>
-    <string name="payment_history_month_title"> - Payments</string>
 
     <!--Payment Details-->
     <string name="payment_details_title">Payment Details</string>
@@ -480,7 +477,7 @@
     <string name="manage_plan_cancel">Cancel Plan</string>
     <string name="manage_plan_payment_info">Payment info</string>
     <string name="manage_plan_change_pm">Change</string>
-    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s</string>
+    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s.</string>
     <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>

@@ -27,7 +27,7 @@
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/session_information_image"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="214dp"
                 android:layout_marginBottom="@dimen/spacing_big_k"
                 android:visibility="gone"/>
 
@@ -161,7 +161,7 @@
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large_extra"
+                android:layout_marginBottom="@dimen/spacing_big_k"
                 app:label="@string/session_information_price">
 
                 <TextView
@@ -177,7 +177,7 @@
                 android:id="@+id/session_information_receipt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large_extra"
+                android:layout_marginBottom="@dimen/spacing_big_k"
                 android:text="@string/session_information_receipt"
                 style="@style/ButtonK.BlueOutline"/>
 

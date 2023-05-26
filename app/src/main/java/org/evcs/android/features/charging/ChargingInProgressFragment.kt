@@ -62,10 +62,10 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         }
         mSessionId = response.id
         hideProgressDialog()
-        mBinding.chargingInProgressEnergy.text = String.format("%.3f kWh", response.kwh)
+        mBinding.chargingInProgressEnergy.text = String.format("%.3f kWh", response.printKwh())
         mBinding.chargingInProgressSessionTime.text = response.printableDuration
         mBinding.chargingInProgressStatus.text = response.status
-        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName.toString()
+        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName
         val formatter = DateTimeFormat.forPattern("hh:mm:ss")
         mBinding.chargingInProgressLastUpdate.text =
                 "Last update: " + formatter.print(response.updatedAt) + " (tap to refresh)"

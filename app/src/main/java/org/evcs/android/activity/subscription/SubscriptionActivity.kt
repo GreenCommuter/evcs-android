@@ -68,7 +68,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
                     defaultPm.card.last4, response.price, response.renewalPeriod, date)))
         mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(defaultPm)
 
-        val format = DateTimeFormat.forPattern("MM/dd/yyyy")
+        val format = DateTimeFormat.forPattern(getString(R.string.app_date_format))
         mBinding.activitySubscriptionsEnrolled.setText(format.print(response.activeSince))
         if (response.onTrialPeriod) {
             mBinding.activitySubscriptionsFreeTrial.visibility = View.VISIBLE

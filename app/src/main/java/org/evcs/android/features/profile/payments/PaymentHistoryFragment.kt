@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.model.Payment
+import org.evcs.android.util.Extras
 
 class PaymentHistoryFragment : PaginationFragment<Payment, PaymentHistoryPresenter, PaymentHistoryAdapter>(), PaginationView<Payment> {
 
@@ -24,9 +25,13 @@ class PaymentHistoryFragment : PaginationFragment<Payment, PaymentHistoryPresent
     override fun setListeners() {
         super.setListeners()
         setItemClickListener { item ->
-            val args = Bundle()
-//            args.putSerializable(Extras.SessionInformationActivity.CHARGE, item)
-            findNavController().navigate(R.id.sessionInformationFragment, args)
+            if (item.chargeId != null) {
+                findNavController().navigate(PaymentHistoryFragmentDirections.actionPaymentHistoryFragmentToSessionInformationFragment(item.chargeId))
+            } else {
+                val args = Bundle()
+                args.putSerializable(Extras.SessionInformationActivity.PAYMENT, item)
+                findNavController().navigate(R.id.receiptPlanFragment, args)
+            }
         }
     }
 

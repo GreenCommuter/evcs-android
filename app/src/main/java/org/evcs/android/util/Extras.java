@@ -30,6 +30,7 @@ public class Extras {
 
     public static class SessionInformationActivity {
         public static final String CHARGE = "Charge";
+        public static final String PAYMENT = "Subscription";
     }
 
     public static class PlanInfo {

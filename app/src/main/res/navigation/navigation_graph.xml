@@ -7,10 +7,9 @@
     <fragment
         android:id="@+id/mainMapFragment"
         android:name="org.evcs.android.features.map.MainMapFragment"
-        android:label="ChooseServiceFragment"
         tools:layout="@layout/fragment_main_map">
         <action
-            android:id="@+id/action_mainMapFragmentt_to_chargingFragment"
+            android:id="@+id/action_mainMapFragment_to_chargingFragment"
             app:destination="@id/chargingFragment" />
         <action
             android:id="@+id/action_mainMapFragment_to_profileFragment"
@@ -121,6 +120,9 @@
         <action
             android:id="@+id/action_sessionInformationFragment_to_receiptFragment"
             app:destination="@id/receiptFragment" />
+        <argument
+            android:name="Charge"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/receiptFragment"
@@ -130,12 +132,18 @@
     <fragment
         android:id="@+id/paymentHistoryFragment"
         android:name="org.evcs.android.features.profile.payments.PaymentHistoryFragment"
-        android:label="PaymentHistoryFragment" >
+        android:label="PaymentHistoryFragment"
+        tools:layout="@layout/fragment_charging_history">
         <action
             android:id="@+id/action_paymentHistoryFragment_to_sessionInformationFragment"
             app:destination="@id/sessionInformationFragment" />
         <action
-            android:id="@+id/action_paymentHistoryFragment_to_receiptFragment"
-            app:destination="@id/receiptFragment" />
+            android:id="@+id/action_paymentHistoryFragment_to_receiptPlanFragment"
+            app:destination="@id/receiptPlanFragment"/>
     </fragment>
+    <fragment
+        android:id="@+id/receiptPlanFragment"
+        android:name="org.evcs.android.features.profile.sessioninformation.ReceiptPlanFragment"
+        android:label="ReceiptPlanFragment"
+        tools:layout="@layout/fragment_receipt_plan"/>
 </navigation>

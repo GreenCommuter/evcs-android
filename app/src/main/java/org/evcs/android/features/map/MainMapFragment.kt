@@ -34,6 +34,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private lateinit var mStatusBarSpacing: View
     private lateinit var mToolbarBackground: View
     private lateinit var mMapLayout: FrameLayout
+    private lateinit var mListLayout: FrameLayout
     private lateinit var mToggleButton: TextView
     private lateinit var mSearchLocationChildFragment: SearchLocationChildFragment
     private lateinit var mInnerMapFragment: InnerMapFragment
@@ -64,6 +65,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mToolbarBackground = binding.fragmentSearchLocationAddressParent
         mStatusBarSpacing = binding.fragmentMainMapStatusBar
         mMapLayout = binding.fragmentMainMapLayout
+        mListLayout = binding.fragmentListLayout
     }
 
     override fun init() {
@@ -99,16 +101,18 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
     fun showMap() {
         mToggleButton.text = "List"
-        mMapLayout.visibility = View.VISIBLE
+        mMapLayout.isVisible = true
+        mListLayout.isVisible = false
     }
 
     fun hideMap() {
         mToggleButton.text = "Map"
-        mMapLayout.visibility = View.GONE
+        mMapLayout.isVisible = false
+        mListLayout.isVisible = true
     }
 
     override fun setListeners() {
-        mToggleButton.setOnClickListener {
+        (mToggleButton.parent as View).setOnClickListener {
             if (isMapShowing()) hideMap() else showMap()
         }
         mFilterButton.setOnClickListener {

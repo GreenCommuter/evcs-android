@@ -100,7 +100,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsViewAllPlans2.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsActivate.setOnClickListener {  }
         mBinding.activitySubscriptionsPaymentInfo.setOnChangeClickListener {
-            WalletActivity.buildIntent(this, true)
+            val intent = WalletActivity.buildIntent(this, true)
             mChangePmLauncher.launch(intent)
         }
         mBinding.activitySubscriptionsToolbar.setNavigationOnClickListener { finish() }

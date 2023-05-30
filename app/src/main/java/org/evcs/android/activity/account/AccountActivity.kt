@@ -1,6 +1,7 @@
 package org.evcs.android.activity.account
 
 import android.content.Intent
+import android.telephony.PhoneNumberUtils
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
@@ -30,7 +31,7 @@ class AccountActivity : BaseActivity2() {
         super.populate()
         val user = UserUtils.getLoggedUser()
         mBinding.fragmentAccountEmail.setText(user.email)
-        mBinding.fragmentAccountPhone.setText(user.phone)
+        mBinding.fragmentAccountPhone.setText(PhoneNumberUtils.formatNumber(user.phone?:"", "US"))
         mBinding.fragmentAccountName.setText(UserUtils.getLoggedUser().name)
     }
 

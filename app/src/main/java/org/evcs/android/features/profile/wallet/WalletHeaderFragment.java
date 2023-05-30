@@ -12,7 +12,9 @@ import org.evcs.android.R;
 import org.evcs.android.databinding.ViewWalletHeaderBinding;
 import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
+import org.evcs.android.model.user.User;
 import org.evcs.android.ui.fragment.ErrorFragment;
+import org.evcs.android.util.UserUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -75,8 +77,10 @@ public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> i
 
             @Override
             public void onStarClicked(@NonNull PaymentMethod item) {
-                showProgressDialog();
-                getPresenter().makeDefaultPaymentMethod(item);
+                if (!item.getId().equals(UserUtils.getLoggedUser().getDefaultPm())) {
+                    showProgressDialog();
+                    getPresenter().makeDefaultPaymentMethod(item);
+                }
             }
 
 //            @Override

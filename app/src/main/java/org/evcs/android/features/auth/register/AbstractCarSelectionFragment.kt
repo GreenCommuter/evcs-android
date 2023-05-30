@@ -9,6 +9,7 @@ import org.evcs.android.features.shared.DropdownWithLabel
 import org.evcs.android.model.Car
 import org.evcs.android.model.CarMaker
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.joda.time.DateTime
 
 
 abstract class AbstractCarSelectionFragment<P : CarSelectionPresenter<*>> : ErrorFragment<P>(), CarSelectionView {
@@ -21,12 +22,14 @@ abstract class AbstractCarSelectionFragment<P : CarSelectionPresenter<*>> : Erro
     override fun init() {
         getMakeField().setItems<String>(ArrayList())
         getModelField().setItems<String>(ArrayList())
+        getYearField().setItems(IntRange(2000, DateTime().year).map { i -> i.toString() })
         presenter!!.getCars()
         setEnableButton(true)
     }
 
     abstract fun getMakeField(): DropdownWithLabel
     abstract fun getModelField(): DropdownWithLabel
+    abstract fun getYearField(): DropdownWithLabel
     abstract fun getButton(): View
 
     override fun setListeners() {
@@ -70,7 +73,8 @@ abstract class AbstractCarSelectionFragment<P : CarSelectionPresenter<*>> : Erro
     protected open fun onButtonClick() {
         progressDialog.show()
         presenter!!.register(
-            (getModelField().getSelectedItem() as Car).id
+            (getModelField().getSelectedItem() as Car).id,
+                    getYearField().getSelectedItem()?.toString()
         )
     }
 

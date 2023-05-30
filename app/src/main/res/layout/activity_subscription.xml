@@ -53,7 +53,7 @@
             android:id="@+id/activity_subscriptions_plan_progress"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_big"/>
+            android:layout_marginBottom="@dimen/spacing_big_k"/>
 
         <org.evcs.android.features.shared.StandardTextFieldNoBorder
             android:id="@+id/activity_subscriptions_enrolled"
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Your visa ending in xx will be charged xx per month \nYour next charge is --"
-                style="@style/Roboto.Body"/>
+                style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 

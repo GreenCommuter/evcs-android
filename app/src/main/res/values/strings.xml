@@ -62,8 +62,7 @@
     <string name="sign_in_password">Password</string>
     <string name="sign_in_forgot_password">Forgot your Password?</string>
     <string name="sign_in_button">Sign in</string>
-    <string name="sign_in_social">Sign in with Google or Facebook account</string>
-    <string name="sign_in_goto_sign_up">Don\'t have an account yet?</string>
+    <string name="sign_in_goto_sign_up">Don\'t have an account?</string>
     <string name="sign_in_error_facebook_email">Make sure your account has an email address</string>
 
     <!-- Forgot Password -->
@@ -481,7 +480,7 @@
     <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>
-    <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
+    <string name="progress_view_text">%1$d/%2$s kWh used this %3$s</string>
 
     <string name="go_to_monthly_plans_title">EVCS Monthly Plans</string>
     <string name="go_to_monthly_plans_subtitle">Learn more about our discounted plans.</string>

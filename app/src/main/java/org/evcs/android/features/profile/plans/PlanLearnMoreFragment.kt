@@ -55,6 +55,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         //mBinding.planLearnMoreDaysFree.setVisibility(View.GONE)
         //show price in title.large
         mBinding.planLearnMorePrice.text = String.format("\$%.2f/%s", mPlan.price, mPlan.renewalPeriod)
+        mBinding.planLearnMorePrice.setTextAppearance(requireContext(), R.style.Title_Large)
 
         //for basic anytime and standard anytime
         //unlimited anytime: Unlimited fast charging, no kWh caps

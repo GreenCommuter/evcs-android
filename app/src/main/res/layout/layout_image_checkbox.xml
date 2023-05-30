@@ -16,8 +16,7 @@
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:textColor="@color/evcs_black"
-            style="@style/Body.Medium" />
+            style="@style/Body.Medium.Black"/>
 
     </LinearLayout>
 

@@ -6,12 +6,6 @@
     android:orientation="vertical"
     android:background="@color/evcs_white">
 
-    <TextView
-        android:id="@+id/fragment_register_step"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"/>
-
     <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,8 +24,7 @@
         android:layout_height="wrap_content"
         android:text="@string/fragment_register_cell_phone_subtitle"
         android:padding="@dimen/spacing_medium_extra"
-        android:textColor="@color/evcs_black"
-        style="@style/Body.Medium"/>
+        style="@style/Body.Medium.Black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -49,11 +42,11 @@
             style="@style/TextInputStyle">
 
             <com.google.android.material.textfield.TextInputEditText
-                style="@style/Roboto.Body.Grey"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
-                android:maxLength="50"/>
+                android:maxLength="50"
+                style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 

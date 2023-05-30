@@ -176,8 +176,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="Body.Medium.Gray800">
-        <item name="android:textColor">#1F2730</item>
+    <style name="Body.Medium.Black">
+        <item name="android:textColor">@color/evcs_black</item>
     </style>
 
     <style name="Body.Small">

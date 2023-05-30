@@ -1,22 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:background="@color/evcs_white">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/fragment_register_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        custom:title="@string/register_title"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"/>
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/spacing_large"
-        android:paddingRight="@dimen/spacing_large">
-
-        <org.evcs.android.ui.view.shared.EVCSToolbar2
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            custom:title="@string/register_title"
-            android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"/>
+        android:paddingLeft="@dimen/padding_ariel_standard"
+        android:paddingRight="@dimen/padding_ariel_standard">
 
         <org.evcs.android.features.shared.StandardTextField
             android:id="@+id/fragment_register_first_name_input"
@@ -29,7 +35,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Body.Medium.Gray800"/>
+                style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 
@@ -44,7 +50,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Body.Medium.Gray800"/>
+                style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 
@@ -60,7 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                style="@style/Body.Medium.Gray800"/>
+                style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextField>
 
@@ -69,13 +75,13 @@
             style="@style/TextInputStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium_more"
+            android:layout_marginBottom="@dimen/spacing_large_k"
             custom:label="@string/register_password">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/Body.Medium.Gray800"/>
+                style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.PasswordTextField>
 
@@ -83,7 +89,7 @@
             android:id="@+id/fragment_register_password_hint"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large_extra"
+            android:layout_marginBottom="@dimen/spacing_large_k"
             android:gravity="center"
             style="@style/Body.Small"/>
 
@@ -91,18 +97,19 @@
             android:id="@+id/fragment_register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_medium"
             android:layout_gravity="center"
             android:enabled="false"
-            style="@style/ButtonK.Orange"
-            android:text="@string/app_continue" />
+            android:text="@string/app_continue"
+            style="@style/ButtonK.Orange"/>
 
         <include layout="@layout/fragment_sign_in_social"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_large_extra"/>
+            android:layout_marginBottom="@dimen/spacing_big_k"/>
 
     </LinearLayout>
 
 </ScrollView>
+
+</LinearLayout>

@@ -13,6 +13,7 @@ import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.user.AuthUser.Companion.TestAuthUser
+import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.*
 
@@ -24,6 +25,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     private lateinit var mPasswordInputLayout: StandardTextField
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: TextView
+    private lateinit var mToolbar: EVCSToolbar2
 
     /**
      * Returns a new RegisterFragment instance.
@@ -54,6 +56,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mPasswordInputLayout = binding.fragmentRegisterPasswordInput
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
+        mToolbar = binding.fragmentRegisterToolbar
     }
 
     override fun init() {
@@ -71,6 +74,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     override fun setListeners() {
         mContinueButton.setOnClickListener { onButtonClick() }
+        mToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     //TODO: replace for validFields

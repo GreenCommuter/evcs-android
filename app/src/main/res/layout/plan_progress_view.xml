@@ -21,7 +21,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="85/200 kWh consumed this month"
-        android:textColor="@color/evcs_black"
-        style="@style/Body.Medium"/>
+        style="@style/Body.Medium.Black"/>
 
 </LinearLayout>

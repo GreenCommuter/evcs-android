@@ -51,6 +51,10 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
         return mBinding.fragmentRegisterYourCarModel
     }
 
+    override fun getYearField(): DropdownWithLabel {
+        return mBinding.fragmentRegisterYourCarYear
+    }
+
     override fun getButton(): View {
         return mBinding.fragmentRegisterYourCarButton
     }

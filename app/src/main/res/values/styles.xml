@@ -193,8 +193,8 @@
 
     <style name="EVCSDatePickerStyle"/>
 
-    <style name="StandardEditText" parent="@style/Roboto.Body">
-        <item name="android:textColorHint">@color/evcs_grey</item>
+    <style name="StandardEditText" parent="@style/Body.Medium">
+        <item name="android:textColorHint">@color/evcs_gray_400</item>
     </style>
 
 <!--    <style name="NavigationViewStyle">-->

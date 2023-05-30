@@ -32,8 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_ariel_different"
-            android:textColor="@color/evcs_black"
-            style="@style/Body.Medium"/>
+            style="@style/Body.Medium.Black"/>
 
     </LinearLayout>
 

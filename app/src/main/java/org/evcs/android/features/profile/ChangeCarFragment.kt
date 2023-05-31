@@ -1,51 +1,20 @@
 package org.evcs.android.features.profile
 
-import android.view.View
-import android.widget.TextView
-import org.evcs.android.EVCSApplication
-import org.evcs.android.R
-import org.evcs.android.databinding.FragmentChangeCarBinding
-import org.evcs.android.features.auth.register.AbstractCarSelectionFragment
-import org.evcs.android.features.auth.register.CarSelectionPresenter
-import org.evcs.android.features.shared.DropdownWithLabel
+import androidx.core.view.isVisible
+import org.evcs.android.features.auth.register.RegisterFragmentYourCar
 import org.evcs.android.model.user.UserCar
 import org.evcs.android.util.UserUtils
 
-class ChangeCarFragment : AbstractCarSelectionFragment<CarSelectionPresenter<*>>() {
-
-    private lateinit var mBinding: FragmentChangeCarBinding
-
-    override fun setUi(v: View) {
-        mBinding = FragmentChangeCarBinding.bind(v)
-    }
-
-    override fun getMakeField(): DropdownWithLabel {
-        return mBinding.fragmentChangeCarMake
-    }
-
-    override fun getModelField(): DropdownWithLabel {
-        return mBinding.fragmentChangeCarModel
-    }
-
-    override fun getButton(): TextView {
-        return mBinding.fragmentChangeCarSave
-    }
-
-    override fun getYearField(): DropdownWithLabel {
-        return mBinding.fragmentChangeCarYear
-    }
+/**
+ * This used to be a separate fragment without zipcode and I was in a hurry
+ */
+class ChangeCarFragment : RegisterFragmentYourCar() {
 
     override fun init() {
         super.init()
-        mBinding.fragmentChangeCarToolbar.setNavigationOnClickListener { activity?.finish() }
-    }
-
-    override fun layout(): Int {
-        return R.layout.fragment_change_car
-    }
-
-    override fun createPresenter(): CarSelectionPresenter<*> {
-        return CarSelectionPresenter(this, EVCSApplication.getInstance().retrofitServices)
+        mBinding.fragmentRegisterYourCarToolbar.setNavigationOnClickListener { activity?.finish() }
+        mBinding.fragmentRegisterYourCarButton.text = "Save vehicle information"
+        mBinding.fragmentRegisterYourCarSubtitle.isVisible = false
     }
 
     override fun onCarsAdded(car : UserCar) {
@@ -53,6 +22,10 @@ class ChangeCarFragment : AbstractCarSelectionFragment<CarSelectionPresenter<*>>
         user.userCar = car
         UserUtils.saveUser(user)
         activity?.finish()
+    }
+
+    override fun hasCompletedCarScreen(): Boolean {
+        return false
     }
 
 }

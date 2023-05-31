@@ -14,9 +14,9 @@ import org.evcs.android.navigation.controller.AbstractNavigationController
 import org.evcs.android.util.UserUtils
 
 
-class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYourCar>(), RegisterViewYourCar {
+open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYourCar>(), RegisterViewYourCar {
 
-    private lateinit var mBinding: FragmentRegisterYourCarBinding
+    protected lateinit var mBinding: FragmentRegisterYourCarBinding
 
     /**
      * Returns a new RegisterFragment instance.
@@ -67,7 +67,7 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
         super.init()
     }
 
-    private fun hasCompletedCarScreen(): Boolean {
+    protected open fun hasCompletedCarScreen(): Boolean {
         return UserUtils.getLoggedUser().zipCode != null
     }
 

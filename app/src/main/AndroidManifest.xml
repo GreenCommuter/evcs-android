@@ -91,7 +91,13 @@
             android:theme="@style/SplashTheme" />
 
         <activity
-            android:name="org.evcs.android.activity.account.ZipCodeActivity"
+            android:name="org.evcs.android.activity.account.ChangeEmailActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/SplashTheme" />
+
+        <activity
+            android:name="org.evcs.android.activity.account.ChangePhoneNumberActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/SplashTheme" />

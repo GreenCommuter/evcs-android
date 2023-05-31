@@ -41,6 +41,12 @@ class AccountActivity : BaseActivity2() {
             mChangeUserResult.launch(Intent(this, ChangeNameActivity::class.java))
         }
         mBinding.fragmentAccountChangePassword.setOnClickListener { jumpTo(this, ChangePasswordActivity::class.java) }
+        mBinding.fragmentAccountEmail.setOnClickListener {
+            mChangeUserResult.launch(Intent(this, ChangeEmailActivity::class.java))
+        }
+        mBinding.fragmentAccountPhone.setOnClickListener {
+            mChangeUserResult.launch(Intent(this, ChangePhoneNumberActivity::class.java))
+        }
         mBinding.fragmentAccountDelete.setOnClickListener { jumpTo(this, DeleteAccountActivity::class.java)  }
         mBinding.fragmentAccountToolbar.setNavigationOnClickListener { finish() }
     }

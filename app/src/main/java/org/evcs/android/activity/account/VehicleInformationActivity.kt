@@ -35,7 +35,7 @@ class VehicleInformationActivity : BaseActivity2() {
             mChangeUserResult.launch(Intent(this, ChangeCarActivity::class.java))
         }
         mBinding.fragmentAccountZipcode.setOnClickListener {
-            mChangeUserResult.launch(Intent(this, ZipCodeActivity::class.java))
+            mChangeUserResult.launch(Intent(this, ChangeCarActivity::class.java))
         }
         mBinding.fragmentAccountToolbar.setNavigationOnClickListener { finish() }
     }

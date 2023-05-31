@@ -394,7 +394,7 @@
     <string name="notifications_channel_name">All notifications</string>
     <string name="notifications_channel_description">All notifications sent by the app</string>
 
-    <string name="register_your_car_title">Your car</string>
+    <string name="register_your_car_title">Vehicle Information</string>
     <string name="register_your_car_subtitle">Your vehicle information helps us improve our services and helps us troubleshoot issues.</string>
     <string name="register_your_car_year">Year</string>
     <string name="register_your_car_model">Model</string>

@@ -3,9 +3,7 @@ package org.evcs.android.activity.account
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.model.user.NameWrapper
-import org.evcs.android.model.user.User
-import org.evcs.android.model.user.ZipCodeWrapper
+import org.evcs.android.model.user.*
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
@@ -17,37 +15,39 @@ class UpdateUserPresenter(viewInstance: UpdateUserView?, services: RetrofitServi
 
     fun changeName(first: CharSequence, last: CharSequence) {
         getService(UserService::class.java).updateUser(UserUtils.getUserId(), NameWrapper(first.toString(), last.toString()))
-            .enqueue(object : AuthCallback<User?>(this) {
-                override fun onResponseSuccessful(response: User?) {
-                    UserUtils.saveUser(response)
-                    view?.onUserUpdate();
-                }
+            .enqueue(getCallback())
+    }
 
-                override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
-                    view?.showError(ErrorUtils.getError(responseBody))
-                }
+    private fun getCallback(): AuthCallback<User?> {
+        return object : AuthCallback<User?>(this) {
+            override fun onResponseSuccessful(response: User?) {
+                UserUtils.saveUser(response)
+                view?.onUserUpdate();
+            }
 
-                override fun onCallFailure(throwable: Throwable) {
-                    runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
-                }
-            })
+            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                view?.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(throwable: Throwable) {
+                runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+            }
+        }
     }
 
     fun changeZipCode(zipcode: CharSequence) {
         getService(UserService::class.java).updateUser(UserUtils.getUserId(), ZipCodeWrapper(zipcode.toString()))
-            .enqueue(object : AuthCallback<User?>(this) {
-                override fun onResponseSuccessful(response: User?) {
-                    UserUtils.saveUser(response)
-                    view?.onUserUpdate();
-                }
+            .enqueue(getCallback())
+    }
 
-                override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
-                    view?.showError(ErrorUtils.getError(responseBody))
-                }
+    fun changePhoneNumber(phone: CharSequence) {
+        getService(UserService::class.java).updateUser(UserUtils.getUserId(), PhoneWrapper(phone.toString()))
+                .enqueue(getCallback())
+    }
 
-                override fun onCallFailure(throwable: Throwable) {
-                    runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
-                }
-            })
+    fun changeEmail(email: CharSequence) {
+        getService(UserService::class.java).updateUser(UserUtils.getUserId(), EmailWrapper(email.toString()))
+                .enqueue(getCallback())
+
     }
 }

@@ -18,7 +18,7 @@ class PaymentHistoryPresenter(viewInstance: PaginationView<Payment>, services: R
     }
 
     override fun showItems(list: List<Payment>, pagesLeft: Boolean, onFirstPage: Boolean) {
-        return view.showItems(list, pagesLeft, onFirstPage)
+        return view.showItems(list.filter { payment -> payment.amount > 0 }, pagesLeft, onFirstPage)
     }
 
 }

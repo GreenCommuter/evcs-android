@@ -40,7 +40,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     private LinearLayout mLayout;
     private TextView mTitle;
     private TextView mSubtitle;
-    private int mButtonMargin;
+    protected int mButtonMargin;
     @ColorInt int mGrey;
     @ColorInt int mTransparent;
 

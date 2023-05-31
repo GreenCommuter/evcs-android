@@ -25,6 +25,7 @@ public class Charge implements Serializable {
     private Subscription subscription;
     private Float ppkwh;
     private Location location;
+    private CreditCardProvider paymentBrand;
 
     public int getId() {
         return id;

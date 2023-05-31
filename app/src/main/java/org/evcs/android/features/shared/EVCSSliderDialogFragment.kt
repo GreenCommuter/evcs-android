@@ -2,6 +2,7 @@ package org.evcs.android.features.shared
 
 import android.widget.Button
 import org.evcs.android.R
+import org.evcs.android.util.ViewUtils.setMargins
 
 class EVCSSliderDialogFragment : EVCSDialogFragment() {
 
@@ -11,6 +12,7 @@ class EVCSSliderDialogFragment : EVCSDialogFragment() {
 
     override fun getCancelButton(cancel: String?): Button {
         val button = super.getCancelButton(cancel)
+        button.setMargins(mButtonMargin, mButtonMargin, mButtonMargin, mButtonMargin)
         button.background = resources.getDrawable(R.drawable.layout_corners_rounded_black_outline)
         return button
     }

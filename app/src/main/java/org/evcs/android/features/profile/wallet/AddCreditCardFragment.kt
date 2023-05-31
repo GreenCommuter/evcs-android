@@ -118,15 +118,16 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
     }
 
     private fun onSetupCompletedSuccessfully(id: String) {
-        ToastUtils.show(getString(R.string.add_credit_card_success))
         if (mSetDefault.isChecked or !mSetDefault.isVisible) {
             presenter.makeDefaultPaymentMethod(id)
         } else {
+            ToastUtils.show(getString(R.string.add_credit_card_success))
             finish()
         }
     }
 
     override fun onDefaultPaymentMethodSet(item: PaymentMethod) {
+        ToastUtils.show(getString(R.string.add_credit_card_success))
         finish()
         (activity as WalletActivity).onPaymentMethodChanged(item)
     }

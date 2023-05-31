@@ -65,6 +65,9 @@ class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(),
             mBinding.sessionInformationImage.isVisible = true
             mBinding.sessionInformationImage.setImageURI(mCharge.image)
         }
+        if (mCharge.price == 0f) {
+            mBinding.sessionInformationReceipt.isVisible = false
+        }
     }
 
     override fun setListeners() {

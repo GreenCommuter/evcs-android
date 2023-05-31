@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Payment implements Serializable {
-//                "id": 12,
+    public String id;
 //                        "ch_processor_id": "ch_idle",
 //                        "last_4": null,
     public DateTime createdAt;

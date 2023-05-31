@@ -23,7 +23,7 @@ class PaymentHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemVi
         mPayment = payment
         if (payment.createdAt != null)
             mBinding.adapterPaymentHistoryItemDate.text = mDateTimeFormatter.print(payment.createdAt)
-        mBinding.adapterPaymentHistoryItemStation.text = payment.description
+        mBinding.adapterPaymentHistoryItemStation.text = payment.description?: payment.id
         mBinding.adapterPaymentHistoryItemPrice.text = itemView.context.getString(R.string.app_price_format, payment.amount)
     }
 

@@ -6,7 +6,6 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -29,6 +28,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.FragmentLocationReceiver
 import org.evcs.android.util.LocationHelper
+import org.evcs.android.util.ViewUtils.setMargins
 
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
@@ -242,14 +242,12 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     fun showSuccessDialog() {
         val textView = TextView(context)
         textView.text = getString(R.string.success_dialog_cta)
-        textView.setTextAppearance(context, R.style.Label_Large)
+        textView.setTextAppearance(context, R.style.Label_Medium)
         textView.gravity = Gravity.CENTER
-        val lp = LinearLayout.LayoutParams(-1, -1)
-        lp.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_big_k).toInt())
-        textView.layoutParams = lp
+        textView.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_big_k).toInt())
 
         EVCSSliderDialogFragment.Builder()
-            .setTitle(getString(R.string.success_dialog_title))
+            .setTitle(getString(R.string.success_dialog_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.success_dialog_subtitle))
             .addView(textView)
             .addButton("Get 30 Days Free") { NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java) }

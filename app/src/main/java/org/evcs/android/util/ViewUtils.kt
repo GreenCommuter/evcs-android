@@ -40,7 +40,7 @@ object ViewUtils {
     }
 
     fun View.setMargins(left: Int, top: Int, right: Int, bottom: Int) {
-        val lp = ViewGroup.MarginLayoutParams(layoutParams)
+        val lp = ViewGroup.MarginLayoutParams(layoutParams ?: ViewGroup.LayoutParams(-2, -2))
         lp.setMargins(left, top, right, bottom)
         layoutParams = lp
     }

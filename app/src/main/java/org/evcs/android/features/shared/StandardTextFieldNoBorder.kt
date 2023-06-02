@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.StyleRes
 import org.evcs.android.R
 
 open class StandardTextFieldNoBorder : StandardTextField {
@@ -17,6 +18,15 @@ open class StandardTextFieldNoBorder : StandardTextField {
 
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context,
         attrs, defStyleAttr) {}
+
+    constructor(context: Context, label: String, text: String, @StyleRes textStyle: Int = R.style.Body_Medium) :
+        super(context) {
+        setLabel(label)
+        val tv = TextView(context)
+        tv.text = text
+        tv.setTextAppearance(context, textStyle)
+        addView(tv)
+    }
 
     override fun init(context: Context) {
         super.init(context)

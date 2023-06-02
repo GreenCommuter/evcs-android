@@ -18,6 +18,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/receipt_plan_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -39,81 +40,6 @@
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 style="@style/Title.Medium"
                 tools:text="12/28/2022"/>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Type">
-
-                <TextView
-                    android:id="@+id/session_information_plan_type"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="Standard Anytime"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Start Date">
-
-                <TextView
-                    android:id="@+id/session_information_start_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="MM/DD/YYYY"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Next Installment">
-
-                <TextView
-                    android:id="@+id/session_information_next_installment"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="MM/DD/YYYY"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="@string/session_information_payment_method">
-
-                <TextView
-                    android:id="@+id/session_information_payment_method"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="VISA ···· 4567"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="@string/session_information_price">
-
-                <TextView
-                    android:id="@+id/session_information_price"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="$0.00"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
         </LinearLayout>
 

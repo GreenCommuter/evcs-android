@@ -2,15 +2,14 @@ package org.evcs.android.features.profile.sessioninformation
 
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import org.evcs.android.ui.fragment.ErrorFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentReceiptPlanBinding
-import org.evcs.android.model.Charge
+import org.evcs.android.features.shared.StandardTextFieldNoBorder
 import org.evcs.android.model.Payment
+import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
-import org.evcs.android.util.StringUtils
-import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils.setMargins
 import org.joda.time.format.DateTimeFormat
 
 class ReceiptPlanFragment : ErrorFragment<BasePresenter<*>>() {
@@ -37,16 +36,15 @@ class ReceiptPlanFragment : ErrorFragment<BasePresenter<*>>() {
     override fun populate() {
         val dateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_date_format))
 
-        //TODO: may be another subscription, i have payment.subscriptionId
-        val subscription = UserUtils.getLoggedUser().activeSubscription!!
-        val period = StringUtils.capitalize(subscription.plan.renewalPeriod.toAdverb())
-        mBinding.sessionInformationChargingSiteSubtitle.text = "${period} Plan"
+//        mBinding.sessionInformationChargingSiteSubtitle.text = "${period} Plan"
         mBinding.sessionInformationChargingSiteDate.text = dateTimeFormatter.print(mPayment.createdAt)
-        mBinding.sessionInformationPlanType.text = subscription.planName
-        mBinding.sessionInformationStartDate.text = dateTimeFormatter.print(subscription.activeSince)
-        mBinding.sessionInformationNextInstallment.text = dateTimeFormatter.print(subscription.renewalDate)
-        mBinding.sessionInformationPaymentMethod.text = getString(R.string.app_payment_method_format)
-        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, mPayment.amount)
+
+        mPayment.receipt.forEach { line ->
+            val v = StandardTextFieldNoBorder(requireContext(), line.label, line.detail)
+//            (v.layoutParams as LinearLayout.LayoutParams)
+                v.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
+            mBinding.receiptPlanLayout.addView(v)
+        }
     }
 
     override fun setListeners() {

@@ -24,6 +24,6 @@ public class Payment implements Serializable {
 //                        "refunded_at": null,
     public Float amount;
     public String description;
-    List<InvoiceLine> invoiceLines;
+    public List<InvoiceLine> receipt;
     public Integer chargeId;
 }

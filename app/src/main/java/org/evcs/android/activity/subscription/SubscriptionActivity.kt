@@ -116,7 +116,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         EVCSDialogFragment.Builder()
                 .setTitle(title)
                 .setSubtitle(getString(R.string.cancellation_dialog_subtitle))
-                .addButton("Close", { dialog -> dialog.dismiss() },
+                .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
                     R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
             .show(supportFragmentManager)
     }

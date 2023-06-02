@@ -1,6 +1,7 @@
 package org.evcs.android.features.profile.plans
 
 import android.os.Bundle
+import org.evcs.android.R
 import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
 import org.joda.time.DateTime
@@ -36,7 +37,7 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
     }
 
     override fun getButtonText(): String {
-        return "Close"
+        return getString(R.string.app_close)
     }
 
     override fun showToday(): Boolean {

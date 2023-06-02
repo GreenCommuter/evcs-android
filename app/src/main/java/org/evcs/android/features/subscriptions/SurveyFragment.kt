@@ -2,7 +2,6 @@ package org.evcs.android.features.subscriptions
 
 import android.app.Activity
 import android.view.View
-import android.widget.LinearLayout
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentSurveyBinding

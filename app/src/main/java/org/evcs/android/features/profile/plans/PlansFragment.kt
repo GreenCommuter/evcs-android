@@ -72,7 +72,7 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         mViewPager.adapter = mPagerAdapter
 
         mShowCorporatePlans = arguments?.getBoolean(Extras.PlanActivity.IS_CORPORATE, true) ?: true
-                && UserUtils.getLoggedUser().isCorporateUser
+                && UserUtils.getLoggedUser()?.isCorporateUser ?: false
         if (!mShowCorporatePlans)
             showTabs()
         mTabLayout.getTabAt(0)?.customView = getTab(tabStandard)
@@ -117,7 +117,10 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
             val isHighMileage = { plan: Plan -> plan.isUnlimited }
             mHighMileageFragment?.showPlans(response.filter(isHighMileage))
             mStandardMileageFragment.showPlans(response.filterNot(isHighMileage))
-            if (isHighMileage.invoke(UserUtils.getLoggedUser().activeSubscription?.plan ?: return)) {
+            if (UserUtils.getLoggedUser()?.activeSubscription == null) {
+                mStandardMileageFragment.addPayAsYouGo()
+            }
+            if (isHighMileage.invoke(UserUtils.getLoggedUser()?.activeSubscription?.plan ?: return)) {
                 mViewPager.currentItem = 1
             }
         }

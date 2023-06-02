@@ -1,14 +1,16 @@
 package org.evcs.android.features.map
 
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.base.core.util.NavigationUtils
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
@@ -18,6 +20,8 @@ import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.map.clustermap.InnerMapFragment
 import org.evcs.android.features.map.location_list.LocationListFragment
 import org.evcs.android.features.map.search.SearchLocationChildFragment
+import org.evcs.android.features.profile.plans.PlansActivity
+import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.model.FilterState
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
@@ -226,4 +230,51 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         super.onResume()
         if (mIsMapShowing) showMap() else hideMap()
     }
+
+    fun showWelcomeDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.welcome_dialog_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.welcome_dialog_subtitle))
+            .addButton(getString(R.string.app_close)) { fragment -> fragment.dismiss() }
+            .show(childFragmentManager)
+    }
+
+    fun showSuccessDialog() {
+        val textView = TextView(context)
+        textView.text = getString(R.string.success_dialog_cta)
+        textView.setTextAppearance(context, R.style.Label_Large)
+        textView.gravity = Gravity.CENTER
+        val lp = LinearLayout.LayoutParams(-1, -1)
+        lp.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_big_k).toInt())
+        textView.layoutParams = lp
+
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.success_dialog_title))
+            .setSubtitle(getString(R.string.success_dialog_subtitle))
+            .addView(textView)
+            .addButton("Get 30 Days Free") { NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java) }
+            .show(childFragmentManager)
+    }
+
+    fun showCongratulationsDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.congratulations_dialog_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.congratulations_dialog_subtitle))
+            .addButton(getString(R.string.app_close)) { fragment -> fragment.dismiss() }
+            .show(childFragmentManager)
+    }
+
+    fun showAccountNotValidatedDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.account_not_validated_title))
+            .setSubtitle(getString(R.string.account_not_validated_subtitle))
+            .addButton(getString(R.string.account_not_validated_button), {
+                    fragment -> fragment.dismiss()
+                    //TODO: go to validation (make activity)
+                },
+                R.drawable.layout_corners_rounded_blue)
+            .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.drawable.layout_corners_rounded_black_outline, R.color.button_text_color_selector_black_outline)
+            .show(childFragmentManager)
+    }
+
 }

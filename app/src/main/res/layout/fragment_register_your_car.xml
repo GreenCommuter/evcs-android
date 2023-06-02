@@ -24,6 +24,7 @@
             android:layout_height="wrap_content"
             android:text="@string/register_your_car_subtitle"
             android:padding="@dimen/spacing_medium_extra"
+            android:layout_marginBottom="@dimen/spacing_medium_extra"
             style="@style/Body.Medium"/>
 
         <LinearLayout

@@ -21,7 +21,6 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setMargins
-import java.util.ArrayList
 
 class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewListener {
 
@@ -64,9 +63,11 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             requireActivity().finish()
     }
 
-    override fun onGetPlanClicked(plan: Plan) {
+    override fun onGetPlanClicked(plan: Plan?) {
         //TODO: Check
-        if (UserUtils.getLoggedUser().hasAnySubscription) {
+        if (plan == null) {
+            //TODO
+        } else if (UserUtils.getLoggedUser().hasAnySubscription) {
             val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan."
             val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
             val paragraph3 = "Do you want to continue changing plans?"
@@ -94,9 +95,10 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         mLauncher.launch(intent)
     }
 
-    override fun onLearnMoreClicked(plan: Plan) {
-        NavigationUtils.jumpTo(requireContext(), PlanLearnMoreActivity::class.java,
-            NavigationUtils.IntentExtra(Extras.PlanActivity.PLAN, plan))
+    override fun onLearnMoreClicked(plan: Plan?) {
+        val intent = Intent(context, PlanLearnMoreActivity::class.java)
+        if (plan != null) intent.putExtra(Extras.PlanActivity.PLAN, plan)
+        requireContext().startActivity(intent)
     }
 
     fun showPlans(response: List<Plan>) {
@@ -123,5 +125,11 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             }
         }
         mLayout.addView(goToMonthlyPlansView)
+    }
+
+    fun addPayAsYouGo() {
+        val view = PlanView(requireContext(), null as Plan?)
+        view.setListener(this)
+        mLayout.addView(view)
     }
 }

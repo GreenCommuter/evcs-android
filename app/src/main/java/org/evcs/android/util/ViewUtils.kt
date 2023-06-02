@@ -10,8 +10,8 @@ import android.text.style.UnderlineSpan
 import android.text.TextPaint
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 
 /**
  * Utilities for Android views
@@ -25,6 +25,10 @@ object ViewUtils {
      */
     fun View.setVisibility(show: Boolean) {
         this.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    fun View.setParentVisibility(show: Boolean) {
+        (this.parent as View).isVisible = show
     }
 
     /**

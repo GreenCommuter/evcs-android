@@ -52,16 +52,8 @@
         <item name="fontFamily">@font/roboto_bold</item>
     </style>
 
-    <style name="RobotoBold.Title">
-        <item name="android:textSize">28sp</item>
-    </style>
-
     <style name="RobotoBold.Body">
         <item name="android:textSize">14sp</item>
-    </style>
-
-    <style name="RobotoBold.Body.Grey">
-        <item name="android:textColor">#514f4d</item>
     </style>
 
     <style name="Inter" parent="@android:style/TextAppearance">

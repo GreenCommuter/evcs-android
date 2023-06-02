@@ -29,6 +29,7 @@ import org.evcs.android.util.Extras
 import org.evcs.android.util.FontUtils
 import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.evcs.android.util.ViewUtils.setVisibility
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
@@ -72,11 +73,11 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileName.text = user.name
         val subscription = user.activeSubscription
 
-        (mBinding.profileExplorePlans.parent as View).isVisible = subscription == null
+        mBinding.profileExplorePlans.setParentVisibility(subscription == null)
 
         mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
         mBinding.profilePlanProgress.isVisible = subscription!= null
-        (mBinding.profileIssueButton.parent as View).isVisible = subscription?.issue ?: false
+        mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended?:false
 
         mBinding.profileExplorePlansText.text =

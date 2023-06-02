@@ -53,6 +53,7 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
     override fun onNextClicked() {
         EVCSSliderDialogFragment.Builder()
+                .showDivider(true)
                 .setTitle(getString(R.string.payment_method_dialog_remove_subtitle))
                 .addButton(getString(R.string.payment_method_dialog_remove_button), { fragment ->
                     presenter.removePaymentMethod(mPaymentMethod!!)

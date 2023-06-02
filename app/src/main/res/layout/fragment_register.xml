@@ -97,7 +97,7 @@
             android:id="@+id/fragment_register_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_big_k"
             android:layout_gravity="center"
             android:enabled="false"
             android:text="@string/app_continue"

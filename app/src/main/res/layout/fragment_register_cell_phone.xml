@@ -76,7 +76,6 @@
             android:text="@string/fragment_register_cell_phone_validate_later"
             style="@style/Label.Large" />
 
-
     </LinearLayout>
 
 </LinearLayout>

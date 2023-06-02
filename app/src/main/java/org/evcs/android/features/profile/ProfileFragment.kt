@@ -21,8 +21,11 @@ import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.activity.subscription.SubscriptionActivity
 import org.evcs.android.activity.account.VehicleInformationActivity
 import org.evcs.android.databinding.FragmentProfileBinding
+import org.evcs.android.features.auth.register.VerifyPhoneActivity
+import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.profile.wallet.WalletActivity
+import org.evcs.android.model.Subscription
 import org.evcs.android.model.user.User
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
@@ -30,7 +33,6 @@ import org.evcs.android.util.FontUtils
 import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
-import org.evcs.android.util.ViewUtils.setVisibility
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
@@ -71,32 +73,54 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun setUser(user: User) {
         mBinding.profileName.text = user.name
-        val subscription = user.activeSubscription
+        if (!user.isPhoneVerified) {
+            setSubscription(null)
+            setUnverifiedUser()
+            return
+        } else {
+            setSubscription(user.activeSubscription)
+        }
+    }
 
+    private fun setSubscription(subscription: Subscription?) {
         mBinding.profileExplorePlans.setParentVisibility(subscription == null)
 
         mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
-        mBinding.profilePlanProgress.isVisible = subscription!= null
+        mBinding.profilePlanProgress.isVisible = subscription != null
         mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
-        mBinding.profileIssueButton.isVisible = subscription?.isSuspended?:false
+        mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
+        mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
+        mBinding.profileValidate.setParentVisibility(false)
 
         mBinding.profileExplorePlansText.text =
                 FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
         if (subscription == null) {
-            if (false /*user is verified*/) {
-                mBinding.profilePlanName.text = "Account not activated"
-            } else {
-                mBinding.profilePlanName.text = getString(R.string.plan_info_pay_as_you_go) + " membership"
-            }
+            mBinding.profilePlanName.text = getString(R.string.plan_info_pay_as_you_go) + " membership"
         } else {
             mBinding.profilePlanName.text = subscription.planName
             mBinding.profilePlanProgress.setPlan(subscription)
-            if (subscription.issue) {
-                mBinding.profileIssueMessage.text = subscription.issueMessage
-            }
+            val issueText = if (subscription.issue) subscription.issueMessage else null
+            val buttonText = if (subscription.isSuspended) "Update payment method" else null
+            setIssue(issueText, buttonText) { goToActivity(WalletActivity::class.java) }
         }
         mBinding.profileMenuVersion.text =
                 getString(R.string.profile_version, BuildConfig.VERSION_NAME)
+        (activity as MainActivity).updateProfileAlert()
+    }
+
+    private fun setUnverifiedUser() {
+        mBinding.profilePlanName.text = "Account not activated"
+        mBinding.profileValidate.setParentVisibility(true)
+        mBinding.profileExplorePlans.setParentVisibility(false)
+    }
+
+    //null = hide
+    private fun setIssue(issueText: String?, buttonText: String?, buttonListener: View.OnClickListener) {
+        mBinding.profileIssueButton.setParentVisibility(issueText != null)
+        mBinding.profileIssueMessage.text = issueText
+        mBinding.profileIssueButton.isVisible = buttonText != null
+        mBinding.profileIssueButton.text = buttonText
+        mBinding.profileIssueButton.setOnClickListener(buttonListener)
     }
 
     override fun populate() {
@@ -116,7 +140,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
-        mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
+        mBinding.profileValidate.setOnClickListener { goToActivity(VerifyPhoneActivity::class.java) }
         mBinding.profileMenuNotifications.setOnClickListener { goToActivity(NotificationsActivity::class.java) }
         mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
         mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }

@@ -96,7 +96,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 //        )
         UserUtils.saveAuthUser(TestAuthUser())
         findNavController()
-            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentVerify(""))
+            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
     }
 
     override fun onTokenSent() {

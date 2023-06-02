@@ -101,6 +101,20 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:id="@+id/fragment_register_register_enter_code_validate_later"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="18dp"
+            android:text="@string/fragment_register_cell_phone_validate_later"
+            style="@style/Label.Large" />
+
     </LinearLayout>
 
 </LinearLayout>

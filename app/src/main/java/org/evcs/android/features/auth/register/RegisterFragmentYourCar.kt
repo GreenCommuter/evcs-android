@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterYourCarBinding
+import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.shared.DropdownWithLabel
 import org.evcs.android.model.user.UserCar
 import org.evcs.android.navigation.controller.AbstractNavigationController
@@ -92,13 +93,14 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
 
     override fun onCarsAdded(car : UserCar) {
         progressDialog.dismiss()
-        findNavController()
-            .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
+        (activity as AuthActivity).goToVerify()
+//        findNavController()
+//            .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
     }
 
     fun skip() {
         val navOptions = AbstractNavigationController.replaceLastNavOptions(findNavController())
-        findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
+//        findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
     }
 
     override fun onZipCodeUpdated() {}

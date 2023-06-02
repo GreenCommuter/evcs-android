@@ -14,7 +14,6 @@ import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterEnterCodeBinding
-import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.network.service.SMSBroadcastReceiver
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.ViewUtils
@@ -28,7 +27,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     private lateinit var mBinding : FragmentRegisterEnterCodeBinding
 
     /**
-     * Returns a new RegisterFragment instance.
+     * Returns a new RegisterFragmentVerify instance.
      *
      * @return new instance.
      */
@@ -81,6 +80,9 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         validatorManager.addValidator(PasswordTextInputValidator(mBinding.fragmentRegisterEnterCodeText))
         validatorManager.setOnAnyTextChangedListener{setEnableButton(validatorManager.areAllFieldsValid())}
         mBinding.fragmentRegisterEnterCodeToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.setOnClickListener {
+            (activity as VerifyPhoneActivity).onVerifyFinished()
+        }
     }
 
     override fun openConsentDialog(consentIntent: Intent) {
@@ -107,7 +109,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun onCellphoneVerified() {
-        (requireActivity() as AuthActivity).onAuthFinished()
+        (requireActivity() as VerifyPhoneActivity).onVerifyFinished()
         progressDialog.dismiss()
     }
 

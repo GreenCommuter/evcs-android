@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/layout_corners_rounded_grey_border"
-    android:theme="@style/Theme.MaterialComponents.DayNight"
     app:strokeColor="#C1CBD0"
     app:strokeWidth="@dimen/spacing_tiniest"
     app:cardCornerRadius="@dimen/default_radius">

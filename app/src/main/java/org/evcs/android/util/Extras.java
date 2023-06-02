@@ -22,6 +22,10 @@ public class Extras {
         public static final String HISTORY = "History";
     }
 
+    public static final class VerifyActivity {
+        public static final String RESULT = "result";
+    }
+
     public static final class ForgotPassword {
         public static final String PATH = "/reset_password";
         public static final String EMAIL = "email";

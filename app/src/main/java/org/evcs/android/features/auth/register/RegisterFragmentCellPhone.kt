@@ -19,7 +19,7 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     private lateinit var mBinding: FragmentRegisterCellPhoneBinding
 
     /**
-     * Returns a new RegisterFragment instance.
+     * Returns a new RegisterFragmentCellPhone instance.
      *
      * @return new instance.
      */
@@ -59,7 +59,7 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
         validatorManager.addValidator(PhoneTextInputValidator(mBinding.fragmentRegisterCellphoneNumber))
         validatorManager.setOnAnyTextChangedListener { setEnableButton(validatorManager.areAllFieldsValid()) }
         mBinding.fragmentRegisterCellphoneValidateLater.setOnClickListener {
-            (requireActivity() as AuthActivity).onAuthFinished()
+            (requireActivity() as VerifyPhoneActivity).onCancel()
         }
         mBinding.fragmentRegisterCellPhoneToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }

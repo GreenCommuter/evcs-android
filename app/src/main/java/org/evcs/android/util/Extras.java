@@ -10,6 +10,10 @@ public class Extras {
         public static final String OPENING_KEY = "opened_app";
     }
 
+    public static class AuthActivity {
+        public static final String SKIP_ROOT = "skip_root";
+    }
+
     public static class MainActivity {
         public static final String IS_BOTTOM = "is_bottom";
     }

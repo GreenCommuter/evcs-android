@@ -60,14 +60,17 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     override fun init() {
+        showProgressDialog()
         presenter.refreshUser()
         presenter.refreshDefaultPaymentMethod()
         mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            showProgressDialog()
             presenter.refreshUser()
         }
     }
 
     override fun onUserRefreshed(response: User) {
+        hideProgressDialog()
         setUser(response)
     }
 
@@ -140,7 +143,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
-        mBinding.profileValidate.setOnClickListener { goToActivity(VerifyPhoneActivity::class.java) }
+        mBinding.profileValidate.setOnClickListener { mLauncher.launch(Intent(context, VerifyPhoneActivity::class.java)) }
         mBinding.profileMenuNotifications.setOnClickListener { goToActivity(NotificationsActivity::class.java) }
         mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
         mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }
@@ -179,5 +182,13 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     override fun onBackPressed(): Boolean {
         mNavigationListener.onMapClicked()
         return true
+    }
+
+    override fun showProgressDialog() {
+        mBinding.profileLoading.isVisible = true
+    }
+
+    override fun hideProgressDialog() {
+        mBinding.profileLoading.isVisible = false
     }
 }

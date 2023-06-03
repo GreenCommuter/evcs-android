@@ -3,6 +3,7 @@ package org.evcs.android.features.auth.register
 import com.base.networking.retrofit.RetrofitServices
 import org.evcs.android.features.auth.AuthPresenter
 import org.evcs.android.features.auth.AuthView
+import org.evcs.android.model.user.UserRequest
 import org.evcs.android.model.user.UserRequestSignup
 import org.evcs.android.network.service.UserService
 
@@ -19,4 +20,9 @@ class RegisterPresenter(viewInstance: AuthView?, services: RetrofitServices?) :
             .enqueue(getLoginCallback())
     }
 
+    //TODO: remove, this is for testing
+    fun logIn(username: String, pass: String) {
+        getService(UserService::class.java).logIn(UserRequest(username, pass))
+            .enqueue(getLoginCallback())
+    }
 }

@@ -15,6 +15,8 @@ import org.evcs.android.R
 import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlansTabBinding
 import org.evcs.android.databinding.ViewGoToMonthlyPlansBinding
+import org.evcs.android.features.auth.initialScreen.AuthActivity
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
@@ -65,9 +67,12 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
 
     override fun onGetPlanClicked(plan: Plan?) {
         //TODO: Check
-        if (plan == null) {
-            //TODO
-        } else if (UserUtils.getLoggedUser().hasAnySubscription) {
+        if (UserUtils.getLoggedUser() == null) {
+            val param = NavigationUtils.IntentExtra(Extras.AuthActivity.SKIP_ROOT, true)
+            NavigationUtils.jumpToClearingTask(requireContext(), AuthActivity::class.java, param)
+        } else if (plan == null) {
+            NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java)
+        } else if (UserUtils.getLoggedUser()?.hasAnySubscription ?: false) {
             val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan."
             val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
             val paragraph3 = "Do you want to continue changing plans?"

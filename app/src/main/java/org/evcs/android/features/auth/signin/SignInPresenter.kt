@@ -13,6 +13,7 @@ import org.evcs.android.network.service.UserService
  */
 class SignInPresenter(viewInstance: AuthView, evcsRetrofitServices: EVCSRetrofitServices?) :
     AuthPresenter<AuthView>(viewInstance, evcsRetrofitServices) {
+
     /**
      * Tries to log in with the given username and password.
      *

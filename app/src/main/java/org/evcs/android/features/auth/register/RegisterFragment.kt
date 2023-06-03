@@ -12,9 +12,7 @@ import org.evcs.android.databinding.FragmentRegisterBinding
 import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.model.user.AuthUser.Companion.TestAuthUser
 import org.evcs.android.ui.view.shared.EVCSToolbar2
-import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.*
 
 class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
@@ -87,16 +85,14 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     private fun onButtonClick() {
         //TODO: switch
-//        progressDialog.show()
+        progressDialog.show()
 //        presenter!!.register(
 //            mNameInputLayout.text.toString(),
 //            mLastNameInputLayout.text.toString(),
 //            mEmailInputLayout.text.toString(),
 //            mPasswordInputLayout.text.toString()
 //        )
-        UserUtils.saveAuthUser(TestAuthUser())
-        findNavController()
-            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar())
+        presenter.logIn("javier+6@evcs.com", "12345678")
     }
 
     override fun onTokenSent() {

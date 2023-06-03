@@ -209,7 +209,7 @@
     <string name="payment_details_authorization_code">Authorization #</string>
 
     <!-- Charging History -->
-    <string name="charging_history_empty">Charge your EV to see you history here.</string>
+    <string name="charging_history_empty">Charge your EV to see your history here.</string>
 
     <!--Search Location-->
     <string name="search_location_explanation">Start typing the address and then select from \n the results</string>

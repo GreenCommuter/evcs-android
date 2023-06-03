@@ -13,6 +13,7 @@ import org.evcs.android.features.shared.DropdownWithLabel
 import org.evcs.android.model.user.UserCar
 import org.evcs.android.navigation.controller.AbstractNavigationController
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils
 
 
 open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYourCar>(), RegisterViewYourCar {
@@ -66,10 +67,12 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
             return
         }
         super.init()
+        ViewUtils.setAdjustResize(mBinding.root)
     }
 
+    //TODO: this is for testing
     protected open fun hasCompletedCarScreen(): Boolean {
-        return UserUtils.getLoggedUser().zipCode != null
+        return false && UserUtils.getLoggedUser().zipCode != null
     }
 
     override fun setListeners() {

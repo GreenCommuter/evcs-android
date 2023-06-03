@@ -163,6 +163,17 @@
         <item name="android:paddingRight">12dp</item>
     </style>
 
+    <style name="Banner">
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/padding_ariel_standard</item>
+    </style>
+
+    <style name="Banner.Red">
+        <item name="android:background">@drawable/layout_corners_rounded_danger</item>
+        <item name="android:backgroundTint">#FFEBE8</item>
+    </style>
+
     <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">bold</item>
     </style>

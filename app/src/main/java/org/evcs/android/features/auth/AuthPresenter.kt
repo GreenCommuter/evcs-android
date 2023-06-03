@@ -12,10 +12,7 @@ import okhttp3.ResponseBody
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.model.push.DeviceToken
 import org.evcs.android.model.shared.RequestError
-import org.evcs.android.model.user.AuthUser
-import org.evcs.android.model.user.User
-import org.evcs.android.model.user.UserRequestFacebook
-import org.evcs.android.model.user.UserRequestGoogle
+import org.evcs.android.model.user.*
 import org.evcs.android.network.service.DeviceTokensService
 import org.evcs.android.network.service.UserService
 import org.evcs.android.util.ErrorUtils

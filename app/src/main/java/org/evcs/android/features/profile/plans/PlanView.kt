@@ -6,8 +6,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import org.evcs.android.R
 import org.evcs.android.databinding.ViewPlanBinding
 import org.evcs.android.model.Plan
+import org.evcs.android.model.user.User
 import org.evcs.android.util.UserUtils
 
 class PlanView : LinearLayout {
@@ -36,6 +38,11 @@ class PlanView : LinearLayout {
         mBinding.viewPlanFlatRate.text = "Simple flat rate pricing"
         mBinding.viewPlanDcPrice.text = "DC fast: \$%.2f"
         mBinding.viewPlanAcPrice.text = "Level 2: \$%.2f"
+
+        if (UserUtils.getLoggedUser()?.activeSubscription == null
+            && UserUtils.getLoggedUser()?.defaultPm != null) {
+            setCurrentPlan()
+        }
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -77,14 +84,19 @@ class PlanView : LinearLayout {
         mBinding.viewPlanDcPrice.text = "DC fast: \$%.2f"
         mBinding.viewPlanAcPrice.text = "Level 2: \$%.2f"
 
-        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.plan?.id
+        val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
         if (currentPlanId == plan.id) {
-            mBinding.viewPlanButton.isEnabled = false
-            mBinding.viewPlanAd.visibility = View.VISIBLE
-            mBinding.viewPlanAd.text = "Current plan"
-            mBinding.viewPlanAd.setTextColor(Color.parseColor("#005387"))
-            mBinding.viewPlanAd.setBackgroundColor(Color.parseColor("#E7EFF6"))
+            setCurrentPlan()
         }
+    }
+
+    private fun setCurrentPlan() {
+        mBinding.viewPlanButton.isEnabled = false
+        mBinding.viewPlanButton.text = "Current plan"
+        mBinding.viewPlanAd.visibility = View.VISIBLE
+        mBinding.viewPlanAd.text = "Current plan"
+        mBinding.viewPlanAd.setTextColor(resources.getColor(R.color.evcs_secondary_800))
+        mBinding.viewPlanAd.setBackgroundColor(Color.parseColor("#E7EFF6"))
     }
 
     fun formatIfPositive(field: Number, format: String, default: String): String {

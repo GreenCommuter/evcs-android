@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large_k"
                 android:text="@string/plan_learn_more_track"
                 style="@style/Body.Medium.WithCheck"/>
 
@@ -124,7 +124,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Get 30 Days free when you upgrade to the Standard Plan."
-                    android:layout_marginBottom="@dimen/spacing_large"/>
+                    android:layout_marginBottom="@dimen/spacing_large_k"
+                    android:gravity="center"
+                    style="@style/Body.Medium"/>
 
                 <TextView
                     android:id="@+id/plans_learn_more_explore"

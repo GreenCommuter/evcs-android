@@ -123,7 +123,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         //Basic anytime w/trial: "Get %d days free charging"
         mBinding.planLearnMoreButton.text = "Get Started"
 
-        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.plan?.id
+        val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
         if (currentPlanId == plan.id) {
             mBinding.planLearnMoreButton.isEnabled = false
             mBinding.planLearnMoreButton.text = "Current plan"

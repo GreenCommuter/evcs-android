@@ -26,7 +26,7 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
     }
 
     override fun getActiveUntil(): DateTime? {
-        return UserUtils.getLoggedUser().previousSubscription?.renewalDate
+        return null//UserUtils.getLoggedUser().previousSubscription?.renewalDate
     }
 
     override fun showCouponCode(): Boolean {
@@ -34,8 +34,10 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
     }
 
     override fun getTrialLabel(): String? {
-        return if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod?: false) String.format("%d Day Offer", mPlan.trialDays)
-        else null
+        if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod?: false)
+            return String.format("%d Day Offer", mPlan.trialDays)
+        else
+            return null
     }
 
     override fun getButtonText(): String {

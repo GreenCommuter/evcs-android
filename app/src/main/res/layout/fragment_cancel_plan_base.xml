@@ -27,14 +27,14 @@
                 android:id="@+id/cancel_plan_image"
                 android:layout_width="match_parent"
                 android:layout_height="215dp"
-                android:layout_marginBottom="@dimen/spacing_large"/>
+                android:layout_marginBottom="@dimen/spacing_large_k"/>
 
             <TextView
                 android:id="@+id/cancel_plan_bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/cancel_plan_sad"
-                android:layout_marginBottom="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large_k"
                 style="@style/Body.Large.Bold"/>
 
             <FrameLayout

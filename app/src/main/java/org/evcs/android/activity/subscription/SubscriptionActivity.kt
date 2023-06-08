@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.base.core.util.NavigationUtils
+import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
@@ -17,12 +17,14 @@ import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.SubscriptionStatus
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.UserUtils
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
 class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
 
+    private lateinit var mSubscriptionId: String
     private lateinit var mLongDateFormatter: DateTimeFormatter
     private lateinit var mPresenter: SubscriptionActivityPresenter
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
@@ -59,6 +61,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
     }
 
     override fun onSubscriptionPlanRetrieved(response: SubscriptionStatus) {
+        mSubscriptionId = response.id
         mBinding.activitySubscriptionsPlanName.text = response.planName
         mBinding.activitySubscriptionsPlanProgress.setPlan(response)
         val date = mLongDateFormatter.print(response.renewalDate)
@@ -98,7 +101,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         }
         mBinding.activitySubscriptionsViewAllPlans.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsViewAllPlans2.setOnClickListener { goToPlansActivity() }
-        mBinding.activitySubscriptionsActivate.setOnClickListener {  }
+        mBinding.activitySubscriptionsActivate.setOnClickListener { mPresenter.voidCancellation(mSubscriptionId) }
         mBinding.activitySubscriptionsPaymentInfo.setOnChangeClickListener {
             val intent = WalletActivity.buildIntent(this, true)
             mChangePmLauncher.launch(intent)
@@ -107,7 +110,10 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
     }
 
     fun goToPlansActivity() {
-        NavigationUtils.jumpTo(this, PlansActivity::class.java)
+        val intent = Intent(this, PlansActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+        startActivity(intent)
+//        NavigationUtils.jumpTo(this, PlansActivity::class.java)
     }
 
     private fun showCancellationDialog() {
@@ -119,6 +125,10 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
                 .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
                     R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
             .show(supportFragmentManager)
+    }
+
+    override fun showError(requestError: RequestError) {
+        ToastUtils.show(requestError.body)
     }
 
 }

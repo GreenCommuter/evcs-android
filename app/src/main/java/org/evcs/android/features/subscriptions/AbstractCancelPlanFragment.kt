@@ -5,6 +5,7 @@ import android.widget.FrameLayout
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentCancelPlanBaseBinding
+import org.evcs.android.model.Subscription
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.UserUtils
 
@@ -26,6 +27,12 @@ abstract class AbstractCancelPlanFragment : ErrorFragment<BasePresenter<*>>() {
     override fun setUi(v: View) {
         mBinding = FragmentCancelPlanBaseBinding.bind(v)
     }
+
+    override fun populate() {
+        setPlan(UserUtils.getLoggedUser().activeSubscription!!)
+    }
+
+    abstract fun setPlan(subscription: Subscription)
 
     override fun setListeners() {
         super.setListeners()

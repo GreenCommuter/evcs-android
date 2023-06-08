@@ -137,6 +137,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun showProfileAlert(show: Boolean) {
+        if (!::menuView.isInitialized) return
         if (show) {
             menuView.getOrCreateBadge(R.id.menu_drawer_profile)
         } else {

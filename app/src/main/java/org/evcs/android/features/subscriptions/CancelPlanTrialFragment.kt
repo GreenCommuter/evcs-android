@@ -7,20 +7,13 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentCancelPlanTrialBinding
+import org.evcs.android.model.Subscription
 import org.evcs.android.navigation.controller.AbstractNavigationController
 import org.evcs.android.util.UserUtils
 
 class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
 
 //    private lateinit var mBinding: FragmentCancelPlanTrialBinding
-
-    override fun init() {
-        super.init()
-        //TODO: check
-        if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod ?: false) {
-            goToCancelPlan(AbstractNavigationController.replaceLastNavOptions(findNavController()))
-        }
-    }
 
     override fun getConfirmationText(): String {
         return getString(R.string.cancel_plan_trial_confirmation)
@@ -35,6 +28,12 @@ class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
                 navoptions)
     }
 
+    override fun setPlan(subscription: Subscription) {
+        if (subscription.onTrialPeriod) {
+            goToCancelPlan(AbstractNavigationController.replaceLastNavOptions(findNavController()))
+        }
+    }
+
     override fun getCancelText(): String {
         return getString(R.string.cancel_plan_trial_cancel)
     }
@@ -45,7 +44,8 @@ class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
     }
 
     override fun getBoldText(): String {
-        return String.format(getString(R.string.cancel_plan_trial_bold), 15)
+        val subscription = UserUtils.getLoggedUser().activeSubscription
+        return getString(R.string.cancel_plan_trial_bold)
     }
 
 }

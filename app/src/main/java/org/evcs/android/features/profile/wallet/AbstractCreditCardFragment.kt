@@ -112,19 +112,24 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
 //        listener!!.onAddCreditCardFragmentFinished()
     }
 
+    override fun onMakeDefaultError(error: RequestError) {
+        showError(error)
+    }
+
     override fun onPaymentMethodRemoved(item: PaymentMethod) {
         hideProgressDialog()
         finish()
     }
 
+    /**
+     * Method called when the [AbstractCreditCardFragment] finishes.
+     */
     fun finish() {
+        requireActivity().onBackPressed()
         NavHostFragment.findNavController(this).popBackStack()
     }
 
 //    interface IBrainTreeListener : INavigationListener {
-        /**
-         * Method called when the [AbstractCreditCardFragment] finishes.
-         */
 //        fun onAddCreditCardFragmentFinished()
 //    }
 }

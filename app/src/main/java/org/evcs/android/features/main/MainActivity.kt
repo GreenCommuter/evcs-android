@@ -8,8 +8,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
 import androidx.navigation.Navigation.findNavController
 import com.base.core.util.NavigationUtils
@@ -20,7 +18,6 @@ import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
-import org.evcs.android.model.user.User
 import org.evcs.android.util.Extras
 import org.evcs.android.util.PushNotificationUtils
 import org.evcs.android.util.UserUtils
@@ -29,16 +26,12 @@ import org.evcs.android.util.ViewUtils.setMargins
 class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     var mNavigationController: MainNavigationController? = null
     private lateinit var menuView: BottomNavigationView
-    private var mPlanResult: ActivityResultLauncher<*>? = null
     private lateinit var mButton: TextView
     var isBottomOfStack = false
         private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPlanResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            populate()
-        }
         isBottomOfStack = intent.getBooleanExtra(Extras.MainActivity.IS_BOTTOM, true)
     }
 
@@ -50,9 +43,9 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             findNavController(this, R.id.activity_base_content))
 //        mNavigationController!!.startFlow()
 
-        if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
-            return
-        }
+//        if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
+//            return
+//        }
     }
 
     override fun inflate(layoutInflater: LayoutInflater): View {
@@ -97,12 +90,17 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         menuView.selectedItemId = R.id.menu_drawer_map
         updateProfileAlert()
         if (intent.hasExtra(Extras.VerifyActivity.RESULT)) {
-            val verifyResult = intent.getIntExtra(Extras.VerifyActivity.RESULT, 0)
-            if (verifyResult == RESULT_OK) {
-                showSuccessDialog()
-            } else {
-                showAccountNotValidatedDialog()
-            }
+            onVerifyResult(intent.getIntExtra(Extras.VerifyActivity.RESULT, RESULT_CANCELED))
+            intent.removeExtra(Extras.VerifyActivity.RESULT)
+        }
+    }
+
+    fun onVerifyResult(verifyResult: Int) {
+        updateProfileAlert()
+        if (verifyResult == RESULT_OK) {
+            showSuccessDialog()
+        } else {
+            showAccountNotValidatedDialog()
         }
     }
 

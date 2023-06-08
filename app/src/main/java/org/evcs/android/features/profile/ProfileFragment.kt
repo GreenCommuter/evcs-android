@@ -88,7 +88,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setSubscription(subscription: Subscription?) {
         mBinding.profileExplorePlans.setParentVisibility(subscription == null)
 
-        mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
+        mBinding.profileMenuSubscriptionPlan.isVisible = true//subscription != null
         mBinding.profilePlanProgress.isVisible = subscription != null
         mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
@@ -169,7 +169,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
             override fun onPermissionsGranted() {
                 super.onPermissionsGranted()
                 val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:" + phone)
+                intent.data = Uri.parse("tel:$phone")
                 startActivity(intent)
             }
 

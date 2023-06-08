@@ -3,7 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_verify.xml"
-    app:startDestination="@id/registerFragmentCellPhone">
+    app:startDestination="@id/registerFragmentYourCar">
+
+    <fragment
+        android:id="@+id/registerFragmentYourCar"
+        android:name="org.evcs.android.features.auth.register.RegisterFragmentYourCar"
+        android:label="RegisterFragmentYourCar"
+        tools:layout="@layout/fragment_register_your_car">
+        <action
+            android:id="@+id/action_registerFragmentYourCar_to_registerFragmentCellPhone"
+            app:destination="@id/registerFragmentCellPhone" />
+    </fragment>
 
     <fragment
         android:id="@+id/registerFragmentCellPhone"

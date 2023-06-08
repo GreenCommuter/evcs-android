@@ -26,7 +26,7 @@ class PlanView : LinearLayout {
         }
     }
 
-    private fun setPayAsYouGo() {
+    fun setPayAsYouGo() {
         mBinding.viewPlanName.text = "Pay as you go"
         mBinding.viewPlanPrice.text = "\$0 Membership Fee"
 

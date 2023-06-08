@@ -59,8 +59,6 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun init() {
-        mBinding.fragmentRegisterEnterCodeText.editText?.addTextChangedListener(PhoneNumberFormattingTextWatcher(
-            BaseConfiguration.DEFAULT_LOCALE.country))
         mPreviousNumber = RegisterFragmentVerifyArgs.fromBundle(requireArguments()).previousNumber
 //        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)

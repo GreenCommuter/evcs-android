@@ -8,7 +8,6 @@ import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterCellPhoneBinding
-import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.PhoneTextInputValidator
@@ -83,5 +82,10 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
             .navigate(RegisterFragmentCellPhoneDirections.actionRegisterFragmentCellPhoneToRegisterFragmentVerify(
                 mBinding.fragmentRegisterCellphoneNumber.text.toString()
             ))
+    }
+
+    override fun onBackPressed(): Boolean {
+        activity?.finish()
+        return true
     }
 }

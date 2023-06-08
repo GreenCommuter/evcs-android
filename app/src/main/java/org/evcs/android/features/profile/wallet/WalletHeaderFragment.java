@@ -12,6 +12,7 @@ import org.evcs.android.R;
 import org.evcs.android.databinding.ViewWalletHeaderBinding;
 import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
+import org.evcs.android.model.shared.RequestError;
 import org.evcs.android.model.user.User;
 import org.evcs.android.ui.fragment.ErrorFragment;
 import org.evcs.android.util.UserUtils;
@@ -96,7 +97,6 @@ public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> i
     }
 
     public void showAndSavePaymentList(List<PaymentMethod> creditCardInformationList) {
-//        int height = mEndlessRecyclerView.getHeight();
         mCreditCardsAdapter.clear();
         if (!creditCardInformationList.isEmpty()) {
             mCreditCardsAdapter.appendTopAll(creditCardInformationList);
@@ -141,6 +141,12 @@ public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> i
         hideProgressDialog();
         mCreditCardsAdapter.setDefault(item);
         ((WalletActivity) getActivity()).onPaymentMethodChanged(mCreditCardsAdapter.getDefault());
+    }
+
+    @Override
+    public void onMakeDefaultError(@NonNull RequestError error) {
+        //TODO: remove payment method
+        showError(error);
     }
 
     public void setParent(WalletHeaderInterface parent) {

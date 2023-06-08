@@ -25,9 +25,4 @@ class WalletHeaderPresenter(viewInstance: IWalletHeaderView, services: RetrofitS
             }
         })
     }
-
-//            override fun onCallFailure(t: Throwable) {
-//                runIfViewCreated(Runnable { view.onPaymentMethodsNotReceived() })
-//            }
-
 }

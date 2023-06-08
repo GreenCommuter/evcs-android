@@ -1,19 +1,26 @@
 package org.evcs.android.features.auth.register
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
-import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.base.core.util.NavigationUtils
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterBinding
 import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
+import org.evcs.android.features.auth.initialScreen.AuthActivity
+import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.ui.view.shared.EVCSToolbar2
-import org.evcs.android.util.validator.*
+import org.evcs.android.util.Extras.VerifyActivity
+import org.evcs.android.util.validator.EmailTextInputValidator
+import org.evcs.android.util.validator.NonEmptyTextInputValidator
+import org.evcs.android.util.validator.PasswordTextInputValidator
+import org.evcs.android.util.validator.TextInputLayoutInterface
 
 class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
@@ -96,10 +103,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     }
 
     override fun onTokenSent() {
-        progressDialog.dismiss()
-        val navOptions = NavOptions.Builder().setPopUpTo(R.id.signInFragment, true).build()
-        findNavController().navigate(
-            RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentYourCar(), navOptions)
+        (activity as AuthActivity).goToVerify()
     }
 
     //Ver password

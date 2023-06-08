@@ -24,7 +24,7 @@ class ChangeCarFragment : RegisterFragmentYourCar() {
         activity?.finish()
     }
 
-    override fun hasCompletedCarScreen(): Boolean {
+    override fun skipScreen(): Boolean {
         return false
     }
 

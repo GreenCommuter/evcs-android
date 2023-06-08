@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:layout_marginBottom="@dimen/spacing_large_k"
                     style="@style/Body.Medium"/>
 
                 <TextView
@@ -131,7 +131,7 @@
                 android:id="@+id/profile_plan_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large_k"
                 android:visibility="gone"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
@@ -230,7 +230,7 @@
                 android:id="@+id/profile_menu_sign_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large_k"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/activity_account_sign_out"

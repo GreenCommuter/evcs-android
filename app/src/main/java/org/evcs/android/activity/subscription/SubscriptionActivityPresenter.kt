@@ -22,9 +22,8 @@ class SubscriptionActivityPresenter(viewInstance: SubscriptionActivityView, serv
                         override fun onResponseSuccessful(response: User) {
                             if (response.activeSubscription != null)
                                 view.onSubscriptionPlanRetrieved(response.activeSubscription!!)
-                            else if (response.previousSubscription != null) {
-                                view.onSubscriptionPlanRetrieved(response.previousSubscription)
-                            }
+                            else
+                                view.showError(RequestError.getUnknownError())
                         }
 
                         override fun onResponseFailed(responseBody: ResponseBody, code: Int) {}

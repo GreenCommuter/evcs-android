@@ -91,4 +91,8 @@ public class SubscriptionStatus {
     public int getActiveDaysLeft() {
         return (int) new Duration(new DateTime(), renewalDate).getStandardDays();
     }
+
+    public boolean isCanceled() {
+        return validTo != null;
+    }
 }

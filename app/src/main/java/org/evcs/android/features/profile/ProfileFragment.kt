@@ -38,8 +38,8 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private val CALL_PERMISSION = "android.permission.CALL_PHONE"
     private val TERMS_URL = "https://www.evcs.com/terms-of-use"
-    private val FAQ_URL = "www.evcs.com/ev-drivers/faqs"
-    private val REQUEST_URL = "support.evcs.com/hc/en-us/requests/new"
+    private val FAQ_URL = "https://www.evcs.com/ev-drivers/faqs"
+    private val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mBinding: FragmentProfileBinding

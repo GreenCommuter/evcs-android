@@ -5,7 +5,9 @@ import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentNotificationsBinding
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.UserUtils
 
 class NotificationsFragment : ErrorFragment<NotificationsPresenter>(), NotificationsView {
 
@@ -20,6 +22,7 @@ class NotificationsFragment : ErrorFragment<NotificationsPresenter>(), Notificat
     }
 
     override fun init() {
+        mBinding.notificationsSwitch.isChecked = UserUtils.getLoggedUser().marketingNotifications!!
     }
 
     override fun setUi(v: View) {
@@ -36,5 +39,10 @@ class NotificationsFragment : ErrorFragment<NotificationsPresenter>(), Notificat
 
     override fun onSuccess() {
         ToastUtils.show("Notifications " + if (mBinding.notificationsSwitch.isChecked) "en" else "dis" + "abled")
+    }
+
+    override fun showError(requestError: RequestError) {
+        super.showError(requestError)
+        init()
     }
 }

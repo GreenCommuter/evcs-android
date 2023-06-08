@@ -13,7 +13,7 @@ class NotificationsPresenter(viewInstance: NotificationsView, services: Retrofit
     ServicesPresenter<NotificationsView>(viewInstance, services) {
 
     fun toggleNotifications(checked: Boolean) {
-        getService(MessageService::class.java).enableNotifications(BooleanWrapper(checked))
+        getService(MessageService::class.java).enableNotifications(BooleanWrapper(checked.toString()))
             .enqueue(object : AuthCallback<Void?>(this) {
                 override fun onResponseSuccessful(response: Void?) {
                     view.onSuccess()

@@ -32,6 +32,8 @@ open class User : Serializable {
     val isCorporateUser: Boolean
         get() = false
 
+    val marketingNotifications: Boolean? = null
+
 //    "noodoe_id":"24",
 //    "charges_last_thirty_days":null,
 //    "total_charges":null,

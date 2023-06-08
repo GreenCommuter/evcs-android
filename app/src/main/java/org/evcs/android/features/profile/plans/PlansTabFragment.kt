@@ -69,7 +69,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         //TODO: Check
         if (UserUtils.getLoggedUser() == null) {
             val param = NavigationUtils.IntentExtra(Extras.AuthActivity.SKIP_ROOT, true)
-            NavigationUtils.jumpToClearingTask(requireContext(), AuthActivity::class.java, param)
+            NavigationUtils.jumpTo(requireContext(), AuthActivity::class.java, param)
         } else if (plan == null) {
             NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java)
         } else if (UserUtils.getLoggedUser()?.hasAnySubscription ?: false) {

@@ -29,7 +29,7 @@ class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
     }
 
     override fun setPlan(subscription: Subscription) {
-        if (subscription.onTrialPeriod) {
+        if (!subscription.onTrialPeriod) {
             goToCancelPlan(AbstractNavigationController.replaceLastNavOptions(findNavController()))
         }
     }

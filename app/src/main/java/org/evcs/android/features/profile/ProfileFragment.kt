@@ -84,7 +84,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setSubscription(subscription: Subscription?) {
         mBinding.profileExplorePlans.setParentVisibility(subscription == null)
 
-        mBinding.profileMenuSubscriptionPlan.isVisible = true//subscription != null
+        mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
         mBinding.profilePlanProgress.isVisible = subscription != null
         mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false

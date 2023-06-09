@@ -70,12 +70,10 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     }
 
     private fun onButtonClick() {
-        //TODO: switch
-//        progressDialog.show()
-//        presenter!!.sendNumbertoVerify(
-//            mBinding.fragmentRegisterCellphoneNumber.text.toString()
-//        )
-        onCellphoneSent()
+        progressDialog.show()
+        presenter!!.sendNumbertoVerify(
+            mBinding.fragmentRegisterCellphoneNumber.text.toString()
+        )
     }
 
     override fun onCellphoneSent() {

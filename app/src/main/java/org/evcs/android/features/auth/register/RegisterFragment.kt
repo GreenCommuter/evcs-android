@@ -56,7 +56,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         super.setUi(v)
         val binding = FragmentRegisterBinding.bind(v)
         mNameInputLayout = binding.fragmentRegisterFirstNameInput
-        mLastNameInputLayout = binding.fragmentRegisterFirstNameInput
+        mLastNameInputLayout = binding.fragmentRegisterLastNameInput
         mEmailInputLayout = binding.fragmentRegisterEmailInput
         mPasswordInputLayout = binding.fragmentRegisterPasswordInput
         mPasswordHint = binding.fragmentRegisterPasswordHint

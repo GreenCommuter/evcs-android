@@ -24,6 +24,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.FragmentLocationReceiver
 import org.evcs.android.util.LocationHelper
+import org.evcs.android.util.ViewUtils.getStatusBarHeight
 
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
@@ -73,6 +74,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
     override fun populate() {
         super.populate()
+        setStatusBarHeight()
         mSearchLocationChildFragment = SearchLocationChildFragment.newInstance()
 //        mSearchLocationChildFragment.setDefault("asdasd")
         requireFragmentManager().beginTransaction().replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment).commit()
@@ -85,6 +87,16 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
         if ((activity as MainActivity).isBottomOfStack) return
+        setTraslucentStatusBar()
+    }
+
+    private fun setStatusBarHeight() {
+        val params = mStatusBarSpacing.layoutParams
+        params.height = requireContext().getStatusBarHeight()
+        mStatusBarSpacing.layoutParams = params
+    }
+
+    private fun setTraslucentStatusBar() {
         mBackButton.visibility = View.VISIBLE
         mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
         setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))

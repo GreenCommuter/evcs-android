@@ -15,6 +15,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
+import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
@@ -180,7 +181,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .setSubtitle(getString(R.string.account_not_validated_subtitle))
             .addButton(getString(R.string.account_not_validated_button), {
                     fragment -> fragment.dismiss()
-                //TODO: go to validation (make activity)
+                    //TODO: handle result
+                    NavigationUtils.jumpTo(this, VerifyPhoneActivity::class.java)
             },
                 R.drawable.layout_corners_rounded_blue)
             .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.drawable.layout_corners_rounded_black_outline, R.color.button_text_color_selector_black_outline)

@@ -12,7 +12,7 @@ open class User : Serializable {
     var lastName: String? = null
     var phone: String? = null
     var userCar: UserCar? = null
-    private val phoneVerifiedAt: DateTime? = null
+    var phoneVerifiedAt: DateTime? = null
     val zipCode: String? = null
     val ccProcessorId: String? = null
     var defaultPm: String? = null

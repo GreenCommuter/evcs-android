@@ -106,7 +106,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/spacing_big"
                 android:padding="@dimen/spacing_medium_extra"
-                android:backgroundTint="#FFEBE8"
+                android:background="#FBFBFB"
                 android:visibility="gone">
 
                 <TextView

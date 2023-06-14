@@ -47,8 +47,8 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
                         showCancellationDialog()
                     }
                 }
-        mChangePmLauncher = WalletActivity.getDefaultLauncher(this,
-                mBinding.activitySubscriptionsPaymentInfo)
+        mChangePmLauncher = WalletActivity.getDefaultLauncher(this) { pm ->
+            mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(pm) }
         mLongDateFormatter = DateTimeFormat.forPattern("MMM dd, yyyy")
     }
 

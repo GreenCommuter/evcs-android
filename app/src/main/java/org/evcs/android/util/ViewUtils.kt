@@ -45,6 +45,12 @@ object ViewUtils {
         layoutParams = lp
     }
 
+    fun Context.getStatusBarHeight(): Int {
+        val resId =
+                resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (resId > 0) resources.getDimensionPixelSize(resId) else 0
+    }
+
     /**
      * Workaround to keep the adjust resize behaviour without ruining the toolbar with fitsSystemWindows
      */

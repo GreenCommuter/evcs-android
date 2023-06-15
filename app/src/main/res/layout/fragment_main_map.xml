@@ -83,4 +83,17 @@
 
     </androidx.cardview.widget.CardView>
 
+    <RelativeLayout
+        android:id="@+id/fragment_main_map_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:background="#5a091018"
+        android:elevation="@dimen/spacing_medium_more"
+        android:visibility="gone">
+
+        <include layout="@layout/spinner_layout_black"/>
+
+    </RelativeLayout>
+
 </RelativeLayout>

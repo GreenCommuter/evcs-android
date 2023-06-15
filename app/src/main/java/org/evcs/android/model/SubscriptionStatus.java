@@ -8,7 +8,9 @@ import org.evcs.android.util.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
-public class SubscriptionStatus {
+import java.io.Serializable;
+
+public class SubscriptionStatus implements Serializable {
     public String id;
     public String planName;
     public boolean issue;

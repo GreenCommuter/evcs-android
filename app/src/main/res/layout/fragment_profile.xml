@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/profile_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/profile_title"/>
@@ -70,31 +71,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/spacing_medium"
-                    style="@style/ButtonK.Danger"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large_k"
-                android:visibility="gone"
-                style="@style/Banner.Red">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_large_k"
-                    android:text="Validate your phone number to receive member discount rates."
-                    android:gravity="center"
-                    style="@style/Body.Medium.Bold"/>
-
-                <TextView
-                    android:id="@+id/profile_validate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    android:text="Validate"
                     style="@style/ButtonK.Danger"/>
 
             </LinearLayout>

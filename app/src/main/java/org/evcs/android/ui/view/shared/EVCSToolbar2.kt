@@ -35,6 +35,10 @@ class EVCSToolbar2 : LinearLayout {
         mBinding.root.layoutParams = lp
     }
 
+    fun setNavigationText(text: String) {
+        mBinding.toolbarEvcsNavbutton.text = text
+    }
+
     fun setNavigationOnClickListener(function: () -> Unit) {
         mBinding.toolbarEvcsNavbutton.setOnClickListener { function.invoke() }
     }

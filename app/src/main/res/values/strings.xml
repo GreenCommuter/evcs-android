@@ -415,7 +415,8 @@
     <string name="success_dialog_subtitle">You’re now an EVCS member. Enjoy discounted rates on Pay As You Go.</string>
     <string name="success_dialog_cta">Want to save more?\nExplore EVCS subscription plans</string>
     <string name="congratulations_dialog_title">Congratulations!</string>
-    <string name="congratulations_dialog_subtitle">Your %s Plan is now active. [You can charge at no cost 24/7] across the entire EVCS network.</string>
+    <string name="congratulations_dialog_subtitle">Your %1$s Plan is now active. %2$s</string>
+    <string name="congratulations_dialog_subtitle_2">[You can charge at no cost 24/7] across the entire EVCS network.</string>
     <string name="account_not_validated_title">Account Not Validated</string>
     <string name="account_not_validated_subtitle">You will need to validate your phone number to activate your account and receive the member discounts on charging sessions.\n\nYou can do this anytime in your profile.</string>
     <string name="account_not_validated_button">Validate Phone Number</string>

@@ -77,7 +77,7 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
         mBinding.fragmentRegisterYourCarZipcode.editText?.doOnTextChanged { _, _, _, _ ->
             setEnableButton(validFields())
         }
-        mBinding.fragmentRegisterYourCarToolbar.setOnClickListener { requireActivity().finish() }
+        mBinding.fragmentRegisterYourCarToolbar.setNavigationText("")
         super.setListeners()
     }
 

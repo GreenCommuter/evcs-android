@@ -93,7 +93,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
         mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
-        mBinding.profileValidate.setParentVisibility(false)
 
         mBinding.profileExplorePlansText.text =
                 FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
@@ -113,7 +112,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun setUnverifiedUser() {
         mBinding.profilePlanName.text = "Account not activated"
-        mBinding.profileValidate.setParentVisibility(true)
         mBinding.profileExplorePlans.setParentVisibility(false)
     }
 
@@ -127,13 +125,14 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     override fun populate() {
+        mBinding.profileToolbar.setNavigationText("")
         setUser(UserUtils.getLoggedUser())
     }
 
     override fun setListeners() {
-        mBinding.profileMenuAccount.setOnClickListener { goToActivity(AccountActivity::class.java) }
+        mBinding.profileMenuAccount.setOnClickListener { goToActivityAndRefresh(AccountActivity::class.java) }
         mBinding.profileMenuPaymentMethods.setOnClickListener { goToActivity(WalletActivity::class.java) }
-        mBinding.profileMenuSubscriptionPlan.setOnClickListener { mLauncher.launch(Intent(context, SubscriptionActivity::class.java)) }
+        mBinding.profileMenuSubscriptionPlan.setOnClickListener { goToActivityAndRefresh(SubscriptionActivity::class.java) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView(TERMS_URL) }
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
@@ -143,8 +142,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
-        mBinding.profileValidate.setOnClickListener { mLauncher.launch(Intent(context, VerifyPhoneActivity::class.java)) }
-        mBinding.profileMenuNotifications.setOnClickListener { goToActivity(NotificationsActivity::class.java) }
+        mBinding.profileMenuNotifications.setOnClickListener { goToActivityAndRefresh(NotificationsActivity::class.java) }
         mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
         mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }
         super.setListeners()
@@ -152,6 +150,10 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun <T : FragmentActivity> goToActivity(activity: Class<T>) {
         NavigationUtils.jumpTo(requireContext(), activity)
+    }
+
+    private fun <T : FragmentActivity> goToActivityAndRefresh(activity: Class<T>) {
+        mLauncher.launch(Intent(requireContext(), activity))
     }
 
     private fun goToWebView(url: String) {

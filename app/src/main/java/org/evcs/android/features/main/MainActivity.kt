@@ -19,6 +19,7 @@ import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
+import org.evcs.android.model.Subscription
 import org.evcs.android.util.Extras
 import org.evcs.android.util.PushNotificationUtils
 import org.evcs.android.util.UserUtils
@@ -94,6 +95,10 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             onVerifyResult(intent.getIntExtra(Extras.VerifyActivity.RESULT, RESULT_CANCELED))
             intent.removeExtra(Extras.VerifyActivity.RESULT)
         }
+        if (intent.hasExtra(Extras.PlanActivity.PLAN)) {
+            showCongratulationsDialog(intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Subscription)
+            intent.removeExtra(Extras.PlanActivity.PLAN)
+        }
     }
 
     fun onVerifyResult(verifyResult: Int) {
@@ -101,7 +106,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         if (verifyResult == RESULT_OK) {
             showSuccessDialog()
         } else {
-            showAccountNotValidatedDialog()
+//            showAccountNotValidatedDialog()
+            showSuccessDialog()
         }
     }
 
@@ -167,10 +173,13 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .show(supportFragmentManager)
     }
 
-    fun showCongratulationsDialog() {
+    fun showCongratulationsDialog(subscription: Subscription) {
+        //TODO: SA, BA: "enjoy your discounted charging rates"
+        //UOP: "from 10 pm to 6 am"
+        val secondLine = getString(R.string.congratulations_dialog_subtitle_2)
         EVCSSliderDialogFragment.Builder()
             .setTitle(getString(R.string.congratulations_dialog_title), R.style.Label_Large)
-            .setSubtitle(getString(R.string.congratulations_dialog_subtitle))
+            .setSubtitle(getString(R.string.congratulations_dialog_subtitle, subscription.planName, secondLine))
             .addButton(getString(R.string.app_close)) { fragment -> fragment.dismiss() }
             .show(supportFragmentManager)
     }

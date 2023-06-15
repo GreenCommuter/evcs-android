@@ -23,7 +23,7 @@ import com.base.core.util.KeyboardUtils
 import org.evcs.android.databinding.StandardTextFieldBinding
 
 open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
-    private var mErrorEnabled = false
+    private var mErrorEnabled = true
     private lateinit var mEditText: EditText
     protected lateinit var mLayout: RelativeLayout
     protected lateinit var mLabel: TextView
@@ -90,13 +90,13 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         child.setBackgroundResource(android.R.color.transparent)
         child.onFocusChangeListener = OnFocusChangeListener { _, hasFocus ->
             updateBackground(hasFocus, mErrorEnabled)
-            updateLabel(hasFocus, text.length == 0)
+            updateLabel(hasFocus, mErrorEnabled)
             if (hasFocus) KeyboardUtils.showKeyboard(context, child)
         }
         child.doAfterTextChanged {
-            updateLabel(child.hasFocus(), text.length == 0)
+//            updateLabel(child.hasFocus(), text.length == 0)
         }
-        updateLabel(child.hasFocus(), text.length == 0)
+//        updateLabel(child.hasFocus(), text.length == 0)
         //    android:paddingRight="@dimen/spacing_small"
     }
 
@@ -108,14 +108,9 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         }
     }
 
-    private fun updateLabel(hasFocus: Boolean, isEmpty: Boolean) {
-//        if (hasFocus || !isEmpty || mEditText.hint != null) {
-//            mLabel.visibility = VISIBLE
-//            mLabelEmpty.visibility = GONE
-//        } else {
-//            mLabel.visibility = INVISIBLE
-//            mLabelEmpty.visibility = VISIBLE
-//        }
+    private fun updateLabel(hasFocus: Boolean, errorEnabled: Boolean) {
+        mLabel.setTextColor(if (hasFocus or !errorEnabled) mLabelColor
+                            else resources.getColor(R.color.evcs_danger_700))
     }
 
     override fun setErrorEnabled(b: Boolean) {

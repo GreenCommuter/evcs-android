@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -41,6 +42,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private lateinit var mListFragment: LocationListFragment
     private lateinit var mBackButton: ImageView
     private lateinit var mFilterButton: ImageButton
+    private lateinit var mLoading: RelativeLayout
 
     fun newInstance(): MainMapFragment {
         val args = Bundle()
@@ -66,6 +68,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mStatusBarSpacing = binding.fragmentMainMapStatusBar
         mMapLayout = binding.fragmentMainMapLayout
         mListLayout = binding.fragmentListLayout
+        mLoading = binding.fragmentMainMapLoading
     }
 
     override fun init() {
@@ -208,16 +211,20 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         presenter.searchFromQuery(latLng, viewport)
     }
 
-    override fun showLoading() {
+    fun showLoading() {
         showProgressDialog()
     }
 
-    override fun hideLoading() {
+    fun hideLoading() {
         hideProgressDialog()
     }
 
-    override fun getProgressDialogLayout(): Int {
-        return R.layout.spinner_layout_black
+    override fun showProgressDialog() {
+        mLoading.isVisible = true
+    }
+
+    override fun hideProgressDialog() {
+        mLoading.isVisible = false
     }
 
     override fun onLocationClicked(location: Location, showAsSlider: Boolean) {

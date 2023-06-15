@@ -141,7 +141,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     override fun onSubscriptionSuccess(response: SubscriptionStatus) {
-        ToastUtils.show("Subscription success")
+//        ToastUtils.show("Subscription success")
         (requireActivity() as GetPlanActivity).onPlanSubscribed(response)
     }
 }

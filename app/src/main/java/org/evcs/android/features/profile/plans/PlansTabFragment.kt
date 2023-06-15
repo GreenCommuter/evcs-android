@@ -56,7 +56,9 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
 
     override fun init() {
         mPlanLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result -> if (result.resultCode == Activity.RESULT_OK) finish()
+            result -> if (result.resultCode == Activity.RESULT_OK) {
+//                finish(result.data!!.getSerializableExtra(Extras.PlanActivity.PLAN) as Subscription)
+            }
         }
         mWalletLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result -> if (result.resultCode == Activity.RESULT_OK) mPayAsYouGoView?.setPayAsYouGo()

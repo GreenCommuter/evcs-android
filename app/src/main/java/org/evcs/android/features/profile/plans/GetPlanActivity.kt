@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import com.base.core.util.NavigationUtils
 import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityBaseBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
+import org.evcs.android.features.main.MainActivity
 import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.util.Extras
@@ -45,9 +47,8 @@ class GetPlanActivity : BaseActivity2() {
     }
 
     fun onPlanSubscribed(subscription: SubscriptionStatus) {
-        val fragment = PlanStartedFragment.newInstance(subscription.plan)
-        replaceFragment(R.id.activity_base_content, fragment)
-        setResult(RESULT_OK)
+        val extra = NavigationUtils.IntentExtra(Extras.PlanActivity.PLAN, subscription)
+        NavigationUtils.jumpToClearingTask(this, MainActivity::class.java, extra)
     }
 
 }

@@ -31,6 +31,11 @@ object ViewUtils {
         (this.parent as View).isVisible = show
     }
 
+    fun TextView.showOrHide(text: String?) {
+        isVisible = text != null
+        setText(text)
+    }
+
     /**
      * Returns the width of the screen in pixels
      * @param context the context of the view

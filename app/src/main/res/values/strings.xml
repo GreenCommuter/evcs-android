@@ -498,6 +498,17 @@
     <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
+    <string name="get_plan_price">%1\$sly Cost (Starting %2\$s)</string>
+    <string name="get_plan_flat_rate">Flat rate for Level 2 and DC fast $%.2f/kWh after %d kWh exceeded</string>
+    <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging</string>
+    <string name="get_plan_flat_rate_time_limited">Unlimited charging %1$s-%2$s</string>
+
+    <!-- Plan View -->
+    <string name="plan_view_current">Current plan</string>
+    <string name="plan_view_flat_rate">Simple flat rate after %d kWh exceeded</string>
+    <string name="plan_view_unlimited">Unlimited charging 24/7</string>
+    <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
+    <string name="plan_view_learn_more">Learn more</string>
 
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>

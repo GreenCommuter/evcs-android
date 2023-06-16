@@ -67,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginBottom="@dimen/spacing_big">
+                android:layout_marginBottom="@dimen/spacing_big_k">
 
                     <org.evcs.android.features.shared.StandardTextField
                         android:id="@+id/fragment_braintree_card_expiration_month"

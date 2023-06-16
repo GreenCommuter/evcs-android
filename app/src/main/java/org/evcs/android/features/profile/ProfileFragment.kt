@@ -33,6 +33,7 @@ import org.evcs.android.util.FontUtils
 import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
@@ -119,8 +120,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setIssue(issueText: String?, buttonText: String?, buttonListener: View.OnClickListener) {
         mBinding.profileIssueButton.setParentVisibility(issueText != null)
         mBinding.profileIssueMessage.text = issueText
-        mBinding.profileIssueButton.isVisible = buttonText != null
-        mBinding.profileIssueButton.text = buttonText
+        mBinding.profileIssueButton.showOrHide(buttonText)
         mBinding.profileIssueButton.setOnClickListener(buttonListener)
     }
 

@@ -36,13 +36,13 @@ class ReceiptPlanFragment : ErrorFragment<BasePresenter<*>>() {
     override fun populate() {
         val dateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_date_format))
 
-//        mBinding.sessionInformationChargingSiteSubtitle.text = "${period} Plan"
-        mBinding.sessionInformationChargingSiteDate.text = dateTimeFormatter.print(mPayment.createdAt)
+        mBinding.receiptPlanTitle.text = mPayment.description
+        mBinding.receiptPlanDate.text = dateTimeFormatter.print(mPayment.createdAt)
 
         mPayment.receipt.forEach { line ->
             val v = StandardTextFieldNoBorder(requireContext(), line.label, line.detail)
 //            (v.layoutParams as LinearLayout.LayoutParams)
-                v.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
+            v.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
             mBinding.receiptPlanLayout.addView(v)
         }
     }

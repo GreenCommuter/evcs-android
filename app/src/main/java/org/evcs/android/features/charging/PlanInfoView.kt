@@ -10,5 +10,5 @@ interface PlanInfoView : IErrorView {
 //    fun onStationRetrieved(response: Station)
     fun showFree(freeChargingCode: String)
     fun show(station: Station, status: SubscriptionStatus?)
-    fun showDefaultPM(paymentMethod: PaymentMethod)
+    fun showDefaultPM(paymentMethod: PaymentMethod?)
 }

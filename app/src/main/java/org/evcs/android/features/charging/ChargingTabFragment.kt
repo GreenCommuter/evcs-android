@@ -13,17 +13,21 @@ import android.widget.Button
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
+import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentChargingTabBinding
-import org.evcs.android.features.shared.EVCSDialogFragment
+import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.Extras
 
 
 class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTabView {
@@ -35,7 +39,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     private lateinit var mTextField: StandardTextField
     lateinit var mButton: Button
 
-    val mListener = ChargingNavigationController.getInstance()
+    val mListener = MainNavigationController.getInstance()
 
     companion object {
         fun newInstance(): ChargingTabFragment {
@@ -124,7 +128,8 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     }
 
     private fun goToPlanInfo(id: String) {
-        mListener.goToPlanInfo(id)
+        val data = IntentExtra(Extras.PlanInfo.STATION_ID, id)
+        NavigationUtils.jumpTo(requireContext(), ChargingActivity::class.java, data)
     }
 
     @SuppressLint("MissingPermission")
@@ -139,7 +144,8 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     override fun onChargeRetrieved(response: Session?) {
         hideProgressDialog()
         if (response != null) {
-            mListener.onChargingStarted(response)
+            val data = IntentExtra(Extras.StartCharging.SESSION, response)
+            NavigationUtils.jumpTo(requireContext(), ChargingActivity::class.java, data)
         }
     }
 
@@ -154,7 +160,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     }
 
     override fun onBackPressed(): Boolean {
-        mListener.finish()
+        mListener.onMapClicked()
         return true;
     }
 }

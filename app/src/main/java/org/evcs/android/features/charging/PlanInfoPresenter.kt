@@ -72,8 +72,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 object : AuthCallback<List<PaymentMethod>?>(this) {
                     override fun onResponseSuccessful(response: List<PaymentMethod>?) {
                         mPaymentMethods.addAll(response!!)
-                        if (!mPaymentMethods.isEmpty())
-                            view.showDefaultPM(mPaymentMethods[0])
+                         view.showDefaultPM(mPaymentMethods.getOrNull(0))
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

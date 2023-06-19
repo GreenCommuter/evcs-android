@@ -38,9 +38,7 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
         backToBaseFragment();
         mIsInCharging = true;
         mIsInProfile = false;
-        ChargingNavigationController controller = new ChargingNavigationController(ROOT_ID, mNavController);
-        controller.startFlow();
-        mCurrentController = controller;
+        navigate(R.id.chargingFragment);
         mActivity.setSelectedItem(R.id.menu_drawer_charging);
     }
 

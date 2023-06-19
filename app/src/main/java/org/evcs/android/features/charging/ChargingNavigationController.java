@@ -13,20 +13,20 @@ import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.Session;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
+import org.evcs.android.navigation.controller.AbstractNavigationController;
 import org.evcs.android.util.Extras;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 
-public class ChargingNavigationController extends AbstractBaseFragmentNavigationController {
+public class ChargingNavigationController extends AbstractNavigationController {
 
     private static ChargingNavigationController mInstance;
-    private ChangePaymentMethodFragment.PaymentMethodChangeListener mPaymentMethodChangeListener;
     private boolean mIsActiveSession;
 
-    public ChargingNavigationController(@IdRes int rootId, NavController navController) {
-        super(navController, rootId);
+    public ChargingNavigationController(NavController navController) {
+        super(navController);
         mInstance = this;
     }
 
@@ -36,7 +36,7 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
 
     @Override
     protected @IdRes int getStartingHistoryBuilder() {
-        return R.id.chargingFragment;
+        return R.id.emptyFragment;
     }
 
 //    public void startFlow() {
@@ -47,15 +47,6 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         Bundle args = new Bundle();
         args.putString(Extras.PlanInfo.STATION_ID, id);
         navigate(R.id.planInfoFragment, args);
-    }
-
-    public void onPaymentMethodChanged(@NotNull PaymentMethod paymentMethod) {
-        mPaymentMethodChangeListener.onPaymentMethodChanged(paymentMethod);
-        mNavController.popBackStack();
-    }
-
-    public void setPaymentMethodChangeListener(@NotNull ChangePaymentMethodFragment.PaymentMethodChangeListener listener) {
-        mPaymentMethodChangeListener = listener;
     }
 
     public void goToStartCharging(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
@@ -89,11 +80,6 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         } else {
             c.onSessionCanceled();
         }
-    }
-
-    // Needed to update the item in the menu
-    public void finish() {
-        MainNavigationController.getInstance().onMapClicked();
     }
 
     public void onChargingStarted(@NotNull Session response) {

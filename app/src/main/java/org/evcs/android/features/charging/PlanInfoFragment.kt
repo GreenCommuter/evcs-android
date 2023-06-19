@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
@@ -18,9 +19,9 @@ import org.evcs.android.util.Extras
 import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
 
-class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
-    ChangePaymentMethodFragment.PaymentMethodChangeListener {
+class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
+    private lateinit var mWalletLauncher: ActivityResultLauncher<Intent>
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
 
@@ -39,7 +40,12 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         mBinding = FragmentPlanInfoBinding.bind(v)
     }
 
-    override fun init() {}
+    override fun init() {
+        mWalletLauncher = WalletActivity.getDefaultLauncher(this) {
+            pm -> mSelectedPM = pm
+            mBinding.planInfoCreditCard.setPaymentMethod(pm)
+        }
+    }
 
     override fun populate() {
         showProgressDialog()
@@ -47,9 +53,8 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
     }
 
     override fun setListeners() {
-        mBinding.planInfoCreditCard.setOnClickListener {
-            //TODO:set
-            WalletActivity.getDefaultLauncher(this) { pm -> mSelectedPM = pm }
+        mBinding.planInfoCreditCard.setOnChangeClickListener {
+            mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
         }
         mBinding.planInfoApplyCoupon.setOnClickListener {  }
         mBinding.planInfoChargeWithPayg.setOnClickListener {
@@ -144,13 +149,14 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         startActivity(i);
     }
 
-    override fun showDefaultPM(paymentMethod: PaymentMethod) {
+    override fun showDefaultPM(paymentMethod: PaymentMethod?) {
         onPaymentMethodChanged(paymentMethod)
     }
 
     private fun showPaymentInfo() {
         mBinding.planInfoChargeRate.setLabel(getString(R.string.plan_info_discounted_charge_rate))
         mBinding.planInfoCreditCardLabel.isVisible = true
+        mBinding.planInfoCreditCard.isVisible = true
         mBinding.planInfoCreditCard.setPaymentMethod(mSelectedPM)
 //        mBinding.planInfoCouponCode.visibility = View.VISIBLE
 
@@ -158,9 +164,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         mBinding.planInfoButton.setOnClickListener {
             goToStartCharging()
         }
-
-        if (mSelectedPM != null)
-            mBinding.planInfoCreditCard.setPaymentMethod(mSelectedPM)
     }
 
     override fun showFree(freeChargingCode: String) {
@@ -177,7 +180,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         return true
     }
 
-    override fun onPaymentMethodChanged(paymentMethod: PaymentMethod) {
+    fun onPaymentMethodChanged(paymentMethod: PaymentMethod?) {
         mSelectedPM = paymentMethod
     }
 

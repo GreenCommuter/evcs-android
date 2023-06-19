@@ -82,7 +82,7 @@
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/spacing_big"
                 android:padding="@dimen/spacing_medium_extra"
-                android:background="#FBFBFB"
+                android:background="@color/evcs_gray_50"
                 android:visibility="gone">
 
                 <TextView

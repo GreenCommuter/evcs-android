@@ -23,6 +23,7 @@
     <color name="evcs_secondary_700">#00619C</color>
     <color name="evcs_secondary_800">#005387</color>
 
+    <color name="evcs_gray_50">#FBFBFB</color>
     <color name="evcs_gray_100">#E3E4E5</color>
     <color name="evcs_gray_300">#93979C</color>
     <color name="evcs_gray_400">#7a7f75</color>

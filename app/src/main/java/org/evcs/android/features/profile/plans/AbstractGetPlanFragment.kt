@@ -63,7 +63,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
             getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap().toInt())
         if (mPlan.isUnlimited) {
             if (mPlan.isTimeLimited)
-                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_time_limited, mPlan.startHour(), mPlan.finishHour())
+                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_time_limited,
+                        mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
             else
                 mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_unlimited)
         }

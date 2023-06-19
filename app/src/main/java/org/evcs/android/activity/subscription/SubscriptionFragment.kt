@@ -68,8 +68,7 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
         mBinding.managePlansCanceledLayout.isVisible = response.isCanceled
         mBinding.managePlansActiveLayout.isVisible = !response.isCanceled
         mBinding.activitySubscriptionsPlanName.text = response.planName
-        val format = DateTimeFormat.forPattern(getString(R.string.app_date_format))
-        mBinding.activitySubscriptionsEnrolled.setText(format.print(response.activeSince))
+        mBinding.activitySubscriptionsEnrolled.setText(response.activeSince)
 
         if (response.isCanceled) {
             populateCanceled(response)

@@ -49,12 +49,6 @@ public class ChargingNavigationController extends AbstractBaseFragmentNavigation
         navigate(R.id.planInfoFragment, args);
     }
 
-    public void goToChangePaymentMethods(@Nullable ArrayList<PaymentMethod> paymentMethods) {
-        Bundle args = new Bundle();
-        args.putSerializable(Extras.ChangePaymentMethod.PAYMENT_METHODS, paymentMethods);
-        navigate(R.id.changePaymentMethodFragment, args);
-    }
-
     public void onPaymentMethodChanged(@NotNull PaymentMethod paymentMethod) {
         mPaymentMethodChangeListener.onPaymentMethodChanged(paymentMethod);
         mNavController.popBackStack();

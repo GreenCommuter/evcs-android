@@ -6,6 +6,7 @@ import com.base.core.presenter.BasePresenter
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentReceiptPlanBinding
 import org.evcs.android.features.shared.StandardTextFieldNoBorder
+import org.evcs.android.features.shared.setText
 import org.evcs.android.model.Payment
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
@@ -34,10 +35,8 @@ class ReceiptPlanFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun populate() {
-        val dateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_date_format))
-
         mBinding.receiptPlanTitle.text = mPayment.description
-        mBinding.receiptPlanDate.text = dateTimeFormatter.print(mPayment.createdAt)
+        mBinding.receiptPlanDate.setText(mPayment.createdAt)
 
         mPayment.receipt.forEach { line ->
             val v = StandardTextFieldNoBorder(requireContext(), line.label, line.detail)

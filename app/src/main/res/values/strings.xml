@@ -441,11 +441,11 @@
     <string name="plan_info_upgrade_plan_dialog">Get 30 days free when you upgrade to the Standard Anytime plan!</string>
     <string name="plan_info_date_pattern">d/M/yyyy</string>
     <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then</string>
-    <string name="plan_info_peak_hours">It is during peak hours (6am - 10pm) \n You’ll be charged a flat rate of $$.2f/kWh \n Charge anytime from 10pm - 6am at no cost\"</string>
+    <string name="plan_info_peak_hours">You are charging during peak hours (%1$s - %2$s) \n You’ll be charged a flat rate of $%.2f/kWh \n Charge anytime from %2$s - %1$s at no cost\"</string>
     <string name="plan_info_pay_as_you_go">Pay as you go</string>
     <string name="plan_info_start_charging">Start Charging Session</string>
     <string name="plan_info_free_title">Free Charging!</string>
-    <string name="plan_info_free_subtitle">Charging is free at this location</string>
+    <string name="plan_info_free_subtitle">Charging is free at this location.</string>
 
     <!-- Start Charging-->
     <string name="start_charging_preparing_subtitle">This should only take a couple of seconds</string>

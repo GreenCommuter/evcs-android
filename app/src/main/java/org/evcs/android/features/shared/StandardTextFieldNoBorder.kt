@@ -5,8 +5,12 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.annotation.StyleRes
 import org.evcs.android.R
+import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 
 open class StandardTextFieldNoBorder : StandardTextField {
 
@@ -51,4 +55,13 @@ open class StandardTextFieldNoBorder : StandardTextField {
         mText.text = text
     }
 
+    fun setText(text: DateTime, @StringRes format: Int = R.string.app_date_format) {
+        mText.setText(text, format)
+    }
+
+}
+
+fun TextView.setText(dateTime: DateTime, @StringRes format: Int = R.string.app_date_format) {
+    val dateTimeFormatter = DateTimeFormat.forPattern(context.getString(format))
+    text = dateTimeFormatter.print(dateTime)
 }

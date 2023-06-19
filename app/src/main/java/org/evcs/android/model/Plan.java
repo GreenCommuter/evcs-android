@@ -73,7 +73,7 @@ public class Plan implements Serializable {
 
     private static String intToHour(Integer startHour) {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("ha");
-        return formatter.print(new DateTime().withHourOfDay(startHour)).toUpperCase();
+        return formatter.print(new DateTime().withHourOfDay(startHour));
     }
 
     public String startHour() {

@@ -2,15 +2,20 @@ package org.evcs.android.features.charging
 
 import android.content.Intent
 import android.net.Uri
+import android.text.method.LinkMovementMethod
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlanInfoBinding
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
 
 class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
@@ -42,12 +47,17 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
     }
 
     override fun setListeners() {
-        mBinding.planInfoCreditCardChange.setOnClickListener {
-            mListener.setPaymentMethodChangeListener(this)
-            mListener.goToChangePaymentMethods(presenter?.mPaymentMethods)
+        mBinding.planInfoCreditCard.setOnClickListener {
+            //TODO:set
+            WalletActivity.getDefaultLauncher(this) { pm -> mSelectedPM = pm }
         }
         mBinding.planInfoApplyCoupon.setOnClickListener {  }
-        mBinding.planInfoChargeWithPayg.setOnClickListener {  }
+        mBinding.planInfoChargeWithPayg.setOnClickListener {
+            //TODO: check
+            goToStartCharging()
+        }
+        mBinding.planInfoToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        mBinding.planInfoHelp.movementMethod = LinkMovementMethod.getInstance()
     }
 
     override fun show(station: Station, status: SubscriptionStatus?) {
@@ -59,14 +69,15 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
         if (status?.renewalDate != null) {
             mBinding.planInfoRenewalDate.visibility = View.VISIBLE
-            val dateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.plan_info_date_pattern))
-            mBinding.planInfoRenewalDate.setText(dateTimeFormatter.print(status.renewalDate))
+            mBinding.planInfoRenewalDate.setText(status.renewalDate)
         }
 
         if (status?.kwhUsage != null) {
             mBinding.planInfoKwhUsage.visibility = View.VISIBLE
             val text = String.format("%d/%s kWh", status.kwhUsage, status.printTotalKwh())
             mBinding.planInfoKwhUsage.setText(text)
+            mBinding.planInfoKwhProgress.isVisible = true
+            mBinding.planInfoKwhProgress.setPlan(status, false)
         }
 
         mBinding.planInfoChargeRate.visibility = View.VISIBLE
@@ -82,16 +93,15 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         }
         setUpButton()
         if (status.remainingKwh != null && status.remainingKwh <= 0) {
-            val resetDate = DateTimeFormat.forPattern(getString(R.string.plan_info_date_pattern))
+            val resetDate = DateTimeFormat.forPattern(getString(R.string.app_date_format))
                     .print(status.nextRemainingKwhRestoration)
             val text = String.format(getString(R.string.plan_info_exceeded),
                     status.totalKwh, resetDate, pricing.thereafterPrice)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
         }
-        //TODO: use actual values
         if (!status.planCoversTime) {
-            val text = String.format(getString(R.string.plan_info_peak_hours), pricing.priceKwh)
+            val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
 
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
@@ -107,7 +117,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
     }
 
     private fun showIssue(issueMessage: String) {
-        (mBinding.planInfoAlertMessage.parent as View).visibility = View.VISIBLE
+        mBinding.planInfoAlertMessage.setParentVisibility(true)
         mBinding.planInfoAlertMessage.text = issueMessage
         mBinding.planInfoChargeWithPayg.visibility = View.VISIBLE
     }
@@ -118,7 +128,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
     }
 
     private fun showPlanDialog(message: String, isUpgradePlan: Boolean, accountUrl: String?) {
-        (mBinding.planInfoExplorePlans.parent as View).visibility = View.VISIBLE
+        mBinding.planInfoExplorePlans.setParentVisibility(true)
         mBinding.planInfoExplorePlans.text = message
         if (isUpgradePlan) {
             mBinding.planInfoExplorePlansButton.text = getString(R.string.plan_info_upgrade_plan)
@@ -140,8 +150,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
 
     private fun showPaymentInfo() {
         mBinding.planInfoChargeRate.setLabel(getString(R.string.plan_info_discounted_charge_rate))
-        (mBinding.planInfoCreditCard.parent as View).visibility = View.VISIBLE
-        mBinding.planInfoCouponCode.visibility = View.VISIBLE
+        mBinding.planInfoCreditCardLabel.isVisible = true
+        mBinding.planInfoCreditCard.setPaymentMethod(mSelectedPM)
+//        mBinding.planInfoCouponCode.visibility = View.VISIBLE
 
         mBinding.planInfoButton.isEnabled = true
         mBinding.planInfoButton.setOnClickListener {
@@ -149,8 +160,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView,
         }
 
         if (mSelectedPM != null)
-            mBinding.planInfoCreditCard.text =
-                mSelectedPM!!.card.brand.toPrintableString() + " ending in " + mSelectedPM!!.card.last4
+            mBinding.planInfoCreditCard.setPaymentMethod(mSelectedPM)
     }
 
     override fun showFree(freeChargingCode: String) {

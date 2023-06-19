@@ -111,7 +111,8 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
 
 class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLimited(context, plan) {
     override fun getPlanLimit(): String? {
-        return mContext.getString(R.string.get_plan_flat_rate_time_limited, mPlan.startHour(), mPlan.finishHour())
+        return mContext.getString(R.string.get_plan_flat_rate_time_limited,
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
     }
 
     override fun getPlanLimitAprox(): String? {
@@ -119,7 +120,8 @@ class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLi
     }
 
     override fun getFlatRate(): String? {
-        return mContext.getString(R.string.plan_view_flat_time_limited, mPlan.finishHour(), mPlan.startHour())
+        return mContext.getString(R.string.plan_view_flat_time_limited,
+                mPlan.finishHour().toUpperCase(), mPlan.startHour().toUpperCase())
     }
 }
 

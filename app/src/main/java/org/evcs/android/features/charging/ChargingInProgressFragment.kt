@@ -62,7 +62,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         }
         mSessionId = response.id
         hideProgressDialog()
-        mBinding.chargingInProgressEnergy.text = String.format("%.3f kWh", response.printKwh())
+        mBinding.chargingInProgressEnergy.text = response.printKwh()
         mBinding.chargingInProgressSessionTime.text = response.printableDuration
         mBinding.chargingInProgressStatus.text = response.status
         mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName

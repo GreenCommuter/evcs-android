@@ -15,7 +15,8 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
     fun getPlans() {
         getService(PlansService::class.java).plans.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
-                view.showPlans(response)
+                getPlanExtras(response)
+//                view.showPlans(response)
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -27,6 +28,43 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
             }
 
         })
+    }
+
+    //Temporary
+    private fun getPlanExtras(plans: ArrayList<Plan>) {
+        val r = object : RetrofitServices() {
+            override fun getApiEndpoint(): String {
+                return "https://evcs-assets.s3.us-west-2.amazonaws.com"
+            }
+
+        }
+        r.init()
+        r.getService(PlansService::class.java).planExtras.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
+            override fun onResponseSuccessful(response: ArrayList<Plan>) {
+                mergePlans(plans, response)
+                view.showPlans(plans)
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable?) {
+                view.showError(RequestError.getNetworkError())
+            }
+
+        })
+    }
+
+    //Temporary
+    private fun mergePlans(plans: ArrayList<Plan>, response: ArrayList<Plan>) {
+        response.forEach { planExtra ->
+            plans.firstOrNull { plan -> plan.name.equals(planExtra.name) }
+                    .let { plan ->
+                        plan?.banner = planExtra.banner
+                        plan?.useCase = planExtra.useCase
+                    }
+        }
     }
 
 }

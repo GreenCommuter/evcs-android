@@ -101,7 +101,7 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
     }
 
     override fun getPlanLimitAprox(): String? {
-        return "Approximately %d miles"
+        return String.format("Approximately %d miles", mPlan.milesCap())
     }
 
     override fun getFlatRate(): String? {

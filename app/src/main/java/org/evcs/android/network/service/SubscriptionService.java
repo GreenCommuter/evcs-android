@@ -13,6 +13,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface SubscriptionService {
 
@@ -37,6 +38,9 @@ public interface SubscriptionService {
 
     @POST("/members/v1/subscriptions/{id}/void_cancelation")
     Call<Void> voidSubscriptionCancelation(@Path("id") String id);
+
+    @GET("subscriptions.evcs.com/learn_more")
+    Call<Void> getLearnMore(@Query("plan_id") String planId, @Query("user_id") String userId);
 
 //    Nombre de la subscription:  STATUS_ENDPOINT -> current_subscription -> plan_name
 //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage

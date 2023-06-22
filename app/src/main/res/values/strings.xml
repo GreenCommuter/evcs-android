@@ -492,13 +492,13 @@
 
     <!-- Get Plan -->
     <string name="get_plan_started">Your plan has started!</string>
-    <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://learntodroid.com">Terms of Use</a>,
-        <a href="https://learntodroid.com">Subscription Terms and Conditions</a> and <a href="https://learntodroid.com">Privacy Policy</a>.</string>
+    <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://evcs.com/app/terms-of-use">Terms of Use</a>,
+        <a href="https://evcs.com/app/subscription-terms-and-conditions">Subscription Terms and Conditions</a> and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
     <string name="get_plan_name">Plan</string>
     <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
-    <string name="get_plan_price">%1\$sly Cost (Starting %2\$s)</string>
+    <string name="get_plan_price">%1\$s Cost (Starting %2\$s)</string>
     <string name="get_plan_flat_rate">Flat rate for Level 2 and DC fast $%.2f/kWh after %d kWh exceeded</string>
     <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging</string>
     <string name="get_plan_flat_rate_time_limited">Unlimited charging %1$s-%2$s</string>

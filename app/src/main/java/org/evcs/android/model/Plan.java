@@ -42,6 +42,9 @@ public class Plan implements Serializable {
     public Float weeklyKwh;
     public int trialDays;
     public String cta;
+//    public String tab;
+    public String banner;
+    public String useCase;
 
     public RenewalPeriod getRenewalPeriod() {
         if (weeklyPrice != null) return RenewalPeriod.WEEK;
@@ -84,5 +87,13 @@ public class Plan implements Serializable {
         return intToHour(finishHour);
     }
 
+    public Integer milesCap() {
+        if (kwhCap() == null) return null;
+        return (int) (kwhCap() * 3.8f);
+    }
+
+    public DateTime startingDate() {
+        return DateTime.now().plusDays(trialDays);
+    }
 }
 //        "pay_per_charge": false,

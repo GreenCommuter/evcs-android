@@ -44,23 +44,23 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
 
     public void goToProfile() {
         if (mIsInProfile) return;
-        cancelSession(() -> {
+//        cancelSession(() -> {
             mIsInProfile = true;
             mIsInCharging = false;
             backToBaseFragment();
             navigate(R.id.profileFragment);
             mActivity.setSelectedItem(R.id.menu_drawer_profile);
-        });
+//        });
     }
 
     public void onMapClicked() {
         if (!mIsInCharging && !mIsInProfile) return;
-        cancelSession(() -> {
+//        cancelSession(() -> {
             mIsInCharging = false;
             mIsInProfile = false;
             backToBaseFragment();
             mActivity.setSelectedItem(R.id.menu_drawer_map);
-        });
+//        });
     }
 
     protected void cancelSession(ChargingNavigationController.CancelSessionCallback c) {

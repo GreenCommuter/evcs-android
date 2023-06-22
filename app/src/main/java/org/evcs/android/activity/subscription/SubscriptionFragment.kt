@@ -69,6 +69,7 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
         mBinding.managePlansActiveLayout.isVisible = !response.isCanceled
         mBinding.activitySubscriptionsPlanName.text = response.planName
         mBinding.activitySubscriptionsEnrolled.setText(response.activeSince)
+        mBinding.activitySubscriptionsPlanProgress.setPlan(response)
 
         if (response.isCanceled) {
             populateCanceled(response)
@@ -78,7 +79,6 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
     }
 
     fun populateActive(response: SubscriptionStatus) {
-        mBinding.activitySubscriptionsPlanProgress.setPlan(response)
         val date = mLongDateFormatter.print(response.renewalDate)
         val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()!!
         mBinding.activitySubscriptionsPaymentDetails.setText(String.format(

@@ -8,11 +8,8 @@ import androidx.navigation.NavController;
 
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
-import org.evcs.android.features.main.MainNavigationController;
 import org.evcs.android.features.shared.EVCSDialogFragment;
-import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.Session;
-import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
 import org.evcs.android.util.Extras;
 import org.jetbrains.annotations.NotNull;
@@ -36,7 +33,7 @@ public class ChargingNavigationController extends AbstractNavigationController {
 
     @Override
     protected @IdRes int getStartingHistoryBuilder() {
-        return R.id.emptyFragment;
+        return R.id.placeholder;
     }
 
 //    public void startFlow() {

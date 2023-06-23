@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/charging_in_progress_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/charging_in_progress_title"/>
@@ -28,20 +29,32 @@
         android:src="@drawable/charging_scene"
         android:visibility="visible"/>
 
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+            <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="@string/charging_in_progress_site">
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
 
-                <TextView
-                    android:id="@+id/charging_in_progress_site_name"
+                <org.evcs.android.features.shared.StandardTextFieldNoBorder
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="nodode charging site\nsadfasdf"
-                    style="@style/Body.Medium"/>
+                    app:label="@string/charging_in_progress_site">
 
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+                    <TextView
+                        android:id="@+id/charging_in_progress_site_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" \n "
+                        style="@style/Body.Medium"/>
+
+                </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+                <ProgressBar
+                    android:id="@+id/charging_in_progress_location_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"/>
+
+            </FrameLayout>
 
             <include layout="@layout/divider"/>
 

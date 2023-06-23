@@ -2,7 +2,6 @@ package org.evcs.android.features.charging
 
 import android.graphics.drawable.AnimationDrawable
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
@@ -41,7 +40,9 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     override fun setListeners() {
         super.setListeners()
 //        mBinding.startChargingButton.setOnClickListener { startCharging() }
-        mBinding.startChargingToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        mBinding.startChargingToolbar.setNavigationOnClickListener {
+            onBackPressed()
+        }
     }
 
     private fun startCharging() {

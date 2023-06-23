@@ -16,8 +16,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
-import com.base.core.util.NavigationUtils
-import com.base.core.util.NavigationUtils.IntentExtra
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
@@ -71,10 +69,11 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
+    //Do this better
     override fun init() {
         mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            //TODO: this should only be if the first screen was skipped
-            MainNavigationController.getInstance().onMapClicked()
+            result -> if (result.resultCode != ChargingActivity.RESULT_CANCELED_WITH_DIALOG)
+                MainNavigationController.getInstance().onMapClicked()
         }
     }
 
@@ -138,8 +137,9 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     }
 
     private fun goToPlanInfo(id: String) {
-        val data = IntentExtra(Extras.PlanInfo.STATION_ID, id)
-        NavigationUtils.jumpTo(requireContext(), ChargingActivity::class.java, data)
+        val intent = Intent(requireContext(), ChargingActivity::class.java)
+        intent.putExtra(Extras.PlanInfo.STATION_ID, id)
+        mLauncher.launch(intent)
     }
 
     @SuppressLint("MissingPermission")
@@ -154,8 +154,6 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     override fun onChargeRetrieved(response: Session?) {
         hideProgressDialog()
         if (response != null) {
-            val data = IntentExtra(Extras.StartCharging.SESSION, response)
-//            NavigationUtils.jumpTo(requireContext(), ChargingActivity::class.java, data)
             val intent = Intent(requireContext(), ChargingActivity::class.java)
             intent.putExtra(Extras.StartCharging.SESSION, response)
             mLauncher.launch(intent)

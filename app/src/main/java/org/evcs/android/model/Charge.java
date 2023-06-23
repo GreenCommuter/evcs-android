@@ -40,7 +40,11 @@ public class Charge implements Serializable {
     }
 
     public String getLocationName() {
-        return locationName;
+        return locationName != null ? locationName : location.getName();
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public float getDuration() {

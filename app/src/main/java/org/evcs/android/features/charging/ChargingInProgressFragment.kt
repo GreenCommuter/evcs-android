@@ -1,11 +1,12 @@
 package org.evcs.android.features.charging
 
 import android.view.View
+import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
+import org.evcs.android.model.Location
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
@@ -17,7 +18,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     ChargingInProgressView {
 
     private lateinit var formatter: DateTimeFormatter
-    private val REFRESH_INTERVAL_SECONDS = 10
+    private val REFRESH_INTERVAL_SECONDS = 30
     private lateinit var mSession: Session
     private lateinit var mBinding: FragmentChargingInProgressBinding
     private var mLastUpdate: DateTime? = null
@@ -78,6 +79,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
             showProgressDialog()
             presenter?.stopSession(mSession.id)
         }
+        mBinding.chargingInProgressToolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun onChargeRetrieved(response: Session?) {
@@ -87,6 +89,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         }
         mLastUpdate = DateTime()
         mSession = response
+        presenter.getStation(response.stationName)
         mBinding.chargingInProgressEnergy.text = response.printKwh()
         if (mDuration == null) {
             hideProgressDialog()
@@ -103,6 +106,12 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
     }
 
+    override fun onLocationRetrieved(location: Location) {
+        mSession.setLocation(location)
+        mBinding.chargingInProgressSiteName.text = mSession.address.toString()
+        mBinding.chargingInProgressLocationLoading.isVisible = false
+    }
+
     private fun setDuration(duration: Long) {
         mDuration = duration
         mBinding.chargingInProgressSessionTime.text = formatter.print(duration)
@@ -112,5 +121,10 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         hideProgressDialog()
         ToastUtils.show("Session finished")
         ChargingNavigationController.getInstance().onSessionFinished(mSession)
+    }
+
+    override fun onBackPressed(): Boolean {
+        requireActivity().finish()
+        return true
     }
 }

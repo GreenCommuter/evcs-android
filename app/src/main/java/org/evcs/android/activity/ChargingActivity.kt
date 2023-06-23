@@ -15,6 +15,9 @@ import org.evcs.android.util.Extras
 class ChargingActivity : NavGraphActivity() {
 
     private var mIsActiveSession = false
+    companion object {
+        val RESULT_CANCELED_WITH_DIALOG = -2
+    }
 
     private lateinit var mNavigationController: ChargingNavigationController
 
@@ -32,8 +35,12 @@ class ChargingActivity : NavGraphActivity() {
         }
     }
 
+    //Maybe make two activities, one for "in progress"
     fun cancelSession(fm: FragmentManager?) {
-        cancelSession(fm) { finish() }
+        cancelSession(fm) {
+            setResult(RESULT_CANCELED_WITH_DIALOG)
+            finish()
+        }
     }
 
     fun cancelSession(fm: FragmentManager?, callback: () -> Unit) {

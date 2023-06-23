@@ -30,7 +30,11 @@
         android:id="@+id/chargingInProgressFragment"
         android:name="org.evcs.android.features.charging.ChargingInProgressFragment"
         android:label="ChargingInProgressFragment"
-        tools:layout="@layout/fragment_charging_in_progress"/>
+        tools:layout="@layout/fragment_charging_in_progress">
+        <action
+            android:id="@+id/action_chargingInProgressFragment_to_sessionInformationFragment"
+            app:destination="@id/sessionInformationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/sessionInformationFragment"
         android:name="org.evcs.android.features.profile.sessioninformation.SessionInformationFragment"

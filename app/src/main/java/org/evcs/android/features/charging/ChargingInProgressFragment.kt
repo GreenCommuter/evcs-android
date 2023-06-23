@@ -1,8 +1,6 @@
 package org.evcs.android.features.charging
 
 import android.view.View
-import android.view.animation.AnimationUtils
-import androidx.navigation.fragment.findNavController
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -48,7 +46,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     }
 
     override fun setListeners() {
-        mBinding.chargingInProgressLastUpdate.setOnClickListener { refresh() }
+//        mBinding.chargingInProgressLastUpdate.setOnClickListener { refresh() }
         mBinding.chargingInProgressStopSession.setOnClickListener {
             showProgressDialog()
             presenter?.stopSession(mSessionId)
@@ -63,21 +61,21 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mSessionId = response.id
         hideProgressDialog()
         mBinding.chargingInProgressEnergy.text = response.printKwh()
-        mBinding.chargingInProgressSessionTime.text = response.printableDuration
-        mBinding.chargingInProgressStatus.text = response.status
-        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName
-        val formatter = DateTimeFormat.forPattern("hh:mm:ss")
-        mBinding.chargingInProgressLastUpdate.text =
-                "Last update: " + formatter.print(response.updatedAt) + " (tap to refresh)"
-        mBinding.chargingInProgressStatusIcon
-                .startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_blink))
-        mBinding.chargingInProgressStatusIcon.visibility = if (response.isCharging) View.VISIBLE else View.GONE
+        val formatter = DateTimeFormat.forPattern("HH:mm:ss").withZoneUTC()
+        mBinding.chargingInProgressSessionTime.text = formatter.print(response.duration.toLong())
+//        mBinding.chargingInProgressStatus.text = response.status
+//        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName
+//        mBinding.chargingInProgressLastUpdate.text =
+//                "Last update: " + formatter.print(response.updatedAt) + " (tap to refresh)"
+//        mBinding.chargingInProgressStatusIcon
+//                .startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_blink))
+//        mBinding.chargingInProgressStatusIcon.visibility = if (response.isCharging) View.VISIBLE else View.GONE
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
     }
 
     override fun sessionStopped() {
         hideProgressDialog()
         ToastUtils.show("Session finished")
-        findNavController().popBackStack()
+        ChargingNavigationController.getInstance().onSessionFinished(mSessionId)
     }
 }

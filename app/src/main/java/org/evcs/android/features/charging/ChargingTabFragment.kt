@@ -9,7 +9,7 @@ import android.util.SparseArray
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
@@ -23,6 +23,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentChargingTabBinding
+import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.Session
@@ -37,7 +38,7 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     private lateinit var barcodeDetector: BarcodeDetector
     private lateinit var cameraSource: CameraSource
     private lateinit var mTextField: StandardTextField
-    lateinit var mButton: Button
+    lateinit var mButton: TextView
 
     val mListener = MainNavigationController.getInstance()
 
@@ -152,11 +153,13 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     override fun onPause() {
         super.onPause()
         cameraSource.release()
+        (activity as MainActivity).detachKeyboardListener()
     }
 
     override fun onResume() {
         super.onResume()
         initialiseDetectorsAndSources()
+        (activity as MainActivity).attachKeyboardListener()
     }
 
     override fun onBackPressed(): Boolean {

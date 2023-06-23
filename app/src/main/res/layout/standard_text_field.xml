@@ -8,13 +8,13 @@
         android:id="@+id/standard_text_field_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_small"
         style="@style/Label.Small"/>
 
     <RelativeLayout
         android:id="@+id/standard_text_field_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_small"
         android:paddingStart="@dimen/padding_ariel_standard"
         android:paddingTop="@dimen/spacing_medium_more"
         android:paddingBottom="@dimen/spacing_medium_more"

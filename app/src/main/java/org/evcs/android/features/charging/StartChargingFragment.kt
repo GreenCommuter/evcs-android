@@ -5,6 +5,7 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentStartChargingBinding
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
@@ -28,7 +29,8 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun init() {
-        (mBinding.startChargingImage.background as AnimationDrawable).start()
+//        (mBinding.startChargingImage.background as AnimationDrawable).start()
+        startCharging()
     }
 
     override fun setUi(v: View) {
@@ -38,17 +40,17 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
 
     override fun setListeners() {
         super.setListeners()
-        mBinding.startChargingButton.setOnClickListener { startCharging() }
+//        mBinding.startChargingButton.setOnClickListener { startCharging() }
         mBinding.startChargingToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     private fun startCharging() {
         presenter.startSession()
-        mBinding.startChargingImage.setBackgroundResource(R.drawable.preparing)
-        (mBinding.startChargingImage.background as AnimationDrawable).start()
-        mBinding.startChargingText.text = getString(R.string.start_charging_preparing)
-        mBinding.startChargingSubtext.text = getString(R.string.start_charging_preparing_subtitle)
-        mBinding.startChargingButton.visibility = View.GONE
+//        mBinding.startChargingImage.setBackgroundResource(R.drawable.preparing)
+//        (mBinding.startChargingImage.background as AnimationDrawable).start()
+//        mBinding.startChargingText.text = getString(R.string.start_charging_preparing)
+//        mBinding.startChargingSubtext.text = getString(R.string.start_charging_preparing_subtitle)
+//        mBinding.startChargingButton.visibility = View.GONE
     }
 
     //TODO: show message
@@ -57,7 +59,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         mBinding.startChargingImage.setBackgroundResource(R.drawable.not_charging)
         mBinding.startChargingText.text = ""
         mBinding.startChargingSubtext.text = ""
-        mBinding.startChargingButton.visibility = View.VISIBLE
+//        mBinding.startChargingButton.visibility = View.VISIBLE
     }
 
     override fun onSessionStarted() {
@@ -65,7 +67,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun onBackPressed(): Boolean {
-        mListener.cancelSession(childFragmentManager)
+        (activity as ChargingActivity).cancelSession(childFragmentManager)
         return true
     }
 }

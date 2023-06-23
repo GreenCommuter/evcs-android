@@ -36,18 +36,14 @@
     <dimen name="spacing_big_extra_k">40dp</dimen>
 
     <!-- Px Spacing -->
-    <dimen name="spacing_ariel_related">8dp</dimen>
     <dimen name="spacing_ariel_different">28dp</dimen>
 
     <dimen name="padding_ariel_standard">16dp</dimen>
     <dimen name="padding_ariel_outer">0dp</dimen>
     <dimen name="padding_ariel_inner">28dp</dimen>
-    <dimen name="padding_ariel_big">36dp</dimen>
 
     <dimen name="radius_text">10dp</dimen>
-    <dimen name="radius_ariel_big">28dp</dimen>
-
-    <dimen name="ariel_avatar_size">64dp</dimen>
+    <dimen name="radius_big">28dp</dimen>
 
     <!-- Anti-spacing -->
     <dimen name="negative_spacing_medium">-4dp</dimen>

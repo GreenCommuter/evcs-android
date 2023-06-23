@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentPlanInfoBinding
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.PaymentMethod
@@ -67,7 +68,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     override fun show(station: Station, status: SubscriptionStatus?) {
         hideProgressDialog()
-        mListener.setActiveSession()
+        (activity as ChargingActivity).setActiveSession()
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
         mBinding.planInfoSubscriptionName.setText(status?.planName ?: getString(R.string.plan_info_pay_as_you_go))
 //        val kWhUsed = status
@@ -168,7 +169,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     override fun showFree(freeChargingCode: String) {
         hideProgressDialog()
-        mListener.setActiveSession()
+        (activity as ChargingActivity).setActiveSession()
         mBinding.planInfoFreeCharging.visibility = View.VISIBLE
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true
@@ -176,7 +177,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     override fun onBackPressed(): Boolean {
-        mListener.cancelSession(childFragmentManager)
+        (activity as ChargingActivity).cancelSession(childFragmentManager)
         return true
     }
 

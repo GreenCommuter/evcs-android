@@ -14,7 +14,6 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
     private static MainNavigationController mInstance;
 
     private final MainActivity mActivity;
-    private AbstractNavigationController mCurrentController;
     private boolean mIsInCharging;
     private boolean mIsInProfile;
 
@@ -61,15 +60,6 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
             backToBaseFragment();
             mActivity.setSelectedItem(R.id.menu_drawer_map);
 //        });
-    }
-
-    protected void cancelSession(ChargingNavigationController.CancelSessionCallback c) {
-        if (mIsInCharging) {
-            ((ChargingNavigationController) mCurrentController)
-                    .cancelSession(mActivity.getSupportFragmentManager(), c);
-        } else {
-            c.onSessionCanceled();
-        }
     }
 
 }

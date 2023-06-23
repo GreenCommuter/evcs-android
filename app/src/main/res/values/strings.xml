@@ -448,16 +448,16 @@
     <string name="plan_info_free_subtitle">Charging is free at this location.</string>
 
     <!-- Start Charging-->
-    <string name="start_charging_preparing_subtitle">This should only take a couple of seconds</string>
-    <string name="start_charging_preparing">Preparing to start charging</string>
+    <string name="start_charging_preparing_subtitle">This may only take a few seconds</string>
+    <string name="start_charging_preparing">Preparing to charge</string>
     <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
-    <string name="start_charging_button">Start charging</string>
-    <string name="start_charging_title">Start to charge</string>
+    <string name="start_charging_button">Start charging session</string>
+    <string name="start_charging_title">Start charging</string>
 
     <!-- Charging in progress-->
     <string name="charging_in_progress_title">Charging</string>
-    <string name="charging_in_progress_kwh">Energy Delivered</string>
-    <string name="charging_in_progress_duration">Session Time Elapsed</string>
+    <string name="charging_in_progress_kwh">kW Usage*</string>
+    <string name="charging_in_progress_duration">Elapsed Time</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
 

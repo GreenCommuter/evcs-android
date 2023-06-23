@@ -25,6 +25,9 @@ abstract class PlanViewHelper(val mContext: Context) {
     abstract fun getFlatRate(): String?
     abstract fun getDCFastPrice(): String?
     abstract fun getLevel2Price(): String?
+
+    abstract fun getFlatRateForGetPlan(): String?
+    abstract fun getCongratulationsDialogSubtitle(): String?
 }
 
 class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
@@ -62,6 +65,14 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
 
     override fun getLevel2Price(): String? {
         return "Level 2: \$%.2f"
+    }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return null
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String? {
+        return null
     }
 
 }
@@ -107,6 +118,14 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
     override fun getFlatRate(): String? {
         return mContext.getString(R.string.plan_view_flat_rate, mPlan.kwhCap())
     }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return mContext.getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap())
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String {
+        return "Enjoy your discounted charging rates."
+    }
 }
 
 class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLimited(context, plan) {
@@ -122,6 +141,17 @@ class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLi
     override fun getFlatRate(): String? {
         return mContext.getString(R.string.plan_view_flat_time_limited,
                 mPlan.finishHour().toUpperCase(), mPlan.startHour().toUpperCase())
+    }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return mContext.getString(R.string.get_plan_flat_rate_time_limited,
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String {
+        return String.format(
+                "You can charge at no cost from %1\$s to %2\$s across the entire EVCS network.",
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
     }
 }
 
@@ -144,5 +174,13 @@ class PlanViewHelperUnlimited(context: Context, plan: Plan) : PlanViewHelperNonN
 
     override fun getLevel2Price(): String? {
         return null
+    }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return mContext.getString(R.string.get_plan_flat_rate_unlimited)
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String {
+        return "You can charge at no cost 24/7 across the entire EVCS network."
     }
 }

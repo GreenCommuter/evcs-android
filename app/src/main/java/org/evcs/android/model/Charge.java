@@ -70,6 +70,7 @@ public class Charge implements Serializable {
     }
 
     public String getPlanName() {
+        if (subscription == null) return null;
         return subscription.planName;
     }
 
@@ -82,6 +83,7 @@ public class Charge implements Serializable {
     }
 
     public String getImage() {
+        if (location == null) return null;
         if (location.getImageUrls() != null && location.getImageUrls().size() > 0) {
             return location.getImageUrls().get(0);
         }
@@ -89,6 +91,7 @@ public class Charge implements Serializable {
     }
 
     public String getAddress() {
+        if (location == null) return null;
         return location.getAddress().toString();
     }
 }

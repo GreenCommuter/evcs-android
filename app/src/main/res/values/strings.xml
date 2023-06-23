@@ -362,14 +362,12 @@
 
     <!-- Invoice -->
     <string name="invoice_total_price">Total price</string>
-    <string name="invoice_title">Invoice</string>
 
     <!-- Image Gallery -->
     <string name="image_gallery_title">Image Gallery</string>
 
     <!-- Search Location -->
     <string name="fragment_search_current_location">Current Location</string>
-    <string name="fragment_search_pickup_on">Pick up on %s</string>
     <string-array name="fragment_search_dropoff_dialog">
         <item>Select the</item>
         <item>drop off</item>
@@ -460,6 +458,8 @@
     <string name="charging_in_progress_duration">Elapsed Time</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
+    <string name="charging_in_progress_end">End charging session</string>
+    <string name="charging_in_progress_data_delay">*final usage may vary due to data delay</string>
 
     <!-- Session information -->
     <string name="session_information_energy">Energy Delivered</string>
@@ -498,7 +498,7 @@
     <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
-    <string name="get_plan_price">%1\$s Cost (Starting %2\$s)</string>
+    <string name="get_plan_price">%1$s Cost (Starting %2$s)</string>
     <string name="get_plan_flat_rate">Flat rate for Level 2 and DC fast $%.2f/kWh after %d kWh exceeded</string>
     <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging</string>
     <string name="get_plan_flat_rate_time_limited">Unlimited charging %1$s-%2$s</string>

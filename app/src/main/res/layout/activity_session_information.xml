@@ -189,6 +189,15 @@
                 android:text="@string/session_information_help"
                 style="@style/Label.Small"/>
 
+            <TextView
+                android:id="@+id/session_information_close"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/spacing_medium"
+                android:text="@string/app_close"
+                style="@style/ButtonK.Orange"
+                android:visibility="gone"/>
+
         </LinearLayout>
 
     </ScrollView>

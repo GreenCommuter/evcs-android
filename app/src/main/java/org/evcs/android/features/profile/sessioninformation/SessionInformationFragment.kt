@@ -17,11 +17,11 @@ import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(), ISessionInformationView {
+open class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(), ISessionInformationView {
 
     private lateinit var mCharge: Charge
     private lateinit var mDateTimeFormatter: DateTimeFormatter
-    private lateinit var mBinding: ActivitySessionInformationBinding
+    protected lateinit var mBinding: ActivitySessionInformationBinding
 
     override fun createPresenter(): SessionInformationPresenter {
         return SessionInformationPresenter(
@@ -37,12 +37,13 @@ class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(),
         return R.layout.activity_session_information
     }
 
-    override fun init() {}
+    override fun init() {
+        mDateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
+    }
 
     override fun populate() {
         showProgressDialog()
-        mDateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
-        val chargeId = requireArguments().getInt(Extras.SessionInformationActivity.CHARGE)
+        val chargeId = requireArguments().getInt(Extras.SessionInformationActivity.CHARGE_ID)
         presenter.getCharge(chargeId)
     }
 

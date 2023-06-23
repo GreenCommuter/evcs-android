@@ -167,8 +167,7 @@
                     android:layout_marginBottom="@dimen/spacing_large"
                     android:text="Get 30 days free when you upgrade to the Standard Anytime plan!"
                     android:gravity="center"
-                    style="@style/Body.Medium.Black"
-                    />
+                    style="@style/Body.Medium.Black"/>
 
                 <TextView
                     android:id="@+id/plan_info_explore_plans_button"
@@ -203,31 +202,13 @@
                 android:id="@+id/plan_info_credit_card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone">
+                android:visibility="gone"/>
 
-            </org.evcs.android.ui.view.shared.PaymentMethodView>
-
-            <org.evcs.android.features.shared.StandardTextField
-                android:visibility="gone"
+            <org.evcs.android.ui.view.shared.CouponCodeView
                 android:id="@+id/plan_info_coupon_code"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:hint="Coupon code" />
-
-                <TextView
-                    android:id="@+id/plan_info_apply_coupon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Apply"
-                    android:layout_alignParentEnd="true"
-                    android:layout_centerVertical="true"
-                    android:layout_margin="@dimen/spacing_medium"/>
-
-            </org.evcs.android.features.shared.StandardTextField>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>
@@ -236,8 +217,8 @@
         android:id="@+id/plan_info_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="@dimen/padding_ariel_standard"
-        android:paddingEnd="@dimen/padding_ariel_standard"
+        android:layout_marginStart="@dimen/padding_ariel_standard"
+        android:layout_marginEnd="@dimen/padding_ariel_standard"
         android:layout_marginBottom="@dimen/spacing_large_k"
         android:text="@string/plan_info_start_charging"
         android:enabled="true"
@@ -248,8 +229,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium_extra"
-        android:paddingStart="@dimen/padding_ariel_standard"
-        android:paddingEnd="@dimen/padding_ariel_standard"
+        android:layout_marginStart="@dimen/padding_ariel_standard"
+        android:layout_marginEnd="@dimen/padding_ariel_standard"
         android:text="Charge With Pay As You Go"
         android:visibility="gone"
         style="@style/ButtonK.BlackOutline"/>

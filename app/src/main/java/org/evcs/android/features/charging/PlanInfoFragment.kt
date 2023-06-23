@@ -57,7 +57,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoCreditCard.setOnChangeClickListener {
             mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
         }
-        mBinding.planInfoApplyCoupon.setOnClickListener {  }
+        mBinding.planInfoCouponCode.setListener {  }
         mBinding.planInfoChargeWithPayg.setOnClickListener {
             //TODO: check
             goToStartCharging()

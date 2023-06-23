@@ -2,6 +2,7 @@ package org.evcs.android.features.charging
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,8 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
@@ -33,6 +36,7 @@ import org.evcs.android.util.Extras
 
 class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTabView {
 
+    private lateinit var mLauncher: ActivityResultLauncher<Intent>
     lateinit var mSurfaceView: SurfaceView
     //    lateinit var txtBarcodeValue: TextView
     private lateinit var barcodeDetector: BarcodeDetector
@@ -67,7 +71,12 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
-    override fun init() {}
+    override fun init() {
+        mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            //TODO: this should only be if the first screen was skipped
+            MainNavigationController.getInstance().onMapClicked()
+        }
+    }
 
     override fun populate() {
         showProgressDialog()
@@ -146,7 +155,10 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         hideProgressDialog()
         if (response != null) {
             val data = IntentExtra(Extras.StartCharging.SESSION, response)
-            NavigationUtils.jumpTo(requireContext(), ChargingActivity::class.java, data)
+//            NavigationUtils.jumpTo(requireContext(), ChargingActivity::class.java, data)
+            val intent = Intent(requireContext(), ChargingActivity::class.java)
+            intent.putExtra(Extras.StartCharging.SESSION, response)
+            mLauncher.launch(intent)
         }
     }
 

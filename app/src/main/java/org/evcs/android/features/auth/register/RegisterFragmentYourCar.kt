@@ -106,4 +106,8 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
 
     override fun onZipCodeUpdated() {}
 
+    override fun onBackPressed(): Boolean {
+        return true
+    }
+
 }

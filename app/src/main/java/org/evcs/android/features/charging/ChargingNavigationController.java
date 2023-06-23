@@ -3,6 +3,7 @@ package org.evcs.android.features.charging;
 import android.os.Bundle;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
@@ -60,9 +61,9 @@ public class ChargingNavigationController extends AbstractNavigationController {
         replaceLastKey(R.id.chargingInProgressFragment, args);
     }
 
-    public void onSessionFinished(int sessionId) {
+    public void onSessionFinished(@NonNull Session session) {
         Bundle args = new Bundle();
-        args.putInt(Extras.SessionInformationActivity.CHARGE, sessionId);
+        args.putSerializable(Extras.SessionInformationActivity.CHARGE, session);
         replaceLastKey(R.id.sessionInformationFragment, args);
     }
 

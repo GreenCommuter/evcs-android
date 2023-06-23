@@ -60,16 +60,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
-        if (mPlan.isUnlimited) {
-            if (mPlan.isTimeLimited)
-                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_time_limited,
-                        mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
-            else
-                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_unlimited)
-        } else {
-            mBinding.getPlanFlatRate.text =
-                    getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap())
-        }
+        mBinding.getPlanFlatRate.text = PlanViewHelper.instance(requireContext(), mPlan).getFlatRateForGetPlan()
         mBinding.getPlanCostLayout.setVisibility(showCostLayout())
         val period = StringUtils.capitalize(mPlan.renewalPeriod.toAdverb())
         val startingDate = dateFormatter.print(mPlan.startingDate())

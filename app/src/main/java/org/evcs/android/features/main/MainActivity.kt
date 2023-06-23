@@ -18,6 +18,7 @@ import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.charging.KeyboardListener
+import org.evcs.android.features.profile.plans.PlanViewHelper
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
@@ -176,9 +177,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun showCongratulationsDialog(subscription: Subscription) {
-        //TODO: SA, BA: "enjoy your discounted charging rates"
-        //UOP: "from 10 pm to 6 am"
-        val secondLine = getString(R.string.congratulations_dialog_subtitle_2)
+        val secondLine = PlanViewHelper.instance(this, subscription.plan)
+                .getCongratulationsDialogSubtitle()
         EVCSSliderDialogFragment.Builder()
             .setTitle(getString(R.string.congratulations_dialog_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.congratulations_dialog_subtitle, subscription.planName, secondLine))

@@ -127,14 +127,9 @@
                 android:layout_marginBottom="@dimen/spacing_big_k"
                 style="@style/Body.Small"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/session_information_help"
-                android:textColor="@color/evcs_black"
-                android:padding="@dimen/spacing_medium"
-                android:layout_gravity="center"
-                style="@style/Label.Small"/>
+            <org.evcs.android.features.shared.NeedHelpView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

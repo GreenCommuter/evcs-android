@@ -207,6 +207,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun detachKeyboardListener() {
+        menuView.isVisible = true
         KeyboardListener.detach(window.decorView.rootView)
     }
 

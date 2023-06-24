@@ -70,6 +70,10 @@ public class Extras {
         public static final String CREDIT_CARD = "credit_card";
     }
 
+    public static class ContactSupportActivity {
+        public static final String SHOW_ADDRESS = "show_address";
+    }
+
     public static class PlanActivity {
         public static final String PLAN = "plan";
         public static final String HAS_PLAN = "has_plan";

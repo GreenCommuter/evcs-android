@@ -95,13 +95,17 @@
 
             </FrameLayout>
 
-            <TextView
+<!--            <TextView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="@string/session_information_help"-->
+<!--                android:padding="@dimen/spacing_medium"-->
+<!--                android:gravity="center"-->
+<!--                style="@style/Label.Small"/>-->
+
+            <org.evcs.android.features.shared.NeedHelpView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/session_information_help"
-                android:padding="@dimen/spacing_medium"
-                android:gravity="center"
-                style="@style/Label.Small"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

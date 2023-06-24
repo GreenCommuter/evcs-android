@@ -2,11 +2,9 @@ package org.evcs.android.features.charging
 
 import android.content.Intent
 import android.net.Uri
-import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
@@ -62,8 +60,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             //TODO: check
             goToStartCharging()
         }
-        mBinding.planInfoToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-        mBinding.planInfoHelp.movementMethod = LinkMovementMethod.getInstance()
+        mBinding.planInfoToolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun show(station: Station, status: SubscriptionStatus?) {

@@ -1,17 +1,16 @@
 package org.evcs.android.features.profile.sessioninformation
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.databinding.ActivitySessionInformationBinding
-import org.evcs.android.features.map.location.LocationPresenter
 import org.evcs.android.model.Charge
-import org.evcs.android.model.Location
-import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
@@ -73,7 +72,11 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
 
     override fun setListeners() {
         mBinding.sessionInformationToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-        mBinding.sessionInformationHelp.movementMethod = LinkMovementMethod.getInstance()
+        //TODO: check if show address or request
+        mBinding.sessionInformationHelp.setOnClickListener {
+            val data = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
+            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, data)
+        }
         mBinding.sessionInformationReceipt.setOnClickListener {
             val args = Bundle()
             args.putSerializable(Extras.SessionInformationActivity.CHARGE, mCharge)

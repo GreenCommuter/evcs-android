@@ -12,10 +12,12 @@ import androidx.navigation.fragment.findNavController
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
 import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.features.profile.notifications.NotificationsActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.activity.subscription.SubscriptionActivity
@@ -37,7 +39,6 @@ import org.evcs.android.util.ViewUtils.showOrHide
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
-    private val CALL_PERMISSION = "android.permission.CALL_PHONE"
     private val TERMS_URL = "https://www.evcs.com/terms-of-use"
     private val FAQ_URL = "https://www.evcs.com/ev-drivers/faqs"
     private val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
@@ -135,7 +136,10 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileMenuSubscriptionPlan.setOnClickListener { goToActivityAndRefresh(SubscriptionActivity::class.java) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView(TERMS_URL) }
-        mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
+        mBinding.profileMenuCallCustomerCare.setOnClickListener {
+            val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
+            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, extra)
+        }
         mBinding.profileMenuPayments.setOnClickListener { findNavController().navigate(R.id.paymentHistoryFragment) }
         mBinding.profileMenuSignOut.setOnClickListener { UserUtils.logout(null) }
         mBinding.profileMenuVehicleInfo.setOnClickListener { goToActivity(VehicleInformationActivity::class.java) }
@@ -158,27 +162,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun goToWebView(url: String) {
         findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToWebViewFragment(url))
-    }
-
-    fun goToCallUs() {
-        goToPhone(StorageUtils.getStringFromSharedPreferences(
-            Extras.Configuration.PHONE_NUMBER,
-            BaseConfiguration.EVCSInformation.PHONE_NUMBER))
-    }
-
-    fun goToPhone(phone: String) {
-        PermissionManager.getInstance().requestPermission(this, object : PermissionListener() {
-            override fun onPermissionsGranted() {
-                super.onPermissionsGranted()
-                val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:$phone")
-                startActivity(intent)
-            }
-
-            override fun onPermissionsDenied(deniedPermissions: Array<String?>) {
-                super.onPermissionsDenied(deniedPermissions)
-            }
-        }, CALL_PERMISSION)
     }
 
     override fun onBackPressed(): Boolean {

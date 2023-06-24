@@ -178,16 +178,12 @@
 
             </LinearLayout>
 
-            <TextView
+            <org.evcs.android.features.shared.NeedHelpView
                 android:id="@+id/plan_info_help"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/spacing_medium"
                 android:layout_marginTop="@dimen/spacing_medium_extra"
-                android:layout_marginBottom="@dimen/spacing_big_k"
-                android:text="@string/session_information_help"
-                style="@style/Label.Small"/>
+                android:layout_marginBottom="@dimen/spacing_big_k"/>
 
             <TextView
                 android:id="@+id/plan_info_credit_card_label"

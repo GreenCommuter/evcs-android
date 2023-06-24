@@ -35,6 +35,9 @@ public interface SubscriptionService {
     @GET("/members/v1/users/status")
     Call<SubscriptionStatusWrapper> getStatus();
 
+    @POST("/members/v1/subscriptions/{id}/void_cancelation")
+    Call<Void> voidSubscriptionCancelation(@Path("id") String id);
+
 //    Nombre de la subscription:  STATUS_ENDPOINT -> current_subscription -> plan_name
 //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
 //    Renewal date: STATUS_ENDPOINT -> current_subscription -> renewal_date

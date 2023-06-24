@@ -42,7 +42,10 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     override fun init() {
         mPlan = requireArguments().getSerializable(Extras.PlanActivity.PLAN) as Plan
-        mLauncher = WalletActivity.getDefaultLauncher(this, mBinding.getPlanPaymentInfo)
+        mLauncher = WalletActivity.getDefaultLauncher(this) { pm ->
+            mBinding.getPlanPaymentInfo.setPaymentMethod(pm)
+            mBinding.bottomNavigationButton.isEnabled = true
+        }
     }
 
     override fun populate() {
@@ -55,11 +58,19 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
-        mBinding.getPlanFlatRate.text = "Flat rate for Level 2 and DC fast \$%.2f/kWh after %d kWh exceeded"
+        //TODO: unlimited
+        mBinding.getPlanFlatRate.text =
+            getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap().toInt())
+        if (mPlan.isUnlimited) {
+            if (mPlan.isTimeLimited)
+                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_time_limited, mPlan.startHour(), mPlan.finishHour())
+            else
+                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_unlimited)
+        }
 
         mBinding.getPlanCostLayout.setVisibility(showCostLayout())
-        //Todo: puede ser weekly
-        mBinding.getPlanMonthlyCostTitle.text = "%\$1s Cost (Starting %\$2s)"
+        val period = mPlan.renewalPeriod.toAdverb()
+        mBinding.getPlanMonthlyCostTitle.text = getString(R.string.get_plan_price)
         mBinding.getPlanSubtotal.text = getString(R.string.app_price_format, mPlan.price)
         mBinding.bottomNavigationButton.text = getButtonText()
 
@@ -90,7 +101,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
-        return "%1\$sly Rate - Starting %2\$s"
+        return "Starting %2\$s"
     }
 
     protected open fun getNextBillingDate(): DateTime? {
@@ -138,7 +149,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     override fun onSubscriptionSuccess(response: SubscriptionStatus) {
-        ToastUtils.show("Subscription success")
+//        ToastUtils.show("Subscription success")
         (requireActivity() as GetPlanActivity).onPlanSubscribed(response)
     }
 }

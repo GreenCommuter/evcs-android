@@ -6,6 +6,7 @@ import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 
+import com.base.core.util.NavigationUtils;
 import com.base.core.util.ToastUtils;
 import com.base.networking.retrofit.serializer.BaseGsonBuilder;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -125,10 +126,7 @@ public final class UserUtils {
 
     private static void jumpToMainScreen() {
         Context context = EVCSApplication.getInstance().getApplicationContext();
-        Intent intent1 = new Intent(context, MainActivity.class);
-        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        Intent intent2 = new Intent(context, AuthActivity.class);
-        context.startActivities(new Intent[]{ intent1, intent2 });
+        NavigationUtils.jumpToClearingTask(context, AuthActivity.class);
     }
 
     private static void clearKeys() {

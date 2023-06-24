@@ -4,21 +4,21 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
-import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterEnterCodeBinding
 import org.evcs.android.network.service.SMSBroadcastReceiver
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.PasswordTextInputValidator
 import org.evcs.android.util.validator.ValidatorManager
+import org.joda.time.DateTime
 
 class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), RegisterViewVerify {
 
@@ -59,8 +59,6 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun init() {
-        mBinding.fragmentRegisterEnterCodeText.editText?.addTextChangedListener(PhoneNumberFormattingTextWatcher(
-            BaseConfiguration.DEFAULT_LOCALE.country))
         mPreviousNumber = RegisterFragmentVerifyArgs.fromBundle(requireArguments()).previousNumber
 //        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
@@ -81,7 +79,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         validatorManager.setOnAnyTextChangedListener{setEnableButton(validatorManager.areAllFieldsValid())}
         mBinding.fragmentRegisterEnterCodeToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         mBinding.fragmentRegisterRegisterEnterCodeValidateLater.setOnClickListener {
-            (activity as VerifyPhoneActivity).onVerifyFinished()
+            (activity as VerifyPhoneActivity).onCancel()
         }
     }
 
@@ -111,6 +109,11 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun onCellphoneVerified() {
+        //TODO: do in presenter
+        val user = UserUtils.getLoggedUser()
+        user.phoneVerifiedAt = DateTime()
+        UserUtils.saveUser(user)
+
         (requireActivity() as VerifyPhoneActivity).onVerifyFinished()
         progressDialog.dismiss()
     }

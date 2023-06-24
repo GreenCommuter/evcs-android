@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#5a091018"
-    android:gravity="bottom|center_horizontal" >
+    android:gravity="bottom|center_horizontal">
 
     <LinearLayout
         android:id="@+id/evcs_dialog_fragment_layout"

@@ -33,13 +33,14 @@ import org.evcs.android.util.FontUtils
 import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private val CALL_PERMISSION = "android.permission.CALL_PHONE"
     private val TERMS_URL = "https://www.evcs.com/terms-of-use"
-    private val FAQ_URL = "www.evcs.com/ev-drivers/faqs"
-    private val REQUEST_URL = "support.evcs.com/hc/en-us/requests/new"
+    private val FAQ_URL = "https://www.evcs.com/ev-drivers/faqs"
+    private val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mBinding: FragmentProfileBinding
@@ -88,12 +89,11 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setSubscription(subscription: Subscription?) {
         mBinding.profileExplorePlans.setParentVisibility(subscription == null)
 
-        mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
+        mBinding.profileMenuSubscriptionPlan.isVisible = true//subscription != null
         mBinding.profilePlanProgress.isVisible = subscription != null
         mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
         mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
-        mBinding.profileValidate.setParentVisibility(false)
 
         mBinding.profileExplorePlansText.text =
                 FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
@@ -113,7 +113,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun setUnverifiedUser() {
         mBinding.profilePlanName.text = "Account not activated"
-        mBinding.profileValidate.setParentVisibility(true)
         mBinding.profileExplorePlans.setParentVisibility(false)
     }
 
@@ -121,19 +120,19 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setIssue(issueText: String?, buttonText: String?, buttonListener: View.OnClickListener) {
         mBinding.profileIssueButton.setParentVisibility(issueText != null)
         mBinding.profileIssueMessage.text = issueText
-        mBinding.profileIssueButton.isVisible = buttonText != null
-        mBinding.profileIssueButton.text = buttonText
+        mBinding.profileIssueButton.showOrHide(buttonText)
         mBinding.profileIssueButton.setOnClickListener(buttonListener)
     }
 
     override fun populate() {
+        mBinding.profileToolbar.setNavigationText("")
         setUser(UserUtils.getLoggedUser())
     }
 
     override fun setListeners() {
-        mBinding.profileMenuAccount.setOnClickListener { goToActivity(AccountActivity::class.java) }
+        mBinding.profileMenuAccount.setOnClickListener { goToActivityAndRefresh(AccountActivity::class.java) }
         mBinding.profileMenuPaymentMethods.setOnClickListener { goToActivity(WalletActivity::class.java) }
-        mBinding.profileMenuSubscriptionPlan.setOnClickListener { mLauncher.launch(Intent(context, SubscriptionActivity::class.java)) }
+        mBinding.profileMenuSubscriptionPlan.setOnClickListener { goToActivityAndRefresh(SubscriptionActivity::class.java) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView(TERMS_URL) }
         mBinding.profileMenuCallCustomerCare.setOnClickListener { goToCallUs() }
@@ -143,8 +142,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
-        mBinding.profileValidate.setOnClickListener { mLauncher.launch(Intent(context, VerifyPhoneActivity::class.java)) }
-        mBinding.profileMenuNotifications.setOnClickListener { goToActivity(NotificationsActivity::class.java) }
+        mBinding.profileMenuNotifications.setOnClickListener { goToActivityAndRefresh(NotificationsActivity::class.java) }
         mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
         mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }
         super.setListeners()
@@ -152,6 +150,10 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun <T : FragmentActivity> goToActivity(activity: Class<T>) {
         NavigationUtils.jumpTo(requireContext(), activity)
+    }
+
+    private fun <T : FragmentActivity> goToActivityAndRefresh(activity: Class<T>) {
+        mLauncher.launch(Intent(requireContext(), activity))
     }
 
     private fun goToWebView(url: String) {
@@ -169,7 +171,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
             override fun onPermissionsGranted() {
                 super.onPermissionsGranted()
                 val intent = Intent(Intent.ACTION_DIAL)
-                intent.data = Uri.parse("tel:" + phone)
+                intent.data = Uri.parse("tel:$phone")
                 startActivity(intent)
             }
 

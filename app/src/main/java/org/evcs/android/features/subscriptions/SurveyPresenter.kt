@@ -53,15 +53,10 @@ class SurveyPresenter(viewInstance: SurveyView?, services: RetrofitServices?)
         })
     }
 
-    //TODO: come on Uva fix this
-    fun cancelSubscription(retries: Int = 1) {
+    fun cancelSubscription() {
         getService(SubscriptionService::class.java).cancelSubscription(subscriptionId).enqueue(object : AuthCallback<Void?>(this) {
             override fun onResponseSuccessful(response: Void?) {
-                if (retries > 0) {
-                    cancelSubscription(retries - 1)
-                } else {
-                    view.onSubscriptionCanceled()
-                }
+                view.onSubscriptionCanceled()
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

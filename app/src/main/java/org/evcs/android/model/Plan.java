@@ -1,8 +1,10 @@
 package org.evcs.android.model;
 
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
+
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.List;
 
 public class Plan implements Serializable {
 //    public static Plan PAY_AS_YOU_GO = new Plan("0", 0, 0, "Pay as you go", 0f, 0);
@@ -25,39 +27,61 @@ public class Plan implements Serializable {
     }
 
     public final String id;
-    public final int startHour;
-    public final int finishHour;
+    public Integer startHour;
+    public Integer finishHour;
     public final String name;
 //            "monthly_charges":null,
-    public Float monthlyPrice;
-    public Float yearlyPrice;
-    public Float weeklyPrice;
+    private Float monthlyPrice;
+    private Float yearlyPrice;
+    private Float weeklyPrice;
     public String iconUrl;
     public String shortDescription;
 //            "long_description":null,
-//            "price_per_kwh":"0.00",
-//            "monthly_kwh":null,
-//            "weekly_kwh":null,
+    public Float pricePerKwh;
+    public Float monthlyKwh;
+    public Float weeklyKwh;
     public int trialDays;
     public String cta;
 
     public RenewalPeriod getRenewalPeriod() {
-        if (yearlyPrice != null) return RenewalPeriod.YEAR;
-        if (monthlyPrice != null) return RenewalPeriod.MONTH;
         if (weeklyPrice != null) return RenewalPeriod.WEEK;
+        if (monthlyPrice != null) return RenewalPeriod.MONTH;
+        if (yearlyPrice != null) return RenewalPeriod.YEAR;
         return RenewalPeriod.MONTH;
     }
 
     public Float getPrice() {
-        if (yearlyPrice != null) return yearlyPrice;
-        if (monthlyPrice != null) return monthlyPrice;
         if (weeklyPrice != null) return weeklyPrice;
+        if (monthlyPrice != null) return monthlyPrice;
+        if (yearlyPrice != null) return yearlyPrice;
         return null;
     }
 
     public boolean isUnlimited() {
-        //TODO
-        return false;
+        return kwhCap() == null;
+    }
+
+    public boolean isTimeLimited() {
+        return startHour != null;
+    }
+
+    public Integer kwhCap() {
+        if (monthlyKwh != null) return monthlyKwh.intValue();
+        if (weeklyKwh != null) return weeklyKwh.intValue();
+        return null;
+    }
+
+    private static String intToHour(Integer startHour) {
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("ha");
+        return formatter.print(new DateTime().withHourOfDay(startHour)).toUpperCase();
+    }
+
+    public String startHour() {
+        return intToHour(startHour);
+    }
+
+    public String finishHour() {
+        return intToHour(finishHour);
     }
 
 }

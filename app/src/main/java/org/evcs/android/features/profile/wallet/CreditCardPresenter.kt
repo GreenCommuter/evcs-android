@@ -34,7 +34,7 @@ open class CreditCardPresenter<T : ICreditCardView?>(viewInstance: T, services: 
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
+                        view.onMakeDefaultError(ErrorUtils.getError(responseBody))
                     }
 
                     override fun onCallFailure(t: Throwable) {

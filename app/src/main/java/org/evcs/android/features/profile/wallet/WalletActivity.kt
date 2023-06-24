@@ -50,22 +50,22 @@ class WalletActivity : NavGraphActivity() {
             return intent
         }
 
-        fun getDefaultLauncher(activity: ComponentActivity, paymentMethodView: PaymentMethodView): ActivityResultLauncher<Intent> {
-            return activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                result -> onActivityResult(paymentMethodView, result)
-            }
-        }
+//        fun getDefaultLauncher(activity: ComponentActivity, paymentMethodView: PaymentMethodView): ActivityResultLauncher<Intent> {
+//            return activity.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+//                result -> onActivityResult(paymentMethodView, result)
+//            }
+//        }
 
-        fun getDefaultLauncher(fragment: Fragment, paymentMethodView: PaymentMethodView): ActivityResultLauncher<Intent> {
+        fun getDefaultLauncher(fragment: Fragment, listener: ((PaymentMethod) -> Unit)? = null): ActivityResultLauncher<Intent> {
             return fragment.registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                result -> onActivityResult(paymentMethodView, result)
+                result -> onActivityResult(result, listener)
             }
         }
 
-        fun onActivityResult(paymentMethodView: PaymentMethodView, result: ActivityResult) {
+        fun onActivityResult(result: ActivityResult, listener: ((PaymentMethod) -> Unit)?) {
             if (result.resultCode == RESULT_OK) {
                 val pm = result.data!!.getSerializableExtra(Extras.ChangePaymentMethod.PAYMENT_METHODS)
-                paymentMethodView.setPaymentMethod(pm as PaymentMethod)
+                listener?.invoke(pm as PaymentMethod)
             }
         }
     }

@@ -26,7 +26,9 @@ import org.evcs.android.util.ViewUtils.setMargins
 
 class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewListener {
 
-    private lateinit var mLauncher: ActivityResultLauncher<Intent>
+    private var mPayAsYouGoView: PlanView? = null
+    private lateinit var mPlanLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mWalletLauncher: ActivityResultLauncher<Intent>
     private lateinit var mLayout: LinearLayout
 
     companion object {
@@ -53,8 +55,13 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
     }
 
     override fun init() {
-        mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-            result -> if (result.resultCode == Activity.RESULT_OK) finish()
+        mPlanLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result -> if (result.resultCode == Activity.RESULT_OK) {
+//                finish(result.data!!.getSerializableExtra(Extras.PlanActivity.PLAN) as Subscription)
+            }
+        }
+        mWalletLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result -> if (result.resultCode == Activity.RESULT_OK) mPayAsYouGoView?.setPayAsYouGo()
         }
     }
 
@@ -69,9 +76,9 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         //TODO: Check
         if (UserUtils.getLoggedUser() == null) {
             val param = NavigationUtils.IntentExtra(Extras.AuthActivity.SKIP_ROOT, true)
-            NavigationUtils.jumpToClearingTask(requireContext(), AuthActivity::class.java, param)
+            NavigationUtils.jumpTo(requireContext(), AuthActivity::class.java, param)
         } else if (plan == null) {
-            NavigationUtils.jumpTo(requireContext(), WalletActivity::class.java)
+            mWalletLauncher.launch(Intent(requireContext(), WalletActivity::class.java))
         } else if (UserUtils.getLoggedUser()?.hasAnySubscription ?: false) {
             val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan."
             val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
@@ -97,7 +104,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         val intent = Intent(context, GetPlanActivity::class.java)
         intent.putExtra(Extras.PlanActivity.PLAN, plan)
         intent.putExtra(Extras.PlanActivity.HAS_PLAN, hasPlan)
-        mLauncher.launch(intent)
+        mPlanLauncher.launch(intent)
     }
 
     override fun onLearnMoreClicked(plan: Plan?) {
@@ -133,8 +140,8 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
     }
 
     fun addPayAsYouGo() {
-        val view = PlanView(requireContext(), null as Plan?)
-        view.setListener(this)
-        mLayout.addView(view)
+        mPayAsYouGoView = PlanView(requireContext(), null as Plan?)
+        mPayAsYouGoView!!.setListener(this)
+        mLayout.addView(mPayAsYouGoView)
     }
 }

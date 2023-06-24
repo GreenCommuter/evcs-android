@@ -9,7 +9,7 @@ import java.util.*
 class Station : Serializable {
     var id = 0
     var name: String? = null
-    var availableStatus: String? = null
+    var status: String? = null
     var kw = 0f
 
     //    DateTime lastSynchedAt;
@@ -25,7 +25,7 @@ class Station : Serializable {
 
     fun getAvailableStatus(): AvailableStatus {
         for (value in AvailableStatus.values()) {
-            if (availableStatus == value.toString()) {
+            if (status == value.toString()) {
                 return value
             }
         }

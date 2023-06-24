@@ -8,7 +8,9 @@ import org.evcs.android.util.StringUtils;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 
-public class SubscriptionStatus {
+import java.io.Serializable;
+
+public class SubscriptionStatus implements Serializable {
     public String id;
     public String planName;
     public boolean issue;
@@ -90,5 +92,9 @@ public class SubscriptionStatus {
 
     public int getActiveDaysLeft() {
         return (int) new Duration(new DateTime(), renewalDate).getStandardDays();
+    }
+
+    public boolean isCanceled() {
+        return validTo != null;
     }
 }

@@ -1,7 +1,6 @@
 package org.evcs.android.model.user
 
 import org.evcs.android.model.Subscription
-import org.evcs.android.model.SubscriptionStatus
 import org.joda.time.DateTime
 import java.io.Serializable
 
@@ -13,7 +12,7 @@ open class User : Serializable {
     var lastName: String? = null
     var phone: String? = null
     var userCar: UserCar? = null
-    private val phoneVerifiedAt: DateTime? = null
+    var phoneVerifiedAt: DateTime? = null
     val zipCode: String? = null
     val ccProcessorId: String? = null
     var defaultPm: String? = null
@@ -31,6 +30,10 @@ open class User : Serializable {
 
     val isCorporateUser: Boolean
         get() = false
+
+    val marketingNotifications: Boolean? = null
+    val hasCompletedCarScreen: Boolean
+        get() = zipCode != null
 
 //    "noodoe_id":"24",
 //    "charges_last_thirty_days":null,

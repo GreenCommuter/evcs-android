@@ -12,7 +12,7 @@
         android:id="@+id/view_plan_freq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I charge publicly 7+ times/mo"
+        tools:text="I charge publicly 7+ times/mo"
         style="@style/Title.Medium"/>
 
     <com.google.android.material.card.MaterialCardView
@@ -81,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/evcs_gray_600"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large_k"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 tools:text="Flat rate 6AM-10PM"
                 style="@style/Body.Small.Bold"/>
@@ -99,7 +99,6 @@
                 android:id="@+id/view_plan_ac_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large"
                 android:textColor="@color/evcs_gray_600"
                 tools:text="Level 2: $0.32/kWh"
                 style="@style/Body.Small.Bold"/>
@@ -108,6 +107,7 @@
                 android:id="@+id/view_plan_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_large_k"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 android:layout_marginLeft="@dimen/spacing_medium_extra"
                 android:layout_marginRight="@dimen/spacing_medium_extra"
@@ -118,7 +118,7 @@
                 android:id="@+id/view_plan_learn_more"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Learn more"
+                android:text="@string/plan_view_learn_more"
                 android:layout_marginBottom="@dimen/spacing_big"
                 style="@style/ButtonK"/>
 

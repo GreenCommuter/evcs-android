@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.core.view.isVisible
 import org.evcs.android.R
 import org.evcs.android.databinding.EvcsSliderDialogFragmentBinding
+import org.evcs.android.features.map.keepStatusBar
 import org.evcs.android.util.ViewUtils.setMargins
 
 class EVCSSliderDialogFragment : EVCSDialogFragment() {
@@ -40,6 +41,7 @@ class EVCSSliderDialogFragment : EVCSDialogFragment() {
         mTitle = binding.evcsDialogFragmentTitle
         mSubtitle = binding.evcsDialogFragmentSubtitle
         mDivider = binding.evcsDialogFragmentDivider.root
+        keepStatusBar(binding.root)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

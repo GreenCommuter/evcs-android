@@ -15,8 +15,7 @@ public interface CommandsService {
                             @Query("payment_method") String paymentMethodId,
                             @Query("coupon_codes") ArrayList<String> couponCodes);
 
-    @GET
-    Call<Object> startSession(@Url String url);
+    @GET Call<Object> startSession(@Url String url);
 //    {"intent":"abc123","coupon_codes":null,"authorization_reference":"ZU63Qa3wwIgRRv2IhE8NmnZwVolDOBWUQBR5"}
 
     @POST("/members/v1/commands/stop_session")

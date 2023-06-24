@@ -8,7 +8,6 @@ import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterYourCarBinding
-import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.shared.DropdownWithLabel
 import org.evcs.android.model.user.UserCar
 import org.evcs.android.navigation.controller.AbstractNavigationController
@@ -62,7 +61,7 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
     }
 
     override fun init() {
-        if (hasCompletedCarScreen()) {
+        if (skipScreen()) {
             skip()
             return
         }
@@ -70,15 +69,15 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
         ViewUtils.setAdjustResize(mBinding.root)
     }
 
-    //TODO: this is for testing
-    protected open fun hasCompletedCarScreen(): Boolean {
-        return false && UserUtils.getLoggedUser().zipCode != null
+    protected open fun skipScreen(): Boolean {
+        return UserUtils.getLoggedUser().hasCompletedCarScreen
     }
 
     override fun setListeners() {
         mBinding.fragmentRegisterYourCarZipcode.editText?.doOnTextChanged { _, _, _, _ ->
             setEnableButton(validFields())
         }
+        mBinding.fragmentRegisterYourCarToolbar.setNavigationText("")
         super.setListeners()
     }
 
@@ -96,14 +95,13 @@ open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresen
 
     override fun onCarsAdded(car : UserCar) {
         progressDialog.dismiss()
-        (activity as AuthActivity).goToVerify()
-//        findNavController()
-//            .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
+        findNavController()
+            .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
     }
 
     fun skip() {
         val navOptions = AbstractNavigationController.replaceLastNavOptions(findNavController())
-//        findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
+        findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
     }
 
     override fun onZipCodeUpdated() {}

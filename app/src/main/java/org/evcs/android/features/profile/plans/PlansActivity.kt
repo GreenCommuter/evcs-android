@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.R
 import org.evcs.android.databinding.ActivityBaseBinding
-import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
 
 /**
@@ -22,4 +21,5 @@ class PlansActivity : BaseActivity2() {
         val fragment = PlansFragment.newInstance(isCorporate)
         replaceFragment(R.id.activity_base_content, fragment)
     }
+
 }

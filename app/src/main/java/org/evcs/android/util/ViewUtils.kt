@@ -31,6 +31,11 @@ object ViewUtils {
         (this.parent as View).isVisible = show
     }
 
+    fun TextView.showOrHide(text: String?) {
+        isVisible = text != null
+        setText(text)
+    }
+
     /**
      * Returns the width of the screen in pixels
      * @param context the context of the view
@@ -43,6 +48,12 @@ object ViewUtils {
         val lp = ViewGroup.MarginLayoutParams(layoutParams ?: ViewGroup.LayoutParams(-2, -2))
         lp.setMargins(left, top, right, bottom)
         layoutParams = lp
+    }
+
+    fun Context.getStatusBarHeight(): Int {
+        val resId =
+                resources.getIdentifier("status_bar_height", "dimen", "android")
+        return if (resId > 0) resources.getDimensionPixelSize(resId) else 0
     }
 
     /**

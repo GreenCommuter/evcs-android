@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/profile_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/profile_title"/>
@@ -48,15 +49,15 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Standard anytime"
-                android:layout_marginBottom="@dimen/spacing_big"
+                android:layout_marginBottom="@dimen/spacing_big_k"
                 style="@style/Body.Large"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_big"
+                android:layout_marginBottom="@dimen/spacing_large_k"
                 android:visibility="gone"
-                style="Banner.Red">
+                style="@style/Banner.Red">
 
                 <TextView
                     android:id="@+id/profile_issue_message"
@@ -77,36 +78,11 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large_k"
-                android:visibility="gone"
-                style="@style/Banner.Red">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_large_k"
-                    android:text="Validate your phone number to receive member discount rates."
-                    android:gravity="center"
-                    style="@style/Body.Medium.Bold"/>
-
-                <TextView
-                    android:id="@+id/profile_validate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/spacing_medium"
-                    android:text="Validate"
-                    style="@style/ButtonK.Danger"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:gravity="center"
                 android:layout_marginBottom="@dimen/spacing_big"
                 android:padding="@dimen/spacing_medium_extra"
-                android:backgroundTint="#FFEBE8"
+                android:background="#FBFBFB"
                 android:visibility="gone">
 
                 <TextView
@@ -114,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:layout_marginBottom="@dimen/spacing_large_k"
                     style="@style/Body.Medium"/>
 
                 <TextView
@@ -131,7 +107,7 @@
                 android:id="@+id/profile_plan_progress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_large"
+                android:layout_marginBottom="@dimen/spacing_large_k"
                 android:visibility="gone"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
@@ -230,7 +206,7 @@
                 android:id="@+id/profile_menu_sign_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_large"
+                android:layout_marginTop="@dimen/spacing_large_k"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/activity_account_sign_out"

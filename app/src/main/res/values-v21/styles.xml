@@ -17,7 +17,7 @@
         <item name="android:navigationBarColor">@color/evcs_black</item>
         <item name="colorControlNormal">@color/evcs_grey</item>
         <item name="colorAccent">@color/evcs_black</item>
-        <item name="textColorError">@color/evcs_red</item>
+<!--        <item name="textColorError">@color/evcs_red</item>-->
         <item name="android:ambientShadowAlpha">.1</item>
         <item name="android:spotShadowAlpha">.1</item>
 <!--        <item name="android:statusBarColor">@color/evcs_gray_89</item>-->

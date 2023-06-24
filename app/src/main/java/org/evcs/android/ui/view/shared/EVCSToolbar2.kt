@@ -2,10 +2,11 @@ package org.evcs.android.ui.view.shared
 
 import android.content.Context
 import android.util.AttributeSet
-import android.widget.LinearLayout
 import android.view.LayoutInflater
+import android.widget.LinearLayout
 import org.evcs.android.R
 import org.evcs.android.databinding.ToolbarEvcsBinding
+import org.evcs.android.util.ViewUtils.getStatusBarHeight
 
 class EVCSToolbar2 : LinearLayout {
 
@@ -29,6 +30,13 @@ class EVCSToolbar2 : LinearLayout {
         val title = typedArray.getString(R.styleable.Toolbar_title)
         typedArray.recycle()
         mBinding.toolbarEvcsTitle.text = title
+        val lp = LayoutParams(mBinding.root.layoutParams)
+        lp.setMargins(0, context.getStatusBarHeight(), 0, 0)
+        mBinding.root.layoutParams = lp
+    }
+
+    fun setNavigationText(text: String) {
+        mBinding.toolbarEvcsNavbutton.text = text
     }
 
     fun setNavigationOnClickListener(function: () -> Unit) {
@@ -38,4 +46,5 @@ class EVCSToolbar2 : LinearLayout {
     fun setTitle(title: String) {
         mBinding.toolbarEvcsTitle.text = title
     }
+
 }

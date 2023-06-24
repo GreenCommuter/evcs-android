@@ -415,7 +415,8 @@
     <string name="success_dialog_subtitle">You’re now an EVCS member. Enjoy discounted rates on Pay As You Go.</string>
     <string name="success_dialog_cta">Want to save more?\nExplore EVCS subscription plans</string>
     <string name="congratulations_dialog_title">Congratulations!</string>
-    <string name="congratulations_dialog_subtitle">Your %s Plan is now active. [You can charge at no cost 24/7] across the entire EVCS network.</string>
+    <string name="congratulations_dialog_subtitle">Your %1$s Plan is now active. %2$s</string>
+    <string name="congratulations_dialog_subtitle_2">[You can charge at no cost 24/7] across the entire EVCS network.</string>
     <string name="account_not_validated_title">Account Not Validated</string>
     <string name="account_not_validated_subtitle">You will need to validate your phone number to activate your account and receive the member discounts on charging sessions.\n\nYou can do this anytime in your profile.</string>
     <string name="account_not_validated_button">Validate Phone Number</string>
@@ -497,6 +498,17 @@
     <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
+    <string name="get_plan_price">%1\$sly Cost (Starting %2\$s)</string>
+    <string name="get_plan_flat_rate">Flat rate for Level 2 and DC fast $%.2f/kWh after %d kWh exceeded</string>
+    <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging</string>
+    <string name="get_plan_flat_rate_time_limited">Unlimited charging %1$s-%2$s</string>
+
+    <!-- Plan View -->
+    <string name="plan_view_current">Current plan</string>
+    <string name="plan_view_flat_rate">Simple flat rate after %d kWh exceeded</string>
+    <string name="plan_view_unlimited">Unlimited charging 24/7</string>
+    <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
+    <string name="plan_view_learn_more">Learn more</string>
 
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>
@@ -512,11 +524,11 @@
         Your plan will stay active through the remainder of your last billing cycle and end on %3$s.</string>
     <string name="cancel_plan_days_remaining">%d days remaining</string>
     <string name="cancel_plan_trial_cancel">Keep Trial</string>
-    <string name="cancel_plan_trial_bold">You have %d days left in your Standard Anytime trial</string>
+    <string name="cancel_plan_trial_bold">You have %d days left in your %s trial</string>
     <string name="cancel_plan_trial_warning">Canceling your free trials means that you will immediately lose access to your plan benefits.</string>
     <string name="cancel_plan_trial_confirmation">Do you want to keep your Trial?</string>
     <string name="cancellation_dialog_title">Your %s subscription has been canceled.</string>
-    <string name="cancellation_dialog_subtitle">You will still receive discounted “Pay As You Go” pricing with when this billing cycle ends.\n\n
+    <string name="cancellation_dialog_subtitle">You will still receive discounted “Pay As You Go” pricing when this billing cycle ends.\n\n
         You can always reactivate the plan if you change your mind.</string>
 
     <!-- Survey -->

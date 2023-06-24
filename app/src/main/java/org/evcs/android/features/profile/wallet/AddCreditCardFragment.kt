@@ -13,6 +13,7 @@ import com.stripe.android.model.*
 import org.evcs.android.Configuration
 import org.evcs.android.R
 import org.evcs.android.model.PaymentMethod
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.ViewUtils.setVisibility
 import org.evcs.android.util.validator.*
 import org.evcs.android.util.watchers.DateFormatWatcher
@@ -62,6 +63,7 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         mCardExpirationMonth.editText!!.addTextChangedListener(DateFormatWatcher())
         mCardNumber.editText!!.addTextChangedListener(FourDigitCardFormatWatcher())
         mCreditCardView.watchNumber(mCardNumber.editText)
+        mToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     override fun getButtonBackground(): Drawable {
@@ -130,6 +132,10 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         ToastUtils.show(getString(R.string.add_credit_card_success))
         finish()
         (activity as WalletActivity).onPaymentMethodChanged(item)
+    }
+
+    override fun onMakeDefaultError(error: RequestError) {
+        presenter.getClientSecret()
     }
 
 }

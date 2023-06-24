@@ -37,12 +37,6 @@
         android:label="ForgotPasswordFragment"
         tools:layout="@layout/fragment_forgot_password"/>
     <fragment
-        android:id="@+id/registerFragmentYourCar"
-        android:name="org.evcs.android.features.auth.register.RegisterFragmentYourCar"
-        android:label="RegisterFragmentYourCar"
-        tools:layout="@layout/fragment_register_your_car">
-    </fragment>
-    <fragment
         android:id="@+id/rootFragment"
         android:name="org.evcs.android.features.auth.initialScreen.RootFragment"
         android:label="RootFragment"

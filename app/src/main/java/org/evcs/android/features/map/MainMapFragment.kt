@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -24,6 +25,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.FragmentLocationReceiver
 import org.evcs.android.util.LocationHelper
+import org.evcs.android.util.ViewUtils.getStatusBarHeight
 
 
 class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, FragmentLocationReceiver,
@@ -40,6 +42,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     private lateinit var mListFragment: LocationListFragment
     private lateinit var mBackButton: ImageView
     private lateinit var mFilterButton: ImageButton
+    private lateinit var mLoading: RelativeLayout
 
     fun newInstance(): MainMapFragment {
         val args = Bundle()
@@ -65,6 +68,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mStatusBarSpacing = binding.fragmentMainMapStatusBar
         mMapLayout = binding.fragmentMainMapLayout
         mListLayout = binding.fragmentListLayout
+        mLoading = binding.fragmentMainMapLoading
     }
 
     override fun init() {
@@ -73,6 +77,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
 
     override fun populate() {
         super.populate()
+        setStatusBarHeight()
         mSearchLocationChildFragment = SearchLocationChildFragment.newInstance()
 //        mSearchLocationChildFragment.setDefault("asdasd")
         requireFragmentManager().beginTransaction().replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment).commit()
@@ -85,6 +90,16 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
         if ((activity as MainActivity).isBottomOfStack) return
+        setTraslucentStatusBar()
+    }
+
+    private fun setStatusBarHeight() {
+        val params = mStatusBarSpacing.layoutParams
+        params.height = requireContext().getStatusBarHeight()
+        mStatusBarSpacing.layoutParams = params
+    }
+
+    private fun setTraslucentStatusBar() {
         mBackButton.visibility = View.VISIBLE
         mToolbarBackground.setBackgroundColor(resources.getColor(R.color.evcs_transparent_white))
         setStatusBarColor(resources.getColor(R.color.evcs_transparent_white))
@@ -196,16 +211,20 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         presenter.searchFromQuery(latLng, viewport)
     }
 
-    override fun showLoading() {
+    fun showLoading() {
         showProgressDialog()
     }
 
-    override fun hideLoading() {
+    fun hideLoading() {
         hideProgressDialog()
     }
 
-    override fun getProgressDialogLayout(): Int {
-        return R.layout.spinner_layout_black
+    override fun showProgressDialog() {
+        mLoading.isVisible = true
+    }
+
+    override fun hideProgressDialog() {
+        mLoading.isVisible = false
     }
 
     override fun onLocationClicked(location: Location, showAsSlider: Boolean) {

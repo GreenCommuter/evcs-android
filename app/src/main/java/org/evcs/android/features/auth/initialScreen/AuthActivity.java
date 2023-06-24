@@ -37,8 +37,7 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
 //        adjustFontScale(getResources().getConfiguration());
 
         mLauncher = registerForActivityResult(
-                new ActivityResultContracts.StartActivityForResult(),
-                result -> onAuthFinished(result.getResultCode()));
+                new ActivityResultContracts.StartActivityForResult(), result -> onAuthFinished(result.getResultCode()));
 
 //        if (getIntent().getExtras() == null) return;
 //        mId = getIntent().getIntExtra(Extras.Root.ID, -1);
@@ -88,6 +87,12 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
     }
 
     public void goToVerify() {
+//        Context context = EVCSApplication.getInstance().getApplicationContext();
+//        Intent intent1 = new Intent(context, MainActivity.class);
+//        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        Intent intent2 = new Intent(context, VerifyPhoneActivity.class);
+//        context.startActivities(new Intent[]{ intent1, intent2 });
+//        NavigationUtils.IntentExtra intentExtra = new NavigationUtils.IntentExtra(Extras.VerifyActivity.RESULT, true);
         mLauncher.launch(new Intent(this, VerifyPhoneActivity.class));
     }
 }

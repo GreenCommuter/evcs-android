@@ -8,6 +8,7 @@ import org.evcs.android.util.UserUtils
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormatter
 
+@Deprecated("")
 class PlanStartedFragment : AbstractGetPlanFragment() {
 
     companion object {

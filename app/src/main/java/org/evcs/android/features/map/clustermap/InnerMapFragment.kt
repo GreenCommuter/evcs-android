@@ -11,6 +11,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentInnerMapBinding
 import org.evcs.android.model.Location
+import org.evcs.android.util.ViewUtils.setParentVisibility
 
 class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location>(), InnerMapView {
 
@@ -76,7 +77,7 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
 
     fun onLocationResult(lastLocation: LatLng) {
         presenter.mLastLocation = lastLocation
-        (mCenterButton.parent as View).visibility = View.VISIBLE
+        mCenterButton.setParentVisibility(true)
         mCenterButton.setImageDrawable(resources.getDrawable(R.drawable.ic_map_center))
         drawLocationMarker()
     }

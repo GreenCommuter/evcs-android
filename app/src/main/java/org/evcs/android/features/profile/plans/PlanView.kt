@@ -6,18 +6,43 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import org.evcs.android.R
 import org.evcs.android.databinding.ViewPlanBinding
 import org.evcs.android.model.Plan
+import org.evcs.android.model.user.User
 import org.evcs.android.util.UserUtils
 
 class PlanView : LinearLayout {
 
-    private lateinit var mPlan: Plan
+    private var mPlan: Plan? = null
     private lateinit var mBinding: ViewPlanBinding
 
-    constructor(context: Context, plan: Plan) : super(context) {
+    constructor(context: Context, plan: Plan?) : super(context) {
         init(context)
-        setPlan(plan)
+        if (plan == null) {
+            setPayAsYouGo()
+        } else {
+            setPlan(plan)
+        }
+    }
+
+    private fun setPayAsYouGo() {
+        mBinding.viewPlanName.text = "Pay as you go"
+        mBinding.viewPlanPrice.text = "\$0 Membership Fee"
+
+        mBinding.viewPlanButton.text = "Get Started"
+
+        mBinding.viewPlanFreq.text = "I charge infrequently / I don't need a plan"
+        mBinding.viewPlanLimits.text = "EVCS offers simple, flat rate pricing!"
+
+        mBinding.viewPlanFlatRate.text = "Simple flat rate pricing"
+        mBinding.viewPlanDcPrice.text = "DC fast: \$%.2f"
+        mBinding.viewPlanAcPrice.text = "Level 2: \$%.2f"
+
+        if (UserUtils.getLoggedUser()?.activeSubscription == null
+            && UserUtils.getLoggedUser()?.defaultPm != null) {
+            setCurrentPlan()
+        }
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
@@ -38,16 +63,13 @@ class PlanView : LinearLayout {
         val period = plan.renewalPeriod.toSmall()
         mBinding.viewPlanPrice.text =
                 formatIfPositive(plan.monthlyPrice, "\$%.2f/$period", "\$0 Membership Fee")
-        mBinding.viewPlanButton.isEnabled = true //TODO: is current plan
-        mBinding.viewPlanButton.text =
-                formatIfPositive(plan.trialDays, "Get %d Days Free", "Get Started")
+
+        mBinding.viewPlanButton.text = plan.cta
 
         mBinding.viewPlanFreq.text = "I charge publicly %d+ times/%s"
-        //PAYG: I charge infrequently/I don't need a plan
 
 //        mBinding.viewPlanLimits.text =
 //        Standard anytime, Basic anytime: Up to %d kWh/month
-//        PAYG: EVCS offers simple, flat rate pricing!
 
         //Standard anytime, basic anytime
         mBinding.viewPlanLimitAprox.text = "Approximately %d miles"
@@ -55,7 +77,6 @@ class PlanView : LinearLayout {
 //        mBinding.viewPlanFlatRate =
 //        Standard anytime: "Simple flat rate after %d kWh exceeded"
 //        Basic anytime: "Flat rate after %d kWh exceeded"
-//        PAYG: "Simple flat rate pricing"
 //        unlimited anytime: "Unlimited charging 24/7"
 //        unlimited offpeak: "Unlimited charging 10PM-6AM"
 
@@ -63,14 +84,19 @@ class PlanView : LinearLayout {
         mBinding.viewPlanDcPrice.text = "DC fast: \$%.2f"
         mBinding.viewPlanAcPrice.text = "Level 2: \$%.2f"
 
-        val currentPlanId = UserUtils.getLoggedUser().activeSubscription?.plan?.id
-        if (currentPlanId == mPlan.id) {
-            mBinding.viewPlanButton.isEnabled = false
-            mBinding.viewPlanAd.visibility = View.VISIBLE
-            mBinding.viewPlanAd.text = "Current plan"
-            mBinding.viewPlanAd.setTextColor(Color.parseColor("#005387"))
-            mBinding.viewPlanAd.setBackgroundColor(Color.parseColor("#E7EFF6"))
+        val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
+        if (currentPlanId == plan.id) {
+            setCurrentPlan()
         }
+    }
+
+    private fun setCurrentPlan() {
+        mBinding.viewPlanButton.isEnabled = false
+        mBinding.viewPlanButton.text = "Current plan"
+        mBinding.viewPlanAd.visibility = View.VISIBLE
+        mBinding.viewPlanAd.text = "Current plan"
+        mBinding.viewPlanAd.setTextColor(resources.getColor(R.color.evcs_secondary_800))
+        mBinding.viewPlanAd.setBackgroundColor(Color.parseColor("#E7EFF6"))
     }
 
     fun formatIfPositive(field: Number, format: String, default: String): String {
@@ -83,8 +109,8 @@ class PlanView : LinearLayout {
     }
 
     interface PlanViewListener {
-        fun onGetPlanClicked(plan: Plan)
-        fun onLearnMoreClicked(plan: Plan)
+        fun onGetPlanClicked(plan: Plan?)
+        fun onLearnMoreClicked(plan: Plan?)
     }
 
 }

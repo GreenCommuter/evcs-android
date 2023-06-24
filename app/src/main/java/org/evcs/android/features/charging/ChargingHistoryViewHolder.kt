@@ -2,31 +2,29 @@ package org.evcs.android.features.charging
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import org.evcs.android.R
 import org.evcs.android.databinding.AdapterChargingHistoryItemBinding
 import org.evcs.android.model.Charge
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-class ChargingHistoryViewHolder(itemView : View?) : RecyclerView.ViewHolder(itemView!!) {
+class ChargingHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
     private lateinit var mCharge: Charge
     private val mDateTimeFormatter: DateTimeFormatter
     private val mBinding: AdapterChargingHistoryItemBinding
 
     init {
-        mBinding = AdapterChargingHistoryItemBinding.bind(itemView!!)
-        mDateTimeFormatter = DateTimeFormat.forPattern("MMM dd, yyyy 'at' hh:mm a")
+        mBinding = AdapterChargingHistoryItemBinding.bind(itemView)
+        mDateTimeFormatter = DateTimeFormat.forPattern(itemView.context.getString(R.string.app_date_format))
     }
 
     fun setCharge(charge: Charge) {
         mCharge = charge
         if (charge.startedAt != null)
-            mBinding.adapterChargingHistoryItemDate.text = "Date: " + mDateTimeFormatter.print(charge.startedAt)
-        mBinding.adapterChargingHistoryItemPrice.text = "Total: " + String.format("$%.2f", charge.price)
+            mBinding.adapterChargingHistoryItemDate.text = mDateTimeFormatter.print(charge.startedAt)
+        mBinding.adapterChargingHistoryItemStation.text = charge.locationName
+        mBinding.adapterChargingHistoryItemPrice.text = itemView.context.getString(R.string.app_price_format, charge.price)
     }
-
-//    fun setOnXClickListener(onXClickListener: ((Location) -> Unit)?) {
-//        mBinding.adapterSearchRemove.setOnClickListener { onXClickListener?.invoke(mLocation) }
-//    }
 
 }

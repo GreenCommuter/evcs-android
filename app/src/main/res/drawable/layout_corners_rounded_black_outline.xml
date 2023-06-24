@@ -10,7 +10,7 @@
     </item>
     <item android:state_pressed="true">
         <shape>
-            <solid android:color="#E3E4E5"/>
+            <solid android:color="@color/evcs_gray_100"/>
             <corners android:radius="@dimen/button_radius"/>
             <stroke android:width="@dimen/spacing_tiny"
                 android:color="@color/evcs_gray_800"/>

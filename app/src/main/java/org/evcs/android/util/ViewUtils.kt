@@ -10,8 +10,8 @@ import android.text.style.UnderlineSpan
 import android.text.TextPaint
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.core.view.ViewCompat
+import androidx.core.view.isVisible
 
 /**
  * Utilities for Android views
@@ -27,6 +27,10 @@ object ViewUtils {
         this.visibility = if (show) View.VISIBLE else View.GONE
     }
 
+    fun View.setParentVisibility(show: Boolean) {
+        (this.parent as View).isVisible = show
+    }
+
     /**
      * Returns the width of the screen in pixels
      * @param context the context of the view
@@ -36,7 +40,7 @@ object ViewUtils {
     }
 
     fun View.setMargins(left: Int, top: Int, right: Int, bottom: Int) {
-        val lp = ViewGroup.MarginLayoutParams(layoutParams)
+        val lp = ViewGroup.MarginLayoutParams(layoutParams ?: ViewGroup.LayoutParams(-2, -2))
         lp.setMargins(left, top, right, bottom)
         layoutParams = lp
     }

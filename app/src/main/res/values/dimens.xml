@@ -31,6 +31,10 @@
     <dimen name="spacing_largest">54dp</dimen>
     <dimen name="spacing_largest_extra">64dp</dimen>
 
+    <dimen name="spacing_large_k">24dp</dimen>
+    <dimen name="spacing_big_k">32dp</dimen>
+    <dimen name="spacing_big_extra_k">40dp</dimen>
+
     <!-- Px Spacing -->
     <dimen name="spacing_ariel_related">8dp</dimen>
     <dimen name="spacing_ariel_different">28dp</dimen>
@@ -41,12 +45,9 @@
     <dimen name="padding_ariel_big">36dp</dimen>
 
     <dimen name="radius_text">10dp</dimen>
-    <dimen name="radius_ariel_co2">24dp</dimen>
     <dimen name="radius_ariel_big">28dp</dimen>
 
     <dimen name="ariel_avatar_size">64dp</dimen>
-    <dimen name="ariel_avatar_size_vanpoolers">48dp</dimen>
-    <dimen name="ariel_icon_size">40dp</dimen>
 
     <!-- Anti-spacing -->
     <dimen name="negative_spacing_medium">-4dp</dimen>
@@ -96,36 +97,19 @@
     <dimen name="vanpool_search_top_padding">72dp</dimen>
 
     <!-- Dialog -->
-    <dimen name="dialog_width">300dp</dimen>
+    <dimen name="dialog_width">326dp</dimen>
     <dimen name="progress_dialog_height">92dp</dimen>
 
     <!-- Rectangle Switch -->
-    <dimen name="switch_rectangle_thumb_width">104dp</dimen>
-    <dimen name="switch_rectangle_thumb_height">40dp</dimen>
-    <dimen name="switch_rectangle_radius">6dp</dimen>
-
-    <!--Tab Switch-->
-    <dimen name="switch_tab_thumb_height">148dp</dimen>
+    <dimen name="switch_rectangle_thumb_width">28dp</dimen>
+    <dimen name="switch_rectangle_thumb_height">28dp</dimen>
+    <dimen name="switch_rectangle_radius">100dp</dimen>
 
     <!-- Image Checkbox -->
     <dimen name="image_checkbox_image_size">44dp</dimen>
 
-    <!--Payment Methods-->
-    <dimen name="payment_methods_credit_font_size">50sp</dimen>
-
-    <!-- Show Password -->
-    <dimen name="show_password_margin_bottom">12dp</dimen>
-
     <!-- Incident Report -->
     <dimen name="status_bar_height">24dp</dimen>
 
-    <!-- Ongoing Car -->
-    <dimen name="ongoing_car_width">100dp</dimen>
-    <dimen name="ongoing_car_height">70dp</dimen>
-    <dimen name="ongoing_car_tabs_height">228dp</dimen>
-
-    <!--Car Sharing-->
-    <dimen name="carsharing_pin_size">25dp</dimen>
-    <dimen name="carsharing_timetable_size">20dp</dimen>
 </resources>
 

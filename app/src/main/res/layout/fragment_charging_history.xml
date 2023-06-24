@@ -7,8 +7,7 @@
     <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/fragment_charging_history_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="@string/profile_charge_history"/>
+        android:layout_height="wrap_content"/>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/fragment_charging_history_swipe_refresh"
@@ -25,11 +24,13 @@
 
     <TextView
         android:id="@+id/fragment_charging_history_empty_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_margin="@dimen/spacing_medium_extra"
+        android:layout_below="@id/fragment_charging_history_toolbar"
         android:text="@string/charging_history_empty"
-        android:textColor="#ADB0B4"
+        android:textColor="#61686E"
+        android:visibility="gone"
         style="@style/EmptyView"/>
 
 </RelativeLayout>

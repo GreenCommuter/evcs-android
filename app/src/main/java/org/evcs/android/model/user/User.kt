@@ -6,6 +6,7 @@ import org.joda.time.DateTime
 import java.io.Serializable
 
 open class User : Serializable {
+
     val id = 0
     val email: String? = null
     var firstName: String? = null
@@ -27,6 +28,9 @@ open class User : Serializable {
 
     val hasAnySubscription: Boolean
         get() = activeSubscription != null || pendingSubscription != null
+
+    val isCorporateUser: Boolean
+        get() = false
 
 //    "noodoe_id":"24",
 //    "charges_last_thirty_days":null,

@@ -5,6 +5,7 @@ import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import org.evcs.android.R
 import org.evcs.android.databinding.PlanProgressViewBinding
 import org.evcs.android.model.SubscriptionStatus
@@ -24,9 +25,11 @@ class PlanProgressView : LinearLayout {
     fun setPlan(status: SubscriptionStatus) {
 
         mBinding.activitySubscriptionsConsumption.text =
-                String.format(context.getString(R.string.progress_view_text),
+                context.getString(R.string.progress_view_text,
                         status.kwhUsage, status.printTotalKwh(), status.renewalPeriod)
-        if (status.remainingKwh != null) {
+        if (status.unlimited) {
+            mBinding.activitySubscriptionsProgress.isVisible = false
+        } else {
             mBinding.activitySubscriptionsProgress.progress = status.kwhUsage
             mBinding.activitySubscriptionsProgress.max = status.totalKwh
             if (status.kwhUsage >= status.totalKwh) {

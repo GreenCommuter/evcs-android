@@ -8,7 +8,9 @@ import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterCellPhoneBinding
+import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.PhoneTextInputValidator
 import org.evcs.android.util.validator.ValidatorManager
 
@@ -17,7 +19,7 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     private lateinit var mBinding: FragmentRegisterCellPhoneBinding
 
     /**
-     * Returns a new RegisterFragment instance.
+     * Returns a new RegisterFragmentCellPhone instance.
      *
      * @return new instance.
      */
@@ -42,8 +44,13 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     }
 
     override fun init() {
-        mBinding.fragmentRegisterCellphoneNumber.editText?.addTextChangedListener(PhoneNumberFormattingTextWatcher(
-            BaseConfiguration.DEFAULT_LOCALE.country))
+        mBinding.fragmentRegisterCellphoneNumber.editText?.addTextChangedListener(
+            PhoneNumberFormattingTextWatcher(BaseConfiguration.DEFAULT_LOCALE.country))
+    }
+
+    override fun populate() {
+        mBinding.fragmentRegisterCellPhoneTitle.text =
+            getString(R.string.fragment_register_cell_phone_title, UserUtils.getLoggedUser().firstName)
     }
 
     override fun setListeners() {
@@ -51,6 +58,10 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
         val validatorManager = ValidatorManager()
         validatorManager.addValidator(PhoneTextInputValidator(mBinding.fragmentRegisterCellphoneNumber))
         validatorManager.setOnAnyTextChangedListener { setEnableButton(validatorManager.areAllFieldsValid()) }
+        mBinding.fragmentRegisterCellphoneValidateLater.setOnClickListener {
+            (requireActivity() as VerifyPhoneActivity).onCancel()
+        }
+        mBinding.fragmentRegisterCellPhoneToolbar.setNavigationOnClickListener { activity?.finish() }
     }
 
     fun setEnableButton(validFields: Boolean) {

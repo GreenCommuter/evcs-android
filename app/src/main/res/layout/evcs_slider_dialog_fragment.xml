@@ -30,18 +30,26 @@
             android:layout_margin="@dimen/spacing_medium_extra"
             android:gravity="center"
             android:text="title"
-            style="@style/RobotoBold.SectionTitle"/>
+            style="@style/Title.Medium"
+            android:textColor="@color/evcs_black"/>
 
-        <include layout="@layout/divider"/>
+        <include
+            android:id="@+id/evcs_dialog_fragment_divider"
+            layout="@layout/divider"/>
 
         <TextView
             android:id="@+id/evcs_dialog_fragment_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_ariel_different"
+            android:layout_marginBottom="@dimen/spacing_medium"
             android:gravity="center"
             android:text="subtitle"
-            style="@style/RobotoBold.Body.Grey"/>
+            android:visibility="visible"
+            style="@style/Body.Medium.Black"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"/>
 
     </LinearLayout>
 

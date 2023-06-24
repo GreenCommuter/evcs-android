@@ -12,6 +12,8 @@ import com.base.core.fragment.IBaseFragment;
 
 import org.evcs.android.R;
 
+import java.util.List;
+
 public abstract class NavGraphActivity extends BaseActivity2 {
 
     @Override
@@ -26,9 +28,11 @@ public abstract class NavGraphActivity extends BaseActivity2 {
     @Override
     public void onBackPressed() {
         Fragment navHostFragment = getSupportFragmentManager().findFragmentById(R.id.activity_base_content);
-        Fragment childFragment = navHostFragment == null ? null : navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (childFragment instanceof IBaseFragment && childFragment.isVisible() && ((IBaseFragment) childFragment).onBackPressed()) {
-            return;
+        List<Fragment> childFragments = navHostFragment == null ? null : navHostFragment.getChildFragmentManager().getFragments();
+        for (Fragment childFragment : childFragments) {
+            if (childFragment instanceof IBaseFragment && childFragment.isVisible() && ((IBaseFragment) childFragment).onBackPressed()) {
+                return;
+            }
         }
         super.onBackPressed();
     }

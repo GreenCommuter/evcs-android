@@ -39,9 +39,10 @@
                 android:id="@+id/dialog_filter_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/evcs_gray_300"
                 android:layout_gravity="center_vertical"
-                android:text="Clear all"/>
+                android:textColor="@color/evcs_gray_300"
+                android:text="@string/dialog_filter_reset"
+                style="@style/Label.Small"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -70,13 +71,16 @@
                 android:layout_height="wrap_content"
                 android:text="@string/filter_activity_available_only"
                 android:gravity="center_vertical"
+                android:layout_gravity="center_vertical"
                 style="@style/Body.Medium"/>
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/activity_filter_switch"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end"/>
+                android:layout_gravity="end"
+                android:thumb="@drawable/rectangle_switch_thumb"
+                app:track="@drawable/rectangle_switch_track" />
 
         </FrameLayout>
 

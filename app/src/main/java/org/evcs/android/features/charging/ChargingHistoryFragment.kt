@@ -1,29 +1,15 @@
 package org.evcs.android.features.charging
 
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.TextView
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import org.evcs.android.BaseConfiguration
+import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.SessionInformationActivity
-import org.evcs.android.databinding.FragmentChargingHistoryBinding
+import org.evcs.android.features.profile.payments.PaginationFragment
+import org.evcs.android.features.profile.payments.PaginationView
 import org.evcs.android.model.Charge
-import org.evcs.android.ui.adapter.BaseRecyclerAdapterItemClickListener
-import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.ui.recycler.EndlessRecyclerView
 import org.evcs.android.util.Extras
-import org.evcs.android.util.UserUtils
 
-class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), ChargingHistoryView {
-
-    private lateinit var mAdapter: ChargingHistoryAdapter
-    private lateinit var mRecyclerView: EndlessRecyclerView
-    private lateinit var mSwipeRefreshLayout: SwipeRefreshLayout
-    private lateinit var mEmptyView: TextView
+class ChargingHistoryFragment : PaginationFragment<Charge, ChargingHistoryPresenter, ChargingHistoryAdapter>(), PaginationView<Charge> {
 
     companion object {
         fun newInstance(): ChargingHistoryFragment {
@@ -34,65 +20,27 @@ class ChargingHistoryFragment : ErrorFragment<ChargingHistoryPresenter>(), Charg
         }
     }
 
-    override fun layout(): Int {
-        return R.layout.fragment_charging_history
-    }
-
-    override fun setUi(v: View) {
-        super.setUi(v)
-        val binding = FragmentChargingHistoryBinding.bind(v)
-        mRecyclerView = binding.fragmentChargingHistoryRecycler
-        mSwipeRefreshLayout = binding.fragmentChargingHistorySwipeRefresh
-        mEmptyView = binding.fragmentChargingHistoryEmptyView
-        binding.fragmentChargingHistoryToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
-    }
-
-    override fun init() {
-        val mLayoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-        mAdapter = ChargingHistoryAdapter()
-        mRecyclerView.adapter = mAdapter
-        mRecyclerView.layoutManager = mLayoutManager
-    }
-
-    override fun populate() {
-        if (UserUtils.getLoggedUser() == null) {
-            mEmptyView.text = "Charging history will be shown here once you have an account";
-            showEmpty()
-            return
-        }
-        mRecyclerView.setUp(true, { presenter.getNextPage() },
-            BaseConfiguration.ChargingHistory.ITEMS_VISIBLE_THRESHOLD)
-    }
     override fun setListeners() {
-        mSwipeRefreshLayout.setOnRefreshListener { presenter?.reset() }
-        mAdapter.setItemClickListener(object : BaseRecyclerAdapterItemClickListener<Charge>() {
-            override fun onItemClicked(item: Charge, adapterPosition: Int) {
-                val intent = Intent(requireContext(), SessionInformationActivity::class.java)
-                intent.putExtra(Extras.SessionInformationActivity.CHARGE, item)
-                startActivity(intent)
-            }
-        })
-
+        super.setListeners()
+        setItemClickListener { item ->
+            findNavController().navigate(ChargingHistoryFragmentDirections.actionChargingHistoryFragmentToSessionInformationFragment(item.id))
+        }
     }
 
     override fun createPresenter(): ChargingHistoryPresenter {
         return ChargingHistoryPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
-    override fun showEmpty() {
-        mEmptyView.visibility = View.VISIBLE
-        mRecyclerView.visibility = View.GONE
+    override fun getToolbarTitle(): String {
+        return getString(R.string.profile_charge_history)
     }
 
-    override fun showCharges(chargesList: List<Charge?>, pagesLeft: Boolean, onFirstPage: Boolean) {
-        mEmptyView.visibility = View.GONE
-        mRecyclerView.visibility = View.VISIBLE
-        if (onFirstPage) mAdapter.clear()
-        mAdapter.appendBottomAll(chargesList)
-        mRecyclerView.toggleEndlessScrolling(pagesLeft)
-        mRecyclerView.notifyLoadingFinished()
-        mSwipeRefreshLayout.isRefreshing = false
-        hideProgressDialog()
+    override fun createAdapter(): ChargingHistoryAdapter {
+        return ChargingHistoryAdapter()
+    }
+
+    override fun getEmptyText(): String? {
+        return getString(R.string.charging_history_empty)
     }
 
 }

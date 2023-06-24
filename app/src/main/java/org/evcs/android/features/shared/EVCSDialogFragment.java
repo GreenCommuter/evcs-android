@@ -7,7 +7,7 @@ import androidx.annotation.ColorRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
+import androidx.annotation.StyleRes;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.ContextThemeWrapper;
@@ -37,10 +37,10 @@ import java.util.Map;
  */
 public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
-    private LinearLayout mLayout;
-    private TextView mTitle;
-    private TextView mSubtitle;
-    private int mButtonMargin;
+    protected LinearLayout mLayout;
+    protected TextView mTitle;
+    protected TextView mSubtitle;
+    protected int mButtonMargin;
     @ColorInt int mGrey;
     @ColorInt int mTransparent;
 
@@ -52,9 +52,14 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     private @Nullable String mCancel;
     private OnClickListener mCancelOnClickListener;
     private boolean mLogParams;
+    private @StyleRes int mTitleAppearance;
 
     @Override
-    public void init() {}
+    public void init() {
+        mGrey = getResources().getColor(R.color.evcs_gray_800);
+        mTransparent = getResources().getColor(R.color.evcs_transparent);
+        mButtonMargin = (int) getResources().getDimension(R.dimen.spacing_medium);
+    }
 
     @Override
     public int layout() {
@@ -72,9 +77,6 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         mLayout = binding.evcsDialogFragmentLayout;
         mTitle = binding.evcsDialogFragmentTitle;
         mSubtitle = binding.evcsDialogFragmentSubtitle;
-        mGrey = getResources().getColor(R.color.evcs_gray_800);
-        mTransparent = getResources().getColor(R.color.evcs_transparent);
-        mButtonMargin = (int) getResources().getDimension(R.dimen.spacing_medium);
     }
 
     //We need the layout to be non null to add the buttons. Therefore, everything must be set before
@@ -84,6 +86,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         super.onViewCreated(view, savedInstanceState);
         mTitle.setText(mTitleResource);
         mTitle.setVisibility(mTitleResource == null ? View.GONE : View.VISIBLE);
+        mTitle.setTextAppearance(getContext(), mTitleAppearance);
         mSubtitle.setText(mSubtitleResource);
         mSubtitle.setVisibility(mSubtitleResource == null ? View.GONE : View.VISIBLE);
 
@@ -124,8 +127,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     // I couldn't find a way to do this through xml
     protected Button getButton(final String label) {
         Button button = new Button(new ContextThemeWrapper(getContext(), R.style.Button_Orange));
-        button.setTextColor(ContextCompat
-            .getColorStateList(getContext(), R.color.button_text_color_selector_filled));
+        button.setTextAppearance(getContext(), R.style.ButtonK);
         button.setBackground(getResources().getDrawable(mButtons.get(label).background));
         button.setTextColor(getResources().getColor(mButtons.get(label).textColor));
         button.setAllCaps(mButtons.get(label).upperCase);
@@ -147,8 +149,9 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
     protected Button getCancelButton(String cancel) {
         Button button = new Button(getContext());
+        button.setTextAppearance(getContext(), R.style.ButtonK);
         button.setBackgroundColor(mTransparent);
-        button.setTextColor(mGrey);
+//        button.setTextColor(mGrey);
         button.setAllCaps(false);
         LinearLayout.LayoutParams layoutParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -168,13 +171,14 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         return button;
     }
 
-    protected void setParams(String titleResource, String subtitleResource,
-        Map<String, ButtonInfo> buttons, List<View> views, String cancel,
-        OnClickListener cancelOnClickListener, boolean cancelable) {
+    protected void setParams(String titleResource, @StyleRes int titleAppearance, String subtitleResource,
+                             Map<String, ButtonInfo> buttons, List<View> views, String cancel,
+                             OnClickListener cancelOnClickListener, boolean cancelable) {
         if (mLogParams) {
             Rollbar.reportMessage("Title: " + mTitleResource, "warning");
         }
         mTitleResource = titleResource;
+        mTitleAppearance = titleAppearance;
         mSubtitleResource = subtitleResource;
         mButtons = buttons;
         mViews = views;
@@ -195,6 +199,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         protected final Map<String, ButtonInfo> mButtons = new LinkedHashMap<>();
         protected final ArrayList<View> mViews = new ArrayList<>();
         protected String mTitleResource;
+        protected @StyleRes int mTitleAppearance;
         protected String mSubtitleResource;
         protected String mCancel;
         protected OnClickListener mCancelOnClickListener;
@@ -208,7 +213,12 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          * @return Builder for further customization
          */
         public Builder setTitle(String title) {
+            return setTitle(title, R.style.Title_Large);
+        }
+
+        public Builder setTitle(String title, @StyleRes int appearance) {
             mTitleResource = title;
+            mTitleAppearance = appearance;
             return this;
         }
 
@@ -267,7 +277,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          * @return Builder for further customization
          */
         public Builder addButton(String text, OnClickListener listener) {
-            return addButton(text, listener, R.drawable.layout_corners_rounded_orange_gradient);
+            return addButton(text, listener, R.drawable.layout_corners_rounded_orange);
         }
 
         public Builder addButton(String text, OnClickListener listener, @DrawableRes int background) {
@@ -310,8 +320,8 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          */
         public EVCSDialogFragment build() {
             EVCSDialogFragment fragment = new EVCSDialogFragment();
-            fragment.setParams(mTitleResource, mSubtitleResource, mButtons, mViews, mCancel,
-                mCancelOnClickListener, mCancelable);
+            fragment.setParams(mTitleResource, mTitleAppearance, mSubtitleResource, mButtons, mViews,
+                    mCancel, mCancelOnClickListener, mCancelable);
             return fragment;
         }
 

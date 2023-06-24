@@ -7,6 +7,7 @@ import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.model.CreditCard
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.util.Extras
+import org.joda.time.DateTime
 
 class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
@@ -30,7 +31,8 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         mCreditCardView.setCreditCard(cc)
         mCardName.editText?.setText(mPaymentMethod!!.billingDetails?.name)
         mCardNumber.editText?.setText("•••• " + cc.last4!!)
-        mCardExpirationMonth.editText?.setText("${cc.expMonth}/${cc.expYear}")
+        val exp = DateTime().withMonthOfYear(cc.expMonth).withYear(cc.expYear)
+        mCardExpirationMonth.editText?.setText(mDateTimeFormatter.print(exp))
         mZipcode.editText?.setText("•••••")
         mCvv.editText?.setText("•••")
         setFields()
@@ -51,6 +53,7 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
     override fun onNextClicked() {
         EVCSSliderDialogFragment.Builder()
+                .showDivider(true)
                 .setTitle(getString(R.string.payment_method_dialog_remove_subtitle))
                 .addButton(getString(R.string.payment_method_dialog_remove_button), { fragment ->
                     presenter.removePaymentMethod(mPaymentMethod!!)

@@ -10,6 +10,10 @@ public class Extras {
         public static final String OPENING_KEY = "opened_app";
     }
 
+    public static class AuthActivity {
+        public static final String SKIP_ROOT = "skip_root";
+    }
+
     public static class MainActivity {
         public static final String IS_BOTTOM = "is_bottom";
     }
@@ -22,6 +26,10 @@ public class Extras {
         public static final String HISTORY = "History";
     }
 
+    public static final class VerifyActivity {
+        public static final String RESULT = "result";
+    }
+
     public static final class ForgotPassword {
         public static final String PATH = "/reset_password";
         public static final String EMAIL = "email";
@@ -30,6 +38,7 @@ public class Extras {
 
     public static class SessionInformationActivity {
         public static final String CHARGE = "Charge";
+        public static final String PAYMENT = "Subscription";
     }
 
     public static class PlanInfo {
@@ -63,5 +72,6 @@ public class Extras {
     public static class PlanActivity {
         public static final String PLAN = "plan";
         public static final String HAS_PLAN = "has_plan";
+        public static final String IS_CORPORATE = "show_corporate_plans";
     }
 }

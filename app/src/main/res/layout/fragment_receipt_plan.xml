@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_white">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/session_information_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Receipt"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/receipt_plan_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/spacing_toolbar_bottom_extra"
+            android:padding="@dimen/padding_ariel_standard">
+
+            <TextView
+                android:id="@+id/session_information_charging_site_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_small"
+                style="@style/Title.Large"
+                tools:text="Monthly Plan"/>
+
+            <TextView
+                android:id="@+id/session_information_charging_site_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                style="@style/Title.Medium"
+                tools:text="12/28/2022"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>

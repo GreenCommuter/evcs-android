@@ -22,6 +22,10 @@ class RootFragment : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun init() {
+        if ((activity as AuthActivity).mSkipRoot) {
+            (activity as AuthActivity).mSkipRoot = false
+            findNavController().navigate(RootFragmentDirections.actionRootFragmentToRegisterFragment())
+        }
     }
 
     override fun setUi(v: View) {

@@ -68,7 +68,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
                     defaultPm.card.last4, response.price, response.renewalPeriod, date)))
         mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(defaultPm)
 
-        val format = DateTimeFormat.forPattern("MM/dd/yyyy")
+        val format = DateTimeFormat.forPattern(getString(R.string.app_date_format))
         mBinding.activitySubscriptionsEnrolled.setText(format.print(response.activeSince))
         if (response.onTrialPeriod) {
             mBinding.activitySubscriptionsFreeTrial.visibility = View.VISIBLE
@@ -100,7 +100,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         mBinding.activitySubscriptionsViewAllPlans2.setOnClickListener { goToPlansActivity() }
         mBinding.activitySubscriptionsActivate.setOnClickListener {  }
         mBinding.activitySubscriptionsPaymentInfo.setOnChangeClickListener {
-            WalletActivity.buildIntent(this, true)
+            val intent = WalletActivity.buildIntent(this, true)
             mChangePmLauncher.launch(intent)
         }
         mBinding.activitySubscriptionsToolbar.setNavigationOnClickListener { finish() }
@@ -116,7 +116,7 @@ class SubscriptionActivity : BaseActivity2(), SubscriptionActivityView {
         EVCSDialogFragment.Builder()
                 .setTitle(title)
                 .setSubtitle(getString(R.string.cancellation_dialog_subtitle))
-                .addButton("Close", { dialog -> dialog.dismiss() },
+                .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
                     R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
             .show(supportFragmentManager)
     }

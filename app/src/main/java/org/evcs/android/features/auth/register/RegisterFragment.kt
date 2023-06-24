@@ -12,8 +12,7 @@ import org.evcs.android.databinding.FragmentRegisterBinding
 import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.model.user.AuthUser.Companion.TestAuthUser
-import org.evcs.android.util.UserUtils
+import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.validator.*
 
 class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
@@ -24,6 +23,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     private lateinit var mPasswordInputLayout: StandardTextField
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: TextView
+    private lateinit var mToolbar: EVCSToolbar2
 
     /**
      * Returns a new RegisterFragment instance.
@@ -54,6 +54,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mPasswordInputLayout = binding.fragmentRegisterPasswordInput
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
+        mToolbar = binding.fragmentRegisterToolbar
     }
 
     override fun init() {
@@ -71,6 +72,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     override fun setListeners() {
         mContinueButton.setOnClickListener { onButtonClick() }
+        mToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
     }
 
     //TODO: replace for validFields
@@ -83,16 +85,14 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     private fun onButtonClick() {
         //TODO: switch
-//        progressDialog.show()
+        progressDialog.show()
 //        presenter!!.register(
 //            mNameInputLayout.text.toString(),
 //            mLastNameInputLayout.text.toString(),
 //            mEmailInputLayout.text.toString(),
 //            mPasswordInputLayout.text.toString()
 //        )
-        UserUtils.saveAuthUser(TestAuthUser())
-        findNavController()
-            .navigate(RegisterFragmentDirections.actionRegisterFragmentToRegisterFragmentVerify(""))
+        presenter.logIn("javier+6@evcs.com", "12345678")
     }
 
     override fun onTokenSent() {

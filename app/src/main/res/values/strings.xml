@@ -8,8 +8,10 @@
     <string name="app_error_unknown">There was an unknown error. Try again later.</string>
     <string name="app_error_oom">"Error: out of memory.</string>
     <string name="app_price_format">$%.2f</string>
+    <string name="app_payment_method_format">%1$s •••• %2$s</string>
     <string name="app_time_format">hh:mm a</string>
-    <string name="app_long_date_format">MMMM d</string>
+    <string name="app_date_format">MM/dd/yyyy</string>
+    <string name="app_datetime_format">MM/dd/yyyy, h:mm a</string>
     <string name="app_edit">Edit</string>
     <string name="app_save">Save</string>
     <string name="app_search">Search</string>
@@ -25,8 +27,8 @@
     <string name="app_new_line">\n</string>
     <string name="app_from">From</string>
     <string name="app_to">To</string>
+    <string name="app_close">Close</string>
     <string name="app_cancel">Cancel</string>
-    <string name="drawer_activity_version_name_prefix_format">v%s</string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
     <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
@@ -61,8 +63,7 @@
     <string name="sign_in_password">Password</string>
     <string name="sign_in_forgot_password">Forgot your Password?</string>
     <string name="sign_in_button">Sign in</string>
-    <string name="sign_in_social">Sign in with Google or Facebook account</string>
-    <string name="sign_in_goto_sign_up">Don\'t have an account yet?</string>
+    <string name="sign_in_goto_sign_up">Don\'t have an account?</string>
     <string name="sign_in_error_facebook_email">Make sure your account has an email address</string>
 
     <!-- Forgot Password -->
@@ -73,16 +74,13 @@
     <string name="forgot_password_wrong_email">Invalid email address</string>
 
     <!-- Register -->
-    <string name="register_title">Sign up</string>
-    <string name="register_subtitle">Sign up with your name and email</string>
+    <string name="register_title">Sign Up</string>
     <string name="register_email">Email</string>
     <string name="register_email_confirm">Confirm E-mail</string>
     <string name="register_password">Password</string>
     <string name="register_password_confirm">Re-enter the password</string>
     <string name="register_password_hint">Must be at least %1d characters long</string>
     <string name="register_button">Create account</string>
-    <string name="register_gotologin">Do you already have an account with us?</string>
-    <string name="fragment_register_step">Step %d of 4</string>
     <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
     <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
 
@@ -201,11 +199,7 @@
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>
-    <string name="payment_history_month_formatter">MMMM yyyy</string>
-    <string name="payment_history_date_formatter">MMM d, yyyy</string>
-    <string name="payment_history_formatter">%1$s (%2$s)</string>
     <string name="payment_history_empty">No trips done yet</string>
-    <string name="payment_history_month_title"> - Payments</string>
 
     <!--Payment Details-->
     <string name="payment_details_title">Payment Details</string>
@@ -215,7 +209,7 @@
     <string name="payment_details_authorization_code">Authorization #</string>
 
     <!-- Charging History -->
-    <string name="charging_history_empty">Charge your EV to see you history here.</string>
+    <string name="charging_history_empty">Charge your EV to see your history here.</string>
 
     <!--Search Location-->
     <string name="search_location_explanation">Start typing the address and then select from \n the results</string>
@@ -241,25 +235,15 @@
 
     <!-- Notifications -->
     <string name="notifications_title">Notifications</string>
+    <string name="notifications_marketing">Marketing communications</string>
     <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
-    <string name="notifications_downgraded">You were downgraded. Please check your license information.</string>
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
     <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>
     <string name="notifications_plug_in_reminder">Did you remember to plug in the car?</string>
     <string name="notifications_vanpool_problems">We had a problem with the car. For more information contact us.</string>
-    <string name="notifications_user_not_coming">%@ is not coming today.</string>
-    <string name="notifications_user_late">%@ is running a little late.</string>
-    <string name="notifications_vanpool_created">Your vanpool has been created.</string>
-    <string name="notifications_vanpool_in_next_minutes">Your vanpool will start in %@ minutes.</string>
-    <string name="notifications_vanpool_approved">Your vanpool has been approved.</string>
-    <string name="notifications_vanpool_activated">Your vanpool has been activated.</string>
-    <string name="notifications_vanpool_payment_required">Your vanpool has been approved and the payment is required.</string>
-    <string name="notifications_invitation">%@ has invited you to a vanpool.</string>
     <string name="notifications_forgot_password">You have requested to change your password. Please check your email.</string>
     <string name="notifications_reservation_ending_soon">Your reservation ends in %@ minutes. Please head back to the parking lot to return the car.</string>
-    <string name="notifications_you_left_vanpool">You have left your vanpool.</string>
     <string name="notifications_complete_vanpool_poll">Please complete your vanpool checklist.</string>
-    <string name="notifications_complete_carshare_poll">Please go to My Trips and complete your booking checklist.</string>
 
     <!-- Vanpool Travel Information View -->
     <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
@@ -401,18 +385,19 @@
     <string name="notifications_channel_name">All notifications</string>
     <string name="notifications_channel_description">All notifications sent by the app</string>
 
-    <string name="register_your_car_title">Your car</string>
+    <string name="register_your_car_title">Vehicle Information</string>
     <string name="register_your_car_subtitle">Your vehicle information helps us improve our services and helps us troubleshoot issues.</string>
     <string name="register_your_car_year">Year</string>
     <string name="register_your_car_model">Model</string>
     <string name="register_your_car_make">Make</string>
 
-    <string name="fragment_register_cell_phone_title">One last thing</string>
-    <string name="fragment_register_cell_phone_subtitle">Let\'s validate your account using your phone number</string>
+    <string name="fragment_register_cell_phone_title">Welcome %s.\nAlmost there!</string>
+    <string name="fragment_register_cell_phone_subtitle">To activate your account we need you to validate your phone number</string>
     <string name="fragment_register_cell_phone_button">Send me a code</string>
+    <string name="fragment_register_cell_phone_validate_later">Validate Phone Number Later</string>
 
-    <string name="fragment_register_enter_code_title">Enter your code</string>
-    <string name="fragment_register_enter_code_subtitle">Please enter the code you received on your cellphone (818) 660-6219</string>
+    <string name="fragment_register_enter_code_title">Code Sent!</string>
+    <string name="fragment_register_enter_code_subtitle">Enter the code that was sent to your phone</string>
     <string name="fragment_register_enter_code_button">Validate it</string>
 
     <!-- Filter Activity -->
@@ -421,6 +406,19 @@
     <string name="filter_activity_connector_types">Connector types</string>
     <string name="filter_activity_minimum_power_level">Minimum power level</string>
     <string name="filter_activity_apply">Apply</string>
+    <string name="dialog_filter_reset">Clear all</string>
+
+    <!-- Slider dialogs-->
+    <string name="welcome_dialog_title">Welcome!</string>
+    <string name="welcome_dialog_subtitle">Your Pay As You Go Membership is now active. You can charge at a simple flat rate, any time, across the entire EVCS network.</string>
+    <string name="success_dialog_title">Success!</string>
+    <string name="success_dialog_subtitle">You’re now an EVCS member. Enjoy discounted rates on Pay As You Go.</string>
+    <string name="success_dialog_cta">Want to save more?\nExplore EVCS subscription plans</string>
+    <string name="congratulations_dialog_title">Congratulations!</string>
+    <string name="congratulations_dialog_subtitle">Your %s Plan is now active. [You can charge at no cost 24/7] across the entire EVCS network.</string>
+    <string name="account_not_validated_title">Account Not Validated</string>
+    <string name="account_not_validated_subtitle">You will need to validate your phone number to activate your account and receive the member discounts on charging sessions.\n\nYou can do this anytime in your profile.</string>
+    <string name="account_not_validated_button">Validate Phone Number</string>
 
     <!-- Search Location Child -->
     <string name="search_activity_hint">Location or zipcode</string>
@@ -471,7 +469,7 @@
     <string name="session_information_station_id">Station ID</string>
     <string name="session_information_price">Total</string>
     <string name="session_information_receipt">View receipt</string>
-    <string name="session_information_help">Need help? Contact Customer Support</string>
+    <string name="session_information_help">Need help? <a href="https://learntodroid.com">Contact Customer Support</a></string>
     <string name="session_information_title">Session detail</string>
 
     <!-- Manage Plan-->
@@ -482,11 +480,14 @@
     <string name="manage_plan_cancel">Cancel Plan</string>
     <string name="manage_plan_payment_info">Payment info</string>
     <string name="manage_plan_change_pm">Change</string>
-    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s</string>
+    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s.</string>
     <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>
-    <string name="progress_view_text">%1$d/%2$s kWh consumed this %3$s</string>
+    <string name="progress_view_text">%1$d/%2$s kWh used this %3$s</string>
+
+    <string name="go_to_monthly_plans_title">EVCS Monthly Plans</string>
+    <string name="go_to_monthly_plans_subtitle">Learn more about our discounted plans.</string>
 
     <!-- Get Plan -->
     <string name="get_plan_started">Your plan has started!</string>

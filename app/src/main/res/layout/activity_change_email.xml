@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_account_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_white">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/activity_change_name_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
+        app:title="@string/activity_account_title" />
+
+    <org.evcs.android.features.shared.StandardTextField
+        android:id="@+id/activity_change_email_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/spacing_medium_extra"
+        android:layout_marginLeft="@dimen/padding_ariel_standard"
+        android:layout_marginRight="@dimen/padding_ariel_standard"
+        style="@style/TextInputStyle"
+        app:label="@string/register_email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            style="@style/Body.Medium"/>
+
+    </org.evcs.android.features.shared.StandardTextField>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"/>
+
+    <TextView
+        android:id="@+id/activity_change_name_save"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/spacing_medium_extra"
+        android:text="@string/activity_account_save"
+        style="@style/ButtonK.Orange"/>
+
+</LinearLayout>

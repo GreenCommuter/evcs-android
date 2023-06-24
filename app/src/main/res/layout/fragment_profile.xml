@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/evcs_white"
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
@@ -22,13 +23,25 @@
             android:paddingTop="@dimen/spacing_toolbar_bottom_extra"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/profile_name"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                android:text="Arya Stark"
-                style="@style/Headline.Medium"/>
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/profile_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium_extra"
+                    style="@style/Headline.Medium"/>
+
+                <ProgressBar
+                    android:id="@+id/profile_loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="end"
+                    android:visibility="visible"/>
+
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/profile_plan_name"
@@ -41,28 +54,47 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:gravity="center"
                 android:layout_marginBottom="@dimen/spacing_big"
-                android:padding="@dimen/spacing_medium_extra"
-                android:background="@drawable/layout_corners_rounded_danger"
-                android:backgroundTint="#FFEBE8"
-                android:visibility="gone">
+                android:visibility="gone"
+                style="Banner.Red">
 
                 <TextView
                     android:id="@+id/profile_issue_message"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Your monthly subscription payment failed"
-                    android:layout_marginBottom="@dimen/spacing_large"
+                    android:layout_marginBottom="@dimen/spacing_large_k"
                     style="@style/Body.Medium"/>
 
                 <TextView
                     android:id="@+id/profile_issue_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Update payment method"
                     android:layout_marginBottom="@dimen/spacing_medium"
+                    style="@style/ButtonK.Danger"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_large_k"
+                android:visibility="gone"
+                style="@style/Banner.Red">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_large_k"
+                    android:text="Validate your phone number to receive member discount rates."
+                    android:gravity="center"
+                    style="@style/Body.Medium.Bold"/>
+
+                <TextView
+                    android:id="@+id/profile_validate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/spacing_medium"
+                    android:text="Validate"
                     style="@style/ButtonK.Danger"/>
 
             </LinearLayout>
@@ -183,13 +215,13 @@
                 app:text="@string/profile_support_contact"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
-                android:id="@+id/profile_menu_request"
+                android:id="@+id/profile_menu_faq"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/profile_support_faq"/>
 
             <org.evcs.android.ui.view.profile.ListButtonView
-                android:id="@+id/profile_menu_feedback"
+                android:id="@+id/profile_menu_request"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:text="@string/profile_support_feedback"/>

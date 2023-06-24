@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import org.evcs.android.util.StringUtils;
 import org.joda.time.DateTime;
-import org.joda.time.Period;
+import org.joda.time.Duration;
 
 public class SubscriptionStatus {
     public String id;
@@ -89,6 +89,6 @@ public class SubscriptionStatus {
     }
 
     public int getActiveDaysLeft() {
-        return new Period(new DateTime(), renewalDate).getDays();
+        return (int) new Duration(new DateTime(), renewalDate).getStandardDays();
     }
 }

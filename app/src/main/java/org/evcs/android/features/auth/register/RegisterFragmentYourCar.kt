@@ -8,15 +8,17 @@ import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterYourCarBinding
+import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.shared.DropdownWithLabel
 import org.evcs.android.model.user.UserCar
 import org.evcs.android.navigation.controller.AbstractNavigationController
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils
 
 
-class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYourCar>(), RegisterViewYourCar {
+open class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYourCar>(), RegisterViewYourCar {
 
-    private lateinit var mBinding: FragmentRegisterYourCarBinding
+    protected lateinit var mBinding: FragmentRegisterYourCarBinding
 
     /**
      * Returns a new RegisterFragment instance.
@@ -51,6 +53,10 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
         return mBinding.fragmentRegisterYourCarModel
     }
 
+    override fun getYearField(): DropdownWithLabel {
+        return mBinding.fragmentRegisterYourCarYear
+    }
+
     override fun getButton(): View {
         return mBinding.fragmentRegisterYourCarButton
     }
@@ -61,10 +67,12 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
             return
         }
         super.init()
+        ViewUtils.setAdjustResize(mBinding.root)
     }
 
-    private fun hasCompletedCarScreen(): Boolean {
-        return UserUtils.getLoggedUser().zipCode != null
+    //TODO: this is for testing
+    protected open fun hasCompletedCarScreen(): Boolean {
+        return false && UserUtils.getLoggedUser().zipCode != null
     }
 
     override fun setListeners() {
@@ -88,13 +96,14 @@ class RegisterFragmentYourCar : AbstractCarSelectionFragment<RegisterPresenterYo
 
     override fun onCarsAdded(car : UserCar) {
         progressDialog.dismiss()
-        findNavController()
-            .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
+        (activity as AuthActivity).goToVerify()
+//        findNavController()
+//            .navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone())
     }
 
     fun skip() {
         val navOptions = AbstractNavigationController.replaceLastNavOptions(findNavController())
-        findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
+//        findNavController().navigate(RegisterFragmentYourCarDirections.actionRegisterFragmentYourCarToRegisterFragmentCellPhone(), navOptions)
     }
 
     override fun onZipCodeUpdated() {}

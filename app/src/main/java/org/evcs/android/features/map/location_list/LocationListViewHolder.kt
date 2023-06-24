@@ -1,14 +1,13 @@
 package org.evcs.android.features.map.location_list
 
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.recyclerview.widget.RecyclerView
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.AdapterListLocationsBinding
 import org.evcs.android.model.Location
+import org.evcs.android.util.ViewUtils.setMargins
 
 class LocationListViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView!!) {
 
@@ -39,12 +38,7 @@ class LocationListViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
         mBinding.adapterListConnectors.removeAllViews()
         location.connectorTypes.forEach { connectorType ->
             val imageView = ImageView(context)
-            val layoutParams = LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-            )
-            layoutParams.setMargins(mMargin, 0, mMargin, 0)
-            imageView.layoutParams = layoutParams
+            imageView.setMargins(mMargin, 0, mMargin, 0)
 
             imageView.setImageDrawable(context.getDrawable(connectorType.mTextIcon))
             mBinding.adapterListConnectors.addView(imageView)

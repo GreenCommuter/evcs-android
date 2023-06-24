@@ -17,6 +17,7 @@ class Station : Serializable {
     var chargerType: String? = null
     var pricing: Pricing? = null
     var connectors: List<Connector>? = null
+    var location: Location? = null
 
     fun printKw(): String {
         return String.format("%.0f kW", kw)

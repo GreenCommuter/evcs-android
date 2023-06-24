@@ -60,7 +60,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanCostLayout.setVisibility(showCostLayout())
         //Todo: puede ser weekly
         mBinding.getPlanMonthlyCostTitle.text = "%\$1s Cost (Starting %\$2s)"
-        mBinding.getPlanSubtotal.text = String.format("\$%.2f", mPlan.price)
+        mBinding.getPlanSubtotal.text = getString(R.string.app_price_format, mPlan.price)
         mBinding.bottomNavigationButton.text = getButtonText()
 
         mBinding.getPlanTandc.text = getTandCText()

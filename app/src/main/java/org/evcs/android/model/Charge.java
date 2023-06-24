@@ -13,6 +13,7 @@ public class Charge implements Serializable {
     private DateTime startedAt;
 //            "completed_at": "2020-08-13T15:01:51.000Z",
     private int locationId;
+    private String locationName;
     private float duration; //unit? ms?
 
 //            "charger_type": "DC",
@@ -20,6 +21,11 @@ public class Charge implements Serializable {
     private float kwh;
     private float price;
     private String status;
+    private String stationName;
+    private Subscription subscription;
+    private Float ppkwh;
+    private Location location;
+    private CreditCardProvider paymentBrand;
 
     public int getId() {
         return id;
@@ -33,8 +39,8 @@ public class Charge implements Serializable {
         return price;
     }
 
-    public int getLocationId() {
-        return locationId;
+    public String getLocationName() {
+        return locationName;
     }
 
     public float getDuration() {
@@ -51,8 +57,8 @@ public class Charge implements Serializable {
         return periodFormatter.print(period);
     }
 
-    public float getKwh() {
-        return kwh;
+    public String printKwh() {
+        return String.format("%.3f kW", kwh);
     }
 
     public String getStatus() {
@@ -61,5 +67,28 @@ public class Charge implements Serializable {
 
     public boolean isCharging() {
         return status.equalsIgnoreCase("active");
+    }
+
+    public String getPlanName() {
+        return subscription.planName;
+    }
+
+    public String getStationName() {
+        return stationName;
+    }
+
+    public Float getPpkwh() {
+        return ppkwh;
+    }
+
+    public String getImage() {
+        if (location.getImageUrls() != null && location.getImageUrls().size() > 0) {
+            return location.getImageUrls().get(0);
+        }
+        return null;
+    }
+
+    public String getAddress() {
+        return location.getAddress().toString();
     }
 }

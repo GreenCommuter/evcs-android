@@ -1,8 +1,10 @@
 package org.evcs.android.features.profile.plans
 
 import android.os.Bundle
+import org.evcs.android.R
 import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormatter
 
@@ -23,8 +25,8 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
         return null
     }
 
-    override fun getActiveUntil(): DateTime {
-        return DateTime() //TODO: hide if subscribing
+    override fun getActiveUntil(): DateTime? {
+        return null//UserUtils.getLoggedUser().previousSubscription?.renewalDate
     }
 
     override fun showCouponCode(): Boolean {
@@ -32,11 +34,14 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
     }
 
     override fun getTrialLabel(): String? {
-        return if (true /* is on trial*/) null else String.format("%d Day Offer", mPlan.trialDays)
+        if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod?: false)
+            return String.format("%d Day Offer", mPlan.trialDays)
+        else
+            return null
     }
 
     override fun getButtonText(): String {
-        return "Close"
+        return getString(R.string.app_close)
     }
 
     override fun showToday(): Boolean {

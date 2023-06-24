@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentCancelPlanTrialBinding
 import org.evcs.android.navigation.controller.AbstractNavigationController
+import org.evcs.android.util.UserUtils
 
 class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
 
@@ -15,8 +16,8 @@ class CancelPlanTrialFragment : AbstractCancelPlanFragment() {
 
     override fun init() {
         super.init()
-        //TODO: not on trial
-        if (true) {
+        //TODO: check
+        if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod ?: false) {
             goToCancelPlan(AbstractNavigationController.replaceLastNavOptions(findNavController()))
         }
     }

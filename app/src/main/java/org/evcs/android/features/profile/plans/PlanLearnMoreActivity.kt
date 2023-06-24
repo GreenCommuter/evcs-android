@@ -15,7 +15,7 @@ class PlanLearnMoreActivity : BaseActivity2() {
     }
 
     override fun init() {
-        val plan = intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Plan
+        val plan = intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Plan?
         val fragment = PlanLearnMoreFragment.newInstance(plan)
         replaceFragment(R.id.activity_base_content, fragment)
     }

@@ -50,7 +50,7 @@ public abstract class LoadingFragment<T extends BasePresenter> extends BaseFragm
     /**
      * Show progress dialog
      */
-    protected final void showProgressDialog() {
+    protected void showProgressDialog() {
         getProgressDialog().show();
         if (getView() != null) {
             KeyboardUtils.hideKeyboard(getContext(), getView());
@@ -60,7 +60,7 @@ public abstract class LoadingFragment<T extends BasePresenter> extends BaseFragm
     /**
      * Hide progress dialog
      */
-    protected final void hideProgressDialog() {
+    protected void hideProgressDialog() {
         getProgressDialog().dismiss();
     }
 

@@ -4,6 +4,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
@@ -17,10 +18,13 @@ import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
 import org.evcs.android.features.profile.plans.PlansActivity
+import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
+import org.evcs.android.model.user.User
 import org.evcs.android.util.Extras
 import org.evcs.android.util.PushNotificationUtils
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.ViewUtils.setMargins
 
 class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     var mNavigationController: MainNavigationController? = null
@@ -44,7 +48,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         createNotificationChannel()
         mNavigationController = MainNavigationController(this, true,
             findNavController(this, R.id.activity_base_content))
-        mNavigationController!!.startFlow()
+//        mNavigationController!!.startFlow()
 
         if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
             return
@@ -91,6 +95,15 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             mButton.visibility = View.GONE
         }
         menuView.selectedItemId = R.id.menu_drawer_map
+        updateProfileAlert()
+        if (intent.hasExtra(Extras.VerifyActivity.RESULT)) {
+            val verifyResult = intent.getIntExtra(Extras.VerifyActivity.RESULT, 0)
+            if (verifyResult == RESULT_OK) {
+                showSuccessDialog()
+            } else {
+                showAccountNotValidatedDialog()
+            }
+        }
     }
 
     override fun setListeners() {
@@ -118,4 +131,60 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         menuView.menu.findItem(item)?.isChecked = true
     }
 
+    fun updateProfileAlert() {
+        showProfileAlert(UserUtils.getLoggedUser()?.activeSubscription?.issue ?: false ||
+        !(UserUtils.getLoggedUser()?.isPhoneVerified ?: true))
+    }
+
+    fun showProfileAlert(show: Boolean) {
+        if (show) {
+            menuView.getOrCreateBadge(R.id.menu_drawer_profile)
+        } else {
+            menuView.removeBadge(R.id.menu_drawer_profile)
+        }
+    }
+
+    fun showWelcomeDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.welcome_dialog_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.welcome_dialog_subtitle))
+            .addButton(getString(R.string.app_close)) { fragment -> fragment.dismiss() }
+            .show(supportFragmentManager)
+    }
+
+    fun showSuccessDialog() {
+        val textView = TextView(this)
+        textView.text = getString(R.string.success_dialog_cta)
+        textView.setTextAppearance(this, R.style.Label_Medium)
+        textView.gravity = Gravity.CENTER
+        textView.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_big_k).toInt())
+
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.success_dialog_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.success_dialog_subtitle))
+            .addView(textView)
+            .addButton("Get 30 Days Free") { NavigationUtils.jumpTo(this, PlansActivity::class.java) }
+            .show(supportFragmentManager)
+    }
+
+    fun showCongratulationsDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.congratulations_dialog_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.congratulations_dialog_subtitle))
+            .addButton(getString(R.string.app_close)) { fragment -> fragment.dismiss() }
+            .show(supportFragmentManager)
+    }
+
+    fun showAccountNotValidatedDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.account_not_validated_title))
+            .setSubtitle(getString(R.string.account_not_validated_subtitle))
+            .addButton(getString(R.string.account_not_validated_button), {
+                    fragment -> fragment.dismiss()
+                //TODO: go to validation (make activity)
+            },
+                R.drawable.layout_corners_rounded_blue)
+            .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.drawable.layout_corners_rounded_black_outline, R.color.button_text_color_selector_black_outline)
+            .show(supportFragmentManager)
+    }
 }

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:id="@+id/fragment_account_toolbar"
@@ -35,7 +36,8 @@
             android:id="@+id/fragment_account_change_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lbv_label="Password"/>
+            app:lbv_label="@string/register_password"
+            app:text="••••••••"/>
 
         <org.evcs.android.ui.view.profile.ListButtonView
             android:id="@+id/fragment_account_phone"

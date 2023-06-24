@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"/>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge"/>
 
     <!-- For old versions -->
     <style name="AppTheme.Transparent"/>
@@ -20,11 +20,6 @@
         <item name="textAllCaps">true</item>
     </style>
 
-    <style name="ToolbarTitle.New">
-        <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="textAllCaps">false</item>
-    </style>
-
     <style name="ToolbarIconStyle">
         <item name="actionMenuTextColor">@android:color/white</item>
     </style>
@@ -35,8 +30,8 @@
         <item name="android:layout_marginBottom">@dimen/spacing_small</item>
         <item name="android:layout_marginLeft">@dimen/spacing_small</item>
         <item name="android:layout_marginRight">@dimen/spacing_small</item>
-        <item name="android:paddingTop">14dp</item>
-        <item name="android:paddingBottom">14dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
         <item name="android:paddingLeft">@dimen/spacing_big</item>
         <item name="android:paddingRight">@dimen/spacing_big</item>
     </style>
@@ -86,11 +81,6 @@
     <style name="Button.Black.NoBorder">
         <item name="android:background">@drawable/button_selector_black</item>
         <item name="android:textColor">@color/button_text_color_selector_black</item>
-    </style>
-
-    <style name="Button.Black.WhiteText">
-        <item name="android:background">@drawable/button_selector_black_border</item>
-        <item name="android:textColor">@color/evcs_white</item>
     </style>
 
     <style name="Button.Orange">
@@ -173,6 +163,17 @@
         <item name="android:paddingRight">12dp</item>
     </style>
 
+    <style name="Banner">
+        <item name="android:gravity">center</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:padding">@dimen/padding_ariel_standard</item>
+    </style>
+
+    <style name="Banner.Red">
+        <item name="android:background">@drawable/layout_corners_rounded_danger</item>
+        <item name="android:backgroundTint">#FFEBE8</item>
+    </style>
+
     <style name="BottomNavigation.ActiveItemTextAppearance" parent="TextAppearance.AppCompat">
         <item name="android:textStyle">bold</item>
     </style>
@@ -193,14 +194,14 @@
 
     <style name="EVCSDatePickerStyle"/>
 
-    <style name="StandardEditText" parent="@style/Roboto.Body">
-        <item name="android:textColorHint">@color/evcs_grey</item>
+    <style name="StandardEditText" parent="@style/Body.Medium">
+        <item name="android:textColorHint">@color/evcs_gray_400</item>
     </style>
 
-    <style name="NavigationViewStyle">
-        <item name="android:listPreferredItemHeightSmall">34dp</item>
-        <item name="itemTextAppearance">@style/Roboto.ProfileMenu</item>
-    </style>
+<!--    <style name="NavigationViewStyle">-->
+<!--        <item name="android:listPreferredItemHeightSmall">34dp</item>-->
+<!--        <item name="itemTextAppearance">@style/Roboto.ProfileMenu</item>-->
+<!--    </style>-->
 
     <style name="BottomNavigationView">
         <item name="android:layout_height">86dp</item>

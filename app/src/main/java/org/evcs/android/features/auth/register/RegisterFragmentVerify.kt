@@ -5,22 +5,17 @@ import android.content.IntentFilter
 import android.os.Build
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
-import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterEnterCodeBinding
-import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.network.service.SMSBroadcastReceiver
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.util.Extras
 import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.PasswordTextInputValidator
 import org.evcs.android.util.validator.ValidatorManager
@@ -32,7 +27,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     private lateinit var mBinding : FragmentRegisterEnterCodeBinding
 
     /**
-     * Returns a new RegisterFragment instance.
+     * Returns a new RegisterFragmentVerify instance.
      *
      * @return new instance.
      */
@@ -67,7 +62,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mBinding.fragmentRegisterEnterCodeText.editText?.addTextChangedListener(PhoneNumberFormattingTextWatcher(
             BaseConfiguration.DEFAULT_LOCALE.country))
         mPreviousNumber = RegisterFragmentVerifyArgs.fromBundle(requireArguments()).previousNumber
-        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
+//        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
     }
 
@@ -81,9 +76,13 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             presenter?.startSMSListener(requireContext())
         }
-        var validatormanager = ValidatorManager();
-        validatormanager.addValidator(PasswordTextInputValidator(mBinding.fragmentRegisterEnterCodeText))
-        validatormanager.setOnAnyTextChangedListener{setEnableButton(validatormanager.areAllFieldsValid())}
+        val validatorManager = ValidatorManager();
+        validatorManager.addValidator(PasswordTextInputValidator(mBinding.fragmentRegisterEnterCodeText))
+        validatorManager.setOnAnyTextChangedListener{setEnableButton(validatorManager.areAllFieldsValid())}
+        mBinding.fragmentRegisterEnterCodeToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
+        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.setOnClickListener {
+            (activity as VerifyPhoneActivity).onVerifyFinished()
+        }
     }
 
     override fun openConsentDialog(consentIntent: Intent) {
@@ -94,11 +93,13 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mBinding.fragmentRegisterEnterCodeButton.isEnabled = validFields
     }
 
+    //TODO: switch
     private fun onButtonClick() {
-        progressDialog.show()
-        presenter!!.sendCode(
-            mBinding.fragmentRegisterEnterCodeText.text.toString()
-        )
+//        progressDialog.show()
+//        presenter!!.sendCode(Rª
+//            mBinding.fragmentRegisterEnterCodeText.text.toString()
+//        )
+        onCellphoneVerified()
     }
 
     override fun onCellphoneSent() {
@@ -110,7 +111,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun onCellphoneVerified() {
-        (requireActivity() as AuthActivity).onAuthFinished()
+        (requireActivity() as VerifyPhoneActivity).onVerifyFinished()
         progressDialog.dismiss()
     }
 

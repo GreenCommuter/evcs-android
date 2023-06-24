@@ -22,17 +22,17 @@
             android:id="@+id/evcs_dialog_fragment_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_ariel_related"
+            android:layout_marginBottom="@dimen/spacing_medium_extra"
             android:gravity="center"
-            style="@style/RobotoBold.SectionTitle"/>
+            android:textColor="@color/evcs_black"
+            style="@style/Title.Large"/>
 
         <TextView
             android:id="@+id/evcs_dialog_fragment_subtitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_ariel_different"
-            android:gravity="center"
-            style="@style/RobotoBold.Body.Grey"/>
+            style="@style/Body.Medium.Black"/>
 
     </LinearLayout>
 

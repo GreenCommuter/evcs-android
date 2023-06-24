@@ -60,10 +60,7 @@ public interface UserService {
     Call<User> getCurrentUser();
 
     @PUT("/members/v1/users/{id}")
-    Call<User> updateUser(@Path("id") int id, @Body ZipCodeWrapper zipcode);
-
-    @PUT("/members/v1/users/{id}")
-    Call<User> updateUser(@Path("id") int id, @Body NameWrapper zipcode);
+    Call<User> updateUser(@Path("id") int id, @Body Object userWrapper);
 
     @POST("/members/v1/user_cars")
     Call<UserCar> saveUserCar(@Body UserCar userCar);

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false">
-        <bitmap android:src="@drawable/ic_arrow_right" android:tint="@color/evcs_grey_transparent" />
+        <color android:color="@color/evcs_gray_300"/>
     </item>
     <item android:state_pressed="true">
-        <bitmap android:src="@drawable/ic_arrow_right" />
-    </item>
-    <item>
-        <bitmap android:src="@drawable/ic_arrow_right" android:tint="@color/evcs_black"/>
+        <color android:color="@color/evcs_gray_300"/>
     </item>
 </selector>

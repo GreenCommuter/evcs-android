@@ -11,8 +11,8 @@ class ChargingHistoryAdapter : BaseRecyclerAdapter<Charge, ChargingHistoryViewHo
         return ChargingHistoryViewHolder(inflateView(parent, R.layout.adapter_charging_history_item))
     }
 
-    override fun populate(holder: ChargingHistoryViewHolder?, item: Charge?, position: Int) {
-        holder?.setCharge(item!!)
+    override fun populate(holder: ChargingHistoryViewHolder, item: Charge, position: Int) {
+        holder.setCharge(item)
     }
 
 }

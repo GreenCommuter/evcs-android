@@ -6,8 +6,8 @@ import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
-import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.RelativeLayout
 import org.evcs.android.R
 
 class PasswordTextField : StandardTextField {
@@ -29,7 +29,7 @@ class PasswordTextField : StandardTextField {
     }
 
     private fun addEye() {
-        val mEye = ImageView(getContext())
+        val mEye = ImageView(context)
         mEye.setOnClickListener {
             mIsShowing = !mIsShowing
             if (mIsShowing) {
@@ -41,13 +41,11 @@ class PasswordTextField : StandardTextField {
             mEye.setImageResource(if (mIsShowing) R.drawable.ic_show else R.drawable.ic_show)
         }
         val params =
-            FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+            RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         params.setMargins(0, 0, mMargin, 0)
-        mEye.layoutParams = params
         mEye.setImageResource(R.drawable.ic_show)
-        val params2 = LayoutParams(params)
-        params2.addRule(ALIGN_PARENT_END)
-        params2.addRule(CENTER_VERTICAL)
-        mLayout.addView(mEye, -1, params2)
+        params.addRule(ALIGN_PARENT_END)
+        params.addRule(CENTER_VERTICAL)
+        mLayout.addView(mEye, -1, params)
     }
 }

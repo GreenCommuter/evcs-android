@@ -63,7 +63,6 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         mCardExpirationMonth.editText!!.addTextChangedListener(DateFormatWatcher())
         mCardNumber.editText!!.addTextChangedListener(FourDigitCardFormatWatcher())
         mCreditCardView.watchNumber(mCardNumber.editText)
-        mToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     override fun getButtonBackground(): Drawable {

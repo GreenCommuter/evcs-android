@@ -40,9 +40,6 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     override fun setListeners() {
         super.setListeners()
 //        mBinding.startChargingButton.setOnClickListener { startCharging() }
-        mBinding.startChargingToolbar.setNavigationOnClickListener {
-            onBackPressed()
-        }
     }
 
     private fun startCharging() {

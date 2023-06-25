@@ -32,10 +32,6 @@ class ChangePhoneNumberActivity : UpdateUserActivity() {
         return mBinding.activityChangeNameSave
     }
 
-    override fun getToolbar(): EVCSToolbar2 {
-        return mBinding.activityChangePhoneToolbar
-    }
-
     override fun getLayout(): View {
         return mBinding.activityAccountLayout
     }

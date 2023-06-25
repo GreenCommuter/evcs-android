@@ -42,7 +42,6 @@ abstract class AbstractCancelPlanFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.cancelPlanContinue.setOnClickListener { onContinueClicked() }
         mBinding.cancelPlanCancel.setOnClickListener { requireActivity().finish() }
         mBinding.cancelPlanCancel.text = getCancelText()
-        mBinding.cancelPlanTrialToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mBinding.cancelPlanConfirmation.text = getConfirmationText()
     }
 

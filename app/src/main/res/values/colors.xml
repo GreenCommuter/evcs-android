@@ -8,13 +8,9 @@
     <color name="evcs_dark_grey">#514f4d</color>
     <color name="evcs_grey">#808080</color>
     <color name="evcs_gray_89">#e4e5e7</color>
-    <color name="evcs_light_grey">#f6f6f6</color>
     <color name="evcs_white">#ffffff</color>
     <color name="evcs_purple">#002D48</color>
-    <color name="evcs_dark_purple">#001B2C</color>
     <color name="evcs_purple_gray">#B6C3CB</color>
-
-    <color name="evcs_baseline_color">#4D4D4D</color>
 
     <color name="evcs_primary_600">#FC612D</color>
     <color name="evcs_primary_800">#D54D21</color>

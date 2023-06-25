@@ -46,9 +46,4 @@ class ReceiptPlanFragment : ErrorFragment<BasePresenter<*>>() {
         }
     }
 
-    override fun setListeners() {
-        mBinding.sessionInformationToolbar.setOnClickListener {
-            findNavController().popBackStack()
-        }
-    }
 }

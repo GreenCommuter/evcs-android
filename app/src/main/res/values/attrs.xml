@@ -26,15 +26,6 @@
         <attr name="showButton" format="boolean"/>
     </declare-styleable>
 
-    <declare-styleable name="SeekBar">
-        <attr name="seekbar_title" format="string"/>
-        <attr name="min" format="float"/>
-        <attr name="max" format="float"/>
-        <attr name="ticks" format="integer"/>
-        <attr name="textStep" format="integer"/>
-        <attr name="format" format="string"/>
-    </declare-styleable>
-
     <declare-styleable name="HoodView">
         <attr name="hoodText" format="string|reference" />
         <attr name="hoodTextStyle" format="reference" />

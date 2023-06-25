@@ -122,7 +122,6 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
             val intent = WalletActivity.buildIntent(requireContext(), true)
             mChangePmLauncher.launch(intent)
         }
-        mBinding.activitySubscriptionsToolbar.setNavigationOnClickListener { requireActivity().finish() }
     }
 
     fun goToPlansActivity() {

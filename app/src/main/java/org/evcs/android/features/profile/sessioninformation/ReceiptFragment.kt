@@ -43,9 +43,4 @@ class ReceiptFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.sessionInformationPaymentMethod.text = getString(R.string.app_payment_method_format)
     }
 
-    override fun setListeners() {
-        mBinding.sessionInformationToolbar.setOnClickListener {
-            findNavController().popBackStack()
-        }
-    }
 }

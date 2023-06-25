@@ -71,7 +71,6 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
     }
 
     override fun setListeners() {
-        mBinding.sessionInformationToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         //TODO: check if show address or request
         mBinding.sessionInformationHelp.setOnClickListener {
             val data = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)

@@ -12,13 +12,11 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlansBinding
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 
 class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
 
-    private lateinit var mToolbar: EVCSToolbar2
     private lateinit var mStandardMileageFragment: PlansTabFragment
     private var mHighMileageFragment: PlansTabFragment? = null
     private lateinit var mViewPager: ViewPager
@@ -49,7 +47,6 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
     override fun setUi(v: View) {
         super.setUi(v)
         val binding = FragmentPlansBinding.bind(v)
-        mToolbar = binding.fragmentPlansToolbar2
         mTabLayout = binding.fragmentPlansTabLayout
         mTabLayoutDivider = binding.fragmentPlansTabLayoutDivider
         mViewPager = binding.fragmentPlansViewPager
@@ -91,11 +88,6 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         mTabLayout.setupWithViewPager(mViewPager)
         mTabLayout.getTabAt(1)?.customView = getTab(tabHigh)
         mViewPager.currentItem = 0
-    }
-
-    override fun setListeners() {
-        super.setListeners()
-        mToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
     private fun getTab(title: String?): TextView {

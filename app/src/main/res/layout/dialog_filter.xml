@@ -30,7 +30,6 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:paddingStart="@dimen/spacing_medium"
             android:paddingEnd="@dimen/spacing_medium"
             android:layout_marginBottom="@dimen/spacing_large_extra">

@@ -17,8 +17,9 @@ import org.joda.time.format.DateTimeFormatter
 class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     ChargingInProgressView {
 
-    private lateinit var formatter: DateTimeFormatter
     private val REFRESH_INTERVAL_SECONDS = 30
+
+    private lateinit var formatter: DateTimeFormatter
     private lateinit var mSession: Session
     private lateinit var mBinding: FragmentChargingInProgressBinding
     private var mLastUpdate: DateTime? = null
@@ -79,7 +80,6 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
             showProgressDialog()
             presenter?.stopSession(mSession.id)
         }
-        mBinding.chargingInProgressToolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun onChargeRetrieved(response: Session?) {

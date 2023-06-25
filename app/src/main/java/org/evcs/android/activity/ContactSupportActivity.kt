@@ -48,9 +48,6 @@ class ContactSupportActivity : BaseActivity2() {
         mBinding.contactSupportAddress.setOnClickListener {
             LocationUtils.launchGoogleMapsWithPin(this, ADDRESS)
         }
-        mBinding.fragmentAccountToolbar.setNavigationOnClickListener {
-            finish()
-        }
     }
 
     fun goToCallUs() {

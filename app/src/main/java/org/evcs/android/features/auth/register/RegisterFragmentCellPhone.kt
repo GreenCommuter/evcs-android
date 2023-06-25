@@ -60,7 +60,6 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
         mBinding.fragmentRegisterCellphoneValidateLater.setOnClickListener {
             (requireActivity() as VerifyPhoneActivity).onCancel()
         }
-        mBinding.fragmentRegisterCellPhoneToolbar.setNavigationOnClickListener { activity?.finish() }
     }
 
     fun setEnableButton(validFields: Boolean) {

@@ -142,7 +142,10 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             }
 
             override fun onLocationChosen(location: Location) {
-                mInnerMapFragment.findAndSelectMarker(location)
+                if (isMapShowing())
+                    mInnerMapFragment.findAndSelectMarker(location)
+                else
+                    onLocationClicked(location, false)
             }
 
             override fun onLocationRemoved() {

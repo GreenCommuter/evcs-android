@@ -15,7 +15,4 @@ class DeleteAccountActivity : BaseActivity2() {
 
     override fun init() {}
 
-    override fun setListeners() {
-        mBinding.fragmentDeleteAccountToolbar.setNavigationOnClickListener { finish() }
-    }
 }

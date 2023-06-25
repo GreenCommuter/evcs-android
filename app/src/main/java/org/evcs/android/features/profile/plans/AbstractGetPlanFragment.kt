@@ -127,7 +127,6 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     override fun setListeners() {
         super.setListeners()
-        mBinding.getPlanToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mBinding.bottomNavigationButton.setOnClickListener { getBottomNavigationListener() }
         mBinding.getPlanPaymentInfo.setOnChangeClickListener {
             val intent = WalletActivity.buildIntent(context, true)

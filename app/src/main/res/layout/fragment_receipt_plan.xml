@@ -8,7 +8,6 @@
     android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/session_information_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="Receipt"/>

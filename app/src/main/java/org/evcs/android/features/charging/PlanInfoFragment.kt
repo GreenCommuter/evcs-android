@@ -60,7 +60,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             //TODO: check
             goToStartCharging()
         }
-        mBinding.planInfoToolbar.setNavigationOnClickListener { onBackPressed() }
     }
 
     override fun show(station: Station, status: SubscriptionStatus?) {

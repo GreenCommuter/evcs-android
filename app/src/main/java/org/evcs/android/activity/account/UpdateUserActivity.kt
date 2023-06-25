@@ -35,12 +35,9 @@ abstract class UpdateUserActivity : BaseActivity2(), UpdateUserView {
             getButton().isEnabled = false
             onSaveClicked()
         }
-        getToolbar().setNavigationOnClickListener { finish() }
 
         ViewUtils.setAdjustResize(getLayout())
     }
-
-    abstract fun getToolbar(): EVCSToolbar2
 
     abstract fun getLayout(): View
 

@@ -3,7 +3,6 @@ package org.evcs.android.activity.account
 import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.databinding.ActivityChangeNameBinding
-import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.NonEmptyTextInputValidator
 
@@ -27,10 +26,6 @@ class ChangeNameActivity : UpdateUserActivity() {
 
     override fun getButton(): View {
         return mBinding.activityChangeNameSave
-    }
-
-    override fun getToolbar(): EVCSToolbar2 {
-        return mBinding.activityChangeNameToolbar
     }
 
     override fun getLayout(): View {

@@ -2,37 +2,31 @@ package org.evcs.android.features.profile
 
 import android.content.Intent
 import android.graphics.Color
-import android.net.Uri
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
-import com.base.core.permission.PermissionListener
-import com.base.core.permission.PermissionManager
 import com.base.core.util.NavigationUtils
 import com.base.core.util.NavigationUtils.IntentExtra
-import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ContactSupportActivity
-import org.evcs.android.features.profile.notifications.NotificationsActivity
 import org.evcs.android.activity.account.AccountActivity
-import org.evcs.android.activity.subscription.SubscriptionActivity
 import org.evcs.android.activity.account.VehicleInformationActivity
+import org.evcs.android.activity.subscription.SubscriptionActivity
 import org.evcs.android.databinding.FragmentProfileBinding
-import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.main.MainNavigationController
+import org.evcs.android.features.profile.notifications.NotificationsActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.Subscription
 import org.evcs.android.model.user.User
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.FontUtils
-import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.evcs.android.util.ViewUtils.showOrHide
@@ -126,7 +120,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     override fun populate() {
-        mBinding.profileToolbar.setNavigationText("")
         setUser(UserUtils.getLoggedUser())
     }
 
@@ -165,7 +158,11 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     override fun onBackPressed(): Boolean {
-        mNavigationListener.onMapClicked()
+        try {
+            mNavigationListener.onMapClicked()
+        } catch (npe : NullPointerException) {
+            NavigationUtils.jumpToClearingTask(requireContext(), MainActivity::class.java)
+        }
         return true
     }
 

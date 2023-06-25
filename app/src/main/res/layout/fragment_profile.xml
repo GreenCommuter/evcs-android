@@ -7,10 +7,10 @@
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/profile_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="@string/profile_title"/>
+        app:title="@string/profile_title"
+        app:navigationIcon="@null"/>
     
     <ScrollView
         android:layout_width="match_parent"

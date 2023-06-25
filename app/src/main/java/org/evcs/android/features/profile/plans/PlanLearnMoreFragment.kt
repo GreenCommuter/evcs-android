@@ -134,7 +134,6 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
     override fun setListeners() {
         super.setListeners()
         mBinding.plansLearnMoreExplore.setOnClickListener { NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java) }
-        mBinding.planLearnMoreToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
     }
 
 }

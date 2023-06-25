@@ -6,16 +6,7 @@
     android:orientation="vertical"
     android:background="@color/evcs_white">
 
-    <TextView
-        android:id="@+id/fragment_register_step"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginLeft="@dimen/spacing_large"
-        android:visibility="gone"/>
-
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/fragment_register_enter_code_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         custom:title="@string/my_information_phone_number"/>

@@ -97,7 +97,7 @@
                     android:id="@+id/profile_explore_plans"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Explore plans"
+                    android:text="@string/plan_info_explore_plans"
                     android:layout_marginBottom="@dimen/spacing_medium"
                     style="@style/ButtonK.Orange"/>
 

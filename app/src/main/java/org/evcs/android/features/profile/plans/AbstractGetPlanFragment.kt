@@ -66,6 +66,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         val startingDate = dateFormatter.print(mPlan.startingDate())
         mBinding.getPlanMonthlyCostTitle.text = getString(R.string.get_plan_price, period, startingDate)
         mBinding.getPlanSubtotal.text = getString(R.string.app_price_format, mPlan.price)
+        //TODO: tax
+        mBinding.getPlanTotal.text = getString(R.string.app_price_format, mPlan.price)
         mBinding.bottomNavigationButton.text = getButtonText()
 
         mBinding.getPlanTandc.text = getTandCText()
@@ -96,7 +98,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
-        return String.format("Starting %s", dateFormatter.print(mPlan.startingDate()))
+        return getString(R.string.get_plan_monthly_label, dateFormatter.print(mPlan.startingDate()))
     }
 
     protected open fun getNextBillingDate(): DateTime? {

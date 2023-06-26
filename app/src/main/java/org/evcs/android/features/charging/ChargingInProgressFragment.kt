@@ -1,5 +1,6 @@
 package org.evcs.android.features.charging
 
+import android.os.Handler
 import android.view.View
 import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
@@ -52,7 +53,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     }
 
     fun startTimerUpdates() {
-        android.os.Handler().postDelayed(mRunnable, 1000)
+        Handler().postDelayed(mRunnable, 1000)
     }
 
     val mRunnable = object : Runnable {
@@ -62,7 +63,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
                 presenter.getCurrentCharge()
             }
             if (isVisible) {
-                android.os.Handler().postDelayed(this, 1000)
+                Handler().postDelayed(this, 1000)
             } else {
                 mDuration = null
             }

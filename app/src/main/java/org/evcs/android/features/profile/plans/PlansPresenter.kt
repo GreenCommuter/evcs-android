@@ -42,7 +42,8 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
         r.getService(PlansService::class.java).planExtras.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
                 mergePlans(plans, response)
-                view.showPlans(plans)
+                val runnable = { view.showPlans(plans) }
+                runIfViewCreated(runnable)
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

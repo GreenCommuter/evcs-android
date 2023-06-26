@@ -46,7 +46,7 @@ class StartChargingPresenter(viewInstance: StartChargingView?, services: Retrofi
             }
 
             override fun onResponseFailed(responseBody: ResponseBody?, responseCode: Int) {
-                view.showError(ErrorUtils.getError(responseBody!!))
+                view.showErrorDialog(ErrorUtils.getError(responseBody!!))
             }
 
             override fun onCallFailure() {

@@ -255,8 +255,6 @@
 
     <!-- Vanpool Status -->
     <string name="vanpool_status_cancelled">Canceled</string>
-    <string name="vanpool_status_waiting_approval">Pending approval</string>
-    <string name="vanpool_status_waiting_users_confirmation">Waiting for users confirmation</string>
     <string name="vanpool_status_active">Active</string>
     <string name="vanpool_status_inactive">Inactive</string>
 
@@ -269,9 +267,6 @@
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
     <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
     <string name="vanpool_ongoing_ride_file_report_button">File report</string>
-    <string name="vanpool_ongoing_ride_call_us">Call us</string>
-    <string name="vanpool_ongoing_ride_control_lock">Lock</string>
-    <string name="vanpool_ongoing_ride_control_unlock">Unlock</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
@@ -295,19 +290,11 @@
     <string name="book_now_my_location">My location</string>
     <string name="book_now_current_location">Current Location</string>
     <string name="book_now_current_location_click">Current location (tap to change)</string>
-    <string name="book_now_tab">Book Now</string>
     <string name="book_now_error_no_cars_found">Sorry, no available cars found for the requested location, please try another one.</string>
     <string name="book_now_advice_enable_location_advice">Enabling location permissions will enable you to find the closest cars to your location.</string>
     <string name="book_now_enable_location_dialog_title">Location error</string>
     <string name="book_now_enable_location_dialog_body">We couldn\'t find your location. Please turn on location services and try again or search from the address field.</string>
     <string name="book_now_error_google_api_connection">Could not connect to Google API Client</string>
-
-    <!-- Future Reservation -->
-    <string name="future_reservation_error_no_cars_found">Sorry, no cars found for current location, please try another one.</string>
-    <string name="future_reservation_pick_up">Pick up</string>
-    <string name="future_reservation_drop_off">Drop off</string>
-    <string name="future_reservation_hour">/hour</string>
-    <string name="future_reservation_day">/day</string>
 
     <!-- Supported Version -->
     <string name="not_supported_version_dialog_title">New Version Available</string>
@@ -319,17 +306,13 @@
 
     <!-- Create Booking -->
     <string name="create_booking_toolbar_title">Car sharing</string>
-    <string name="create_booking_car_title">Car</string>
     <string name="create_booking_car_name_format">%1$s %2$s</string>
     <string name="create_booking_car_plate_format">#%s</string>
     <string name="create_booking_plus_tax">+ tax</string>
     <string name="create_booking_wallet_error_title">The payment has failed</string>
     <string name="create_booking_wallet_error_subtitle">Please edit your wallet information</string>
-    <string name="create_booking_wallet_error_edit">Go to Wallet</string>
-    <string name="create_booking_wallet_error_cancel">Cancel</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
     <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
-    <string name="create_booking_please_select_a_car">Please select a car</string>
 
     <!-- Coupons -->
     <string name="coupons_toolbar_title">Coupons</string>
@@ -355,11 +338,6 @@
     <string name="promo_code_add_title">Add promo code</string>
     <string name="promo_code_add_redeem">Redeem</string>
 
-    <!-- Help -->
-    <string name="help_title">Help</string>
-    <string name="help_terms_of_use"><a href="https://greencommuter.org/term_of_use">Terms Of Use</a></string>
-    <string name="help_privacy_policy"><a href="https://greencommuter.org/privacy">Privacy Policy</a></string>
-
     <!-- Invoice -->
     <string name="invoice_total_price">Total price</string>
 
@@ -368,16 +346,6 @@
 
     <!-- Search Location -->
     <string name="fragment_search_current_location">Current Location</string>
-    <string-array name="fragment_search_dropoff_dialog">
-        <item>Select the</item>
-        <item>drop off</item>
-        <item>date and time</item>
-    </string-array>
-    <string-array name="fragment_search_pickup_dialog">
-        <item>Select the</item>
-        <item>pick up</item>
-        <item>date and time</item>
-    </string-array>
 
     <!--Notifications-->
     <string name="notifications_channel_name">All notifications</string>
@@ -397,6 +365,8 @@
     <string name="fragment_register_enter_code_title">Code Sent!</string>
     <string name="fragment_register_enter_code_subtitle">Enter the code that was sent to your phone</string>
     <string name="fragment_register_enter_code_button">Validate it</string>
+    <string name="fragment_register_enter_code_resend_1">Didn\'t get the code?</string>
+    <string name="fragment_register_enter_code_resend_2">Resend</string>
 
     <!-- Filter Activity -->
     <string name="filter_activity_title">Filters</string>
@@ -414,7 +384,9 @@
     <string name="success_dialog_cta">Want to save more?\nExplore EVCS subscription plans</string>
     <string name="congratulations_dialog_title">Congratulations!</string>
     <string name="congratulations_dialog_subtitle">Your %1$s Plan is now active. %2$s</string>
-    <string name="congratulations_dialog_subtitle_2">[You can charge at no cost 24/7] across the entire EVCS network.</string>
+    <string name="congratulations_dialog_subtitle_1">Enjoy your discounted charging rates.</string>
+    <string name="congratulations_dialog_subtitle_2">You can charge at no cost from %1$s to %2$s across the entire EVCS network.</string>
+    <string name="congratulations_dialog_subtitle_3">You can charge at no cost 24/7 across the entire EVCS network.</string>
     <string name="account_not_validated_title">Account Not Validated</string>
     <string name="account_not_validated_subtitle">You will need to validate your phone number to activate your account and receive the member discounts on charging sessions.\n\nYou can do this anytime in your profile.</string>
     <string name="account_not_validated_button">Validate Phone Number</string>
@@ -444,6 +416,12 @@
     <string name="plan_info_start_charging">Start Charging Session</string>
     <string name="plan_info_free_title">Free Charging!</string>
     <string name="plan_info_free_subtitle">Charging is free at this location.</string>
+    <string name="plan_info_kwh_usage">kWh usage</string>
+    <string name="plan_info_explore_plans">Explore plans</string>
+    <string name="plan_info_charge_with_payg">Charge With Pay As You Go</string>
+<!--    <string name="plan_info_payment_error_title">Payment</string>-->
+<!--    <string name="plan_info_payment_error_subtitle">We were unable to process your card, please update your payment method or try again.</string>-->
+    <string name="plan_info_payment_error_update">Update payment method</string>
 
     <!-- Start Charging-->
     <string name="start_charging_preparing_subtitle">This may only take a few seconds</string>
@@ -451,6 +429,11 @@
     <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
     <string name="start_charging_button">Start charging session</string>
     <string name="start_charging_title">Start charging</string>
+    <string name="start_charging_error_title">Connection Failed</string>
+    <string name="start_charging_error_subtitle">Make sure your car is plugged in, or try disconnecting and reconnecting the connector to your vehicle.</string>
+    <string name="start_charging_error_retry">Try again</string>
+    <string name="start_charging_error_cancel">Cancel Session</string>
+    <string name="start_charging_error_support">Contact Support</string>
 
     <!-- Charging in progress-->
     <string name="charging_in_progress_title">Charging</string>
@@ -460,6 +443,8 @@
     <string name="charging_in_progress_site">Charging Site</string>
     <string name="charging_in_progress_end">End charging session</string>
     <string name="charging_in_progress_data_delay">*final usage may vary due to data delay</string>
+<!--    <string name="charging_in_progress_error_title">Charging issue</string>-->
+<!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
 
     <!-- Session information -->
     <string name="session_information_energy">Energy Delivered</string>
@@ -502,6 +487,9 @@
     <string name="get_plan_flat_rate">Flat rate for Level 2 and DC fast $%.2f/kWh after %d kWh exceeded</string>
     <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging</string>
     <string name="get_plan_flat_rate_time_limited">Unlimited charging %1$s-%2$s</string>
+    <string name="get_plan_monthly_label">Starting %s</string>
+    <string name="get_plan_next_billing_date">Next Billing Date</string>
+    <string name="get_plan_previous_plan_active">Previous plan active until</string>
 
     <!-- Plan View -->
     <string name="plan_view_current">Current plan</string>
@@ -509,6 +497,8 @@
     <string name="plan_view_unlimited">Unlimited charging 24/7</string>
     <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
     <string name="plan_view_learn_more">Learn more</string>
+    <string name="plan_view_limit">Up to %d kWh/%s</string>
+    <string name="plan_view_aprox">Approximately %d miles</string>
 
     <!-- Cancel Plan -->
     <string name="cancel_plan_sad">We\'re sad to see you go</string>
@@ -533,7 +523,7 @@
 
     <!-- Survey -->
     <string name="survey_comment_hint">Provide any other details you would like to share with us.</string>
-    <string name="survey_title">Plan Canceled?</string>
+    <string name="survey_title">Cancel plan</string>
     <string name="survey_love_feedback">We’d love your feedback!</string>
     <string name="survey_subtitle">We’re always looking to improve your experience. Please let us know why you’ve decided to cancel your plan:</string>
     <string name="survey_confirm">Confirm cancelation</string>
@@ -543,5 +533,15 @@
     <string name="plan_learn_more_hikes">No time-of-day price hikes on charging over 200 kWh</string>
     <string name="plan_learn_more_locate">Locate stations with the EVCS, PlugShare, Google MapsTM and Apple MapsTM apps</string>
     <string name="plan_learn_more_track">Track monthly charging sessions and kWh consumed</string>
+
+    <!-- Pay as you go -->
+    <string name="pay_as_you_go_name">Pay as you go</string>
+    <string name="pay_as_you_go_button">Get Started</string>
+    <string name="pay_as_you_go_freq">I charge infrequently</string>
+    <string name="pay_as_you_go_limit">EVCS offers simple, flat rate pricing!</string>
+    <string name="pay_as_you_go_flat">Simple flat rate pricing</string>
+    <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
+    <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
+    <string name="pay_as_you_go_price">$0 Membership Fee</string>
 
 </resources>

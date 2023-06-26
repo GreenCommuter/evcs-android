@@ -5,10 +5,12 @@ import android.net.Uri
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
+import com.base.core.util.NavigationUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentPlanInfoBinding
+import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
@@ -110,7 +112,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         }
         if (status.isSuspended) {
             showIssue(status.issueMessage)
-            mBinding.planInfoButton.text = "Update payment method"
+            mBinding.planInfoButton.text = getString(R.string.plan_info_payment_error_update)
             mBinding.planInfoButton.setOnClickListener { launchUrl(status.accountUrl) }
         }
         else if (status.issue) {
@@ -135,7 +137,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         if (isUpgradePlan) {
             mBinding.planInfoExplorePlansButton.text = getString(R.string.plan_info_upgrade_plan)
             mBinding.planInfoExplorePlansButton.setOnClickListener {
-                launchUrl(accountUrl)
+                NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java)
             }
         }
     }

@@ -48,7 +48,6 @@ class PlanView : LinearLayout {
         mBinding.viewPlanAcPrice.showOrHide(helper.getLevel2Price())
         mBinding.viewPlanAd.text = plan?.banner
         mBinding.viewPlanAd.visibility = if (plan?.banner == null) INVISIBLE else VISIBLE
-        mBinding.viewPlanFreq.showOrHide(plan?.useCase)
 
         val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
         //Only relevant to show PAYG as not current

@@ -89,13 +89,12 @@
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/charging_in_progress_rate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Rate">
+                app:label="Rate*">
 
                 <TextView
-                    android:id="@+id/charging_in_progress_rate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$0.00/kWh"
@@ -103,14 +102,22 @@
 
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+            <TextView
+                android:id="@+id/charging_in_progress_rate_explanation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="-"
+                style="@style/Body.Medium"/>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/charging_in_progress_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 app:label="Session Cost">
 
                 <TextView
-                    android:id="@+id/charging_in_progress_cost"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="$0.00"

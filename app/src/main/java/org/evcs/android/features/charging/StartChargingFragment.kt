@@ -82,7 +82,6 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun onBackPressed(): Boolean {
-        (activity as ChargingActivity).cancelSession(childFragmentManager)
         return true
     }
 }

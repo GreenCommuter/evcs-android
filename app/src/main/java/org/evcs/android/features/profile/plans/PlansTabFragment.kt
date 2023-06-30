@@ -16,14 +16,15 @@ import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlansTabBinding
 import org.evcs.android.databinding.ViewGoToMonthlyPlansBinding
 import org.evcs.android.features.auth.initialScreen.AuthActivity
-import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.Plan
+import org.evcs.android.model.Subscription
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setMargins
+import org.joda.time.format.DateTimeFormat
 
 class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewListener {
 
@@ -81,24 +82,45 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         } else if (plan == null) {
             mWalletLauncher.launch(Intent(requireContext(), WalletActivity::class.java))
         } else if (UserUtils.getLoggedUser()?.hasAnySubscription ?: false) {
-            val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan."
-            val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
-            val paragraph3 = "Do you want to continue changing plans?"
-            val paragraph4 = "This will end your %1\$ %2\$s plan. It will stay active until %3\$s."
-            val paragraph5 = "Your new %1\$s plan will start on %2\$s. You will be billed $%.2f per month until you cancel."
-            val paragraph6 = "Your %s plan will start immediately.\n\nYou’ll receive a free %d days starting from today.\n\nAfter that, you will automatically be billed $%.2f per month until you cancel."
-            EVCSDialogFragment.Builder()
-                .setTitle("Are you sure you want to change plans?")
-                .setSubtitle(paragraph1 + "\n\n" + paragraph2 + "\n\n" + paragraph3)
-                .addButton(getString(R.string.app_continue), {
-                        dialog -> dialog.dismiss()
-                        gotoPlan(plan, true)
-                    }, R.drawable.layout_corners_rounded_blue)
-                .showCancel(true)
-                .show(childFragmentManager)
+            showChangePlanDialog(UserUtils.getLoggedUser().activeSubscription!!, plan)
         } else {
             gotoPlan(plan, false)
         }
+    }
+
+    private fun showChangePlanDialog(activeSubscription: Subscription, plan: Plan) {
+        val formatter = DateTimeFormat.forPattern("MMM d, yyyy")
+
+        val isUpgrade = activeSubscription.plan.price < plan.price
+
+//        val paragraph1 = "This will end your %1\$s subscription to the %2\$s plan."
+//        val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
+        val paragraph3 = getString(R.string.plans_tab_dialog_subtitle_3)
+        val paragraph4 = String.format(getString(R.string.plans_tab_dialog_subtitle_4),
+            activeSubscription.plan.renewalPeriod.toString(),
+            activeSubscription.plan.name,
+            formatter.print(activeSubscription.renewalDate))
+        val paragraph8 = String.format(getString(R.string.plans_tab_dialog_subtitle_8),
+            plan.price,
+            plan.renewalPeriod.toString())
+        val paragraph5 = String.format(getString(R.string.plans_tab_dialog_subtitle_5),
+            plan.name,
+            formatter.print(activeSubscription.renewalDate.plusDays(1))) + paragraph8
+        val paragraph7 = String.format(getString(R.string.plans_tab_dialog_subtitle_7), plan.name)
+//        val paragraph6 = "$paragraph7\n\nYou’ll receive a free %d days starting from today.\n\nAfter that, you will automatically be billed $%.2f per month until you cancel."
+
+        val subtitle = if (isUpgrade) paragraph7 + "\n\n" + paragraph8 + "\n\n" + paragraph3
+                       else paragraph4 + "\n\n" + paragraph5 + "\n\n" + paragraph3
+
+        EVCSDialogFragment.Builder()
+            .setTitle(getString(R.string.plans_tab_dialog_title))
+            .setSubtitle(subtitle)
+            .addButton(getString(R.string.app_continue), {
+                    dialog -> dialog.dismiss()
+                gotoPlan(plan, true)
+            }, R.drawable.layout_corners_rounded_blue)
+            .showCancel(true)
+            .show(childFragmentManager)
     }
 
     fun gotoPlan(plan: Plan, hasPlan: Boolean) {

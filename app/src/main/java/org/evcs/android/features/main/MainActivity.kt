@@ -140,8 +140,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun updateProfileAlert() {
-        showProfileAlert(UserUtils.getLoggedUser()?.activeSubscription?.issue ?: false ||
-        !(UserUtils.getLoggedUser()?.isPhoneVerified ?: true))
+//        showProfileAlert(UserUtils.getLoggedUser()?.activeSubscription?.issue ?: false ||
+//        !(UserUtils.getLoggedUser()?.isPhoneVerified ?: true))
     }
 
     fun showProfileAlert(show: Boolean) {

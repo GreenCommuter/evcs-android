@@ -37,7 +37,7 @@ public class SubscriptionStatus implements Serializable {
 //        "issue_title": null,
 //        "referral_link": "https://dev.evcs.com/refer/abc123",
 //        "remaining_charges": 8,
-    public boolean unlimited;
+//    public boolean unlimited;
 //        "plan_id": 2,
     public DateTime activeSince;
     //        "valid_from": null,
@@ -74,8 +74,12 @@ public class SubscriptionStatus implements Serializable {
         }
     }
 
+    public boolean isUnlimited() {
+        return plan.isUnlimited();
+    }
+
     public String printTotalKwh() {
-        return (unlimited) ? "unlimited" : getTotalKwh().toString();
+        return (isUnlimited()) ? "unlimited" : getTotalKwh().toString();
     }
 
     public boolean isSuspended() {

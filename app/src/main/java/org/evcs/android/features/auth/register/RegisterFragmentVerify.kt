@@ -77,7 +77,6 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         val validatorManager = ValidatorManager();
         validatorManager.addValidator(PasswordTextInputValidator(mBinding.fragmentRegisterEnterCodeText))
         validatorManager.setOnAnyTextChangedListener{setEnableButton(validatorManager.areAllFieldsValid())}
-        mBinding.fragmentRegisterEnterCodeToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
         mBinding.fragmentRegisterRegisterEnterCodeValidateLater.setOnClickListener {
             (activity as VerifyPhoneActivity).onCancel()
         }

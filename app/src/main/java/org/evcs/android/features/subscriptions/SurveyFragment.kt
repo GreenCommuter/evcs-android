@@ -40,7 +40,6 @@ class SurveyFragment : ErrorFragment<SurveyPresenter>(), SurveyView {
     }
 
     override fun setListeners() {
-        mBinding.surveyToolbar.setNavigationOnClickListener { requireActivity().finish() }
         mBinding.surveyContinue.setOnClickListener {
             presenter?.sendSurveyResults(mCheckedItems, mOtherId, mBinding.surveyComments.text)
             presenter?.cancelSubscription()

@@ -68,8 +68,8 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
         mBinding.managePlansCanceledLayout.isVisible = response.isCanceled
         mBinding.managePlansActiveLayout.isVisible = !response.isCanceled
         mBinding.activitySubscriptionsPlanName.text = response.planName
-        val format = DateTimeFormat.forPattern(getString(R.string.app_date_format))
-        mBinding.activitySubscriptionsEnrolled.setText(format.print(response.activeSince))
+        mBinding.activitySubscriptionsEnrolled.setText(response.activeSince)
+        mBinding.activitySubscriptionsPlanProgress.setPlan(response)
 
         if (response.isCanceled) {
             populateCanceled(response)
@@ -79,7 +79,6 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
     }
 
     fun populateActive(response: SubscriptionStatus) {
-        mBinding.activitySubscriptionsPlanProgress.setPlan(response)
         val date = mLongDateFormatter.print(response.renewalDate)
         val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()!!
         mBinding.activitySubscriptionsPaymentDetails.setText(String.format(
@@ -123,7 +122,6 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
             val intent = WalletActivity.buildIntent(requireContext(), true)
             mChangePmLauncher.launch(intent)
         }
-        mBinding.activitySubscriptionsToolbar.setNavigationOnClickListener { requireActivity().finish() }
     }
 
     fun goToPlansActivity() {

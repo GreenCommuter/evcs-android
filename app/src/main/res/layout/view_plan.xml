@@ -65,6 +65,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium"
+                android:gravity="center"
                 tools:text="Unlimited charging 10PM-6AM"
                 style="@style/Title.Large"/>
 

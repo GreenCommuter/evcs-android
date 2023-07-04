@@ -154,6 +154,12 @@
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.Transparent" />
 
+        <activity android:name=".activity.ChargingActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Transparent" />
+
         <activity android:name="org.evcs.android.features.image.ImageDetailsActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
@@ -166,6 +172,12 @@
             android:theme="@style/AppTheme.Transparent" />
 
         <activity android:name="org.evcs.android.features.auth.register.VerifyPhoneActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan"
+            android:launchMode="singleTask"
+            android:theme="@style/AppTheme.Transparent" />
+
+        <activity android:name="org.evcs.android.activity.ContactSupportActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleTask"

@@ -25,27 +25,30 @@ abstract class PlanViewHelper(val mContext: Context) {
     abstract fun getFlatRate(): String?
     abstract fun getDCFastPrice(): String?
     abstract fun getLevel2Price(): String?
+
+    abstract fun getFlatRateForGetPlan(): String?
+    abstract fun getCongratulationsDialogSubtitle(): String?
 }
 
 class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     override fun getPlanName(): String {
-        return "Pay as you go"
+        return mContext.getString(R.string.pay_as_you_go_name)
     }
 
     override fun getPlanPrice(): String {
-        return  "\$0 Membership Fee"
+        return mContext.getString(R.string.pay_as_you_go_price)
     }
 
     override fun getPlanButton(): String {
-        return "Get Started"
+        return mContext.getString(R.string.pay_as_you_go_button)
     }
 
     override fun getPlanFreq(): String {
-        return "I charge infrequently"
+        return mContext.getString(R.string.pay_as_you_go_freq)
     }
 
     override fun getPlanLimit(): String? {
-        return "EVCS offers simple, flat rate pricing!"
+        return mContext.getString(R.string.pay_as_you_go_limit)
     }
 
     override fun getPlanLimitAprox(): String? {
@@ -53,15 +56,23 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     }
 
     override fun getFlatRate(): String? {
-        return "Simple flat rate pricing"
+        return mContext.getString(R.string.pay_as_you_go_flat)
     }
 
     override fun getDCFastPrice(): String? {
-        return "DC fast: \$%.2f"
+        return mContext.getString(R.string.pay_as_you_go_dc)
     }
 
     override fun getLevel2Price(): String? {
-        return "Level 2: \$%.2f"
+        return mContext.getString(R.string.pay_as_you_go_ac)
+    }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return null
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String? {
+        return null
     }
 
 }
@@ -81,37 +92,46 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
     }
 
     override fun getPlanFreq(): String {
-        return "I charge publicly %d+ times/%s"
+        return mPlan.useCase
     }
 }
 
 abstract class PlanViewHelperLimited(context: Context, plan: Plan) : PlanViewHelperNonNull(context, plan) {
     override fun getDCFastPrice(): String? {
-        return String.format("DC fast: \$%.2f", mPlan.pricePerKwh)
+        return mContext.getString(R.string.pay_as_you_go_dc, mPlan.pricePerKwh)
     }
 
     override fun getLevel2Price(): String? {
-        return String.format("Level 2: \$%.2f", mPlan.pricePerKwh)
+        return mContext.getString(R.string.pay_as_you_go_ac, mPlan.pricePerKwh)
     }
 }
 
 class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited(context, plan) {
     override fun getPlanLimit(): String? {
-        return String.format("Up to %d kWh/%s", mPlan.kwhCap(), mPlan.renewalPeriod)
+        return mContext.getString(R.string.plan_view_limit, mPlan.kwhCap(), mPlan.renewalPeriod)
     }
 
     override fun getPlanLimitAprox(): String? {
-        return "Approximately %d miles"
+        return mContext.getString(R.string.plan_view_aprox, mPlan.milesCap())
     }
 
     override fun getFlatRate(): String? {
         return mContext.getString(R.string.plan_view_flat_rate, mPlan.kwhCap())
     }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return mContext.getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap())
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String {
+        return mContext.getString(R.string.congratulations_dialog_subtitle_1)
+    }
 }
 
 class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLimited(context, plan) {
     override fun getPlanLimit(): String? {
-        return mContext.getString(R.string.get_plan_flat_rate_time_limited, mPlan.startHour(), mPlan.finishHour())
+        return mContext.getString(R.string.get_plan_flat_rate_time_limited,
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
     }
 
     override fun getPlanLimitAprox(): String? {
@@ -119,7 +139,19 @@ class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLi
     }
 
     override fun getFlatRate(): String? {
-        return mContext.getString(R.string.plan_view_flat_time_limited, mPlan.finishHour(), mPlan.startHour())
+        return mContext.getString(R.string.plan_view_flat_time_limited,
+                mPlan.finishHour().toUpperCase(), mPlan.startHour().toUpperCase())
+    }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return mContext.getString(R.string.get_plan_flat_rate_time_limited,
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String {
+        return String.format(
+                mContext.getString(R.string.congratulations_dialog_subtitle_2),
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
     }
 }
 
@@ -142,5 +174,13 @@ class PlanViewHelperUnlimited(context: Context, plan: Plan) : PlanViewHelperNonN
 
     override fun getLevel2Price(): String? {
         return null
+    }
+
+    override fun getFlatRateForGetPlan(): String? {
+        return mContext.getString(R.string.get_plan_flat_rate_unlimited)
+    }
+
+    override fun getCongratulationsDialogSubtitle(): String {
+        return mContext.getString(R.string.congratulations_dialog_subtitle_3)
     }
 }

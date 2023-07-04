@@ -15,7 +15,6 @@ import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.navigation.INavigationListener
 import org.evcs.android.navigation.controller.AbstractNavigationController
-import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.Extras
 
 class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.WalletHeaderInterface, IWalletView {
@@ -29,8 +28,6 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.Wa
         }
     }
 
-    private lateinit var mToolbar: EVCSToolbar2
-
     override fun layout(): Int {
         return R.layout.fragment_wallet
     }
@@ -43,15 +40,9 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.Wa
 
     override fun setUi(v: View) {
         super.setUi(v)
-        val binding = FragmentWalletBinding.bind(v)
         val walletHeaderFragment = WalletHeaderFragment.newInstance()
         walletHeaderFragment.setParent(this)
         fragmentManager?.beginTransaction()?.replace(R.id.wallet_header_view, walletHeaderFragment)?.commit()
-        mToolbar = binding.walletToolbar
-    }
-
-    override fun setListeners() {
-        mToolbar.setNavigationOnClickListener { activity?.finish() }
     }
 
     override fun onAddPaymentMethodSelected(clearStack: Boolean) {

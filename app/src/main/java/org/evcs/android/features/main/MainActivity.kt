@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import androidx.annotation.CallSuper
+import androidx.core.view.isVisible
 import androidx.navigation.Navigation.findNavController
 import com.base.core.util.NavigationUtils
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -16,6 +17,8 @@ import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
+import org.evcs.android.features.charging.KeyboardListener
+import org.evcs.android.features.profile.plans.PlanViewHelper
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
@@ -174,9 +177,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun showCongratulationsDialog(subscription: Subscription) {
-        //TODO: SA, BA: "enjoy your discounted charging rates"
-        //UOP: "from 10 pm to 6 am"
-        val secondLine = getString(R.string.congratulations_dialog_subtitle_2)
+        val secondLine = PlanViewHelper.instance(this, subscription.plan)
+                .getCongratulationsDialogSubtitle()
         EVCSSliderDialogFragment.Builder()
             .setTitle(getString(R.string.congratulations_dialog_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.congratulations_dialog_subtitle, subscription.planName, secondLine))
@@ -197,4 +199,16 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.drawable.layout_corners_rounded_black_outline, R.color.button_text_color_selector_black_outline)
             .show(supportFragmentManager)
     }
+
+    //Needed because if there's a scrollview the menu can be shown above the keyboard instead of below
+    fun attachKeyboardListener() {
+        val view = window.decorView.rootView
+        KeyboardListener.attach(view) { isShown -> menuView.isVisible = !isShown }
+    }
+
+    fun detachKeyboardListener() {
+        menuView.isVisible = true
+        KeyboardListener.detach(window.decorView.rootView)
+    }
+
 }

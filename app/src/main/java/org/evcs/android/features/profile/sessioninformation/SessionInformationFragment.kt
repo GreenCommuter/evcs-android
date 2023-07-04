@@ -1,27 +1,26 @@
 package org.evcs.android.features.profile.sessioninformation
 
 import android.os.Bundle
-import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.databinding.ActivitySessionInformationBinding
-import org.evcs.android.features.map.location.LocationPresenter
 import org.evcs.android.model.Charge
-import org.evcs.android.model.Location
-import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(), ISessionInformationView {
+open class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(), ISessionInformationView {
 
     private lateinit var mCharge: Charge
     private lateinit var mDateTimeFormatter: DateTimeFormatter
-    private lateinit var mBinding: ActivitySessionInformationBinding
+    protected lateinit var mBinding: ActivitySessionInformationBinding
 
     override fun createPresenter(): SessionInformationPresenter {
         return SessionInformationPresenter(
@@ -37,12 +36,13 @@ class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(),
         return R.layout.activity_session_information
     }
 
-    override fun init() {}
+    override fun init() {
+        mDateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
+    }
 
     override fun populate() {
         showProgressDialog()
-        mDateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
-        val chargeId = requireArguments().getInt(Extras.SessionInformationActivity.CHARGE)
+        val chargeId = requireArguments().getInt(Extras.SessionInformationActivity.CHARGE_ID)
         presenter.getCharge(chargeId)
     }
 
@@ -71,8 +71,11 @@ class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(),
     }
 
     override fun setListeners() {
-        mBinding.sessionInformationToolbar.setNavigationOnClickListener { findNavController().popBackStack() }
-        mBinding.sessionInformationHelp.movementMethod = LinkMovementMethod.getInstance()
+        //TODO: check if show address or request
+        mBinding.sessionInformationHelp.setOnClickListener {
+            val data = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
+            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, data)
+        }
         mBinding.sessionInformationReceipt.setOnClickListener {
             val args = Bundle()
             args.putSerializable(Extras.SessionInformationActivity.CHARGE, mCharge)

@@ -16,6 +16,7 @@ import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlansTabBinding
 import org.evcs.android.databinding.ViewGoToMonthlyPlansBinding
 import org.evcs.android.features.auth.initialScreen.AuthActivity
+import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.Plan

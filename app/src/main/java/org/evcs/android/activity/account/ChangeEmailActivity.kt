@@ -27,10 +27,6 @@ class ChangeEmailActivity : UpdateUserActivity() {
         return mBinding.activityChangeNameSave
     }
 
-    override fun getToolbar(): EVCSToolbar2 {
-        return mBinding.activityChangeNameToolbar
-    }
-
     override fun getLayout(): View {
         return mBinding.activityAccountLayout
     }

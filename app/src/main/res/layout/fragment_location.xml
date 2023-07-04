@@ -6,7 +6,6 @@
     android:orientation="vertical">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/fragment_location_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="Station? detail"/>

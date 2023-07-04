@@ -12,7 +12,6 @@ class ChangeCarFragment : RegisterFragmentYourCar() {
 
     override fun init() {
         super.init()
-        mBinding.fragmentRegisterYourCarToolbar.setNavigationOnClickListener { activity?.finish() }
         mBinding.fragmentRegisterYourCarButton.text = "Save vehicle information"
         mBinding.fragmentRegisterYourCarSubtitle.isVisible = false
     }

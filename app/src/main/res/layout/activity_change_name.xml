@@ -8,7 +8,6 @@
     android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/activity_change_name_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
@@ -17,10 +16,10 @@
     <org.evcs.android.features.shared.StandardTextField
         android:id="@+id/fragment_change_name_first"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/padding_ariel_standard"
         app:label="First name"
-        style="@style/TextInputStyle"
-        android:layout_height="wrap_content">
+        style="@style/TextInputStyle">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.text.*
 import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.StringRes
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
@@ -16,6 +17,7 @@ import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.StringUtils
 import org.evcs.android.util.ViewUtils.setVisibility
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -58,20 +60,14 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))
-        //TODO: unlimited
-        mBinding.getPlanFlatRate.text =
-            getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap().toInt())
-        if (mPlan.isUnlimited) {
-            if (mPlan.isTimeLimited)
-                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_time_limited, mPlan.startHour(), mPlan.finishHour())
-            else
-                mBinding.getPlanFlatRate.text = getString(R.string.get_plan_flat_rate_unlimited)
-        }
-
+        mBinding.getPlanFlatRate.text = PlanViewHelper.instance(requireContext(), mPlan).getFlatRateForGetPlan()
         mBinding.getPlanCostLayout.setVisibility(showCostLayout())
-        val period = mPlan.renewalPeriod.toAdverb()
-        mBinding.getPlanMonthlyCostTitle.text = getString(R.string.get_plan_price)
+        val period = StringUtils.capitalize(mPlan.renewalPeriod.toAdverb())
+        val startingDate = dateFormatter.print(mPlan.startingDate())
+        mBinding.getPlanMonthlyCostTitle.text = getString(R.string.get_plan_price, period, startingDate)
         mBinding.getPlanSubtotal.text = getString(R.string.app_price_format, mPlan.price)
+        //TODO: tax
+        mBinding.getPlanTotal.text = getString(R.string.app_price_format, mPlan.price)
         mBinding.bottomNavigationButton.text = getButtonText()
 
         mBinding.getPlanTandc.text = getTandCText()
@@ -93,7 +89,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         return requireContext().getText(R.string.get_plan_tandc, getButtonText())
     }
 
-    fun Context.getText(id: Int, vararg args: Any): CharSequence {
+    // Needed to have both placeholders and html links
+    fun Context.getText(@StringRes id: Int, vararg args: Any): CharSequence {
         val escapedArgs = args.map {
             if (it is String) TextUtils.htmlEncode(it) else it
         }.toTypedArray()
@@ -101,7 +98,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
-        return "Starting %2\$s"
+        return getString(R.string.get_plan_monthly_label, dateFormatter.print(mPlan.startingDate()))
     }
 
     protected open fun getNextBillingDate(): DateTime? {
@@ -132,7 +129,6 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     override fun setListeners() {
         super.setListeners()
-        mBinding.getPlanToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         mBinding.bottomNavigationButton.setOnClickListener { getBottomNavigationListener() }
         mBinding.getPlanPaymentInfo.setOnChangeClickListener {
             val intent = WalletActivity.buildIntent(context, true)

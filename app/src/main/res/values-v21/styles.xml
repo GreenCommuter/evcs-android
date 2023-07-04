@@ -12,7 +12,7 @@
 
         <!-- Status bar, background and accent color -->
         <item name="android:colorPrimaryDark">@color/evcs_black</item>
-        <item name="android:windowBackground">@color/evcs_light_grey</item>
+        <item name="android:windowBackground">@color/evcs_white</item>
         <item name="android:textColorPrimary">@color/evcs_gray_800</item>
         <item name="android:navigationBarColor">@color/evcs_black</item>
         <item name="colorControlNormal">@color/evcs_grey</item>
@@ -24,8 +24,7 @@
 
         <!-- TextInputLayout style -->
         <item name="textInputLayoutStyle">@style/TextInputStyle</item>
-
-        <item name="android:datePickerDialogTheme">@style/EVCSDatePickerDialogTheme</item>
+        <item name="navigationIcon">@string/back</item>
     </style>
 
     <!-- Text styling and background of options menu items -->
@@ -43,14 +42,4 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
     </style>
 
-    <!-- Date Picker -->
-    <style name="EVCSDatePickerDialogTheme" parent="android:Theme.Material.Light.Dialog">
-        <item name="android:colorAccent">@color/evcs_green</item>
-        <item name="android:datePickerStyle">@style/EVCSDatePickerStyle</item>
-    </style>
-
-    <style name="EVCSDatePickerStyle" parent="@android:style/Widget.Material.Light.DatePicker">
-        <item name="android:headerBackground">@color/evcs_green</item>
-    </style>
-    
 </resources>

@@ -15,7 +15,6 @@ import org.evcs.android.features.subscriptions.ImageCheckBoxLayout
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.ViewUtils
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
@@ -31,7 +30,6 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
     protected lateinit var mCardExpirationMonth: StandardTextField
     protected lateinit var mCvv: StandardTextField
     protected lateinit var mNext: Button
-    protected lateinit var mToolbar: EVCSToolbar2
     protected lateinit var mSetDefault: ImageCheckBoxLayout
 
 //    protected var listener: IBrainTreeListener? = null
@@ -62,7 +60,6 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
         mCvv = binding.fragmentBraintreeCardCvv
         mZipcode = binding.fragmentBraintreeCardZipcode
         mNext = binding.fragmentBraintreeNext
-        mToolbar = binding.fragmentAddCreditCardToolbar
         mSetDefault = binding.fragmentAddCreditCardSetDefault
 
         for (view in arrayListOf (mCardName, mCardNumber, mCardExpirationMonth, mCvv, mZipcode)) {
@@ -83,7 +80,6 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
     @CallSuper
     override fun setListeners() {
         mNext.setOnClickListener { onNextClicked() }
-        mToolbar.setNavigationOnClickListener { finish() }
         mNext.background = getButtonBackground()
         mNext.text = getButtonText()
     }
@@ -126,7 +122,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
      */
     fun finish() {
         requireActivity().onBackPressed()
-        NavHostFragment.findNavController(this).popBackStack()
+//        NavHostFragment.findNavController(this).popBackStack()
     }
 
 //    interface IBrainTreeListener : INavigationListener {

@@ -2,6 +2,7 @@ package org.evcs.android.features.charging
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -9,7 +10,9 @@ import android.util.SparseArray
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
@@ -19,23 +22,27 @@ import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentChargingTabBinding
-import org.evcs.android.features.shared.EVCSDialogFragment
+import org.evcs.android.features.main.MainActivity
+import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.Extras
 
 
 class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTabView {
 
+    private lateinit var mLauncher: ActivityResultLauncher<Intent>
     lateinit var mSurfaceView: SurfaceView
     //    lateinit var txtBarcodeValue: TextView
     private lateinit var barcodeDetector: BarcodeDetector
     private lateinit var cameraSource: CameraSource
     private lateinit var mTextField: StandardTextField
-    lateinit var mButton: Button
+    lateinit var mButton: TextView
 
-    val mListener = ChargingNavigationController.getInstance()
+    val mListener = MainNavigationController.getInstance()
 
     companion object {
         fun newInstance(): ChargingTabFragment {
@@ -62,7 +69,13 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
-    override fun init() {}
+    //Do this better
+    override fun init() {
+        mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result -> if (result.resultCode != ChargingActivity.RESULT_CANCELED_WITH_DIALOG)
+                MainNavigationController.getInstance().onMapClicked()
+        }
+    }
 
     override fun populate() {
         showProgressDialog()
@@ -124,7 +137,9 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     }
 
     private fun goToPlanInfo(id: String) {
-        mListener.goToPlanInfo(id)
+        val intent = Intent(requireContext(), ChargingActivity::class.java)
+        intent.putExtra(Extras.PlanInfo.STATION_ID, id)
+        mLauncher.launch(intent)
     }
 
     @SuppressLint("MissingPermission")
@@ -139,22 +154,26 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
     override fun onChargeRetrieved(response: Session?) {
         hideProgressDialog()
         if (response != null) {
-            mListener.onChargingStarted(response)
+            val intent = Intent(requireContext(), ChargingActivity::class.java)
+            intent.putExtra(Extras.StartCharging.SESSION, response)
+            mLauncher.launch(intent)
         }
     }
 
     override fun onPause() {
         super.onPause()
         cameraSource.release()
+        (activity as MainActivity).detachKeyboardListener()
     }
 
     override fun onResume() {
         super.onResume()
         initialiseDetectorsAndSources()
+        (activity as MainActivity).attachKeyboardListener()
     }
 
     override fun onBackPressed(): Boolean {
-        mListener.finish()
+        mListener.onMapClicked()
         return true;
     }
 }

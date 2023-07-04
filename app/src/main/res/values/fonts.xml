@@ -37,24 +37,11 @@
         <item name="android:textColor">#514f4d</item>
     </style>
 
-    <style name="Roboto.Body.White">
-        <item name="android:textColor">@color/evcs_white</item>
-    </style>
-
 <!--    <style name="Roboto.ProfileMenu">-->
 <!--        <item name="android:textColor">@color/button_text_color_selector_filled</item>-->
 <!--        <item name="android:textSize">21sp</item>-->
 <!--        <item name="fontFamily">@font/roboto_regular</item>-->
 <!--    </style>-->
-
-    <style name="RobotoBold" parent="@android:style/TextAppearance">
-        <item name="fontPath">fonts/Roboto-Bold.ttf</item>
-        <item name="fontFamily">@font/roboto_bold</item>
-    </style>
-
-    <style name="RobotoBold.Body">
-        <item name="android:textSize">14sp</item>
-    </style>
 
     <style name="Inter" parent="@android:style/TextAppearance">
         <item name="android:textColor">@color/evcs_gray_800</item>

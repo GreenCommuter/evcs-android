@@ -31,7 +31,6 @@ abstract class PaginationFragment<K, P : PaginationPresenter<K, *>, A : BaseRecy
         mRecyclerView = binding.fragmentChargingHistoryRecycler
         mSwipeRefreshLayout = binding.fragmentChargingHistorySwipeRefresh
         mEmptyView = binding.fragmentChargingHistoryEmptyView
-        binding.fragmentChargingHistoryToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
         binding.fragmentChargingHistoryToolbar.setTitle(getToolbarTitle())
     }
 

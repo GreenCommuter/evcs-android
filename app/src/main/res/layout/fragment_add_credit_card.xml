@@ -8,7 +8,6 @@
     android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/fragment_add_credit_card_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title="@string/braintree_title" />
@@ -74,7 +73,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="@dimen/spacing_ariel_related">
+                        android:layout_marginEnd="@dimen/spacing_medium">
 
                         <com.google.android.material.textfield.TextInputEditText
                             style="@style/StandardEditText"
@@ -92,7 +91,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginEnd="@dimen/spacing_ariel_related">
+                    android:layout_marginEnd="@dimen/spacing_medium">
 
                     <com.google.android.material.textfield.TextInputEditText
                         style="@style/StandardEditText"

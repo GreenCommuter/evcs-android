@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/placeholder">
+
+    <fragment
+        android:id="@+id/planInfoFragment"
+        android:name="org.evcs.android.features.charging.PlanInfoFragment"
+        android:label="PlanInfoFragment"
+        tools:layout="@layout/fragment_plan_info">
+        <argument
+            android:name="station_id"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_planInfoFragment_to_startChargingFragment"
+            app:destination="@id/startChargingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startChargingFragment"
+        android:name="org.evcs.android.features.charging.StartChargingFragment"
+        android:label="StartChargingFragment"
+        tools:layout="@layout/fragment_start_charging">
+        <action
+            android:id="@+id/action_startChargingFragment_to_chargingInProgressFragment"
+            app:destination="@id/chargingInProgressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chargingInProgressFragment"
+        android:name="org.evcs.android.features.charging.ChargingInProgressFragment"
+        android:label="ChargingInProgressFragment"
+        tools:layout="@layout/fragment_charging_in_progress">
+        <action
+            android:id="@+id/action_chargingInProgressFragment_to_sessionInformationFragment"
+            app:destination="@id/sessionInformationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sessionInformationFragment"
+        android:name="org.evcs.android.features.profile.sessioninformation.ChargingSessionInformationFragment"
+        android:label="SessionInformationFragment"
+        tools:layout="@layout/activity_session_information">
+<!--        <action-->
+<!--            android:id="@+id/action_sessionInformationFragment_to_receiptFragment"-->
+<!--            app:destination="@id/receiptFragment" />-->
+<!--        <argument-->
+<!--            android:name="Charge"-->
+<!--            app:argType="integer" />-->
+    </fragment>
+<!--    <fragment-->
+<!--        android:id="@+id/receiptFragment"-->
+<!--        android:name="org.evcs.android.features.profile.sessioninformation.ReceiptFragment"-->
+<!--        android:label="ReceiptFragment"-->
+<!--        tools:layout="@layout/fragment_receipt"/>-->
+    <fragment android:id="@+id/placeholder"
+        android:name="org.evcs.android.ui.fragment.EmptyFragment">
+        <action
+            android:id="@+id/action_placeholder_to_planInfoFragment"
+            app:destination="@id/planInfoFragment" />
+    </fragment>
+</navigation>

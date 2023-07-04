@@ -34,7 +34,7 @@ class ListButtonView : LinearLayout {
         val bottomDiv = typedArray.getBoolean(R.styleable.ListButtonView_bottomDivider, true)
         val showButton = typedArray.getBoolean(R.styleable.ListButtonView_showButton, true)
         typedArray.recycle()
-        mText.text = text
+        setText(text)
         mBinding.viewListButtonLabel.text = label
         mBinding.viewListButtonLabel.visibility = if (TextUtils.isEmpty(label)) GONE else VISIBLE
         mBinding.viewListButtonBottomLine.visibility = if (bottomDiv) VISIBLE else INVISIBLE
@@ -44,6 +44,7 @@ class ListButtonView : LinearLayout {
 
     fun setText(text: String?) {
         mText.text = text
+        mText.visibility = if (TextUtils.isEmpty(text)) GONE else VISIBLE
     }
 
     fun setText(@StringRes resId: Int) {

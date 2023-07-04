@@ -31,7 +31,6 @@ class NotificationsFragment : ErrorFragment<NotificationsPresenter>(), Notificat
     }
 
     override fun setListeners() {
-        mBinding.notificationsToolbar.setNavigationOnClickListener { requireActivity().finish() }
         mBinding.notificationsSwitch.setOnClickListener {
             presenter.toggleNotifications(mBinding.notificationsSwitch.isChecked)
         }

@@ -1,22 +1,30 @@
 package org.evcs.android.features.charging
 
+import android.os.Handler
 import android.view.View
-import android.view.animation.AnimationUtils
-import androidx.navigation.fragment.findNavController
+import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
+import org.evcs.android.model.Location
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
+import org.joda.time.format.DateTimeFormatter
 
 class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     ChargingInProgressView {
 
-    private var mSessionId: Int = 0
+    private val REFRESH_INTERVAL_SECONDS = 30
+
+    private lateinit var formatter: DateTimeFormatter
+    private lateinit var mSession: Session
     private lateinit var mBinding: FragmentChargingInProgressBinding
+    private var mLastUpdate: DateTime? = null
+    private var mDuration: Long? = null
 
     override fun layout(): Int {
         return R.layout.fragment_charging_in_progress
@@ -34,11 +42,31 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     override fun init() {}
 
     override fun populate() {
+        formatter = DateTimeFormat.forPattern("HH:mm:ss").withZoneUTC()
+
         val session = arguments?.getSerializable(Extras.StartCharging.SESSION) as Session?
         if (session == null) {
             refresh()
         } else {
             onChargeRetrieved(session)
+        }
+    }
+
+    fun startTimerUpdates() {
+        Handler().postDelayed(mRunnable, 1000)
+    }
+
+    val mRunnable = object : Runnable {
+        override fun run() {
+            setDuration(mDuration!!.plus(1000))
+            if (mLastUpdate?.plusSeconds(REFRESH_INTERVAL_SECONDS)?.isBeforeNow == true) {
+                presenter.getCurrentCharge()
+            }
+            if (isVisible) {
+                Handler().postDelayed(this, 1000)
+            } else {
+                mDuration = null
+            }
         }
     }
 
@@ -48,10 +76,10 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     }
 
     override fun setListeners() {
-        mBinding.chargingInProgressLastUpdate.setOnClickListener { refresh() }
+//        mBinding.chargingInProgressLastUpdate.setOnClickListener { refresh() }
         mBinding.chargingInProgressStopSession.setOnClickListener {
             showProgressDialog()
-            presenter?.stopSession(mSessionId)
+            presenter?.stopSession(mSession.id)
         }
     }
 
@@ -60,24 +88,44 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
             sessionStopped()
             return
         }
-        mSessionId = response.id
-        hideProgressDialog()
-        mBinding.chargingInProgressEnergy.text = String.format("%.3f kWh", response.printKwh())
-        mBinding.chargingInProgressSessionTime.text = response.printableDuration
-        mBinding.chargingInProgressStatus.text = response.status
-        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName
-        val formatter = DateTimeFormat.forPattern("hh:mm:ss")
-        mBinding.chargingInProgressLastUpdate.text =
-                "Last update: " + formatter.print(response.updatedAt) + " (tap to refresh)"
-        mBinding.chargingInProgressStatusIcon
-                .startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_blink))
-        mBinding.chargingInProgressStatusIcon.visibility = if (response.isCharging) View.VISIBLE else View.GONE
+        mLastUpdate = DateTime()
+        mSession = response
+        presenter.getStation(response.stationName)
+        mBinding.chargingInProgressEnergy.text = response.printKwh()
+        if (mDuration == null) {
+            hideProgressDialog()
+            setDuration(response.duration.toLong())
+            startTimerUpdates()
+        }
+//        mBinding.chargingInProgressStatus.text = response.status
+//        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName
+//        mBinding.chargingInProgressLastUpdate.text =
+//                "Last update: " + formatter.print(response.updatedAt) + " (tap to refresh)"
+//        mBinding.chargingInProgressStatusIcon
+//                .startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_blink))
+//        mBinding.chargingInProgressStatusIcon.visibility = if (response.isCharging) View.VISIBLE else View.GONE
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
+    }
+
+    override fun onLocationRetrieved(location: Location) {
+        mSession.setLocation(location)
+        mBinding.chargingInProgressSiteName.text = mSession.address.toString()
+        mBinding.chargingInProgressLocationLoading.isVisible = false
+    }
+
+    private fun setDuration(duration: Long) {
+        mDuration = duration
+        mBinding.chargingInProgressSessionTime.text = formatter.print(duration)
     }
 
     override fun sessionStopped() {
         hideProgressDialog()
         ToastUtils.show("Session finished")
-        findNavController().popBackStack()
+        ChargingNavigationController.getInstance().onSessionFinished(mSession)
+    }
+
+    override fun onBackPressed(): Boolean {
+        requireActivity().finish()
+        return true
     }
 }

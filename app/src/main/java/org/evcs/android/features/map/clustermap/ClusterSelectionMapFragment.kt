@@ -74,9 +74,12 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
     }
 
     open fun showMapItems(mapItems: List<T?>) {
-        mClusterManager.clearItems()
-        mClusterManager.addItems(mapItems)
-        mClusterManager.cluster()
+        //Mainly to make sure the clustermanager is init
+        mapView?.getMapAsync {
+            mClusterManager.clearItems()
+            mClusterManager.addItems(mapItems)
+            mClusterManager.cluster()
+        }
     }
 
     fun toggleContainerSelection(selectedLocation: T) {

@@ -38,6 +38,7 @@ public class Extras {
 
     public static class SessionInformationActivity {
         public static final String CHARGE = "Charge";
+        public static final String CHARGE_ID = "ChargeId";
         public static final String PAYMENT = "Subscription";
     }
 
@@ -67,6 +68,10 @@ public class Extras {
 
     public static class CreditCard {
         public static final String CREDIT_CARD = "credit_card";
+    }
+
+    public static class ContactSupportActivity {
+        public static final String SHOW_ADDRESS = "show_address";
     }
 
     public static class PlanActivity {

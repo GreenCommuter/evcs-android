@@ -22,11 +22,12 @@ class PlanProgressView : LinearLayout {
         mBinding = PlanProgressViewBinding.inflate(LayoutInflater.from(context), this, true)
     }
 
-    fun setPlan(status: SubscriptionStatus) {
+    fun setPlan(status: SubscriptionStatus, showText: Boolean = true) {
 
         mBinding.activitySubscriptionsConsumption.text =
                 context.getString(R.string.progress_view_text,
                         status.kwhUsage, status.printTotalKwh(), status.renewalPeriod)
+        mBinding.activitySubscriptionsConsumption.isVisible = showText
         if (status.unlimited) {
             mBinding.activitySubscriptionsProgress.isVisible = false
         } else {

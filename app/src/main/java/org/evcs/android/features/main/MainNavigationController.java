@@ -14,7 +14,6 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
     private static MainNavigationController mInstance;
 
     private final MainActivity mActivity;
-    private AbstractNavigationController mCurrentController;
     private boolean mIsInCharging;
     private boolean mIsInProfile;
 
@@ -38,40 +37,29 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
         backToBaseFragment();
         mIsInCharging = true;
         mIsInProfile = false;
-        ChargingNavigationController controller = new ChargingNavigationController(ROOT_ID, mNavController);
-        controller.startFlow();
-        mCurrentController = controller;
+        navigate(R.id.chargingFragment);
         mActivity.setSelectedItem(R.id.menu_drawer_charging);
     }
 
     public void goToProfile() {
         if (mIsInProfile) return;
-        cancelSession(() -> {
+//        cancelSession(() -> {
             mIsInProfile = true;
             mIsInCharging = false;
             backToBaseFragment();
             navigate(R.id.profileFragment);
             mActivity.setSelectedItem(R.id.menu_drawer_profile);
-        });
+//        });
     }
 
     public void onMapClicked() {
         if (!mIsInCharging && !mIsInProfile) return;
-        cancelSession(() -> {
+//        cancelSession(() -> {
             mIsInCharging = false;
             mIsInProfile = false;
             backToBaseFragment();
             mActivity.setSelectedItem(R.id.menu_drawer_map);
-        });
-    }
-
-    protected void cancelSession(ChargingNavigationController.CancelSessionCallback c) {
-        if (mIsInCharging) {
-            ((ChargingNavigationController) mCurrentController)
-                    .cancelSession(mActivity.getSupportFragmentManager(), c);
-        } else {
-            c.onSessionCanceled();
-        }
+//        });
     }
 
 }

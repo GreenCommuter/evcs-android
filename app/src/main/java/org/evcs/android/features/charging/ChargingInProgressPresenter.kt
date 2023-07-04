@@ -3,8 +3,14 @@ package org.evcs.android.features.charging
 import com.base.networking.retrofit.RetrofitServices
 import com.base.networking.utils.NetworkCodes
 import okhttp3.ResponseBody
+import org.evcs.android.model.Location
+import org.evcs.android.model.PaginatedResponse
+import org.evcs.android.model.Station
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.CommandsService
+import org.evcs.android.network.service.LocationService
+import org.evcs.android.network.service.StationsService
 import org.evcs.android.network.service.presenter.PollingManager
 import org.evcs.android.util.ErrorUtils
 import retrofit2.Call
@@ -53,6 +59,40 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services
                 return response.code() == NetworkCodes.ACCEPTED
             }
         })
+    }
+
+    fun getStation(id : String) {
+        getService(StationsService::class.java).getStationFromQR(id).enqueue(
+            object : AuthCallback<PaginatedResponse<Station>?>(this) {
+                override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {
+                    getLocation(response!!.page!![0].locationId!!)
+                }
+
+                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                    view.showError(ErrorUtils.getError(responseBody))
+                }
+
+                override fun onCallFailure(t: Throwable) {
+                    view.showError(RequestError.getNetworkError())
+                }
+            })
+    }
+
+    fun getLocation(id : Int) {
+        getService(LocationService::class.java).getLocation(id).enqueue(
+            object : AuthCallback<Location>(this) {
+                override fun onResponseSuccessful(response: Location) {
+                    view.onLocationRetrieved(response)
+                }
+
+                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                    view.showError(ErrorUtils.getError(responseBody))
+                }
+
+                override fun onCallFailure(t: Throwable) {
+                    view.showError(RequestError.getNetworkError())
+                }
+            })
     }
 
 }

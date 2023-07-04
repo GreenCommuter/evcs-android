@@ -9,6 +9,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Session
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.ViewUtils.showOrHide
@@ -129,5 +130,9 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     override fun onBackPressed(): Boolean {
         requireActivity().finish()
         return true
+    }
+
+    override fun showNetworkError() {
+        super.showError(RequestError.getNetworkError())
     }
 }

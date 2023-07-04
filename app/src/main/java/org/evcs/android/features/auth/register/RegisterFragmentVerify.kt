@@ -71,9 +71,9 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         val intentFilter = IntentFilter()
         intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)
         requireActivity().registerReceiver(SMSBroadcastReceiver(presenter), intentFilter)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             presenter?.startSMSListener(requireContext())
-        }
+//        }
         val validatorManager = ValidatorManager();
         validatorManager.addValidator(PasswordTextInputValidator(mBinding.fragmentRegisterEnterCodeText))
         validatorManager.setOnAnyTextChangedListener{setEnableButton(validatorManager.areAllFieldsValid())}

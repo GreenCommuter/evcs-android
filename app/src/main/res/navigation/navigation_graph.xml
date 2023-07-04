@@ -83,7 +83,7 @@
             android:id="@+id/action_sessionInformationFragment_to_receiptFragment"
             app:destination="@id/receiptFragment" />
         <argument
-            android:name="ChargeId"
+            android:name="chargeId"
             app:argType="integer" />
     </fragment>
     <fragment

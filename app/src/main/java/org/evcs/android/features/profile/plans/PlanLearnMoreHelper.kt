@@ -102,7 +102,7 @@ class PlanLearnMoreHelperCapped(context: Context, plan: Plan) : PlanLearnMoreHel
     }
 
     override fun getPlanSideNote(): String? {
-        return String.format(
+        return if (mPlan.trialDays == 0) null else String.format(
             "*%d days free not available for users who have already tried Standard Anytime",
             mPlan.trialDays)
     }
@@ -115,7 +115,7 @@ abstract class PlanLearnMoreHelperNotCapped(context: Context, plan: Plan) : Plan
     }
 
     override fun getPlanSideNote(): String? {
-        return String.format(
+        return if (mPlan.trialDays == 0) null else String.format(
             "*%d days free not available for users who have already tried Unlimited Anytime or Standard Anytime",
             mPlan.trialDays)
     }

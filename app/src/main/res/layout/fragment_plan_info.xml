@@ -25,7 +25,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_big_k"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:layout_marginBottom="@dimen/spacing_big_k"
                 android:visibility="visible"
                 android:src="@drawable/charging_scene"/>
@@ -215,7 +215,7 @@
         android:layout_marginEnd="@dimen/padding_ariel_standard"
         android:layout_marginBottom="@dimen/spacing_large_k"
         android:text="@string/plan_info_start_charging"
-        android:enabled="true"
+        android:enabled="false"
         style="@style/ButtonK.Orange"/>
 
     <TextView

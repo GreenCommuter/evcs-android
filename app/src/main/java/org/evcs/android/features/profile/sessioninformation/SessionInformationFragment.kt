@@ -42,7 +42,7 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
 
     override fun populate() {
         showProgressDialog()
-        val chargeId = requireArguments().getInt(Extras.SessionInformationActivity.CHARGE_ID)
+        val chargeId = SessionInformationFragmentArgs.fromBundle(requireArguments()).chargeId
         presenter.getCharge(chargeId)
     }
 
@@ -81,6 +81,11 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
             args.putSerializable(Extras.SessionInformationActivity.CHARGE, mCharge)
             findNavController().navigate(R.id.receiptFragment, args)
         }
+    }
+
+    override fun onBackPressed(): Boolean {
+        requireActivity().finish()
+        return true
     }
 
 }

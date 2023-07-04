@@ -28,6 +28,7 @@ import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.Session
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 
@@ -160,16 +161,29 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         }
     }
 
+    override fun showNetworkError() {
+        super.showError(RequestError.getNetworkError())
+        onBackPressed()
+    }
+
     override fun onPause() {
         super.onPause()
         cameraSource.release()
-        (activity as MainActivity).detachKeyboardListener()
     }
 
     override fun onResume() {
         super.onResume()
         initialiseDetectorsAndSources()
+    }
+
+    override fun onStart() {
+        super.onStart()
         (activity as MainActivity).attachKeyboardListener()
+    }
+
+    override fun onStop() {
+        (activity as MainActivity).detachKeyboardListener()
+        super.onStop()
     }
 
     override fun onBackPressed(): Boolean {

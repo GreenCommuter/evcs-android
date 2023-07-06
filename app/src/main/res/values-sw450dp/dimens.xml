@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Spacing -->
+    <dimen name="spacing_tiniest">1.37dp</dimen>
+    <dimen name="spacing_tiny">2.74dp</dimen>
+    <dimen name="spacing_small">5.48dp</dimen>
+    <dimen name="spacing_medium">10.96dp</dimen>
+    <dimen name="spacing_medium_more">21.92dp</dimen>
+    <dimen name="spacing_medium_extra">21.92dp</dimen>
+    <dimen name="spacing_large">27.4dp</dimen>
+    <dimen name="spacing_large_extra">38.36dp</dimen>
+    <dimen name="spacing_big">49.32dp</dimen>
+    <dimen name="spacing_big_extra">57.54dp</dimen>
+    <dimen name="spacing_huge">65.76dp</dimen>
+    <dimen name="spacing_huge_extra">82.2dp</dimen>
+    <dimen name="spacing_largest">98.64dp</dimen>
+    <dimen name="spacing_largest_extra">120.56dp</dimen>
+
+    <!-- Text sizes -->
+    <dimen name="font_tiny">10sp</dimen>
+    <dimen name="font_small">12sp</dimen>
+    <dimen name="font_small_more">14sp</dimen>
+    <dimen name="font_medium">16sp</dimen>
+    <dimen name="font_medium_more">18sp</dimen>
+    <dimen name="font_medium_extra">20sp</dimen>
+    <dimen name="font_large">22sp</dimen>
+    <dimen name="font_large_extra">24sp</dimen>
+    <dimen name="font_big">26sp</dimen>
+    <dimen name="font_huge">32sp</dimen>
+
+    <dimen name="spacing_large_k">32.88dp</dimen>
+    <dimen name="spacing_big_k">43.84dp</dimen>
+    <dimen name="spacing_big_extra_k">54.8dp</dimen>
+
+    <dimen name="padding_ariel_standard">21.92dp</dimen>
+    <dimen name="spacing_toolbar_bottom_extra">21.92dp</dimen>
+
+</resources>

@@ -78,7 +78,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
         if (status?.kwhUsage != null) {
             mBinding.planInfoKwhUsage.visibility = View.VISIBLE
-            val text = String.format("%d/%s kWh", status.kwhUsage, status.printTotalKwh())
+            val text = String.format("%.0f/%s kWh", status.kwhUsage, status.printTotalKwh())
             mBinding.planInfoKwhUsage.setText(text)
             mBinding.planInfoKwhProgress.isVisible = true
             mBinding.planInfoKwhProgress.setPlan(status, false)

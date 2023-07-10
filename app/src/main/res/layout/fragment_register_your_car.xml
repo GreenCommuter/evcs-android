@@ -12,6 +12,7 @@
         android:background="@color/evcs_white">
 
         <org.evcs.android.ui.view.shared.EVCSToolbar2
+            android:id="@+id/fragment_register_you_car_toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"

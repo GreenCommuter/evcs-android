@@ -9,7 +9,7 @@ import java.util.regex.Pattern
 
 enum class CreditCardProvider(val mKey: String, val mPossible: String, @DrawableRes val drawable: Int,
                               @DrawableRes val logo: Int) {
-    @SerializedName(value = "american_express", alternate = ["AmericanExpress"])
+    @SerializedName(value = "amex", alternate = ["AmericanExpress"])
     AMERICAN_EXPRESS("^3[47][0-9]{13}$", "^3[47]", R.drawable.cc_american, R.drawable.cc_american_logo),
     @SerializedName(value = "jcb", alternate = ["JCB"])
     JCB("^(?:2131|1800|35[0-9]{3})[0-9]{11}$", "^(2131|1800|35)", R.drawable.cc_jcb, R.drawable.cc_jcb),

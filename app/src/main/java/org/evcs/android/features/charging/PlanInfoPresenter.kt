@@ -95,7 +95,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
             } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
                 view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
             } else {
-                view.show(mStation!!, mStatus!!.currentSubscription)
+                view.show(mStation!!, mStatus?.currentSubscription)
             }
         }
     }

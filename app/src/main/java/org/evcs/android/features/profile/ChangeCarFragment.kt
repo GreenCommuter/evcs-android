@@ -14,6 +14,7 @@ class ChangeCarFragment : RegisterFragmentYourCar() {
         super.init()
         mBinding.fragmentRegisterYourCarButton.text = "Save vehicle information"
         mBinding.fragmentRegisterYourCarSubtitle.isVisible = false
+        mBinding.fragmentRegisterYouCarToolbar.setNavigationText("Back")
     }
 
     override fun onCarsAdded(car : UserCar) {
@@ -25,6 +26,11 @@ class ChangeCarFragment : RegisterFragmentYourCar() {
 
     override fun skipScreen(): Boolean {
         return false
+    }
+
+    override fun onBackPressed(): Boolean {
+        requireActivity().finish()
+        return true
     }
 
 }

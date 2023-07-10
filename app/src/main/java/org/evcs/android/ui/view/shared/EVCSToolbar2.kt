@@ -51,7 +51,7 @@ class EVCSToolbar2 : LinearLayout {
     }
 
     fun setNavigationText(text: String) {
-        mBinding.toolbarEvcsNavbutton.text = text
+        mBinding.toolbarEvcsNavbutton.showOrHide(text)
     }
 
     fun setNavigationOnClickListener(function: () -> Unit) {

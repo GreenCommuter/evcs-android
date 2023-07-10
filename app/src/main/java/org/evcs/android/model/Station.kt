@@ -26,7 +26,7 @@ class Station : Serializable {
 
     fun getAvailableStatus(): AvailableStatus {
         for (value in AvailableStatus.values()) {
-            if (status == value.toString()) {
+            if (value.toString().equals(status, true)) {
                 return value
             }
         }

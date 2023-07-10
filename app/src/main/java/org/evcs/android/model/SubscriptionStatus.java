@@ -24,7 +24,7 @@ public class SubscriptionStatus implements Serializable {
 //                    "plan_icon_url": "https://media.evcs.com/plan.png"
     //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
     public Status status;
-    public int kwhUsage;
+    public Float kwhUsage;
     public DateTime renewalDate;
     public boolean planCoversTime;
     public Integer remainingKwh;
@@ -68,7 +68,7 @@ public class SubscriptionStatus implements Serializable {
 
     public Integer getTotalKwh() {
         try {
-            return remainingKwh + kwhUsage;
+            return remainingKwh + kwhUsage.intValue();
         } catch (Exception e) {
             return null;
         }

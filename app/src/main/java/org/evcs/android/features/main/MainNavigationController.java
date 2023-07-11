@@ -4,9 +4,7 @@ import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
-import org.evcs.android.features.charging.ChargingNavigationController;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
-import org.evcs.android.navigation.controller.AbstractNavigationController;
 
 public class MainNavigationController extends AbstractBaseFragmentNavigationController {
 

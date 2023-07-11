@@ -31,6 +31,7 @@ class PlanProgressView : LinearLayout {
         if (status.isUnlimited) {
             mBinding.activitySubscriptionsProgress.isVisible = false
         } else {
+            if (status.kwhUsage == null) return
             mBinding.activitySubscriptionsProgress.progress = status.kwhUsage.toInt()
             mBinding.activitySubscriptionsProgress.max = status.totalKwh
             if (status.kwhUsage >= status.totalKwh) {

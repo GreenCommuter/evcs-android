@@ -109,7 +109,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"
-                style="@style/Body.Medium"/>
+                android:textColor="@color/evcs_gray_400"
+                style="@style/Body.ExtraSmall"/>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
                 android:id="@+id/charging_in_progress_cost"
@@ -117,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Session Cost">
+                app:label="Session Fee">
 
                 <TextView
                     android:layout_width="wrap_content"

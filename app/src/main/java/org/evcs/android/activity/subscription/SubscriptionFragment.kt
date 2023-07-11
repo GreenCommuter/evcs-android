@@ -22,7 +22,7 @@ import org.evcs.android.util.UserUtils
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
-class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), SubscriptionActivityView {
+class SubscriptionFragment : ErrorFragment<SubscriptionPresenter>(), SubscriptionView {
 
     private lateinit var mSubscriptionId: String
     private lateinit var mLongDateFormatter: DateTimeFormatter
@@ -58,8 +58,8 @@ class SubscriptionFragment : ErrorFragment<SubscriptionActivityPresenter>(), Sub
         UserUtils.getLoggedUser().activeSubscription?.let { onSubscriptionPlanRetrieved(it) }
     }
 
-    override fun createPresenter(): SubscriptionActivityPresenter {
-        return SubscriptionActivityPresenter(this, EVCSApplication.getInstance().retrofitServices)
+    override fun createPresenter(): SubscriptionPresenter {
+        return SubscriptionPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun onSubscriptionPlanRetrieved(response: SubscriptionStatus) {

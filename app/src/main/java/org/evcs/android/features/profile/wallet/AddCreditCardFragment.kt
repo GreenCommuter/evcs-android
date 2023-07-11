@@ -129,8 +129,8 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
     override fun onDefaultPaymentMethodSet(item: PaymentMethod) {
         ToastUtils.show(getString(R.string.add_credit_card_success))
-        finish()
         (activity as WalletActivity).onPaymentMethodChanged(item)
+        finish()
     }
 
     override fun onMakeDefaultError(error: RequestError) {

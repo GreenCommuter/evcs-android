@@ -67,11 +67,16 @@ public class SubscriptionStatus implements Serializable {
     //        "weekly_kwh":null,
 
     public Integer getTotalKwh() {
-        try {
-            return remainingKwh + kwhUsage.intValue();
-        } catch (Exception e) {
-            return null;
-        }
+//        try {
+//            return remainingKwh + kwhUsage.intValue();
+//        } catch (Exception e) {
+//            return null;
+//        }
+        return plan.kwhCap();
+    }
+
+    public Float getKwhUsage() {
+        return kwhUsage == null ? 0 : kwhUsage;
     }
 
     public boolean isUnlimited() {

@@ -113,7 +113,10 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         if (status.isSuspended) {
             showIssue(status.issueMessage)
             mBinding.planInfoButton.text = getString(R.string.plan_info_payment_error_update)
-            mBinding.planInfoButton.setOnClickListener { launchUrl(status.accountUrl) }
+            //TODO: use for plan, remove dialog
+            mBinding.planInfoButton.setOnClickListener {
+                mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
+            }
         }
         else if (status.issue) {
             showIssue(status.issueMessage)
@@ -159,7 +162,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoCreditCard.setPaymentMethod(mSelectedPM)
 //        mBinding.planInfoCouponCode.visibility = View.VISIBLE
 
-        mBinding.planInfoButton.isEnabled = true
+        mBinding.planInfoButton.isEnabled = mSelectedPM != null
         mBinding.planInfoButton.setOnClickListener {
             goToStartCharging()
         }

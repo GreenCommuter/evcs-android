@@ -9,8 +9,8 @@
         android:name="org.evcs.android.features.map.MainMapFragment"
         tools:layout="@layout/fragment_main_map">
         <action
-            android:id="@+id/action_mainMapFragment_to_chargingFragment"
-            app:destination="@id/chargingFragment" />
+            android:id="@+id/action_mainMapFragment_to_preChargingFragment"
+            app:destination="@id/preChargingFragment" />
         <action
             android:id="@+id/action_mainMapFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
@@ -18,6 +18,13 @@
             android:id="@+id/action_mainMapFragment_to_locationFragment"
             app:destination="@id/locationFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/preChargingFragment"
+        android:name="org.evcs.android.features.charging.PreChargingFragment">
+        <action
+            android:id="@+id/action_preChargingFragment_to_chargingFragment"
+            app:destination="@id/chargingFragment" />
+    </dialog>
     <fragment
         android:id="@+id/chargingFragment"
         android:name="org.evcs.android.features.charging.ChargingTabFragment"

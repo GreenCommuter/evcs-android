@@ -39,7 +39,7 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
 
     override fun setListeners() {
         mBinding.activityLocationLocation.setStartChargingListener {
-            MainNavigationController.getInstance().goToCharging()
+            MainNavigationController.getInstance().goToPreCharging()
         }
     }
 

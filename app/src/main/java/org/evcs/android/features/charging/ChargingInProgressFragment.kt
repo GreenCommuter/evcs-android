@@ -132,7 +132,4 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         return true
     }
 
-    override fun showNetworkError() {
-        super.showError(RequestError.getNetworkError())
-    }
 }

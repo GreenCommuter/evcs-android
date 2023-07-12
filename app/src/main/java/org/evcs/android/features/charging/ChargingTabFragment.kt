@@ -16,24 +16,22 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
+import com.base.core.presenter.BasePresenter
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
-import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentChargingTabBinding
 import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
-import org.evcs.android.model.Session
-import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 
 
-class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTabView {
+class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     lateinit var mSurfaceView: SurfaceView
@@ -66,8 +64,8 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
         mTextField = binding.chargingTabStationId
     }
 
-    override fun createPresenter(): ChargingTabPresenter<ChargingTabView> {
-        return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
+    override fun createPresenter(): BasePresenter<*> {
+        return BasePresenter(this)
     }
 
     //Do this better
@@ -76,11 +74,6 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
             result -> if (result.resultCode != ChargingActivity.RESULT_CANCELED_WITH_DIALOG)
                 MainNavigationController.getInstance().onMapClicked()
         }
-    }
-
-    override fun populate() {
-        showProgressDialog()
-        presenter?.getCurrentCharge()
     }
 
     override fun setListeners() {
@@ -150,20 +143,6 @@ class ChargingTabFragment : ErrorFragment<ChargingTabPresenter<*>>(), ChargingTa
                     cameraSource.start(mSurfaceView.holder)
                 }
             }, Manifest.permission.CAMERA)
-    }
-
-    override fun onChargeRetrieved(response: Session?) {
-        hideProgressDialog()
-        if (response != null) {
-            val intent = Intent(requireContext(), ChargingActivity::class.java)
-            intent.putExtra(Extras.StartCharging.SESSION, response)
-            mLauncher.launch(intent)
-        }
-    }
-
-    override fun showNetworkError() {
-        super.showError(RequestError.getNetworkError())
-        onBackPressed()
     }
 
     override fun onPause() {

@@ -23,7 +23,7 @@ open class ChargingTabPresenter<T : ChargingTabView>(viewInstance: T, services: 
             }
 
             override fun onCallFailure(t: Throwable?) {
-                runIfViewCreated(Runnable { view?.showNetworkError() })
+                runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
             }
 
         })

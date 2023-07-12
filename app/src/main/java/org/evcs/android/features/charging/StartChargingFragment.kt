@@ -35,6 +35,10 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         startCharging()
     }
 
+    override fun setListeners() {
+        mBinding.startChargingCancel.setOnClickListener { onBackPressed() }
+    }
+
     override fun setUi(v: View) {
         mBinding = FragmentStartChargingBinding.bind(v)
         super.setUi(v)
@@ -82,6 +86,8 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun onBackPressed(): Boolean {
+        (activity as ChargingActivity).cancelSession(childFragmentManager)
         return true
     }
+
 }

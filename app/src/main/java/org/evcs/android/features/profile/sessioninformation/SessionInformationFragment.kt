@@ -13,6 +13,7 @@ import org.evcs.android.databinding.ActivitySessionInformationBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
@@ -58,7 +59,11 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
         mBinding.sessionInformationChargingSiteSubtitle.text = mCharge.locationName
         mBinding.sessionInformationPlanType.text = mCharge.planName
         mBinding.sessionInformationChargingSiteId.text = mCharge.stationName
-        mBinding.sessionInformationPaymentMethod.text = getString(R.string.app_payment_method_format)
+        if (mCharge.paymentBrand != null && mCharge.paymentLast4 != null) {
+            mBinding.sessionInformationPaymentMethod.setParentVisibility(true)
+            mBinding.sessionInformationPaymentMethod.text = getString(
+                R.string.app_payment_method_format, mCharge.paymentBrand, mCharge.paymentLast4)
+        }
 
         mBinding.sessionInformationChargingSiteAddress.text = mCharge.address
         if (mCharge.image != null) {
@@ -81,11 +86,6 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
             args.putSerializable(Extras.SessionInformationActivity.CHARGE, mCharge)
             findNavController().navigate(R.id.receiptFragment, args)
         }
-    }
-
-    override fun onBackPressed(): Boolean {
-        requireActivity().finish()
-        return true
     }
 
 }

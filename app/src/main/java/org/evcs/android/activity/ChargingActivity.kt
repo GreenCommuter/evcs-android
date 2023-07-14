@@ -31,7 +31,8 @@ class ChargingActivity : NavGraphActivity() {
         if (intent.hasExtra(Extras.StartCharging.SESSION)) {
             mNavigationController.onChargingStarted(intent.getSerializableExtra(Extras.StartCharging.SESSION) as Session)
         } else {
-            mNavigationController.goToPlanInfo(intent.getStringExtra(Extras.PlanInfo.STATION_ID))
+            mNavigationController.goToPlanInfo(intent.getStringExtra(Extras.PlanInfo.STATION_ID),
+                intent.getBooleanExtra(Extras.PlanInfo.FROM_QR, false))
         }
     }
 

@@ -121,7 +121,7 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
                     //check host
                     try {
                         val id = uri.getQueryParameter("id")
-                        goToPlanInfo(id.toString())
+                        goToPlanInfo(id.toString(), true)
                     } catch (e : java.lang.NullPointerException) {
 
                     }
@@ -130,9 +130,10 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
         })
     }
 
-    private fun goToPlanInfo(id: String) {
+    private fun goToPlanInfo(id: String, fromQR: Boolean = false) {
         val intent = Intent(requireContext(), ChargingActivity::class.java)
         intent.putExtra(Extras.PlanInfo.STATION_ID, id)
+        intent.putExtra(Extras.PlanInfo.FROM_QR, fromQR)
         mLauncher.launch(intent)
     }
 

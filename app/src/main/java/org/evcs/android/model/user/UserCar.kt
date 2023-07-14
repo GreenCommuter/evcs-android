@@ -1,6 +1,6 @@
 package org.evcs.android.model.user
 
-data class UserCar(private val carId: Int, private val year: String? = null) {
+data class UserCar(private val carId: Int, val year: String? = null) {
 
     var make: String? = null
     var model: String? = null

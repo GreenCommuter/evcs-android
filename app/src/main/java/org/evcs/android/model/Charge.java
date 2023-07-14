@@ -26,6 +26,7 @@ public class Charge implements Serializable {
     private Float ppkwh;
     private Location location;
     private CreditCardProvider paymentBrand;
+    private String paymentLast4;
 
     public int getId() {
         return id;
@@ -97,5 +98,13 @@ public class Charge implements Serializable {
     public String getAddress() {
         if (location == null) return null;
         return location.getAddress().toString();
+    }
+
+    public CreditCardProvider getPaymentBrand() {
+        return paymentBrand;
+    }
+
+    public String getPaymentLast4() {
+        return paymentLast4;
     }
 }

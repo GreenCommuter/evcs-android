@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
 import com.base.core.util.NavigationUtils
+import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
@@ -175,6 +176,15 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true
         setUpButton()
+    }
+
+    override fun showStationNotFound() {
+        hideProgressDialog()
+        if (arguments?.getBoolean(Extras.PlanInfo.FROM_QR) == true) {
+            ToastUtils.show("Please try writing the numeric code for this station")
+        } else {
+            ToastUtils.show("Station not found")
+        }
     }
 
     override fun onBackPressed(): Boolean {

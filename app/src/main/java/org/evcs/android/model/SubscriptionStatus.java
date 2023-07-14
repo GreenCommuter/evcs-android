@@ -27,7 +27,7 @@ public class SubscriptionStatus implements Serializable {
     public Float kwhUsage;
     public DateTime renewalDate;
     public boolean planCoversTime;
-    public Integer remainingKwh;
+    public Float remainingKwh;
     public DateTime nextRemainingKwhRestoration;
     public Plan plan;
     public boolean onTrialPeriod;

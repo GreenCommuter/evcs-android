@@ -174,7 +174,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     }
 
     private fun getInitialLocations() {
-        if (presenter.mCachedLocations != null) {
+        if (presenter.mCachedLocations != null && !presenter.mCachedLocations!!.isEmpty()) {
             showInitialLocations(presenter.mCachedLocations!!, presenter.mLastLocation != null)
         } else {
             showProgressDialog()

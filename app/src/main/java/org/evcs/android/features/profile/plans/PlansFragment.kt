@@ -100,7 +100,7 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         return tab
     }
 
-    override fun showPlans(response: ArrayList<Plan>) {
+    override fun showPlans(response: List<Plan>) {
         hideProgressDialog()
         if (mShowCorporatePlans) {
             mStandardMileageFragment.showPlans(response)

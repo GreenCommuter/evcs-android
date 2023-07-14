@@ -43,6 +43,7 @@ public class Extras {
     }
 
     public static class PlanInfo {
+        public static final String FROM_QR = "from_qr";
         public static final String STATION_ID = "station_id";
     }
 

@@ -91,7 +91,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     private fun fireRequests() {
         mMultipleRequestsManager.fireRequests {
             if (mStation == null) {
-                view.showError(RequestError("Station not found"))
+                view.showStationNotFound()
             } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
                 view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
             } else {

@@ -1,6 +1,7 @@
 package org.evcs.android.features.map
 
 import android.annotation.SuppressLint
+import android.content.res.Resources
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -12,7 +13,11 @@ import org.evcs.android.databinding.FragmentLocationSliderBinding
 import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.model.Location
 
-
+/** This is an extremely hacky component that mimics the behaviour of Instagram comments. It has an
+ * outer scroll, with an empty view on top and at the bottom a space that is calculated to fill the
+ * screen. Inside that space there is an inner scroll.
+ */
+//TODO: check the "fragment constructor not found" crash
 class LocationSliderFragment(private var location: Location) : BaseDialogFragment<BasePresenter<*>>() {
 
     private var mMaxScroll: Int = 0
@@ -24,9 +29,19 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
         setLocation(location)
         mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
         val height = mBinding.mapItemFragmentEmpty.measuredHeight
-        mMaxScroll = height - resources.getDimension(R.dimen.status_bar_height).toInt()
-        mBinding.mapItemFragmentScroll.setMinFling(mMaxScroll)
+        val shadowPadding = 4
+        mMaxScroll = height - shadowPadding
+
+        val screenHeight = Resources.getSystem().displayMetrics.heightPixels
+        val innerScrollInitialHeight = screenHeight -
+                mBinding.fragmentLocationHandler.measuredHeight - shadowPadding
+        resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
+
         keepStatusBar(mBinding.root)
+    }
+
+    fun resizeViewHeight(v : View, height : Int) {
+        v.layoutParams.height = height
     }
 
     override fun layout(): Int {
@@ -41,7 +56,7 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
     @SuppressLint("ClickableViewAccessibility")
     override fun setListeners() {
         super.setListeners()
-        mBinding.mapItemFragmentScroll.setOnTouchListener { _, event ->
+        val onTouchListener = { v : View, event : MotionEvent ->
             Log.d(event.action.toString(), currentY().toString())
             when (event.action) {
                 MotionEvent.ACTION_MOVE -> {
@@ -49,12 +64,14 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
                     resizePicture(mLastY / 2)
                 }
                 MotionEvent.ACTION_UP -> {
-                    snap()
+                    snap(v)
                 }
             }
             mLastAction = MotionEvent.obtain(event)
             false
         }
+        mBinding.mapItemFragmentScroll.setOnTouchListener(onTouchListener)
+        mBinding.mapItemFragmentInnerScroll.setOnTouchListener(onTouchListener)
         //Touches on the empty part can be a click on the map.
         mBinding.mapItemFragmentEmpty.setOnTouchListener { _, event ->
             when (event.action) {
@@ -66,21 +83,31 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
                     requireActivity().dispatchTouchEvent(event)
                 }
             }
+            mLastAction = MotionEvent.obtain(event)
             true
         }
     }
 
-    private fun snap() {
+    //Magic
+    /**
+     * @param caller The view that was scrolled before this call
+     */
+    private fun snap(caller: View) {
+        //Scroll upwards: snap at the top
         if (currentY() > mLastY) {
             if (currentY() <= getMaxScroll()) {
                 scroll(getMaxScroll())
                 resizePicture(getMaxScroll()/2)
             }
         } else {
-            if (currentY() == 0 && mLastAction?.action == MotionEvent.ACTION_MOVE) {
+            //Scroll downwards. If the view was already at the bottom, both current and last equal 0
+            //We will either dismiss the view (if it was already at the bottom)
+            //Or snap at the bottom
+            val innerScrollIsAtTop = mBinding.mapItemFragmentInnerScroll.scrollY == 0
+            if (currentY() == 0 && (innerScrollIsAtTop || (caller == mBinding.mapItemFragmentScroll))
+                && mLastAction?.action == MotionEvent.ACTION_MOVE) {
                 dismiss()
-            }
-            else if (currentY() <= getMaxScroll()) {
+            } else if (currentY() < mLastY && currentY() <= getMaxScroll()) {
                 scroll(0)
                 resizePicture(0)
             }

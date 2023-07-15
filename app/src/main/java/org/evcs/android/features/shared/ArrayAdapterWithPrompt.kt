@@ -28,4 +28,8 @@ class ArrayAdapterWithPrompt<T>(context: Context, resource: Int, private val obj
     fun getItemLabel(position: Int): String {
         return super.getItem(position)!!
     }
+
+    fun indexOf(item: Any?): Int {
+        return objects.indexOf(item as T?) + 1
+    }
 }

@@ -7,7 +7,4 @@ class Car {
     var model: String? = null
     var imageUrl: String? = null
 
-    override fun toString(): String {
-        return model!!
-    }
 }

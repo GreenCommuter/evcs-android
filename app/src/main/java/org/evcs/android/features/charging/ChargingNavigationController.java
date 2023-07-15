@@ -37,9 +37,10 @@ public class ChargingNavigationController extends AbstractNavigationController {
 //        super.startFlow();
 //    }
 
-    public void goToPlanInfo(String id) {
+    public void goToPlanInfo(String id, boolean fromQR) {
         Bundle args = new Bundle();
         args.putString(Extras.PlanInfo.STATION_ID, id);
+        args.putBoolean(Extras.PlanInfo.FROM_QR, fromQR);
         navigate(R.id.planInfoFragment, args);
     }
 

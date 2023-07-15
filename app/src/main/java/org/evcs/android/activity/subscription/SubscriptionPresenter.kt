@@ -2,7 +2,6 @@ package org.evcs.android.activity.subscription
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
-import org.evcs.android.model.Subscription
 import org.evcs.android.model.SubscriptionStatusWrapper
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.User
@@ -12,16 +11,15 @@ import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
-class SubscriptionActivityPresenter(viewInstance: SubscriptionActivityView, services: RetrofitServices) :
-        ServicesPresenter<SubscriptionActivityView?>(viewInstance, services) {
+class SubscriptionPresenter(viewInstance: SubscriptionView, services: RetrofitServices) :
+        ServicesPresenter<SubscriptionView?>(viewInstance, services) {
 
-    //getStatus only retrieves active subscription
     fun refreshSubscription() {
-            getService(UserService::class.java).currentUser.enqueue(
-                    object : AuthCallback<User>(this) {
-                        override fun onResponseSuccessful(response: User) {
-                            if (response.activeSubscription != null)
-                                view.onSubscriptionPlanRetrieved(response.activeSubscription!!)
+            getService(SubscriptionService::class.java).status.enqueue(
+                    object : AuthCallback<SubscriptionStatusWrapper>(this) {
+                        override fun onResponseSuccessful(response: SubscriptionStatusWrapper) {
+                            if (response.currentSubscription != null)
+                                view.onSubscriptionPlanRetrieved(response.currentSubscription!!)
                             else
                                 view.showError(RequestError.getUnknownError())
                         }

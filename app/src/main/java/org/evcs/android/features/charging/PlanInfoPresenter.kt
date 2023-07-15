@@ -14,6 +14,7 @@ import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.presenter.MultipleRequestsManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
+import org.evcs.android.util.UserUtils
 
 class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?) :
         ServicesPresenter<PlanInfoView>(viewInstance, services) {
@@ -72,7 +73,9 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 object : AuthCallback<List<PaymentMethod>?>(this) {
                     override fun onResponseSuccessful(response: List<PaymentMethod>?) {
                         mPaymentMethods.addAll(response!!)
-                         view.showDefaultPM(mPaymentMethods.getOrNull(0))
+                         view.showDefaultPM(mPaymentMethods.firstOrNull {
+                             pm -> pm.id == UserUtils.getLoggedUser().defaultPm
+                         })
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -88,11 +91,11 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
     private fun fireRequests() {
         mMultipleRequestsManager.fireRequests {
             if (mStation == null) {
-                view.showError(RequestError("Station not found"))
+                view.showStationNotFound()
             } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
                 view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
             } else {
-                view.show(mStation!!, mStatus!!.currentSubscription)
+                view.show(mStation!!, mStatus?.currentSubscription)
             }
         }
     }

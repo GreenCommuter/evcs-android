@@ -12,6 +12,8 @@ import org.evcs.android.util.ErrorUtils
 class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
     : ServicesPresenter<PlansView>(viewInstance, services) {
 
+    val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")
+
     fun getPlans() {
         getService(PlansService::class.java).plans.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
@@ -42,7 +44,9 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
         r.getService(PlansService::class.java).planExtras.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
                 mergePlans(plans, response)
-                val runnable = { view.showPlans(plans) }
+                //TODO: API should do this
+                val plans2 = plans.filter { plan -> ALLOWED_PLANS.contains(plan.name) }
+                val runnable = { view.showPlans(plans2) }
                 runIfViewCreated(runnable)
             }
 

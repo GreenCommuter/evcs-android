@@ -109,7 +109,7 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
         mBinding.mapItemFragmentLocationView.setLocation(location)
         mBinding.mapItemFragmentLocationView.setStartChargingListener {
             dismiss()
-            MainNavigationController.getInstance().goToCharging()
+            MainNavigationController.getInstance().goToPreCharging()
         }
     }
 

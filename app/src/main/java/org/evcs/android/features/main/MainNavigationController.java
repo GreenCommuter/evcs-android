@@ -4,9 +4,7 @@ import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
 import org.evcs.android.R;
-import org.evcs.android.features.charging.ChargingNavigationController;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
-import org.evcs.android.navigation.controller.AbstractNavigationController;
 
 public class MainNavigationController extends AbstractBaseFragmentNavigationController {
 
@@ -32,12 +30,16 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
         return ROOT_ID;
     }
 
-    public void goToCharging() {
+    public void goToPreCharging() {
         if (mIsInCharging) return;
-        backToBaseFragment();
+        navigate(R.id.preChargingFragment);
+    }
+
+    public void selectCharging() {
+        if (mIsInCharging) return;
+//        backToBaseFragment();
         mIsInCharging = true;
         mIsInProfile = false;
-        navigate(R.id.chargingFragment);
         mActivity.setSelectedItem(R.id.menu_drawer_charging);
     }
 

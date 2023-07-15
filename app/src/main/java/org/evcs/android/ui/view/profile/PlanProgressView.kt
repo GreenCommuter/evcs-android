@@ -28,10 +28,11 @@ class PlanProgressView : LinearLayout {
                 context.getString(R.string.progress_view_text,
                         status.kwhUsage, status.printTotalKwh(), status.renewalPeriod)
         mBinding.activitySubscriptionsConsumption.isVisible = showText
-        if (status.unlimited) {
+        if (status.isUnlimited) {
             mBinding.activitySubscriptionsProgress.isVisible = false
         } else {
-            mBinding.activitySubscriptionsProgress.progress = status.kwhUsage
+            if (status.kwhUsage == null) return
+            mBinding.activitySubscriptionsProgress.progress = status.kwhUsage.toInt()
             mBinding.activitySubscriptionsProgress.max = status.totalKwh
             if (status.kwhUsage >= status.totalKwh) {
                 mBinding.activitySubscriptionsProgress.progressTintList =

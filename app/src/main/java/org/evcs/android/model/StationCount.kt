@@ -1,6 +1,8 @@
 package org.evcs.android.model
 
-class StationCount {
+import java.io.Serializable
+
+class StationCount : Serializable {
     var dc50kw = 0
     var dc100kw = 0
     var ac = 0

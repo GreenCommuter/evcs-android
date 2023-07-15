@@ -22,7 +22,7 @@ class StationView : LinearLayout {
     private fun init(context: Context) {
         val binding = ViewStationBinding.inflate(LayoutInflater.from(context), this, true)
         binding.stationPower.text = mStation.getChargerType().printableName + ": " + mStation.printKw()
-        binding.stationId.text = String.format("Station ID: %d", mStation.id)
+        binding.stationId.text = String.format("Station ID: %s", mStation.name)
 
         mStation.connectorTypes.forEach { connectorType ->
             val cv = ConnectorView(context, connectorType, mStation.getAvailableStatus())

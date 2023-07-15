@@ -120,7 +120,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         menuView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_drawer_map -> mNavigationController!!.onMapClicked()
-                R.id.menu_drawer_charging -> mNavigationController!!.goToCharging()
+                R.id.menu_drawer_charging -> mNavigationController!!.goToPreCharging()
                 R.id.menu_drawer_profile -> mNavigationController!!.goToProfile()
             }
             //will be updated after canceling session
@@ -140,8 +140,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun updateProfileAlert() {
-        showProfileAlert(UserUtils.getLoggedUser()?.activeSubscription?.issue ?: false ||
-        !(UserUtils.getLoggedUser()?.isPhoneVerified ?: true))
+//        showProfileAlert(UserUtils.getLoggedUser()?.activeSubscription?.issue ?: false ||
+//        !(UserUtils.getLoggedUser()?.isPhoneVerified ?: true))
     }
 
     fun showProfileAlert(show: Boolean) {

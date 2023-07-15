@@ -19,7 +19,7 @@ abstract class PlanViewHelper(val mContext: Context) {
     abstract fun getPlanName() : String
     abstract fun getPlanPrice() : String
     abstract fun getPlanButton() : String
-    abstract fun getPlanFreq() : String
+    abstract fun getPlanFreq() : String?
     abstract fun getPlanLimit() : String?
     abstract fun getPlanLimitAprox() : String?
     abstract fun getFlatRate(): String?
@@ -91,7 +91,7 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
         return mPlan.cta
     }
 
-    override fun getPlanFreq(): String {
+    override fun getPlanFreq(): String? {
         return mPlan.useCase
     }
 }

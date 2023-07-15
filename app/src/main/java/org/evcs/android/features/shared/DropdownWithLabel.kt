@@ -78,4 +78,9 @@ class DropdownWithLabel : RelativeLayout {
                 //mDropdown.selectedItem?.toString() != "" && mDropdown.selectedItem?.toString() != PROMPT
     }
 
+    fun selectItem(item: Any?) {
+        val position = adapter.indexOf(item)
+        if (position > 0) mDropdown.setSelection(position)
+    }
+
 }

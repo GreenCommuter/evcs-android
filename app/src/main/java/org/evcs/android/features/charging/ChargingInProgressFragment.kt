@@ -9,8 +9,10 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Session
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -90,20 +92,21 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         }
         mLastUpdate = DateTime()
         mSession = response
-        presenter.getStation(response.stationName)
+        if (mSession.address == null)
+            presenter.getStation(response.stationName)
         mBinding.chargingInProgressEnergy.text = response.printKwh()
         if (mDuration == null) {
             hideProgressDialog()
             setDuration(response.duration.toLong())
             startTimerUpdates()
         }
-//        mBinding.chargingInProgressStatus.text = response.status
-//        mBinding.chargingInProgressSiteId.text = "Station ID: " + response.stationName
-//        mBinding.chargingInProgressLastUpdate.text =
-//                "Last update: " + formatter.print(response.updatedAt) + " (tap to refresh)"
-//        mBinding.chargingInProgressStatusIcon
-//                .startAnimation(AnimationUtils.loadAnimation(requireContext(), R.anim.animation_blink))
-//        mBinding.chargingInProgressStatusIcon.visibility = if (response.isCharging) View.VISIBLE else View.GONE
+//        mBinding.chargingInProgressCost.setText(String.format("\$%.2f", mSession.ongoingRate?.sessionFeeValue))
+        mBinding.chargingInProgressCost.setText(mSession.ongoingRate?.sessionFeeValue)
+        mBinding.chargingInProgressCost.setLabel(mSession.ongoingRate?.sessionFeeLabel?:"")
+        mBinding.chargingInProgressRate.setLabel((mSession.ongoingRate?.rateLabel?:"") + "*")
+//        mBinding.chargingInProgressRate.setText(String.format("\$%.2f/kWh", mSession.ongoingRate?.rateValue))
+        mBinding.chargingInProgressRate.setText(String.format("%s/kWh", mSession.ongoingRate?.rateValue))
+        mBinding.chargingInProgressRateExplanation.showOrHide(mSession.ongoingRate?.optionalExplanation)
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
     }
 
@@ -128,4 +131,5 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         requireActivity().finish()
         return true
     }
+
 }

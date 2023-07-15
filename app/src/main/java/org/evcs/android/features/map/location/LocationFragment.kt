@@ -1,7 +1,6 @@
 package org.evcs.android.features.map.location
 
 import android.view.View
-import androidx.navigation.fragment.findNavController
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentLocationBinding
@@ -40,7 +39,7 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
 
     override fun setListeners() {
         mBinding.activityLocationLocation.setStartChargingListener {
-            MainNavigationController.getInstance().goToCharging()
+            MainNavigationController.getInstance().goToPreCharging()
         }
     }
 

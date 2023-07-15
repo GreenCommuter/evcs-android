@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
 import com.base.core.util.NavigationUtils
+import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
@@ -78,7 +79,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
         if (status?.kwhUsage != null) {
             mBinding.planInfoKwhUsage.visibility = View.VISIBLE
-            val text = String.format("%d/%s kWh", status.kwhUsage, status.printTotalKwh())
+            val text = String.format("%.0f/%s kWh", status.kwhUsage, status.printTotalKwh())
             mBinding.planInfoKwhUsage.setText(text)
             mBinding.planInfoKwhProgress.isVisible = true
             mBinding.planInfoKwhProgress.setPlan(status, false)
@@ -113,7 +114,10 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         if (status.isSuspended) {
             showIssue(status.issueMessage)
             mBinding.planInfoButton.text = getString(R.string.plan_info_payment_error_update)
-            mBinding.planInfoButton.setOnClickListener { launchUrl(status.accountUrl) }
+            //TODO: use for plan, remove dialog
+            mBinding.planInfoButton.setOnClickListener {
+                mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
+            }
         }
         else if (status.issue) {
             showIssue(status.issueMessage)
@@ -159,7 +163,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoCreditCard.setPaymentMethod(mSelectedPM)
 //        mBinding.planInfoCouponCode.visibility = View.VISIBLE
 
-        mBinding.planInfoButton.isEnabled = true
+        mBinding.planInfoButton.isEnabled = mSelectedPM != null
         mBinding.planInfoButton.setOnClickListener {
             goToStartCharging()
         }
@@ -172,6 +176,15 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         //TODO: mostrar prompt de freeChargingCode
         mBinding.planInfoButton.isEnabled = true
         setUpButton()
+    }
+
+    override fun showStationNotFound() {
+        hideProgressDialog()
+        if (arguments?.getBoolean(Extras.PlanInfo.FROM_QR) == true) {
+            ToastUtils.show("Please try writing the numeric code for this station")
+        } else {
+            ToastUtils.show("Station not found")
+        }
     }
 
     override fun onBackPressed(): Boolean {

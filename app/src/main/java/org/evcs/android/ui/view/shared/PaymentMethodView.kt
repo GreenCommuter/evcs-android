@@ -35,7 +35,7 @@ class PaymentMethodView : LinearLayout {
         } else {
             mBinding.viewListButtonChevron.visibility = View.GONE
             mBinding.creditCardChange.visibility = View.VISIBLE
-            mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(paymentMethod.card.brand.drawable))
+            mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(paymentMethod.card.brand?.drawable))
             mBinding.creditCardNumber.text = String.format("•••• %s", paymentMethod.card.last4)
             mBinding.creditCardChange.setOnClickListener{ mListener?.onClick(null) }
         }

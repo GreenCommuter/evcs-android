@@ -1,20 +1,27 @@
 package org.evcs.android.features.profile.plans
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.R
+import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlanLearnMoreBinding
+import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 
 class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
 
+    private lateinit var mWalletLauncher: ActivityResultLauncher<Intent>
     private var mPlan: Plan? = null
     private lateinit var mBinding: FragmentPlanLearnMoreBinding
 
@@ -44,20 +51,22 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
 
     override fun init() {
         mPlan = arguments?.getSerializable(Extras.PlanActivity.PLAN) as Plan?
-    }
-
-    override fun populate() {
-        if (mPlan == null) {
-            showPayAsYouGo()
-        } else {
-            setPlan(mPlan!!)
+        mWalletLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result -> if (result.resultCode == NavGraphActivity.RESULT_OK) {
+                        populate()
+                      }
         }
     }
 
-    private fun showPayAsYouGo() {
-        //TODO: all views
-        mBinding.planLearnMoreToolbar.setTitle("Pay as you go")
+    override fun populate() {
+        if (mPlan == null)
+            showPayAsYouGo()
+        else
+            setGetPlanButton(mPlan!!)
+        setPlan(mPlan)
+    }
 
+    private fun showPayAsYouGo() {
         if (UserUtils.getLoggedUser() == null) {
             //TODO
         } else if (UserUtils.getLoggedUser().defaultPm == null) {
@@ -71,7 +80,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
     private fun setPaymentButton() {
         mBinding.planLearnMoreButton.text = "Add payment method"
         mBinding.planLearnMoreButton.setOnClickListener {
-            //TODO
+            mWalletLauncher.launch(WalletActivity.buildIntent(context, true))
         }
     }
 
@@ -82,53 +91,31 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         }
     }
 
-    fun setPlan(plan: Plan) {
-        mBinding.planLearnMoreToolbar.setTitle(plan.name)
-        //if plan and user both have free days
-//        mBinding.planLearnMoreDaysFree.text = String.format("${mPlan.trialDays} Days Free!*", mPlan.trialDays)
-        //if plan doesn't:
-        //mBinding.planLearnMoreDaysFree.text = "Simple Flat Rate Member Pricing"
-        //if user doesn't:
-        //mBinding.planLearnMoreDaysFree.setVisibility(View.GONE)
-        //show price in title.large
-        mBinding.planLearnMorePrice.text = String.format("\$%.2f/%s", plan.price, plan.renewalPeriod)
-        mBinding.planLearnMorePrice.setTextAppearance(requireContext(), R.style.Title_Large)
+    fun setPlan(plan: Plan?) {
+        val helper = PlanLearnMoreHelper.instance(requireContext(), plan,
+            UserUtils.getLoggedUser().defaultPm != null)
 
-        //for basic anytime and standard anytime
-        //unlimited anytime: Unlimited fast charging, no kWh caps
-        //unlimited oofpeak: Unlimited DC fast charging from 10pm to 6am
-        mBinding.planLearnMoreCap.text = "Up to %d kWh/%s"
-        //for basic anytime and standard anytime
-        //unlimited offpeak: Flat rate of \$%.2f/kWh on DC Fast and \$%.2f on Level 2 (40% discount) from 6am to 10pm
-        mBinding.planLearnMoreFlatRate.text = "Flat rate of \$%.2f/kWh on DC fast charging and \$%.2f/kWh on Level 2 after cap is exceeded"
-        //en el medio en unlimited offpeak: Unlimited fast charging, no kWh caps
+        mBinding.planLearnMoreToolbar.setTitle(helper.getPlanName())
 
-        //24/7: visible en standard anytime, basic anytime, unlimited aytime
-        //en unlimited offpeak: Unlimited fast charging, no kWh caps
-
-        //hikes: visible en standard anytime, basic anytime, pay as you go no payment
-
-        if (/*mPlan.trialDays > 0*/ false) {
-            //unlimited anytime / unlimited offpeak
-            val unlimited = "Unlimited Anytime or"
-            mBinding.planLearnMoreSidenote.text = String.format(
-                "*%d days free not available for users who have already tried %s Standard Anytime",
-                plan.trialDays, unlimited)
+        if ((plan?.trialDays ?: 0) > 0) {
+            mBinding.planLearnMoreDaysFree.text = helper.getPlanFreeDays()
         } else {
-            //Pay as you go, no payment: *Up to 40% off for member pricing on Level 2 and DC Fast compared to non-members
-            mBinding.planLearnMoreSidenote.visibility = View.GONE
+            mBinding.planLearnMoreDaysFree.isVisible = false
+            mBinding.planLearnMorePrice.setTextAppearance(requireContext(), R.style.Title_Large)
         }
-
-        //standard anytime w/trial: "Get %d days free"
-        //Basic anytime w/trial: "Get %d days free charging"
-        mBinding.planLearnMoreButton.text = "Get Started"
+        mBinding.planLearnMorePrice.text = helper.getPlanPrice()
+        mBinding.planLearnMoreCap.showOrHide(helper.getPlanLimit())
+        mBinding.planLearnMoreFlatRate.showOrHide(helper.getFlatRate())
+        mBinding.planLearnMore247.showOrHide(helper.getPlanTimes())
+        mBinding.planLearnMoreHikes.showOrHide(helper.getPlanHikes())
+        mBinding.planLearnMoreSidenote.showOrHide(helper.getPlanSideNote())
+        mBinding.planLearnMoreButton.text = helper.getPlanButton()
 
         val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
-        if (currentPlanId == plan.id) {
+        if (currentPlanId == plan?.id) {
             mBinding.planLearnMoreButton.isEnabled = false
-            mBinding.planLearnMoreButton.text = "Current plan"
+            mBinding.planLearnMoreButton.text = getString(R.string.plan_view_current)
         }
-        setGetPlanButton(plan)
     }
 
     override fun setListeners() {

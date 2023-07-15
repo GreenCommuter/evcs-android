@@ -72,13 +72,13 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     private fun setUser(user: User) {
         mBinding.profileName.text = user.name
-        if (!user.isPhoneVerified) {
-            setSubscription(null)
-            setUnverifiedUser()
-            return
-        } else {
+//        if (!user.isPhoneVerified) {
+//            setSubscription(null)
+//            setUnverifiedUser()
+//            return
+//        } else {
             setSubscription(user.activeSubscription)
-        }
+//        }
     }
 
     private fun setSubscription(subscription: Subscription?) {

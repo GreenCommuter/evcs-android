@@ -18,4 +18,8 @@ class ChargingSessionInformationFragment : SessionInformationFragment() {
         mBinding.sessionInformationClose.setOnClickListener { requireActivity().finish() }
     }
 
+    override fun onBackPressed(): Boolean {
+        requireActivity().finish()
+        return true
+    }
 }

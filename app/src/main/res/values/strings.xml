@@ -260,9 +260,7 @@
 
     <!-- Vanpool Ongoing ride -->
     <string name="vanpool_ongoing_ride_title">Ongoing Ride</string>
-    <string name="vanpool_ongoing_ride_finish_booking">Finish journey</string>
     <string name="vanpool_ongoing_ride_enable_location_dialog_title">Location error</string>
-    <string name="vanpool_ongoing_ride_report_text">Reports can be submitted for any big or small issues \nfound when using the car.</string>
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
     <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
@@ -271,11 +269,8 @@
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
     <string name="vanpool_ongoing_ride_map_uri_format">http://maps.google.com/maps?%s&amp;dirflg=d</string>
-    <string name="vanpool_ongoing_ride_clock_format">%1$01d:%2$02d</string>
-    <string name="vanpool_ongoing_ride_clock_left_time">left in your reservation</string>
     <string name="vanpool_ongoing_ride_clock_overtime">overtime</string>
     <string name="vanpool_ongoing_ride_service">TeslaService</string>
-    <string name="vanpool_ongoing_ride_spinner">Finishing the ride, please wait</string>
     <string-array name="vanpool_ongoing_ride_spinner">
         <item>Beginning the process to finish your ride, please wait</item>
     </string-array>
@@ -312,7 +307,6 @@
     <string name="create_booking_wallet_error_title">The payment has failed</string>
     <string name="create_booking_wallet_error_subtitle">Please edit your wallet information</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
-    <string name="create_booking_error_time_invalid_subtitle">error_time_invalid_body</string>
 
     <!-- Coupons -->
     <string name="coupons_toolbar_title">Coupons</string>
@@ -437,12 +431,12 @@
 
     <!-- Charging in progress-->
     <string name="charging_in_progress_title">Charging</string>
-    <string name="charging_in_progress_kwh">kW Usage*</string>
+    <string name="charging_in_progress_kwh">Energy Delivered*</string>
     <string name="charging_in_progress_duration">Elapsed Time</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
     <string name="charging_in_progress_end">End charging session</string>
-    <string name="charging_in_progress_data_delay">*final usage may vary due to data delay</string>
+    <string name="charging_in_progress_data_delay">*Final energy delivered and rate may vary</string>
 <!--    <string name="charging_in_progress_error_title">Charging issue</string>-->
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
 
@@ -458,7 +452,7 @@
     <string name="session_information_help">Need help? <u>Contact Customer Support</u></string>
     <string name="session_information_title">Session detail</string>
 
-    <!-- Manage Plan-->
+    <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>
     <string name="manage_plan_free_trial">Free Trial</string>
     <string name="manage_plan_payment_details">Payment details</string>
@@ -470,10 +464,18 @@
     <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>
-    <string name="progress_view_text">%1$d/%2$s kWh used this %3$s</string>
+    <string name="progress_view_text">%1$.0f/%2$s kWh used this %3$s</string>
 
     <string name="go_to_monthly_plans_title">EVCS Monthly Plans</string>
     <string name="go_to_monthly_plans_subtitle">Learn more about our discounted plans.</string>
+
+    <!-- Plans tab -->
+    <string name="plans_tab_dialog_title">Are you sure you want to change plans?</string>
+    <string name="plans_tab_dialog_subtitle_3">Do you want to continue changing plans?</string>
+    <string name="plans_tab_dialog_subtitle_4">This will end your %1$s %2$s plan. It will stay active until %3$s.</string>
+    <string name="plans_tab_dialog_subtitle_5">Your new %1s plan will start on %2s.</string>
+    <string name="plans_tab_dialog_subtitle_7">Your %s plan will start immediately.</string>
+    <string name="plans_tab_dialog_subtitle_8">You will be billed $%1.2f per %2s until you cancel.</string>
 
     <!-- Get Plan -->
     <string name="get_plan_started">Your plan has started!</string>

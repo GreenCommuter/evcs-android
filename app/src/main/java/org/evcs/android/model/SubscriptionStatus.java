@@ -24,10 +24,10 @@ public class SubscriptionStatus implements Serializable {
 //                    "plan_icon_url": "https://media.evcs.com/plan.png"
     //    Kwh usage: STATUS_ENDPOINT -> current_subscription -> kwh_usage
     public Status status;
-    public int kwhUsage;
+    public Float kwhUsage;
     public DateTime renewalDate;
     public boolean planCoversTime;
-    public Integer remainingKwh;
+    public Float remainingKwh;
     public DateTime nextRemainingKwhRestoration;
     public Plan plan;
     public boolean onTrialPeriod;
@@ -37,7 +37,7 @@ public class SubscriptionStatus implements Serializable {
 //        "issue_title": null,
 //        "referral_link": "https://dev.evcs.com/refer/abc123",
 //        "remaining_charges": 8,
-    public boolean unlimited;
+//    public boolean unlimited;
 //        "plan_id": 2,
     public DateTime activeSince;
     //        "valid_from": null,
@@ -67,15 +67,24 @@ public class SubscriptionStatus implements Serializable {
     //        "weekly_kwh":null,
 
     public Integer getTotalKwh() {
-        try {
-            return remainingKwh + kwhUsage;
-        } catch (Exception e) {
-            return null;
-        }
+//        try {
+//            return remainingKwh + kwhUsage.intValue();
+//        } catch (Exception e) {
+//            return null;
+//        }
+        return plan.kwhCap();
+    }
+
+    public Float getKwhUsage() {
+        return kwhUsage == null ? 0 : kwhUsage;
+    }
+
+    public boolean isUnlimited() {
+        return plan.isUnlimited();
     }
 
     public String printTotalKwh() {
-        return (unlimited) ? "unlimited" : getTotalKwh().toString();
+        return (isUnlimited()) ? "unlimited" : getTotalKwh().toString();
     }
 
     public boolean isSuspended() {

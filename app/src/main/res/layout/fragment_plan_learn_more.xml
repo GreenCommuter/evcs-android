@@ -40,12 +40,15 @@
                 tools:text="49.99/month"
                 style="@style/Title.Medium"/>
 
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/spacing_big_extra_k"/>
+
             <TextView
                 android:id="@+id/plan_learn_more_cap"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="Up to 200 kWh/month"
-                android:layout_marginTop="@dimen/spacing_big"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 style="@style/Body.Medium.WithCheck"/>
 

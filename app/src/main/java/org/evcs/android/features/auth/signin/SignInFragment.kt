@@ -62,7 +62,6 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     override fun populate() {
         mEmailInputLayout.editText!!.setText(UserUtils.getUserEmail())
         ViewUtils.addUnderlines(binding.fragmentSignInSignUp)
-        ViewUtils.addUnderlines(binding.fragmentSignInForgotPassword)
 //        mLoginButton.setTypeface(null, Typeface.NORMAL)
     }
 

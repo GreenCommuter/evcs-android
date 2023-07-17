@@ -65,6 +65,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
                 view.isSelected = view.connectorType == mFilterState.connectorType
                         || mFilterState.connectorType == null
         }
+        onAnyFilterChanged()
     }
 
     private fun onConnectorClicked(v : ConnectorTypeView) {
@@ -72,6 +73,11 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             mBinding.activityFilterConnectorTypes.getChildAt(i).isSelected = false
         v.isSelected = true
         mFilterState.connectorType = v.connectorType
+        onAnyFilterChanged()
+    }
+
+    private fun onAnyFilterChanged() {
+        mBinding.dialogFilterReset.isEnabled = !mFilterState.isEmpty()
     }
 
     override fun setListeners() {
@@ -81,10 +87,16 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             mFilterState = FilterState()
             setFiltersFromState()
         }
+        mBinding.activityFilterSwitch.setOnClickListener {
+            mFilterState.comingSoon = mBinding.activityFilterSwitch.isChecked
+            onAnyFilterChanged()
+        }
+        mBinding.activityFilterMinPower.setOnSeekBarChangeListener {
+            mFilterState.minKw = mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress]
+            onAnyFilterChanged()
+        }
         mBinding.dialogFilterClose.setOnClickListener { dismiss() }
         mBinding.activityFilterButton.setOnClickListener {
-            mFilterState.minKw = mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress]
-            mFilterState.comingSoon = mBinding.activityFilterSwitch.isChecked
             mListener?.onFilterResult(mFilterState)
             dismiss()
         }

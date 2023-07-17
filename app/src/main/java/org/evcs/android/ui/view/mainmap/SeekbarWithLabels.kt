@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.SeekBar
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import org.evcs.android.databinding.ViewSeekbarWithLabelsBinding
 
@@ -29,6 +30,19 @@ class SeekbarWithLabels : LinearLayout {
         val binding = ViewSeekbarWithLabelsBinding.inflate(LayoutInflater.from(context), this, true)
         seekbar = binding.viewSeekbarWithLabelsSeekbar
         mLabelLayout = binding.viewSeekbarWithLabelsLabels
+    }
+
+    fun setOnSeekBarChangeListener(listener: (progress: Int) -> Unit) {
+        seekbar.setOnSeekBarChangeListener(object : OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                listener.invoke(progress)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {}
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {}
+
+        })
     }
 
     fun setLabels(labels: Array<String>) {

@@ -26,6 +26,7 @@
             android:text="@string/auth_or"
             android:textAllCaps="false"
             android:textSize="@dimen/font_medium_more"
+            android:textColor="@color/evcs_gray_300"
             android:textAppearance="@style/Body.Medium.Bold"/>
 
         <View

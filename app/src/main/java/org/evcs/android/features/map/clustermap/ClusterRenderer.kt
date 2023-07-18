@@ -17,7 +17,6 @@ import com.google.maps.android.clustering.Cluster
 import com.google.maps.android.clustering.ClusterItem
 import com.google.maps.android.clustering.ClusterManager
 import com.google.maps.android.clustering.view.DefaultClusterRenderer
-import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.MarkerLayoutBinding
 import org.evcs.android.util.BitmapUtils
@@ -29,7 +28,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     private var mSumItems: Boolean = false
 
     override fun onBeforeClusterItemRendered(item: T, markerOptions: MarkerOptions) {
-        markerOptions.icon(getBitmap(item, chooseIcon(item, false)))
+        markerOptions.icon(getBitmap(item, chooseIcon(item, false), chooseTextColor(item, false)))
         //If items have the same z index the one at the back is selected, for some reason
 //        markerOptions.zIndex((90 - item.position.latitude).toFloat())
     }
@@ -44,7 +43,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     }
 
     fun onClusterItemChange(item: T, marker: Marker, isSelected : Boolean) {
-        marker.setIcon(getBitmap(item, chooseIcon(item, isSelected)))
+        marker.setIcon(getBitmap(item, chooseIcon(item, isSelected), chooseTextColor(item, isSelected)))
     }
 
     @DrawableRes
@@ -56,6 +55,16 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
             else R.drawable.ic_map_pin_coming_soon
         }
         return icon
+    }
+
+    fun chooseTextColor(item: T, isSelected: Boolean): Int {
+        var color = if (isSelected) R.color.evcs_white else R.color.evcs_secondary_700
+
+        if (item is ClusterItemWithDisabling && !item.isMarkerEnabled()) {
+            color = if (isSelected) R.color.evcs_white
+            else R.color.evcs_gray_300
+        }
+        return mContext.resources.getColor(color)
     }
 
     override fun onBeforeClusterRendered(cluster: Cluster<T>, markerOptions: MarkerOptions) {
@@ -73,7 +82,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
             }
         }
 
-        val bitmap = createMarker(text, icon, Gravity.CENTER, Color.WHITE)
+        val bitmap = createMarker(text, icon, mContext.resources.getColor(R.color.evcs_secondary_700), Gravity.CENTER)
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(bitmap))
     }
 
@@ -81,9 +90,9 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
         return items.fold(items.first().isMarkerEnabled()) { acc, item -> item.isClusterEnabled(acc) }
     }
 
-    private fun getBitmap(item: T, @DrawableRes icon: Int): BitmapDescriptor {
+    private fun getBitmap(item: T, @DrawableRes icon: Int, textColor: Int): BitmapDescriptor {
         if (item is ClusterItemWithText) {
-            return BitmapDescriptorFactory.fromBitmap(createMarker(item.getMarkerText(), icon))
+            return BitmapDescriptorFactory.fromBitmap(createMarker(item.getMarkerText(), icon, textColor))
         } else {
             return BitmapDescriptorFactory.fromResource(icon)
         }
@@ -93,7 +102,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
      * Creates a Bitmap with the specified icon, text and text params for use as a marker
      */
     private fun createMarker(text: String, @DrawableRes icon: Int,
-                             textAlign: Int = Gravity.CENTER_HORIZONTAL, textColor: Int = Color.WHITE): Bitmap {
+                             textColor: Int = Color.WHITE, textAlign: Int = Gravity.CENTER_HORIZONTAL): Bitmap {
         val markerLayout = buildLayout(text, icon, textAlign, textColor)
         return BitmapUtils.bitmapFromView(markerLayout)
     }
@@ -112,9 +121,9 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
         params.gravity = textAlign
         binding.markerText.layoutParams = params
         if (textAlign == Gravity.CENTER_HORIZONTAL) {
-            val paddingTop = EVCSApplication.getInstance().applicationContext
-                    .resources.getDimension(R.dimen.spacing_medium).toInt()
-            binding.markerText.setPadding(0, paddingTop, 0 ,0)
+            val paddingTop = mContext
+                    .resources.getDimension(R.dimen.spacing_medium).toInt() * 1.1f
+            binding.markerText.setPadding(0, paddingTop.toInt(), 0 ,0)
         }
         return markerLayout
     }

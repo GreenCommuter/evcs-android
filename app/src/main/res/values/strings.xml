@@ -67,9 +67,9 @@
     <string name="sign_in_error_facebook_email">Make sure your account has an email address</string>
 
     <!-- Forgot Password -->
-    <string name="forgot_password_title">Password Recovery</string>
-    <string name="forgot_password_email">Enter your email address</string>
-    <string name="forgot_password_button">Send me an email</string>
+    <string name="forgot_password_title">Forgot password</string>
+    <string name="forgot_password_email">Email</string>
+    <string name="forgot_password_button">Submit</string>
     <string name="forgot_password_dialog">Password recovery instructions have been sent to your email address</string>
     <string name="forgot_password_wrong_email">Invalid email address</string>
 
@@ -106,7 +106,7 @@
     </string-array>
     <string name="my_information_birthdate">Birthdate</string>
     <string name="my_information_street_address">Street Address</string>
-    <string name="my_information_zip_code">Zip Code</string>
+    <string name="my_information_zip_code">Zipcode</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
 
@@ -192,7 +192,7 @@
     <string name="add_credit_card_expiration">Expiration</string>
     <string name="add_credit_card_zip_code">Zipcode</string>
     <string name="add_credit_card_cvv">CVV</string>
-    <string name="add_credit_card_ok">Save card</string>
+    <string name="add_credit_card_ok">Save Card</string>
     <string name="add_credit_card_name">Cardholder name</string>
     <string name="add_credit_card_set_default">Set as default payment method</string>
     <string name="add_credit_card_success">Your card was successfully added</string>
@@ -421,7 +421,7 @@
     <string name="start_charging_preparing_subtitle">This may only take a few seconds</string>
     <string name="start_charging_preparing">Preparing to charge</string>
     <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
-    <string name="start_charging_button">Start charging session</string>
+    <string name="start_charging_button">Start Charging</string>
     <string name="start_charging_title">Start charging</string>
     <string name="start_charging_error_title">Connection Failed</string>
     <string name="start_charging_error_subtitle">Make sure your car is plugged in, or try disconnecting and reconnecting the connector to your vehicle.</string>

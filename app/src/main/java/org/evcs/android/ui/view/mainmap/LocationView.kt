@@ -9,10 +9,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.R
+import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
+import org.evcs.android.util.Extras
 import org.evcs.android.util.LocationUtils
 
 class LocationView : LinearLayout {
@@ -31,6 +35,15 @@ class LocationView : LinearLayout {
 
     fun init(context: Context?) {
         mBinding = ViewLocationBinding.inflate(LayoutInflater.from(context), this, true)
+
+        mBinding.fragmentLocationContactSupport.setOnClickListener {
+            val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
+            NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java, extra)
+        }
+        mBinding.fragmentLocationReportIssue.setOnClickListener {
+            //TODO: report issue
+        }
+
     }
 
     fun setStartChargingListener(listener: (View) -> Unit) {

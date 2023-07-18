@@ -23,7 +23,6 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     private lateinit var mPasswordInputLayout: StandardTextField
     private lateinit var mOldPasswordInputLayout: StandardTextField
     private lateinit var mConfirmInputLayout: StandardTextField
-    private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: Button
     private lateinit var mPresenter: ChangePasswordPresenter
 
@@ -32,7 +31,6 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
         mPasswordInputLayout = mBinding.fragmentChangePasswordNew
         mOldPasswordInputLayout = mBinding.fragmentChangePasswordOld
         mConfirmInputLayout = mBinding.fragmentChangePasswordConfirm
-        mPasswordHint = mBinding.fragmentChangePasswordShortPassword
         mContinueButton = mBinding.fragmentChangePasswordButton
         return mBinding.root
     }
@@ -46,10 +44,10 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
         mPresenter = createPresenter()
         mPresenter.onViewCreated()
 
-        mPasswordHint.text = resources.getString(
-            R.string.register_password_hint,
-            BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
-        )
+//        mPasswordHint.text = resources.getString(
+//            R.string.register_password_hint,
+//            BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
+//        )
         mValidatorManager = ValidatorManager()
         mValidatorManager.addValidator(PasswordTextInputValidator(mPasswordInputLayout))
         mValidatorManager.addValidator(MatchingValidator(mConfirmInputLayout, mPasswordInputLayout))

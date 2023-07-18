@@ -12,6 +12,7 @@
         android:id="@+id/view_plan_freq"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="bottom"
         tools:text="I charge publicly 7+ times/mo"
         style="@style/Title.Medium"/>
 

@@ -53,18 +53,17 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     private fun startCharging() {
         presenter.startSession()
         mBinding.startChargingImage.setVideoResource(R.raw.evcs_scene1, requireContext())
+        mBinding.startChargingImage.startAndLoop()
     }
 
-    fun VideoView.setVideoResource(@RawRes videoRes: Int, context: Context) {
-        val uri = Uri.parse("android.resource://${context.packageName}/$videoRes")
-        setVideoURI(uri)
+    fun VideoView.startAndLoop() {
         setOnPreparedListener { mp ->
             start()
             mp.isLooping = true
             mp.setOnInfoListener { _, what, _ ->
                 if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
                     // video started; hide the placeholder.
-                    mBinding.startChargingImage.background = ColorDrawable(Color.TRANSPARENT)
+                    this.background = ColorDrawable(Color.TRANSPARENT)
                     true
                 } else false
             }
@@ -104,4 +103,9 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         return true
     }
 
+}
+
+fun VideoView.setVideoResource(@RawRes videoRes: Int, context: Context) {
+    val uri = Uri.parse("android.resource://${context.packageName}/$videoRes")
+    setVideoURI(uri)
 }

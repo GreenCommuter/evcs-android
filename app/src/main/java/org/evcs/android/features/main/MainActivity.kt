@@ -172,7 +172,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .setTitle(getString(R.string.success_dialog_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.success_dialog_subtitle))
             .addView(textView)
-            .addButton("Get 30 Days Free") { NavigationUtils.jumpTo(this, PlansActivity::class.java) }
+            .addButton("Start your free trial") { NavigationUtils.jumpTo(this, PlansActivity::class.java) }
             .show(supportFragmentManager)
     }
 

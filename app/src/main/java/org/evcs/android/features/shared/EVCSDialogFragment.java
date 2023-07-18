@@ -126,7 +126,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
     // I couldn't find a way to do this through xml
     protected Button getButton(final String label) {
-        Button button = new Button(new ContextThemeWrapper(getContext(), R.style.Button_Orange));
+        Button button = new Button(new ContextThemeWrapper(getContext(), R.style.ButtonK_Orange));
         button.setTextAppearance(getContext(), R.style.ButtonK);
         button.setBackground(getResources().getDrawable(mButtons.get(label).background));
         button.setTextColor(getResources().getColor(mButtons.get(label).textColor));

@@ -1,6 +1,5 @@
 package org.evcs.android.features.profile.wallet;
 
-import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -13,28 +12,17 @@ import org.evcs.android.databinding.ViewWalletHeaderBinding;
 import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.shared.RequestError;
-import org.evcs.android.model.user.User;
 import org.evcs.android.ui.fragment.ErrorFragment;
-import org.evcs.android.util.UserUtils;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> implements IWalletHeaderView {
+public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> implements IWalletHeaderView {
 
     RecyclerView mEndlessRecyclerView;
 
     private PaymentMethodAdapterV2 mCreditCardsAdapter;
-    private WalletHeaderInterface mParent;
-
-    public static WalletHeaderFragment newInstance() {
-
-        Bundle args = new Bundle();
-
-        WalletHeaderFragment fragment = new WalletHeaderFragment();
-        fragment.setArguments(args);
-        return fragment;
-    }
+    protected WalletHeaderInterface mParent;
 
     public WalletHeaderPresenter createPresenter() {
         return new WalletHeaderPresenter(this, EVCSApplication.getInstance().getRetrofitServices());
@@ -60,9 +48,11 @@ public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> i
 
 //        setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
-        mCreditCardsAdapter = new PaymentMethodAdapterV2();
+        mCreditCardsAdapter = new PaymentMethodAdapterV2(showArrows());
         mEndlessRecyclerView.setAdapter(mCreditCardsAdapter);
     }
+
+    protected abstract boolean showArrows();
 
     public void populate() {
         showProgressDialog();
@@ -70,27 +60,10 @@ public class WalletHeaderFragment extends ErrorFragment<WalletHeaderPresenter> i
     }
 
     public void setListeners() {
-        mCreditCardsAdapter.setOnItemClickListener(new PaymentMethodAdapterV2.CreditCardListener() {
-            @Override
-            public void onDetailClicked(@NonNull PaymentMethod item) {
-                mParent.goToDetail(item);
-            }
-
-            @Override
-            public void onStarClicked(@NonNull PaymentMethod item) {
-                if (!item.getId().equals(UserUtils.getLoggedUser().getDefaultPm())) {
-                    showProgressDialog();
-                    getPresenter().makeDefaultPaymentMethod(item);
-                }
-            }
-
-//            @Override
-//            public void onTrashClicked(@NonNull PaymentMethod item) {
-//                showRemovePaymentMethodDialog(item);
-//            }
-        });
-
+        mCreditCardsAdapter.setOnItemClickListener(getOnItemClickListener());
     }
+
+    abstract PaymentMethodAdapterV2.CreditCardListener getOnItemClickListener();
 
     void onAddPaymentMethodClicked() {
         mParent.onAddPaymentMethodSelected(false);

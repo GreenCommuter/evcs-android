@@ -5,6 +5,10 @@ import android.text.TextWatcher;
 
 import androidx.annotation.NonNull;
 
+import org.evcs.android.BaseConfiguration;
+import org.evcs.android.EVCSApplication;
+import org.evcs.android.R;
+
 /**
  * A validator that checks if an EmptyTextInputLayout has the same text as another
  * {@link EmptyTextInputLayout}
@@ -43,5 +47,10 @@ public class MatchingValidator extends AbstractTextInputValidator {
     @Override
     protected boolean validateField(@NonNull CharSequence content) {
         return mMatches.getText().toString().equals(content.toString());
+    }
+
+    @Override
+    protected String getErrorString() {
+        return "Passwords must match";
     }
 }

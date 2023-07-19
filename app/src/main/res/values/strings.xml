@@ -81,8 +81,8 @@
     <string name="register_password_confirm">Re-enter the password</string>
     <string name="register_password_hint">Must be at least %1d characters long</string>
     <string name="register_button">Create account</string>
-    <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
-    <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
+    <string name="register_tandc">By clicking Continue you agree to our <a href="https://evcs.com/app/terms-of-use">ToS</a>
+        and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
 
     <!--Placeholder Fragment-->
     <string name="placeholder_no_internet_dialog_title">Connection Lost</string>

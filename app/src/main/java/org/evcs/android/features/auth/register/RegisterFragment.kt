@@ -2,11 +2,11 @@ package org.evcs.android.features.auth.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.NavigationUtils
-import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterBinding
@@ -63,10 +63,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     override fun init() {
         super.init()
-        mPasswordHint.text = resources.getString(
-            R.string.register_password_hint,
-            BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
-        )
+        mPasswordHint.movementMethod = LinkMovementMethod.getInstance()
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mNameInputLayout))
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mLastNameInputLayout))
         mValidatorManager.addValidator(EmailTextInputValidator(mEmailInputLayout))

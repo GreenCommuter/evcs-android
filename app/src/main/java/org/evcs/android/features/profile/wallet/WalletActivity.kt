@@ -18,6 +18,7 @@ import org.evcs.android.util.Extras
 
 class WalletActivity : NavGraphActivity() {
 
+    var mFromProfile = false
     var mFinishOnClick = false
 
     override fun inflate(layoutInflater: LayoutInflater): View {
@@ -26,6 +27,7 @@ class WalletActivity : NavGraphActivity() {
 
     override fun init() {
         mFinishOnClick = intent.getBooleanExtra(Extras.ChangePaymentMethod.FINISH_ON_CLICK, false)
+        mFromProfile = !mFinishOnClick
     }
 
     override fun getNavGraphId(): Int {

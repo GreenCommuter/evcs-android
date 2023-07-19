@@ -18,6 +18,8 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.text.TextUtilsCompat
+import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
 import androidx.core.widget.doAfterTextChanged
 import com.base.core.util.KeyboardUtils
 import org.evcs.android.databinding.StandardTextFieldBinding
@@ -27,6 +29,8 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
     private lateinit var mEditText: EditText
     protected lateinit var mLayout: RelativeLayout
     protected lateinit var mLabel: TextView
+    protected lateinit var mError: TextView
+    private var mBaseBottomMargin: Int = -1
     protected var mLabelColor: Int = 0
     protected lateinit var mLabelEmpty: TextView
     private lateinit var mGreyBorder: Drawable
@@ -69,6 +73,7 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         mLabelEmpty = binding.standardTextFieldLabelEmpty
         mLayout = binding.standardTextFieldLayout
         mLabel = binding.standardTextFieldLabel
+        mError = binding.standardTextFieldError
         mGreyBorder = resources.getDrawable(R.drawable.layout_corners_rounded_grey_border)
         mBlackBorder = resources.getDrawable(R.drawable.layout_corners_rounded_blue_outline)
         mRedBorder = resources.getDrawable(R.drawable.layout_corners_rounded_red_border)
@@ -115,11 +120,17 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
     }
 
     override fun setErrorEnabled(b: Boolean) {
+        if (mBaseBottomMargin == -1) mBaseBottomMargin = marginBottom
         mErrorEnabled = b
+        mError.isVisible = b
+        mError.measure(0, 0)
+        val lp = layoutParams as MarginLayoutParams
+        lp.bottomMargin = mBaseBottomMargin + (if (b) -1 else 0) * mError.measuredHeight
+//        layoutParams = lp
     }
 
     override fun setError(s: CharSequence?) {
-//        mEditText.setText(s);
+        mError.text = s
     }
 
     override fun getEditText(): EditText? {

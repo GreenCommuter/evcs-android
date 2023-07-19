@@ -5,7 +5,8 @@ import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import org.evcs.android.BaseConfiguration;
-import org.evcs.android.Configuration;
+import org.evcs.android.EVCSApplication;
+import org.evcs.android.R;
 
 /**
  * Common validator to validate if the field's length is equals or greater than the given parameter.
@@ -27,4 +28,10 @@ public class PasswordTextInputValidator extends AbstractTextInputValidator {
                 content.length() >= BaseConfiguration.Validations.PASSWORD_MIN_LENGTH;
     }
 
+    @Override
+    protected String getErrorString() {
+        return EVCSApplication.getInstance().getApplicationContext().getString(
+                R.string.register_password_hint, BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
+        );
+    }
 }

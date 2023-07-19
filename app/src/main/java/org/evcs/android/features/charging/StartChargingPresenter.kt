@@ -13,9 +13,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class StartChargingPresenter(viewInstance: StartChargingView?, services: RetrofitServices?,
+class StartChargingPresenter(viewInstance: StartChargingView, services: RetrofitServices?,
         val mStationId: Int, val mPmId: String?, val mCoupons: ArrayList<String>?) :
-        ServicesPresenter<StartChargingView?>(viewInstance, services) {
+        ChargingTabPresenter<StartChargingView>(viewInstance, services) {
 
     private lateinit var mStation: Station
     private val LOCATION_KEY = "location"

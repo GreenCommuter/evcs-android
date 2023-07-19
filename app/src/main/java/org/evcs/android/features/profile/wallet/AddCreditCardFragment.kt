@@ -44,7 +44,6 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
     override fun populate() {
         mSetDefault.setVisibility(!(activity as WalletActivity).mFinishOnClick)
-        mSetDefault.setDescription(getString(R.string.add_credit_card_set_default))
         mCardNumber.editText?.setMonospaceIfNotShowingHint()
     }
 

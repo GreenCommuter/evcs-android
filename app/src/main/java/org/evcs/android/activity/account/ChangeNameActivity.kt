@@ -20,8 +20,16 @@ class ChangeNameActivity : UpdateUserActivity() {
         super.populate()
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mBinding.fragmentChangeNameFirst))
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mBinding.fragmentChangeNameLast))
-        mBinding.fragmentChangeNameFirst.editText?.setText(UserUtils.getLoggedUser().firstName)
-        mBinding.fragmentChangeNameLast.editText?.setText(UserUtils.getLoggedUser().lastName)
+        var firstName = UserUtils.getLoggedUser().firstName
+        var lastName = UserUtils.getLoggedUser().lastName
+        val splitFirstName = UserUtils.getLoggedUser().firstName?.split(" ")
+        //Old users have their full name as firstname
+        if (splitFirstName?.size == 2 && lastName == ""){
+            firstName = splitFirstName[0]
+            lastName = splitFirstName[1]
+        }
+        mBinding.fragmentChangeNameFirst.editText?.setText(firstName)
+        mBinding.fragmentChangeNameLast.editText?.setText(lastName)
     }
 
     override fun getButton(): View {

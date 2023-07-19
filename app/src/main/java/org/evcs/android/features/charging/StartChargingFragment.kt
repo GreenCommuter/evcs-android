@@ -9,12 +9,14 @@ import android.view.View
 import android.widget.VideoView
 import androidx.annotation.RawRes
 import com.base.core.util.NavigationUtils
+import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.databinding.FragmentStartChargingBinding
 import org.evcs.android.features.shared.EVCSDialogFragment
+import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
@@ -51,9 +53,21 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     private fun startCharging() {
+        presenter.getCurrentCharge()
         presenter.startSession()
         mBinding.startChargingImage.setVideoResource(R.raw.evcs_scene1, requireContext())
         mBinding.startChargingImage.startAndLoop()
+    }
+
+    //We don't have a way to tell if the user canceled a charge while it was starting, so this is
+    //to prevent them from starting the same charge twice
+    override fun onChargeRetrieved(response: Session?) {
+        if (response != null) {
+            ToastUtils.show("There's a charge in progress")
+            onSessionStarted()
+        } else {
+            presenter.startSession()
+        }
     }
 
     fun VideoView.startAndLoop() {

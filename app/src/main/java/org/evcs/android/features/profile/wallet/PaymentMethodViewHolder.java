@@ -10,12 +10,14 @@ import org.evcs.android.model.PaymentMethod;
 
 public class PaymentMethodViewHolder extends RecyclerView.ViewHolder {
 
+    private final boolean mShowArrow;
     private CreditCardViewListener mListener;
     @NonNull ViewCreditCardItemBinding mBinding;
 
-    public PaymentMethodViewHolder(View itemView) {
+    public PaymentMethodViewHolder(View itemView, boolean showArrow) {
         super(itemView);
         mBinding = ViewCreditCardItemBinding.bind(itemView);
+        mShowArrow = showArrow;
     }
 
     public void setPaymentMethod(PaymentMethod creditCardInformation) {
@@ -23,6 +25,7 @@ public class PaymentMethodViewHolder extends RecyclerView.ViewHolder {
             mBinding.creditCardNumber.setText(String.format("•••• %s", creditCardInformation.card.getLast4()));
             mBinding.creditCardProvider.setImageResource(creditCardInformation.card.getBrand().getDrawable());
         }
+        mBinding.viewListButtonChevron.setVisibility(mShowArrow ? View.VISIBLE : View.GONE);
     }
 
     public void setListeners(CreditCardViewListener listener) {

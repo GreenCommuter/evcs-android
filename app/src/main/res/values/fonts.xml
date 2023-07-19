@@ -11,34 +11,34 @@
 
     <style name="Display.Large">
         <item name="android:textSize">57sp</item>
-        <item name="android:minHeight">64sp</item>
+        <item name="lineHeight">64sp</item>
     </style>
 
     <style name="Display.Medium">
         <item name="android:textSize">45sp</item>
-        <item name="android:minHeight">52sp</item>
+        <item name="lineHeight">52sp</item>
     </style>
 
     <style name="Display.Small">
         <item name="android:textSize">36sp</item>
-        <item name="android:minHeight">44sp</item>
+        <item name="lineHeight">44sp</item>
     </style>
 
     <style name="Headline" parent="Inter"/>
 
     <style name="Headline.Large">
         <item name="android:textSize">32sp</item>
-        <item name="android:minHeight">40sp</item>
+        <item name="lineHeight">40sp</item>
     </style>
 
     <style name="Headline.Medium">
         <item name="android:textSize">@dimen/font_huge</item>
-        <item name="android:minHeight">36sp</item>
+        <item name="lineHeight">36sp</item>
     </style>
 
     <style name="Headline.Small">
         <item name="android:textSize">@dimen/font_big</item>
-        <item name="android:minHeight">32sp</item>
+        <item name="lineHeight">32sp</item>
     </style>
 
     <style name="Title" parent="Inter">
@@ -47,18 +47,19 @@
 
     <style name="Title.Large">
         <item name="android:textSize">@dimen/font_large_extra</item>
-        <item name="android:minHeight">@dimen/font_huge</item>
+        <item name="lineHeight">@dimen/font_huge</item>
     </style>
 
     <style name="Title.Medium">
         <item name="android:textSize">@dimen/font_medium_more</item>
-        <item name="android:minHeight">@dimen/font_big</item>
+        <item name="lineHeight">@dimen/font_big</item>
+        <item name="minHeight">@dimen/font_big</item>
         <item name="android:letterSpacing">0.00936</item>
     </style>
 
     <style name="Title.Small">
         <item name="android:textSize">@dimen/font_medium</item>
-        <item name="android:minHeight">@dimen/font_large</item>
+        <item name="lineHeight">@dimen/font_large</item>
         <item name="android:letterSpacing">0.00624</item>
     </style>
 
@@ -68,19 +69,19 @@
 
     <style name="Label.Large">
         <item name="android:textSize">@dimen/font_medium_extra</item>
-        <item name="android:minHeight">@dimen/font_large</item>
+        <item name="lineHeight">@dimen/font_large</item>
         <item name="android:letterSpacing">0.00624</item>
     </style>
 
     <style name="Label.Medium">
         <item name="android:textSize">@dimen/font_medium_more</item>
-        <item name="android:minHeight">@dimen/font_medium_extra</item>
+        <item name="lineHeight">@dimen/font_medium_extra</item>
         <item name="android:letterSpacing">0.0312</item>
     </style>
 
     <style name="Label.Small">
         <item name="android:textSize">@dimen/font_medium</item>
-        <item name="android:minHeight">@dimen/font_medium_more</item>
+        <item name="lineHeight">@dimen/font_medium_more</item>
         <item name="android:letterSpacing">0.0312</item>
     </style>
 
@@ -94,7 +95,7 @@
 
     <style name="Body.Large">
         <item name="android:textSize">@dimen/font_medium_extra</item>
-        <item name="android:minHeight">@dimen/font_big</item>
+        <item name="lineHeight">@dimen/font_big</item>
         <item name="android:letterSpacing">0.0312</item>
     </style>
 
@@ -104,6 +105,7 @@
 
     <style name="Body.Medium">
         <item name="android:textSize">@dimen/font_medium_more</item>
+        <item name="lineHeight">26sp</item>
         <item name="android:minHeight">26sp</item>
         <item name="android:letterSpacing">0.0156</item>
     </style>
@@ -118,7 +120,7 @@
 
     <style name="Body.Small">
         <item name="android:textSize">@dimen/font_medium</item>
-        <item name="android:minHeight">@dimen/font_large_extra</item>
+        <item name="lineHeight">@dimen/font_large_extra</item>
         <item name="android:letterSpacing">0.02496</item>
     </style>
 
@@ -128,7 +130,7 @@
 
     <style name="Body.ExtraSmall">
         <item name="android:textSize">@dimen/font_small_more</item>
-        <item name="android:minHeight">@dimen/font_medium_more</item>
+        <item name="lineHeight">@dimen/font_medium_more</item>
         <item name="android:letterSpacing">0.02496</item>
     </style>
 
@@ -136,19 +138,19 @@
 
     <style name="WebBody.Large">
         <item name="android:textSize">@dimen/font_big</item>
-        <item name="android:minHeight">32sp</item>
+        <item name="lineHeight">32sp</item>
         <item name="android:letterSpacing">0.0312</item>
     </style>
 
     <style name="WebBody.Medium">
         <item name="android:textSize">@dimen/font_large</item>
-        <item name="android:minHeight">@dimen/font_huge</item>
+        <item name="lineHeight">@dimen/font_huge</item>
         <item name="android:letterSpacing">0.0156</item>
     </style>
 
     <style name="WebBody.Small">
         <item name="android:textSize">@dimen/font_medium_more</item>
-        <item name="android:minHeight">@dimen/font_large</item>
+        <item name="lineHeight">@dimen/font_large</item>
         <item name="android:letterSpacing">0.2496</item>
     </style>
 

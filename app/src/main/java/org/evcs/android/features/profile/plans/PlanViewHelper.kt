@@ -25,6 +25,7 @@ abstract class PlanViewHelper(val mContext: Context) {
     abstract fun getFlatRate(): String?
     abstract fun getDCFastPrice(): String?
     abstract fun getLevel2Price(): String?
+    abstract fun showLearnMore(): Boolean
 
     abstract fun getFlatRateForGetPlan(): String?
     abstract fun getCongratulationsDialogSubtitle(): String?
@@ -48,7 +49,7 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     }
 
     override fun getPlanLimit(): String? {
-        return mContext.getString(R.string.pay_as_you_go_limit)
+        return null
     }
 
     override fun getPlanLimitAprox(): String? {
@@ -75,6 +76,10 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
         return null
     }
 
+    override fun showLearnMore(): Boolean {
+        return false
+    }
+
 }
 
 abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanViewHelper(context) {
@@ -93,6 +98,10 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
 
     override fun getPlanFreq(): String? {
         return mPlan.useCase
+    }
+
+    override fun showLearnMore(): Boolean {
+        return true
     }
 }
 

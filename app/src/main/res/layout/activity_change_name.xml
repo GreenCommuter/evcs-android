@@ -24,6 +24,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textCapWords"
             style="@style/Body.Medium"/>
 
     </org.evcs.android.features.shared.StandardTextField>
@@ -41,6 +42,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:inputType="textCapWords"
             style="@style/Body.Medium"/>
 
     </org.evcs.android.features.shared.StandardTextField>

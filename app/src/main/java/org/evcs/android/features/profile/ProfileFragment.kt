@@ -128,7 +128,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileMenuPaymentMethods.setOnClickListener { goToActivity(WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener { goToActivityAndRefresh(SubscriptionActivity::class.java) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
-        mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView(TERMS_URL) }
+        mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("Terms of Use", TERMS_URL) }
         mBinding.profileMenuCallCustomerCare.setOnClickListener {
             val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
             NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, extra)
@@ -140,9 +140,8 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileMenuNotifications.setOnClickListener { goToActivityAndRefresh(NotificationsActivity::class.java) }
-        mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
-        mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }
-        super.setListeners()
+        mBinding.profileMenuFaq.setOnClickListener { goToWebView("Help Center FAQ", FAQ_URL) }
+        mBinding.profileMenuRequest.setOnClickListener { goToWebView("Submit a request", REQUEST_URL) }
     }
 
     private fun <T : FragmentActivity> goToActivity(activity: Class<T>) {
@@ -153,8 +152,8 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mLauncher.launch(Intent(requireContext(), activity))
     }
 
-    private fun goToWebView(url: String) {
-        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToWebViewFragment(url))
+    private fun goToWebView(title: String, url: String) {
+        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToWebViewFragment(title, url))
     }
 
     override fun onBackPressed(): Boolean {

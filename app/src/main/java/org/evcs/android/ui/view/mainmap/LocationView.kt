@@ -53,7 +53,7 @@ class LocationView : LinearLayout {
     fun setLocation(location: Location) {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
-        mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
+        mBinding.viewLocationPicture.setImageURI(location.imageUrls?.firstOrNull())
 
         mBinding.viewLocationConnectors.removeAllViews()
         location.stations!!.forEach { station ->

@@ -45,7 +45,7 @@ class AccountActivity : BaseActivity2() {
             mChangeUserResult.launch(Intent(this, ChangeEmailActivity::class.java))
         }
         mBinding.fragmentAccountPhone.setOnClickListener {
-            mChangeUserResult.launch(Intent(this, ChangePhoneNumberActivity::class.java))
+//            mChangeUserResult.launch(Intent(this, ChangePhoneNumberActivity::class.java))
         }
         mBinding.fragmentAccountDelete.setOnClickListener { jumpTo(this, DeleteAccountActivity::class.java)  }
     }

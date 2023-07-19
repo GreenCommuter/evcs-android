@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingTop="@dimen/spacing_medium"
-    android:paddingBottom="@dimen/spacing_medium"
+    android:paddingTop="12dp"
     android:paddingStart="@dimen/spacing_medium_extra"
     android:paddingEnd="@dimen/spacing_medium_extra">
 
@@ -14,8 +13,7 @@
         android:layout_height="match_parent"
         android:text="@string/back"
         android:layout_gravity="center_vertical"
-        android:paddingLeft="@dimen/spacing_medium"
-        android:paddingRight="@dimen/spacing_medium"
+        android:padding="9dp"
         style="@style/TextButton.Blue"/>
 
     <TextView
@@ -23,6 +21,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:paddingTop="@dimen/spacing_medium"
+        android:paddingBottom="@dimen/spacing_medium"
         android:text="title"
         style="@style/Title.Medium"/>
 

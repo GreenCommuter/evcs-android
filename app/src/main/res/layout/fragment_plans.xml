@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@color/evcs_white">
+    android:background="@color/evcs_gray_50">
     
     <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:layout_width="match_parent"

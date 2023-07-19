@@ -43,13 +43,13 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             }
             if (i < ConnectorType.values().size - 1) {
                 val spacing = View(context)
-                val params = LinearLayout.LayoutParams(resources.getDimension(R.dimen.spacing_large).toInt(), -1)
+                val params = LinearLayout.LayoutParams(resources.getDimension(R.dimen.spacing_medium_extra).toInt(), -1)
                 mBinding.activityFilterConnectorTypes.addView(spacing, params)
             }
         }
 
         mBinding.activityFilterMinPower.setLabels(
-            mMinKwValues.map{ i -> if (i > 0) "$i"+"kW" else "Any"}.toTypedArray())
+            mMinKwValues.map{ i -> if (i > 0) "$i" else "Any"}.toTypedArray())
         mBinding.activityFilterMinPower.seekbar.progressDrawable =
             context?.getDrawable(R.drawable.progress_bar_background)
         setFiltersFromState()

@@ -33,7 +33,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:drawableStart="@drawable/ic_go"
-            android:drawablePadding="@dimen/spacing_medium"
             android:text="Go"
             style="@style/ButtonK.Blue"/>
 
@@ -66,14 +65,13 @@
         android:id="@+id/view_location_type_price_dc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_tiny"
         style="@style/Body.Small"/>
 
     <TextView
         android:id="@+id/view_location_type_price_ac"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="@dimen/spacing_medium"
         style="@style/Body.Small"/>
 
     <TextView
@@ -81,7 +79,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_charging_button"
-        android:layout_margin="0dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="@dimen/spacing_medium"
         style="@style/ButtonK.OrangeOutline"/>
 
     <LinearLayout

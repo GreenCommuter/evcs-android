@@ -79,6 +79,7 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
             addEditText(child)
             val childParams = LayoutParams(params)
             childParams.addRule(BELOW, R.id.standard_text_field_label)
+            child.setPadding(0, 0, 0, 0)
             mLayout.addView(child, index, childParams)
         } else {
             super.addView(child, index, params)

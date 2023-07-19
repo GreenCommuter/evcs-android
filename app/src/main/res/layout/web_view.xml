@@ -1,11 +1,45 @@
-<FrameLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/web_view_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/status_bar_height"
-    android:alpha="1">
+    android:orientation="vertical">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_medium"
+        android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra">
+
+        <TextView
+            android:id="@+id/web_view_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="title"
+            android:layout_centerHorizontal="true"
+            style="@style/Title.Medium"/>
+
+        <TextView
+            android:id="@+id/web_view_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/web_view_title"
+            android:text="subtitle"
+            style="@style/Title.Small"
+            android:textColor="@color/evcs_gray_300"/>
+
+        <ImageView
+            android:id="@+id/web_view_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="29dp"
+            android:src="@drawable/ic_xmark_solid"
+            app:tint="#1b1c1f" />
+
+    </RelativeLayout>
 <!--    <ProgressBar-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="match_parent"-->
@@ -16,4 +50,4 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</FrameLayout>
+</LinearLayout>

@@ -12,6 +12,7 @@ import com.stripe.android.Stripe
 import com.stripe.android.model.*
 import org.evcs.android.Configuration
 import org.evcs.android.R
+import org.evcs.android.features.shared.setMonospaceIfNotShowingHint
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.ViewUtils.setVisibility
@@ -44,6 +45,7 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
     override fun populate() {
         mSetDefault.setVisibility(!(activity as WalletActivity).mFinishOnClick)
         mSetDefault.setDescription(getString(R.string.add_credit_card_set_default))
+        mCardNumber.editText?.setMonospaceIfNotShowingHint()
     }
 
     override fun setListeners() {

@@ -216,9 +216,9 @@
 
     <!-- Change password -->
     <string name="change_password_success">Password changed</string>
-    <string name="change_password_old">Current password</string>
-    <string name="change_password_new">New password</string>
-    <string name="change_password_confirm">Confirm new password</string>
+    <string name="change_password_old">Current Password</string>
+    <string name="change_password_new">New Password</string>
+    <string name="change_password_confirm">Confirm New Password</string>
     <string name="change_password_button">Change your password</string>
     <string name="change_password_reset">Forgot password? Reset it via email</string>
 
@@ -365,10 +365,10 @@
     <!-- Filter Activity -->
     <string name="filter_activity_title">Filters</string>
     <string name="filter_activity_available_only">Show locations coming soon</string>
-    <string name="filter_activity_connector_types">Connector types</string>
-    <string name="filter_activity_minimum_power_level">Minimum power level</string>
+    <string name="filter_activity_connector_types">Connector Types</string>
+    <string name="filter_activity_minimum_power_level">Minimum Power Level (kW)</string>
     <string name="filter_activity_apply">Apply</string>
-    <string name="dialog_filter_reset">Clear all</string>
+    <string name="dialog_filter_reset">Clear All</string>
 
     <!-- Slider dialogs-->
     <string name="welcome_dialog_title">Welcome!</string>
@@ -407,7 +407,7 @@
     <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then</string>
     <string name="plan_info_peak_hours">You are charging during peak hours (%1$s - %2$s) \n You’ll be charged a flat rate of $%.2f/kWh \n Charge anytime from %2$s - %1$s at no cost\"</string>
     <string name="plan_info_pay_as_you_go">Pay as you go</string>
-    <string name="plan_info_start_charging">Start Charging Session</string>
+    <string name="plan_info_start_charging">Start Charging</string>
     <string name="plan_info_free_title">Free Charging!</string>
     <string name="plan_info_free_subtitle">Charging is free at this location.</string>
     <string name="plan_info_kwh_usage">kWh usage</string>
@@ -494,7 +494,7 @@
     <string name="get_plan_previous_plan_active">Previous plan active until</string>
 
     <!-- Plan View -->
-    <string name="plan_view_current">Current plan</string>
+    <string name="plan_view_current">Current Plan</string>
     <string name="plan_view_flat_rate">Simple flat rate after %d kWh exceeded</string>
     <string name="plan_view_unlimited">Unlimited charging 24/7</string>
     <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
@@ -537,11 +537,11 @@
     <string name="plan_learn_more_track">Track monthly charging sessions and kWh consumed</string>
 
     <!-- Pay as you go -->
-    <string name="pay_as_you_go_name">Pay as you go</string>
+    <string name="pay_as_you_go_name">Pay As You Go</string>
     <string name="pay_as_you_go_button">Get Started</string>
     <string name="pay_as_you_go_freq">I charge infrequently</string>
     <string name="pay_as_you_go_limit">EVCS offers simple, flat rate pricing!</string>
-    <string name="pay_as_you_go_flat">Simple flat rate pricing</string>
+    <string name="pay_as_you_go_flat">Your discounted member flat rate</string>
     <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
     <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
     <string name="pay_as_you_go_price">$0 Membership Fee</string>

@@ -93,6 +93,8 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
 //        Intent intent2 = new Intent(context, VerifyPhoneActivity.class);
 //        context.startActivities(new Intent[]{ intent1, intent2 });
 //        NavigationUtils.IntentExtra intentExtra = new NavigationUtils.IntentExtra(Extras.VerifyActivity.RESULT, true);
-        mLauncher.launch(new Intent(this, VerifyPhoneActivity.class));
+        Intent intent = new Intent(this, VerifyPhoneActivity.class);
+        intent.putExtra(Extras.VerifyActivity.FROM_AUTH, true);
+        mLauncher.launch(intent);
     }
 }

@@ -90,20 +90,24 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         }
     }
 
+    //TODO: replace for validFields
     override fun setEnableButton(validFields: Boolean) {
-        mContinueButton.isEnabled = validFields
+        mContinueButton.isEnabled = true
     }
 
     override fun emailTextInputLayout(): TextInputLayoutInterface = mEmailInputLayout
     override fun passwordTextInputLayout(): TextInputLayoutInterface = mPasswordInputLayout
 
     private fun onButtonClick() {
-        presenter!!.register(
-            mNameInputLayout.text.toString(),
-            mLastNameInputLayout.text.toString(),
-            mEmailInputLayout.text.toString(),
-            mPasswordInputLayout.text.toString()
-        )
+        //TODO: switch
+        progressDialog.show()
+//        presenter!!.register(
+//            mNameInputLayout.text.toString(),
+//            mLastNameInputLayout.text.toString(),
+//            mEmailInputLayout.text.toString(),
+//            mPasswordInputLayout.text.toString()
+//        )
+        presenter.logIn("javier+6@evcs.com", "12345678")
     }
 
     override fun onTokenSent() {

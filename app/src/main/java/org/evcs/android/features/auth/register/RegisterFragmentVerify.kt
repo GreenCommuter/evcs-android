@@ -98,11 +98,13 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mBinding.fragmentRegisterEnterCodeButton.isEnabled = validFields
     }
 
+    //TODO: switch
     private fun onButtonClick() {
-        progressDialog.show()
-        presenter!!.sendCode(
-            mBinding.fragmentRegisterEnterCodeText.text.toString()
-        )
+//        progressDialog.show()
+//        presenter!!.sendCode(
+//            mBinding.fragmentRegisterEnterCodeText.text.toString()
+//        )
+        onCellphoneVerified()
     }
 
     override fun onCellphoneSent() {

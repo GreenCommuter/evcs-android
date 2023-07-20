@@ -66,14 +66,16 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     }
 
     fun setEnableButton(validFields: Boolean) {
-        mBinding.fragmentRegisterCellphoneSend.isEnabled = validFields
+        mBinding.fragmentRegisterCellphoneSend.isEnabled = true//validFields
     }
 
     private fun onButtonClick() {
-        progressDialog.show()
-        presenter!!.sendNumbertoVerify(
-            mBinding.fragmentRegisterCellphoneNumber.text.toString()
-        )
+        //TODO: switch
+//        progressDialog.show()
+//        presenter!!.sendNumbertoVerify(
+//            mBinding.fragmentRegisterCellphoneNumber.text.toString()
+//        )
+        onCellphoneSent()
     }
 
     override fun onCellphoneSent() {

@@ -23,7 +23,7 @@ import org.evcs.android.util.SpinnerUtils
 //If the request fails: go back, don't select charging
 //If it is null: go to charging fragment, select charging
 //It it is not null: go to "in progress", select charging, make sure when they come back we are back in the map
-class PreChargingFragment : BaseDialogFragment<ChargingTabPresenter<*>?>(), ChargingTabView {
+class PreChargingFragment : BaseDialogFragment<PreChargingPresenter<*>?>(), PreChargingView {
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mProgressDialog: Dialog
@@ -32,8 +32,8 @@ class PreChargingFragment : BaseDialogFragment<ChargingTabPresenter<*>?>(), Char
         return R.layout.fragment_base
     }
 
-    override fun createPresenter(): ChargingTabPresenter<*>? {
-        return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
+    override fun createPresenter(): PreChargingPresenter<*>? {
+        return PreChargingPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun init() {

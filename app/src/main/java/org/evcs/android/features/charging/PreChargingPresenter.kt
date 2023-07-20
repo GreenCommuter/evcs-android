@@ -9,7 +9,7 @@ import org.evcs.android.network.service.ChargesService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
-open class ChargingTabPresenter<T : ChargingTabView>(viewInstance: T, services: RetrofitServices?) :
+open class PreChargingPresenter<T : PreChargingView>(viewInstance: T, services: RetrofitServices?) :
     ServicesPresenter<T>(viewInstance, services) {
 
     fun getCurrentCharge() {

@@ -48,7 +48,6 @@
     <string name="choose_plan_basic_title">Basic membership</string>
     <string name="choose_plan_basic_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
     <string name="choose_plan_premium_title">Premium membership</string>
-    <string name="choose_plan_premium_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
 
     <!-- Gatecode dialog -->
     <string name="gatecode_dialog_title">Access requirement</string>
@@ -105,7 +104,6 @@
         <item>Female</item>
     </string-array>
     <string name="my_information_birthdate">Birthdate</string>
-    <string name="my_information_street_address">Street Address</string>
     <string name="my_information_zip_code">Zipcode</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
@@ -263,8 +261,6 @@
     <string name="vanpool_ongoing_ride_enable_location_dialog_title">Location error</string>
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
-    <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
-    <string name="vanpool_ongoing_ride_file_report_button">File report</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
@@ -545,5 +541,11 @@
     <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
     <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
     <string name="pay_as_you_go_price">$0 Membership Fee</string>
+
+    <!-- Charging Tab -->
+    <string name="charging_tab_scan_qr">Scan the QR code</string>
+    <string name="charing_tab_enter_id">Enter the station ID</string>
+    <string name="charging_tab_hint">Station ID</string>
+    <string name="charging_tab_title">Start Charging</string>
 
 </resources>

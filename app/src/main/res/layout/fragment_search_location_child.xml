@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="@dimen/spacing_medium">
+    android:padding="@dimen/spacing_tiniest">
 
     <org.evcs.android.features.map.search.FilterableAutocompleteTextView
         android:id="@+id/fragment_search_location_address"

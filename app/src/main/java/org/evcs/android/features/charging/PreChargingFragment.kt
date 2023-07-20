@@ -69,4 +69,9 @@ class PreChargingFragment : BaseDialogFragment<PreChargingPresenter<*>?>(), PreC
         mProgressDialog.hide()
         dismiss()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mProgressDialog.dismiss()
+    }
 }

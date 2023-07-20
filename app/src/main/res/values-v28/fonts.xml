@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:tools="http://schemas.android.com/tools">
-
-    <style name="Title" parent="Inter">
-        <item name="android:textFontWeight" tools:targetApi="o">500</item>
-    </style>
-</resources>

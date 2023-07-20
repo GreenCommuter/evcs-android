@@ -42,7 +42,8 @@
     </style>
 
     <style name="Title" parent="Inter">
-        <item name="android:textStyle">bold</item>
+<!--        <item name="android:textFontWeight" tools:targetApi="p">500</item>-->
+        <item name="android:fontFamily">@font/inter_medium</item>
     </style>
 
     <style name="Title.Large">

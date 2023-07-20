@@ -78,7 +78,7 @@
     <string name="register_email_confirm">Confirm E-mail</string>
     <string name="register_password">Password</string>
     <string name="register_password_confirm">Re-enter the password</string>
-    <string name="register_password_hint">Must be at least %1d characters long</string>
+    <string name="register_password_hint">Must be at least %1d characters</string>
     <string name="register_button">Create account</string>
     <string name="register_tandc">By clicking Continue you agree to our <a href="https://evcs.com/app/terms-of-use">ToS</a>
         and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>

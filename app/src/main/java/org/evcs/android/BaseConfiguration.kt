@@ -28,11 +28,15 @@ object BaseConfiguration {
         const val IMAGE_QUALITY = 80
     }
 
-    object License {
-        const val IMAGE_MAX_WIDTH = 750
-        const val IMAGE_MAX_HEIGHT = 750
-        const val IMAGE_QUALITY = 50
+    object WebViews {
+        const val TERMS_URL = "https://www.evcs.com/app/terms-of-use"
+        const val FAQ_URL = "https://www.evcs.com/ev-drivers/faqs"
+        const val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
+        const val REPORT_URL = "https://support.evcs.com/hc/en-us/requests/new"
+        const val PLANS_URL = "https://subscriptions.evcs.com/account/%s/plans"
     }
+
+    val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")
 
     object IncidentPictures {
         const val IMAGE_QUALITY = 35
@@ -41,7 +45,7 @@ object BaseConfiguration {
     object Map {
         const val DEFAULT_LATITUDE = 34.0223187
         const val DEFAULT_LONGITUDE = -118.3104457
-        const val DEFAULT_ZOOM = 10f
+        const val DEFAULT_ZOOM = 9f
     }
 
     object ChargingHistory {

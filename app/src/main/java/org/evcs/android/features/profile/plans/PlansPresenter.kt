@@ -2,6 +2,7 @@ package org.evcs.android.features.profile.plans
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
+import org.evcs.android.BaseConfiguration
 import org.evcs.android.model.Plan
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
@@ -11,8 +12,6 @@ import org.evcs.android.util.ErrorUtils
 
 class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
     : ServicesPresenter<PlansView>(viewInstance, services) {
-
-    val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")
 
     fun getPlans() {
         getService(PlansService::class.java).plans.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
@@ -45,7 +44,7 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
                 mergePlans(plans, response)
                 //TODO: API should do this
-                val plans2 = plans.filter { plan -> ALLOWED_PLANS.contains(plan.name) }
+                val plans2 = plans.filter { plan -> BaseConfiguration.ALLOWED_PLANS.contains(plan.name) }
                 val runnable = { view.showPlans(plans2) }
                 runIfViewCreated(runnable)
             }

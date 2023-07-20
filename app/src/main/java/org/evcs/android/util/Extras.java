@@ -61,6 +61,7 @@ public class Extras {
     }
 
     public static final class WebView {
+        public static final String SUBTITLE = "subtitle";
         public static final String TITLE = "title";
         public static final String URL = "url";
     }

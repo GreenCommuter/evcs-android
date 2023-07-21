@@ -20,22 +20,9 @@ class PlansActivity : BaseActivity2() {
     }
 
     override fun init() {
-        if (userHasHiddenPlan()) {
-            val url = String.format(BaseConfiguration.WebViews.PLANS_URL, UserUtils.getSessionToken())
-            val intent = WebViewActivity.buildIntent(this, "Plans", url, "")
-            startActivity(intent)
-            finish()
-            return
-        }
-
         val isCorporate = intent.getBooleanExtra(Extras.PlanActivity.IS_CORPORATE, true)
         val fragment = PlansFragment.newInstance(isCorporate)
         replaceFragment(R.id.activity_base_content, fragment)
-    }
-
-    private fun userHasHiddenPlan(): Boolean {
-        val userPlan = UserUtils.getLoggedUser()?.activeSubscription?.plan
-        return userPlan != null && !BaseConfiguration.ALLOWED_PLANS.contains(userPlan.name)
     }
 
 }

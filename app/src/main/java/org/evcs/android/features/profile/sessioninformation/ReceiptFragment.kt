@@ -1,7 +1,6 @@
 package org.evcs.android.features.profile.sessioninformation
 
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.ui.fragment.ErrorFragment
 import com.base.core.presenter.BasePresenter

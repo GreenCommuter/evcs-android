@@ -50,8 +50,6 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
 
         mBinding.activityFilterMinPower.setLabels(
             mMinKwValues.map{ i -> if (i > 0) "$i" else "Any"}.toTypedArray())
-        mBinding.activityFilterMinPower.seekbar.progressDrawable =
-            context?.getDrawable(R.drawable.progress_bar_background)
         setFiltersFromState()
         keepStatusBar(mBinding.root)
         dimBackground()
@@ -59,7 +57,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
 
     private fun setFiltersFromState() {
         mBinding.activityFilterSwitch.isChecked = mFilterState.comingSoon ?: false
-        mBinding.activityFilterMinPower.seekbar.progress = mMinKwValues.indexOf(mFilterState.minKw)
+        mBinding.activityFilterMinPower.setProgress(mMinKwValues.indexOf(mFilterState.minKw))
         for (i in 0..mBinding.activityFilterConnectorTypes.childCount - 1) {
             val view = mBinding.activityFilterConnectorTypes.getChildAt(i)
             if (view is ConnectorTypeView)
@@ -94,8 +92,8 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             mFilterState.comingSoon = mBinding.activityFilterSwitch.isChecked
             onAnyFilterChanged()
         }
-        mBinding.activityFilterMinPower.setOnSeekBarChangeListener {
-            mFilterState.minKw = mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress]
+        mBinding.activityFilterMinPower.setListener {
+            mFilterState.minKw = mMinKwValues[mBinding.activityFilterMinPower.getProgress()]
             onAnyFilterChanged()
         }
         mBinding.dialogFilterClose.setOnClickListener { dismiss() }

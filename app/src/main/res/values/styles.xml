@@ -83,6 +83,20 @@
         <item name="android:paddingRight">12dp</item>
     </style>
 
+    <style name="ChipStandard" parent="Widget.Design.TextInputLayout">
+        <item name="android:width">68dp</item>
+        <item name="android:background">@drawable/layout_chip</item>
+        <item name="android:textColor">@color/button_text_color_selector_chip</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center</item>
+
+        <!-- Label.Medium-->
+        <item name="android:fontFamily">@font/inter</item>
+        <item name="android:textSize">@dimen/font_medium_more</item>
+        <item name="lineHeight">@dimen/font_medium_extra</item>
+        <item name="android:letterSpacing">0.0312</item>
+    </style>
+
     <style name="Banner">
         <item name="android:gravity">center</item>
         <item name="android:orientation">vertical</item>

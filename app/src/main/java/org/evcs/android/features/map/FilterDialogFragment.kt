@@ -54,6 +54,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             context?.getDrawable(R.drawable.progress_bar_background)
         setFiltersFromState()
         keepStatusBar(mBinding.root)
+        dimBackground()
     }
 
     private fun setFiltersFromState() {
@@ -118,7 +119,12 @@ fun DialogFragment.keepStatusBar(rootView: View) {
     rootView.fitsSystemWindows = true
     val window = dialog!!.window!!
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+}
+
+fun DialogFragment.dimBackground(amount: Float = 90/256.0f) {
+    val window = dialog!!.window!!
+    window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    window.setDimAmount(amount);
 }

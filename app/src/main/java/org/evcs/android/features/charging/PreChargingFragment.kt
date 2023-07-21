@@ -13,6 +13,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.features.main.MainNavigationController
+import org.evcs.android.features.map.dimBackground
 import org.evcs.android.features.map.keepStatusBar
 import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
@@ -37,7 +38,7 @@ class PreChargingFragment : BaseDialogFragment<PreChargingPresenter<*>?>(), PreC
     }
 
     override fun init() {
-        mProgressDialog = SpinnerUtils.getNewProgressDialog(context, R.layout.spinner_layout)
+        mProgressDialog = SpinnerUtils.getNewProgressDialog(context, R.layout.spinner_layout_black)
         mProgressDialog.show()
         presenter?.onViewCreated()
         presenter?.getCurrentCharge()
@@ -48,6 +49,7 @@ class PreChargingFragment : BaseDialogFragment<PreChargingPresenter<*>?>(), PreC
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         keepStatusBar(view)
+        dimBackground()
     }
 
     override fun onChargeRetrieved(response: Session?) {

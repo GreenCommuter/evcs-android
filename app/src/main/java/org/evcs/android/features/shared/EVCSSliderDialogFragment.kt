@@ -6,6 +6,7 @@ import android.widget.Button
 import androidx.core.view.isVisible
 import org.evcs.android.R
 import org.evcs.android.databinding.EvcsSliderDialogFragmentBinding
+import org.evcs.android.features.map.dimBackground
 import org.evcs.android.features.map.keepStatusBar
 import org.evcs.android.util.ViewUtils.setMargins
 
@@ -36,12 +37,14 @@ class EVCSSliderDialogFragment : EVCSDialogFragment() {
     }
 
     override fun setUi(v: View) {
-        val binding: EvcsSliderDialogFragmentBinding = EvcsSliderDialogFragmentBinding.bind(v)
+        val binding = EvcsSliderDialogFragmentBinding.bind(v)
         mLayout = binding.evcsDialogFragmentLayout
         mTitle = binding.evcsDialogFragmentTitle
         mSubtitle = binding.evcsDialogFragmentSubtitle
         mDivider = binding.evcsDialogFragmentDivider.root
+
         keepStatusBar(binding.root)
+        dimBackground()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -65,6 +65,7 @@ public class ChargingNavigationController extends AbstractNavigationController {
     public void onSessionFinished(@NonNull Session session) {
         Bundle args = new Bundle();
         args.putSerializable(Extras.SessionInformationActivity.CHARGE, session);
+        args.putSerializable(Extras.SessionInformationActivity.CHARGE_ID, session.getId());
         replaceLastKey(R.id.sessionInformationFragment, args);
     }
 

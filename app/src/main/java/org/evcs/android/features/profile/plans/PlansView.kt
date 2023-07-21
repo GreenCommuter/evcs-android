@@ -6,4 +6,5 @@ import java.util.ArrayList
 
 interface PlansView : IErrorView {
     fun showPlans(response: List<Plan>)
+    fun userHasHiddenPlan(url: String)
 }

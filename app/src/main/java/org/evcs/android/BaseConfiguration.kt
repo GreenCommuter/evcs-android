@@ -40,8 +40,6 @@ object BaseConfiguration {
         const val LYFT_URL = "https://evcs.com/lyft"
     }
 
-    val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")
-
     object IncidentPictures {
         const val IMAGE_QUALITY = 35
     }

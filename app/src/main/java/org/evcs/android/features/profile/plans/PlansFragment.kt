@@ -4,11 +4,14 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager.widget.ViewPager
 import com.base.core.adapter.viewpager.BaseFragmentStatePagerAdapter
 import com.google.android.material.tabs.TabLayout
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.NavGraphActivity
+import org.evcs.android.activity.WebViewActivity
 import org.evcs.android.databinding.FragmentPlansBinding
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
@@ -122,6 +125,13 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
             }
         }
 
+    }
+
+    override fun userHasHiddenPlan(url: String) {
+        val intent = WebViewActivity.buildIntent(requireContext(), "Plans", url, "")
+        startActivity(intent)
+        if (activity is NavGraphActivity) findNavController().popBackStack()
+        else requireActivity().finish()
     }
 
 }

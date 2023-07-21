@@ -10,7 +10,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/spacing_medium"
+        android:paddingTop="20dp"
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra">
 
         <TextView
@@ -28,6 +28,7 @@
             android:layout_centerHorizontal="true"
             android:layout_below="@id/web_view_title"
             android:text="subtitle"
+            android:visibility="gone"
             style="@style/Title.Small"
             android:textColor="@color/evcs_gray_300"/>
 

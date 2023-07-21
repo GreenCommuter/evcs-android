@@ -93,7 +93,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
 
     fun setPlan(plan: Plan?) {
         val helper = PlanLearnMoreHelper.instance(requireContext(), plan,
-            UserUtils.getLoggedUser().defaultPm != null)
+            UserUtils.getLoggedUser()?.defaultPm != null)
 
         mBinding.planLearnMoreToolbar.setTitle(helper.getPlanName())
 

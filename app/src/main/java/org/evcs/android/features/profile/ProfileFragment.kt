@@ -139,7 +139,9 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileMenuNotifications.setOnClickListener { goToActivityAndRefresh(NotificationsActivity::class.java) }
         mBinding.profileMenuFaq.setOnClickListener { goToWebView("Help Center FAQ", BaseConfiguration.WebViews.FAQ_URL) }
-        mBinding.profileMenuRequest.setOnClickListener { goToWebView("Submit a request", BaseConfiguration.WebViews.REQUEST_URL) }
+        mBinding.profileMenuRequest.setOnClickListener {
+            goToWebView(getString(R.string.profile_support_feedback), BaseConfiguration.WebViews.REQUEST_URL)
+        }
     }
 
     private fun <T : FragmentActivity> goToActivity(activity: Class<T>) {

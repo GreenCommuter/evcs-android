@@ -105,6 +105,11 @@ abstract class ClusterSelectionMapFragment<K, T : ClusterItem> : AbstractMapFrag
     }
 
     private fun toggleContainerSelection2(selectedLocation: T) {
+        if (selectedLocation == mSelectedContainer?.mapItem) {
+            unselectCurrent() //unselect changes mSelectedContainer
+            return
+        }
+
         unselectCurrent()
         val marker = mRenderer.getMarker(selectedLocation)
         mSelectedContainer = Container(selectedLocation, marker)

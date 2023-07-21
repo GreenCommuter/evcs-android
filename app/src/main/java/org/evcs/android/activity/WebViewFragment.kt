@@ -58,6 +58,8 @@ class WebViewFragment : BaseActivity2() {
 
         mWebView.loadUrl(mUrl)
         mWebView.settings.cacheMode = WebSettings.LOAD_NO_CACHE
+        mWebView.settings.javaScriptEnabled = true
+        mWebView.settings.domStorageEnabled = true
     }
 
 }

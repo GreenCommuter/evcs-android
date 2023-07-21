@@ -30,7 +30,7 @@ object BaseConfiguration {
 
     object WebViews {
         const val TERMS_URL = "https://www.evcs.com/app/terms-of-use"
-        const val FAQ_URL = "https://www.evcs.com/ev-drivers/faqs"
+        const val FAQ_URL = "https://support.evcs.com/hc/en-us"
         const val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
         const val REPORT_URL = "https://support.evcs.com/hc/en-us/requests/new"
         const val PLANS_URL = "https://subscriptions.evcs.com/account/%s/plans"

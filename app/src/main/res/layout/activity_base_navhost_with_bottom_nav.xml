@@ -28,7 +28,7 @@
             android:layout_marginLeft="@dimen/spacing_medium_extra"
             android:layout_marginRight="@dimen/spacing_medium_extra"
             android:layout_gravity="center"
-            android:text="Get 30 Days Free Charging"
+            android:text="@string/app_trial_cta_default"
             style="@style/ButtonK.Orange"/>
 
     </com.google.android.material.bottomnavigation.BottomNavigationView>

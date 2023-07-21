@@ -29,6 +29,7 @@
     <string name="app_to">To</string>
     <string name="app_close">Close</string>
     <string name="app_cancel">Cancel</string>
+    <string name="app_trial_cta_default">Start Your Free Trial</string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
     <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
@@ -173,7 +174,7 @@
     <string name="payment_method_dialog_remove_subtitle">Are you sure you want to remove this payment method?</string>
     <string name="payment_method_dialog_remove_title">Warning</string>
     <string name="payment_method_dialog_default_subtitle">Are you sure you want to set this credit card as your default payment method? Your subscriptions will be charged to this card</string>
-    <string name="payment_method_dialog_remove_button">Delete card</string>
+    <string name="payment_method_dialog_remove_button">Delete Card</string>
     <string name="payment_method_promo_codes">Promo codes</string>
     <string name="payment_method_add_coupon">Add a new promo code</string>
     <string-array name="payment_method_balance_format">
@@ -407,7 +408,7 @@
     <string name="plan_info_free_title">Free Charging!</string>
     <string name="plan_info_free_subtitle">Charging is free at this location.</string>
     <string name="plan_info_kwh_usage">kWh usage</string>
-    <string name="plan_info_explore_plans">Explore plans</string>
+    <string name="plan_info_explore_plans">Explore Plans</string>
     <string name="plan_info_charge_with_payg">Charge With Pay As You Go</string>
 <!--    <string name="plan_info_payment_error_title">Payment</string>-->
 <!--    <string name="plan_info_payment_error_subtitle">We were unable to process your card, please update your payment method or try again.</string>-->
@@ -444,9 +445,9 @@
     <string name="session_information_id">Session ID</string>
     <string name="session_information_station_id">Station ID</string>
     <string name="session_information_price">Total</string>
-    <string name="session_information_receipt">View receipt</string>
+    <string name="session_information_receipt">View Receipt</string>
     <string name="session_information_help">Need help? <u>Contact Customer Support</u></string>
-    <string name="session_information_title">Session detail</string>
+    <string name="session_information_title">Session Detail</string>
 
     <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>

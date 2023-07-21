@@ -30,7 +30,7 @@ public abstract class AuthCallback<T> extends NetworkCallback<T> {
         if (this.isAuthError(response)) {
             this.handleAuthError(response);
         } else if (response.isSuccessful() && mPresenter.isViewAttached() && mPresenter.isViewCreated()) {
-            // it uses attached and created because the view can be attached and not be created by wolmo implementation.
+            // it uses attached and created because the view can be attached and not be created by androidBase implementation.
             this.onResponseSuccessful(response.body());
         } else if (mPresenter.isViewAttached() && mPresenter.isViewCreated()) {
             this.onResponseFailed(response.errorBody(), response.code());

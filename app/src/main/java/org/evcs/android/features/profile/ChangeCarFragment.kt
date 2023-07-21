@@ -16,7 +16,7 @@ class ChangeCarFragment : RegisterFragmentYourCar() {
 
     override fun init() {
         super.init()
-        mBinding.fragmentRegisterYourCarButton.text = "Save vehicle information"
+        mBinding.fragmentRegisterYourCarButton.text = "Save Vehicle Information"
         mBinding.fragmentRegisterYourCarSubtitle.isVisible = false
         mBinding.fragmentRegisterYouCarToolbar.setNavigationText("Back")
         mUserCar = UserUtils.getLoggedUser().userCar

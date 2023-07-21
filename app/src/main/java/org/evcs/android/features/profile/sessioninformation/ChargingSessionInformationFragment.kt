@@ -6,9 +6,15 @@ import org.evcs.android.util.Extras
 
 class ChargingSessionInformationFragment : SessionInformationFragment() {
 
+    override fun init() {
+        super.init()
+        showProgressDialog()
+        progressDialog.setCancelable(true)
+        presenter?.getChargeFromSession(
+                requireArguments().getInt(Extras.SessionInformationActivity.CHARGE_ID))
+    }
+
     override fun populate() {
-        val charge = requireArguments().getSerializable(Extras.SessionInformationActivity.CHARGE) as Charge
-        showCharge(charge)
         mBinding.sessionInformationClose.isVisible = true
         mBinding.sessionInformationReceipt.isVisible = false
         mBinding.sessionInformationHelp.isVisible = false

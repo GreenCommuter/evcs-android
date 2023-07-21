@@ -63,17 +63,19 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
         for (i in 0..mBinding.activityFilterConnectorTypes.childCount - 1) {
             val view = mBinding.activityFilterConnectorTypes.getChildAt(i)
             if (view is ConnectorTypeView)
-                view.isSelected = view.connectorType == mFilterState.connectorType
-                        || mFilterState.connectorType == null
+                view.isSelected = mFilterState.connectorTypes.contains(view.connectorType)
         }
         onAnyFilterChanged()
     }
 
     private fun onConnectorClicked(v : ConnectorTypeView) {
-        for (i in 0 .. mBinding.activityFilterConnectorTypes.childCount - 1)
-            mBinding.activityFilterConnectorTypes.getChildAt(i).isSelected = false
-        v.isSelected = true
-        mFilterState.connectorType = v.connectorType
+        if (v.connectorType in mFilterState.connectorTypes) {
+            v.isSelected = false
+            mFilterState.connectorTypes.remove(v.connectorType)
+        } else {
+            v.isSelected = true
+            mFilterState.connectorTypes.add(v.connectorType)
+        }
         onAnyFilterChanged()
     }
 

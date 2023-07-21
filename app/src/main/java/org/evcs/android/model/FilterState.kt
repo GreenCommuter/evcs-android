@@ -4,7 +4,7 @@ import java.io.Serializable
 
 class FilterState : Serializable {
     var minKw = 0
-    var connectorType: ConnectorType? = null
+    var connectorTypes: MutableSet<ConnectorType> = ConnectorType.values().toMutableSet()
     var comingSoon: Boolean? = null
         set(value) {field = if (value!!) true else null}
 
@@ -12,11 +12,15 @@ class FilterState : Serializable {
         return this == FilterState()
     }
 
+    fun getConnectorTypes(): Array<String> {
+        return connectorTypes.map { connectorType -> connectorType.name.lowercase() }.toTypedArray()
+    }
+
     //This should be the default but it isn't
     override fun equals(other: Any?): Boolean {
         return other is FilterState
                 && minKw == other.minKw
-                && connectorType == other.connectorType
+                && connectorTypes == other.connectorTypes
                 && comingSoon == other.comingSoon
     }
 

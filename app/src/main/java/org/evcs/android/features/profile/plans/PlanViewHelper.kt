@@ -3,6 +3,7 @@ package org.evcs.android.features.profile.plans
 import android.content.Context
 import org.evcs.android.R
 import org.evcs.android.model.Plan
+import org.evcs.android.util.UserUtils
 
 abstract class PlanViewHelper(val mContext: Context) {
     companion object {
@@ -41,7 +42,8 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     }
 
     override fun getPlanButton(): String? {
-        return null//mContext.getString(R.string.pay_as_you_go_button)
+        return if (UserUtils.getLoggedUser() != null) null
+               else mContext.getString(R.string.pay_as_you_go_button)
     }
 
     override fun getPlanFreq(): String {

@@ -110,7 +110,7 @@
     <string name="my_information_email_taken">Email has already been taken</string>
 
     <!-- BrainTree -->
-    <string name="braintree_title">Add credit or debit card</string>
+    <string name="braintree_title">Add Credit or Debit Card</string>
     <string name="braintree_error_token">Error retrieving token</string>
     <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
 
@@ -129,7 +129,7 @@
     <string name="profile_privacy_notifications">Notifications</string>
     <string name="profile_privacy_tandc">Terms and Conditions</string>
     <string name="profile_account_section">Account</string>
-    <string name="profile_charge_history">Charge history</string>
+    <string name="profile_charge_history">Charge History</string>
     <string name="profile_account_vehicle_info">Vehicle Information</string>
     <string name="profile_account_plans">Plans</string>
     <string name="profile_account_payment_methods">Payment Methods</string>

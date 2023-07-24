@@ -11,6 +11,7 @@ import com.base.core.util.NavigationUtils
 import org.evcs.android.R
 import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlanLearnMoreBinding
+import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
@@ -86,8 +87,15 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
 
     private fun setGetPlanButton(plan: Plan) {
         mBinding.planLearnMoreButton.setOnClickListener {
-            NavigationUtils.jumpTo(requireContext(), GetPlanActivity::class.java,
-                NavigationUtils.IntentExtra(Extras.PlanActivity.PLAN, plan))
+            if (UserUtils.getLoggedUser() == null) {
+                val param = NavigationUtils.IntentExtra(Extras.AuthActivity.SKIP_ROOT, true)
+                NavigationUtils.jumpTo(requireContext(), AuthActivity::class.java, param)
+            } else {
+                NavigationUtils.jumpTo(
+                    requireContext(), GetPlanActivity::class.java,
+                    NavigationUtils.IntentExtra(Extras.PlanActivity.PLAN, plan)
+                )
+            }
         }
     }
 

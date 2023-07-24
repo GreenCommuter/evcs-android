@@ -34,6 +34,8 @@ object BaseConfiguration {
         const val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
         const val REPORT_URL = "https://support.evcs.com/hc/en-us/requests/new"
         const val PLANS_URL = "https://subscriptions.evcs.com/account/%s/plans"
+        const val LEARN_MORE_URL = "https://subscriptions.evcs.com/learn_more?plan_id=%s"
+        const val LEARN_MORE_USER_ID_QUERY = "&user_id=%s"
     }
 
     val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")

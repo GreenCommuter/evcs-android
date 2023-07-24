@@ -8,6 +8,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
+import org.evcs.android.BaseConfiguration
 import org.evcs.android.R
 import org.evcs.android.activity.NavGraphActivity
 import org.evcs.android.databinding.FragmentPlanLearnMoreBinding
@@ -62,8 +63,14 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
     override fun populate() {
         if (mPlan == null)
             showPayAsYouGo()
-        else
+        else {
             setGetPlanButton(mPlan!!)
+            val userIdQuery : String = if (UserUtils.getLoggedUser() == null) ""
+            else String.format(BaseConfiguration.WebViews.LEARN_MORE_USER_ID_QUERY, UserUtils.getUserId())
+            mBinding.planLearnMoreWebview.loadUrl(
+                String.format(BaseConfiguration.WebViews.LEARN_MORE_URL, mPlan!!.id) + userIdQuery
+            )
+        }
         setPlan(mPlan)
     }
 
@@ -105,18 +112,6 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
 
         mBinding.planLearnMoreToolbar.setTitle(helper.getPlanName())
 
-        if ((plan?.trialDays ?: 0) > 0) {
-            mBinding.planLearnMoreDaysFree.text = helper.getPlanFreeDays()
-        } else {
-            mBinding.planLearnMoreDaysFree.isVisible = false
-            mBinding.planLearnMorePrice.setTextAppearance(requireContext(), R.style.Title_Large)
-        }
-        mBinding.planLearnMorePrice.text = helper.getPlanPrice()
-        mBinding.planLearnMoreCap.showOrHide(helper.getPlanLimit())
-        mBinding.planLearnMoreFlatRate.showOrHide(helper.getFlatRate())
-        mBinding.planLearnMore247.showOrHide(helper.getPlanTimes())
-        mBinding.planLearnMoreHikes.showOrHide(helper.getPlanHikes())
-        mBinding.planLearnMoreSidenote.showOrHide(helper.getPlanSideNote())
         mBinding.planLearnMoreButton.text = helper.getPlanButton()
 
         val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id

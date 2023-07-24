@@ -18,7 +18,7 @@ abstract class PlanViewHelper(val mContext: Context) {
     }
     abstract fun getPlanName() : String
     abstract fun getPlanPrice() : String
-    abstract fun getPlanButton() : String
+    abstract fun getPlanButton() : String?
     abstract fun getPlanFreq() : String?
     abstract fun getPlanLimit() : String?
     abstract fun getPlanLimitAprox() : String?
@@ -40,8 +40,8 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
         return mContext.getString(R.string.pay_as_you_go_price)
     }
 
-    override fun getPlanButton(): String {
-        return mContext.getString(R.string.pay_as_you_go_button)
+    override fun getPlanButton(): String? {
+        return null//mContext.getString(R.string.pay_as_you_go_button)
     }
 
     override fun getPlanFreq(): String {
@@ -61,11 +61,11 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     }
 
     override fun getDCFastPrice(): String? {
-        return mContext.getString(R.string.pay_as_you_go_dc)
+        return null//mContext.getString(R.string.pay_as_you_go_dc)
     }
 
     override fun getLevel2Price(): String? {
-        return mContext.getString(R.string.pay_as_you_go_ac)
+        return null//mContext.getString(R.string.pay_as_you_go_ac)
     }
 
     override fun getFlatRateForGetPlan(): String? {

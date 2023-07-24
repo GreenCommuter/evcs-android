@@ -8,7 +8,8 @@
     <org.evcs.android.ui.view.shared.EVCSToolbar2
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title="Station? Detail"/>
+        app:title="Station Detail"/>
+        <!--TODO: shouldn't this be location?-->
 
     <ScrollView
         android:layout_width="match_parent"

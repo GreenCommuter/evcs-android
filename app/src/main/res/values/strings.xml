@@ -538,7 +538,7 @@
     <string name="pay_as_you_go_button">Get Started</string>
     <string name="pay_as_you_go_freq">I charge infrequently</string>
     <string name="pay_as_you_go_limit">EVCS offers simple, flat rate pricing!</string>
-    <string name="pay_as_you_go_flat">Your discounted member flat rate</string>
+    <string name="pay_as_you_go_flat">Discounted $/kWh rates</string>
     <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
     <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
     <string name="pay_as_you_go_price">$0 Membership Fee</string>

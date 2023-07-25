@@ -131,7 +131,7 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
     }
 
     override fun getFlatRateForGetPlan(): String? {
-        return mContext.getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap())
+        return mContext.getString(R.string.get_plan_flat_rate, mPlan.kwhCap(), mPlan.renewalPeriod.toString(), mPlan.pricePerKwh)
     }
 
     override fun getCongratulationsDialogSubtitle(): String {
@@ -141,7 +141,7 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
 
 class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLimited(context, plan) {
     override fun getPlanLimit(): String? {
-        return mContext.getString(R.string.get_plan_flat_rate_time_limited,
+        return mContext.getString(R.string.get_plan_flat_rate_time_limited_old,
                 mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
     }
 
@@ -156,7 +156,7 @@ class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLi
 
     override fun getFlatRateForGetPlan(): String? {
         return mContext.getString(R.string.get_plan_flat_rate_time_limited,
-                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase(), mPlan.pricePerKwh)
     }
 
     override fun getCongratulationsDialogSubtitle(): String {

@@ -54,7 +54,9 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
     }
 
     override fun setListeners() {
-        mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
+        (mCenterButton.parent as View).setOnClickListener {
+            if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!)
+        }
         addOnCameraChangeListener {
 //                cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
         }

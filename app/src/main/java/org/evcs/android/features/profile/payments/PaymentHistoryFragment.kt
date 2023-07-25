@@ -35,20 +35,20 @@ class PaymentHistoryFragment : PaginationFragment<Payment, PaymentHistoryPresent
         }
     }
 
-    override fun showEmpty() {
-        mSwipeRefreshLayout.isRefreshing = false
-    }
+//    override fun showEmpty() {
+//        mSwipeRefreshLayout.isRefreshing = false
+//    }
 
     override fun createAdapter(): PaymentHistoryAdapter {
         return PaymentHistoryAdapter()
     }
 
     override fun getEmptyText(): String? {
-        return null
+        return getString(R.string.charging_history_empty)
     }
 
     override fun getToolbarTitle(): String {
-        return "Payment history"
+        return "Payment History"
     }
 
 }

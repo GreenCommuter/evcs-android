@@ -92,6 +92,7 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
         barcodeDetector = BarcodeDetector.Builder(requireContext())
             .setBarcodeFormats(Barcode.ALL_FORMATS)
             .build()
+        if (!barcodeDetector.isOperational) return
         cameraSource = CameraSource.Builder(requireContext(), barcodeDetector)
             .setRequestedPreviewSize(1920, 1080)
             .setAutoFocusEnabled(true) //must
@@ -122,7 +123,7 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
                     try {
                         val id = uri.getQueryParameter("id")
                         goToPlanInfo(id.toString(), true)
-                    } catch (e : java.lang.NullPointerException) {
+                    } catch (_ : java.lang.NullPointerException) {
 
                     }
                 }
@@ -148,7 +149,8 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
 
     override fun onPause() {
         super.onPause()
-        cameraSource.release()
+        if (::cameraSource.isInitialized)
+            cameraSource.release()
     }
 
     override fun onResume() {

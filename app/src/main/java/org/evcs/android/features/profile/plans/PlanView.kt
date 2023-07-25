@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import org.evcs.android.R
 import org.evcs.android.databinding.ViewPlanBinding
 import org.evcs.android.model.Plan
@@ -39,7 +40,7 @@ class PlanView : LinearLayout {
         val helper = PlanViewHelper.instance(context, plan)
         mBinding.viewPlanName.text = helper.getPlanName()
         mBinding.viewPlanPrice.text = helper.getPlanPrice()
-        mBinding.viewPlanButton.text = helper.getPlanButton()
+        mBinding.viewPlanButton.showOrHide(helper.getPlanButton())
         mBinding.viewPlanFreq.text = helper.getPlanFreq()
         mBinding.viewPlanLimitAprox.showOrHide(helper.getPlanLimitAprox());
         mBinding.viewPlanLimits.showOrHide(helper.getPlanLimit())
@@ -48,6 +49,7 @@ class PlanView : LinearLayout {
         mBinding.viewPlanAcPrice.showOrHide(helper.getLevel2Price())
         mBinding.viewPlanAd.text = plan?.banner
         mBinding.viewPlanAd.visibility = if (plan?.banner == null) INVISIBLE else VISIBLE
+        mBinding.viewPlanLearnMore.isVisible = helper.showLearnMore()
 
         val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
         //Only relevant to show PAYG as not current

@@ -1,17 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <VideoView
+        android:id="@+id/fragment_root_video"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+        />
+
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/bg_root_tinted"
+        android:background="#804E5258"
     android:padding="@dimen/spacing_medium_extra">
 
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/status_bar_height"
         android:src="@drawable/logo_white_splash"
-        android:layout_marginTop="@dimen/status_bar_height"
         android:paddingTop="@dimen/spacing_medium_extra"
         android:gravity="center"/>
 
@@ -26,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:text="Sign up"
+            android:text="@string/auth_register"
         style="@style/ButtonK.Orange"/>
 
     <TextView
@@ -34,15 +48,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
-        android:text="Log in"
+            android:text="@string/auth_sign_in"
         style="@style/ButtonK.OrangeOutline"/>
 
     <TextView
         android:id="@+id/fragment_root_find_a_location"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Find a station"
+            android:text="Find A Location"
         android:textColor="@color/evcs_white"
         style="@style/ButtonK"/>
 
 </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

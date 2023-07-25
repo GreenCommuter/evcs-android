@@ -1,5 +1,7 @@
 package org.evcs.android.model;
 
+import org.evcs.android.EVCSApplication;
+import org.evcs.android.R;
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.format.PeriodFormatter;
@@ -75,7 +77,9 @@ public class Charge implements Serializable {
     }
 
     public String getPlanName() {
-        if (subscription == null) return null;
+        if (subscription == null)
+            return EVCSApplication.getInstance().getApplicationContext()
+                .getString(R.string.pay_as_you_go_name);
         return subscription.planName;
     }
 

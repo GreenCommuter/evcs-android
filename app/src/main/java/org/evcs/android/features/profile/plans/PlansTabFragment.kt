@@ -97,7 +97,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
 //        val paragraph2 = "Your subscription will stay active through the remainder of your last billing cycle and end on %s. After that, you will have to pay after each charge session. You will still have the same member pricing."
         val paragraph3 = getString(R.string.plans_tab_dialog_subtitle_3)
         val paragraph4 = String.format(getString(R.string.plans_tab_dialog_subtitle_4),
-            activeSubscription.plan.renewalPeriod.toString(),
+            activeSubscription.plan.renewalPeriod.toAdverb(),
             activeSubscription.plan.name,
             formatter.print(activeSubscription.renewalDate))
         val paragraph8 = String.format(getString(R.string.plans_tab_dialog_subtitle_8),
@@ -105,7 +105,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             plan.renewalPeriod.toString())
         val paragraph5 = String.format(getString(R.string.plans_tab_dialog_subtitle_5),
             plan.name,
-            formatter.print(activeSubscription.renewalDate.plusDays(1))) + paragraph8
+            formatter.print(activeSubscription.renewalDate.plusDays(1))) + " " + paragraph8
         val paragraph7 = String.format(getString(R.string.plans_tab_dialog_subtitle_7), plan.name)
 //        val paragraph6 = "$paragraph7\n\nYou’ll receive a free %d days starting from today.\n\nAfter that, you will automatically be billed $%.2f per month until you cancel."
 

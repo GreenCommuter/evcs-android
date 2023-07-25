@@ -33,6 +33,7 @@
             android:id="@+id/fragment_search_location_address_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/spacing_medium"
             android:layout_toEndOf="@id/fragment_main_map_back"/>
 
         <ImageButton
@@ -50,9 +51,10 @@
             android:id="@+id/fragment_main_map_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:layout_marginStart="21dp"
             android:layout_centerVertical="true"
+            android:paddingStart="@dimen/spacing_medium"
+            android:paddingEnd="@dimen/spacing_medium_extra"
+            android:src="@drawable/ic_back"
             android:visibility="gone"/>
 
     </RelativeLayout>
@@ -62,7 +64,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/spacing_big_k"
+        android:layout_marginBottom="@dimen/spacing_large_k"
         android:elevation="@dimen/spacing_medium"
         app:cardCornerRadius="@dimen/radius_text"
         android:backgroundTint="@color/color_selector_fab_white">

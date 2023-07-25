@@ -24,13 +24,14 @@ class Station : Serializable {
         return String.format("%.0f kW", kw)
     }
 
+    //Maybe I could just save the tex but I did some work already with the states
     fun getAvailableStatus(): AvailableStatus {
         for (value in AvailableStatus.values()) {
             if (value.toString().equals(status, true)) {
-                return value
+                return value.withText(status)
             }
         }
-        return AvailableStatus.UNKNOWN
+        return AvailableStatus.OTHER.withText(status)
     }
 
     val isAvailable: Boolean
@@ -40,10 +41,19 @@ class Station : Serializable {
         get() = connectors!![0].id
 
     enum class AvailableStatus(@AttrRes val state: Int = R.attr.state_offline) {
-        AVAILABLE(R.attr.state_active), BLOCKED, IN_USE(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN;
 
-        fun toPrintableString(): String {
-            return StringUtils.capitalize(super.toString().lowercase(Locale.getDefault()).replace("_", " ")).toString()
+        AVAILABLE(R.attr.state_active), BLOCKED, IN_USE(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN, OTHER;
+
+        var text : String? = ""
+
+        fun withText(text: String?): AvailableStatus {
+            this.text = text
+            return this
+        }
+
+        fun toPrintableString(): String? {
+            return text
+//            return StringUtils.capitalize(super.toString().lowercase(Locale.getDefault()).replace("_", " ")).toString()
         }
     }
 

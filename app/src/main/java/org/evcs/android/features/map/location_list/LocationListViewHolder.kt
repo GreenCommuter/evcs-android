@@ -18,7 +18,7 @@ class LocationListViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
     init {
         mBinding = AdapterListLocationsBinding.bind(itemView!!)
         mMargin = EVCSApplication.getInstance().applicationContext.resources
-            .getDimension(R.dimen.spacing_large).toInt()
+            .getDimension(R.dimen.spacing_medium_extra).toInt()
     }
 
     fun setLocation(location: Location) {

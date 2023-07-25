@@ -59,7 +59,7 @@ public class ImageCheckBoxLayout extends LinearLayout {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                mCheckbox.performClick();
+                if (isEnabled()) mCheckbox.performClick();
             }
         });
     }
@@ -70,6 +70,12 @@ public class ImageCheckBoxLayout extends LinearLayout {
      */
     public final void setChecked(boolean checked) {
         mCheckbox.setChecked(checked);
+    }
+
+    @Override
+    public void setEnabled(boolean enabled) {
+        super.setEnabled(enabled);
+        mCheckbox.setClickable(enabled);
     }
 
     /**

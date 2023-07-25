@@ -9,7 +9,9 @@ open class User : Serializable {
     val id = 0
     val email: String? = null
     var firstName: String? = null
+        get() = field ?: ""
     var lastName: String? = null
+        get() = field ?: ""
     var phone: String? = null
     var userCar: UserCar? = null
     var phoneVerifiedAt: DateTime? = null

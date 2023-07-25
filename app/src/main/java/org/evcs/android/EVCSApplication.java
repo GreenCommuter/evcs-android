@@ -41,9 +41,11 @@ public class EVCSApplication extends NetworkingApplication {
 
         User user = UserUtils.getLoggedUser();
         String id = user != null ? String.valueOf(user.getId()) : NOT_LOGGED_USER_ID;
+        String username = user != null ? String.format(FULL_NAME_FORMAT, user.getLastName(),
+                user.getFirstName()) : NOT_LOGGED_USER_USERNAME;
         String email = user != null ? user.getEmail() : NOT_LOGGED_USER_EMAIL;
 
-        Rollbar.setPersonData(id, null, email);
+        Rollbar.instance().setPersonData(id, username, email);
         Fresco.initialize(this);
         // We need to initialize the SystemService with the Application Context to avoid memory leaks
         // This is an Android issue, leaking context in the ConnectivityManager

@@ -40,7 +40,8 @@ class WalletFragment : BaseFragment<BasePresenter<*>>(), WalletHeaderFragment.Wa
 
     override fun setUi(v: View) {
         super.setUi(v)
-        val walletHeaderFragment = WalletHeaderFragment.newInstance()
+        val walletHeaderFragment = if ((activity as WalletActivity).mFromProfile)
+                ProfileWalletHeaderFragment.newInstance() else ChangeWalletHeaderFragment.newInstance()
         walletHeaderFragment.setParent(this)
         fragmentManager?.beginTransaction()?.replace(R.id.wallet_header_view, walletHeaderFragment)?.commit()
     }

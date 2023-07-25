@@ -34,6 +34,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapWords"
                 style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextField>
@@ -49,6 +50,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textCapWords"
                 style="@style/Body.Medium"/>
 
         </org.evcs.android.features.shared.StandardTextField>
@@ -90,6 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_large_k"
             android:gravity="center"
+            android:text="@string/register_tandc"
+            android:textColor="@color/evcs_gray_300"
             style="@style/Body.Small"/>
 
         <TextView

@@ -3,6 +3,8 @@
         android:shape="oval">
         <size android:height="34dp"
             android:width="34dp"/>
-        <solid android:color="@color/evcs_orange" />
+        <solid android:color="@color/evcs_white" />
+        <stroke android:width="3dp"
+                android:color="#F15A29"/>
         <corners android:radius="@dimen/radius_text" />
 </shape>

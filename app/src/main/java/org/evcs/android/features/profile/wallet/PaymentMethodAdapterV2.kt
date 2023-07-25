@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import org.evcs.android.R
 import org.evcs.android.model.PaymentMethod
 
-class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodViewHolder>() {
+class PaymentMethodAdapterV2(val mShowArrow: Boolean) : BaseRecyclerAdapter<PaymentMethod, PaymentMethodViewHolder>() {
 
     private var mListener: CreditCardListener? = null
     private var mDefaultPm: String? = null
@@ -41,7 +41,7 @@ class PaymentMethodAdapterV2 : BaseRecyclerAdapter<PaymentMethod, PaymentMethodV
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PaymentMethodViewHolder {
         val v = LayoutInflater
             .from(parent.context).inflate(R.layout.view_credit_card_item, parent, false)
-        return PaymentMethodViewHolder(v)
+        return PaymentMethodViewHolder(v, mShowArrow)
     }
 
     fun setDefault(id: String) {

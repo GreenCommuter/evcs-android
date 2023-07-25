@@ -2,11 +2,11 @@ package org.evcs.android.features.auth.register
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.method.LinkMovementMethod
 import android.view.View
 import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.NavigationUtils
-import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterBinding
@@ -63,10 +63,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     override fun init() {
         super.init()
-        mPasswordHint.text = resources.getString(
-            R.string.register_password_hint,
-            BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
-        )
+        mPasswordHint.movementMethod = LinkMovementMethod.getInstance()
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mNameInputLayout))
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mLastNameInputLayout))
         mValidatorManager.addValidator(EmailTextInputValidator(mEmailInputLayout))
@@ -78,24 +75,20 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mContinueButton.setOnClickListener { onButtonClick() }
     }
 
-    //TODO: replace for validFields
     override fun setEnableButton(validFields: Boolean) {
-        mContinueButton.isEnabled = true
+        mContinueButton.isEnabled = validFields
     }
 
     override fun emailTextInputLayout(): TextInputLayoutInterface = mEmailInputLayout
     override fun passwordTextInputLayout(): TextInputLayoutInterface = mPasswordInputLayout
 
     private fun onButtonClick() {
-        //TODO: switch
-        progressDialog.show()
-//        presenter!!.register(
-//            mNameInputLayout.text.toString(),
-//            mLastNameInputLayout.text.toString(),
-//            mEmailInputLayout.text.toString(),
-//            mPasswordInputLayout.text.toString()
-//        )
-        presenter.logIn("javier+6@evcs.com", "12345678")
+        presenter!!.register(
+            mNameInputLayout.text.toString(),
+            mLastNameInputLayout.text.toString(),
+            mEmailInputLayout.text.toString(),
+            mPasswordInputLayout.text.toString()
+        )
     }
 
     override fun onTokenSent() {

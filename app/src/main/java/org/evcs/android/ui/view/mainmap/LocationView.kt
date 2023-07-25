@@ -9,10 +9,16 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
+import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
+import org.evcs.android.BaseConfiguration
 import org.evcs.android.R
+import org.evcs.android.activity.ContactSupportActivity
+import org.evcs.android.activity.WebViewFragment
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
+import org.evcs.android.util.Extras
 import org.evcs.android.util.LocationUtils
 
 class LocationView : LinearLayout {
@@ -31,6 +37,16 @@ class LocationView : LinearLayout {
 
     fun init(context: Context?) {
         mBinding = ViewLocationBinding.inflate(LayoutInflater.from(context), this, true)
+
+        mBinding.fragmentLocationContactSupport.setOnClickListener {
+            val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
+            NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java, extra)
+        }
+        mBinding.fragmentLocationReportIssue.setOnClickListener {
+            context!!.startActivity(WebViewFragment.buildIntent(context,
+                    "Report An Issue", BaseConfiguration.WebViews.REPORT_URL))
+        }
+
     }
 
     fun setStartChargingListener(listener: (View) -> Unit) {
@@ -40,7 +56,7 @@ class LocationView : LinearLayout {
     fun setLocation(location: Location) {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
-        mBinding.viewLocationPicture.setImageURI(location.imageUrls?.get(0))
+        mBinding.viewLocationPicture.setImageURI(location.imageUrls?.firstOrNull())
 
         mBinding.viewLocationConnectors.removeAllViews()
         location.stations!!.forEach { station ->

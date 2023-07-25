@@ -43,35 +43,42 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             }
             if (i < ConnectorType.values().size - 1) {
                 val spacing = View(context)
-                val params = LinearLayout.LayoutParams(resources.getDimension(R.dimen.spacing_large).toInt(), -1)
+                val params = LinearLayout.LayoutParams(resources.getDimension(R.dimen.spacing_medium_extra).toInt(), -1)
                 mBinding.activityFilterConnectorTypes.addView(spacing, params)
             }
         }
 
         mBinding.activityFilterMinPower.setLabels(
-            mMinKwValues.map{ i -> if (i > 0) "$i"+"kW" else "Any"}.toTypedArray())
-        mBinding.activityFilterMinPower.seekbar.progressDrawable =
-            context?.getDrawable(R.drawable.progress_bar_background)
+            mMinKwValues.map{ i -> if (i > 0) "$i" else "Any"}.toTypedArray())
         setFiltersFromState()
         keepStatusBar(mBinding.root)
+        dimBackground()
     }
 
     private fun setFiltersFromState() {
         mBinding.activityFilterSwitch.isChecked = mFilterState.comingSoon ?: false
-        mBinding.activityFilterMinPower.seekbar.progress = mMinKwValues.indexOf(mFilterState.minKw)
+        mBinding.activityFilterMinPower.setProgress(mMinKwValues.indexOf(mFilterState.minKw))
         for (i in 0..mBinding.activityFilterConnectorTypes.childCount - 1) {
             val view = mBinding.activityFilterConnectorTypes.getChildAt(i)
             if (view is ConnectorTypeView)
-                view.isSelected = view.connectorType == mFilterState.connectorType
-                        || mFilterState.connectorType == null
+                view.isSelected = mFilterState.connectorTypes.contains(view.connectorType)
         }
+        onAnyFilterChanged()
     }
 
     private fun onConnectorClicked(v : ConnectorTypeView) {
-        for (i in 0 .. mBinding.activityFilterConnectorTypes.childCount - 1)
-            mBinding.activityFilterConnectorTypes.getChildAt(i).isSelected = false
-        v.isSelected = true
-        mFilterState.connectorType = v.connectorType
+        if (v.connectorType in mFilterState.connectorTypes) {
+            v.isSelected = false
+            mFilterState.connectorTypes.remove(v.connectorType)
+        } else {
+            v.isSelected = true
+            mFilterState.connectorTypes.add(v.connectorType)
+        }
+        onAnyFilterChanged()
+    }
+
+    private fun onAnyFilterChanged() {
+        mBinding.dialogFilterReset.isEnabled = !mFilterState.isEmpty()
     }
 
     override fun setListeners() {
@@ -81,10 +88,16 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             mFilterState = FilterState()
             setFiltersFromState()
         }
+        mBinding.activityFilterSwitch.setOnClickListener {
+            mFilterState.comingSoon = mBinding.activityFilterSwitch.isChecked
+            onAnyFilterChanged()
+        }
+        mBinding.activityFilterMinPower.setListener {
+            mFilterState.minKw = mMinKwValues[mBinding.activityFilterMinPower.getProgress()]
+            onAnyFilterChanged()
+        }
         mBinding.dialogFilterClose.setOnClickListener { dismiss() }
         mBinding.activityFilterButton.setOnClickListener {
-            mFilterState.minKw = mMinKwValues[mBinding.activityFilterMinPower.seekbar.progress]
-            mFilterState.comingSoon = mBinding.activityFilterSwitch.isChecked
             mListener?.onFilterResult(mFilterState)
             dismiss()
         }
@@ -106,7 +119,12 @@ fun DialogFragment.keepStatusBar(rootView: View) {
     rootView.fitsSystemWindows = true
     val window = dialog!!.window!!
     window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
-    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
     window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+}
+
+fun DialogFragment.dimBackground(amount: Float = 90/256.0f) {
+    val window = dialog!!.window!!
+    window.addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+    window.setDimAmount(amount);
 }

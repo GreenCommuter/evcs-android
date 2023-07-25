@@ -57,7 +57,7 @@
                     style="@style/StandardEditText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text|textNoSuggestions"
+                    android:inputType="text|textNoSuggestions|textCapWords"
                     android:hint="@string/add_credit_card_name"/>
 
             </org.evcs.android.features.shared.StandardTextField>

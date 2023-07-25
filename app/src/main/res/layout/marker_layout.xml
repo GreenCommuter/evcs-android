@@ -11,15 +11,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:src="@drawable/ic_map_orange"/>
+        android:src="@drawable/layout_oval_orange"/>
 
     <TextView
         android:id="@+id/marker_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/spacing_medium_extra"
-        android:textColor="@color/evcs_white"
-        android:textStyle="normal"/>
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textColor="@color/evcs_secondary_700"
+        style="@style/Body.Medium.Bold"/>
 
 </FrameLayout>

@@ -34,9 +34,6 @@
         android:name="org.evcs.android.features.profile.ProfileFragment"
         tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_profileFragment_to_webViewFragment"
-            app:destination="@id/webViewFragment" />
-        <action
             android:id="@+id/action_profileFragment_to_plansFragment"
             app:destination="@id/plansFragment" />
         <action
@@ -45,14 +42,6 @@
         <action
             android:id="@+id/action_profileFragment_to_paymentHistoryFragment"
             app:destination="@id/paymentHistoryFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/webViewFragment"
-        android:name="org.evcs.android.features.shared.WebViewFragment"
-        android:label="WebViewFragment" >
-        <argument
-            android:name="url"
-            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/locationFragment"

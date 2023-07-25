@@ -2,7 +2,7 @@ package org.evcs.android.features.auth.forgotPassword
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Button
+import android.widget.TextView
 import com.base.core.fragment.BaseFragment
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
@@ -18,7 +18,7 @@ class ForgotPasswordFragment : BaseFragment<ForgotPasswordPresenter>(), ForgotPa
     private lateinit var mValidatorManager: ValidatorManager
     private var mEnableBack = true
     private lateinit var mText: StandardTextField
-    private lateinit var mButton: Button
+    private lateinit var mButton: TextView
 
     fun newInstance(): ForgotPasswordFragment {
         val args = Bundle()

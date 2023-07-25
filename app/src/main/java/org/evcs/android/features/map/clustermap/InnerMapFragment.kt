@@ -11,6 +11,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentInnerMapBinding
 import org.evcs.android.model.Location
+import org.evcs.android.util.LocationUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
 
 class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location>(), InnerMapView {
@@ -53,7 +54,9 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
     }
 
     override fun setListeners() {
-        mCenterButton.setOnClickListener { if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!) }
+        (mCenterButton.parent as View).setOnClickListener {
+            if (presenter?.mLastLocation != null) centerMap(presenter?.mLastLocation!!)
+        }
         addOnCameraChangeListener {
 //                cameraPosition -> if (cameraPosition.zoom < ZOOM_LIMIT) showCarousel(false)
         }
@@ -90,9 +93,10 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         showMapItems(response)
     }
 
-    fun zoomToLocations(locations: List<Location>, viewport: LatLngBounds?) {
+    fun zoomToLocations(locations: List<Location>, nullableViewport: LatLngBounds?) {
         val closest = locations[0].latLng
-        if (viewport!!.contains(closest)) {
+        val viewport = nullableViewport ?: LocationUtils.addDiagonal(LatLngBounds(closest, closest))
+        if (viewport.contains(closest)) {
             applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport, 20))
         } else {
             //I want to try to make sure that at least something is shown, and if there is a single point it may get clustered

@@ -1,14 +1,22 @@
 package org.evcs.android.features.charging
 
-import android.graphics.drawable.AnimationDrawable
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.media.MediaPlayer
+import android.net.Uri
 import android.view.View
+import android.widget.VideoView
+import androidx.annotation.RawRes
 import com.base.core.util.NavigationUtils
+import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.databinding.FragmentStartChargingBinding
 import org.evcs.android.features.shared.EVCSDialogFragment
+import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
@@ -23,15 +31,15 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun createPresenter(): StartChargingPresenter {
-        return StartChargingPresenter(this, EVCSApplication.getInstance().retrofitServices,
+        return StartChargingPresenter(
+                this, EVCSApplication.getInstance().retrofitServices,
                 requireArguments().getInt(Extras.StartCharging.STATION_ID),
                 requireArguments().getString(Extras.StartCharging.PM_ID),
                 requireArguments().getSerializable(Extras.StartCharging.COUPONS) as ArrayList<String>?,
-            )
+        )
     }
 
     override fun init() {
-//        (mBinding.startChargingImage.background as AnimationDrawable).start()
         startCharging()
     }
 
@@ -44,25 +52,42 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         super.setUi(v)
     }
 
-//    override fun setListeners() {
-//        super.setListeners()
-//        mBinding.startChargingButton.setOnClickListener { startCharging() }
-//    }
-
     private fun startCharging() {
+        presenter.getCurrentCharge()
         presenter.startSession()
-//        mBinding.startChargingImage.setBackgroundResource(R.drawable.preparing)
-//        (mBinding.startChargingImage.background as AnimationDrawable).start()
-//        mBinding.startChargingText.text = getString(R.string.start_charging_preparing)
-//        mBinding.startChargingSubtext.text = getString(R.string.start_charging_preparing_subtitle)
-//        mBinding.startChargingButton.visibility = View.GONE
+        mBinding.startChargingImage.setVideoResource(R.raw.evcs_scene1, requireContext())
+        mBinding.startChargingImage.startAndLoop()
+    }
+
+    //We don't have a way to tell if the user canceled a charge while it was starting, so this is
+    //to prevent them from starting the same charge twice
+    override fun onChargeRetrieved(response: Session?) {
+        if (response != null) {
+            ToastUtils.show("There's a charge in progress")
+            onSessionStarted()
+        } else {
+            presenter.startSession()
+        }
+    }
+
+    fun VideoView.startAndLoop() {
+        setOnPreparedListener { mp ->
+            start()
+            mp.isLooping = true
+            mp.setOnInfoListener { _, what, _ ->
+                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
+                    // video started; hide the placeholder.
+                    this.background = ColorDrawable(Color.TRANSPARENT)
+                    true
+                } else false
+            }
+        }
     }
 
     //TODO: show message
     override fun showErrorDialog(requestError: RequestError) {
 //        super.showError(requestError)
-//        mBinding.startChargingImage.setBackgroundResource(R.drawable.not_charging)
-//        mBinding.startChargingButton.visibility = View.VISIBLE
+        mBinding.startChargingImage.stopPlayback()
         EVCSDialogFragment.Builder()
                 .setTitle(getString(R.string.start_charging_error_title))
                 .setSubtitle(getString(R.string.start_charging_error_subtitle))
@@ -71,13 +96,15 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
                     startCharging()
                 }, R.drawable.layout_corners_rounded_blue)
                 .addButton(getString(R.string.start_charging_error_cancel), {
-                    fragment -> fragment.dismiss()
-                    (activity as ChargingActivity).finish()
+//                    fragment -> fragment.dismiss()
+                    requireActivity().finish()
                 }, R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
                 .showCancel(getString(R.string.start_charging_error_support))
                 .withCancelOnClickListener {
+                    requireActivity().finish()
                     NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java)
                 }
+                .setCancelable(false)
                 .show(childFragmentManager)
     }
 
@@ -90,4 +117,9 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         return true
     }
 
+}
+
+fun VideoView.setVideoResource(@RawRes videoRes: Int, context: Context) {
+    val uri = Uri.parse("android.resource://${context.packageName}/$videoRes")
+    setVideoURI(uri)
 }

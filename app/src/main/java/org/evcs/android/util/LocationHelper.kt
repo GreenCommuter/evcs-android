@@ -79,7 +79,6 @@ class LocationHelper {
         }
     }
 
-
     @SuppressLint("MissingPermission")
     private fun onLocationSettingsEnabled() {
         val fusedLocationClient = LocationServices.getFusedLocationProviderClient(mReceiver.requireActivity())

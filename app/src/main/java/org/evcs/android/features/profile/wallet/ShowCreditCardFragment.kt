@@ -2,11 +2,15 @@ package org.evcs.android.features.profile.wallet
 
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import androidx.core.view.isVisible
+import com.base.core.util.ToastUtils
 import org.evcs.android.R
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.model.CreditCard
 import org.evcs.android.model.PaymentMethod
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 import org.joda.time.DateTime
 
 class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
@@ -36,7 +40,32 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         mZipcode.editText?.setText("•••••")
         mCvv.editText?.setText("•••")
         setFields()
+        mSetDefault.isVisible = true
         mNext.isEnabled = true //What if only card?
+    }
+
+    override fun setListeners() {
+        super.setListeners()
+        mSetDefault.isChecked = mPaymentMethod!!.id.equals(UserUtils.getLoggedUser().defaultPm)
+        mSetDefault.isEnabled = !mSetDefault.isChecked
+        mSetDefault.setOnCheckedClickListener { _, isChecked ->
+            if (isChecked) {
+                showProgressDialog()
+                presenter.makeDefaultPaymentMethod(mPaymentMethod!!)
+                mSetDefault.isEnabled = false
+            }
+        }
+    }
+
+    override fun onMakeDefaultError(error: RequestError) {
+        super.showError(error)
+        mSetDefault.isChecked = false
+        mSetDefault.isEnabled = true
+    }
+
+    override fun onDefaultPaymentMethodSet(item: PaymentMethod) {
+        hideProgressDialog()
+        ToastUtils.show("Payment method set as default")
     }
 
     override fun areFieldsEditable(): Boolean {

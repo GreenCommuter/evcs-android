@@ -39,9 +39,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:padding="12dp"
             android:drawableLeft="@drawable/ic_go"
-            android:drawablePadding="@dimen/spacing_medium"
             android:text="Go"
             style="@style/ButtonK.Blue"/>
 
@@ -94,8 +92,8 @@
         android:id="@+id/adapter_list_connectors"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/spacing_large"
-        android:layout_marginBottom="@dimen/spacing_large"
+        android:layout_marginTop="@dimen/spacing_large_k"
+        android:layout_marginBottom="@dimen/spacing_large_k"
         android:layout_gravity="center"
         android:orientation="horizontal"/>
 

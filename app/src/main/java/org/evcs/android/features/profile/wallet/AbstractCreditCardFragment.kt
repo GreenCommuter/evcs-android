@@ -44,6 +44,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
     override fun init() {
         mCardNumber.editText!!.typeface = Typeface.MONOSPACE
         mDateTimeFormatter = DateTimeFormat.forPattern("MM/yy")
+        mSetDefault.setDescription(getString(R.string.add_credit_card_set_default))
     }
 
     override fun createPresenter(): AddCreditCardPresenter {

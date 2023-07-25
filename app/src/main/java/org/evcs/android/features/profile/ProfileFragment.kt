@@ -10,10 +10,12 @@ import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.NavigationUtils
 import com.base.core.util.NavigationUtils.IntentExtra
+import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ContactSupportActivity
+import org.evcs.android.activity.WebViewFragment
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.activity.account.VehicleInformationActivity
 import org.evcs.android.activity.subscription.SubscriptionActivity
@@ -32,10 +34,6 @@ import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.evcs.android.util.ViewUtils.showOrHide
 
 class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
-
-    private val TERMS_URL = "https://www.evcs.com/terms-of-use"
-    private val FAQ_URL = "https://www.evcs.com/ev-drivers/faqs"
-    private val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mBinding: FragmentProfileBinding
@@ -84,7 +82,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     private fun setSubscription(subscription: Subscription?) {
         mBinding.profileExplorePlans.setParentVisibility(subscription == null)
 
-        mBinding.profileMenuSubscriptionPlan.isVisible = true//subscription != null
+        mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
         mBinding.profilePlanProgress.isVisible = subscription != null
         mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
@@ -128,7 +126,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileMenuPaymentMethods.setOnClickListener { goToActivity(WalletActivity::class.java) }
         mBinding.profileMenuSubscriptionPlan.setOnClickListener { goToActivityAndRefresh(SubscriptionActivity::class.java) }
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
-        mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView(TERMS_URL) }
+        mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("Terms of Use", BaseConfiguration.WebViews.TERMS_URL) }
         mBinding.profileMenuCallCustomerCare.setOnClickListener {
             val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
             NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, extra)
@@ -140,9 +138,10 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileMenuShowPlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileExplorePlans.setOnClickListener { findNavController().navigate(R.id.plansFragment) }
         mBinding.profileMenuNotifications.setOnClickListener { goToActivityAndRefresh(NotificationsActivity::class.java) }
-        mBinding.profileMenuFaq.setOnClickListener { goToWebView(FAQ_URL) }
-        mBinding.profileMenuRequest.setOnClickListener { goToWebView(REQUEST_URL) }
-        super.setListeners()
+        mBinding.profileMenuFaq.setOnClickListener { goToWebView("Help Center FAQ", BaseConfiguration.WebViews.FAQ_URL) }
+        mBinding.profileMenuRequest.setOnClickListener {
+            goToWebView(getString(R.string.profile_support_feedback), BaseConfiguration.WebViews.REQUEST_URL)
+        }
     }
 
     private fun <T : FragmentActivity> goToActivity(activity: Class<T>) {
@@ -153,8 +152,8 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mLauncher.launch(Intent(requireContext(), activity))
     }
 
-    private fun goToWebView(url: String) {
-        findNavController().navigate(ProfileFragmentDirections.actionProfileFragmentToWebViewFragment(url))
+    private fun goToWebView(title: String, url: String) {
+        requireContext().startActivity(WebViewFragment.buildIntent(requireContext(), title, url))
     }
 
     override fun onBackPressed(): Boolean {

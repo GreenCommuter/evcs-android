@@ -3,6 +3,7 @@ package org.evcs.android.features.auth.register
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.EVCSApplication
@@ -50,6 +51,8 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     override fun populate() {
         mBinding.fragmentRegisterCellPhoneTitle.text =
             getString(R.string.fragment_register_cell_phone_title, UserUtils.getLoggedUser().firstName)
+        mBinding.fragmentRegisterCellphoneValidateLater.isVisible =
+                (activity as VerifyPhoneActivity).mFromAuth
     }
 
     override fun setListeners() {
@@ -67,12 +70,10 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     }
 
     private fun onButtonClick() {
-        //TODO: switch
-//        progressDialog.show()
-//        presenter!!.sendNumbertoVerify(
-//            mBinding.fragmentRegisterCellphoneNumber.text.toString()
-//        )
-        onCellphoneSent()
+        progressDialog.show()
+        presenter!!.sendNumbertoVerify(
+            mBinding.fragmentRegisterCellphoneNumber.text.toString()
+        )
     }
 
     override fun onCellphoneSent() {

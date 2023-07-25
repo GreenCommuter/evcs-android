@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/padding_ariel_standard"
             android:paddingTop="64dp"
-            android:paddingBottom="34dp"
+            android:paddingBottom="@dimen/spacing_big_extra_k"
             android:orientation="vertical">
 
             <org.evcs.android.features.shared.StandardTextField
@@ -80,25 +80,14 @@
 
             </FrameLayout>
 
-            <TextView
-                android:id="@+id/fragment_sign_in_forgot_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="@dimen/spacing_medium"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                android:text="@string/sign_in_forgot_password"
-                android:textAppearance="@style/Roboto.Body.Grey" />
-
             <include android:id="@+id/fragment_sign_in_social"
                 layout="@layout/fragment_sign_in_social"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:gravity="bottom"
-                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:orientation="horizontal">
 
                 <TextView
@@ -116,6 +105,16 @@
                     android:textAppearance="@style/Body.Medium"/>
 
             </LinearLayout>
+
+            <TextView
+                android:id="@+id/fragment_sign_in_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:gravity="bottom"
+                android:textColor="@color/evcs_secondary_700"
+                android:text="@string/sign_in_forgot_password"
+                android:textAppearance="@style/Label.Large" />
 
         </LinearLayout>
 

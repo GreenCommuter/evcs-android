@@ -18,7 +18,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services: RetrofitServices?) :
-    ChargingTabPresenter<ChargingInProgressView>(viewInstance, services) {
+    PreChargingPresenter<ChargingInProgressView>(viewInstance, services) {
 
     private val LOCATION_KEY = "location"
 

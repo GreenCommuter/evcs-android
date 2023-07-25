@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import org.evcs.android.EVCSApplication
@@ -62,6 +63,8 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mPreviousNumber = RegisterFragmentVerifyArgs.fromBundle(requireArguments()).previousNumber
 //        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
+        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.isVisible =
+                (activity as VerifyPhoneActivity).mFromAuth
     }
 
     override fun setListeners() {
@@ -90,13 +93,11 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mBinding.fragmentRegisterEnterCodeButton.isEnabled = validFields
     }
 
-    //TODO: switch
     private fun onButtonClick() {
-//        progressDialog.show()
-//        presenter!!.sendCode(Rª
-//            mBinding.fragmentRegisterEnterCodeText.text.toString()
-//        )
-        onCellphoneVerified()
+        progressDialog.show()
+        presenter!!.sendCode(
+            mBinding.fragmentRegisterEnterCodeText.text.toString()
+        )
     }
 
     override fun onCellphoneSent() {

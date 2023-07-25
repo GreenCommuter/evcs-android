@@ -9,7 +9,6 @@ import com.base.core.permission.PermissionListener
 import com.base.core.permission.PermissionManager
 import com.google.android.gms.maps.model.LatLng
 import org.evcs.android.BaseConfiguration
-import org.evcs.android.Configuration
 import org.evcs.android.R
 import org.evcs.android.databinding.ActivityContactSupportBinding
 import org.evcs.android.features.shared.EVCSDialogFragment
@@ -43,7 +42,8 @@ class ContactSupportActivity : BaseActivity2() {
     override fun setListeners() {
         mBinding.contactSupportPhone.setOnClickListener { goToCallUs() }
         mBinding.contactSupportReport.setOnClickListener {
-            //TODO: report issue
+            startActivity(WebViewFragment.buildIntent(this,
+                    "Report An Issue", BaseConfiguration.WebViews.REQUEST_URL))
         }
         mBinding.contactSupportAddress.setOnClickListener {
             LocationUtils.launchGoogleMapsWithPin(this, ADDRESS)

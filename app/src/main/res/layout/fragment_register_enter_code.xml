@@ -59,8 +59,7 @@
             android:layout_height="wrap_content"
             android:text="Edit your number"
             android:textColor="@color/evcs_orange"
-            android:visibility="gone"
-            style="@style/Roboto.Body"/>
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/fragment_register_enter_code_button"

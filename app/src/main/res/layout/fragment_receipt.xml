@@ -43,7 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Type">
+                app:label="Plan Type">
 
                 <TextView
                     android:id="@+id/session_information_plan_type"
@@ -88,25 +88,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Rate">
+                app:label="Rate"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/receipt_rate"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    tools:text="2.013 kWh"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Tax">
-
-                <TextView
-                    android:id="@+id/session_information_tax"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="2.013 kWh"
@@ -133,7 +119,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="@string/session_information_payment_method">
+                app:label="@string/session_information_payment_method"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/session_information_payment_method"

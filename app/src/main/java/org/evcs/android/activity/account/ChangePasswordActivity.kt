@@ -1,5 +1,6 @@
 package org.evcs.android.activity.account
 
+import android.app.Dialog
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
@@ -13,17 +14,18 @@ import org.evcs.android.databinding.FragmentChangePasswordBinding
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.util.Extras
+import org.evcs.android.util.SpinnerUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.validator.*
 
 class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
 
+    private lateinit var progressDialog: Dialog
     private lateinit var mValidatorManager: ValidatorManager
     private lateinit var mBinding: FragmentChangePasswordBinding
     private lateinit var mPasswordInputLayout: StandardTextField
     private lateinit var mOldPasswordInputLayout: StandardTextField
     private lateinit var mConfirmInputLayout: StandardTextField
-    private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: Button
     private lateinit var mPresenter: ChangePasswordPresenter
 
@@ -32,7 +34,6 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
         mPasswordInputLayout = mBinding.fragmentChangePasswordNew
         mOldPasswordInputLayout = mBinding.fragmentChangePasswordOld
         mConfirmInputLayout = mBinding.fragmentChangePasswordConfirm
-        mPasswordHint = mBinding.fragmentChangePasswordShortPassword
         mContinueButton = mBinding.fragmentChangePasswordButton
         return mBinding.root
     }
@@ -46,10 +47,11 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
         mPresenter = createPresenter()
         mPresenter.onViewCreated()
 
-        mPasswordHint.text = resources.getString(
-            R.string.register_password_hint,
-            BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
-        )
+        progressDialog = SpinnerUtils.getNewProgressDialog(this, R.layout.spinner_layout_black)
+//        mPasswordHint.text = resources.getString(
+//            R.string.register_password_hint,
+//            BaseConfiguration.Validations.PASSWORD_MIN_LENGTH
+//        )
         mValidatorManager = ValidatorManager()
         mValidatorManager.addValidator(PasswordTextInputValidator(mPasswordInputLayout))
         mValidatorManager.addValidator(MatchingValidator(mConfirmInputLayout, mPasswordInputLayout))
@@ -78,7 +80,7 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     }
 
     private fun onButtonClick() {
-//        progressDialog.show()
+        progressDialog.show()
         mPresenter.onButtonClick(
             mOldPasswordInputLayout.text.toString(),
             mPasswordInputLayout.text.toString()
@@ -86,10 +88,12 @@ class ChangePasswordActivity : BaseActivity2(), ChangePasswordView {
     }
 
     override fun showError(requestError: RequestError) {
+        progressDialog.dismiss()
         ToastUtils.show(requestError.body)
     }
 
     override fun onPasswordChanged() {
+        progressDialog.dismiss()
         ToastUtils.show(R.string.change_password_success)
         if (isLoggedUser()) {
             UserUtils.logout(null)

@@ -29,6 +29,7 @@
     <string name="app_to">To</string>
     <string name="app_close">Close</string>
     <string name="app_cancel">Cancel</string>
+    <string name="app_trial_cta_default">Start Your Free Trial</string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
     <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
@@ -48,7 +49,6 @@
     <string name="choose_plan_basic_title">Basic membership</string>
     <string name="choose_plan_basic_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
     <string name="choose_plan_premium_title">Premium membership</string>
-    <string name="choose_plan_premium_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
 
     <!-- Gatecode dialog -->
     <string name="gatecode_dialog_title">Access requirement</string>
@@ -61,15 +61,15 @@
     <string name="sign_in_name">First Name</string>
     <string name="sign_in_last_name">Last Name</string>
     <string name="sign_in_password">Password</string>
-    <string name="sign_in_forgot_password">Forgot your Password?</string>
+    <string name="sign_in_forgot_password">Forgot Password</string>
     <string name="sign_in_button">Sign in</string>
     <string name="sign_in_goto_sign_up">Don\'t have an account?</string>
     <string name="sign_in_error_facebook_email">Make sure your account has an email address</string>
 
     <!-- Forgot Password -->
-    <string name="forgot_password_title">Password Recovery</string>
-    <string name="forgot_password_email">Enter your email address</string>
-    <string name="forgot_password_button">Send me an email</string>
+    <string name="forgot_password_title">Forgot password</string>
+    <string name="forgot_password_email">Email</string>
+    <string name="forgot_password_button">Submit</string>
     <string name="forgot_password_dialog">Password recovery instructions have been sent to your email address</string>
     <string name="forgot_password_wrong_email">Invalid email address</string>
 
@@ -79,10 +79,10 @@
     <string name="register_email_confirm">Confirm E-mail</string>
     <string name="register_password">Password</string>
     <string name="register_password_confirm">Re-enter the password</string>
-    <string name="register_password_hint">Must be at least %1d characters long</string>
+    <string name="register_password_hint">Must be at least %1d characters</string>
     <string name="register_button">Create account</string>
-    <string name="i_agree_terms">I agree to EVCS\'s <a href="https://">privacy policy</a> and <a href="https://">terms of use</a></string>
-    <string name="i_agree_terms_title">Please accept our terms and conditions to continue</string>
+    <string name="register_tandc">By clicking Continue you agree to our <a href="https://evcs.com/app/terms-of-use">ToS</a>
+        and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
 
     <!--Placeholder Fragment-->
     <string name="placeholder_no_internet_dialog_title">Connection Lost</string>
@@ -105,13 +105,12 @@
         <item>Female</item>
     </string-array>
     <string name="my_information_birthdate">Birthdate</string>
-    <string name="my_information_street_address">Street Address</string>
-    <string name="my_information_zip_code">Zip Code</string>
+    <string name="my_information_zip_code">Zipcode</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
 
     <!-- BrainTree -->
-    <string name="braintree_title">Add credit or debit card</string>
+    <string name="braintree_title">Add Credit or Debit Card</string>
     <string name="braintree_error_token">Error retrieving token</string>
     <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
 
@@ -125,12 +124,12 @@
     <string name="profile_support_section">Support</string>
     <string name="profile_support_contact">Contact Support</string>
     <string name="profile_support_faq">Help Center FAQ</string>
-    <string name="profile_support_feedback">Submit a request</string>
+    <string name="profile_support_feedback">Submit a Request</string>
     <string name="profile_privacy_section">Privacy</string>
     <string name="profile_privacy_notifications">Notifications</string>
     <string name="profile_privacy_tandc">Terms and Conditions</string>
     <string name="profile_account_section">Account</string>
-    <string name="profile_charge_history">Charge history</string>
+    <string name="profile_charge_history">Charge History</string>
     <string name="profile_account_vehicle_info">Vehicle Information</string>
     <string name="profile_account_plans">Plans</string>
     <string name="profile_account_payment_methods">Payment Methods</string>
@@ -175,7 +174,7 @@
     <string name="payment_method_dialog_remove_subtitle">Are you sure you want to remove this payment method?</string>
     <string name="payment_method_dialog_remove_title">Warning</string>
     <string name="payment_method_dialog_default_subtitle">Are you sure you want to set this credit card as your default payment method? Your subscriptions will be charged to this card</string>
-    <string name="payment_method_dialog_remove_button">Delete card</string>
+    <string name="payment_method_dialog_remove_button">Delete Card</string>
     <string name="payment_method_promo_codes">Promo codes</string>
     <string name="payment_method_add_coupon">Add a new promo code</string>
     <string-array name="payment_method_balance_format">
@@ -192,7 +191,7 @@
     <string name="add_credit_card_expiration">Expiration</string>
     <string name="add_credit_card_zip_code">Zipcode</string>
     <string name="add_credit_card_cvv">CVV</string>
-    <string name="add_credit_card_ok">Save card</string>
+    <string name="add_credit_card_ok">Save Card</string>
     <string name="add_credit_card_name">Cardholder name</string>
     <string name="add_credit_card_set_default">Set as default payment method</string>
     <string name="add_credit_card_success">Your card was successfully added</string>
@@ -216,9 +215,9 @@
 
     <!-- Change password -->
     <string name="change_password_success">Password changed</string>
-    <string name="change_password_old">Current password</string>
-    <string name="change_password_new">New password</string>
-    <string name="change_password_confirm">Confirm new password</string>
+    <string name="change_password_old">Current Password</string>
+    <string name="change_password_new">New Password</string>
+    <string name="change_password_confirm">Confirm New Password</string>
     <string name="change_password_button">Change your password</string>
     <string name="change_password_reset">Forgot password? Reset it via email</string>
 
@@ -263,8 +262,6 @@
     <string name="vanpool_ongoing_ride_enable_location_dialog_title">Location error</string>
     <string name="vanpool_ongoing_ride_enable_location_service">Please enable the location services to see your current position.</string>
     <string name="vanpool_ongoing_ride_retrieving_position_error">There was an internal error whilst retrieving your position. Please check that networking and location services are on.</string>
-    <string name="vanpool_ongoing_ride_enable_location_advice">Enabling location permissions will enable you to follow your location throughout the route.</string>
-    <string name="vanpool_ongoing_ride_file_report_button">File report</string>
     <string name="vanpool_ongoing_ride_control_start">Start</string>
     <string name="vanpool_ongoing_ride_date_time_format">%1$s on %2$s</string>
     <string name="vanpool_ongoing_ride_location_format">&amp;daddr=%1$s,%2$s</string>
@@ -365,10 +362,10 @@
     <!-- Filter Activity -->
     <string name="filter_activity_title">Filters</string>
     <string name="filter_activity_available_only">Show locations coming soon</string>
-    <string name="filter_activity_connector_types">Connector types</string>
-    <string name="filter_activity_minimum_power_level">Minimum power level</string>
+    <string name="filter_activity_connector_types">Connector Types</string>
+    <string name="filter_activity_minimum_power_level">Minimum Power Level (kW)</string>
     <string name="filter_activity_apply">Apply</string>
-    <string name="dialog_filter_reset">Clear all</string>
+    <string name="dialog_filter_reset">Clear All</string>
 
     <!-- Slider dialogs-->
     <string name="welcome_dialog_title">Welcome!</string>
@@ -407,11 +404,11 @@
     <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then</string>
     <string name="plan_info_peak_hours">You are charging during peak hours (%1$s - %2$s) \n You’ll be charged a flat rate of $%.2f/kWh \n Charge anytime from %2$s - %1$s at no cost\"</string>
     <string name="plan_info_pay_as_you_go">Pay as you go</string>
-    <string name="plan_info_start_charging">Start Charging Session</string>
+    <string name="plan_info_start_charging">Start Charging</string>
     <string name="plan_info_free_title">Free Charging!</string>
     <string name="plan_info_free_subtitle">Charging is free at this location.</string>
     <string name="plan_info_kwh_usage">kWh usage</string>
-    <string name="plan_info_explore_plans">Explore plans</string>
+    <string name="plan_info_explore_plans">Explore Plans</string>
     <string name="plan_info_charge_with_payg">Charge With Pay As You Go</string>
 <!--    <string name="plan_info_payment_error_title">Payment</string>-->
 <!--    <string name="plan_info_payment_error_subtitle">We were unable to process your card, please update your payment method or try again.</string>-->
@@ -421,7 +418,7 @@
     <string name="start_charging_preparing_subtitle">This may only take a few seconds</string>
     <string name="start_charging_preparing">Preparing to charge</string>
     <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
-    <string name="start_charging_button">Start charging session</string>
+    <string name="start_charging_button">Start Charging</string>
     <string name="start_charging_title">Start charging</string>
     <string name="start_charging_error_title">Connection Failed</string>
     <string name="start_charging_error_subtitle">Make sure your car is plugged in, or try disconnecting and reconnecting the connector to your vehicle.</string>
@@ -448,9 +445,9 @@
     <string name="session_information_id">Session ID</string>
     <string name="session_information_station_id">Station ID</string>
     <string name="session_information_price">Total</string>
-    <string name="session_information_receipt">View receipt</string>
+    <string name="session_information_receipt">View Receipt</string>
     <string name="session_information_help">Need help? <u>Contact Customer Support</u></string>
-    <string name="session_information_title">Session detail</string>
+    <string name="session_information_title">Session Detail</string>
 
     <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>
@@ -482,19 +479,20 @@
     <string name="get_plan_tandc">By clicking ‘%s’, you agree to our <a href="https://evcs.com/app/terms-of-use">Terms of Use</a>,
         <a href="https://evcs.com/app/subscription-terms-and-conditions">Subscription Terms and Conditions</a> and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
     <string name="get_plan_name">Plan</string>
-    <string name="get_plan_no_commitment">No commitments. Cancel anytime.</string>
+    <string name="get_plan_no_commitment">No commitments. Cancel online anytime.</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
     <string name="get_plan_price">%1$s Cost (Starting %2$s)</string>
-    <string name="get_plan_flat_rate">Flat rate for Level 2 and DC fast $%.2f/kWh after %d kWh exceeded</string>
-    <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging</string>
-    <string name="get_plan_flat_rate_time_limited">Unlimited charging %1$s-%2$s</string>
+    <string name="get_plan_flat_rate">Up to %d kWh/%s included. $%.2f/kWh after the limit is reached.</string>
+    <string name="get_plan_flat_rate_unlimited">Unlimited 24/7 charging.</string>
+    <string name="get_plan_flat_rate_time_limited">Unlimited charging from %1$s to %2$s. \$%3$s/kWh from %2$s to %1$s.</string>
+    <string name="get_plan_flat_rate_time_limited_old">Unlimited charging %1$s-%2$s</string>
     <string name="get_plan_monthly_label">Starting %s</string>
     <string name="get_plan_next_billing_date">Next Billing Date</string>
     <string name="get_plan_previous_plan_active">Previous plan active until</string>
 
     <!-- Plan View -->
-    <string name="plan_view_current">Current plan</string>
+    <string name="plan_view_current">Current Plan</string>
     <string name="plan_view_flat_rate">Simple flat rate after %d kWh exceeded</string>
     <string name="plan_view_unlimited">Unlimited charging 24/7</string>
     <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
@@ -537,13 +535,19 @@
     <string name="plan_learn_more_track">Track monthly charging sessions and kWh consumed</string>
 
     <!-- Pay as you go -->
-    <string name="pay_as_you_go_name">Pay as you go</string>
+    <string name="pay_as_you_go_name">Pay As You Go</string>
     <string name="pay_as_you_go_button">Get Started</string>
     <string name="pay_as_you_go_freq">I charge infrequently</string>
     <string name="pay_as_you_go_limit">EVCS offers simple, flat rate pricing!</string>
-    <string name="pay_as_you_go_flat">Simple flat rate pricing</string>
+    <string name="pay_as_you_go_flat">Discounted $/kWh rates</string>
     <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
     <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
     <string name="pay_as_you_go_price">$0 Membership Fee</string>
+
+    <!-- Charging Tab -->
+    <string name="charging_tab_scan_qr">Scan the QR code</string>
+    <string name="charing_tab_enter_id">Enter the station ID</string>
+    <string name="charging_tab_hint">Station ID</string>
+    <string name="charging_tab_title">Start Charging</string>
 
 </resources>

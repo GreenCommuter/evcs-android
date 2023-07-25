@@ -38,7 +38,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
      * If there's a query, I already have all the icons on the map, so I'm restricting the search
      * to a distance radius.
      */
-    fun getInitialLocations(latlng: LatLng?, comingSoon: Boolean?, minKw: Int?, connector: String?) {
+    fun getInitialLocations(latlng: LatLng?, comingSoon: Boolean?, minKw: Int?, connector: Array<String>) {
         getService(LocationService::class.java).getLocations(latlng?.latitude, latlng?.longitude, comingSoon, minKw, connector)
             .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
                 override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
@@ -62,7 +62,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
      * It seems that there's a 3000-something mile cap when searching, so this is mostly for me when
      * I test this from Argentina without mocking my location
      */
-    private fun retryInitialLocations(comingSoon: Boolean?, minKw: Int?, connector: String?) {
+    private fun retryInitialLocations(comingSoon: Boolean?, minKw: Int?, connector: Array<String>) {
         getInitialLocations(LatLng(BaseConfiguration.Map.DEFAULT_LATITUDE, BaseConfiguration.Map.DEFAULT_LONGITUDE), comingSoon, minKw, connector)
     }
 
@@ -76,7 +76,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     fun getInitialLocations(latlng : LatLng? = null) {
         getInitialLocations(latlng, mFilterState.comingSoon, mFilterState.minKw,
-                mFilterState.connectorType?.name?.lowercase());
+                mFilterState.getConnectorTypes());
     }
 
     fun onFilterResult(result: FilterState) {
@@ -95,7 +95,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     fun searchFromQuery(viewport: LatLngBounds?) {
         getService(LocationService::class.java).getLocations(mLastLocation?.latitude,
                 mLastLocation?.longitude, MILES_LIMIT, mFilterState.comingSoon, mFilterState.minKw,
-                mFilterState.connectorType?.name?.lowercase())
+                mFilterState.getConnectorTypes())
                 .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
                         val locationList: List<Location>? = response!!.page

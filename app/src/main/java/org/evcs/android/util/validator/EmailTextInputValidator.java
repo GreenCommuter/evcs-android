@@ -21,4 +21,8 @@ public class EmailTextInputValidator extends AbstractTextInputValidator {
         return Patterns.EMAIL_ADDRESS.matcher(content).matches();
     }
 
+    @Override
+    protected String getErrorString() {
+        return "Invalid Email";
+    }
 }

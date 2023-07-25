@@ -28,6 +28,7 @@ public class Extras {
 
     public static final class VerifyActivity {
         public static final String RESULT = "result";
+        public static final String FROM_AUTH = "from_auth";
     }
 
     public static final class ForgotPassword {
@@ -60,6 +61,8 @@ public class Extras {
     }
 
     public static final class WebView {
+        public static final String SUBTITLE = "subtitle";
+        public static final String TITLE = "title";
         public static final String URL = "url";
     }
 

@@ -6,7 +6,7 @@ object BaseConfiguration {
     const val SHARED_PREFERENCES = "private-shared-prefs"
     const val STATE_NAME_SEPARATOR = ","
     const val DEVICE_TYPE = "android"
-    const val ROLLBAR_CLIENT_ID = "46c2f505dec044f9855223be8549a559"
+    const val ROLLBAR_CLIENT_ID = "8f045077be25481c874d39b1da7e475b"
     const val REQUEST_TRIES = 12
     const val REQUEST_TRIES_DELAY = 5000
     @JvmField
@@ -28,11 +28,15 @@ object BaseConfiguration {
         const val IMAGE_QUALITY = 80
     }
 
-    object License {
-        const val IMAGE_MAX_WIDTH = 750
-        const val IMAGE_MAX_HEIGHT = 750
-        const val IMAGE_QUALITY = 50
+    object WebViews {
+        const val TERMS_URL = "https://www.evcs.com/app/terms-of-use"
+        const val FAQ_URL = "https://support.evcs.com/hc/en-us"
+        const val REQUEST_URL = "https://support.evcs.com/hc/en-us/requests/new"
+        const val REPORT_URL = "https://support.evcs.com/hc/en-us/requests/new"
+        const val PLANS_URL = "https://subscriptions.evcs.com/account/%s/plans"
     }
+
+    val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")
 
     object IncidentPictures {
         const val IMAGE_QUALITY = 35
@@ -41,7 +45,7 @@ object BaseConfiguration {
     object Map {
         const val DEFAULT_LATITUDE = 34.0223187
         const val DEFAULT_LONGITUDE = -118.3104457
-        const val DEFAULT_ZOOM = 10f
+        const val DEFAULT_ZOOM = 9f
     }
 
     object ChargingHistory {

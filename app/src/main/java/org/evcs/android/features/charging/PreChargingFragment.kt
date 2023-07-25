@@ -13,6 +13,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.features.main.MainNavigationController
+import org.evcs.android.features.map.dimBackground
 import org.evcs.android.features.map.keepStatusBar
 import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
@@ -23,7 +24,7 @@ import org.evcs.android.util.SpinnerUtils
 //If the request fails: go back, don't select charging
 //If it is null: go to charging fragment, select charging
 //It it is not null: go to "in progress", select charging, make sure when they come back we are back in the map
-class PreChargingFragment : BaseDialogFragment<ChargingTabPresenter<*>?>(), ChargingTabView {
+class PreChargingFragment : BaseDialogFragment<PreChargingPresenter<*>?>(), PreChargingView {
 
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     private lateinit var mProgressDialog: Dialog
@@ -32,12 +33,12 @@ class PreChargingFragment : BaseDialogFragment<ChargingTabPresenter<*>?>(), Char
         return R.layout.fragment_base
     }
 
-    override fun createPresenter(): ChargingTabPresenter<*>? {
-        return ChargingTabPresenter(this, EVCSApplication.getInstance().retrofitServices)
+    override fun createPresenter(): PreChargingPresenter<*>? {
+        return PreChargingPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
     override fun init() {
-        mProgressDialog = SpinnerUtils.getNewProgressDialog(context, R.layout.spinner_layout)
+        mProgressDialog = SpinnerUtils.getNewProgressDialog(context, R.layout.spinner_layout_black)
         mProgressDialog.show()
         presenter?.onViewCreated()
         presenter?.getCurrentCharge()
@@ -48,6 +49,7 @@ class PreChargingFragment : BaseDialogFragment<ChargingTabPresenter<*>?>(), Char
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         keepStatusBar(view)
+        dimBackground()
     }
 
     override fun onChargeRetrieved(response: Session?) {
@@ -68,5 +70,10 @@ class PreChargingFragment : BaseDialogFragment<ChargingTabPresenter<*>?>(), Char
         ToastUtils.show(requestError.body)
         mProgressDialog.hide()
         dismiss()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mProgressDialog.dismiss()
     }
 }

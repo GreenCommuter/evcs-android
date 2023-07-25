@@ -3,6 +3,7 @@ package org.evcs.android.features.profile.plans
 import android.content.Context
 import org.evcs.android.R
 import org.evcs.android.model.Plan
+import org.evcs.android.util.UserUtils
 
 abstract class PlanViewHelper(val mContext: Context) {
     companion object {
@@ -18,13 +19,14 @@ abstract class PlanViewHelper(val mContext: Context) {
     }
     abstract fun getPlanName() : String
     abstract fun getPlanPrice() : String
-    abstract fun getPlanButton() : String
+    abstract fun getPlanButton() : String?
     abstract fun getPlanFreq() : String?
     abstract fun getPlanLimit() : String?
     abstract fun getPlanLimitAprox() : String?
     abstract fun getFlatRate(): String?
     abstract fun getDCFastPrice(): String?
     abstract fun getLevel2Price(): String?
+    abstract fun showLearnMore(): Boolean
 
     abstract fun getFlatRateForGetPlan(): String?
     abstract fun getCongratulationsDialogSubtitle(): String?
@@ -39,8 +41,9 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
         return mContext.getString(R.string.pay_as_you_go_price)
     }
 
-    override fun getPlanButton(): String {
-        return mContext.getString(R.string.pay_as_you_go_button)
+    override fun getPlanButton(): String? {
+        return if (UserUtils.getLoggedUser() != null) null
+               else mContext.getString(R.string.pay_as_you_go_button)
     }
 
     override fun getPlanFreq(): String {
@@ -48,7 +51,7 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     }
 
     override fun getPlanLimit(): String? {
-        return mContext.getString(R.string.pay_as_you_go_limit)
+        return null
     }
 
     override fun getPlanLimitAprox(): String? {
@@ -60,11 +63,11 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
     }
 
     override fun getDCFastPrice(): String? {
-        return mContext.getString(R.string.pay_as_you_go_dc)
+        return null//mContext.getString(R.string.pay_as_you_go_dc)
     }
 
     override fun getLevel2Price(): String? {
-        return mContext.getString(R.string.pay_as_you_go_ac)
+        return null//mContext.getString(R.string.pay_as_you_go_ac)
     }
 
     override fun getFlatRateForGetPlan(): String? {
@@ -73,6 +76,10 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
 
     override fun getCongratulationsDialogSubtitle(): String? {
         return null
+    }
+
+    override fun showLearnMore(): Boolean {
+        return false
     }
 
 }
@@ -93,6 +100,10 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
 
     override fun getPlanFreq(): String? {
         return mPlan.useCase
+    }
+
+    override fun showLearnMore(): Boolean {
+        return true
     }
 }
 
@@ -120,7 +131,7 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
     }
 
     override fun getFlatRateForGetPlan(): String? {
-        return mContext.getString(R.string.get_plan_flat_rate, mPlan.pricePerKwh, mPlan.kwhCap())
+        return mContext.getString(R.string.get_plan_flat_rate, mPlan.kwhCap(), mPlan.renewalPeriod.toString(), mPlan.pricePerKwh)
     }
 
     override fun getCongratulationsDialogSubtitle(): String {
@@ -130,7 +141,7 @@ class PlanViewHelperCapped(context: Context, plan: Plan) : PlanViewHelperLimited
 
 class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLimited(context, plan) {
     override fun getPlanLimit(): String? {
-        return mContext.getString(R.string.get_plan_flat_rate_time_limited,
+        return mContext.getString(R.string.get_plan_flat_rate_time_limited_old,
                 mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
     }
 
@@ -145,7 +156,7 @@ class PlanViewHelperTimeLimited(context: Context, plan: Plan) : PlanViewHelperLi
 
     override fun getFlatRateForGetPlan(): String? {
         return mContext.getString(R.string.get_plan_flat_rate_time_limited,
-                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase())
+                mPlan.startHour().toUpperCase(), mPlan.finishHour().toUpperCase(), mPlan.pricePerKwh)
     }
 
     override fun getCongratulationsDialogSubtitle(): String {

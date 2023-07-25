@@ -13,7 +13,6 @@ import org.evcs.android.databinding.ActivitySessionInformationBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
-import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
@@ -54,15 +53,15 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
             mBinding.sessionInformationChargingSiteDate.text = mDateTimeFormatter.print(mCharge.startedAt)
         mBinding.sessionInformationDuration.text = mCharge.printableDuration
         mBinding.sessionInformationEnergy.text = mCharge.printKwh()
-        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, mCharge.price)
+        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, mCharge.paymentAmount)
         mBinding.sessionInformationId.text = mCharge.id.toString()
         mBinding.sessionInformationChargingSiteSubtitle.text = mCharge.locationName
         mBinding.sessionInformationPlanType.text = mCharge.planName
         mBinding.sessionInformationChargingSiteId.text = mCharge.stationName
         if (mCharge.paymentBrand != null && mCharge.paymentLast4 != null) {
-            mBinding.sessionInformationPaymentMethod.setParentVisibility(true)
-            mBinding.sessionInformationPaymentMethod.text = getString(
-                R.string.app_payment_method_format, mCharge.paymentBrand, mCharge.paymentLast4)
+            mBinding.sessionInformationPaymentMethod.isVisible = true
+            mBinding.sessionInformationPaymentMethod.setText(getString(
+                R.string.app_payment_method_format, mCharge.paymentBrand, mCharge.paymentLast4))
         }
 
         mBinding.sessionInformationChargingSiteAddress.text = mCharge.address
@@ -70,7 +69,7 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
             mBinding.sessionInformationImage.isVisible = true
             mBinding.sessionInformationImage.setImageURI(mCharge.image)
         }
-        if (mCharge.price == 0f) {
+        if (mCharge.paymentAmount == 0f) {
             mBinding.sessionInformationReceipt.isVisible = false
         }
     }

@@ -1,6 +1,7 @@
 package org.evcs.android.features.profile.sessioninformation
 
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import org.evcs.android.ui.fragment.ErrorFragment
 import com.base.core.presenter.BasePresenter
@@ -36,16 +37,16 @@ class ReceiptFragment : ErrorFragment<BasePresenter<*>>() {
         if (charge.startedAt != null)
             mBinding.sessionInformationChargingSiteDate.text = dateTimeFormatter.print(charge.startedAt)
         mBinding.sessionInformationEnergy.text = charge.printKwh()
-        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, charge.price)
+        mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, charge.paymentAmount)
         mBinding.sessionInformationChargingSiteSubtitle.text = charge.locationName
-        mBinding.receiptFee.text = getString(R.string.app_price_format, charge.price)
+//        mBinding.receiptFee.text = getString(R.string.app_price_format, 0f)
         mBinding.receiptRate.setParentVisibility(charge.ppkwh != null)
-        mBinding.receiptRate.text = String.format("$%.2f/kWh", charge.ppkwh)
+        mBinding.receiptRate.setText(String.format("$%.2f/kWh", charge.ppkwh))
         mBinding.sessionInformationPlanType.text = charge.planName
         if (charge.paymentBrand != null && charge.paymentLast4 != null) {
-            mBinding.sessionInformationPaymentMethod.setParentVisibility(true)
-            mBinding.sessionInformationPaymentMethod.text = getString(
-                    R.string.app_payment_method_format, charge.paymentBrand, charge.paymentLast4)
+            mBinding.sessionInformationPaymentMethod.isVisible = true
+            mBinding.sessionInformationPaymentMethod.setText(getString(
+                    R.string.app_payment_method_format, charge.paymentBrand, charge.paymentLast4))
         }
     }
 

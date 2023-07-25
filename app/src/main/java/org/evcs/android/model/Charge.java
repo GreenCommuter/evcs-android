@@ -1,5 +1,7 @@
 package org.evcs.android.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
 import org.joda.time.DateTime;
@@ -21,13 +23,15 @@ public class Charge implements Serializable {
 //            "charger_type": "DC",
 //            "connector": "CHAdeMO",
     private float kwh;
-    private float price;
+//    private float price;
     private String status;
     private String stationName;
     private Subscription subscription;
     private Float ppkwh;
     private Location location;
     private CreditCardProvider paymentBrand;
+    private Float paymentAmount;
+    @SerializedName("payment_last_4")
     private String paymentLast4;
 
     public int getId() {
@@ -36,10 +40,6 @@ public class Charge implements Serializable {
 
     public DateTime getStartedAt() {
         return startedAt;
-    }
-
-    public float getPrice() {
-        return price;
     }
 
     public String getLocationName() {
@@ -77,7 +77,7 @@ public class Charge implements Serializable {
     }
 
     public String getPlanName() {
-        if (subscription == null)
+        if (subscription == null || subscription.planName == null)
             return EVCSApplication.getInstance().getApplicationContext()
                 .getString(R.string.pay_as_you_go_name);
         return subscription.planName;
@@ -106,6 +106,10 @@ public class Charge implements Serializable {
 
     public CreditCardProvider getPaymentBrand() {
         return paymentBrand;
+    }
+
+    public Float getPaymentAmount() {
+        return paymentAmount;
     }
 
     public String getPaymentLast4() {

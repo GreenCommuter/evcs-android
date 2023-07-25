@@ -36,7 +36,7 @@ class SessionInformationPresenter(viewInstance: ISessionInformationView, service
         val call = getService(ChargesService::class.java).getChargeFromSession(sessionId)
         PollingManager(this).poll(call, object : PollingManager.PollingCallback {
             override fun onResponseSuccessful(response: Response<*>) {
-                getCharge(handleResponse(response)[0].id)
+                view?.showCharge(handleResponse(response)[0])
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

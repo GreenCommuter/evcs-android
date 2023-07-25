@@ -17,6 +17,7 @@
             android:layout_height="360dp"/>
 
         <LinearLayout
+            android:id="@+id/fragment_location_handler"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -25,7 +26,6 @@
             android:elevation="@dimen/spacing_medium">
 
             <ImageView
-                android:id="@+id/activity_location_close"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -37,15 +37,32 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/spacing_medium_extra"
+                android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:text="Location Detail"
                 android:textColor="#0C141D"
                 style="@style/Title.Medium"/>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@color/evcs_white"
+            android:elevation="@dimen/spacing_medium">
+
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/map_item_fragment_inner_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
             <org.evcs.android.ui.view.mainmap.LocationView
                 android:id="@+id/map_item_fragment_location_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_medium_extra"/>
+
+            </androidx.core.widget.NestedScrollView>
 
         </LinearLayout>
 

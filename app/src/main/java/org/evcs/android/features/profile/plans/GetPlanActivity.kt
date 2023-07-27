@@ -40,7 +40,7 @@ class GetPlanActivity : BaseActivity2() {
 
     override fun populate() {
         val plan = intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Plan
-        val fragment = if (intent.getBooleanExtra(Extras.PlanActivity.HAS_PLAN, false))
+        val fragment = if (UserUtils.getLoggedUser().activeSubscription != null)
             SwitchPlanFragment.newInstance(plan)
         else GetPlanFragment.newInstance(plan)
         replaceFragment(R.id.activity_base_content, fragment)

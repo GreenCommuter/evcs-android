@@ -19,6 +19,10 @@ class GetPlanFragment : AbstractGetPlanFragment() {
         }
     }
 
+    override fun getStartingDate(): DateTime? {
+        return mPlan.startingDate()
+    }
+
     override fun getActiveUntil(): DateTime? {
         return null
     }

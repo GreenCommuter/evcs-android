@@ -84,7 +84,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         } else if (UserUtils.getLoggedUser()?.hasAnySubscription ?: false) {
             showChangePlanDialog(UserUtils.getLoggedUser().activeSubscription!!, plan)
         } else {
-            gotoPlan(plan, false)
+            gotoPlan(plan)
         }
     }
 
@@ -115,18 +115,17 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         EVCSDialogFragment.Builder()
             .setTitle(getString(R.string.plans_tab_dialog_title))
             .setSubtitle(subtitle)
-            .addButton(getString(R.string.app_continue), {
-                    dialog -> dialog.dismiss()
-                gotoPlan(plan, true)
+            .addButton(getString(R.string.app_continue), { dialog ->
+                dialog.dismiss()
+                gotoPlan(plan)
             }, R.drawable.layout_corners_rounded_blue)
             .showCancel(true)
             .show(childFragmentManager)
     }
 
-    fun gotoPlan(plan: Plan, hasPlan: Boolean) {
+    fun gotoPlan(plan: Plan) {
         val intent = Intent(context, GetPlanActivity::class.java)
         intent.putExtra(Extras.PlanActivity.PLAN, plan)
-        intent.putExtra(Extras.PlanActivity.HAS_PLAN, hasPlan)
         mPlanLauncher.launch(intent)
     }
 

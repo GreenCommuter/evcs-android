@@ -63,7 +63,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanFlatRate.text = PlanViewHelper.instance(requireContext(), mPlan).getFlatRateForGetPlan()
         mBinding.getPlanCostLayout.setVisibility(showCostLayout())
         val period = StringUtils.capitalize(mPlan.renewalPeriod.toAdverb())
-        val startingDate = dateFormatter.print(mPlan.startingDate())
+        val startingDate = dateFormatter.print(getStartingDate())
         mBinding.getPlanMonthlyCostTitle.text = getString(R.string.get_plan_price, period, startingDate)
         mBinding.getPlanSubtotal.text = getString(R.string.app_price_format, mPlan.price)
         //TODO: tax
@@ -98,7 +98,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
-        return getString(R.string.get_plan_monthly_label, dateFormatter.print(mPlan.startingDate()))
+        return getString(R.string.get_plan_monthly_label, dateFormatter.print(getStartingDate()))
     }
 
     protected open fun getNextBillingDate(): DateTime? {
@@ -116,6 +116,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     protected open fun getToolbarTitle(): String {
         return mPlan.name
     }
+
+    abstract fun getStartingDate(): DateTime?
 
     abstract fun getActiveUntil(): DateTime?
 

@@ -12,6 +12,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
 import org.evcs.android.features.profile.wallet.WalletActivity
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionStatus
@@ -19,6 +20,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.StringUtils
 import org.evcs.android.util.ViewUtils.setVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -54,8 +56,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         val dateFormatter = DateTimeFormat.forPattern("M/d/yyyy")
         mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
-        mBinding.getPlanFreeTrial.setVisibility(getTrialLabel() != null)
-        mBinding.getPlanFreeTrial.setLabel(getTrialLabel() ?: "")
+        mBinding.getPlanFreeTrial.showOrHide(getTrialLabel())
 
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
@@ -138,6 +139,14 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         }
         mBinding.getPlanPaymentCouponCode.setListener {
             //TODO: apply
+        }
+        mBinding.getPlanFreeTrialLabel.setOnClickListener {
+            EVCSDialogFragment.Builder()
+                    .setTitle("Free Trial")
+                    .setSubtitle("Your free trial includes %1\$d kWh, which you can use within %2\$d days from when you sign up.\n\nYou will be automatically charged the monthly installment for you subscription plan either after consuming the free %1\$d kWh or after the %2\$d day trial expires, whichever comes first.")
+                    .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
+                            R.drawable.layout_corners_rounded_blue, R.color.button_text_color_selector_filled)
+                    .show(childFragmentManager)
         }
     }
 

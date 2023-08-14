@@ -32,7 +32,7 @@ class GetPlanFragment : AbstractGetPlanFragment() {
     }
 
     override fun getTrialLabel(): String {
-        return String.format("%d Day Offer - New Members Only", mPlan.trialDays)
+        return String.format("Free %1\$d kWh, expires in %2\$d days", 0, mPlan.trialDays)
     }
 
     override fun getButtonText(): String {

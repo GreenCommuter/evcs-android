@@ -2,11 +2,9 @@ package org.evcs.android.features.auth.register
 
 import android.view.View
 import android.widget.AdapterView
-import android.widget.TextView
 import androidx.annotation.CallSuper
 import org.evcs.android.R
 import org.evcs.android.features.shared.DropdownWithLabel
-import org.evcs.android.model.Car
 import org.evcs.android.model.CarMaker
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.joda.time.DateTime
@@ -73,8 +71,9 @@ abstract class AbstractCarSelectionFragment<P : CarSelectionPresenter<*>> : Erro
     protected open fun onButtonClick() {
         progressDialog.show()
         presenter!!.register(
-            (getModelField().getSelectedItem() as Car).id,
-                    getYearField().getSelectedItem()?.toString()
+                getMakeField().getSelectedItem() as String,
+                getModelField().getSelectedItem() as String,
+                getYearField().getSelectedItem()?.toString()
         )
     }
 

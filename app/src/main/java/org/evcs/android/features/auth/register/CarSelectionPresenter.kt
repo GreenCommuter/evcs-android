@@ -17,7 +17,11 @@ open class CarSelectionPresenter<V : CarSelectionView>(viewInstance: V, services
 
     private lateinit var mCarMakers: List<CarMaker>
 
-    fun register(carId: Int, year: String?) {
+    fun register(make: String, model: String, year: String?) {
+        var cars = getCars(make)
+        //Searching by string here is ugly, but API is not giving me the car id for the user
+        var carId = cars.first { car -> car.model == model }.id
+
         getService(UserService::class.java).saveUserCar(UserCar(carId, year))
             .enqueue(object : AuthCallback<UserCar>(this) {
             override fun onResponseSuccessful(response: UserCar?) {

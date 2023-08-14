@@ -11,6 +11,7 @@ import org.evcs.android.network.service.EVCSRetrofitServices
 import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
+import org.evcs.android.util.UserUtils
 
 open class CarSelectionPresenter<V : CarSelectionView>(viewInstance: V, services: EVCSRetrofitServices) :
     ServicesPresenter<V>(viewInstance, services) {
@@ -20,7 +21,11 @@ open class CarSelectionPresenter<V : CarSelectionView>(viewInstance: V, services
     fun register(carId: Int, year: String?) {
         getService(UserService::class.java).saveUserCar(UserCar(carId, year))
             .enqueue(object : AuthCallback<UserCar>(this) {
-            override fun onResponseSuccessful(response: UserCar?) {
+            override fun onResponseSuccessful(response: UserCar) {
+                response.carId = carId
+                val user = UserUtils.getLoggedUser()
+                user.userCar = response
+                UserUtils.saveUser(user)
                 view?.onCarsAdded(response!!)
             }
 

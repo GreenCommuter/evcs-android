@@ -1,10 +1,14 @@
 package org.evcs.android.model
 
-class Car {
+class Car(var id: Int, var make: String?, var model: String?) {
 
-    var id = 0
-    var make: String? = null
-    var model: String? = null
     var imageUrl: String? = null
 
+    override fun toString(): String {
+        return model!!
+    }
+
+    override fun equals(other: Any?): Boolean {
+        return other is Car && other.id == id
+    }
 }

@@ -63,7 +63,7 @@ abstract class AbstractCarSelectionFragment<P : CarSelectionPresenter<*>> : Erro
 
     protected open fun onManufacturerClicked(manufacturer: String) {
         val items = presenter!!.getCars(manufacturer)
-        getModelField().setItems(items.map { car -> car.model })
+        getModelField().setItems(items)
     }
 
     fun setEnableButton(validFields: Boolean) {

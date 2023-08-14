@@ -42,17 +42,14 @@ class ChangeCarFragment : RegisterFragmentYourCar() {
 
     override fun onManufacturerClicked(manufacturer: String) {
         if (presenter.getCars(manufacturer).isEmpty()) {
-            mBinding.fragmentRegisterYourCarModel.setItemAndSelect(mUserCar?.model)
+            mBinding.fragmentRegisterYourCarModel.setItemAndSelect(mUserCar?.toCar())
         } else {
             super.onManufacturerClicked(manufacturer)
-            mBinding.fragmentRegisterYourCarModel.selectItem(mUserCar?.model)
+            mBinding.fragmentRegisterYourCarModel.selectItem(mUserCar?.toCar())
         }
     }
 
     override fun onCarsAdded(car : UserCar) {
-        val user = UserUtils.getLoggedUser()
-        user.userCar = car
-        UserUtils.saveUser(user)
         activity?.finish()
     }
 

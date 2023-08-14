@@ -1,5 +1,6 @@
 package org.evcs.android.network.service;
 
+import org.evcs.android.model.Car;
 import org.evcs.android.model.user.AuthUser;
 import org.evcs.android.model.user.CodeWrapper;
 import org.evcs.android.model.user.NameWrapper;

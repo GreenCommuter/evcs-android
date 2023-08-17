@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_planInfoFragment_to_startChargingFragment"
             app:destination="@id/startChargingFragment" />
+        <action
+            android:id="@+id/action_planInfoFragment_to_freeTrialReminderFragment"
+            app:destination="@id/freeTrialReminderFragment" />
     </fragment>
     <fragment
         android:id="@+id/startChargingFragment"
@@ -58,4 +61,9 @@
             android:id="@+id/action_placeholder_to_planInfoFragment"
             app:destination="@id/planInfoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/freeTrialReminderFragment"
+        android:name="org.evcs.android.features.charging.FreeTrialReminderFragment"
+        android:label="FreeTrialReminderFragment"
+        tools:layout="@layout/fragment_free_trial_reminder"/>
 </navigation>

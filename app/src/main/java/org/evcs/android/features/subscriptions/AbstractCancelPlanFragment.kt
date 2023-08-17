@@ -36,7 +36,9 @@ abstract class AbstractCancelPlanFragment : ErrorFragment<BasePresenter<*>>() {
 
     override fun setListeners() {
         super.setListeners()
-        mBinding.cancelPlanImage.setImageURI(UserUtils.getLoggedUser().activeSubscription?.plan?.iconUrl)
+        var imageUrl = UserUtils.getLoggedUser().activeSubscription?.plan?.iconUrl
+        if (imageUrl != null) imageUrl = "https:" + imageUrl.split(":")[1]
+        mBinding.cancelPlanImage.setImageURI(imageUrl)
         mBinding.cancelPlanBold.text = getBoldText()
 
         mBinding.cancelPlanContinue.setOnClickListener { onContinueClicked() }

@@ -95,7 +95,7 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
     }
 
     override fun getPlanButton(): String {
-        return mPlan.cta
+        return mContext.getString(R.string.app_trial_cta_default)
     }
 
     override fun getPlanFreq(): String? {

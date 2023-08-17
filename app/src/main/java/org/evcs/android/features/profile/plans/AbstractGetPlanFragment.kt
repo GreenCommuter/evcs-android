@@ -143,7 +143,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanFreeTrialLabel.setOnClickListener {
             EVCSDialogFragment.Builder()
                     .setTitle("Free Trial")
-                    .setSubtitle("Your free trial includes %1\$d kWh, which you can use within %2\$d days from when you sign up.\n\nYou will be automatically charged the monthly installment for you subscription plan either after consuming the free %1\$d kWh or after the %2\$d day trial expires, whichever comes first.")
+                    .setSubtitle(getString(R.string.get_plan_trial_subtitle, mPlan.trialKwh, mPlan.trialDays))
                     .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
                             R.drawable.layout_corners_rounded_blue, R.color.button_text_color_selector_filled)
                     .show(childFragmentManager)

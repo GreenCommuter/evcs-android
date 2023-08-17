@@ -86,12 +86,15 @@ class SubscriptionFragment : ErrorFragment<SubscriptionPresenter>(), Subscriptio
                     defaultPm.card.last4, response.price, response.renewalPeriod, date)))
         mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(defaultPm)
 
+        mBinding.activitySubscriptionsPlanStatus.text = response.status.toString()
+        mBinding.activitySubscriptionsViewAllPlans.isEnabled = !response.onTrialPeriod
+
         if (response.onTrialPeriod) {
             mBinding.activitySubscriptionsFreeTrial.visibility = View.VISIBLE
             mBinding.activitySubscriptionsFreeTrial.setText(
                     getString(R.string.manage_plan_days_remaining, response.activeDaysLeft))
+            mBinding.activitySubscriptionsPlanStatus.text = "Free Trial"
         }
-        mBinding.activitySubscriptionsPlanStatus.text = response.status.toString()
         setChipColor(R.color.evcs_secondary_700)
     }
 

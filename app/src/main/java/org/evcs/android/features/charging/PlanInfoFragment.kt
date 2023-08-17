@@ -18,6 +18,7 @@ import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 import org.evcs.android.util.VideoUtils.playVideo
 import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
@@ -27,6 +28,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     private lateinit var mWalletLauncher: ActivityResultLauncher<Intent>
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
+    private lateinit var mExplorePlansText: CharSequence
 
     private val mListener = ChargingNavigationController.getInstance()
 
@@ -49,6 +51,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             mBinding.planInfoCreditCard.setPaymentMethod(pm)
         }
         mBinding.planInfoAnim.playVideo(R.raw.evcs_scene1)
+        mExplorePlansText = UserUtils.getLoggedUser().getExplorePlansText(resources)
     }
 
     override fun populate() {
@@ -94,7 +97,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                     String.format("$%.2f", pricing.priceKwh ?: pricing.thereafterPrice))
         }
         if (status == null) {
-            showPlanDialog(getString(R.string.plan_info_upgrade_plan_dialog), false, null)
+            showPlanDialog(mExplorePlansText, false, null)
             showPaymentInfo()
             return
         }
@@ -137,7 +140,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoButton.setOnClickListener { goToStartCharging() }
     }
 
-    private fun showPlanDialog(message: String, isUpgradePlan: Boolean, accountUrl: String?) {
+    private fun showPlanDialog(message: CharSequence, isUpgradePlan: Boolean, accountUrl: String?) {
         mBinding.planInfoExplorePlans.setParentVisibility(true)
         mBinding.planInfoExplorePlans.text = message
         if (isUpgradePlan) {

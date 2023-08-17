@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:drawablePadding="@dimen/spacing_medium"
                 style="@style/Label.Small"
-                android:text="Free trial"/>
+                android:text="@string/manage_plan_free_trial"/>
 
             <TextView
                 android:id="@+id/get_plan_free_trial"

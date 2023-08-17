@@ -41,6 +41,7 @@ public class Plan implements Serializable {
     public Float monthlyKwh;
     public Float weeklyKwh;
     public int trialDays;
+    public int trialKwh;
     public String cta;
 //    public String tab;
     public String banner;

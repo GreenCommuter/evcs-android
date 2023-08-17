@@ -80,7 +80,7 @@ abstract class PlanLearnMoreHelperNonNull(context: Context, val mPlan: Plan) : P
     }
 
     override fun getPlanButton(): String {
-        return mPlan.cta
+        return mContext.getString(R.string.app_trial_cta_default)
     }
 }
 

@@ -18,6 +18,7 @@ import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.VideoUtils.playVideo
 import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
 
@@ -47,6 +48,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             pm -> mSelectedPM = pm
             mBinding.planInfoCreditCard.setPaymentMethod(pm)
         }
+        mBinding.planInfoAnim.playVideo(R.raw.evcs_scene1)
     }
 
     override fun populate() {

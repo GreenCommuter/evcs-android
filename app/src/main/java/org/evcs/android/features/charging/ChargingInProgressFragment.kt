@@ -9,9 +9,9 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Session
-import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.VideoUtils.playVideo
 import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -41,7 +41,9 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mBinding = FragmentChargingInProgressBinding.bind(v)
     }
 
-    override fun init() {}
+    override fun init() {
+        mBinding.chargingInProgressAnim.playVideo(R.raw.evcs_scene3)
+    }
 
     override fun populate() {
         formatter = DateTimeFormat.forPattern("HH:mm:ss").withZoneUTC()
@@ -94,6 +96,10 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mSession = response
         if (mSession.address == null)
             presenter.getStation(response.stationName)
+        else {
+            mBinding.chargingInProgressSiteName.text = mSession.address.toString()
+            mBinding.chargingInProgressLocationLoading.isVisible = false
+        }
         mBinding.chargingInProgressEnergy.text = response.printKwh()
         if (mDuration == null) {
             hideProgressDialog()

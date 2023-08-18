@@ -2,63 +2,16 @@ package org.evcs.android.util
 
 import android.content.Context
 import android.graphics.Color
-import android.graphics.SurfaceTexture
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.net.Uri
-import android.view.Surface
-import android.view.TextureView
 import android.widget.VideoView
 import androidx.annotation.RawRes
 import kotlin.math.roundToInt
 
 object VideoUtils {
 
-    fun TextureView.playVideo(@RawRes rawVideo: Int) {
-        surfaceTextureListener = object : TextureView.SurfaceTextureListener {
-            private var mp: MediaPlayer? = null
-
-            override fun onSurfaceTextureAvailable(surfaceTexture: SurfaceTexture, p1: Int, p2: Int) {
-                mp = playVideo(surfaceTexture, rawVideo)
-            }
-
-            override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture, p1: Int, p2: Int) {}
-
-            override fun onSurfaceTextureDestroyed(p0: SurfaceTexture): Boolean {
-                mp?.stop()
-                mp?.release()
-                mp = null
-                return false
-            }
-
-            override fun onSurfaceTextureUpdated(p0: SurfaceTexture) {}
-
-        }
-    }
-
-    fun TextureView.playVideo(surfaceTexture: SurfaceTexture, @RawRes rawVideo: Int): MediaPlayer? {
-        try {
-            val assetFileDescriptor = resources.openRawResourceFd(rawVideo)
-            val surface = Surface(surfaceTexture)
-            val mediaPlayer = MediaPlayer()
-            mediaPlayer.setDataSource(assetFileDescriptor.fileDescriptor,
-                assetFileDescriptor.startOffset, assetFileDescriptor.length)
-            mediaPlayer.prepareAsync()
-            mediaPlayer.setSurface(surface)
-            mediaPlayer.isLooping = true
-            mediaPlayer.setOnPreparedListener { player ->
-                scaleView(mediaPlayer.videoWidth, mediaPlayer.videoHeight)
-                player?.start()
-            }
-            mediaPlayer.setOnErrorListener { _, _, _ -> false }
-            return mediaPlayer
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
-
-    private fun TextureView.scaleView(videoWidth: Int, videoHeight: Int) {
+    private fun VideoView.scaleView(videoWidth: Int, videoHeight: Int) {
         val lp = layoutParams
         val prop = width / videoWidth.toFloat()
         lp.height = (videoHeight * prop).roundToInt()
@@ -72,6 +25,7 @@ object VideoUtils {
 
     fun VideoView.startAndLoop() {
         setOnPreparedListener { mp ->
+            scaleView(mp.videoWidth, mp.videoHeight)
             start()
             mp.isLooping = true
             mp.setOnInfoListener { _, what, _ ->

@@ -44,10 +44,10 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextureView
+            <VideoView
                 android:id="@+id/plan_info_anim"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:layout_marginBottom="@dimen/spacing_big_k"
                 android:visibility="visible"

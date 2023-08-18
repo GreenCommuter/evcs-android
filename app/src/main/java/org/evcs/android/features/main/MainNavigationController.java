@@ -57,17 +57,17 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
     }
 
     public void onMapClicked() {
+        if (mNavController.findDestination(R.id.mainMapFragment) == null) {
+            NavigationUtils.jumpToClearingTask(mActivity, MainActivity.class);
+            return;
+        }
         if (!mIsInCharging && !mIsInProfile) return;
 //        cancelSession(() -> {
             mIsInCharging = false;
             mIsInProfile = false;
             mActivity.setSelectedItem(R.id.menu_drawer_map);
 //        });
-        if (mNavController.findDestination(R.id.mainMapFragment) == null) {
-            NavigationUtils.jumpToClearingTask(mActivity, MainActivity.class);
-        } else {
             backToBaseFragment();
-        }
     }
 
 }

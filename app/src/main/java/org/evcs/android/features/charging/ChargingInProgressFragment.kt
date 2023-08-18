@@ -11,7 +11,8 @@ import org.evcs.android.model.Location
 import org.evcs.android.model.Session
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
-import org.evcs.android.util.VideoUtils.playVideo
+import org.evcs.android.util.VideoUtils.setVideoResource
+import org.evcs.android.util.VideoUtils.startAndLoop
 import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
@@ -42,7 +43,8 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     }
 
     override fun init() {
-        mBinding.chargingInProgressAnim.playVideo(R.raw.evcs_scene3)
+        mBinding.chargingInProgressAnim.setVideoResource(R.raw.evcs_scene3, requireContext())
+        mBinding.chargingInProgressAnim.startAndLoop()
     }
 
     override fun populate() {

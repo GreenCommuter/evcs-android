@@ -16,13 +16,18 @@ object VideoUtils {
 
     fun TextureView.playVideo(@RawRes rawVideo: Int) {
         surfaceTextureListener = object : TextureView.SurfaceTextureListener {
+            private var mp: MediaPlayer? = null
+
             override fun onSurfaceTextureAvailable(surfaceTexture: SurfaceTexture, p1: Int, p2: Int) {
-                playVideo(surfaceTexture, rawVideo)
+                mp = playVideo(surfaceTexture, rawVideo)
             }
 
             override fun onSurfaceTextureSizeChanged(p0: SurfaceTexture, p1: Int, p2: Int) {}
 
             override fun onSurfaceTextureDestroyed(p0: SurfaceTexture): Boolean {
+                mp?.stop()
+                mp?.release()
+                mp = null
                 return false
             }
 
@@ -31,7 +36,7 @@ object VideoUtils {
         }
     }
 
-    fun TextureView.playVideo(surfaceTexture: SurfaceTexture, @RawRes rawVideo: Int) {
+    fun TextureView.playVideo(surfaceTexture: SurfaceTexture, @RawRes rawVideo: Int): MediaPlayer? {
         try {
             val assetFileDescriptor = resources.openRawResourceFd(rawVideo)
             val surface = Surface(surfaceTexture)
@@ -46,9 +51,11 @@ object VideoUtils {
                 player?.start()
             }
             mediaPlayer.setOnErrorListener { _, _, _ -> false }
+            return mediaPlayer
         } catch (e: Exception) {
             e.printStackTrace()
         }
+        return null
     }
 
     private fun TextureView.scaleView(videoWidth: Int, videoHeight: Int) {

@@ -32,10 +32,14 @@ open class User : Serializable {
     val previousSubscription: Subscription? = null
 
     fun getExplorePlansText(resources: Resources): CharSequence {
-        if (previousSubscription == null)
+        if (canDoTrial())
             return FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text_trial), Color.BLACK)
         else
             return resources.getString(R.string.profile_explore_plans_text)
+    }
+
+    fun canDoTrial() : Boolean {
+        return previousSubscription == null
     }
 
     val hasAnySubscription: Boolean

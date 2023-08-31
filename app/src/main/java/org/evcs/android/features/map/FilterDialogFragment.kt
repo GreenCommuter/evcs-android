@@ -43,7 +43,7 @@ class FilterDialogFragment(private var mFilterState: FilterState = FilterState()
             }
             if (i < ConnectorType.values().size - 1) {
                 val spacing = View(context)
-                val params = LinearLayout.LayoutParams(resources.getDimension(R.dimen.spacing_medium_extra).toInt(), -1)
+                val params = LinearLayout.LayoutParams(0, -1, 0.2f)
                 mBinding.activityFilterConnectorTypes.addView(spacing, params)
             }
         }

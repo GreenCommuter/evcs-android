@@ -29,9 +29,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/start_charging_preparing"
-            android:layout_marginBottom="@dimen/spacing_medium_extra"
-            android:textColor="@color/evcs_black"
-            style="@style/Body.Large.Bold"/>
+            android:layout_marginBottom="@dimen/spacing_medium"
+            style="@style/Body.Medium.Black"/>
 
         <TextView
             android:id="@+id/start_charging_subtext"

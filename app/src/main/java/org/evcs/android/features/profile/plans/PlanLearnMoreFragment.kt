@@ -117,7 +117,7 @@ class PlanLearnMoreFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.planLearnMore247.showOrHide(helper.getPlanTimes())
         mBinding.planLearnMoreHikes.showOrHide(helper.getPlanHikes())
         mBinding.planLearnMoreSidenote.showOrHide(helper.getPlanSideNote())
-        mBinding.planLearnMoreButton.text = helper.getPlanButton()
+        mBinding.planLearnMoreButton.text = helper.getPlanButton(UserUtils.getLoggedUser())
 
         val currentPlanId = UserUtils.getLoggedUser()?.activeSubscription?.plan?.id
         if (currentPlanId == plan?.id) {

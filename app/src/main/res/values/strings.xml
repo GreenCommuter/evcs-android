@@ -417,14 +417,14 @@
     <string name="plan_info_payment_error_update">Update payment method</string>
 
     <!-- Start Charging-->
-    <string name="start_charging_preparing_subtitle">This may only take a few seconds</string>
-    <string name="start_charging_preparing">Preparing to charge</string>
+    <string name="start_charging_preparing_subtitle">This could take a few seconds.</string>
+    <string name="start_charging_preparing">Preparing to charge your vehicle.</string>
     <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
     <string name="start_charging_button">Start Charging</string>
-    <string name="start_charging_title">Start charging</string>
+    <string name="start_charging_title">Preparing to Charge</string>
     <string name="start_charging_error_title">Connection Failed</string>
     <string name="start_charging_error_subtitle">Make sure your car is plugged in, or try disconnecting and reconnecting the connector to your vehicle.</string>
-    <string name="start_charging_error_retry">Try again</string>
+    <string name="start_charging_error_retry">Try Again</string>
     <string name="start_charging_error_cancel">Cancel Session</string>
     <string name="start_charging_error_support">Contact Support</string>
 
@@ -455,7 +455,7 @@
     <string name="manage_plan_enrolled">Enrolled</string>
     <string name="manage_plan_free_trial">Free Trial</string>
     <string name="manage_plan_payment_details">Payment details</string>
-    <string name="manage_plan_change">Change plan</string>
+    <string name="manage_plan_change">Change Plan</string>
     <string name="manage_plan_cancel">Cancel Plan</string>
     <string name="manage_plan_payment_info">Payment info</string>
     <string name="manage_plan_change_pm">Change</string>
@@ -496,10 +496,10 @@
     <string name="get_plan_trial_subtitle">Your free trial includes %1$d kWh, which you can use within %2$d days from when you sign up.\n\nYou will be automatically charged the monthly installment for you subscription plan either after consuming the free %1$d kWh or after the %2$d day trial expires, whichever comes first.</string>
     <!-- Plan View -->
     <string name="plan_view_current">Current Plan</string>
-    <string name="plan_view_flat_rate">Simple flat rate after %d kWh exceeded</string>
+    <string name="plan_view_flat_rate">Flat rate after %d kWh exceeded</string>
     <string name="plan_view_unlimited">Unlimited charging 24/7</string>
     <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
-    <string name="plan_view_learn_more">Learn more</string>
+    <string name="plan_view_learn_more">Learn More</string>
     <string name="plan_view_limit">Up to %d kWh/%s</string>
     <string name="plan_view_aprox">Approximately %d miles</string>
 
@@ -543,13 +543,13 @@
     <string name="pay_as_you_go_freq">I charge infrequently</string>
     <string name="pay_as_you_go_limit">EVCS offers simple, flat rate pricing!</string>
     <string name="pay_as_you_go_flat">Discounted $/kWh rates</string>
-    <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
-    <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
+    <string name="pay_as_you_go_dc">DC fast: $%.2f/kWh</string>
+    <string name="pay_as_you_go_ac">Level 2: $%.2f/kWh</string>
     <string name="pay_as_you_go_price">$0 Membership Fee</string>
 
     <!-- Charging Tab -->
     <string name="charging_tab_scan_qr">Scan the QR code</string>
-    <string name="charing_tab_enter_id">Enter the station ID</string>
+    <string name="charging_tab_enter_id">Enter the station ID</string>
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
 

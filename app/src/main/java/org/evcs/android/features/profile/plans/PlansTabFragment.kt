@@ -137,6 +137,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
 
     fun showPlans(response: List<Plan>) {
         response.forEach { plan ->
+            if (context == null) return
             val view = PlanView(requireContext(), plan)
             view.setListener(this)
             mLayout.addView(view)

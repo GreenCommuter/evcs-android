@@ -8,9 +8,9 @@
     android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:id="@+id/fragment_add_credit_card_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title="@string/braintree_title" />
+        android:layout_height="wrap_content"/>
 
     <ScrollView
         android:layout_width="match_parent"

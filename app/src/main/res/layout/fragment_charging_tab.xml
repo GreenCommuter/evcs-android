@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                android:text="@string/charing_tab_enter_id"
+                android:text="@string/charging_tab_enter_id"
                 style="@style/Body.Large"/>
 
             <FrameLayout

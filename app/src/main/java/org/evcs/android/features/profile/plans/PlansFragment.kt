@@ -12,6 +12,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentPlansBinding
 import org.evcs.android.model.Plan
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.ui.view.shared.EVCSToolbar2
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 
@@ -23,6 +24,7 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
     private lateinit var mTabLayout: TabLayout
     private lateinit var mTabLayoutDivider: View
     private lateinit var mPagerAdapter: BaseFragmentStatePagerAdapter
+    private lateinit var mToolbar: EVCSToolbar2
     private var mShowCorporatePlans: Boolean = false
 
     companion object {
@@ -50,6 +52,7 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
         mTabLayout = binding.fragmentPlansTabLayout
         mTabLayoutDivider = binding.fragmentPlansTabLayoutDivider
         mViewPager = binding.fragmentPlansViewPager
+        mToolbar = binding.fragmentPlansToolbar
     }
 
     override fun init() {
@@ -72,6 +75,8 @@ class PlansFragment : ErrorFragment<PlansPresenter>(), PlansView {
                 && UserUtils.getLoggedUser()?.isCorporateUser ?: false
         if (!mShowCorporatePlans)
             showTabs()
+        else
+            mToolbar.setTitle("Hertz-EVCS Plans")
         mTabLayout.getTabAt(0)?.customView = getTab(tabStandard)
 
         showProgressDialog()

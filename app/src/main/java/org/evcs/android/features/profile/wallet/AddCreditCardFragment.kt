@@ -66,6 +66,10 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         mCreditCardView.watchNumber(mCardNumber.editText)
     }
 
+    override fun getToolbarTitle(): String {
+        return getString(R.string.braintree_title)
+    }
+
     override fun getButtonBackground(): Drawable {
         return resources.getDrawable(R.drawable.layout_corners_rounded_orange)
     }

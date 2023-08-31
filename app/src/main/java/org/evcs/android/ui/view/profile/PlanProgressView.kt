@@ -30,7 +30,7 @@ class PlanProgressView : LinearLayout {
         if (status.onTrialPeriod) {
             mBinding.activitySubscriptionsConsumption.text =
                 context.getString(R.string.progress_view_text_trial,
-                    status.kwhUsage, status.plan.trialKwh)
+                    status.kwhUsage, status.totalKwh)
         }
         mBinding.activitySubscriptionsConsumption.isVisible = showText
         if (status.isUnlimited) {

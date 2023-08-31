@@ -3,6 +3,7 @@ package org.evcs.android.features.profile.plans
 import android.content.Context
 import org.evcs.android.R
 import org.evcs.android.model.Plan
+import org.evcs.android.model.user.User
 import org.evcs.android.util.UserUtils
 
 abstract class PlanViewHelper(val mContext: Context) {
@@ -19,7 +20,7 @@ abstract class PlanViewHelper(val mContext: Context) {
     }
     abstract fun getPlanName() : String
     abstract fun getPlanPrice() : String
-    abstract fun getPlanButton() : String?
+    abstract fun getPlanButton(user: User?) : String?
     abstract fun getPlanFreq() : String?
     abstract fun getPlanLimit() : String?
     abstract fun getPlanLimitAprox() : String?
@@ -41,8 +42,8 @@ class PlanViewHelperPAYG(context: Context) : PlanViewHelper(context) {
         return mContext.getString(R.string.pay_as_you_go_price)
     }
 
-    override fun getPlanButton(): String? {
-        return if (UserUtils.getLoggedUser() != null) null
+    override fun getPlanButton(user: User?): String? {
+        return if (user != null) null
                else mContext.getString(R.string.pay_as_you_go_button)
     }
 
@@ -90,12 +91,13 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
     }
 
     override fun getPlanPrice(): String {
-        val period = mPlan.renewalPeriod.toSmall()
+        val period = mPlan.renewalPeriod
         return String.format("\$%.2f/$period", mPlan.price)
     }
 
-    override fun getPlanButton(): String {
-        return mContext.getString(R.string.app_trial_cta_default)
+    override fun getPlanButton(user: User?): String {
+        val stringRes = if (user == null || user.canDoTrial()) R.string.app_trial_cta_default else R.string.pay_as_you_go_button
+        return mContext.getString(stringRes)
     }
 
     override fun getPlanFreq(): String? {

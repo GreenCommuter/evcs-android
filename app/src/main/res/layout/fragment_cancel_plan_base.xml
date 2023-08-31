@@ -22,12 +22,6 @@
             android:orientation="vertical"
             android:padding="@dimen/padding_ariel_standard">
 
-            <com.facebook.drawee.view.SimpleDraweeView
-                android:id="@+id/cancel_plan_image"
-                android:layout_width="match_parent"
-                android:layout_height="215dp"
-                android:layout_marginBottom="@dimen/spacing_large_k"/>
-
             <TextView
                 android:id="@+id/cancel_plan_bold"
                 android:layout_width="wrap_content"

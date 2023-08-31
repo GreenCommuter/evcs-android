@@ -9,7 +9,7 @@ import retrofit2.http.GET;
 
 public interface PlansService {
 
-    @GET("/members/v1/plans")
+    @GET("/members/v1/plans") //?renewal_period=week
     Call<ArrayList<Plan>> getPlans();
 
     @GET("/plan_index_view.json")

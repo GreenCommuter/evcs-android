@@ -40,7 +40,7 @@ class PlanView : LinearLayout {
         val helper = PlanViewHelper.instance(context, plan)
         mBinding.viewPlanName.text = helper.getPlanName()
         mBinding.viewPlanPrice.text = helper.getPlanPrice()
-        mBinding.viewPlanButton.showOrHide(helper.getPlanButton())
+        mBinding.viewPlanButton.showOrHide(helper.getPlanButton(UserUtils.getLoggedUser()))
         mBinding.viewPlanFreq.text = helper.getPlanFreq()
         mBinding.viewPlanLimitAprox.showOrHide(helper.getPlanLimitAprox());
         mBinding.viewPlanLimits.showOrHide(helper.getPlanLimit())

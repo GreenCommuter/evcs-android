@@ -12,6 +12,7 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
 import org.evcs.android.features.profile.wallet.WalletActivity
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionStatus
@@ -19,6 +20,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.StringUtils
 import org.evcs.android.util.ViewUtils.setVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -54,8 +56,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         val dateFormatter = DateTimeFormat.forPattern("M/d/yyyy")
         mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
-        mBinding.getPlanFreeTrial.setVisibility(getTrialLabel() != null)
-        mBinding.getPlanFreeTrial.setLabel(getTrialLabel() ?: "")
+        mBinding.getPlanFreeTrial.showOrHide(getTrialLabel())
 
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
@@ -63,7 +64,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanFlatRate.text = PlanViewHelper.instance(requireContext(), mPlan).getFlatRateForGetPlan()
         mBinding.getPlanCostLayout.setVisibility(showCostLayout())
         val period = StringUtils.capitalize(mPlan.renewalPeriod.toAdverb())
-        val startingDate = dateFormatter.print(mPlan.startingDate())
+        val startingDate = dateFormatter.print(getStartingDate())
         mBinding.getPlanMonthlyCostTitle.text = getString(R.string.get_plan_price, period, startingDate)
         mBinding.getPlanSubtotal.text = getString(R.string.app_price_format, mPlan.price)
         //TODO: tax
@@ -98,7 +99,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     }
 
     protected open fun getMonthlyLabel(dateFormatter: DateTimeFormatter): String {
-        return getString(R.string.get_plan_monthly_label, dateFormatter.print(mPlan.startingDate()))
+        return getString(R.string.get_plan_monthly_label, dateFormatter.print(getStartingDate()))
     }
 
     protected open fun getNextBillingDate(): DateTime? {
@@ -116,6 +117,8 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     protected open fun getToolbarTitle(): String {
         return mPlan.name
     }
+
+    abstract fun getStartingDate(): DateTime?
 
     abstract fun getActiveUntil(): DateTime?
 
@@ -136,6 +139,14 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         }
         mBinding.getPlanPaymentCouponCode.setListener {
             //TODO: apply
+        }
+        mBinding.getPlanFreeTrialLabel.setOnClickListener {
+            EVCSDialogFragment.Builder()
+                    .setTitle("Free Trial")
+                    .setSubtitle(getString(R.string.get_plan_trial_subtitle, mPlan.trialKwh, mPlan.trialDays))
+                    .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
+                            R.drawable.layout_corners_rounded_blue, R.color.button_text_color_selector_filled)
+                    .show(childFragmentManager)
         }
     }
 

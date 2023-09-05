@@ -105,7 +105,7 @@
             android:layout_marginTop="@dimen/spacing_medium_extra"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:text="Report an issue"
+            android:text="Report an Issue"
             style="@style/ButtonK.BlackOutline"
             android:layout_marginBottom="@dimen/spacing_medium_extra"/>
 
@@ -115,7 +115,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
-            android:text="Contact support"
+            android:text="Contact Support"
             style="@style/ButtonK.BlackOutline"/>
 
     </LinearLayout>

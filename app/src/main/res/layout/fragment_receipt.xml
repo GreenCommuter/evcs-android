@@ -73,7 +73,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Fee">
+                app:label="Fee"
+                android:visibility="gone">
 
                 <TextView
                     android:id="@+id/receipt_fee"
@@ -85,6 +86,7 @@
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/receipt_rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
@@ -92,7 +94,6 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/receipt_rate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="2.013 kWh"
@@ -116,6 +117,7 @@
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/session_information_payment_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
@@ -123,7 +125,6 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/session_information_payment_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="VISA ···· 4567"

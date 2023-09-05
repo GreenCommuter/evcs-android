@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_medium"
         style="@style/Body.Small.Bold"
+        android:fontFamily="@font/inter_medium"
         android:textColor="@color/evcs_gray_600" />
 
     <TextView

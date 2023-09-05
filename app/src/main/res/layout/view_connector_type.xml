@@ -6,7 +6,9 @@
     android:layout_height="wrap_content"
     android:background="@drawable/layout_corners_rounded_filter"
     android:paddingTop="23dp"
-    android:paddingBottom="23dp">
+    android:paddingBottom="23dp"
+    android:paddingLeft="@dimen/spacing_tiny"
+    android:paddingRight="@dimen/spacing_tiny">
 
     <ImageView
         android:id="@+id/connector_type_icon"

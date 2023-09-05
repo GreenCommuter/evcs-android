@@ -1,6 +1,10 @@
 package org.evcs.android.model.user
 
+import android.content.res.Resources
+import android.graphics.Color
+import org.evcs.android.R
 import org.evcs.android.model.Subscription
+import org.evcs.android.util.FontUtils
 import org.joda.time.DateTime
 import java.io.Serializable
 
@@ -26,6 +30,17 @@ open class User : Serializable {
     var activeSubscription: Subscription? = null
     val pendingSubscription: Subscription? = null
     val previousSubscription: Subscription? = null
+
+    fun getExplorePlansText(resources: Resources): CharSequence {
+        if (canDoTrial())
+            return FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text_trial), Color.BLACK)
+        else
+            return resources.getString(R.string.profile_explore_plans_text)
+    }
+
+    fun canDoTrial() : Boolean {
+        return previousSubscription == null
+    }
 
     val hasAnySubscription: Boolean
         get() = activeSubscription != null || pendingSubscription != null

@@ -20,6 +20,8 @@ import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.VideoUtils.setVideoResource
+import org.evcs.android.util.VideoUtils.startAndLoop
 
 class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChargingView {
 
@@ -55,7 +57,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     private fun startCharging() {
         presenter.getCurrentCharge()
         presenter.startSession()
-        mBinding.startChargingImage.setVideoResource(R.raw.evcs_scene1, requireContext())
+        mBinding.startChargingImage.setVideoResource(R.raw.evcs_scene2, requireContext())
         mBinding.startChargingImage.startAndLoop()
     }
 
@@ -67,20 +69,6 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
             onSessionStarted()
         } else {
             presenter.startSession()
-        }
-    }
-
-    fun VideoView.startAndLoop() {
-        setOnPreparedListener { mp ->
-            start()
-            mp.isLooping = true
-            mp.setOnInfoListener { _, what, _ ->
-                if (what == MediaPlayer.MEDIA_INFO_VIDEO_RENDERING_START) {
-                    // video started; hide the placeholder.
-                    this.background = ColorDrawable(Color.TRANSPARENT)
-                    true
-                } else false
-            }
         }
     }
 
@@ -117,9 +105,4 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         return true
     }
 
-}
-
-fun VideoView.setVideoResource(@RawRes videoRes: Int, context: Context) {
-    val uri = Uri.parse("android.resource://${context.packageName}/$videoRes")
-    setVideoURI(uri)
 }

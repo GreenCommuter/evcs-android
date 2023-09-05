@@ -72,6 +72,10 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         return false
     }
 
+    override fun getToolbarTitle(): String {
+        return getString(R.string.profile_billing_information)
+    }
+
     override fun getButtonText(): String {
         return "Remove Card"
     }

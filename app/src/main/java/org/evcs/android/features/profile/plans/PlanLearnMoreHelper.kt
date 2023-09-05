@@ -3,6 +3,7 @@ package org.evcs.android.features.profile.plans
 import android.content.Context
 import org.evcs.android.R
 import org.evcs.android.model.Plan
+import org.evcs.android.model.user.User
 
 abstract class PlanLearnMoreHelper(val mContext: Context) {
     companion object {
@@ -19,7 +20,7 @@ abstract class PlanLearnMoreHelper(val mContext: Context) {
     abstract fun getPlanName() : String
     abstract fun getPlanPrice() : String
     abstract fun getPlanFreeDays(): String
-    abstract fun getPlanButton() : String
+    abstract fun getPlanButton(user: User?) : String
     abstract fun getPlanLimit() : String?
     abstract fun getFlatRate(): String?
     abstract fun getPlanTimes(): String?
@@ -40,7 +41,7 @@ class PlanLearnMoreHelperPAYG(context: Context, val hasPaymentMethod: Boolean) :
         return "Level 2: $%1\$s/kWH\nDC Fast: $%2\$s/kWh"
     }
 
-    override fun getPlanButton(): String {
+    override fun getPlanButton(user: User?): String {
         return "Add payment Method"
     }
 
@@ -79,9 +80,11 @@ abstract class PlanLearnMoreHelperNonNull(context: Context, val mPlan: Plan) : P
         return String.format("\$%.2f/%s", mPlan.price, mPlan.renewalPeriod)
     }
 
-    override fun getPlanButton(): String {
-        return mPlan.cta
+    override fun getPlanButton(user: User?): String {
+        val stringRes = if (user == null || user.canDoTrial()) R.string.app_trial_cta_default else R.string.pay_as_you_go_button
+        return mContext.getString(stringRes)
     }
+
 }
 
 class PlanLearnMoreHelperCapped(context: Context, plan: Plan) : PlanLearnMoreHelperNonNull(context, plan) {

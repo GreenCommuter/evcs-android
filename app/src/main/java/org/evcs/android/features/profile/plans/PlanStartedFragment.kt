@@ -26,6 +26,10 @@ class PlanStartedFragment : AbstractGetPlanFragment() {
         return null
     }
 
+    override fun getStartingDate(): DateTime? {
+        TODO("Not yet implemented")
+    }
+
     override fun getActiveUntil(): DateTime? {
         return null//UserUtils.getLoggedUser().previousSubscription?.renewalDate
     }

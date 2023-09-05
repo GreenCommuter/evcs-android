@@ -21,7 +21,8 @@ class ChargingHistoryViewHolder(itemView : View) : RecyclerView.ViewHolder(itemV
         if (charge.startedAt != null)
             mBinding.adapterChargingHistoryItemDate.setText(charge.startedAt)
         mBinding.adapterChargingHistoryItemStation.text = charge.locationName
-        mBinding.adapterChargingHistoryItemPrice.text = itemView.context.getString(R.string.app_price_format, charge.price)
+        mBinding.adapterChargingHistoryItemPrice.text =
+            itemView.context.getString(R.string.app_price_format, charge.paymentAmount)
     }
 
 }

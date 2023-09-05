@@ -37,27 +37,33 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="@dimen/padding_ariel_standard">
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <ImageView
+            <VideoView
+                android:id="@+id/plan_info_anim"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:layout_marginBottom="@dimen/spacing_big_k"
                 android:visibility="visible"
-                android:src="@drawable/charging_scene"/>
+                />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/spacing_medium_extra"
+                android:orientation="vertical">
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
                 android:id="@+id/plan_info_subscription_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                android:layout_marginTop="@dimen/spacing_medium_extra"
                 android:layout_marginBottom="@dimen/spacing_medium_more"
                 app:label="Plan">
 
@@ -115,7 +121,7 @@
                 android:id="@+id/plan_info_renewal_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:label="Renewal date"
+                app:label="Renewal Date"
                 android:visibility="gone">
 
                 <TextView
@@ -182,13 +188,6 @@
 
             </LinearLayout>
 
-            <org.evcs.android.features.shared.NeedHelpView
-                android:id="@+id/plan_info_help"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium_extra"
-                android:layout_marginBottom="@dimen/spacing_big_k"/>
-
             <TextView
                 android:id="@+id/plan_info_credit_card_label"
                 android:layout_width="wrap_content"
@@ -204,11 +203,20 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
 
+            <org.evcs.android.features.shared.NeedHelpView
+                    android:id="@+id/plan_info_help"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/spacing_medium_extra"
+                    android:layout_marginBottom="@dimen/spacing_medium_extra"/>
+
             <org.evcs.android.ui.view.shared.CouponCodeView
                 android:id="@+id/plan_info_coupon_code"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
+
+            </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -218,6 +226,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_ariel_standard"
+        android:layout_marginTop="@dimen/padding_ariel_standard"
         android:layout_marginEnd="@dimen/padding_ariel_standard"
         android:layout_marginBottom="@dimen/spacing_large_k"
         android:text="@string/plan_info_start_charging"

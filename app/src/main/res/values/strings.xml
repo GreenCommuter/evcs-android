@@ -134,11 +134,13 @@
     <string name="profile_account_plans">Plans</string>
     <string name="profile_account_payment_methods">Payment Methods</string>
     <string name="profile_version">Version %s</string>
-    <string-array name="profile_explore_plans_text">
-        <item>Get</item>
-        <item>30 days free</item>
-        <item>when you upgrade to Standard Anytime plan!</item>
+    <string-array name="profile_explore_plans_text_trial">
+        <item>Get up to</item>
+        <item>30 kWh free</item>
+        <item>charging when you upgrade your plan!</item>
     </string-array>
+    <string name="profile_explore_plans_text">Upgrade your plan for discounted charging</string>
+
 
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
@@ -374,7 +376,7 @@
     <string name="success_dialog_subtitle">You’re now an EVCS member. Enjoy discounted rates on Pay As You Go.</string>
     <string name="success_dialog_cta">Want to save more?\nExplore EVCS subscription plans</string>
     <string name="congratulations_dialog_title">Congratulations!</string>
-    <string name="congratulations_dialog_subtitle">Your %1$s Plan is now active. %2$s</string>
+    <string name="congratulations_dialog_subtitle">Your %1$s is now active. %2$s</string>
     <string name="congratulations_dialog_subtitle_1">Enjoy your discounted charging rates.</string>
     <string name="congratulations_dialog_subtitle_2">You can charge at no cost from %1$s to %2$s across the entire EVCS network.</string>
     <string name="congratulations_dialog_subtitle_3">You can charge at no cost 24/7 across the entire EVCS network.</string>
@@ -415,14 +417,14 @@
     <string name="plan_info_payment_error_update">Update payment method</string>
 
     <!-- Start Charging-->
-    <string name="start_charging_preparing_subtitle">This may only take a few seconds</string>
-    <string name="start_charging_preparing">Preparing to charge</string>
+    <string name="start_charging_preparing_subtitle">This could take a few seconds.</string>
+    <string name="start_charging_preparing">Preparing to charge your vehicle.</string>
     <string name="start_charging_footer">Plug the charging connector into the vehicle</string>
     <string name="start_charging_button">Start Charging</string>
-    <string name="start_charging_title">Start charging</string>
+    <string name="start_charging_title">Preparing to Charge</string>
     <string name="start_charging_error_title">Connection Failed</string>
     <string name="start_charging_error_subtitle">Make sure your car is plugged in, or try disconnecting and reconnecting the connector to your vehicle.</string>
-    <string name="start_charging_error_retry">Try again</string>
+    <string name="start_charging_error_retry">Try Again</string>
     <string name="start_charging_error_cancel">Cancel Session</string>
     <string name="start_charging_error_support">Contact Support</string>
 
@@ -453,7 +455,7 @@
     <string name="manage_plan_enrolled">Enrolled</string>
     <string name="manage_plan_free_trial">Free Trial</string>
     <string name="manage_plan_payment_details">Payment details</string>
-    <string name="manage_plan_change">Change plan</string>
+    <string name="manage_plan_change">Change Plan</string>
     <string name="manage_plan_cancel">Cancel Plan</string>
     <string name="manage_plan_payment_info">Payment info</string>
     <string name="manage_plan_change_pm">Change</string>
@@ -462,6 +464,7 @@
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>
     <string name="progress_view_text">%1$.0f/%2$s kWh used this %3$s</string>
+    <string name="progress_view_text_trial">%1$.0f/%2$d kWh used for free trial</string>
 
     <string name="go_to_monthly_plans_title">EVCS Monthly Plans</string>
     <string name="go_to_monthly_plans_subtitle">Learn more about our discounted plans.</string>
@@ -490,13 +493,13 @@
     <string name="get_plan_monthly_label">Starting %s</string>
     <string name="get_plan_next_billing_date">Next Billing Date</string>
     <string name="get_plan_previous_plan_active">Previous plan active until</string>
-
+    <string name="get_plan_trial_subtitle">Your free trial includes %1$d kWh, which you can use within %2$d days from when you sign up.\n\nYou will be automatically charged the monthly installment for you subscription plan either after consuming the free %1$d kWh or after the %2$d day trial expires, whichever comes first.</string>
     <!-- Plan View -->
     <string name="plan_view_current">Current Plan</string>
-    <string name="plan_view_flat_rate">Simple flat rate after %d kWh exceeded</string>
+    <string name="plan_view_flat_rate">Flat rate after %d kWh exceeded</string>
     <string name="plan_view_unlimited">Unlimited charging 24/7</string>
     <string name="plan_view_flat_time_limited">Flat rate %1$s-%2$s</string>
-    <string name="plan_view_learn_more">Learn more</string>
+    <string name="plan_view_learn_more">Learn More</string>
     <string name="plan_view_limit">Up to %d kWh/%s</string>
     <string name="plan_view_aprox">Approximately %d miles</string>
 
@@ -540,13 +543,13 @@
     <string name="pay_as_you_go_freq">I charge infrequently</string>
     <string name="pay_as_you_go_limit">EVCS offers simple, flat rate pricing!</string>
     <string name="pay_as_you_go_flat">Discounted $/kWh rates</string>
-    <string name="pay_as_you_go_dc">DC fast: $%.2f</string>
-    <string name="pay_as_you_go_ac">Level 2: $%.2f</string>
+    <string name="pay_as_you_go_dc">DC fast: $%.2f/kWh</string>
+    <string name="pay_as_you_go_ac">Level 2: $%.2f/kWh</string>
     <string name="pay_as_you_go_price">$0 Membership Fee</string>
 
     <!-- Charging Tab -->
     <string name="charging_tab_scan_qr">Scan the QR code</string>
-    <string name="charing_tab_enter_id">Enter the station ID</string>
+    <string name="charging_tab_enter_id">Enter the station ID</string>
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
 

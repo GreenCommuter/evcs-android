@@ -15,9 +15,9 @@ class CancelPlanFragment : AbstractCancelPlanFragment() {
     private lateinit var mBinding: FragmentCancelPlanBinding
 
     override fun setPlan(subscription: Subscription) {
-        mBinding.cancelPlanSubscriptionEnd.text = DateTimeFormat.forPattern(getString(R.string.app_date_format))
-                .print(subscription.renewalDate)
-//        mBinding.cancelPlanBillingCycle
+        val formatter = DateTimeFormat.forPattern(getString(R.string.app_date_format))
+        mBinding.cancelPlanSubscriptionEnd.text = formatter.print(subscription.renewalDate)
+        mBinding.cancelPlanBillingCycle.text = formatter.print(subscription.renewalDate)
         val activeDays = subscription.activeDaysLeft
         mBinding.cancelPlanActiveDays.text = getString(R.string.cancel_plan_days_remaining, activeDays)
         val dateTimeFormat = DateTimeFormat.forPattern("MMM d, yyyy")

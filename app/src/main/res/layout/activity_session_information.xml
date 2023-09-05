@@ -98,6 +98,7 @@
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/session_information_payment_method"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
@@ -105,7 +106,6 @@
                 android:visibility="gone">
 
                 <TextView
-                    android:id="@+id/session_information_payment_method"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="VISA ···· 4567"
@@ -123,7 +123,7 @@
                     android:id="@+id/session_information_plan_type"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="Standard anytimw"
+                    tools:text="Standard anytime"
                     style="@style/Body.Medium"/>
 
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
@@ -190,7 +190,8 @@
                 android:id="@+id/session_information_close"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/spacing_medium"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
                 android:text="@string/app_close"
                 style="@style/ButtonK.Orange"
                 android:visibility="gone"/>

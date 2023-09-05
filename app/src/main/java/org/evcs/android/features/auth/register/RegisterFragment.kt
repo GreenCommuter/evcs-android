@@ -10,6 +10,7 @@ import com.base.core.util.NavigationUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterBinding
+import org.evcs.android.databinding.FragmentSignInSocialBinding
 import org.evcs.android.features.auth.AbstractAuthFragment
 import org.evcs.android.features.auth.AuthView
 import org.evcs.android.features.auth.initialScreen.AuthActivity
@@ -29,6 +30,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     private lateinit var mPasswordInputLayout: StandardTextField
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: TextView
+    private lateinit var mRegisterSocial: FragmentSignInSocialBinding
 
     /**
      * Returns a new RegisterFragment instance.
@@ -59,6 +61,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mPasswordInputLayout = binding.fragmentRegisterPasswordInput
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
+        mRegisterSocial = binding.fragmentRegisterSocial
     }
 
     override fun init() {
@@ -73,6 +76,8 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
 
     override fun setListeners() {
         mContinueButton.setOnClickListener { onButtonClick() }
+        mRegisterSocial.fragmentSignInGoogle.setOnClickListener { onLoginWithGoogleClick() }
+        mRegisterSocial.fragmentSignInFacebook.setOnClickListener { onLoginWithFacebookClick() }
     }
 
     override fun setEnableButton(validFields: Boolean) {

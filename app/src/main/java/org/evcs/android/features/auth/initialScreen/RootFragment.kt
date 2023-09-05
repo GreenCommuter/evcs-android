@@ -9,9 +9,9 @@ import com.base.core.presenter.BasePresenter
 import com.base.core.util.NavigationUtils
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRootBinding
-import org.evcs.android.features.charging.setVideoResource
 import org.evcs.android.features.main.MainActivity
 import org.evcs.android.util.Extras
+import org.evcs.android.util.VideoUtils.setVideoResource
 
 class RootFragment : ErrorFragment<BasePresenter<*>>() {
     private lateinit var mBinding: FragmentRootBinding

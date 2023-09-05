@@ -37,7 +37,7 @@ class NotificationsFragment : ErrorFragment<NotificationsPresenter>(), Notificat
     }
 
     override fun onSuccess() {
-        ToastUtils.show("Notifications " + if (mBinding.notificationsSwitch.isChecked) "en" else "dis" + "abled")
+        ToastUtils.show("Notifications " + (if (mBinding.notificationsSwitch.isChecked) "en" else "dis") + "abled")
     }
 
     override fun showError(requestError: RequestError) {

@@ -32,7 +32,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     var mNavigationController: MainNavigationController? = null
     private lateinit var menuView: BottomNavigationView
     private lateinit var mButton: TextView
-    var isBottomOfStack = false
+    var isBottomOfStack = true
         private set
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -179,11 +179,12 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     }
 
     fun showCongratulationsDialog(subscription: Subscription) {
-        val secondLine = PlanViewHelper.instance(this, subscription.plan)
-                .getCongratulationsDialogSubtitle()
+        val secondLine = if (subscription.onTrialPeriod) getString(R.string.congratulations_dialog_subtitle_3)
+                         else PlanViewHelper.instance(this, subscription.plan).getCongratulationsDialogSubtitle()
+        val planName = if (subscription.onTrialPeriod) "Free Trial" else subscription.planName + " Plan"
         EVCSSliderDialogFragment.Builder()
             .setTitle(getString(R.string.congratulations_dialog_title), R.style.Label_Large)
-            .setSubtitle(getString(R.string.congratulations_dialog_subtitle, subscription.planName, secondLine))
+            .setSubtitle(getString(R.string.congratulations_dialog_subtitle, planName, secondLine))
             .addButton(getString(R.string.app_close)) { fragment -> fragment.dismiss() }
             .show(supportFragmentManager)
     }

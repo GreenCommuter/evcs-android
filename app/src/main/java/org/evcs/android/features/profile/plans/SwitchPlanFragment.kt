@@ -6,8 +6,11 @@ import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormatter
 
 class SwitchPlanFragment : AbstractGetPlanFragment() {
+
+    private var isDowngrade: Boolean = false
 
     companion object {
         fun newInstance(plan: Plan): SwitchPlanFragment {
@@ -20,10 +23,18 @@ class SwitchPlanFragment : AbstractGetPlanFragment() {
         }
     }
 
-    override fun getActiveUntil(): DateTime {
+    override fun init() {
+        super.init()
         val sub = UserUtils.getLoggedUser().activeSubscription
-        val isDowngrade = sub!!.plan.price > mPlan.price
-        return if (isDowngrade) sub.renewalDate else DateTime()
+        isDowngrade = sub!!.plan.price > mPlan.price
+    }
+
+    override fun getActiveUntil(): DateTime {
+        return if (isDowngrade) UserUtils.getLoggedUser().activeSubscription!!.renewalDate else DateTime()
+    }
+
+    override fun getStartingDate(): DateTime? {
+        return getActiveUntil().plusDays(1)
     }
 
     override fun showCouponCode(): Boolean {

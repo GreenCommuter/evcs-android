@@ -1,7 +1,6 @@
 package org.evcs.android.features.profile
 
 import android.content.Intent
-import android.graphics.Color
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +27,6 @@ import org.evcs.android.model.Subscription
 import org.evcs.android.model.user.User
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
-import org.evcs.android.util.FontUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.evcs.android.util.ViewUtils.showOrHide
@@ -77,6 +75,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 //        } else {
             setSubscription(user.activeSubscription)
 //        }
+        mBinding.profileExplorePlansText.text = user.getExplorePlansText(resources)
     }
 
     private fun setSubscription(subscription: Subscription?) {
@@ -88,8 +87,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
         mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
 
-        mBinding.profileExplorePlansText.text =
-                FontUtils.getSpannable(resources.getStringArray(R.array.profile_explore_plans_text), Color.BLACK)
         if (subscription == null) {
             mBinding.profilePlanName.text = getString(R.string.plan_info_pay_as_you_go) + " membership"
         } else {

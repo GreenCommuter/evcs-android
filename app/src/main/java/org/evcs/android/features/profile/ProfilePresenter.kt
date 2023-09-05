@@ -5,12 +5,14 @@ import okhttp3.ResponseBody
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Subscription
 import org.evcs.android.model.SubscriptionStatusWrapper
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.User
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.PaymentMethodsService
 import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
+import org.evcs.android.util.ErrorUtils
 import org.evcs.android.util.Extras
 import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.UserUtils
@@ -25,9 +27,13 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
                         refreshSubscription(response)
                     }
 
-                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {}
+                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                        view.showError(ErrorUtils.getError(responseBody))
+                    }
 
-                    override fun onCallFailure(t: Throwable) {}
+                    override fun onCallFailure(t: Throwable) {
+                        runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+                    }
                 })
     }
 
@@ -40,9 +46,13 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
                         UserUtils.saveUser(user)
                     }
 
-                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {}
+                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                        view?.showError(ErrorUtils.getError(responseBody))
+                    }
 
-                    override fun onCallFailure(t: Throwable) {}
+                    override fun onCallFailure(t: Throwable) {
+                        runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+                    }
                 })
     }
 

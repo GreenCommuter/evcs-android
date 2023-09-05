@@ -3,6 +3,8 @@ package org.evcs.android.features.main;
 import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
+import com.base.core.util.NavigationUtils;
+
 import org.evcs.android.R;
 import org.evcs.android.navigation.controller.AbstractBaseFragmentNavigationController;
 
@@ -55,13 +57,17 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
     }
 
     public void onMapClicked() {
+        if (mNavController.findDestination(R.id.mainMapFragment) == null) {
+            NavigationUtils.jumpToClearingTask(mActivity, MainActivity.class);
+            return;
+        }
         if (!mIsInCharging && !mIsInProfile) return;
 //        cancelSession(() -> {
             mIsInCharging = false;
             mIsInProfile = false;
-            backToBaseFragment();
             mActivity.setSelectedItem(R.id.menu_drawer_map);
 //        });
+            backToBaseFragment();
     }
 
 }

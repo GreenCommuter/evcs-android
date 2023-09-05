@@ -72,7 +72,7 @@ public class SubscriptionStatus implements Serializable {
 //        } catch (Exception e) {
 //            return null;
 //        }
-        return plan.kwhCap();
+        return (onTrialPeriod) ? plan.trialKwh : plan.kwhCap();
     }
 
     public Float getKwhUsage() {

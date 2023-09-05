@@ -62,6 +62,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
         mZipcode = binding.fragmentBraintreeCardZipcode
         mNext = binding.fragmentBraintreeNext
         mSetDefault = binding.fragmentAddCreditCardSetDefault
+        binding.fragmentAddCreditCardToolbar.setTitle(getToolbarTitle())
 
         for (view in arrayListOf (mCardName, mCardNumber, mCardExpirationMonth, mCvv, mZipcode)) {
             view.isEnabled = areFieldsEditable()
@@ -69,6 +70,8 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
 
         ViewUtils.setAdjustResize(binding.fragmentAddCreditCardLayout)
     }
+
+    abstract fun getToolbarTitle(): String
 
     fun setFields() {
         mCreditCardView.setName(mCardName.text.toString())

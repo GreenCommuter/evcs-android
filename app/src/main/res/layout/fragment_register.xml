@@ -106,7 +106,8 @@
             android:text="@string/app_continue"
             style="@style/ButtonK.Orange"/>
 
-        <include layout="@layout/fragment_sign_in_social"
+        <include android:id="@+id/fragment_register_social"
+            layout="@layout/fragment_sign_in_social"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/spacing_big_k"/>

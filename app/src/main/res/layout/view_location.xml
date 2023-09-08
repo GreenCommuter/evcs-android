@@ -82,6 +82,7 @@
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
         android:layout_marginTop="@dimen/spacing_medium"
+        android:enabled="false"
         style="@style/ButtonK.OrangeOutline"/>
 
     <LinearLayout

@@ -10,4 +10,8 @@ class StationCount : Serializable {
     fun totalDc(): Int {
         return dc50kw + dc100kw
     }
+
+    fun total(): Int {
+        return totalDc() + ac
+    }
 }

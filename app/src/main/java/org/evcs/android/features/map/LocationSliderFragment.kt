@@ -7,18 +7,23 @@ import android.view.MotionEvent
 import android.view.View
 import android.view.View.MeasureSpec
 import com.base.core.fragment.BaseDialogFragment
-import com.base.core.presenter.BasePresenter
+import com.base.core.util.ToastUtils
+import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentLocationSliderBinding
 import org.evcs.android.features.main.MainNavigationController
+import org.evcs.android.features.map.location.ILocationView
+import org.evcs.android.features.map.location.LocationPresenter
 import org.evcs.android.model.Location
+import org.evcs.android.model.shared.RequestError
 
 /** This is an extremely hacky component that mimics the behaviour of Instagram comments. It has an
  * outer scroll, with an empty view on top and at the bottom a space that is calculated to fill the
  * screen. Inside that space there is an inner scroll.
  */
 //TODO: check the "fragment constructor not found" crash
-class LocationSliderFragment(private var location: Location) : BaseDialogFragment<BasePresenter<*>>() {
+class LocationSliderFragment(private var location: Location) : BaseDialogFragment<LocationPresenter>(),
+    ILocationView {
 
     private var mMaxScroll: Int = 0
     private lateinit var mBinding: FragmentLocationSliderBinding
@@ -26,7 +31,8 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
     private var mLastAction: MotionEvent? = null
 
     override fun init() {
-        setLocation(location)
+        presenter.onViewCreated()
+        presenter.getLocation(location.id)
         mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
         val height = mBinding.mapItemFragmentEmpty.measuredHeight
         val shadowPadding = 4
@@ -38,6 +44,14 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
         resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
 
         keepStatusBar(mBinding.root)
+    }
+
+    override fun showLocation(response: Location) {
+        setLocation(response)
+    }
+
+    override fun showError(requestError: RequestError) {
+        ToastUtils.show(requestError.body)
     }
 
     fun resizeViewHeight(v : View, height : Int) {
@@ -140,8 +154,8 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
         }
     }
 
-    override fun createPresenter(): BasePresenter<*> {
-        return BasePresenter(this)
+    override fun createPresenter(): LocationPresenter {
+        return LocationPresenter(this, EVCSApplication.getInstance().retrofitServices)
     }
 
 }

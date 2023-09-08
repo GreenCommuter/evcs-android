@@ -7,17 +7,22 @@ import org.evcs.android.model.Plan
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.PlansService
+import org.evcs.android.network.service.presenter.MultipleRequestsManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 
 class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
     : ServicesPresenter<PlansView>(viewInstance, services) {
 
+    private lateinit var mPlans: ArrayList<Plan>
+    private lateinit var mPlanExtras: ArrayList<Plan>
+
     fun getPlans() {
-        getService(PlansService::class.java).plans.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
+        val m = MultipleRequestsManager(this)
+        m.addRequest(getService(PlansService::class.java).plans, object : AuthCallback<ArrayList<Plan>>(this) {
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
-                getPlanExtras(response)
 //                view.showPlans(response)
+                mPlans = response
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -29,10 +34,18 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
             }
 
         })
+        getPlanExtras(m)
+        m.fireRequests {
+            mergePlans(mPlans, mPlanExtras)
+            //TODO: API should do this
+            val plans = mPlans.filter { plan -> BaseConfiguration.ALLOWED_PLANS.contains(plan.name) }
+            val runnable = { view.showPlans(plans) }
+            runIfViewCreated(runnable)
+        }
     }
 
     //Temporary
-    private fun getPlanExtras(plans: ArrayList<Plan>) {
+    private fun getPlanExtras(m: MultipleRequestsManager) {
         val r = object : RetrofitServices() {
             override fun getApiEndpoint(): String {
                 return "https://evcs-assets.s3.us-west-2.amazonaws.com"
@@ -40,13 +53,9 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
 
         }
         r.init()
-        r.getService(PlansService::class.java).planExtras.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
+        m.addRequest(r.getService(PlansService::class.java).planExtras, object : AuthCallback<ArrayList<Plan>>(this) {
             override fun onResponseSuccessful(response: ArrayList<Plan>) {
-                mergePlans(plans, response)
-                //TODO: API should do this
-                val plans2 = plans.filter { plan -> BaseConfiguration.ALLOWED_PLANS.contains(plan.name) }
-                val runnable = { view.showPlans(plans2) }
-                runIfViewCreated(runnable)
+                mPlanExtras = response
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

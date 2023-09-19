@@ -16,20 +16,23 @@
         <action
             android:id="@+id/action_signInFragment_to_forgotPasswordFragment"
             app:destination="@id/forgotPasswordFragment" />
-        <action
-            android:id="@+id/action_signInFragment_to_registerFragmentYourCar"
-            app:popUpTo="@id/signInFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/registerFragmentYourCar" />
+<!--        <action-->
+<!--            android:id="@+id/action_signInFragment_to_registerFragmentYourCar"-->
+<!--            app:popUpTo="@id/signInFragment"-->
+<!--            app:popUpToInclusive="true"-->
+<!--            app:destination="@id/registerFragmentYourCar" />-->
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
         android:name="org.evcs.android.features.auth.register.RegisterFragment"
         android:label="RegisterFragment"
         tools:layout="@layout/fragment_register">
+<!--        <action-->
+<!--            android:id="@+id/action_registerFragment_to_registerFragmentYourCar"-->
+<!--            app:destination="@id/registerFragmentYourCar" />-->
         <action
-            android:id="@+id/action_registerFragment_to_registerFragmentYourCar"
-            app:destination="@id/registerFragmentYourCar" />
+            android:id="@+id/action_registerFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
         android:id="@+id/forgotPasswordFragment"

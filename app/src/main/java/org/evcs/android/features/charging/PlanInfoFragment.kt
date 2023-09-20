@@ -13,11 +13,13 @@ import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentPlanInfoBinding
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.PaymentUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.VideoUtils.setVideoResource
 import org.evcs.android.util.VideoUtils.startAndLoop
@@ -72,8 +74,11 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         }
     }
 
-    override fun show(station: Station, status: SubscriptionStatus?) {
+    override fun show(station: Station, status: SubscriptionStatus?, hasRejectedPayments: Boolean) {
         hideProgressDialog()
+        if (hasRejectedPayments) {
+            showRejectedPaymentsDialog()
+        }
         (activity as ChargingActivity).setActiveSession()
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
         mBinding.planInfoSubscriptionName.setText(status?.planName ?: getString(R.string.plan_info_pay_as_you_go))
@@ -129,6 +134,17 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         else if (status.issue) {
             showIssue(status.issueMessage)
         }
+    }
+
+    private fun showRejectedPaymentsDialog() {
+        EVCSDialogFragment.Builder()
+                .setSubtitle(getString(R.string.profile_payment_issue))
+                .addButton(getString(R.string.profile_payment_button)) { fragment ->
+                    PaymentUtils.goToPendingPayment(requireContext())
+                    fragment.dismiss()
+                }
+                .withCancelOnClickListener { requireActivity().finish() }
+                .show(childFragmentManager)
     }
 
     private fun showIssue(issueMessage: String) {

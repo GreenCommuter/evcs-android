@@ -9,7 +9,7 @@ interface PlanInfoView : IErrorView {
 //    fun onStatusRetrieved(response: SubscriptionStatusWrapper?)
 //    fun onStationRetrieved(response: Station)
     fun showFree(freeChargingCode: String)
-    fun show(station: Station, status: SubscriptionStatus?)
+    fun show(station: Station, status: SubscriptionStatus?, hasRejectedPayments: Boolean)
     fun showDefaultPM(paymentMethod: PaymentMethod?)
     fun showStationNotFound()
 }

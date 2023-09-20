@@ -1,13 +1,6 @@
 package org.evcs.android.features.charging
 
-import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.media.MediaPlayer
-import android.net.Uri
 import android.view.View
-import android.widget.VideoView
-import androidx.annotation.RawRes
 import com.base.core.util.NavigationUtils
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
@@ -20,6 +13,7 @@ import org.evcs.android.model.Session
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.PaymentUtils
 import org.evcs.android.util.VideoUtils.setVideoResource
 import org.evcs.android.util.VideoUtils.startAndLoop
 
@@ -69,6 +63,14 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
             onSessionStarted()
         } else {
             presenter.startSession()
+        }
+    }
+
+    override fun showError(requestError: RequestError) {
+        if (requestError.isPaymentError) {
+            PaymentUtils.showPaymentDialog(requireActivity(), requestError)
+        } else {
+            super.showError(requestError)
         }
     }
 

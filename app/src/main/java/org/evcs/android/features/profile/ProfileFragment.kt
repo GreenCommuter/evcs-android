@@ -27,6 +27,7 @@ import org.evcs.android.model.Subscription
 import org.evcs.android.model.user.User
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.PaymentUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.evcs.android.util.ViewUtils.showOrHide
@@ -55,6 +56,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         showProgressDialog()
         presenter.refreshUser()
         presenter.refreshDefaultPaymentMethod()
+        presenter.getRejectedPayments()
         mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             showProgressDialog()
             presenter.refreshUser()
@@ -92,9 +94,6 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         } else {
             mBinding.profilePlanName.text = subscription.planName
             mBinding.profilePlanProgress.setPlan(subscription)
-            val issueText = if (subscription.issue) subscription.issueMessage else null
-            val buttonText = if (subscription.isSuspended) "Update payment method" else null
-            setIssue(issueText, buttonText) { goToActivity(WalletActivity::class.java) }
         }
         mBinding.profileMenuVersion.text =
                 getString(R.string.profile_version, BuildConfig.VERSION_NAME)
@@ -106,9 +105,25 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileExplorePlans.setParentVisibility(false)
     }
 
-    //null = hide
-    private fun setIssue(issueText: String?, buttonText: String?, buttonListener: View.OnClickListener) {
-        mBinding.profileIssueButton.setParentVisibility(issueText != null)
+    override fun showPaymentIssue() {
+        val issueText = getString(R.string.profile_payment_issue)
+        val buttonText = getString(R.string.profile_payment_button)
+        setIssue(issueText, buttonText) { PaymentUtils.goToPendingPayment(requireContext()) }
+    }
+
+    override fun showSubscriptionIssue(subscription: Subscription) {
+        val issueText = subscription.issueMessage
+        val buttonText = if (subscription.isSuspended) getString(R.string.profile_subscription_issue_button)
+                         else null
+        setIssue(issueText, buttonText) { goToActivity(WalletActivity::class.java) }
+    }
+
+    override fun hideIssues() {
+        mBinding.profileIssueButton.setParentVisibility(false)
+    }
+
+    private fun setIssue(issueText: String, buttonText: String?, buttonListener: View.OnClickListener) {
+        mBinding.profileIssueButton.setParentVisibility(true)
         mBinding.profileIssueMessage.text = issueText
         mBinding.profileIssueButton.showOrHide(buttonText)
         mBinding.profileIssueButton.setOnClickListener(buttonListener)

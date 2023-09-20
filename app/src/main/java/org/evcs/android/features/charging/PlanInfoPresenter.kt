@@ -3,12 +3,14 @@ package org.evcs.android.features.charging
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaginatedResponse
+import org.evcs.android.model.Payment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatusWrapper
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.PaymentMethodsService
+import org.evcs.android.network.service.PaymentsService
 import org.evcs.android.network.service.StationsService
 import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.presenter.MultipleRequestsManager
@@ -21,6 +23,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
 
     private var mStation: Station? = null
     private var mStatus: SubscriptionStatusWrapper? = null
+    private var mRejectedPayments: ArrayList<Payment>? = null
     var mPaymentMethods: ArrayList<PaymentMethod> = ArrayList()
 
     private var mMultipleRequestsManager: MultipleRequestsManager =
@@ -28,10 +31,27 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
 
     fun populate(stationId : String) {
         getSubscriptionStatus()
+        getRejectedPayments()
         getStation(stationId)
         if (mPaymentMethods.isEmpty())
             getPaymentMethods()
         fireRequests()
+    }
+
+    private fun getRejectedPayments() {
+        mMultipleRequestsManager.addRequest(getService(PaymentsService::class.java).rejectedPayments,
+            object : AuthCallback<ArrayList<Payment>>(this) {
+                override fun onResponseSuccessful(response: ArrayList<Payment>?) {
+                    mRejectedPayments = response
+                }
+
+                override fun onResponseFailed(responseBody: ResponseBody?, code: Int) {
+                }
+
+                override fun onCallFailure(t: Throwable?) {
+                }
+
+            })
     }
 
     private fun getSubscriptionStatus() {
@@ -95,7 +115,8 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
             } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
                 view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
             } else {
-                view.show(mStation!!, mStatus?.currentSubscription)
+                val hasRejectedPayments = mRejectedPayments!!.filter { payment -> !payment.isSubscriptionPayment }.isNotEmpty()
+                view.show(mStation!!, mStatus?.currentSubscription, hasRejectedPayments)
             }
         }
     }

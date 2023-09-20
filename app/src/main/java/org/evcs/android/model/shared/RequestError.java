@@ -34,4 +34,8 @@ public class RequestError {
         return errorMessage;
     }
 
+    public boolean isPaymentError() {
+        return "error_pending_payment".equals(error);
+    }
+
 }

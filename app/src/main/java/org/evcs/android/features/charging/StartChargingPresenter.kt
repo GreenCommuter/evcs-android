@@ -20,6 +20,10 @@ class StartChargingPresenter(viewInstance: StartChargingView, services: Retrofit
     private val LOCATION_KEY = "location"
 
     fun startSession() {
+
+        view.showError(RequestError("error_pending_payment", "subtitle wording"))
+        return
+
         getService(CommandsService::class.java).startSession(mStationId, mPmId, mCoupons)
                 .enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>?, response: Response<Void>?) {

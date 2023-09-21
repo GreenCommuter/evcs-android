@@ -142,8 +142,8 @@
         <item>charging when you upgrade your plan!</item>
     </string-array>
     <string name="profile_explore_plans_text">Upgrade your plan for discounted charging</string>
-    <string name="profile_payment_issue">Your account has an unpaid balance due to a previous declined payment.</string>
-    <string name="profile_payment_button">Pay</string>
+    <string name="profile_payment_issue">One or more credit card payments were declined.</string>
+    <string name="profile_payment_button">Resolve</string>
     <string name="profile_subscription_issue_button">Update payment method</string>
 
     <string name="profile_avatar_change_title">Change Profile Picture</string>

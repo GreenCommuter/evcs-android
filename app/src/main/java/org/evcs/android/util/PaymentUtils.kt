@@ -1,6 +1,5 @@
 package org.evcs.android.util
 
-import android.app.Activity
 import android.content.Context
 import androidx.fragment.app.FragmentActivity
 import org.evcs.android.BaseConfiguration
@@ -17,7 +16,7 @@ object PaymentUtils {
 
     fun showPaymentDialog(context: FragmentActivity, requestError: RequestError) {
         EVCSDialogFragment.Builder()
-        .setTitle("Payment")
+                .setTitle("Payment")
                 .setSubtitle(requestError.body)
                 .withCancelOnClickListener { context.finish() }
                 .addButton(context.getString(R.string.profile_payment_button)) { goToPendingPayment(context) }

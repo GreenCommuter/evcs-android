@@ -79,6 +79,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     }
 
     override fun setListeners() {
+        super.setListeners()
         mContinueButton.setOnClickListener { onButtonClick() }
         mRegisterSocial.fragmentSignInGoogle.setOnClickListener { onLoginWithGoogleClick() }
         mRegisterSocial.fragmentSignInFacebook.setOnClickListener { onLoginWithFacebookClick() }

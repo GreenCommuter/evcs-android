@@ -58,6 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="@dimen/spacing_medium_extra"
+        android:visibility="gone"
         android:text="@string/activity_account_delete_account"/>
 
 </LinearLayout>

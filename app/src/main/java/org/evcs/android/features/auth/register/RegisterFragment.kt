@@ -17,6 +17,7 @@ import org.evcs.android.features.auth.initialScreen.AuthActivity
 import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.util.Extras.VerifyActivity
+import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.validator.EmailTextInputValidator
 import org.evcs.android.util.validator.NonEmptyTextInputValidator
 import org.evcs.android.util.validator.PasswordTextInputValidator
@@ -31,6 +32,7 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     private lateinit var mPasswordHint: TextView
     private lateinit var mContinueButton: TextView
     private lateinit var mRegisterSocial: FragmentSignInSocialBinding
+    private lateinit var mGoToLogin: TextView
 
     /**
      * Returns a new RegisterFragment instance.
@@ -62,10 +64,12 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
         mPasswordHint = binding.fragmentRegisterPasswordHint
         mContinueButton = binding.fragmentRegisterButton
         mRegisterSocial = binding.fragmentRegisterSocial
+        mGoToLogin = binding.fragmentRegisterLogin
     }
 
     override fun init() {
         super.init()
+        ViewUtils.addUnderlines(mGoToLogin)
         mPasswordHint.movementMethod = LinkMovementMethod.getInstance()
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mNameInputLayout))
         mValidatorManager.addValidator(NonEmptyTextInputValidator(mLastNameInputLayout))
@@ -75,9 +79,15 @@ class RegisterFragment : AbstractAuthFragment<RegisterPresenter>(), AuthView {
     }
 
     override fun setListeners() {
+        super.setListeners()
         mContinueButton.setOnClickListener { onButtonClick() }
         mRegisterSocial.fragmentSignInGoogle.setOnClickListener { onLoginWithGoogleClick() }
         mRegisterSocial.fragmentSignInFacebook.setOnClickListener { onLoginWithFacebookClick() }
+        mGoToLogin.setOnClickListener {
+            findNavController().popBackStack(R.id.rootFragment, false)
+            findNavController().navigate(R.id.registerFragment)
+            findNavController().navigate(R.id.signInFragment)
+        }
     }
 
     override fun setEnableButton(validFields: Boolean) {

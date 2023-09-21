@@ -27,10 +27,11 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
     override fun populate() {
         super.populate()
         val l = arguments?.getSerializable(Extras.LocationActivity.LOCATION) as Location
-        showLocation(l)
+//        showLocation(l)
         //the presenter will not retrieve distance
 //        mBinding.activityLocationDistance.text = l?.printableDistance
-//        presenter.getLocation(l.id)
+        showProgressDialog()
+        presenter.getLocation(l.id)
     }
 
     override fun createPresenter(): LocationPresenter {
@@ -43,8 +44,9 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
         }
     }
 
-    override fun showLocation(response: Location?) {
-        mBinding.activityLocationLocation.setLocation(response!!)
+    override fun showLocation(response: Location) {
+        hideProgressDialog()
+        mBinding.activityLocationLocation.setLocation(response)
         mBinding.activityLocationLocation.resizePicture(
             resources.getDimension(R.dimen.location_fragment_image_height).toInt())
     }

@@ -25,7 +25,7 @@ class StartChargingPresenter(viewInstance: StartChargingView, services: Retrofit
             override fun onResponse(call: Call<Void>?, response: Response<Void>?) {
                 val headers = response!!.headers()
                 val url = headers[LOCATION_KEY]
-                if (url != null) {
+                if (url != null /* TODO: y no hay error body o no da 40x o algo así */ ) {
                     startSession(url)
                 } else {
                     view.showError(ErrorUtils.getError(response.errorBody()))

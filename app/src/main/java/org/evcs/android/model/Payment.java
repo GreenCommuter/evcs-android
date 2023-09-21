@@ -26,4 +26,8 @@ public class Payment implements Serializable {
     public String description;
     public List<InvoiceLine> receipt;
     public Integer chargeId;
+
+    public boolean isSubscriptionPayment() {
+        return false || subscriptionId != null;
+    }
 }

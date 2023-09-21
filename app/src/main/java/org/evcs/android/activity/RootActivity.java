@@ -53,7 +53,8 @@ public class RootActivity extends AppCompatActivity {
 
     private Intent getPasswordIntent() {
         Intent newIntent = new Intent(this, ChangePasswordActivity.class);
-        newIntent.putExtra(Extras.ForgotPassword.EMAIL, getIntent().getData().getQueryParameter(Extras.ForgotPassword.EMAIL));
+        //This prevents bad encoding
+        newIntent.putExtra(Extras.ForgotPassword.EMAIL, getIntent().getData().getQueryParameters(Extras.ForgotPassword.EMAIL).get(0));
         newIntent.putExtra(Extras.ForgotPassword.ID, getIntent().getData().getQueryParameter(Extras.ForgotPassword.ID));
         return newIntent;
     }

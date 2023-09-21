@@ -16,6 +16,7 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, Cluste
     var stationCount: StationCount? = null
     var distance: Float? = null
     var stations: List<Station>? = null
+    var outlets: List<Outlet>? = null
     var address: Address? = null
     var comingSoon: Boolean? = null
     var gatecode: String? = null
@@ -53,11 +54,11 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, Cluste
     }
 
     override fun getMarkerText(): String {
-        return stations!!.size.toString()
+        return stationCount!!.total().toString()
     }
 
     override fun getMarkerValue(): Int {
-        return stations!!.size
+        return stationCount!!.total()
     }
 
     override fun isMarkerEnabled(): Boolean {
@@ -71,8 +72,11 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, Cluste
     val printableDistance: CharSequence
         get() = if (distance == null) "-- mi" else String.format("%.1f mi", distance)
 
+//    val connectorTypes: Set<ConnectorType>
+//        get() = stations!!.flatMap { station -> station.connectorTypes }.toSet()
+
     val connectorTypes: Set<ConnectorType>
-        get() = stations!!.flatMap { station -> station.connectorTypes }.toSet()
+        get() = outlets!!.connectorTypes()
 
     val acPrice: Float
         get() = priceOfFirstStationMatching { station ->

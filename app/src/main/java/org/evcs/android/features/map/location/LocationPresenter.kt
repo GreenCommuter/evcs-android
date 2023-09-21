@@ -12,14 +12,12 @@ import org.evcs.android.util.ErrorUtils
 class LocationPresenter(viewInstance: ILocationView, services: RetrofitServices) :
     ServicesPresenter<ILocationView>(viewInstance, services) {
 
-    var mLocation: Location? = null
-
     fun getLocation(id: Int) {
         getService(LocationService::class.java).getLocation(id)
             .enqueue(object : AuthCallback<Location?>(this) {
                 override fun onResponseSuccessful(response: Location?) {
-                    mLocation = response
-                    view.showLocation(response)
+                    if (response != null) view.showLocation(response)
+                    else view.showError(RequestError.getNetworkError())
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {

@@ -29,6 +29,7 @@ import org.evcs.android.features.main.MainNavigationController
 import org.evcs.android.features.shared.StandardTextField
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.ViewUtils
 
 
 class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
@@ -62,6 +63,7 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
         mSurfaceView = binding.chargingTabSurfaceView
         mButton = binding.chargingTabButton
         mTextField = binding.chargingTabStationId
+        ViewUtils.setAdjustResize(binding.root)
     }
 
     override fun createPresenter(): BasePresenter<*> {

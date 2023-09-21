@@ -16,8 +16,10 @@ import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Plan
 import org.evcs.android.model.SubscriptionStatus
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.PaymentUtils
 import org.evcs.android.util.StringUtils
 import org.evcs.android.util.ViewUtils.setVisibility
 import org.evcs.android.util.ViewUtils.showOrHide
@@ -158,5 +160,13 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     override fun onSubscriptionSuccess(response: SubscriptionStatus) {
 //        ToastUtils.show("Subscription success")
         (requireActivity() as GetPlanActivity).onPlanSubscribed(response)
+    }
+
+    override fun showError(requestError: RequestError) {
+        if (requestError.isPaymentError) {
+            PaymentUtils.showPaymentDialog(requireActivity(), requestError)
+        } else {
+            super.showError(requestError)
+        }
     }
 }

@@ -65,7 +65,8 @@ class Station : Serializable {
     }
 
     val connectorTypes: Set<ConnectorType>
-        get() = outlets!!.map { outlets -> outlets.getConnectorType() }.toSet()
+        get() = outlets!!.connectorTypes()
+//    map { outlets -> outlets.getConnectorType() }.toSet()
 
     fun getConnectorType(): ConnectorType {
         return outlets!![0].getConnectorType()

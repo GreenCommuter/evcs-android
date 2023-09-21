@@ -12,4 +12,8 @@ class Outlet : Serializable {
         }
         return ConnectorType.TYPE1
     }
+
+}
+fun List<Outlet>.connectorTypes() : Set<ConnectorType> {
+    return this.map { outlet -> outlet.getConnectorType() }.toSet()
 }

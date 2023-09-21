@@ -136,8 +136,9 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     }
 
     protected fun onRegisterClick() {
-        findNavController()
-            .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragment())
+        findNavController().popBackStack(R.id.rootFragment, false)
+        findNavController().navigate(R.id.signInFragment)
+        findNavController().navigate(R.id.registerFragment)
     }
 
     override fun showLoading(loading : Boolean) {

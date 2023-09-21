@@ -3,12 +3,14 @@ package org.evcs.android.features.charging
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaginatedResponse
+import org.evcs.android.model.Payment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatusWrapper
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.PaymentMethodsService
+import org.evcs.android.network.service.PaymentsService
 import org.evcs.android.network.service.StationsService
 import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.presenter.MultipleRequestsManager

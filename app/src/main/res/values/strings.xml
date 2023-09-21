@@ -81,6 +81,8 @@
     <string name="register_password_confirm">Re-enter the password</string>
     <string name="register_password_hint">Must be at least %1d characters</string>
     <string name="register_button">Create account</string>
+    <string name="register_login">Already have an account?</string>
+    <string name="register_login_2">Log In</string>
     <string name="register_tandc">By clicking Continue you agree to our <a href="https://evcs.com/app/terms-of-use">ToS</a>
         and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
 
@@ -140,7 +142,9 @@
         <item>charging when you upgrade your plan!</item>
     </string-array>
     <string name="profile_explore_plans_text">Upgrade your plan for discounted charging</string>
-
+    <string name="profile_payment_issue">One or more credit card payments were declined.</string>
+    <string name="profile_payment_button">Resolve</string>
+    <string name="profile_subscription_issue_button">Update payment method</string>
 
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>

@@ -62,7 +62,7 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
     }
 
     private fun handleIssues(subscription: Subscription?) {
-        if (mRejectedPayments.filter { payment -> !payment.isSubscriptionPayment }.isNotEmpty()) {
+        if (mRejectedPayments.isNotEmpty()) {
             view?.showPaymentIssue()
         } else if (subscription != null && subscription.issue) {
             view?.showSubscriptionIssue(subscription)

@@ -80,7 +80,7 @@ android {
         gc {
             dimension "app_colour"
             applicationId "org.evcs.android"
-            manifestPlaceholders.appName = "EVCS"
+            manifestPlaceholders.appName = "EVCS (new)"
             resValue "string", "app_name", "evcs"
         }
 

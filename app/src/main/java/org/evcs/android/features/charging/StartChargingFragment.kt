@@ -50,7 +50,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
 
     private fun startCharging() {
         presenter.getCurrentCharge()
-        presenter.startSession()
+//        presenter.startSession()
         mBinding.startChargingImage.setVideoResource(R.raw.evcs_scene2, requireContext())
         mBinding.startChargingImage.startAndLoop()
     }
@@ -66,17 +66,13 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         }
     }
 
-    override fun showError(requestError: RequestError) {
-        if (requestError.isPaymentError) {
-            PaymentUtils.showPaymentDialog(requireActivity(), requestError)
-        } else {
-            super.showError(requestError)
-        }
-    }
-
     //TODO: show message
     override fun showErrorDialog(requestError: RequestError) {
 //        super.showError(requestError)
+        if (requestError.isPaymentError) {
+            PaymentUtils.showPaymentDialog(requireActivity(), requestError)
+            return
+        }
         mBinding.startChargingImage.stopPlayback()
         EVCSDialogFragment.Builder()
                 .setTitle(getString(R.string.start_charging_error_title))

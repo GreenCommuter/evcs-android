@@ -28,6 +28,6 @@ public class Payment implements Serializable {
     public Integer chargeId;
 
     public boolean isSubscriptionPayment() {
-        return false || subscriptionId != null;
+        return subscriptionId != null;
     }
 }

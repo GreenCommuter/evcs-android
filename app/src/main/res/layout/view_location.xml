@@ -34,6 +34,7 @@
             android:layout_gravity="end"
             android:drawableStart="@drawable/ic_go"
             android:text="Go"
+            android:visibility="invisible"
             style="@style/ButtonK.Blue"/>
 
     </FrameLayout>

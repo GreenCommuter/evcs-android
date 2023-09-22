@@ -54,12 +54,11 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     override fun init() {
         showProgressDialog()
-        presenter.refreshUser()
+        presenter.populate()
         presenter.refreshDefaultPaymentMethod()
-        presenter.getRejectedPayments()
         mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             showProgressDialog()
-            presenter.refreshUser()
+            presenter.populate()
         }
     }
 

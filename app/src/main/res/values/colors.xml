@@ -9,7 +9,6 @@
     <color name="evcs_grey">#808080</color>
     <color name="evcs_gray_89">#e4e5e7</color>
     <color name="evcs_white">#ffffff</color>
-    <color name="evcs_purple">#002D48</color>
     <color name="evcs_purple_gray">#B6C3CB</color>
 
     <color name="evcs_primary_600">#FC612D</color>
@@ -36,7 +35,6 @@
     <color name="evcs_splash_tint">#d9333333</color>
     <color name="evcs_dialog_tint">#d9333333</color>
     <color name="evcs_green_transparent_new">#9a09ca87</color>
-    <color name="evcs_drawer_tint">#99333333</color>
 
     <!-- Common colors -->
     <color name="evcs_transparent">#00000000</color>

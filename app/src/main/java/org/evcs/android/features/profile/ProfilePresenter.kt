@@ -35,10 +35,12 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
         refreshSubscription()
         getRejectedPayments()
         mMultipleRequestsManager.fireRequests {
-            mIncompleteUser.activeSubscription = mSubscription
-            view.onUserRefreshed(mIncompleteUser)
-            UserUtils.saveUser(mIncompleteUser)
-            handleIssues(mSubscription)
+            if (::mIncompleteUser.isInitialized) {
+                mIncompleteUser.activeSubscription = mSubscription
+                view.onUserRefreshed(mIncompleteUser)
+                UserUtils.saveUser(mIncompleteUser)
+                handleIssues(mSubscription)
+            }
         }
     }
 

@@ -144,13 +144,14 @@
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/session_information_charging_site_id"
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_medium_extra"
                 app:label="@string/session_information_station_id">
 
                 <TextView
-                    android:id="@+id/session_information_charging_site_id"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     tools:text="24484587"

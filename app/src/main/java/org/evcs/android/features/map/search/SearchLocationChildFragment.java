@@ -158,7 +158,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         if (mAddress.length() <= BaseConfiguration.AUTOCOMPLETE_ADAPTER_THRESHOLD) {
             mAdapter.showHistory();
             mAdapter.notifyDataSetChanged();
-            mAddress.showDropDown();
+            mAddress.post(() -> mAddress.showDropDown());
         }
     }
 

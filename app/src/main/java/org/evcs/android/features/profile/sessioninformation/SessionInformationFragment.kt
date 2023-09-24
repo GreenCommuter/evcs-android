@@ -13,6 +13,7 @@ import org.evcs.android.databinding.ActivitySessionInformationBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
+import org.evcs.android.util.ViewUtils.setParentVisibility
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
@@ -57,7 +58,8 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
         mBinding.sessionInformationId.text = mCharge.id.toString()
         mBinding.sessionInformationChargingSiteSubtitle.text = mCharge.locationName
         mBinding.sessionInformationPlanType.text = mCharge.planName
-        mBinding.sessionInformationChargingSiteId.text = mCharge.stationName
+        mBinding.sessionInformationChargingSiteId.setText(mCharge.stationName)
+        mBinding.sessionInformationChargingSiteId.isVisible = mCharge.stationName != null
         if (mCharge.paymentBrand != null && mCharge.paymentLast4 != null) {
             mBinding.sessionInformationPaymentMethod.isVisible = true
             mBinding.sessionInformationPaymentMethod.setText(getString(

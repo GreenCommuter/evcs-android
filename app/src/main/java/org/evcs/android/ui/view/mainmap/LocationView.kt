@@ -39,8 +39,7 @@ class LocationView : LinearLayout {
         mBinding = ViewLocationBinding.inflate(LayoutInflater.from(context), this, true)
 
         mBinding.fragmentLocationContactSupport.setOnClickListener {
-            val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
-            NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java, extra)
+            NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java)
         }
         mBinding.fragmentLocationReportIssue.setOnClickListener {
             context!!.startActivity(WebViewFragment.buildIntent(context,

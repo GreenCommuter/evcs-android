@@ -79,8 +79,7 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
     override fun setListeners() {
         //TODO: check if show address or request
         mBinding.sessionInformationHelp.setOnClickListener {
-            val data = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
-            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, data)
+            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java)
         }
         mBinding.sessionInformationReceipt.setOnClickListener {
             val args = Bundle()

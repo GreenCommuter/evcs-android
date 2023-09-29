@@ -7,7 +7,6 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
-import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding

@@ -104,7 +104,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             return
         }
         setUpButton()
-        if (status.remainingKwh != null && status.remainingKwh <= 0) {
+        if (!status.isUnlimited && status.remainingKwh != null && status.remainingKwh <= 0) {
             val resetDate = DateTimeFormat.forPattern(getString(R.string.app_date_format))
                     .print(status.nextRemainingKwhRestoration)
             val text = String.format(getString(R.string.plan_info_exceeded),

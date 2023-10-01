@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="78dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <TextView
@@ -13,7 +13,7 @@
     <RelativeLayout
         android:id="@+id/dropdown_with_label_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_small"
         android:paddingStart="@dimen/padding_ariel_standard"
         android:paddingTop="@dimen/spacing_medium_more"
@@ -23,7 +23,7 @@
         <Spinner
             android:id="@+id/dropdown_with_label_dropdown"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:spinnerMode="dropdown"
             android:background="@color/evcs_transparent"/>
 

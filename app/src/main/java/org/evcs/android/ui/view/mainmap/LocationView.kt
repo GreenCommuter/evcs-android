@@ -39,8 +39,7 @@ class LocationView : LinearLayout {
         mBinding = ViewLocationBinding.inflate(LayoutInflater.from(context), this, true)
 
         mBinding.fragmentLocationContactSupport.setOnClickListener {
-            val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
-            NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java, extra)
+            NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java)
         }
         mBinding.fragmentLocationReportIssue.setOnClickListener {
             context!!.startActivity(WebViewFragment.buildIntent(context,
@@ -80,12 +79,15 @@ class LocationView : LinearLayout {
         showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, context.getString(R.string.location_view_ac_price_format))
         showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, context.getString(R.string.location_view_dc_price_format))
 
-        mBinding.viewLocationGo.setOnClickListener {
-            LocationUtils.launchGoogleMapsWithPin(context, location.latLng, location.gatecode, getFragmentManager())
-        }
-
         //        mBinding.activityLocationHint.text = response?
 
+    }
+
+    fun addGoButton(location: Location, fragmentManager: FragmentManager) {
+        mBinding.viewLocationGo.visibility = VISIBLE
+        mBinding.viewLocationGo.setOnClickListener {
+            LocationUtils.launchGoogleMapsWithPin(context, location.latLng, location.gatecode, fragmentManager)
+        }
     }
 
     private fun showPriceIfExists(textView: TextView, price: Float, format: String) {
@@ -93,9 +95,9 @@ class LocationView : LinearLayout {
         textView.visibility = if (price > 0) VISIBLE else GONE
     }
 
-    private fun getFragmentManager(): FragmentManager {
-        return ((context as ContextWrapper).baseContext as FragmentActivity).supportFragmentManager
-    }
+//    private fun getFragmentManager(): FragmentManager {
+//        return ((context as ContextWrapper).baseContext as FragmentActivity).supportFragmentManager
+//    }
 
     //Gotta love extensions
     fun View.resize(height: Int) {

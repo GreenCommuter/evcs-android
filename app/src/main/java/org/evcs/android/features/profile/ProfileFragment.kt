@@ -54,12 +54,11 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
     override fun init() {
         showProgressDialog()
-        presenter.refreshUser()
+        presenter.populate()
         presenter.refreshDefaultPaymentMethod()
-        presenter.getRejectedPayments()
         mLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             showProgressDialog()
-            presenter.refreshUser()
+            presenter.populate()
         }
     }
 
@@ -140,8 +139,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
         mBinding.profileMenuChargingHistory.setOnClickListener { findNavController().navigate(R.id.chargingHistoryFragment) }
         mBinding.profileMenuEvcsTermsAndConditions.setOnClickListener { goToWebView("Terms of Use", BaseConfiguration.WebViews.TERMS_URL) }
         mBinding.profileMenuCallCustomerCare.setOnClickListener {
-            val extra = IntentExtra(Extras.ContactSupportActivity.SHOW_ADDRESS, true)
-            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java, extra)
+            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java)
         }
         mBinding.profileMenuPayments.setOnClickListener { findNavController().navigate(R.id.paymentHistoryFragment) }
         mBinding.profileMenuSignOut.setOnClickListener { UserUtils.logout(null) }

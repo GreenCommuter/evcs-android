@@ -47,6 +47,7 @@ class LocationFragment : ErrorFragment<LocationPresenter>(), ILocationView {
     override fun showLocation(response: Location) {
         hideProgressDialog()
         mBinding.activityLocationLocation.setLocation(response)
+        mBinding.activityLocationLocation.addGoButton(response, requireFragmentManager())
         mBinding.activityLocationLocation.resizePicture(
             resources.getDimension(R.dimen.location_fragment_image_height).toInt())
     }

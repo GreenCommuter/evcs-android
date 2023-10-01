@@ -148,6 +148,7 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
 
     fun setLocation(location: Location) {
         mBinding.mapItemFragmentLocationView.setLocation(location)
+        mBinding.mapItemFragmentLocationView.addGoButton(location, requireFragmentManager())
         mBinding.mapItemFragmentLocationView.setStartChargingListener {
             dismiss()
             MainNavigationController.getInstance().goToPreCharging()

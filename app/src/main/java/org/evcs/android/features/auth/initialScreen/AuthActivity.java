@@ -23,8 +23,6 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
     private ActivityResultLauncher<Intent> mLauncher;
     public boolean mSkipRoot;
 
-//    private static final float MAX_FONT_SIZE = 1.12f;
-
     @Override
     protected View inflate(LayoutInflater layoutInflater) {
         ActivityBaseNavhostBinding binding = ActivityBaseNavhostBinding.inflate(layoutInflater);
@@ -34,7 +32,6 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        adjustFontScale(getResources().getConfiguration());
 
         mLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartActivityForResult(), result -> onAuthFinished(result.getResultCode()));
@@ -64,17 +61,6 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
         intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
-
-//    private void adjustFontScale(android.content.res.Configuration configuration) {
-//        if (configuration.fontScale > MAX_FONT_SIZE) {
-//            configuration.fontScale = MAX_FONT_SIZE;
-//            DisplayMetrics metrics = getResources().getDisplayMetrics();
-//            WindowManager wm = (WindowManager) getSystemService(WINDOW_SERVICE);
-//            wm.getDefaultDisplay().getMetrics(metrics);
-//            metrics.scaledDensity = configuration.fontScale * metrics.density;
-//            getBaseContext().getResources().updateConfiguration(configuration, metrics);
-//        }
-//    }
 
     @Override
     public void onNetworkError() {

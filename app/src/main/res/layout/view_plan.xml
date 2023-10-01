@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_large"
+                android:gravity="center"
                 tools:text="$99.99/mo"
                 style="@style/Headline.Large"/>
 

@@ -13,6 +13,7 @@ import org.evcs.android.network.service.PaymentMethodsService
 import org.evcs.android.network.service.PaymentsService
 import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.UserService
+import org.evcs.android.network.service.presenter.MultipleRequestsManager
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 import org.evcs.android.util.Extras
@@ -22,13 +23,32 @@ import org.evcs.android.util.UserUtils
 open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServices?)
     : ServicesPresenter<ProfileView>(viewInstance, services) {
 
+    private lateinit var mIncompleteUser: User
+    private var mSubscription: Subscription? = null
     private lateinit var mRejectedPayments: ArrayList<Payment>
 
-    fun refreshUser() {
-        getService(UserService::class.java).getCurrentUser().enqueue(
+    private var mMultipleRequestsManager: MultipleRequestsManager =
+            MultipleRequestsManager(this)
+
+    fun populate() {
+        refreshUser()
+        refreshSubscription()
+        getRejectedPayments()
+        mMultipleRequestsManager.fireRequests {
+            if (::mIncompleteUser.isInitialized) {
+                mIncompleteUser.activeSubscription = mSubscription
+                view.onUserRefreshed(mIncompleteUser)
+                UserUtils.saveUser(mIncompleteUser)
+                handleIssues(mSubscription)
+            }
+        }
+    }
+
+    private fun refreshUser() {
+        mMultipleRequestsManager.addRequest(getService(UserService::class.java).getCurrentUser(),
                 object : AuthCallback<User>(this) {
                     override fun onResponseSuccessful(response: User) {
-                        refreshSubscription(response)
+                        mIncompleteUser = response
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -41,14 +61,11 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
                 })
     }
 
-    private fun refreshSubscription(user: User) {
-        getService(SubscriptionService::class.java).status.enqueue(
+    private fun refreshSubscription() {
+        mMultipleRequestsManager.addRequest(getService(SubscriptionService::class.java).status,
                 object : AuthCallback<SubscriptionStatusWrapper>(this) {
                     override fun onResponseSuccessful(response: SubscriptionStatusWrapper) {
-                        user.activeSubscription = response.currentSubscription
-                        view.onUserRefreshed(user)
-                        UserUtils.saveUser(user)
-                        handleIssues(response.currentSubscription)
+                        mSubscription = response.currentSubscription
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -62,15 +79,15 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
     }
 
     private fun handleIssues(subscription: Subscription?) {
-        if (mRejectedPayments.filter { payment -> !payment.isSubscriptionPayment }.isNotEmpty()) {
+        if (mRejectedPayments.isNotEmpty()) {
             view?.showPaymentIssue()
         } else if (subscription != null && subscription.issue) {
             view?.showSubscriptionIssue(subscription)
         } else view.hideIssues()
     }
 
-    fun getRejectedPayments() {
-        getService(PaymentsService::class.java).rejectedPayments.enqueue(
+    private fun getRejectedPayments() {
+        mMultipleRequestsManager.addRequest(getService(PaymentsService::class.java).rejectedPayments,
                 object : AuthCallback<ArrayList<Payment>>(this) {
                     override fun onResponseSuccessful(response: ArrayList<Payment>) {
                         mRejectedPayments = response

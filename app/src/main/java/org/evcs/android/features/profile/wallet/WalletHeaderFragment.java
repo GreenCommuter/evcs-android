@@ -13,6 +13,7 @@ import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.shared.RequestError;
 import org.evcs.android.ui.fragment.ErrorFragment;
+import org.evcs.android.ui.view.shared.PaymentMethodView;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPre
 
     private PaymentMethodAdapterV2 mCreditCardsAdapter;
     protected WalletHeaderInterface mParent;
+    protected PaymentMethodView mGpay;
 
     public WalletHeaderPresenter createPresenter() {
         return new WalletHeaderPresenter(this, EVCSApplication.getInstance().getRetrofitServices());
@@ -41,6 +43,7 @@ public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPre
         mEndlessRecyclerView.setLayoutManager(
                 new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         binding.walletAddNewPaymentMethod.setOnChangeClickListener(view -> onAddPaymentMethodClicked());
+        mGpay = binding.walletGpay;
     }
 
     @Override

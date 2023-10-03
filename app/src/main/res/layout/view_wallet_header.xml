@@ -10,6 +10,12 @@
         android:layout_height="wrap_content" />
 
     <org.evcs.android.ui.view.shared.PaymentMethodView
+        android:id="@+id/wallet_gpay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
+
+    <org.evcs.android.ui.view.shared.PaymentMethodView
         android:id="@+id/wallet_add_new_payment_method"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

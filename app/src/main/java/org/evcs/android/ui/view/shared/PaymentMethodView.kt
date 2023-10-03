@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
+import androidx.core.view.isVisible
 import org.evcs.android.R
 import org.evcs.android.databinding.ViewCreditCardItemBinding
 import org.evcs.android.model.PaymentMethod
@@ -32,6 +33,8 @@ class PaymentMethodView : LinearLayout {
     fun setPaymentMethod(paymentMethod: PaymentMethod?) {
         if (paymentMethod == null) {
             setAddPaymentMethod()
+        } else if (paymentMethod.isGpay) {
+            setGooglePay()
         } else {
             mBinding.viewListButtonChevron.visibility = View.GONE
             mBinding.creditCardChange.visibility = View.VISIBLE
@@ -57,6 +60,13 @@ class PaymentMethodView : LinearLayout {
 
     fun setOnChangeClickListener(function: OnClickListener) {
         mListener = function
+    }
+
+    fun setGooglePay() {
+        mBinding.viewListButtonChevron.isVisible = false
+        mBinding.creditCardNumber.text = "Google Pay"
+        mBinding.creditCardProvider.setImageDrawable(resources.getDrawable(R.drawable.cc_gpay))
+        mBinding.root.setOnClickListener { mListener?.onClick(null) }
     }
 
 }

@@ -17,12 +17,20 @@ class PaymentMethod : Serializable {
     //    "livemode": false,
     //    "metadata": {},
     //    "type": "card"
+    var isGpay: Boolean = false
 
     companion object {
         fun getDefaultFromSharedPrefs(): PaymentMethod? {
             val json = StorageUtils.getStringFromSharedPreferences(Extras.ChangePaymentMethod.PAYMENT_METHODS, "")
             val gson = BaseGsonBuilder.getBaseGsonBuilder().create()
             return gson.fromJson(json, PaymentMethod::class.java)
+        }
+
+        fun GPay(id: String?): PaymentMethod {
+            val pm = PaymentMethod()
+            pm.id = id
+            pm.isGpay = true
+            return pm
         }
     }
 }

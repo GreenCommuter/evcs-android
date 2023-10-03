@@ -51,7 +51,7 @@
             android:id="@+id/view_list_button_chevron"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_arrow_right" />
+            android:src="@drawable/ic_arrow_right"/>
 
     </LinearLayout>
 

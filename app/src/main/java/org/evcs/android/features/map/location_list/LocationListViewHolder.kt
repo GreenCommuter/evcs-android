@@ -29,7 +29,7 @@ class LocationListViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView
         mBinding.adapterListAcAmount.visibility = if (ac > 0) View.VISIBLE else View.GONE
         mBinding.adapterListAcDesc.visibility = if (ac > 0) View.VISIBLE else View.GONE
         mBinding.adapterListAcAmount.text = ac.toString()
-        val dc = location.stationCount!!.totalDc()
+        val dc = location.stationCount!!.dc
         mBinding.adapterListDcAmount.visibility = if (dc > 0) View.VISIBLE else View.GONE
         mBinding.adapterListDcDesc.visibility = if (dc > 0) View.VISIBLE else View.GONE
         mBinding.adapterListDcAmount.text = dc.toString()

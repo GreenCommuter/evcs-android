@@ -2,6 +2,7 @@ package org.evcs.android.ui.view.mainmap
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -70,7 +71,7 @@ class LocationView : LinearLayout {
             return
         }
 
-        if (location.gatecode != null) {
+        if (!TextUtils.isEmpty(location.gatecode)) {
             mBinding.viewLocationGatecode.text = context.getString(R.string.location_view_gatecode) + location.gatecode
             mBinding.viewLocationGatecode.visibility = VISIBLE
         }

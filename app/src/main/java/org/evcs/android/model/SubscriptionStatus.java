@@ -44,7 +44,7 @@ public class SubscriptionStatus implements Serializable {
     public DateTime validTo;
 //        "lockup_time": 10,
 //        "min_valid_charge_duration": 5,
-//        "price_per_kwh": 9,
+    public Float pricePerKwh;
     //        "plan_start_hour":0,
 //        "plan_finish_hour":0,
 //        "plan_public":true,

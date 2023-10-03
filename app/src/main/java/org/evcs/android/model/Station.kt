@@ -42,7 +42,7 @@ class Station : Serializable {
 
     enum class AvailableStatus(@AttrRes val state: Int = R.attr.state_offline) {
 
-        AVAILABLE(R.attr.state_active), BLOCKED, IN_USE(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN, OTHER;
+        AVAILABLE(R.attr.state_active), BLOCKED, OCCUPIED(R.attr.state_busy), INOPERATIVE, UNDER_REPAIR, PLANNED, REMOVED, RESERVED, UNKNOWN, OTHER;
 
         var text : String? = ""
 
@@ -59,7 +59,7 @@ class Station : Serializable {
 
     fun getChargerType(): ChargerType {
         for (ct in ChargerType.values()) {
-            if (ct.toString().lowercase() == chargerType?.lowercase()) return ct
+            if (ct.toString().lowercase() == chargerType?.lowercase()?.substring(0, 2)) return ct
         }
         return ChargerType.AC
     }
@@ -74,8 +74,7 @@ class Station : Serializable {
 
     enum class ChargerType(val printableName: String) : Serializable {
         AC("Level 2"),
-        DC50KW("DC Fast"),
-        DC100KW("DC Fast")
+        DC("DC Fast")
     }
 
 }

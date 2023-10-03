@@ -108,7 +108,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             val resetDate = DateTimeFormat.forPattern(getString(R.string.app_date_format))
                     .print(status.nextRemainingKwhRestoration)
             val text = String.format(getString(R.string.plan_info_exceeded),
-                    status.totalKwh, resetDate, pricing.thereafterPrice)
+                    status.totalKwh, resetDate, status.pricePerKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
         }

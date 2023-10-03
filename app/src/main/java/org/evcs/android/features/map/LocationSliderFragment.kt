@@ -22,9 +22,10 @@ import org.evcs.android.model.shared.RequestError
  * screen. Inside that space there is an inner scroll.
  */
 //TODO: check the "fragment constructor not found" crash
-class LocationSliderFragment(private var location: Location) : BaseDialogFragment<LocationPresenter>(),
+class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
     ILocationView {
 
+    private lateinit var location: Location
     private var mMaxScroll: Int = 0
     private lateinit var mBinding: FragmentLocationSliderBinding
     private var mLastY = 0
@@ -44,6 +45,11 @@ class LocationSliderFragment(private var location: Location) : BaseDialogFragmen
         resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
 
         keepStatusBar(mBinding.root)
+    }
+
+    fun withLocation(location: Location): LocationSliderFragment {
+        this.location = location
+        return this
     }
 
     override fun showLocation(response: Location) {

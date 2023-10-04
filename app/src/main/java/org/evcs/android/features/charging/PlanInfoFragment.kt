@@ -89,6 +89,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mBinding.planInfoChargeRate.setParentVisibility(true)
 
         if (status == null) {
+            mBinding.planInfoLyft.isVisible = true
             showPlanDialog(mExplorePlansText, false, null)
             showPaymentInfo()
             return

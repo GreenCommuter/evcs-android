@@ -1,25 +1,21 @@
 package org.evcs.android.ui.view.mainmap
 
 import android.content.Context
-import android.content.ContextWrapper
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import com.base.core.util.NavigationUtils
-import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.R
 import org.evcs.android.activity.ContactSupportActivity
-import org.evcs.android.activity.WebViewFragment
+import org.evcs.android.activity.WebViewActivity
 import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
-import org.evcs.android.util.Extras
 import org.evcs.android.util.LocationUtils
 
 class LocationView : LinearLayout {
@@ -43,7 +39,7 @@ class LocationView : LinearLayout {
             NavigationUtils.jumpTo(context!!, ContactSupportActivity::class.java)
         }
         mBinding.fragmentLocationReportIssue.setOnClickListener {
-            context!!.startActivity(WebViewFragment.buildIntent(context,
+            context!!.startActivity(WebViewActivity.buildIntent(context,
                     "Report An Issue", BaseConfiguration.WebViews.REPORT_URL))
         }
 

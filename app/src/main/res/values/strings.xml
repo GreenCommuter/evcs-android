@@ -308,7 +308,6 @@
     <string name="create_booking_car_plate_format">#%s</string>
     <string name="create_booking_plus_tax">+ tax</string>
     <string name="create_booking_wallet_error_title">The payment has failed</string>
-    <string name="create_booking_wallet_error_subtitle">Please edit your wallet information</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
 
     <!-- Coupons -->
@@ -557,5 +556,12 @@
     <string name="charging_tab_enter_id">Enter the station ID</string>
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
+
+    <string-array name="lyft_array">
+        <item>You are connected to </item>
+        <item>Lyft</item>
+        <item>. Take advantage of your charging discounts</item>
+    </string-array>
+
 
 </resources>

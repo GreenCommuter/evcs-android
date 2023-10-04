@@ -15,7 +15,7 @@ import org.evcs.android.util.Extras
 import org.evcs.android.util.SpinnerUtils
 
 
-class WebViewFragment : BaseActivity2() {
+class WebViewActivity : BaseActivity2() {
 
     private lateinit var mProgressDialog: Dialog
     private lateinit var mSubtitle: TextView
@@ -25,7 +25,7 @@ class WebViewFragment : BaseActivity2() {
 
     companion object {
         fun buildIntent(context: Context?, title: String, url: String, subtitle: String? = null): Intent {
-            val intent = Intent(context, WebViewFragment::class.java)
+            val intent = Intent(context, WebViewActivity::class.java)
             intent.putExtra(Extras.WebView.TITLE, title)
             intent.putExtra(Extras.WebView.URL, url)
             intent.putExtra(Extras.WebView.SUBTITLE, subtitle)

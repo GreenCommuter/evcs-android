@@ -66,6 +66,10 @@ open class User : Serializable {
 //    "cc_brand":"visa",
 //    "last_sub_id":null,
 //    "subscription_user":false,
-//    "created_from":null,
-//    "created_from_description":null,
+    val createdFrom: String? = null
+    val createdFromDescription: String? = null
+
+    fun isLyftUser() : Boolean {
+        return "Lyft".equals(createdFrom, ignoreCase = true) && createdFromDescription != null
+    }
 }

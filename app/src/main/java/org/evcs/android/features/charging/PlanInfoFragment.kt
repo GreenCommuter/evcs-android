@@ -85,13 +85,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             mBinding.planInfoRenewalDate.setText(status.renewalDate)
         }
 
-        if (status?.kwhUsage != null) {
-            mBinding.planInfoKwhUsage.visibility = View.VISIBLE
-            val text = String.format("%.0f/%s kWh", status.kwhUsage, status.printTotalKwh())
-            mBinding.planInfoKwhUsage.setText(text)
-            mBinding.planInfoKwhProgress.isVisible = true
-            mBinding.planInfoKwhProgress.setPlan(status, false)
-        }
+        setProgress(status)
 
         mBinding.planInfoChargeRate.visibility = View.VISIBLE
         val pricing = station.pricing!!.detail
@@ -105,17 +99,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             return
         }
         setUpButton()
-        if (!status.isUnlimited && status.remainingKwh != null && status.remainingKwh <= 0) {
-            val resetDate = DateTimeFormat.forPattern(getString(R.string.app_date_format))
-                    .print(status.nextRemainingKwhRestoration)
-            val text = String.format(getString(R.string.plan_info_exceeded),
-                    status.totalKwh, resetDate, status.pricePerKwh)
-            showPlanDialog(text, true, status.accountUrl)
-            showPaymentInfo()
-        }
+        setCapExceededAlert(status)
         if (!status.planCoversTime) {
             val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
-
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
         }
@@ -128,6 +114,27 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         }
         else if (status.issue) {
             showIssue(status.issueMessage, status.issueUrl, status.issueUrlTitle)
+        }
+    }
+
+    private fun setProgress(status: SubscriptionStatus?) {
+        if (status?.kwhUsage != null) {
+            mBinding.planInfoKwhUsage.visibility = View.VISIBLE
+            val text = String.format("%.0f/%s kWh", status.kwhUsage, status.printTotalKwh())
+            mBinding.planInfoKwhUsage.setText(text)
+            mBinding.planInfoKwhProgress.isVisible = true
+            mBinding.planInfoKwhProgress.setPlan(status, false)
+        }
+    }
+
+    private fun setCapExceededAlert(status: SubscriptionStatus) {
+        if (!status.isUnlimited && status.remainingKwh != null && status.remainingKwh <= 0) {
+            val resetDate = DateTimeFormat.forPattern(getString(R.string.app_date_format))
+                    .print(status.nextRemainingKwhRestoration)
+            val text = String.format(getString(R.string.plan_info_exceeded),
+                    status.totalKwh, resetDate, status.pricePerKwh)
+            showPlanDialog(text, true, status.accountUrl)
+            showPaymentInfo()
         }
     }
 

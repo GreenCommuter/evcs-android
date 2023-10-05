@@ -86,6 +86,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         }
 
         setProgress(status)
+        mBinding.planInfoChargeRate.setParentVisibility(true)
 
         if (status == null) {
             showPlanDialog(mExplorePlansText, false, null)
@@ -158,7 +159,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     override fun showChargeRate(rate: String) {
-        mBinding.planInfoChargeRate.visibility = View.VISIBLE
+        mBinding.planInfoChargeRateLoading.isVisible = false
         mBinding.planInfoChargeRate.setText(rate)
     }
 

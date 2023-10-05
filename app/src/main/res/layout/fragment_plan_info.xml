@@ -101,22 +101,34 @@
                 android:layout_marginBottom="@dimen/spacing_medium_more"
                 android:visibility="gone"/>
 
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:id="@+id/plan_info_charge_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_more"
-                app:label="Charge Rate"
-                android:visibility="gone">
-
-                <TextView
+                <FrameLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/font_medium_extra"
-                    style="@style/Body.Medium"
-                    android:text="$0.00"/>
+                    android:visibility="gone">
 
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+                    <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                        android:id="@+id/plan_info_charge_rate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/spacing_medium_more"
+                        app:label="Charge Rate">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="@dimen/font_medium_extra"
+                            style="@style/Body.Medium"
+                            android:text=""/>
+
+                    </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+                    <ProgressBar
+                        android:id="@+id/plan_info_charge_rate_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"/>
+
+                </FrameLayout>
 
             <org.evcs.android.features.shared.StandardTextFieldNoBorder
                 android:id="@+id/plan_info_renewal_date"

@@ -87,12 +87,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
         setProgress(status)
 
-        mBinding.planInfoChargeRate.visibility = View.VISIBLE
-        val pricing = station.pricing!!.detail
-        if (pricing.priceKwh != null || pricing.thereafterPrice != null) {
-            mBinding.planInfoChargeRate.setText(
-                    String.format("$%.2f", pricing.priceKwh ?: pricing.thereafterPrice))
-        }
         if (status == null) {
             showPlanDialog(mExplorePlansText, false, null)
             showPaymentInfo()
@@ -101,6 +95,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         setUpButton()
         setCapExceededAlert(status)
         if (!status.planCoversTime) {
+            val pricing = station.pricing!!.detail
             val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
@@ -160,6 +155,11 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                 NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java)
             }
         }
+    }
+
+    override fun showChargeRate(rate: String) {
+        mBinding.planInfoChargeRate.visibility = View.VISIBLE
+        mBinding.planInfoChargeRate.setText(rate)
     }
 
     private fun launchUrl(url: String?) {

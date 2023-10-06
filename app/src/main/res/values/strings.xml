@@ -487,6 +487,7 @@
         <a href="https://evcs.com/app/subscription-terms-and-conditions">Subscription Terms and Conditions</a> and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
     <string name="get_plan_name">Plan</string>
     <string name="get_plan_no_commitment">No commitments. Cancel online anytime.</string>
+    <string name="get_plan_trial_label">Free %1$d kWh, expires in %2$d days</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
     <string name="get_plan_price">%1$s Cost (Starting %2$s)</string>

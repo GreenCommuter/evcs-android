@@ -4,6 +4,7 @@ import android.os.Bundle
 import org.evcs.android.R
 import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
+import org.evcs.android.util.UserUtils
 import org.joda.time.DateTime
 
 class GetPlanFragment : AbstractGetPlanFragment() {
@@ -31,8 +32,12 @@ class GetPlanFragment : AbstractGetPlanFragment() {
         return false
     }
 
-    override fun getTrialLabel(): String {
-        return String.format("Free %1\$d kWh, expires in %2\$d days", 0, mPlan.trialDays)
+    override fun getTrialLabel(): String? {
+        if (UserUtils.getLoggedUser() == null || UserUtils.getLoggedUser().canDoTrial()) {
+            return getString(R.string.get_plan_trial_label, mPlan.trialKwh, mPlan.trialDays)
+        } else {
+            return null
+        }
     }
 
     override fun getButtonText(): String {

@@ -10,6 +10,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.rollbar.android.Rollbar
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentRegisterEnterCodeBinding
@@ -86,7 +87,11 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun openConsentDialog(consentIntent: Intent) {
-        startForResult.launch(consentIntent)
+        try {
+            startForResult.launch(consentIntent)
+        } catch (e: Exception) {
+            Rollbar.instance().warning(e)
+        }
     }
 
     fun setEnableButton(validFields: Boolean) {

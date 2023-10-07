@@ -22,6 +22,7 @@ import org.evcs.android.util.UserUtils
 import org.evcs.android.util.VideoUtils.setVideoResource
 import org.evcs.android.util.VideoUtils.startAndLoop
 import org.evcs.android.util.ViewUtils.setParentVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.format.DateTimeFormat
 
 class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
@@ -119,22 +120,23 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             showPaymentInfo()
         }
         if (status.isSuspended) {
-            showIssue(status.issueMessage)
-            mBinding.planInfoButton.text = getString(R.string.plan_info_payment_error_update)
+            showIssue(status.issueMessage, null, getString(R.string.plan_info_payment_error_update))
             //TODO: use for plan, remove dialog
             mBinding.planInfoButton.setOnClickListener {
                 mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
             }
         }
         else if (status.issue) {
-            showIssue(status.issueMessage)
+            showIssue(status.issueMessage, status.issueUrl, status.issueUrlTitle)
         }
     }
 
-    private fun showIssue(issueMessage: String) {
+    private fun showIssue(issueMessage: String, issueUrl: String?, issueUrlTitle: String) {
         mBinding.planInfoAlertMessage.setParentVisibility(true)
         mBinding.planInfoAlertMessage.text = issueMessage
         mBinding.planInfoChargeWithPayg.visibility = View.VISIBLE
+        mBinding.planInfoButton.showOrHide(issueUrlTitle)
+        mBinding.planInfoButton.setOnClickListener { launchUrl(issueUrl) }
     }
 
     private fun setUpButton() {

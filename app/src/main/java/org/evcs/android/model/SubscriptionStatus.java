@@ -32,8 +32,8 @@ public class SubscriptionStatus implements Serializable {
     public Plan plan;
     public boolean onTrialPeriod;
 
-    //        "issue_url": null,
-//        "issue_url_title": null,
+    public String issueUrl;
+    public String issueUrlTitle;
 //        "issue_title": null,
 //        "referral_link": "https://dev.evcs.com/refer/abc123",
 //        "remaining_charges": 8,

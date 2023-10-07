@@ -69,4 +69,11 @@ class ChargingActivity : NavGraphActivity() {
     override fun getNavGraphId(): Int {
         return R.navigation.charging_graph
     }
+
+    //This is very ugly. It's called when recreating the activity. If I keep the startChargingFragment,
+    //it crashes because the controller is null. If I keep the chargeInProgress, it shows the wrong duration
+    //And the main activity remembers the precharging dialog so you end up in hte current session
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        finish()
+    }
 }

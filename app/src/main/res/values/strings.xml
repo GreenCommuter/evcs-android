@@ -396,12 +396,12 @@
     <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
     <!-- Location View -->
-    <string name="location_view_ac_price_format">Level 2 Member Price: \$%.2f/kWh</string>
-    <string name="location_view_dc_price_format">DC Fast Member Price: $%.2f/kWh</string>
+    <string name="location_view_ac_price_format">Member Price, Level 2 Charger: \$%.2f/kWh</string>
+    <string name="location_view_dc_price_format">Member Price, DC Fast Charger: $%.2f/kWh</string>
     <string name="location_view_gatecode">Gatecode: </string>
 
     <!-- Plan info -->
-    <string name="plan_info_title">Start charging</string>
+    <string name="plan_info_title">Start Charging</string>
     <string name="plan_info_discounted_charge_rate">Discounted charge rate</string>
     <string name="plan_info_upgrade_plan">Upgrade plan</string>
     <string name="plan_info_dialog_cancel">Cancel charging session?</string>

@@ -19,7 +19,7 @@ import org.evcs.android.util.VideoUtils.startAndLoop
 
 class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChargingView {
 
-    private val mListener: ChargingNavigationController = ChargingNavigationController.getInstance()
+    private lateinit var mListener: ChargingNavigationController
     private lateinit var mBinding: FragmentStartChargingBinding
 
     override fun layout(): Int {
@@ -40,6 +40,10 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun setListeners() {
+        if (ChargingNavigationController.getInstance() == null) {
+            requireActivity().finish()
+        }
+        mListener = ChargingNavigationController.getInstance()
         mBinding.startChargingCancel.setOnClickListener { onBackPressed() }
     }
 

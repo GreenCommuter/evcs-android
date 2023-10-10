@@ -2,6 +2,7 @@ package org.evcs.android.features.map
 
 import android.annotation.SuppressLint
 import android.content.res.Resources
+import android.os.Bundle
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
@@ -16,12 +17,12 @@ import org.evcs.android.features.map.location.ILocationView
 import org.evcs.android.features.map.location.LocationPresenter
 import org.evcs.android.model.Location
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.util.Extras
 
 /** This is an extremely hacky component that mimics the behaviour of Instagram comments. It has an
  * outer scroll, with an empty view on top and at the bottom a space that is calculated to fill the
  * screen. Inside that space there is an inner scroll.
  */
-//TODO: check the "fragment constructor not found" crash
 class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
     ILocationView {
 
@@ -31,8 +32,19 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
     private var mLastY = 0
     private var mLastAction: MotionEvent? = null
 
+    companion object {
+        fun newInstance(location: Location): LocationSliderFragment {
+            val args = Bundle()
+            args.putSerializable(Extras.LocationActivity.LOCATION, location)
+            val fragment = LocationSliderFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
+
     override fun init() {
         presenter.onViewCreated()
+        location = requireArguments().getSerializable(Extras.LocationActivity.LOCATION) as Location
         presenter.getLocation(location.id)
         mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
         val height = mBinding.mapItemFragmentEmpty.measuredHeight
@@ -45,11 +57,6 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
 
         keepStatusBar(mBinding.root)
-    }
-
-    fun withLocation(location: Location): LocationSliderFragment {
-        this.location = location
-        return this
     }
 
     override fun showLocation(response: Location) {

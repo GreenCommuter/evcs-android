@@ -46,7 +46,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         createNotificationChannel()
         mNavigationController = MainNavigationController(this, true,
             findNavController(this, R.id.activity_base_content))
-//        mNavigationController!!.startFlow()
+        mNavigationController!!.startFlow()
 
 //        if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
 //            return

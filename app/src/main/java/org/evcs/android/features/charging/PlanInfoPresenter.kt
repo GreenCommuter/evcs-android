@@ -1,6 +1,7 @@
 package org.evcs.android.features.charging
 
 import com.base.networking.retrofit.RetrofitServices
+import com.rollbar.android.Rollbar
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.PaymentMethod
@@ -110,13 +111,18 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
 
     private fun fireRequests() {
         mMultipleRequestsManager.fireRequests {
-            if (mStation == null) {
+            try {
+                if (mStation == null) {
+                    view.showStationNotFound()
+                } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
+                    view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
+                } else {
+                    view.show(mStation!!, mStatus?.currentSubscription)
+                    getPpkWh()
+                }
+            } catch (e: java.lang.NullPointerException) {
                 view.showStationNotFound()
-            } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
-                view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
-            } else {
-                view.show(mStation!!, mStatus?.currentSubscription)
-                getPpkWh()
+                Rollbar.instance().error("NPE in station " + (mStation?.id).toString())
             }
         }
     }

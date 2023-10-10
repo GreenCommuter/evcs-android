@@ -234,7 +234,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mIsMapShowing = isMapShowing()
         SearchLocationChildFragment.saveToLocationHistory(location)
         if (showAsSlider) {
-            val locationDialog = LocationSliderFragment().withLocation(location)
+            val locationDialog = LocationSliderFragment.newInstance(location)
             locationDialog.show(fragmentManager)
         } else {
             val args = Bundle()

@@ -39,6 +39,11 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         startCharging()
     }
 
+    override fun onResume() {
+        super.onResume()
+        startCharging()
+    }
+
     override fun setListeners() {
         if (ChargingNavigationController.getInstance() == null) {
             requireActivity().finish()

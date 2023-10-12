@@ -5,7 +5,7 @@
             android:color="@color/evcs_success_500" />
 
     <item app:state_busy="true"
-        android:color="@color/evcs_warning_600" />
+        android:color="@color/evcs_danger_700" />
 
     <item app:state_offline="true"
         android:color="@color/evcs_gray_300" />

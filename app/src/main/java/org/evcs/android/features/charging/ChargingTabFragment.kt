@@ -172,6 +172,6 @@ class ChargingTabFragment : ErrorFragment<BasePresenter<*>>() {
 
     override fun onBackPressed(): Boolean {
         mListener.onMapClicked()
-        return true;
+        return true
     }
 }

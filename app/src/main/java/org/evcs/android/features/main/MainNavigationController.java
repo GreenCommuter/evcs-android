@@ -1,5 +1,7 @@
 package org.evcs.android.features.main;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.IdRes;
 import androidx.navigation.NavController;
 
@@ -68,6 +70,12 @@ public class MainNavigationController extends AbstractBaseFragmentNavigationCont
             mActivity.setSelectedItem(R.id.menu_drawer_map);
 //        });
             backToBaseFragment();
+    }
+
+    @SuppressLint("MissingSuperCall")
+    public void startFlow() {
+        replaceLastKey(getStartingHistoryBuilder(), null);
+        mActivity.setSelectedItem(R.id.menu_drawer_map);
     }
 
 }

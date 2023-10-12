@@ -22,6 +22,7 @@ import org.evcs.android.util.UserUtils
 import org.evcs.android.util.VideoUtils.setVideoResource
 import org.evcs.android.util.VideoUtils.startAndLoop
 import org.evcs.android.util.ViewUtils.setParentVisibility
+import org.evcs.android.util.ViewUtils.showOrHide
 import org.joda.time.format.DateTimeFormat
 
 class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
@@ -84,6 +85,36 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             mBinding.planInfoRenewalDate.setText(status.renewalDate)
         }
 
+        setProgress(status)
+        mBinding.planInfoChargeRate.setParentVisibility(true)
+
+        if (status == null) {
+            mBinding.planInfoLyft.isVisible = true
+            showPlanDialog(mExplorePlansText, false, null)
+            showPaymentInfo()
+            return
+        }
+        setUpButton()
+        setCapExceededAlert(status)
+        if (!status.planCoversTime) {
+            val pricing = station.pricing!!.detail
+            val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
+            showPlanDialog(text, true, status.accountUrl)
+            showPaymentInfo()
+        }
+        if (status.isSuspended) {
+            showIssue(status.issueMessage, null, getString(R.string.plan_info_payment_error_update))
+            //TODO: use for plan, remove dialog
+            mBinding.planInfoButton.setOnClickListener {
+                mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
+            }
+        }
+        else if (status.issue) {
+            showIssue(status.issueMessage, status.issueUrl, status.issueUrlTitle)
+        }
+    }
+
+    private fun setProgress(status: SubscriptionStatus?) {
         if (status?.kwhUsage != null) {
             mBinding.planInfoKwhUsage.visibility = View.VISIBLE
             val text = String.format("%.0f/%s kWh", status.kwhUsage, status.printTotalKwh())
@@ -91,50 +122,25 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             mBinding.planInfoKwhProgress.isVisible = true
             mBinding.planInfoKwhProgress.setPlan(status, false)
         }
+    }
 
-        mBinding.planInfoChargeRate.visibility = View.VISIBLE
-        val pricing = station.pricing!!.detail
-        if (pricing.priceKwh != null || pricing.thereafterPrice != null) {
-            mBinding.planInfoChargeRate.setText(
-                    String.format("$%.2f", pricing.priceKwh ?: pricing.thereafterPrice))
-        }
-        if (status == null) {
-            showPlanDialog(mExplorePlansText, false, null)
-            showPaymentInfo()
-            return
-        }
-        setUpButton()
+    private fun setCapExceededAlert(status: SubscriptionStatus) {
         if (!status.isUnlimited && status.remainingKwh != null && status.remainingKwh <= 0) {
             val resetDate = DateTimeFormat.forPattern(getString(R.string.app_date_format))
                     .print(status.nextRemainingKwhRestoration)
             val text = String.format(getString(R.string.plan_info_exceeded),
-                    status.totalKwh, resetDate, pricing.thereafterPrice)
+                    status.totalKwh, resetDate, status.pricePerKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
-        }
-        if (!status.planCoversTime) {
-            val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
-
-            showPlanDialog(text, true, status.accountUrl)
-            showPaymentInfo()
-        }
-        if (status.isSuspended) {
-            showIssue(status.issueMessage)
-            mBinding.planInfoButton.text = getString(R.string.plan_info_payment_error_update)
-            //TODO: use for plan, remove dialog
-            mBinding.planInfoButton.setOnClickListener {
-                mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
-            }
-        }
-        else if (status.issue) {
-            showIssue(status.issueMessage)
         }
     }
 
-    private fun showIssue(issueMessage: String) {
+    private fun showIssue(issueMessage: String, issueUrl: String?, issueUrlTitle: String) {
         mBinding.planInfoAlertMessage.setParentVisibility(true)
         mBinding.planInfoAlertMessage.text = issueMessage
         mBinding.planInfoChargeWithPayg.visibility = View.VISIBLE
+        mBinding.planInfoButton.showOrHide(issueUrlTitle)
+        mBinding.planInfoButton.setOnClickListener { launchUrl(issueUrl) }
     }
 
     private fun setUpButton() {
@@ -151,6 +157,11 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                 NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java)
             }
         }
+    }
+
+    override fun showChargeRate(rate: String) {
+        mBinding.planInfoChargeRateLoading.isVisible = false
+        mBinding.planInfoChargeRate.setText(rate)
     }
 
     private fun launchUrl(url: String?) {

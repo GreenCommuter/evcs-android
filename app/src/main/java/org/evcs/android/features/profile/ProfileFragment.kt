@@ -8,13 +8,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.FragmentActivity
 import androidx.navigation.fragment.findNavController
 import com.base.core.util.NavigationUtils
-import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.BuildConfig
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ContactSupportActivity
-import org.evcs.android.activity.WebViewFragment
+import org.evcs.android.activity.WebViewActivity
 import org.evcs.android.activity.account.AccountActivity
 import org.evcs.android.activity.account.VehicleInformationActivity
 import org.evcs.android.activity.subscription.SubscriptionActivity
@@ -26,7 +25,6 @@ import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.Subscription
 import org.evcs.android.model.user.User
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.util.Extras
 import org.evcs.android.util.PaymentUtils
 import org.evcs.android.util.UserUtils
 import org.evcs.android.util.ViewUtils.setParentVisibility
@@ -163,7 +161,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     private fun goToWebView(title: String, url: String) {
-        requireContext().startActivity(WebViewFragment.buildIntent(requireContext(), title, url))
+        requireContext().startActivity(WebViewActivity.buildIntent(requireContext(), title, url))
     }
 
     override fun onBackPressed(): Boolean {

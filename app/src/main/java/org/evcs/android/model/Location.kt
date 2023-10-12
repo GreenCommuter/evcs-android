@@ -84,9 +84,7 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, Cluste
 
     val dcPrice: Float
         get() = priceOfFirstStationMatching { station ->
-            station.getChargerType() == Station.ChargerType.DC100KW
-                    || station.getChargerType() == Station.ChargerType.DC50KW
-        }
+            station.getChargerType() == Station.ChargerType.DC }
 
     fun priceOfFirstStationMatching(condition: (Station) -> Boolean) : Float {
         return stations!!.filter(condition).getOrNull(0)?.pricing?.detail?.priceKwh ?: 0f

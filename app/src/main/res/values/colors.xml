@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application colors -->
-    <color name="evcs_green">#09ca87</color>
     <color name="evcs_light_orange">#FF6600</color>
     <color name="evcs_orange">#F45A2E</color>
     <color name="evcs_black">#000000</color>
@@ -30,6 +29,8 @@
     <color name="evcs_warning_600">#DEA22A</color>
 
     <color name="evcs_danger_700">#9E030E</color>
+
+    <color name="lyft_pink">#FF008E</color>
 
     <!-- Tint colors -->
     <color name="evcs_splash_tint">#d9333333</color>

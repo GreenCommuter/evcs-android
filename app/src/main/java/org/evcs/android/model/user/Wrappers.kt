@@ -13,3 +13,5 @@ class NameWrapper(var firstName: String, var lastName: String)
 class ChangePasswordWrapper(var email: String, var identifier: String, var password: String, var passwordConfirmation: String)
 
 class BooleanWrapper(var enabled: String)
+
+class RateWrapper(var rateValue: String)

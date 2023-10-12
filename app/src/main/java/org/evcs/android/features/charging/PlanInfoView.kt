@@ -12,4 +12,5 @@ interface PlanInfoView : IErrorView {
     fun show(station: Station, status: SubscriptionStatus?)
     fun showDefaultPM(paymentMethod: PaymentMethod?)
     fun showStationNotFound()
+    fun showChargeRate(rate: String)
 }

@@ -42,7 +42,7 @@ class ContactSupportActivity : BaseActivity2() {
     override fun setListeners() {
         mBinding.contactSupportPhone.setOnClickListener { goToCallUs() }
         mBinding.contactSupportReport.setOnClickListener {
-            startActivity(WebViewFragment.buildIntent(this,
+            startActivity(WebViewActivity.buildIntent(this,
                     "Report An Issue", BaseConfiguration.WebViews.REQUEST_URL))
         }
         mBinding.contactSupportAddress.setOnClickListener {

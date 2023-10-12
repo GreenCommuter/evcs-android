@@ -3,6 +3,7 @@ package org.evcs.android.network.service;
 import org.evcs.android.model.Charge;
 import org.evcs.android.model.PaginatedResponse;
 import org.evcs.android.model.Session;
+import org.evcs.android.model.user.RateWrapper;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -19,4 +20,7 @@ public interface ChargesService {
 
     @GET("/members/v1/charges/current_session")
     Call<Session> getCurrent();
+
+    @GET("/members/v1/pricing/charges")
+    Call<RateWrapper> getPpkWh(@Query("station_id") int stationId);
 }

@@ -308,7 +308,6 @@
     <string name="create_booking_car_plate_format">#%s</string>
     <string name="create_booking_plus_tax">+ tax</string>
     <string name="create_booking_wallet_error_title">The payment has failed</string>
-    <string name="create_booking_wallet_error_subtitle">Please edit your wallet information</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
 
     <!-- Coupons -->
@@ -396,12 +395,12 @@
     <string name="location_list_fail">We currently don\'t have any chargers around here</string>
 
     <!-- Location View -->
-    <string name="location_view_ac_price_format">Level 2 Member Price: \$%.2f/kWh</string>
-    <string name="location_view_dc_price_format">DC Fast Member Price: $%.2f/kWh</string>
+    <string name="location_view_ac_price_format">Member Price, Level 2 Charger: \$%.2f/kWh</string>
+    <string name="location_view_dc_price_format">Member Price, DC Fast Charger: $%.2f/kWh</string>
     <string name="location_view_gatecode">Gatecode: </string>
 
     <!-- Plan info -->
-    <string name="plan_info_title">Start charging</string>
+    <string name="plan_info_title">Start Charging</string>
     <string name="plan_info_discounted_charge_rate">Discounted charge rate</string>
     <string name="plan_info_upgrade_plan">Upgrade plan</string>
     <string name="plan_info_dialog_cancel">Cancel charging session?</string>
@@ -487,6 +486,7 @@
         <a href="https://evcs.com/app/subscription-terms-and-conditions">Subscription Terms and Conditions</a> and <a href="https://evcs.com/app/privacy">Privacy Policy</a>.</string>
     <string name="get_plan_name">Plan</string>
     <string name="get_plan_no_commitment">No commitments. Cancel online anytime.</string>
+    <string name="get_plan_trial_label">Free %1$d kWh, expires in %2$d days</string>
     <string name="get_plan_agree_subscribe">Agree &amp; Subscribe</string>
     <string name="get_plan_agree_switch">Agree &amp; Switch Plans</string>
     <string name="get_plan_price">%1$s Cost (Starting %2$s)</string>
@@ -556,5 +556,12 @@
     <string name="charging_tab_enter_id">Enter the station ID</string>
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
+
+    <string-array name="lyft_array">
+        <item>You are connected to </item>
+        <item>Lyft</item>
+        <item>. Take advantage of your charging discounts</item>
+    </string-array>
+
 
 </resources>

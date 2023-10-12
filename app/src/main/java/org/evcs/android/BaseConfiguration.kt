@@ -37,6 +37,7 @@ object BaseConfiguration {
         const val PAY_URL = "https://subscriptions.evcs.com/account/%s/pay"
         const val LEARN_MORE_URL = "https://subscriptions.evcs.com/learn_more?plan_id=%s"
         const val LEARN_MORE_USER_ID_QUERY = "&user_id=%s"
+        const val LYFT_URL = "https://evcs.com/lyft"
     }
 
     val ALLOWED_PLANS = listOf("Essential Anytime", "Standard Anytime", "Unlimited Anytime", "Unlimited Off-Peak")

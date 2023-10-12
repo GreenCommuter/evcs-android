@@ -1,16 +1,17 @@
 package org.evcs.android.features.charging
 
 import com.base.networking.retrofit.RetrofitServices
+import com.rollbar.android.Rollbar
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaginatedResponse
-import org.evcs.android.model.Payment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatusWrapper
 import org.evcs.android.model.shared.RequestError
+import org.evcs.android.model.user.RateWrapper
 import org.evcs.android.network.callback.AuthCallback
+import org.evcs.android.network.service.ChargesService
 import org.evcs.android.network.service.PaymentMethodsService
-import org.evcs.android.network.service.PaymentsService
 import org.evcs.android.network.service.StationsService
 import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.presenter.MultipleRequestsManager
@@ -90,14 +91,38 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 })
     }
 
+
+    private fun getPpkWh() {
+        getService(ChargesService::class.java).getPpkWh(getStationId()).enqueue(
+                object : AuthCallback<RateWrapper>(this) {
+                    override fun onResponseSuccessful(response: RateWrapper) {
+                        view.showChargeRate(response.rateValue)
+                    }
+
+                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                        view.showError(ErrorUtils.getError(responseBody))
+                    }
+
+                    override fun onCallFailure(t: Throwable) {
+                        view.showError(RequestError.getNetworkError())
+                    }
+                })
+    }
+
     private fun fireRequests() {
         mMultipleRequestsManager.fireRequests {
-            if (mStation == null) {
+            try {
+                if (mStation == null) {
+                    view.showStationNotFound()
+                } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
+                    view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
+                } else {
+                    view.show(mStation!!, mStatus?.currentSubscription)
+                    getPpkWh()
+                }
+            } catch (e: java.lang.NullPointerException) {
                 view.showStationNotFound()
-            } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
-                view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
-            } else {
-                view.show(mStation!!, mStatus?.currentSubscription)
+                Rollbar.instance().error("NPE in station " + (mStation?.id).toString())
             }
         }
     }

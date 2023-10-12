@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.R
-import org.evcs.android.activity.WebViewFragment
+import org.evcs.android.activity.WebViewActivity
 import org.evcs.android.databinding.ActivityBaseBinding
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
@@ -22,7 +22,7 @@ class PlansActivity : BaseActivity2() {
     override fun init() {
         if (userHasHiddenPlan()) {
             val url = String.format(BaseConfiguration.WebViews.PLANS_URL, UserUtils.getSessionToken())
-            val intent = WebViewFragment.buildIntent(this, "Plans", url, "")
+            val intent = WebViewActivity.buildIntent(this, "Plans", url, "")
             startActivity(intent)
             finish()
             return

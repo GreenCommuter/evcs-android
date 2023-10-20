@@ -342,6 +342,7 @@
 
     <!-- Search Location -->
     <string name="fragment_search_current_location">Current Location</string>
+    <string name="fragment_search_search_by_name">Search by name:</string>
 
     <!--Notifications-->
     <string name="notifications_channel_name">All notifications</string>

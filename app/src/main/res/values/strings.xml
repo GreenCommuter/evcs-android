@@ -437,8 +437,8 @@
     <string name="charging_in_progress_duration">Elapsed Time</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
-    <string name="charging_in_progress_end">End charging session</string>
-    <string name="charging_in_progress_data_delay">*Final energy delivered and rate may vary</string>
+    <string name="charging_in_progress_end">End Charging Session</string>
+    <string name="charging_in_progress_data_delay">*Final energy delivered may vary</string>
 <!--    <string name="charging_in_progress_error_title">Charging issue</string>-->
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
 

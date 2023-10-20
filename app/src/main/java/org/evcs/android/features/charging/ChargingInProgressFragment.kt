@@ -114,7 +114,9 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mBinding.chargingInProgressRate.setLabel((mSession.ongoingRate?.rateLabel?:"") + "*")
 //        mBinding.chargingInProgressRate.setText(String.format("\$%.2f/kWh", mSession.ongoingRate?.rateValue))
         mBinding.chargingInProgressRate.setText(String.format("%s/kWh", mSession.ongoingRate?.rateValue))
-        mBinding.chargingInProgressRateExplanation.showOrHide(mSession.ongoingRate?.optionalExplanation)
+        if (mSession.ongoingRate?.optionalExplanation != null) {
+            mBinding.chargingInProgressRateExplanation.showOrHide("*" + mSession.ongoingRate?.optionalExplanation)
+        }
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
     }
 

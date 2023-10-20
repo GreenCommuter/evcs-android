@@ -96,24 +96,35 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
         getService(LocationService::class.java).getLocations(mLastLocation?.latitude,
                 mLastLocation?.longitude, MILES_LIMIT, mFilterState.comingSoon, mFilterState.minKw,
                 mFilterState.getConnectorTypes())
-                .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
-                    override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
-                        val locationList: List<Location>? = response!!.page
-                        if (locationList!!.size == 0) {
-                            view.onEmptyResponse()
-                        } else {
-                            view.showLocations(locationList, viewport)
-                        }
-                    }
+                .enqueue(getLocationSearchCallback(viewport))
+    }
 
-                    override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
-                    }
+    fun searchByName(query: String) {
+        getService(LocationService::class.java).getLocations(query, mFilterState.comingSoon, mFilterState.minKw,
+                mFilterState.getConnectorTypes())
+                .enqueue(getLocationSearchCallback())
+    }
 
-                    override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
-                    }
-                })
+    fun getLocationSearchCallback(viewport: LatLngBounds? = null): AuthCallback<PaginatedResponse<Location>?> {
+        return object : AuthCallback<PaginatedResponse<Location>?>(this) {
+            override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
+                val locationList: List<Location>? = response!!.page
+                if (locationList!!.size == 0) {
+                    view.onEmptyResponse()
+                } else {
+                    view.showLocations(locationList, viewport)
+                }
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable) {
+                view.showError(RequestError.getNetworkError())
+            }
+        }
+
     }
 
 }

@@ -28,6 +28,12 @@ public interface LocationService {
                                                    @Query("min_kw") @Nullable Integer minKw,
                                                    @Query("connectors[]") @Nullable String[] connector);
 
+    @GET("/members/v1/locations")
+    Call<PaginatedResponse<Location>> getLocations(@Query("name") @Nullable String name,
+                                                   @Query("with_coming_soon") @Nullable Boolean comingSoon,
+                                                   @Query("min_kw") @Nullable Integer minKw,
+                                                   @Query("connectors[]") @Nullable String[] connector);
+
     @GET("/members/v1/locations/{id}")
     Call<Location> getLocation(@Path("id") int id);
 

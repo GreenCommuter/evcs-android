@@ -151,6 +151,11 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             override fun onLocationRemoved() {
 //                clear()
             }
+
+            override fun searchByName(query: String) {
+                showLoading()
+                presenter.searchByName(query)
+            }
         })
         mBackButton.setOnClickListener { requireActivity().finish() }
     }

@@ -162,9 +162,11 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
 
     private void onSearchByNameClick(String placeId) {
         //do this better
-        String query = placeId.split(":")[1];
+        String query = placeId.split(":")[1].trim();
         ToastUtils.show(query);
         mAddress.setText(query);
+        mClearOnDelete = true;
+        mListener.searchByName(query);
     }
 
     private void showHistory() {
@@ -324,6 +326,8 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         void onLocationChosen(@NonNull org.evcs.android.model.Location location);
 
         void onLocationRemoved();
+
+        void searchByName(String query);
     }
 
 }

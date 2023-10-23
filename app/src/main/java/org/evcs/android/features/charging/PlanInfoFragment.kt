@@ -135,7 +135,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         }
     }
 
-    private fun showIssue(issueMessage: String, issueUrl: String?, issueUrlTitle: String) {
+    private fun showIssue(issueMessage: String, issueUrl: String?, issueUrlTitle: String?) {
         mBinding.planInfoAlertMessage.setParentVisibility(true)
         mBinding.planInfoAlertMessage.text = issueMessage
         mBinding.planInfoChargeWithPayg.visibility = View.VISIBLE

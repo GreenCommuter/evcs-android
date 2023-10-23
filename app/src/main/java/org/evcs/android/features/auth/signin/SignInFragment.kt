@@ -124,7 +124,7 @@ class SignInFragment : AbstractAuthFragment<SignInPresenter>(), AuthView {
     override fun onTokenSent() {
         showLoading(false)
 //        if (hasCompletedRegistration()) {
-            (activity as AuthActivity).onAuthFinished()
+            (activity as AuthActivity?)?.onAuthFinished()
 //        } else {
 //            findNavController()
 //                .navigate(SignInFragmentDirections.actionSignInFragmentToRegisterFragmentYourCar())

@@ -132,7 +132,11 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     override fun sessionStopped() {
         hideProgressDialog()
         ToastUtils.show("Session finished")
-        ChargingNavigationController.getInstance().onSessionFinished(mSession)
+        if (::mSession.isInitialized) {
+            ChargingNavigationController.getInstance().onSessionFinished(mSession)
+        } else {
+            onBackPressed()
+        }
     }
 
     override fun onBackPressed(): Boolean {

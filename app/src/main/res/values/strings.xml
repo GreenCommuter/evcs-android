@@ -457,12 +457,13 @@
     <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>
     <string name="manage_plan_free_trial">Free Trial</string>
-    <string name="manage_plan_payment_details">Payment details</string>
+    <string name="manage_plan_payment_details">Payment Details</string>
     <string name="manage_plan_change">Change Plan</string>
     <string name="manage_plan_cancel">Cancel Plan</string>
-    <string name="manage_plan_payment_info">Payment info</string>
+    <string name="manage_plan_payment_info">Payment Info</string>
     <string name="manage_plan_change_pm">Change</string>
-    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s.</string>
+    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.</string>
+    <string name="manage_plan_payment_details_next">Your next charge is %s.</string>
     <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>

@@ -30,6 +30,7 @@ open class User : Serializable {
     var activeSubscription: Subscription? = null
     val pendingSubscription: Subscription? = null
     val previousSubscription: Subscription? = null
+    val companyId: String? = null
 
     fun getExplorePlansText(resources: Resources): CharSequence {
         if (canDoTrial())

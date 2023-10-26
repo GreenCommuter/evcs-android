@@ -18,6 +18,7 @@ import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.SubscriptionStatus
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.StringUtils
 import org.evcs.android.util.UserUtils
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -81,9 +82,17 @@ class SubscriptionFragment : ErrorFragment<SubscriptionPresenter>(), Subscriptio
     fun populateActive(response: SubscriptionStatus) {
         val date = mLongDateFormatter.print(response.renewalDate)
         val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()!!
-        mBinding.activitySubscriptionsPaymentDetails.setText(String.format(
-                getString(R.string.manage_plan_payment_details_format, defaultPm.card.brand.toPrintableString(),
-                    defaultPm.card.last4, response.price, response.renewalPeriod, date)))
+        var paymentDetailsText = getString(R.string.manage_plan_payment_details_next, date)
+        if (userPaysForPlan(response)) {
+            paymentDetailsText =
+                    getString(R.string.manage_plan_payment_details_format, StringUtils.capitalize(defaultPm.card.brand.toPrintableString()),
+                            defaultPm.card.last4, response.price, response.renewalPeriod) + "\n" + paymentDetailsText
+        } else {
+            mBinding.activitySubscriptionsPaymentDetails.setLabel("")
+            mBinding.activitySubscriptionsPaymentInfo.isVisible = false
+            mBinding.activitySubscriptionsPaymentInfoTitle.isVisible = false
+        }
+        mBinding.activitySubscriptionsPaymentDetails.setText(paymentDetailsText)
         mBinding.activitySubscriptionsPaymentInfo.setPaymentMethod(defaultPm)
 
         mBinding.activitySubscriptionsPlanStatus.text = response.status.toString()
@@ -96,6 +105,10 @@ class SubscriptionFragment : ErrorFragment<SubscriptionPresenter>(), Subscriptio
             mBinding.activitySubscriptionsPlanStatus.text = "Free Trial"
         }
         setChipColor(R.color.evcs_secondary_700)
+    }
+
+    private fun userPaysForPlan(response: SubscriptionStatus): Boolean {
+        return response.price > 0f && UserUtils.getLoggedUser().companyId == null
     }
 
     private fun populateCanceled(response: SubscriptionStatus) {

@@ -89,7 +89,14 @@ public final class LocationUtils {
         mapItemsBounds = mapItemsBounds.including(southWest);
         return mapItemsBounds;
     }
-    
+
+    public static void addDiagonal(LatLngBounds.Builder builder, LatLng latlng) {
+        LatLng northEast = new LatLng(latlng.latitude + PADDING_DEGREES, latlng.longitude + PADDING_DEGREES);
+        LatLng southWest = new LatLng(latlng.latitude - PADDING_DEGREES, latlng.longitude - PADDING_DEGREES);
+        builder.include(northEast);
+        builder.include(southWest);
+    }
+
     private static void requestLocationPermission(final Activity activity, final LocationCallback callback) {
         PermissionManager.getInstance().requestPermission(activity, new PermissionListener() {
             @Override

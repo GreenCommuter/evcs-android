@@ -100,7 +100,8 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     fun searchByName(query: String) {
-        getService(LocationService::class.java).getLocations(query, mFilterState.comingSoon, mFilterState.minKw,
+        getService(LocationService::class.java).getLocations(query, mLastLocation?.latitude,
+                mLastLocation?.longitude, mFilterState.comingSoon, mFilterState.minKw,
                 mFilterState.getConnectorTypes())
                 .enqueue(getLocationSearchCallback())
     }
@@ -112,7 +113,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                 if (locationList!!.size == 0) {
                     view.onEmptyResponse()
                 } else {
-                    view.showLocations(locationList, viewport)
+                    view.showLocations(locationList, viewport ?: getViewport(locationList))
                 }
             }
 
@@ -125,6 +126,14 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
             }
         }
 
+    }
+
+    private fun getViewport(mapItems: List<Location>): LatLngBounds {
+        val boundsBuilder = LatLngBounds.builder()
+        for (mapItem in mapItems) {
+            LocationUtils.addDiagonal(boundsBuilder, mapItem.latLng)
+        }
+        return boundsBuilder.build()
     }
 
 }

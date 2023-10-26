@@ -163,7 +163,6 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     private void onSearchByNameClick(String placeId) {
         //do this better
         String query = placeId.split(":")[1].trim();
-        ToastUtils.show(query);
         mAddress.setText(query);
         mClearOnDelete = true;
         mListener.searchByName(query);

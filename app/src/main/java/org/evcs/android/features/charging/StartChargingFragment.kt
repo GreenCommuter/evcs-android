@@ -48,6 +48,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     override fun setListeners() {
         if (ChargingNavigationController.getInstance() == null) {
             requireActivity().finish()
+            return
         }
         mListener = ChargingNavigationController.getInstance()
         mBinding.startChargingCancel.setOnClickListener { onBackPressed() }

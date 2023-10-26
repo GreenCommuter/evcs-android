@@ -81,11 +81,11 @@ class SubscriptionFragment : ErrorFragment<SubscriptionPresenter>(), Subscriptio
 
     fun populateActive(response: SubscriptionStatus) {
         val date = mLongDateFormatter.print(response.renewalDate)
-        val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()!!
+        val defaultPm = PaymentMethod.getDefaultFromSharedPrefs()
         var paymentDetailsText = getString(R.string.manage_plan_payment_details_next, date)
         if (userPaysForPlan(response)) {
             paymentDetailsText =
-                    getString(R.string.manage_plan_payment_details_format, StringUtils.capitalize(defaultPm.card.brand.toPrintableString()),
+                    getString(R.string.manage_plan_payment_details_format, StringUtils.capitalize(defaultPm!!.card.brand.toPrintableString()),
                             defaultPm.card.last4, response.price, response.renewalPeriod) + "\n" + paymentDetailsText
         } else {
             mBinding.activitySubscriptionsPaymentDetails.setLabel("")

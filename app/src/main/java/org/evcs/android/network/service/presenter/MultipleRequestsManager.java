@@ -62,7 +62,8 @@ public class MultipleRequestsManager {
 
     public void fireRequests(@Nullable MultipleRequestsCallback callback) {
         for (Call call : mCalls.keySet()) {
-            call.enqueue(mCalls.get(call));
+            if (!call.isExecuted())
+                call.enqueue(mCalls.get(call));
         }
         mCallback = callback;
     }

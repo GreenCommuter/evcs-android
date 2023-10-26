@@ -7,6 +7,9 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
+import com.base.core.util.ToastUtils
+import com.google.gson.Gson
+import com.rollbar.android.Rollbar
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
@@ -152,6 +155,12 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     protected open fun getBottomNavigationListener() {
         showProgressDialog()
+        if (PaymentMethod.getDefaultFromSharedPrefs() == null) {
+            Rollbar.instance().warning("Payment method null but button enabled")
+            ToastUtils.show("There was a problem adding your payment method, please retry")
+            activity?.finish()
+            return
+        }
         presenter.subscribe(mPlan, PaymentMethod.getDefaultFromSharedPrefs()!!.id!!)
     }
 

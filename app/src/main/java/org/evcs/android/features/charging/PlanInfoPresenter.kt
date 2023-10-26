@@ -1,6 +1,8 @@
 package org.evcs.android.features.charging
 
+import android.util.Log
 import com.base.networking.retrofit.RetrofitServices
+import com.google.gson.Gson
 import com.rollbar.android.Rollbar
 import okhttp3.ResponseBody
 import org.evcs.android.model.PaymentMethod
@@ -116,6 +118,8 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
             try {
                 if (mStation == null) {
                     view.showStationNotFound(mErrorCode, mError)
+                } else if (mStation!!.pricing == null) {
+                    npe()
                 } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
                     view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
                 } else {
@@ -127,6 +131,11 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                 Rollbar.instance().error("NPE in station " + (mStation?.id).toString())
             }
         }
+    }
+
+    private fun npe() {
+        Rollbar.instance().error(Gson().toJson(mStation))
+        view.showStationNotFound(mErrorCode, RequestError.getUnknownError())
     }
 
     fun getStationId(): Int {

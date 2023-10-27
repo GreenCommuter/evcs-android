@@ -2,6 +2,8 @@ package org.evcs.android.features.shared.places;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
 import org.evcs.android.features.map.search.SearchLocationChildFragment;
+import org.evcs.android.util.FontUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -118,11 +121,11 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                     mResultList.addAll(resultValues);
                 }
 
-                mResultNames.add(new CustomLocation(
-                        mResultList.get(0).getFullText(null).toString()));
+                SpannableString a = FontUtils.getSpannable(new String[]{mSearchByNameString, mResultList.get(0).getFullText(null).toString()}, Color.BLACK);
+                mResultNames.add(new CustomLocation(a));
 
                 mResultNames.add(new CustomLocation(
-                        mResultList.get(1).getFullText(null).toString(),
+                        mResultList.get(1).getFullText(null),
                         R.drawable.ic_map_car_location));
 
                 for (int i = 2; i < Math.min(mResultList.size(), MAX_RESULTS + 2); i++) {
@@ -173,7 +176,7 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
 
     private AutocompletePrediction getSearchByName(CharSequence query) {
         return AutocompletePrediction.builder(mSearchByNameString + " " + query)
-                .setFullText(mSearchByNameString + " " + query)
+                .setFullText(query.toString())
                 .build();
     }
 

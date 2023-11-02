@@ -145,8 +145,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
             EVCSDialogFragment.Builder()
                     .setTitle("Free Trial")
                     .setSubtitle(getString(R.string.get_plan_trial_subtitle, mPlan.trialKwh, mPlan.trialDays))
-                    .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
-                            R.drawable.layout_corners_rounded_blue, R.color.button_text_color_selector_filled)
+                    .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() }, R.style.ButtonK_Blue)
                     .show(childFragmentManager)
         }
     }

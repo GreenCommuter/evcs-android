@@ -65,6 +65,11 @@
         <item name="android:textColor">@color/button_text_color_selector_filled</item>
     </style>
 
+    <style name="ButtonK.DangerOutline">
+        <item name="android:background">@drawable/layout_corners_rounded_red_border</item>
+        <item name="android:textColor">@color/button_text_color_selector_red_outline</item>
+    </style>
+
     <style name="ButtonK.BlackOutline">
         <item name="android:background">@drawable/layout_corners_rounded_black_outline</item>
         <item name="android:textColor">@color/button_text_color_selector_black_outline</item>

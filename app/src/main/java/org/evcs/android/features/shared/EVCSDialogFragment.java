@@ -3,8 +3,6 @@ package org.evcs.android.features.shared;
 import android.os.Bundle;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
@@ -24,6 +22,7 @@ import com.rollbar.android.Rollbar;
 import org.evcs.android.EVCSApplication;
 import org.evcs.android.R;
 import org.evcs.android.databinding.EvcsDialogFragmentBinding;
+import org.evcs.android.util.ViewUtils;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -128,8 +127,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     protected Button getButton(final String label) {
         Button button = new Button(new ContextThemeWrapper(getContext(), R.style.ButtonK_Orange));
         button.setTextAppearance(getContext(), R.style.ButtonK);
-        button.setBackground(getResources().getDrawable(mButtons.get(label).background));
-        button.setTextColor(getResources().getColor(mButtons.get(label).textColor));
+        ViewUtils.INSTANCE.setStyle(button, mButtons.get(label).style);
         button.setAllCaps(mButtons.get(label).upperCase);
         LinearLayout.LayoutParams layoutParams =
             new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -277,15 +275,11 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          * @return Builder for further customization
          */
         public Builder addButton(String text, OnClickListener listener) {
-            return addButton(text, listener, R.drawable.layout_corners_rounded_orange);
+            return addButton(text, listener, R.style.ButtonK_Orange);
         }
 
-        public Builder addButton(String text, OnClickListener listener, @DrawableRes int background) {
-            return addButton(text, listener, background, R.color.button_text_color_selector_filled);
-        }
-
-        public Builder addButton(String text, OnClickListener listener, @DrawableRes int background, @ColorRes int textColor) {
-            mButtons.put(text, new ButtonInfo(false, listener, background, textColor));
+        public Builder addButton(String text, OnClickListener listener, @StyleRes int style) {
+            mButtons.put(text, new ButtonInfo(false, listener, style));
             return this;
         }
 
@@ -340,15 +334,12 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     protected static class ButtonInfo {
         OnClickListener listener;
         boolean upperCase;
-        @DrawableRes int background;
-        @ColorRes int textColor;
+        @StyleRes int style;
 
-        public ButtonInfo(boolean upperCase, OnClickListener listener, @DrawableRes int background,
-                          @ColorRes int textColor) {
+        public ButtonInfo(boolean upperCase, OnClickListener listener, @StyleRes int style) {
             this.listener = listener;
             this.upperCase = upperCase;
-            this.background = background;
-            this.textColor = textColor;
+            this.style = style;
         }
     }
 

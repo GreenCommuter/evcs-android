@@ -118,7 +118,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             .addButton(getString(R.string.app_continue), { dialog ->
                 dialog.dismiss()
                 gotoPlan(plan)
-            }, R.drawable.layout_corners_rounded_blue)
+            }, R.style.ButtonK_Blue)
             .showCancel(true)
             .show(childFragmentManager)
     }

@@ -198,8 +198,8 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
                     //TODO: handle result
                     NavigationUtils.jumpTo(this, VerifyPhoneActivity::class.java)
             },
-                R.drawable.layout_corners_rounded_blue)
-            .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.drawable.layout_corners_rounded_black_outline, R.color.button_text_color_selector_black_outline)
+                R.style.ButtonK_Blue)
+            .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.style.ButtonK_BlackOutline)
             .show(supportFragmentManager)
     }
 

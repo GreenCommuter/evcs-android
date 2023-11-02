@@ -82,4 +82,7 @@ public interface UserService {
     @DELETE("/members/v1/logout")
     Call<Void> logOut(@Query("device_token") String token);
 
+    @DELETE("/members/v1/users/destroy_me")
+    Call<Void> deleteAccount();
+
 }

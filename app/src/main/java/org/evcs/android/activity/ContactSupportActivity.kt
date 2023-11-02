@@ -76,8 +76,7 @@ class ContactSupportActivity : BaseActivity2() {
         EVCSDialogFragment.Builder()
             .setTitle("Thank you for reporting an issue!")
             .setSubtitle("Your issue has been reported to our support team. Someone will respond to you within 24-48 hours.")
-            .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
-                R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
+            .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
             .show(supportFragmentManager)
     }
 }

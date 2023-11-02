@@ -153,8 +153,7 @@ class SubscriptionFragment : ErrorFragment<SubscriptionPresenter>(), Subscriptio
         EVCSDialogFragment.Builder()
                 .setTitle(title)
                 .setSubtitle(getString(R.string.cancellation_dialog_subtitle))
-                .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() },
-                    R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
+                .addButton(getString(R.string.app_close), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
             .show(childFragmentManager)
     }
 

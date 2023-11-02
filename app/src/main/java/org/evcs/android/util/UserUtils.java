@@ -1,5 +1,6 @@
 package org.evcs.android.util;
 
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -110,6 +111,7 @@ public final class UserUtils {
         mUserService.logOut(FirebaseInstanceId.getInstance().getToken()).enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
+                deleteNotifications();
                 clearKeys();
                 jumpToMainScreen();
             }
@@ -122,6 +124,11 @@ public final class UserUtils {
                 ToastUtils.show(R.string.app_error_network);
             }
         });
+    }
+
+    public static void deleteNotifications() {
+        Context context = EVCSApplication.getInstance().getApplicationContext();
+        ((NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE)).cancelAll();
     }
 
     private static void jumpToMainScreen() {

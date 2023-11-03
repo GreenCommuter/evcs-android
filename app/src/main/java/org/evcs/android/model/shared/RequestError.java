@@ -31,7 +31,7 @@ public class RequestError {
     }
 
     public String getBody() {
-        return errorMessage;
+        return (errorMessage == null ? getUnknownError().getBody() : errorMessage);
     }
 
     public boolean isPaymentError() {

@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Charge implements Serializable {
     private int id;
     private String noodoeId;
-    private DateTime startedAt;
+    private String startedAt;
 //            "completed_at": "2020-08-13T15:01:51.000Z",
     private int locationId;
     private String locationName;
@@ -39,7 +39,7 @@ public class Charge implements Serializable {
     }
 
     public DateTime getStartedAt() {
-        return startedAt;
+        return DateTime.parse(startedAt);
     }
 
     public String getLocationName() {

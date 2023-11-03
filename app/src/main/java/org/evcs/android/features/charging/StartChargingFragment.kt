@@ -89,11 +89,11 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
                 .addButton(getString(R.string.start_charging_error_retry), {
                     fragment -> fragment.dismiss()
                     startCharging()
-                }, R.drawable.layout_corners_rounded_blue)
+                }, R.style.ButtonK_Blue)
                 .addButton(getString(R.string.start_charging_error_cancel), {
 //                    fragment -> fragment.dismiss()
                     requireActivity().finish()
-                }, R.drawable.layout_corners_rounded_blue_outline, R.color.button_text_color_selector_blue_outline)
+                }, R.style.ButtonK_BlueOutline)
                 .showCancel(getString(R.string.start_charging_error_support))
                 .withCancelOnClickListener {
                     requireActivity().finish()

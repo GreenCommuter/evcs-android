@@ -70,8 +70,8 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         return getString(R.string.braintree_title)
     }
 
-    override fun getButtonBackground(): Drawable {
-        return resources.getDrawable(R.drawable.layout_corners_rounded_orange)
+    override fun getButtonStyle(): Int {
+        return R.style.ButtonK_Orange
     }
 
     override fun getButtonText(): String {

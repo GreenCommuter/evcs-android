@@ -130,7 +130,7 @@ public final class LocationUtils {
                 .addButton(context.getString(R.string.app_continue), fragment -> {
                     launchGoogleMapsWithPin(context, latLng);
                     fragment.dismiss();
-                }, R.drawable.layout_corners_rounded_blue)
+                }, R.style.ButtonK_Blue)
                 .show(fm);
     }
 

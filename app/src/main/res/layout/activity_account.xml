@@ -54,11 +54,12 @@
 
     <TextView
         android:id="@+id/fragment_account_delete"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="@dimen/spacing_medium_extra"
         android:padding="@dimen/spacing_medium_extra"
-        android:visibility="gone"
-        android:text="@string/activity_account_delete_account"/>
+        android:text="@string/activity_account_delete_account"
+        style="@style/ButtonK.DangerOutline"/>
 
 </LinearLayout>

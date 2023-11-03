@@ -77,6 +77,7 @@ open class StandardTextField : RelativeLayout, TextInputLayoutInterface {
         mGreyBorder = resources.getDrawable(R.drawable.layout_corners_rounded_grey_border)
         mBlackBorder = resources.getDrawable(R.drawable.layout_corners_rounded_blue_outline)
         mRedBorder = resources.getDrawable(R.drawable.layout_corners_rounded_red_border)
+        binding.root.gravity = gravity
     }
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {

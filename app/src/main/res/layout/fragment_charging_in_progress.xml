@@ -12,15 +12,14 @@
         app:title="@string/charging_in_progress_title"/>
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="@dimen/padding_ariel_standard">
+            android:orientation="vertical">
 
             <VideoView
                 android:id="@+id/charging_in_progress_anim"
@@ -30,10 +29,125 @@
                 android:layout_marginBottom="@dimen/spacing_big_k"
                 android:background="@color/evcs_white"/>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:layout_marginEnd="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_medium_extra">
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                app:labelColor="@color/evcs_gray_300"
+                app:label="@string/charging_in_progress_duration"
+                android:gravity="center">
+
+                <TextView
+                    android:id="@+id/charging_in_progress_session_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="01:18:00"
+                    style="@style/Headline.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                app:labelColor="@color/evcs_gray_300"
+                app:label="@string/charging_in_progress_kwh">
+
+                <TextView
+                    android:id="@+id/charging_in_progress_energy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    tools:text="22.013 kW"
+                    style="@style/Headline.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            </LinearLayout>
+
+            <include layout="@layout/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="@dimen/spacing_medium_more"
+                android:layout_marginEnd="@dimen/spacing_medium_more"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/spacing_medium"
+            android:orientation="horizontal">
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/charging_in_progress_rate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                app:labelColor="@color/evcs_gray_300"
+                app:label="Rate/kWh*">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="$0.00/kWh"
+                    style="@style/Headline.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+            <org.evcs.android.features.shared.StandardTextFieldNoBorder
+                android:id="@+id/charging_in_progress_cost"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                app:labelColor="@color/evcs_gray_300"
+                app:label="Session Fee">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="$0.00"
+                    android:gravity="center"
+                    style="@style/Headline.Medium"/>
+
+            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
+
+        </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/charging_in_progress_data_delay"
+                android:layout_gravity="center"
+                android:textColor="@color/evcs_gray_600"
+                style="@style/Body.ExtraSmall"/>
+
+            <TextView
+                android:id="@+id/charging_in_progress_rate_explanation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="-"
+                android:textColor="@color/evcs_gray_600"
+                android:layout_marginBottom="@dimen/spacing_medium"
+                style="@style/Body.ExtraSmall"/>
+
             <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra">
+                android:layout_margin="@dimen/spacing_medium_extra"
+                android:visibility="visible">
 
                 <org.evcs.android.features.shared.StandardTextFieldNoBorder
                     android:layout_width="wrap_content"
@@ -57,88 +171,12 @@
 
             </FrameLayout>
 
-            <include layout="@layout/divider"/>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium_extra"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="@string/charging_in_progress_duration">
-
-                <TextView
-                    android:id="@+id/charging_in_progress_session_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="01:18:00"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="@string/charging_in_progress_kwh">
-
-                <TextView
-                    android:id="@+id/charging_in_progress_energy"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    tools:text="22.013 kW"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:id="@+id/charging_in_progress_rate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:label="Rate*">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$0.00/kWh"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <TextView
-                android:id="@+id/charging_in_progress_rate_explanation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"
-                android:textColor="@color/evcs_gray_400"
-                style="@style/Body.ExtraSmall"/>
-
-            <org.evcs.android.features.shared.StandardTextFieldNoBorder
-                android:id="@+id/charging_in_progress_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/spacing_medium_extra"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                app:label="Session Fee">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$0.00"
-                    style="@style/Body.Medium"/>
-
-            </org.evcs.android.features.shared.StandardTextFieldNoBorder>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/charging_in_progress_data_delay"
-                android:textColor="@color/evcs_black"
-                android:layout_marginBottom="@dimen/spacing_big_k"
-                style="@style/Body.Small"/>
-
             <org.evcs.android.features.shared.NeedHelpView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:layout_marginBottom="@dimen/spacing_big_extra_k"
+                android:visibility="visible"/>
 
         </LinearLayout>
 

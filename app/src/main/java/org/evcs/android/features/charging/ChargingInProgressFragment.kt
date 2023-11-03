@@ -114,7 +114,9 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mBinding.chargingInProgressRate.setLabel((mSession.ongoingRate?.rateLabel?:"") + "*")
 //        mBinding.chargingInProgressRate.setText(String.format("\$%.2f/kWh", mSession.ongoingRate?.rateValue))
         mBinding.chargingInProgressRate.setText(String.format("%s/kWh", mSession.ongoingRate?.rateValue))
-        mBinding.chargingInProgressRateExplanation.showOrHide(mSession.ongoingRate?.optionalExplanation)
+        if (mSession.ongoingRate?.optionalExplanation != null) {
+            mBinding.chargingInProgressRateExplanation.showOrHide("*" + mSession.ongoingRate?.optionalExplanation)
+        }
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
     }
 
@@ -132,7 +134,11 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
     override fun sessionStopped() {
         hideProgressDialog()
         ToastUtils.show("Session finished")
-        ChargingNavigationController.getInstance().onSessionFinished(mSession)
+        if (::mSession.isInitialized) {
+            ChargingNavigationController.getInstance().onSessionFinished(mSession)
+        } else {
+            onBackPressed()
+        }
     }
 
     override fun onBackPressed(): Boolean {

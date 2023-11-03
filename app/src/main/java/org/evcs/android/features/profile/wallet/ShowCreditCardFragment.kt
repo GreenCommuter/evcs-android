@@ -1,6 +1,5 @@
 package org.evcs.android.features.profile.wallet
 
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
@@ -80,8 +79,8 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
         return "Remove Card"
     }
 
-    override fun getButtonBackground(): Drawable {
-        return resources.getDrawable(R.drawable.layout_corners_rounded_danger)
+    override fun getButtonStyle(): Int {
+        return R.style.ButtonK_DangerOutline
     }
 
     override fun onNextClicked() {
@@ -91,7 +90,7 @@ class ShowCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
                 .addButton(getString(R.string.payment_method_dialog_remove_button), { fragment ->
                     presenter.removePaymentMethod(mPaymentMethod!!)
                     fragment.dismiss()
-                }, R.drawable.layout_corners_rounded_danger)
+                }, R.style.ButtonK_DangerOutline)
                 .showCancel(true)
                 .setCancelable(true)
                 .show(requireFragmentManager())

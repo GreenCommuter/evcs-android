@@ -5,6 +5,7 @@ import android.graphics.drawable.Drawable
 import android.view.View
 import android.widget.Button
 import androidx.annotation.CallSuper
+import androidx.annotation.StyleRes
 import androidx.navigation.fragment.NavHostFragment
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
@@ -16,6 +17,7 @@ import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.ViewUtils
+import org.evcs.android.util.ViewUtils.setStyle
 import org.joda.time.LocalDate
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
@@ -84,7 +86,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
     @CallSuper
     override fun setListeners() {
         mNext.setOnClickListener { onNextClicked() }
-        mNext.background = getButtonBackground()
+        mNext.setStyle(getButtonStyle())
         mNext.text = getButtonText()
     }
     protected fun getDate() : LocalDate {
@@ -102,7 +104,7 @@ abstract class AbstractCreditCardFragment : ErrorFragment<AddCreditCardPresenter
 
     abstract fun getButtonText(): String
 
-    abstract fun getButtonBackground(): Drawable
+    @StyleRes abstract fun getButtonStyle(): Int
 
     abstract fun onNextClicked()
 

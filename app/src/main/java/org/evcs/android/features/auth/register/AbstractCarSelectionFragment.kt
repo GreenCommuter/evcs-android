@@ -20,7 +20,7 @@ abstract class AbstractCarSelectionFragment<P : CarSelectionPresenter<*>> : Erro
     override fun init() {
         getMakeField().setItems<String>(ArrayList())
         getModelField().setItems<String>(ArrayList())
-        getYearField().setItems(IntRange(2000, DateTime().year).reversed().map { i -> i.toString() })
+        getYearField().setItems(IntRange(2000, DateTime().plusMonths(8).year).reversed().map { i -> i.toString() })
         presenter!!.getCars()
         setEnableButton(true)
     }

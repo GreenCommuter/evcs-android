@@ -161,7 +161,7 @@
     <string name="activity_account_name">Name</string>
     <string name="activity_account_change_password">Password</string>
     <string name="activity_account_sign_out">Sign Out</string>
-    <string name="activity_account_delete_account">Delete account</string>
+    <string name="activity_account_delete_account">Delete Account</string>
     <string name="account_fragment_email_updated">Email updated</string>
 
     <!-- Personal Information -->
@@ -180,7 +180,7 @@
     <string name="payment_method_dialog_remove_subtitle">Are you sure you want to remove this payment method?</string>
     <string name="payment_method_dialog_remove_title">Warning</string>
     <string name="payment_method_dialog_default_subtitle">Are you sure you want to set this credit card as your default payment method? Your subscriptions will be charged to this card</string>
-    <string name="payment_method_dialog_remove_button">Delete Card</string>
+    <string name="payment_method_dialog_remove_button">Remove Card</string>
     <string name="payment_method_promo_codes">Promo codes</string>
     <string name="payment_method_add_coupon">Add a new promo code</string>
     <string-array name="payment_method_balance_format">
@@ -407,7 +407,7 @@
     <string name="plan_info_upgrade_plan_dialog">Get 30 days free when you upgrade to the Standard Anytime plan!</string>
     <string name="plan_info_date_pattern">d/M/yyyy</string>
     <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then</string>
-    <string name="plan_info_peak_hours">You are charging during peak hours (%1$s - %2$s) \n You’ll be charged a flat rate of $%.2f/kWh \n Charge anytime from %2$s - %1$s at no cost\"</string>
+    <string name="plan_info_peak_hours">You are charging during peak hours (%1$s - %2$s) \n You’ll be charged a flat rate of $%3$.2f/kWh \n Charge anytime from %2$s - %1$s at no cost</string>
     <string name="plan_info_pay_as_you_go">Pay as you go</string>
     <string name="plan_info_start_charging">Start Charging</string>
     <string name="plan_info_free_title">Free Charging!</string>
@@ -437,8 +437,8 @@
     <string name="charging_in_progress_duration">Elapsed Time</string>
     <string name="charging_in_progress_status">Session Status</string>
     <string name="charging_in_progress_site">Charging Site</string>
-    <string name="charging_in_progress_end">End charging session</string>
-    <string name="charging_in_progress_data_delay">*Final energy delivered and rate may vary</string>
+    <string name="charging_in_progress_end">End Charging Session</string>
+    <string name="charging_in_progress_data_delay">*Final energy delivered may vary</string>
 <!--    <string name="charging_in_progress_error_title">Charging issue</string>-->
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
 
@@ -457,13 +457,15 @@
     <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>
     <string name="manage_plan_free_trial">Free Trial</string>
-    <string name="manage_plan_payment_details">Payment details</string>
+    <string name="manage_plan_payment_details">Payment Details</string>
     <string name="manage_plan_change">Change Plan</string>
     <string name="manage_plan_cancel">Cancel Plan</string>
-    <string name="manage_plan_payment_info">Payment info</string>
+    <string name="manage_plan_payment_info">Payment Info</string>
     <string name="manage_plan_change_pm">Change</string>
-    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.\nYour next charge is %5$s.</string>
-    <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.\nYour plan will remain active through %s.</string>
+    <string name="manage_plan_payment_details_format">Your %1$s ending in %2$s will be charged \$%3$.2f per %4$s.</string>
+    <string name="manage_plan_payment_details_next">Your next charge is %s.</string>
+    <string name="manage_plan_payment_details_format_canceled">You have canceled your plan and will not be billed again.
+        \nYour plan will remain active through %s.</string>
     <string name="manage_plan_days_remaining">%d days remaining</string>
     <string name="manage_plan_activate">Activate Plan</string>
     <string name="progress_view_text">%1$.0f/%2$s kWh used this %3$s</string>
@@ -517,8 +519,8 @@
     <string name="cancel_plan_subscription_end">Subscription End Date</string>
     <string name="cancel_plan_active_days">Active Days</string>
     <string name="cancel_plan_billing_cycle">Billing Cycle</string>
-    <string name="cancel_plan_active_until">This will end your %1$s subscription to the %2$s plan.\n
-        Your plan will stay active through the remainder of your last billing cycle and end on %3$s.</string>
+    <string name="cancel_plan_active_until">This will end your %1$s subscription to the %2$s plan.
+        \nYour plan will stay active through the remainder of your last billing cycle and end on %3$s.</string>
     <string name="cancel_plan_days_remaining">%d days remaining</string>
     <string name="cancel_plan_trial_cancel">Keep Trial</string>
     <string name="cancel_plan_trial_bold">You have %d days left in your %s trial</string>

@@ -1,5 +1,8 @@
 package org.evcs.android.model
 
+import com.base.networking.retrofit.serializer.BaseGsonBuilder
+import org.evcs.android.util.Extras
+import org.evcs.android.util.StorageUtils
 import java.io.Serializable
 
 class FilterState : Serializable {
@@ -22,6 +25,14 @@ class FilterState : Serializable {
                 && minKw == other.minKw
                 && connectorTypes == other.connectorTypes
                 && comingSoon == other.comingSoon
+    }
+
+    companion object {
+        fun getFromSharedPrefs(): FilterState? {
+            val json = StorageUtils.getStringFromSharedPreferences(Extras.MainActivity.FILTER_STATE, "")
+            val gson = BaseGsonBuilder.getBaseGsonBuilder().create()
+            return gson.fromJson(json, FilterState::class.java)
+        }
     }
 
 }

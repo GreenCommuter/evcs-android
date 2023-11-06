@@ -25,6 +25,7 @@ import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.FragmentLocationReceiver
 import org.evcs.android.util.LocationHelper
+import org.evcs.android.util.StorageUtils
 import org.evcs.android.util.ViewUtils.getStatusBarHeight
 
 
@@ -256,6 +257,11 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     override fun onResume() {
         super.onResume()
         if (mIsMapShowing) showMap() else hideMap()
+    }
+
+    override fun onPause() {
+        StorageUtils.storeInSharedPreferences(Extras.MainActivity.FILTER_STATE, presenter.mFilterState)
+        super.onPause()
     }
 
 }

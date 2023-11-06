@@ -135,6 +135,7 @@ public final class UserUtils {
         StorageUtils.clearKey(USER_PREF);
         StorageUtils.clearKey(USER_SESSION_PREF);
         StorageUtils.clearKey(Extras.ChangePaymentMethod.PAYMENT_METHODS);
+        StorageUtils.clearKey(Extras.MainActivity.FILTER_STATE);
         StorageUtils.clearKey(Extras.SearchActivity.HISTORY);
     }
 

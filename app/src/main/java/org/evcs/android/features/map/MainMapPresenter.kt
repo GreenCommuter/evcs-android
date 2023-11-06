@@ -76,6 +76,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     }
 
     fun getInitialLocations(latlng : LatLng? = null) {
+        mFilterState = FilterState.getFromSharedPrefs() ?: FilterState()
         getInitialLocations(latlng, mFilterState.comingSoon, mFilterState.minKw,
                 mFilterState.getConnectorTypes());
     }

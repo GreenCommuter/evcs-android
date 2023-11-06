@@ -16,6 +16,7 @@ public class Extras {
 
     public static class MainActivity {
         public static final String IS_BOTTOM = "is_bottom";
+        public static final String FILTER_STATE = "filter_state";
     }
 
     public static final class LocationActivity {

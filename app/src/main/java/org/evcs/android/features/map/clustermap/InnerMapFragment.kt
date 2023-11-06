@@ -69,6 +69,7 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
             toggleContainerSelection(location)
         //Ex: markers didn't load
         else {
+            addSingleItem(location)
             applyCameraUpdate(CameraUpdateFactory.newLatLngZoom(location.latLng, 18f))
             mParent.onLocationClicked(location, true)
         //            getLocations()

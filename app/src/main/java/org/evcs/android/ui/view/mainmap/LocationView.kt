@@ -68,7 +68,7 @@ class LocationView : LinearLayout {
         }
 
         if (!TextUtils.isEmpty(location.gatecode)) {
-            mBinding.viewLocationGatecode.text = context.getString(R.string.location_view_gatecode) + location.gatecode
+            mBinding.viewLocationGatecode.text = context.getString(R.string.location_view_gatecode, location.gatecode)
             mBinding.viewLocationGatecode.visibility = VISIBLE
         }
         mBinding.viewLocationHint.text = location.directions

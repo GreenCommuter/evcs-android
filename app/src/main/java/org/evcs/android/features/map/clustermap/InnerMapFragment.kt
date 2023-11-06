@@ -93,7 +93,7 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         showMapItems(response)
     }
 
-    fun zoomToLocations(locations: List<Location>, nullableViewport: LatLngBounds?) {
+    fun zoomToClosest(locations: List<Location>, nullableViewport: LatLngBounds?) {
         val closest = locations[0].latLng
         val viewport = nullableViewport ?: LocationUtils.addDiagonal(LatLngBounds(closest, closest))
         if (viewport.contains(closest)) {
@@ -104,8 +104,15 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         }
     }
 
+    fun zoomToLocations(locations: List<Location>) {
+        val builder = LatLngBounds.builder()
+        locations.forEach { location -> builder.include(location.latLng) }
+        applyCameraUpdate(CameraUpdateFactory
+                .newLatLngBounds(LocationUtils.addDiagonal(builder.build()), 100))
+    }
+
     override fun showMapItems(mapItems: List<Location?>) {
-        clearMap()
+//        clearMap()
         super.showMapItems(mapItems)
     }
 

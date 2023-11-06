@@ -126,15 +126,17 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
             @Override
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 String placeId = mAdapter.getPlaceId(position);
-                if (position == 0) {
-                    onSearchByNameClick(placeId);
-                    return;
-                }
                 org.evcs.android.model.Location location = findInLocationHistory(placeId);
-                if (location == null)
-                    getPresenter().getPlaceFromId(placeId);
-                else
+                if (location == null) {
+                    if (position == 0) {
+                        onSearchByNameClick(placeId);
+                    } else {
+                        getPresenter().getPlaceFromId(placeId);
+                    }
+                } else {
+                    mClearOnDelete = true;
                     mListener.onLocationChosen(location);
+                }
             }
         });
         mAddress.addTextChangedListener(new TextWatcher() {
@@ -166,6 +168,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setText(query);
         mClearOnDelete = true;
         mListener.searchByName(query);
+        KeyboardUtils.hideKeyboard(getActivity());
     }
 
     private void showHistory() {
@@ -317,6 +320,11 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     public void setDefault(String defaultText) {
         mDefaultText = defaultText;
     }
+
+//    public void setText(String text) {
+//        mAddress.setText(text);
+//        mAddress.setSelection(text.length());
+//    }
 
     public interface ISearchLocationListener {
 

@@ -46,7 +46,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                     mCachedLocations = response?.page
                     if (mCachedLocations!!.isEmpty() && latlng?.latitude != BaseConfiguration.Map.DEFAULT_LATITUDE)
                         retryInitialLocations(comingSoon, minKw, connector)
-                    else view.showInitialLocations(populateDistances(mCachedLocations!!), latlng != null)
+                    else view.showInitialLocations(populateDistances(latlng, mCachedLocations!!), latlng != null)
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -67,10 +67,10 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
         getInitialLocations(LatLng(BaseConfiguration.Map.DEFAULT_LATITUDE, BaseConfiguration.Map.DEFAULT_LONGITUDE), comingSoon, minKw, connector)
     }
 
-    fun populateDistances(locations: List<Location>): List<Location> {
+    fun populateDistances(origin: LatLng?, locations: List<Location>): List<Location> {
         locations.forEach { location ->
             location.distance =
-                if (mLastLocation != null) LocationUtils.distance(location.latLng, mLastLocation) else null
+                if (origin != null) LocationUtils.distance(location.latLng, origin) else null
         }
         return locations
     }
@@ -97,7 +97,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                         mCachedLocations = response?.page
 //                        if (mCachedLocations!!.isEmpty() && latlng?.latitude != BaseConfiguration.Map.DEFAULT_LATITUDE)
 //                            retryInitialLocations(comingSoon, minKw, connector)
-                        view.showFilterResult(populateDistances(mCachedLocations!!), mLastLocation != null || !mFilterState.isEmpty())
+                        view.showFilterResult(populateDistances(mLastLocation, mCachedLocations!!), mLastLocation != null || !mFilterState.isEmpty())
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -115,18 +115,18 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
         getLocationsWithFilters()
     }
 
-    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
-        mLastLocation = latlng
-        mNameQuery = null
-        searchFromQuery(viewport)
-    }
+//    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
+//        mLastLocation = latlng
+//        searchFromQuery(viewport)
+//    }
 
     /**
      * @param viewport: bounds for the map to show the locations
      */
-    fun searchFromQuery(viewport: LatLngBounds?) {
-        getService(LocationService::class.java).getLocations(null, mLastLocation?.latitude,
-                mLastLocation?.longitude, MILES_LIMIT, mFilterState.comingSoon, mFilterState.minKw,
+    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
+        mNameQuery = null
+        getService(LocationService::class.java).getLocations(null, latlng.latitude,
+                latlng.longitude, MILES_LIMIT, mFilterState.comingSoon, mFilterState.minKw,
                 mFilterState.getConnectorTypes())
                 .enqueue(getLocationSearchCallback(viewport))
 5    }

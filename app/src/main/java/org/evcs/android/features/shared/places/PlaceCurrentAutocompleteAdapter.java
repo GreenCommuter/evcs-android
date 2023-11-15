@@ -2,6 +2,8 @@ package org.evcs.android.features.shared.places;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,7 @@ import com.google.android.libraries.places.api.model.AutocompletePrediction;
 import org.evcs.android.BaseConfiguration;
 import org.evcs.android.R;
 import org.evcs.android.features.map.search.SearchLocationChildFragment;
+import org.evcs.android.util.FontUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,13 +36,16 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
     private final ArrayList<CustomLocation> mResultNames;
     private PlaceCurrentAutocompleteAdapter.AutocompleteListener mListener;
     private String mCurrentLocationString;
+    private String mSearchByNameString;
 
-    public PlaceCurrentAutocompleteAdapter(Context context, PlacesRequestPresenter presenter, String currentLocationString) {
+    public PlaceCurrentAutocompleteAdapter(Context context, PlacesRequestPresenter presenter,
+                                           String currentLocationString, String searchByNameString) {
         super(context, R.layout.adapter_autocomplete_custom, R.id.adapter_autocomplete_custom_text);
         mPresenter = presenter;
         mResultList = new ArrayList<>();
         mResultNames = new ArrayList<>();
         mCurrentLocationString = currentLocationString;
+        mSearchByNameString = searchByNameString;
     }
 
     public PlaceCurrentAutocompleteAdapter setListener(PlaceCurrentAutocompleteAdapter.AutocompleteListener listener) {
@@ -107,31 +113,32 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
                 mResultNames.clear();
                 if (resultValues == null) {
                     // Current Location is the default value
-                    results.count = 1;
+                    results.count = 2;
                 } else {
-                    results.count = resultValues.size() + 1;
-                    mResultList.add(0, getCurrentLocationPrediction());
+                    results.count = resultValues.size() + 2;
+                    mResultList.add(0, getSearchByName(query));
+                    mResultList.add(1, getCurrentLocationPrediction());
                     mResultList.addAll(resultValues);
                 }
 
+                SpannableString a = FontUtils.getSpannable(new String[]{mSearchByNameString, mResultList.get(0).getFullText(null).toString()}, Color.BLACK);
+                mResultNames.add(new CustomLocation(a));
 
-                for (int i = 0; i < Math.min(mResultList.size(), MAX_RESULTS); i++) {
-                    if (i == 0) {
-                        mResultNames.add(new CustomLocation(
-                                mResultList.get(i).getFullText(null).toString(),
-                                R.drawable.ic_map_car_location));
-                    } else {
-                        mResultNames.add(new CustomLocation(mResultList.get(i).getFullText(null).toString()));
-                    }
+                mResultNames.add(new CustomLocation(
+                        mResultList.get(1).getFullText(null),
+                        R.drawable.ic_map_car_location));
+
+                for (int i = 2; i < Math.min(mResultList.size(), MAX_RESULTS + 2); i++) {
+                    mResultNames.add(new CustomLocation(mResultList.get(i).getFullText(null).toString()));
                 }
 
-                if (mListener != null) {
-                    if (mResultList.isEmpty()) {
-                        mListener.onResultsRetrieved(null);
-                    } else {
-                        mListener.onResultsRetrieved(mResultList.get(0).getPlaceId());
-                    }
-                }
+//                if (mListener != null) {
+//                    if (mResultList.isEmpty()) {
+//                        mListener.onResultsRetrieved(null);
+//                    } else {
+//                        mListener.onResultsRetrieved(mResultList.get(0).getPlaceId());
+//                    }
+//                }
 
                 return results;
             }
@@ -154,8 +161,9 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
         mResultList.clear();
         mResultNames.clear();
         for (int i = 0; i < Math.min(history.size(), MAX_RESULTS); i++) {
-           mResultNames.add(new CustomLocation(history.get(i).location.getName(), R.drawable.ic_clock_light_blue));
-           mResultList.add(AutocompletePrediction.builder(history.get(i).key).setFullText(history.get(i).location.getName()).build());
+           String name = history.get(i).location.getName();
+           mResultNames.add(new CustomLocation(name, R.drawable.ic_clock_light_blue));
+           mResultList.add(AutocompletePrediction.builder(history.get(i).key).setFullText(name).build());
         }
         return mResultList.size();
     }
@@ -163,6 +171,12 @@ public class PlaceCurrentAutocompleteAdapter extends ArrayAdapter<CustomLocation
     private AutocompletePrediction getCurrentLocationPrediction() {
         return AutocompletePrediction.builder(mCurrentLocationString)
                 .setFullText(mCurrentLocationString)
+                .build();
+    }
+
+    private AutocompletePrediction getSearchByName(CharSequence query) {
+        return AutocompletePrediction.builder(mSearchByNameString + " " + query)
+                .setFullText(query.toString())
                 .build();
     }
 

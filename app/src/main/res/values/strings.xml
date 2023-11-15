@@ -342,6 +342,7 @@
 
     <!-- Search Location -->
     <string name="fragment_search_current_location">Current Location</string>
+    <string name="fragment_search_search_by_name">Search by name:</string>
 
     <!--Notifications-->
     <string name="notifications_channel_name">All notifications</string>
@@ -397,7 +398,7 @@
     <!-- Location View -->
     <string name="location_view_ac_price_format">Member Price, Level 2 Charger: \$%.2f/kWh</string>
     <string name="location_view_dc_price_format">Member Price, DC Fast Charger: $%.2f/kWh</string>
-    <string name="location_view_gatecode">Gatecode: </string>
+    <string name="location_view_gatecode">Gate code: %s</string>
 
     <!-- Plan info -->
     <string name="plan_info_title">Start Charging</string>

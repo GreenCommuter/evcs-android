@@ -141,6 +141,8 @@ public final class UserUtils {
         sToken = null;
         StorageUtils.clearKey(USER_PREF);
         StorageUtils.clearKey(USER_SESSION_PREF);
+        StorageUtils.clearKey(Extras.ChangePaymentMethod.PAYMENT_METHODS);
+        StorageUtils.clearKey(Extras.SearchActivity.HISTORY);
     }
 
     /**

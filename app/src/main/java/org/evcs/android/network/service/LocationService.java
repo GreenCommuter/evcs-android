@@ -21,7 +21,8 @@ public interface LocationService {
                                                    @Query("connectors[]") @Nullable String[] connector);
 
     @GET("/members/v1/locations")
-    Call<PaginatedResponse<Location>> getLocations(@Query("latitude") @Nullable Double latitude,
+    Call<PaginatedResponse<Location>> getLocations(@Query("search") @Nullable String name,
+                                                   @Query("latitude") @Nullable Double latitude,
                                                    @Query("longitude") @Nullable Double longitude,
                                                    @Query("miles") int miles,
                                                    @Query("with_coming_soon") @Nullable Boolean comingSoon,

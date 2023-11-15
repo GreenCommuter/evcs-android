@@ -48,6 +48,7 @@ import java.util.Objects;
 public class SearchLocationChildFragment extends LoadingFragment<SearchLocationChildPresenter> implements ISearchLocationView {
 
     private String mCurrentLocationString;
+    private String mSearchByName;
     private String mNoLocationTitlePath;
     private String mNoLocationSubtitlePath;
     private String mNoPermissionsSubtitlePath;
@@ -75,7 +76,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     @Override
     public void init() {
         mAdapter = new PlaceCurrentAutocompleteAdapter(getContext(), getPresenter().getPlacesPresenter(),
-                mCurrentLocationString);
+                mCurrentLocationString, mSearchByName);
         mAddress.setAdapter(mAdapter);
         mAddress.setText(mDefaultText);
         if (mHint != null)
@@ -89,6 +90,7 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
     public void setUi(View v) {
         FragmentSearchLocationChildBinding binding = FragmentSearchLocationChildBinding.bind(v);
         mCurrentLocationString = getString(R.string.fragment_search_current_location);
+        mSearchByName = getString(R.string.fragment_search_search_by_name);
         mNoLocationTitlePath = getString(R.string.carsharing_location_error_title_path);
         mNoLocationSubtitlePath = getString(R.string.carsharing_location_error_subtitle_path);
         mNoPermissionsSubtitlePath = getString(R.string.carsharing_gps_permissions_error_subtitle_path);
@@ -125,10 +127,16 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
             public void onItemClick(AdapterView parent, View view, int position, long id) {
                 String placeId = mAdapter.getPlaceId(position);
                 org.evcs.android.model.Location location = findInLocationHistory(placeId);
-                if (location == null)
-                    getPresenter().getPlaceFromId(placeId);
-                else
+                if (location == null) {
+                    if (position == 0) {
+                        onSearchByNameClick(placeId);
+                    } else {
+                        getPresenter().getPlaceFromId(placeId);
+                    }
+                } else {
+                    mClearOnDelete = true;
                     mListener.onLocationChosen(location);
+                }
             }
         });
         mAddress.addTextChangedListener(new TextWatcher() {
@@ -152,6 +160,15 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mAddress.setOnFocusChangeListener((v, hasFocus) -> {
             if (hasFocus) showHistory();
         });
+    }
+
+    private void onSearchByNameClick(String placeId) {
+        //do this better
+        String query = placeId.split(":")[1].trim();
+        mAddress.setText(query);
+        mClearOnDelete = true;
+        mListener.searchByName(query);
+        KeyboardUtils.hideKeyboard(getActivity());
     }
 
     private void showHistory() {
@@ -304,6 +321,11 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         mDefaultText = defaultText;
     }
 
+//    public void setText(String text) {
+//        mAddress.setText(text);
+//        mAddress.setSelection(text.length());
+//    }
+
     public interface ISearchLocationListener {
 
         void onLatLngChosen(@NonNull String address, @NonNull LatLng latLng, LatLngBounds viewport);
@@ -311,6 +333,8 @@ public class SearchLocationChildFragment extends LoadingFragment<SearchLocationC
         void onLocationChosen(@NonNull org.evcs.android.model.Location location);
 
         void onLocationRemoved();
+
+        void searchByName(String query);
     }
 
 }

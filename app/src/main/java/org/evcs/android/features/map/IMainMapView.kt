@@ -9,4 +9,5 @@ interface IMainMapView : IErrorView {
     fun showLocations(response: List<Location>, viewport: LatLngBounds?)
     fun showInitialLocations(response: List<Location>, showInList: Boolean)
     fun onEmptyResponse()
+    fun showFilterResult(response: List<Location>, showInList: Boolean)
 }

@@ -109,9 +109,12 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
     }
 
     override fun showSubscriptionIssue(subscription: Subscription) {
-        val issueText = subscription.issueMessage
+        var issueText = subscription.issueMessage
         val buttonText = if (subscription.isSuspended) getString(R.string.profile_subscription_issue_button)
                          else null
+        if (issueText.contains("minutes in between charges")) {
+            issueText = issueText.split(".")[0] + "."
+        }
         setIssue(issueText, buttonText) { goToActivity(WalletActivity::class.java) }
     }
 

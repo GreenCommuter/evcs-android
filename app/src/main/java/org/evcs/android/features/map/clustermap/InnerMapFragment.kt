@@ -3,6 +3,7 @@ package org.evcs.android.features.map.clustermap
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import com.google.android.gms.maps.CameraUpdate
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
@@ -68,6 +69,7 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
             toggleContainerSelection(location)
         //Ex: markers didn't load
         else {
+            addSingleItem(location)
             applyCameraUpdate(CameraUpdateFactory.newLatLngZoom(location.latLng, 18f))
             mParent.onLocationClicked(location, true)
         //            getLocations()
@@ -93,19 +95,35 @@ class InnerMapFragment : ClusterSelectionMapFragment<InnerMapPresenter, Location
         showMapItems(response)
     }
 
-    fun zoomToLocations(locations: List<Location>, nullableViewport: LatLngBounds?) {
+    fun zoomToClosest(locations: List<Location>, nullableViewport: LatLngBounds?) {
         val closest = locations[0].latLng
         val viewport = nullableViewport ?: LocationUtils.addDiagonal(LatLngBounds(closest, closest))
         if (viewport.contains(closest)) {
-            applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport, 20))
+            applyCameraUpdate2(CameraUpdateFactory.newLatLngBounds(viewport, 20))
         } else {
             //I want to try to make sure that at least something is shown, and if there is a single point it may get clustered
-            applyCameraUpdate(CameraUpdateFactory.newLatLngBounds(viewport.including(closest), 200))
+            applyCameraUpdate2(CameraUpdateFactory.newLatLngBounds(viewport.including(closest), 200))
         }
     }
 
+    fun zoomToLocations(locations: List<Location>) {
+        val builder = LatLngBounds.builder()
+        locations.forEach { location -> builder.include(location.latLng) }
+        applyCameraUpdate2(CameraUpdateFactory
+                .newLatLngBounds(LocationUtils.addDiagonal(builder.build()), 100))
+    }
+
+    private fun applyCameraUpdate2(newLatLngBounds: CameraUpdate) {
+        mapView?.getMapAsync {
+            map -> map.setOnMapLoadedCallback {
+                applyCameraUpdate(newLatLngBounds)
+            }
+        }
+    }
+
+
     override fun showMapItems(mapItems: List<Location?>) {
-        clearMap()
+//        clearMap()
         super.showMapItems(mapItems)
     }
 

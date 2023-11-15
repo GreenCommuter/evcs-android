@@ -1,5 +1,6 @@
 package org.evcs.android.features.charging
 
+import android.view.Gravity
 import android.view.View
 import com.base.core.util.NavigationUtils
 import com.base.core.util.ToastUtils
@@ -85,7 +86,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
         mBinding.startChargingImage.stopPlayback()
         EVCSDialogFragment.Builder()
                 .setTitle(getString(R.string.start_charging_error_title))
-                .setSubtitle(getString(R.string.start_charging_error_subtitle))
+                .setSubtitle(getString(R.string.start_charging_error_subtitle), Gravity.CENTER)
                 .addButton(getString(R.string.start_charging_error_retry), {
                     fragment -> fragment.dismiss()
                     startCharging()

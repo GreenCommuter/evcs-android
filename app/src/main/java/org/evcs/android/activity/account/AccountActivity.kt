@@ -72,7 +72,6 @@ class AccountActivity : BaseActivity2(), DeleteAccountView {
 
     override fun onAccountDeleted() {
         ToastUtils.show("Your account has been deleted")
-        UserUtils.logout(null)
     }
 
     override fun showError(requestError: RequestError) {

@@ -149,7 +149,12 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             }
 
             override fun onLocationRemoved() {
-//                clear()
+                presenter?.onLocationRemoved()
+            }
+
+            override fun searchByName(query: String) {
+                showLoading()
+                presenter.searchByName(query)
             }
         })
         mBackButton.setOnClickListener { requireActivity().finish() }
@@ -197,6 +202,11 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
             showHistoryInList()
     }
 
+    override fun showFilterResult(response: List<Location>, showInList: Boolean) {
+        showInitialLocations(response, showInList)
+        mInnerMapFragment.zoomToLocations(response)
+    }
+
     private fun showHistoryInList() {
         val history = SearchLocationChildFragment.getLocationHistory().map { item -> item.location }
         if (history.size > 0)
@@ -206,7 +216,7 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
     override fun showLocations(response: List<Location>, viewport: LatLngBounds?) {
         hideLoading()
         mListFragment.showLocations(response, null)
-        mInnerMapFragment.zoomToLocations(response, viewport)
+        mInnerMapFragment.zoomToClosest(response, viewport)
     }
 
     private fun onLocationChosen(address: String, latLng: LatLng, viewport: LatLngBounds?) {

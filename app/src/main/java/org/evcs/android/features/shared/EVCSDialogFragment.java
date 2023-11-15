@@ -9,6 +9,7 @@ import androidx.annotation.StyleRes;
 import androidx.fragment.app.FragmentManager;
 
 import android.view.ContextThemeWrapper;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -52,6 +53,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     private OnClickListener mCancelOnClickListener;
     private boolean mLogParams;
     private @StyleRes int mTitleAppearance;
+    private int mSubtitleGravity;
 
     @Override
     public void init() {
@@ -88,6 +90,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         mTitle.setTextAppearance(getContext(), mTitleAppearance);
         mSubtitle.setText(mSubtitleResource);
         mSubtitle.setVisibility(mSubtitleResource == null ? View.GONE : View.VISIBLE);
+        mSubtitle.setGravity(mSubtitleGravity);
 
         try {
             for (View v : mViews) {
@@ -169,7 +172,8 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         return button;
     }
 
-    protected void setParams(String titleResource, @StyleRes int titleAppearance, String subtitleResource,
+    protected void setParams(String titleResource, @StyleRes int titleAppearance,
+                             String subtitleResource, int subtitleGravity,
                              Map<String, ButtonInfo> buttons, List<View> views, String cancel,
                              OnClickListener cancelOnClickListener, boolean cancelable) {
         if (mLogParams) {
@@ -178,6 +182,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         mTitleResource = titleResource;
         mTitleAppearance = titleAppearance;
         mSubtitleResource = subtitleResource;
+        mSubtitleGravity = subtitleGravity;
         mButtons = buttons;
         mViews = views;
         mCancel = cancel;
@@ -199,6 +204,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         protected String mTitleResource;
         protected @StyleRes int mTitleAppearance;
         protected String mSubtitleResource;
+        protected int mSubtitleGravity;
         protected String mCancel;
         protected OnClickListener mCancelOnClickListener;
         protected boolean mCancelable = true;
@@ -228,7 +234,12 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          * @return Builder for further customization
          */
         public Builder setSubtitle(String subtitle) {
+            return setSubtitle(subtitle, Gravity.START);
+        }
+
+        public Builder setSubtitle(String subtitle, int gravity) {
             mSubtitleResource = subtitle;
+            mSubtitleGravity = gravity;
             return this;
         }
 
@@ -314,8 +325,8 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          */
         public EVCSDialogFragment build() {
             EVCSDialogFragment fragment = new EVCSDialogFragment();
-            fragment.setParams(mTitleResource, mTitleAppearance, mSubtitleResource, mButtons, mViews,
-                    mCancel, mCancelOnClickListener, mCancelable);
+            fragment.setParams(mTitleResource, mTitleAppearance, mSubtitleResource, mSubtitleGravity,
+                    mButtons, mViews, mCancel, mCancelOnClickListener, mCancelable);
             return fragment;
         }
 

@@ -21,6 +21,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
     private val MILES_LIMIT: Int = 200
     var mCachedLocations: List<Location>? = null
     var mFilterState: FilterState = FilterState()
+    var mNameQuery: String? = null
     var mLastLocation: LatLng? = null
 
     /**
@@ -45,7 +46,7 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                     mCachedLocations = response?.page
                     if (mCachedLocations!!.isEmpty() && latlng?.latitude != BaseConfiguration.Map.DEFAULT_LATITUDE)
                         retryInitialLocations(comingSoon, minKw, connector)
-                    else view.showInitialLocations(populateDistances(mCachedLocations!!), latlng != null)
+                    else view.showInitialLocations(populateDistances(latlng, mCachedLocations!!), latlng != null)
                 }
 
                 override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -66,10 +67,10 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
         getInitialLocations(LatLng(BaseConfiguration.Map.DEFAULT_LATITUDE, BaseConfiguration.Map.DEFAULT_LONGITUDE), comingSoon, minKw, connector)
     }
 
-    fun populateDistances(locations: List<Location>): List<Location> {
+    fun populateDistances(origin: LatLng?, locations: List<Location>): List<Location> {
         locations.forEach { location ->
             location.distance =
-                if (mLastLocation != null) LocationUtils.distance(location.latLng, mLastLocation) else null
+                if (origin != null) LocationUtils.distance(location.latLng, origin) else null
         }
         return locations
     }
@@ -81,29 +82,22 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
 
     fun onFilterResult(result: FilterState) {
         mFilterState = result
-        getInitialLocations()
+        getLocationsWithFilters()
     }
 
-    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
-        mLastLocation = latlng
-        searchFromQuery(viewport)
-    }
-
-    /**
-     * @param viewport: bounds for the map to show the locations
-     */
-    fun searchFromQuery(viewport: LatLngBounds?) {
-        getService(LocationService::class.java).getLocations(mLastLocation?.latitude,
-                mLastLocation?.longitude, MILES_LIMIT, mFilterState.comingSoon, mFilterState.minKw,
-                mFilterState.getConnectorTypes())
+    fun getLocationsWithFilters() {
+        getService(LocationService::class.java).getLocations(mNameQuery, mLastLocation?.latitude, mLastLocation?.longitude, MILES_LIMIT,
+                mFilterState.comingSoon, mFilterState.minKw, mFilterState.getConnectorTypes())
                 .enqueue(object : AuthCallback<PaginatedResponse<Location>?>(this) {
                     override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
-                        val locationList: List<Location>? = response!!.page
-                        if (locationList!!.size == 0) {
+                        if (response?.page?.isEmpty() == true) {
                             view.onEmptyResponse()
-                        } else {
-                            view.showLocations(locationList, viewport)
+                            return
                         }
+                        mCachedLocations = response?.page
+//                        if (mCachedLocations!!.isEmpty() && latlng?.latitude != BaseConfiguration.Map.DEFAULT_LATITUDE)
+//                            retryInitialLocations(comingSoon, minKw, connector)
+                        view.showFilterResult(populateDistances(mLastLocation, mCachedLocations!!), mLastLocation != null || !mFilterState.isEmpty())
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -114,6 +108,64 @@ class MainMapPresenter(viewInstance: IMainMapView?, services: RetrofitServices?)
                         view.showError(RequestError.getNetworkError())
                     }
                 })
+    }
+
+    fun searchByName(query: String) {
+        mNameQuery = query
+        getLocationsWithFilters()
+    }
+
+//    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
+//        mLastLocation = latlng
+//        searchFromQuery(viewport)
+//    }
+
+    /**
+     * @param viewport: bounds for the map to show the locations
+     */
+    fun searchFromQuery(latlng: LatLng, viewport: LatLngBounds?) {
+        mNameQuery = null
+        getService(LocationService::class.java).getLocations(null, latlng.latitude,
+                latlng.longitude, MILES_LIMIT, mFilterState.comingSoon, mFilterState.minKw,
+                mFilterState.getConnectorTypes())
+                .enqueue(getLocationSearchCallback(viewport))
+5    }
+
+    fun getLocationSearchCallback(viewport: LatLngBounds? = null): AuthCallback<PaginatedResponse<Location>?> {
+        return object : AuthCallback<PaginatedResponse<Location>?>(this) {
+            override fun onResponseSuccessful(response: PaginatedResponse<Location>?) {
+                val locationList: List<Location>? = response!!.page
+                if (locationList!!.size == 0) {
+                    view.onEmptyResponse()
+                } else {
+                    view.showLocations(locationList, viewport ?: getViewport(locationList))
+                }
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable) {
+                view.showError(RequestError.getNetworkError())
+            }
+        }
+
+    }
+
+    private fun getViewport(mapItems: List<Location>): LatLngBounds {
+        val boundsBuilder = LatLngBounds.builder()
+        for (mapItem in mapItems) {
+            LocationUtils.addDiagonal(boundsBuilder, mapItem.latLng)
+        }
+        return boundsBuilder.build()
+    }
+
+    fun onLocationRemoved() {
+        if (mNameQuery != null) {
+            getInitialLocations(mLastLocation)
+        }
+        mNameQuery = null
     }
 
 }

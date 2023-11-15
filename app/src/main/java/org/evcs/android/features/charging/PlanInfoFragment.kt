@@ -2,6 +2,7 @@ package org.evcs.android.features.charging
 
 import android.content.Intent
 import android.net.Uri
+import android.view.Gravity
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
@@ -13,6 +14,7 @@ import org.evcs.android.activity.ChargingActivity
 import org.evcs.android.databinding.FragmentPlanInfoBinding
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.profile.wallet.WalletActivity
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
@@ -219,7 +221,14 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     private fun goToStartCharging() {
-        mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
+        EVCSDialogFragment.Builder()
+            .setTitle("Are you connected?")
+            .setSubtitle("Please plug the charging connector into your vehicle.", Gravity.CENTER)
+            .addButton("Yes, Start Charging", {
+                mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
+            }, R.style.ButtonK_Blue)
+            .showCancel(true)
+            .show(childFragmentManager)
     }
 
 }

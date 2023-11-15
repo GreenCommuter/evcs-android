@@ -11,8 +11,8 @@ android {
         applicationId "org.evcs.android"
         minSdkVersion 21
         targetSdkVersion 33
-        versionCode 17
-        versionName "1.0.6"
+        versionCode 20
+        versionName "1.1.0"
         multiDexEnabled true
 //        javaCompileOptions {
 //            annotationProcessorOptions {

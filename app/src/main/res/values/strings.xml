@@ -536,7 +536,7 @@
     <string name="survey_title">Cancel plan</string>
     <string name="survey_love_feedback">We’d love your feedback!</string>
     <string name="survey_subtitle">We’re always looking to improve your experience. Please let us know why you’ve decided to cancel your plan:</string>
-    <string name="survey_confirm">Confirm cancelation</string>
+    <string name="survey_confirm">Confirm Cancelation</string>
 
     <!-- Plan Learn More -->
     <string name="plan_learn_more_unrestricted_network_access">Unrestricted network access in CA, OR, WA</string>

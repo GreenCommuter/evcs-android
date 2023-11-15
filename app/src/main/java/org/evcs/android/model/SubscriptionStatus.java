@@ -17,8 +17,6 @@ public class SubscriptionStatus implements Serializable {
     public String issueMessage;
     public String accountUrl;
 //                    "issue_title": null
-//                    "issue_url_title": null
-//                    "issue_url": null,
     public String renewalPeriod;
     public float price;
 //                    "plan_icon_url": "https://media.evcs.com/plan.png"

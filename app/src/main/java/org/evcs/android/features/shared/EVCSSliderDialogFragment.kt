@@ -68,8 +68,8 @@ class EVCSSliderDialogFragment : EVCSDialogFragment() {
         override fun build(): EVCSSliderDialogFragment {
             val fragment = EVCSSliderDialogFragment()
             fragment.setParams(
-                mTitleResource, mTitleAppearance, mSubtitleResource, mButtons, mViews,
-                mCancel, mCancelOnClickListener, mCancelable
+                mTitleResource, mTitleAppearance, mSubtitleResource, mSubtitleGravity,
+                    mButtons, mViews, mCancel, mCancelOnClickListener, mCancelable
             )
             fragment.setShowDivider(mShowDivider)
             return fragment

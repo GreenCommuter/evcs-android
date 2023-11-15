@@ -82,7 +82,7 @@ class ProfileFragment : ErrorFragment<ProfilePresenter>(), ProfileView {
 
         mBinding.profileMenuSubscriptionPlan.isVisible = subscription != null
         mBinding.profilePlanProgress.isVisible = subscription != null
-        mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
+//        mBinding.profileIssueButton.setParentVisibility(subscription?.issue ?: false)
         mBinding.profileIssueButton.isVisible = subscription?.isSuspended ?: false
         mBinding.profileIssueButton.setOnClickListener { goToActivity(WalletActivity::class.java) }
 

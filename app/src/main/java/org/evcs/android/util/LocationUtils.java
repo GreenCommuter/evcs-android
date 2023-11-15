@@ -132,7 +132,7 @@ public final class LocationUtils {
 
         new EVCSDialogFragment.Builder()
                 .setTitle(context.getString(R.string.gatecode_dialog_title))
-                .setSubtitle(context.getString(R.string.gatecode_dialog_subtitle))
+                .setSubtitle(context.getString(R.string.gatecode_dialog_subtitle), Gravity.CENTER)
                 .addView(gatecodeView)
                 .addButton(context.getString(R.string.app_continue), fragment -> {
                     launchGoogleMapsWithPin(context, latLng);

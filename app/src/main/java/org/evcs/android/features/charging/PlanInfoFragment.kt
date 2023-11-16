@@ -222,9 +222,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     private fun goToStartCharging() {
         EVCSDialogFragment.Builder()
-            .setTitle("Are you connected?")
-            .setSubtitle("Please plug the charging connector into your vehicle.", Gravity.CENTER)
-            .addButton("Yes, Start Charging", {
+            .setTitle(getString(R.string.plan_info_dialog_title))
+            .setSubtitle(getString(R.string.plan_info_dialog_subtitle), Gravity.CENTER)
+            .addButton(getString(R.string.plan_info_dialog_yes), {
                 mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
             }, R.style.ButtonK_Blue)
             .showCancel(true)

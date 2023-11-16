@@ -4,9 +4,11 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.base.core.fragment.BaseDialogFragment;
 import com.base.core.presenter.BasePresenter;
+import com.rollbar.android.Rollbar;
 
 /**
  * Not actually a singleton, but makes sure that the dialog is only opened once.
@@ -49,4 +51,15 @@ public abstract class SingletonDialog<T extends BasePresenter> extends BaseDialo
     protected T getPresenter() {
         return mPresenter;
     }
+//
+//    @Override
+//    public void show(FragmentManager manager, String tag) {
+//        try {
+//            FragmentTransaction ft = manager.beginTransaction();
+//            ft.add(this, tag);
+//            ft.commitAllowingStateLoss();
+//        } catch (IllegalStateException e) {
+//            Rollbar.instance().warning(e);
+//        }
+//    }
 }

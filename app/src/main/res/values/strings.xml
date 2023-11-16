@@ -303,11 +303,8 @@
     <string name="toolbar_map_icon_title">Go to map</string>
 
     <!-- Create Booking -->
-    <string name="create_booking_toolbar_title">Car sharing</string>
-    <string name="create_booking_car_name_format">%1$s %2$s</string>
     <string name="create_booking_car_plate_format">#%s</string>
     <string name="create_booking_plus_tax">+ tax</string>
-    <string name="create_booking_wallet_error_title">The payment has failed</string>
     <string name="create_booking_error_time_invalid_title">error_time_invalid_title</string>
 
     <!-- Coupons -->
@@ -403,11 +400,11 @@
     <!-- Plan info -->
     <string name="plan_info_title">Start Charging</string>
     <string name="plan_info_discounted_charge_rate">Discounted charge rate</string>
-    <string name="plan_info_upgrade_plan">Upgrade plan</string>
+    <string name="plan_info_upgrade_plan">Upgrade Plan</string>
     <string name="plan_info_dialog_cancel">Cancel charging session?</string>
     <string name="plan_info_upgrade_plan_dialog">Get 30 days free when you upgrade to the Standard Anytime plan!</string>
     <string name="plan_info_date_pattern">d/M/yyyy</string>
-    <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then</string>
+    <string name="plan_info_exceeded">You have exceeded your %d kWh monthly cap. On %s your usage will reset. You will be billed a flat rate of $%.2f/kWh until then.</string>
     <string name="plan_info_peak_hours">You are charging during peak hours (%1$s - %2$s) \n You’ll be charged a flat rate of $%3$.2f/kWh \n Charge anytime from %2$s - %1$s at no cost</string>
     <string name="plan_info_pay_as_you_go">Pay as you go</string>
     <string name="plan_info_start_charging">Start Charging</string>
@@ -419,6 +416,9 @@
 <!--    <string name="plan_info_payment_error_title">Payment</string>-->
 <!--    <string name="plan_info_payment_error_subtitle">We were unable to process your card, please update your payment method or try again.</string>-->
     <string name="plan_info_payment_error_update">Update payment method</string>
+    <string name="plan_info_dialog_title">Are you connected?</string>
+    <string name="plan_info_dialog_subtitle">Please plug the charging connector into your vehicle.</string>
+    <string name="plan_info_dialog_yes">Yes, Start Charging</string>
 
     <!-- Start Charging-->
     <string name="start_charging_preparing_subtitle">This could take a few seconds.</string>

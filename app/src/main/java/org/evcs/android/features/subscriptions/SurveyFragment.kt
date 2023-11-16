@@ -7,6 +7,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentSurveyBinding
 import org.evcs.android.model.SurveyItem
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.ViewUtils
 import org.evcs.android.util.ViewUtils.setMargins
 
 class SurveyFragment : ErrorFragment<SurveyPresenter>(), SurveyView {
@@ -30,6 +31,7 @@ class SurveyFragment : ErrorFragment<SurveyPresenter>(), SurveyView {
     override fun setUi(v: View) {
         super.setUi(v)
         mBinding = FragmentSurveyBinding.bind(v)
+        ViewUtils.setAdjustResize(mBinding.root)
     }
 
     override fun populate() {

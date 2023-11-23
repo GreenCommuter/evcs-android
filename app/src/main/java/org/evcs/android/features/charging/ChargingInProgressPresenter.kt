@@ -61,22 +61,22 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services
         })
     }
 
-    fun getStation(id : String) {
-        getService(StationsService::class.java).getStationFromQR(id).enqueue(
-            object : AuthCallback<PaginatedResponse<Station>?>(this) {
-                override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {
-                    getLocation(response!!.page!![0].locationId!!)
-                }
-
-                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                    view.showError(ErrorUtils.getError(responseBody))
-                }
-
-                override fun onCallFailure(t: Throwable) {
-                    view.showError(RequestError.getNetworkError())
-                }
-            })
-    }
+//    fun getStation(id : String) {
+//        getService(StationsService::class.java).getStationFromQR(id).enqueue(
+//            object : AuthCallback<PaginatedResponse<Station>?>(this) {
+//                override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {
+//                    getLocation(response!!.page!![0].locationId!!)
+//                }
+//
+//                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+//                    view.showError(ErrorUtils.getError(responseBody))
+//                }
+//
+//                override fun onCallFailure(t: Throwable) {
+//                    view.showError(RequestError.getNetworkError())
+//                }
+//            })
+//    }
 
     fun getLocation(id : Int) {
         getService(LocationService::class.java).getLocation(id).enqueue(

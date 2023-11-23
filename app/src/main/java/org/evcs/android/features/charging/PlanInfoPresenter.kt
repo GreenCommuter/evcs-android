@@ -3,7 +3,6 @@ package org.evcs.android.features.charging
 import com.base.networking.retrofit.RetrofitServices
 import com.rollbar.android.Rollbar
 import okhttp3.ResponseBody
-import org.evcs.android.model.PaginatedResponse
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatusWrapper
@@ -22,7 +21,9 @@ import org.evcs.android.util.UserUtils
 class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?) :
         ServicesPresenter<PlanInfoView>(viewInstance, services) {
 
+    private var mErrorCode: Int = 0
     private var mStation: Station? = null
+    private lateinit var mError: RequestError
     private var mStatus: SubscriptionStatusWrapper? = null
     var mPaymentMethods: ArrayList<PaymentMethod> = ArrayList()
 
@@ -45,28 +46,29 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
+//                        view.showError(ErrorUtils.getError(responseBody))
                     }
 
                     override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
+//                        view.showError(RequestError.getNetworkError())
                     }
                 })
     }
 
     private fun getStation(id : String) {
         mMultipleRequestsManager.addRequest(getService(StationsService::class.java).getStationFromQR(id),
-                object : AuthCallback<PaginatedResponse<Station>?>(this) {
-                    override fun onResponseSuccessful(response: PaginatedResponse<Station>?) {
-                        mStation = response!!.page!!.getOrNull(0)
+                object : AuthCallback<Station>(this) {
+                    override fun onResponseSuccessful(response: Station) {
+                        mStation = response//!!.page!!.getOrNull(0)
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
+                        mError = ErrorUtils.getError(responseBody)
+                        mErrorCode = code
                     }
 
                     override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
+                        mError = RequestError.getNetworkError()
                     }
                 })
     }
@@ -82,11 +84,11 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
+//                        view.showError(ErrorUtils.getError(responseBody))
                     }
 
                     override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
+//                        view.showError(RequestError.getNetworkError())
                     }
                 })
     }
@@ -100,11 +102,11 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view.showError(ErrorUtils.getError(responseBody))
+//                        view.showError(ErrorUtils.getError(responseBody))
                     }
 
                     override fun onCallFailure(t: Throwable) {
-                        view.showError(RequestError.getNetworkError())
+//                        view.showError(RequestError.getNetworkError())
                     }
                 })
     }
@@ -113,7 +115,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
         mMultipleRequestsManager.fireRequests {
             try {
                 if (mStation == null) {
-                    view.showStationNotFound()
+                    view.showStationNotFound(mErrorCode, mError)
                 } else if (mStation!!.pricing!!.detail.showFreeChargingCode) {
                     view.showFree(mStation!!.pricing!!.detail.freeChargingCode!!)
                 } else {
@@ -121,7 +123,7 @@ class PlanInfoPresenter(viewInstance: PlanInfoView?, services: RetrofitServices?
                     getPpkWh()
                 }
             } catch (e: java.lang.NullPointerException) {
-                view.showStationNotFound()
+                view.showStationNotFound(mErrorCode, RequestError.getUnknownError())
                 Rollbar.instance().error("NPE in station " + (mStation?.id).toString())
             }
         }

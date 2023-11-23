@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
+import com.rollbar.android.Rollbar
 import com.stripe.android.ApiResultCallback
 import com.stripe.android.SetupIntentResult
 import com.stripe.android.Stripe
@@ -95,7 +96,12 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
 
         val zipcode = mZipcode.text.toString()
         val name = mCardName.text.toString()
-        mStripe.confirmSetupIntent(this, presenter.getConfirmParams(name, card, zipcode))
+        try {
+            mStripe.confirmSetupIntent(this, presenter.getConfirmParams(name, card, zipcode))
+        } catch (e : NullPointerException) {
+            ToastUtils.show("Error communicating with credit card service, please try again later")
+            Rollbar.instance().error(e)
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

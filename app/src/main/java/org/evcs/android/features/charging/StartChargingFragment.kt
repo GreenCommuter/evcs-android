@@ -37,7 +37,7 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
     }
 
     override fun init() {
-        startCharging()
+//        startCharging()
     }
 
     override fun onResume() {

@@ -10,8 +10,11 @@ import retrofit2.http.Query;
 
 public interface StationsService {
 
-    @GET("/members/v1/stations")
-    Call<PaginatedResponse<Station>> getStationFromQR(@Query("name") String id);
+//    @GET("/members/v1/stations")
+//    Call<PaginatedResponse<Station>> getStationFromQR(@Query("name") String id);
+
+    @GET("/members/v1/stations/find")
+    Call<Station> getStationFromQR(@Query("code") String code);
 
     @GET("/members/v1/stations/{id}")
     Call<Station> getStation(@Path("id") int id);

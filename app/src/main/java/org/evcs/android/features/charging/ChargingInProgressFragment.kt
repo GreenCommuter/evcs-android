@@ -4,6 +4,7 @@ import android.os.Handler
 import android.view.View
 import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
+import com.rollbar.android.Rollbar
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
@@ -97,7 +98,8 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
         mLastUpdate = DateTime()
         mSession = response
         if (mSession.address == null)
-            presenter.getStation(response.stationName)
+            Rollbar.instance().warning("Session with address null " + mSession.id.toString())
+//            presenter.getStation(response.stationName)
         else {
             mBinding.chargingInProgressSiteName.text = mSession.address.toString()
             mBinding.chargingInProgressLocationLoading.isVisible = false

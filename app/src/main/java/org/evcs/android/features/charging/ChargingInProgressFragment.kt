@@ -10,6 +10,7 @@ import org.evcs.android.R
 import org.evcs.android.databinding.FragmentChargingInProgressBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Session
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.VideoUtils.setVideoResource
@@ -120,6 +121,11 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
             mBinding.chargingInProgressRateExplanation.showOrHide("*" + mSession.ongoingRate?.optionalExplanation)
         }
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
+    }
+
+    override fun showChargeError(error: RequestError) {
+        mLastUpdate = DateTime()
+        super.showError(error)
     }
 
     override fun onLocationRetrieved(location: Location) {

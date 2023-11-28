@@ -5,20 +5,23 @@ import com.base.networking.utils.NetworkCodes
 import okhttp3.ResponseBody
 import org.evcs.android.model.Location
 import org.evcs.android.model.PaginatedResponse
+import org.evcs.android.model.Session
 import org.evcs.android.model.Station
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
+import org.evcs.android.network.service.ChargesService
 import org.evcs.android.network.service.CommandsService
 import org.evcs.android.network.service.LocationService
 import org.evcs.android.network.service.StationsService
 import org.evcs.android.network.service.presenter.PollingManager
+import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services: RetrofitServices?) :
-    PreChargingPresenter<ChargingInProgressView>(viewInstance, services) {
+    ServicesPresenter<ChargingInProgressView>(viewInstance, services) {
 
     private val LOCATION_KEY = "location"
 
@@ -58,6 +61,23 @@ class ChargingInProgressPresenter(viewInstance: ChargingInProgressView, services
             override fun shouldRetry(response: Response<*>): Boolean {
                 return response.code() == NetworkCodes.ACCEPTED
             }
+        })
+    }
+
+    fun getCurrentCharge() {
+        getService(ChargesService::class.java).current.enqueue(object : AuthCallback<Session>(this) {
+            override fun onResponseSuccessful(response: Session?) {
+                view?.onChargeRetrieved(response)
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                view?.showChargeError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable?) {
+                runIfViewCreated(Runnable { view?.showChargeError(RequestError.getNetworkError()) })
+            }
+
         })
     }
 

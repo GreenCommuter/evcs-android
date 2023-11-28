@@ -471,6 +471,7 @@
     <string name="manage_plan_activate">Activate Plan</string>
     <string name="progress_view_text">%1$.0f/%2$s kWh used this %3$s</string>
     <string name="progress_view_text_trial">%1$.0f/%2$d kWh used for free trial</string>
+    <string name="progress_view_text_time_limited">Unlimited kWh from %1$s to %2$s</string>
 
     <string name="go_to_monthly_plans_title">EVCS Monthly Plans</string>
     <string name="go_to_monthly_plans_subtitle">Learn more about our discounted plans.</string>

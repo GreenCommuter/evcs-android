@@ -23,15 +23,7 @@ class PlanProgressView : LinearLayout {
     }
 
     fun setPlan(status: SubscriptionStatus, showText: Boolean = true) {
-
-        mBinding.activitySubscriptionsConsumption.text =
-                context.getString(R.string.progress_view_text,
-                        status.kwhUsage, status.printTotalKwh(), status.renewalPeriod)
-        if (status.onTrialPeriod) {
-            mBinding.activitySubscriptionsConsumption.text =
-                context.getString(R.string.progress_view_text_trial,
-                    status.kwhUsage, status.totalKwh)
-        }
+        mBinding.activitySubscriptionsConsumption.text = getText(status)
         mBinding.activitySubscriptionsConsumption.isVisible = showText
         if (status.isUnlimited) {
             mBinding.activitySubscriptionsProgress.isVisible = false
@@ -44,5 +36,18 @@ class PlanProgressView : LinearLayout {
                         ColorStateList.valueOf(context.resources.getColor(R.color.evcs_danger_700))
             }
         }
+    }
+
+    private fun getText(status: SubscriptionStatus): CharSequence {
+        if (status.onTrialPeriod) {
+            return context.getString(R.string.progress_view_text_trial,
+                    status.kwhUsage, status.totalKwh)
+        }
+        if (status.plan.isTimeLimited) {
+            return context.getString(R.string.progress_view_text_time_limited,
+                    status.plan.startHour().toUpperCase(), status.plan.finishHour().toUpperCase())
+        }
+        return context.getString(R.string.progress_view_text,
+           status.kwhUsage, status.printTotalKwh(), status.renewalPeriod)
     }
 }

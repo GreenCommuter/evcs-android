@@ -68,6 +68,7 @@
                 android:text="@string/survey_confirm"
                 android:layout_marginStart="0dp"
                 android:layout_marginBottom="@dimen/spacing_large"
+                android:enabled="false"
                 style="@style/ButtonK.Danger"/>
 
             <TextView

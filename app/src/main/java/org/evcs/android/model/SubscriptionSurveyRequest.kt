@@ -1,5 +1,7 @@
 package org.evcs.android.model
 
+import android.text.TextUtils
+
 class SubscriptionSurveyRequest {
     var subscriptionId: String? = null
     var items: ArrayList<SurveyAnswer> = ArrayList()
@@ -7,6 +9,7 @@ class SubscriptionSurveyRequest {
     constructor(subscriptionId: String, checkedItems: HashSet<String>, otherId: String, text: String) {
         this.subscriptionId = subscriptionId
         items.addAll(checkedItems.map { item -> SurveyAnswer(item) })
-        items.add(SurveyAnswer(otherId, text))
+        if (!TextUtils.isEmpty(text))
+            items.add(SurveyAnswer(otherId, text))
     }
 }

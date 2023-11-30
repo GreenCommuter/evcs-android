@@ -66,7 +66,8 @@ public class Plan implements Serializable {
     }
 
     public boolean isTimeLimited() {
-        return startHour != null;
+        if (startHour == null) return false;
+        return (startHour != 0 || finishHour != 0);
     }
 
     public Integer kwhCap() {

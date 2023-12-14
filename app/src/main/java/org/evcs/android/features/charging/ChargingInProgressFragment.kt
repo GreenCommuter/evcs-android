@@ -1,6 +1,10 @@
 package org.evcs.android.features.charging
 
 import android.os.Handler
+import android.text.SpannableString
+import android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE
+import android.text.TextUtils
+import android.text.style.RelativeSizeSpan
 import android.view.View
 import androidx.core.view.isVisible
 import com.base.core.util.ToastUtils
@@ -105,7 +109,7 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
             mBinding.chargingInProgressSiteName.text = mSession.address.toString()
             mBinding.chargingInProgressLocationLoading.isVisible = false
         }
-        mBinding.chargingInProgressEnergy.text = response.printKwh()
+        mBinding.chargingInProgressEnergy.text = formatKwh(response.printKwh())
         if (mDuration == null) {
             hideProgressDialog()
             setDuration(response.duration.toLong())
@@ -114,13 +118,25 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
 //        mBinding.chargingInProgressCost.setText(String.format("\$%.2f", mSession.ongoingRate?.sessionFeeValue))
         mBinding.chargingInProgressCost.setText(mSession.ongoingRate?.sessionFeeValue)
         mBinding.chargingInProgressCost.setLabel(mSession.ongoingRate?.sessionFeeLabel?:"")
-        mBinding.chargingInProgressRate.setLabel((mSession.ongoingRate?.rateLabel?:"") + "*")
-//        mBinding.chargingInProgressRate.setText(String.format("\$%.2f/kWh", mSession.ongoingRate?.rateValue))
-        mBinding.chargingInProgressRate.setText(String.format("%s/kWh", mSession.ongoingRate?.rateValue))
+        var rateLabel = mSession.ongoingRate?.rateLabel?:""
+        //Temporary
+        if (!(mSession.ongoingRate?.rateLabel?:"").lowercase().contains("kwh")) {
+            rateLabel = "$rateLabel/kWh"
+        }
+        mBinding.chargingInProgressRate.setLabel(rateLabel)
+        mBinding.chargingInProgressRate.setText(mSession.ongoingRate?.rateValue)
         if (mSession.ongoingRate?.optionalExplanation != null) {
-            mBinding.chargingInProgressRateExplanation.showOrHide("*" + mSession.ongoingRate?.optionalExplanation)
+            mBinding.chargingInProgressRateExplanation.showOrHide("**" + mSession.ongoingRate?.optionalExplanation)
+            mBinding.chargingInProgressRate.setLabel("$rateLabel**")
         }
         mBinding.chargingInProgressStopSession.visibility = if (response.isCharging) View.VISIBLE else View.GONE
+    }
+
+    private fun formatKwh(kwh: String): CharSequence {
+        val span1 = SpannableString(kwh.split(" ")[0])
+        val span2 = SpannableString(kwh.split(" ")[1])
+        span2.setSpan(RelativeSizeSpan(0.5f), 0, span2.length, SPAN_INCLUSIVE_INCLUSIVE)
+        return TextUtils.concat(span1, span2)
     }
 
     override fun showChargeError(error: RequestError) {

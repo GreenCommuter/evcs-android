@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_small"
+        android:gravity="center"
         style="@style/Label.Small"/>
 
     <RelativeLayout

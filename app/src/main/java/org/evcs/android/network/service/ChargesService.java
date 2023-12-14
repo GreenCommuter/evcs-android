@@ -23,4 +23,8 @@ public interface ChargesService {
 
     @GET("/members/v1/pricing/charges")
     Call<RateWrapper> getPpkWh(@Query("station_id") int stationId);
+
+    //The name is confusing. Here Session = in progress; Charge = Finished
+    @GET("/members/v1/charges")
+    Call<PaginatedResponse<Charge>> getChargeFromSession(@Query("session_id") int id);
 }

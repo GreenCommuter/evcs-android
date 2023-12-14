@@ -80,7 +80,7 @@ public abstract class AbstractSupportedVersionActivity extends NavGraphActivity 
                                                 BaseConfiguration.BASE_URL_PLAY_STORE + appPackageName)
                                         ).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
                             } catch (ActivityNotFoundException e) {
-                                // this exception will be throw when the cellphone
+                                // this exception will be thrown when the cellphone
                                 // don't have Play Store installed.
                                 Log.e("SupportedVersionA", e.getLocalizedMessage(), e);
                             } finally {

@@ -101,7 +101,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     /**
      * Creates a Bitmap with the specified icon, text and text params for use as a marker
      */
-    private fun createMarker(text: String, @DrawableRes icon: Int,
+    private fun createMarker(text: String?, @DrawableRes icon: Int,
                              textColor: Int = Color.WHITE, textAlign: Int = Gravity.CENTER_HORIZONTAL): Bitmap {
         val markerLayout = buildLayout(text, icon, textAlign, textColor)
         return BitmapUtils.bitmapFromView(markerLayout)
@@ -110,7 +110,7 @@ open class ClusterRenderer<T : ClusterItem>(private var mContext: Context, map: 
     /**
      * Creates a layout for the above method
      */
-    private fun buildLayout(text: String, @DrawableRes icon: Int, textAlign: Int, textColor: Int): ViewGroup {
+    private fun buildLayout(text: String?, @DrawableRes icon: Int, textAlign: Int, textColor: Int): ViewGroup {
         val binding = MarkerLayoutBinding.inflate(LayoutInflater.from(mContext))
         val markerLayout = binding.root
         binding.markerImage.setImageResource(icon)

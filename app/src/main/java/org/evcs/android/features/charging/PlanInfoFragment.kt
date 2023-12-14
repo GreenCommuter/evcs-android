@@ -8,6 +8,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
 import com.base.core.util.NavigationUtils
 import com.base.core.util.ToastUtils
+import com.base.networking.utils.NetworkCodes
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.ChargingActivity
@@ -18,6 +19,7 @@ import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.model.Station
 import org.evcs.android.model.SubscriptionStatus
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
@@ -198,12 +200,12 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         setUpButton()
     }
 
-    override fun showStationNotFound() {
+    override fun showStationNotFound(errorCode: Int, error: RequestError) {
         hideProgressDialog()
-        if (arguments?.getBoolean(Extras.PlanInfo.FROM_QR) == true) {
+        if (errorCode == NetworkCodes.ERROR_NOT_FOUND && arguments?.getBoolean(Extras.PlanInfo.FROM_QR) == true) {
             ToastUtils.show("Please try writing the numeric code for this station")
         } else {
-            ToastUtils.show("Station not found")
+            showError(error)
         }
     }
 
@@ -222,9 +224,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     private fun goToStartCharging() {
         EVCSDialogFragment.Builder()
-            .setTitle("Are you connected?")
-            .setSubtitle("Please plug the charging connector into your vehicle.", Gravity.CENTER)
-            .addButton("Yes, Start Charging", {
+            .setTitle(getString(R.string.plan_info_dialog_title))
+            .setSubtitle(getString(R.string.plan_info_dialog_subtitle), Gravity.CENTER)
+            .addButton(getString(R.string.plan_info_dialog_yes), {
                 mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
             }, R.style.ButtonK_Blue)
             .showCancel(true)

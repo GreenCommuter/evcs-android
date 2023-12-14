@@ -28,7 +28,8 @@ public class MultipleRequestsManager {
         this.mPresenter = presenter;
     }
 
-    public <W> void addRequest(final Call<W> call, final NetworkCallback<W> callback) {
+    public <W> void addRequest(final Call<W> call1, final NetworkCallback<W> callback) {
+        Call<W> call = call1.clone();
         NetworkCallback<W> presenterCallback = new AuthCallback<W>(mPresenter) {
             @Override
             public void onResponseSuccessful(W response) {

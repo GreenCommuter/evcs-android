@@ -69,11 +69,11 @@ open class ProfilePresenter(viewInstance: ProfileView?, services: RetrofitServic
                     }
 
                     override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                        view?.showError(ErrorUtils.getError(responseBody))
+//                        view?.showError(ErrorUtils.getError(responseBody))
                     }
 
                     override fun onCallFailure(t: Throwable) {
-                        runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+//                        runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
                     }
                 })
     }

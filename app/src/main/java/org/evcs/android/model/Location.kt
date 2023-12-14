@@ -53,7 +53,8 @@ class Location : Serializable, ClusterItemWithText, ClusterItemWithValue, Cluste
         return latLng
     }
 
-    override fun getMarkerText(): String {
+    override fun getMarkerText(): String? {
+        if (comingSoon == true) return null
         return stationCount!!.total().toString()
     }
 

@@ -65,7 +65,7 @@ public class Charge implements Serializable {
     }
 
     public String printKwh() {
-        return String.format("%.3f kW", kwh);
+        return String.format("%.3f kWh", kwh);
     }
 
     public String getStatus() {

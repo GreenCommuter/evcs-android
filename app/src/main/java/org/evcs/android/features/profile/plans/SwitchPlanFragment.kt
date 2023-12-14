@@ -38,7 +38,7 @@ class SwitchPlanFragment : AbstractGetPlanFragment() {
     }
 
     override fun showCouponCode(): Boolean {
-        return true;
+        return false
     }
 
     override fun getTrialLabel(): String? {

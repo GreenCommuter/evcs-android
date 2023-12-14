@@ -63,6 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/spacing_medium"
+        android:visibility="gone"
         style="@style/Body.Small"/>
 
     <TextView
@@ -70,12 +71,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/spacing_tiny"
+        android:visibility="gone"
         style="@style/Body.Small"/>
 
     <TextView
         android:id="@+id/view_location_type_price_ac"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         style="@style/Body.Small"/>
 
     <TextView

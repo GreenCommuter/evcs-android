@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.view.isInvisible
 import androidx.fragment.app.FragmentManager
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BaseConfiguration
@@ -17,6 +18,7 @@ import org.evcs.android.databinding.ViewLocationBinding
 import org.evcs.android.model.Location
 import org.evcs.android.model.Station
 import org.evcs.android.util.LocationUtils
+import org.evcs.android.util.ViewUtils.showOrHide
 
 class LocationView : LinearLayout {
     private lateinit var mBinding: ViewLocationBinding
@@ -62,8 +64,8 @@ class LocationView : LinearLayout {
         }
 
         if (location.comingSoon!!) {
-            mBinding.viewLocationGo.visibility = View.GONE
             mBinding.viewLocationStartCharging.visibility = View.GONE
+            mBinding.viewLocationHint.showOrHide("Coming soon")
             return
         }
 
@@ -71,8 +73,9 @@ class LocationView : LinearLayout {
             mBinding.viewLocationGatecode.text = context.getString(R.string.location_view_gatecode, location.gatecode)
             mBinding.viewLocationGatecode.visibility = VISIBLE
         }
-        mBinding.viewLocationHint.text = location.directions
-        if (location.directions == null) mBinding.viewLocationHint.visibility = View.GONE
+        mBinding.viewLocationHint.showOrHide(location.directions)
+//        mBinding.viewLocationHint.text = location.directions
+//        if (location.directions == null) mBinding.viewLocationHint.visibility = View.GONE
         showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, context.getString(R.string.location_view_ac_price_format))
         showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, context.getString(R.string.location_view_dc_price_format))
 
@@ -81,7 +84,7 @@ class LocationView : LinearLayout {
     }
 
     fun addGoButton(location: Location, fragmentManager: FragmentManager) {
-        mBinding.viewLocationGo.visibility = VISIBLE
+        mBinding.viewLocationGo.isInvisible = location.comingSoon!!
         mBinding.viewLocationGo.setOnClickListener {
             LocationUtils.launchGoogleMapsWithPin(context, location.latLng, location.gatecode, fragmentManager)
         }

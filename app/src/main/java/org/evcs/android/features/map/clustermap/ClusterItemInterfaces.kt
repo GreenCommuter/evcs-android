@@ -14,5 +14,5 @@ interface ClusterItemWithValue : ClusterItem {
 }
 
 interface ClusterItemWithText : ClusterItem {
-    fun getMarkerText(): String
+    fun getMarkerText(): String?
 }

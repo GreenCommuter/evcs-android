@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
 import androidx.fragment.app.FragmentManager
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BaseConfiguration
@@ -56,6 +58,7 @@ class LocationView : LinearLayout {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.firstOrNull())
+        mBinding.viewLocationPicture.isVisible = location.imageUrls?.firstOrNull() != null
 
         mBinding.viewLocationConnectors.removeAllViews()
         location.stations!!.forEach { station ->
@@ -108,6 +111,21 @@ class LocationView : LinearLayout {
 
     fun resizePicture(height: Int) {
         mBinding.viewLocationPicture.resize(height)
+    }
+
+    //The space for the image will be counted even if it's set as gone later, but it's ok
+    fun getMinVisibleHeight(): Int {
+        mBinding.root.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
+        var res = 0
+        for (i in 0..mBinding.root.childCount) {
+            val v = mBinding.root.getChildAt(i)
+            res += v.measuredHeight
+            res += v.marginBottom
+            res += v.paddingBottom
+            if (v == mBinding.viewLocationGatecode)
+                return res + 4
+        }
+        return 0
     }
 
     fun pack(stations: List<Station>): ArrayList<List<Station>> {

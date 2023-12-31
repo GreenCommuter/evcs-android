@@ -45,7 +45,7 @@
     <com.facebook.drawee.view.SimpleDraweeView
         android:id="@+id/view_location_picture"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="@dimen/location_fragment_image_height"
         android:paddingBottom="@dimen/spacing_medium_extra"/>
 
     <TextView

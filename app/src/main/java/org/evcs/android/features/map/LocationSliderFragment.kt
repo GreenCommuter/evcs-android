@@ -46,6 +46,17 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         presenter.onViewCreated()
         location = requireArguments().getSerializable(Extras.LocationActivity.LOCATION) as Location
         presenter.getLocation(location.id)
+        setLocation(location)
+        val emptyViewHeight = measureEmptyViewHeight()
+        val shadowPadding = 4
+        resizeViewHeight(mBinding.mapItemFragmentEmpty, emptyViewHeight)
+
+        mMaxScroll = emptyViewHeight - shadowPadding
+
+        keepStatusBar(mBinding.root)
+    }
+
+    private fun measureEmptyViewHeight(): Int {
         mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
 //        val height = mBinding.mapItemFragmentEmpty.measuredHeight
         val shadowPadding = 4
@@ -54,16 +65,13 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         val innerScrollInitialHeight = screenHeight -
                 mBinding.fragmentLocationHandler.measuredHeight - shadowPadding
 //        resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
-        val emptyViewHeight = innerScrollInitialHeight - mBinding.mapItemFragmentLocationView.getMinVisibleHeight()
-        resizeViewHeight(mBinding.mapItemFragmentEmpty, emptyViewHeight)
-
-        mMaxScroll = emptyViewHeight - shadowPadding
-
-        keepStatusBar(mBinding.root)
+        val emptyViewHeight = innerScrollInitialHeight - mBinding.mapItemFragmentLocationView.paddingTop
+        return emptyViewHeight - mBinding.mapItemFragmentLocationView.getMinVisibleHeight()
     }
 
+    //Stations are the only thing not retrieved from the map
     override fun showLocation(response: Location) {
-        setLocation(response)
+        mBinding.mapItemFragmentLocationView.setStations(response)
     }
 
     override fun showError(requestError: RequestError) {

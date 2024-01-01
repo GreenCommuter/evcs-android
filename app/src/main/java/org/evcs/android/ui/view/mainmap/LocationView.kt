@@ -61,10 +61,6 @@ class LocationView : LinearLayout {
         mBinding.viewLocationPicture.isVisible = location.imageUrls?.firstOrNull() != null
 
         mBinding.viewLocationConnectors.removeAllViews()
-        location.stations!!.forEach { station ->
-            val v = StationView(context, station)
-            mBinding.viewLocationConnectors.addView(v)
-        }
 
         if (location.comingSoon!!) {
             mBinding.viewLocationStartCharging.visibility = View.GONE
@@ -79,10 +75,19 @@ class LocationView : LinearLayout {
         mBinding.viewLocationHint.showOrHide(location.directions)
 //        mBinding.viewLocationHint.text = location.directions
 //        if (location.directions == null) mBinding.viewLocationHint.visibility = View.GONE
+        setStations(location)
+        //        mBinding.activityLocationHint.text = response?
+
+    }
+
+    fun setStations(location: Location) {
+        if (location.stations == null) return
+        location.stations!!.forEach { station ->
+            val v = StationView(context, station)
+            mBinding.viewLocationConnectors.addView(v)
+        }
         showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, context.getString(R.string.location_view_ac_price_format))
         showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, context.getString(R.string.location_view_dc_price_format))
-
-        //        mBinding.activityLocationHint.text = response?
 
     }
 

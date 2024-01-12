@@ -78,8 +78,9 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
     }
 
     private fun userHasHiddenPlan(allowedPlans: ArrayList<Plan>): Boolean {
+        // temporary
         val userPlan = UserUtils.getLoggedUser()?.activeSubscription?.plan
-        return userPlan != null && !allowedPlans.map { plan -> plan.name }.contains(userPlan.name)
+        return userPlan != null //&& !allowedPlans.map { plan -> plan.name }.contains(userPlan.name)
     }
 
 }

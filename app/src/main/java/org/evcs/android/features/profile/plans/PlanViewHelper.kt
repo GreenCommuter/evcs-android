@@ -91,8 +91,7 @@ abstract class PlanViewHelperNonNull(context: Context, val mPlan: Plan) : PlanVi
     }
 
     override fun getPlanPrice(): String {
-        val period = mPlan.renewalPeriod
-        return String.format("\$%.2f/$period", mPlan.price)
+        return mPlan.priceTitle
     }
 
     override fun getPlanButton(user: User?): String {

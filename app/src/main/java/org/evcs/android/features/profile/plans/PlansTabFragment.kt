@@ -34,9 +34,9 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
     private lateinit var mLayout: LinearLayout
 
     companion object {
-        fun newInstance(): PlansTabFragment {
+        fun newInstance(plans: ArrayList<Plan>): PlansTabFragment {
             val args = Bundle()
-
+            args.putSerializable(Extras.PlanActivity.PLAN, plans)
             val fragment = PlansTabFragment()
             fragment.arguments = args
             return fragment
@@ -65,6 +65,10 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
         mWalletLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result -> if (result.resultCode == Activity.RESULT_OK) mPayAsYouGoView?.setPayAsYouGo()
         }
+    }
+
+    override fun populate() {
+        showPlans(requireArguments().getSerializable(Extras.PlanActivity.PLAN) as ArrayList<Plan>)
     }
 
     private fun finish() {
@@ -137,7 +141,7 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
 
     fun showPlans(response: List<Plan>) {
         response.forEach { plan ->
-            if (context == null) return
+//            if (context == null) return
             val view = PlanView(requireContext(), plan)
             view.setListener(this)
             mLayout.addView(view)

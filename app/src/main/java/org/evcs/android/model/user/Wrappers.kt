@@ -15,3 +15,5 @@ class ChangePasswordWrapper(var email: String, var identifier: String, var passw
 class BooleanWrapper(var enabled: String)
 
 class RateWrapper(var rateValue: String)
+
+class TextWrapper(var text: String): java.io.Serializable

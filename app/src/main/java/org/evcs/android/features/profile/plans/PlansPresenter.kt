@@ -4,6 +4,7 @@ import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.BaseConfiguration
 import org.evcs.android.model.Plan
+import org.evcs.android.model.PlanResponse
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.PlansService
@@ -15,10 +16,10 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
     : ServicesPresenter<PlansView>(viewInstance, services) {
 
     fun getPlans() {
-        getService(PlansService::class.java).plans.enqueue(object : AuthCallback<ArrayList<Plan>>(this) {
-            override fun onResponseSuccessful(response: ArrayList<Plan>) {
-                getPlanExtras(response)
-//                view.showPlans(response)
+        getService(PlansService::class.java).planTabs.enqueue(object : AuthCallback<PlanResponse>(this) {
+            override fun onResponseSuccessful(response: PlanResponse) {
+                    val runnable = { view.showPlans(response.tabs!!) }
+                    runIfViewCreated(runnable)
             }
 
             override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
@@ -47,8 +48,8 @@ class PlansPresenter(viewInstance: PlansView, services: RetrofitServices)
                     val url = String.format(BaseConfiguration.WebViews.PLANS_URL, UserUtils.getSessionToken())
                     view.userHasHiddenPlan(url)
                 } else {
-                    val runnable = { view.showPlans(plans2) }
-                    runIfViewCreated(runnable)
+//                    val runnable = { view.showPlans(plans2) }
+//                    runIfViewCreated(runnable)
                 }
             }
 

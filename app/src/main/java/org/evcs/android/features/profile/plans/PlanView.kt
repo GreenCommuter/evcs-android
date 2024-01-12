@@ -47,7 +47,7 @@ class PlanView : LinearLayout {
         mBinding.viewPlanFlatRate.showOrHide(helper.getFlatRate())
         mBinding.viewPlanDcPrice.showOrHide(helper.getDCFastPrice())
         mBinding.viewPlanAcPrice.showOrHide(helper.getLevel2Price())
-        mBinding.viewPlanAd.text = plan?.banner
+        mBinding.viewPlanAd.text = plan?.displayBanner
         mBinding.viewPlanAd.visibility = if (plan?.banner == null) INVISIBLE else VISIBLE
         mBinding.viewPlanLearnMore.isVisible = helper.showLearnMore()
 

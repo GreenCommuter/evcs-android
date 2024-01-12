@@ -1,10 +1,12 @@
 package org.evcs.android.model;
 
+import org.evcs.android.model.user.TextWrapper;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Plan implements Serializable {
 //    public static Plan PAY_AS_YOU_GO = new Plan("0", 0, 0, "Pay as you go", 0f, 0);
@@ -46,6 +48,13 @@ public class Plan implements Serializable {
 //    public String tab;
     public String banner;
     public String useCase;
+    public String displayBanner;
+    public String displayTopText;
+    public String displaySubtitle;
+    public String displayUnderSubtitle;
+    public String priceTitle;
+//    public ArrayList<Object> displayDetails;
+    public ArrayList<TextWrapper> displayButtons;
 
     public RenewalPeriod getRenewalPeriod() {
         if (weeklyPrice != null) return RenewalPeriod.WEEK;

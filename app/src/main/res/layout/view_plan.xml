@@ -88,26 +88,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/evcs_gray_600"
+                android:gravity="center"
                 android:layout_marginTop="@dimen/spacing_large_k"
                 android:layout_marginBottom="@dimen/spacing_medium"
                 tools:text="Flat rate 6AM-10PM"
-                style="@style/Body.Small.Bold"/>
-
-            <TextView
-                android:id="@+id/view_plan_dc_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/evcs_gray_600"
-                android:layout_marginBottom="@dimen/spacing_medium"
-                tools:text="DC Fast: $0.32/kWh"
-                style="@style/Body.Small.Bold"/>
-
-            <TextView
-                android:id="@+id/view_plan_ac_price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/evcs_gray_600"
-                tools:text="Level 2: $0.32/kWh"
                 style="@style/Body.Small.Bold"/>
 
             <TextView

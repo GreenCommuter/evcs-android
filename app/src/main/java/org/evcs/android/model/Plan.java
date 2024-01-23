@@ -53,7 +53,7 @@ public class Plan implements Serializable {
     public String displaySubtitle;
     public String displayUnderSubtitle;
     public String priceTitle;
-//    public ArrayList<Object> displayDetails;
+    public ArrayList<String> displayDetails;
     public ArrayList<TextWrapper> displayButtons;
 
     public RenewalPeriod getRenewalPeriod() {

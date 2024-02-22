@@ -268,5 +268,6 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.OUR_REQUEST)
             startForResult.launch(intent)
         }
+        RefreshTokenHelper.onResume()
     }
 }

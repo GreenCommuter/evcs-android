@@ -214,4 +214,9 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         KeyboardListener.detach(window.decorView.rootView)
     }
 
+    override fun onResume() {
+        super.onResume()
+        RefreshTokenHelper.onResume()
+    }
+
 }

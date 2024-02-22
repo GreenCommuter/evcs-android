@@ -23,12 +23,14 @@ import org.evcs.android.network.callback.AuthCallback;
 import org.evcs.android.network.serializer.DateTimeDeserializer;
 import org.evcs.android.network.service.UserService;
 import org.joda.time.DateTime;
+import org.joda.time.format.ISODateTimeFormat;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public final class UserUtils {
+    private static final String USER_SESSION_EXP_PREF = "UserSessionTokenExp";
     private static final String USER_SESSION_PREF = "UserSessionToken";
     private static final String USER_PREF = "UserKey";
     public static final String USER_EMAIL_PREF = "UserEmail";
@@ -51,6 +53,7 @@ public final class UserUtils {
     public static void saveAuthUser(AuthUser authUser) {
         sToken = authUser.getSessionToken();
         StorageUtils.storeInSharedPreferences(USER_SESSION_PREF, authUser.getSessionToken());
+        StorageUtils.storeInSharedPreferences(USER_SESSION_EXP_PREF, authUser.getExpiresAt());
         StorageUtils.storeInSharedPreferences(USER_EMAIL_PREF, authUser.getEmail());
         saveUser(authUser);
     }
@@ -77,6 +80,12 @@ public final class UserUtils {
             sToken = StorageUtils.getStringFromSharedPreferences(USER_SESSION_PREF, null);
         }
         return sToken;
+    }
+
+    public static DateTime getSessionTokenExpiration() {
+        String expiration = StorageUtils.getStringFromSharedPreferences(USER_SESSION_EXP_PREF, "");
+        if (expiration.equals("")) return null;
+        return ISODateTimeFormat.dateTime().parseDateTime(expiration.substring(1, expiration.length() - 1));
     }
 
     public static String getUserEmail() {

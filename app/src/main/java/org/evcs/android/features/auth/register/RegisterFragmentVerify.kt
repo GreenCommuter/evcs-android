@@ -40,13 +40,6 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         return fragment
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
-                result -> presenter.onConsentResult(result)
-        }
-    }
-
     override fun layout(): Int {
         return R.layout.fragment_register_enter_code
     }
@@ -66,21 +59,29 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
         mBinding.fragmentRegisterRegisterEnterCodeValidateLater.isVisible =
                 (activity as VerifyPhoneActivity).mFromAuth
+        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            result -> presenter.onConsentResult(result)
+        }
     }
 
     override fun setListeners() {
         mBinding.fragmentRegisterEnterCodeButton.setOnClickListener { onButtonClick() }
         mBinding.fragmentRegisterEnterCodeEdit.setOnClickListener { findNavController().popBackStack() }
-        mBinding.fragmentRegisterEnterCodeResend.setOnClickListener { presenter?.sendNumbertoVerify(mPreviousNumber!!) }
+        mBinding.fragmentRegisterEnterCodeResend.setOnClickListener {
+            progressDialog.show()
+            presenter?.sendNumbertoVerify(mPreviousNumber!!)
+            //Apparently I need to do this again
+            presenter?.startSMSListener(requireContext())
+        }
         val intentFilter = IntentFilter()
         intentFilter.addAction(SmsRetriever.SMS_RETRIEVED_ACTION)
         requireActivity().registerReceiver(SMSBroadcastReceiver(presenter), intentFilter)
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             presenter?.startSMSListener(requireContext())
 //        }
-        val validatorManager = ValidatorManager();
+        val validatorManager = ValidatorManager()
         validatorManager.addValidator(PasswordTextInputValidator(mBinding.fragmentRegisterEnterCodeText))
-        validatorManager.setOnAnyTextChangedListener{setEnableButton(validatorManager.areAllFieldsValid())}
+        validatorManager.setOnAnyTextChangedListener { setEnableButton(validatorManager.areAllFieldsValid()) }
         mBinding.fragmentRegisterRegisterEnterCodeValidateLater.setOnClickListener {
             (activity as VerifyPhoneActivity).onCancel()
         }

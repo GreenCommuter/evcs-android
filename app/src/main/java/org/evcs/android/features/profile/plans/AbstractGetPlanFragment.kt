@@ -34,6 +34,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     private lateinit var mLauncher: ActivityResultLauncher<Intent>
     protected lateinit var mBinding: FragmentGetPlanBinding
     protected lateinit var mPlan: Plan
+    private var mSelectedPM: PaymentMethod? = null
 
     override fun layout(): Int {
         return R.layout.fragment_get_plan
@@ -51,6 +52,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
     override fun init() {
         mPlan = requireArguments().getSerializable(Extras.PlanActivity.PLAN) as Plan
         mLauncher = WalletActivity.getDefaultLauncher(this) { pm ->
+            mSelectedPM = pm
             mBinding.getPlanPaymentInfo.setPaymentMethod(pm)
             mBinding.bottomNavigationButton.isEnabled = true
         }
@@ -79,9 +81,9 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanTandc.setVisibility(getTandCText() != null)
         mBinding.getPlanTandc.movementMethod = LinkMovementMethod.getInstance()
         mBinding.getPlanTodayLayout.setVisibility(showToday())
-        val pm = PaymentMethod.getDefaultFromSharedPrefs()
-        mBinding.bottomNavigationButton.isEnabled = pm != null
-        mBinding.getPlanPaymentInfo.setPaymentMethod(pm)
+        mSelectedPM = PaymentMethod.getDefaultFromSharedPrefs()
+        mBinding.bottomNavigationButton.isEnabled = mSelectedPM != null
+        mBinding.getPlanPaymentInfo.setPaymentMethod(mSelectedPM)
         mBinding.getPlanPaymentCouponCode.setVisibility(showCouponCode())
         mBinding.getPlanPreviousPlanActiveUntil.setVisibility(getActiveUntil() != null)
         mBinding.getPlanPreviousPlanActiveUntil.setText(dateFormatter.print(getActiveUntil()))
@@ -155,13 +157,13 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
 
     protected open fun getBottomNavigationListener() {
         showProgressDialog()
-        if (PaymentMethod.getDefaultFromSharedPrefs() == null) {
+        if (mSelectedPM == null) {
             Rollbar.instance().warning("Payment method null but button enabled")
             ToastUtils.show("There was a problem adding your payment method, please retry")
             activity?.finish()
             return
         }
-        presenter.subscribe(mPlan, PaymentMethod.getDefaultFromSharedPrefs()!!.id!!)
+        presenter.subscribe(mPlan, mSelectedPM!!.id!!)
     }
 
     override fun onSubscriptionSuccess(response: SubscriptionStatus) {

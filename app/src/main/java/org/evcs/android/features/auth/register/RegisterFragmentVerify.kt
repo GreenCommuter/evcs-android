@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.base.core.util.ToastUtils
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.rollbar.android.Rollbar
 import org.evcs.android.EVCSApplication
@@ -57,8 +58,8 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mPreviousNumber = RegisterFragmentVerifyArgs.fromBundle(requireArguments()).previousNumber
 //        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
-        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.isVisible =
-                (activity as VerifyPhoneActivity).mFromAuth
+//        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.isVisible =
+//                (activity as VerifyPhoneActivity).mFromAuth
         startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result -> presenter.onConsentResult(result)
         }
@@ -107,6 +108,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun onCellphoneSent() {
+        ToastUtils.show("Phone verified")
         progressDialog.dismiss()
     }
 

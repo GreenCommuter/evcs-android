@@ -351,6 +351,10 @@
     <string name="register_your_car_model">Model</string>
     <string name="register_your_car_make">Make</string>
 
+    <string name="fragment_validate_old_user_title">Validate Phone Number</string>
+    <string name="fragment_validate_old_user_subtitle">Please validate your phone number</string>
+    <string name="fragment_validate_old_user_description">We now require a valid phone number for security purposes. If you would like to continue using our service</string>
+
     <string name="fragment_register_cell_phone_title">Welcome %s.\nAlmost there!</string>
     <string name="fragment_register_cell_phone_subtitle">To activate your account we need you to validate your phone number</string>
     <string name="fragment_register_cell_phone_button">Send me a code</string>

@@ -7,11 +7,11 @@
     android:background="@color/evcs_white">
 
     <org.evcs.android.ui.view.shared.EVCSToolbar2
-        android:id="@+id/fragment_register_cell_phone_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
-        custom:title="@string/my_information_phone_number"/>
+        custom:title="@string/fragment_validate_old_user_title"
+        custom:navigationIcon="@null"/>
 
     <TextView
         android:id="@+id/fragment_register_cell_phone_title"
@@ -19,14 +19,16 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
         android:layout_marginStart="@dimen/padding_ariel_standard"
+        android:layout_marginEnd="@dimen/padding_ariel_standard"
         android:textColor="@color/evcs_black"
+        android:text="@string/fragment_validate_old_user_subtitle"
         style="@style/Title.Large"/>
 
     <TextView
         android:id="@+id/fragment_register_cell_phone_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fragment_register_cell_phone_subtitle"
+        android:text="@string/fragment_validate_old_user_description"
         android:padding="@dimen/spacing_medium_extra"
         style="@style/Body.Medium.Black"/>
 
@@ -39,45 +41,27 @@
         android:paddingTop="@dimen/padding_ariel_standard"
         android:paddingBottom="@dimen/spacing_medium">
 
-        <org.evcs.android.features.shared.StandardTextField
-            android:id="@+id/fragment_register_cellphone_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/spacing_medium_extra"
-            custom:label="@string/my_information_phone_number"
-            style="@style/TextInputStyle">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone"
-                android:maxLength="50"
-                style="@style/Body.Medium"/>
-
-        </org.evcs.android.features.shared.StandardTextField>
-
-        <TextView
-            android:id="@+id/fragment_register_cellphone_send"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:enabled="false"
-            android:text="@string/app_continue"
-            style="@style/ButtonK.Orange" />
-
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/fragment_register_cellphone_validate_later"
+            android:id="@+id/fragment_validate_old_user_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fragment_validate_old_user_title"
+            android:layout_marginBottom="@dimen/spacing_medium_extra"
+            style="@style/ButtonK.Orange" />
+
+        <TextView
+            android:id="@+id/fragment_validate_old_user_logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:padding="18dp"
-            android:text="@string/fragment_register_cell_phone_validate_later"
-            style="@style/Label.Large"
-            android:visibility="gone"/>
+            android:text="Log Out"
+            style="@style/ButtonK.BlackOutline"
+            android:visibility="visible"/>
 
     </LinearLayout>
 

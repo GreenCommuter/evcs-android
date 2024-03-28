@@ -12,9 +12,11 @@ import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityAccountBinding
+import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 
 class AccountActivity : BaseActivity2(), DeleteAccountView {
@@ -54,7 +56,9 @@ class AccountActivity : BaseActivity2(), DeleteAccountView {
             mChangeUserResult.launch(Intent(this, ChangeEmailActivity::class.java))
         }
         mBinding.fragmentAccountPhone.setOnClickListener {
-//            mChangeUserResult.launch(Intent(this, ChangePhoneNumberActivity::class.java))
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.USER_REQUEST)
+            mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountDelete.setOnClickListener {
             EVCSDialogFragment.Builder()

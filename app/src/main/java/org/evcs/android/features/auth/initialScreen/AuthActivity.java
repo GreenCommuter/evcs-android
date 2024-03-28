@@ -80,7 +80,8 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
 //        context.startActivities(new Intent[]{ intent1, intent2 });
 //        NavigationUtils.IntentExtra intentExtra = new NavigationUtils.IntentExtra(Extras.VerifyActivity.RESULT, true);
         Intent intent = new Intent(this, VerifyPhoneActivity.class);
-        intent.putExtra(Extras.VerifyActivity.FROM_AUTH, true);
+        intent.putExtra(Extras.VerifyActivity.ASK_FOR_CAR, true);
+        intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.AUTH);
         mLauncher.launch(intent);
     }
 }

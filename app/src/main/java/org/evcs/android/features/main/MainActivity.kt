@@ -2,6 +2,7 @@ package org.evcs.android.features.main
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -214,4 +215,13 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         KeyboardListener.detach(window.decorView.rootView)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (UserUtils.getLoggedUser() == null) return
+        if (!(UserUtils.getLoggedUser().isPhoneVerified)) {
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.OUR_REQUEST)
+            startActivity(intent)
+        }
+    }
 }

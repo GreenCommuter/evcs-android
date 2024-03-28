@@ -217,4 +217,10 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         KeyboardListener.detach(window.decorView.rootView)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (!(UserUtils.getLoggedUser().isPhoneVerified)) {
+            NavigationUtils.jumpTo(this, VerifyPhoneActivity::class.java)
+        }
+    }
 }

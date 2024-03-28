@@ -57,8 +57,8 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
         mPreviousNumber = RegisterFragmentVerifyArgs.fromBundle(requireArguments()).previousNumber
 //        ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeEdit)
         ViewUtils.addUnderlines(mBinding.fragmentRegisterEnterCodeResend)
-        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.isVisible =
-                (activity as VerifyPhoneActivity).mFromAuth
+//        mBinding.fragmentRegisterRegisterEnterCodeValidateLater.isVisible =
+//                (activity as VerifyPhoneActivity).mFromAuth
         startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
             result -> presenter.onConsentResult(result)
         }

@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
-        custom:title="@string/my_information_phone_number"/>
+        custom:title="@string/my_information_phone_number"
+        custom:navigationIcon="@null"/>
 
     <TextView
         android:id="@+id/fragment_register_cell_phone_title"
@@ -74,7 +75,8 @@
             android:gravity="center"
             android:padding="18dp"
             android:text="@string/fragment_register_cell_phone_validate_later"
-            style="@style/Label.Large" />
+            style="@style/Label.Large"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

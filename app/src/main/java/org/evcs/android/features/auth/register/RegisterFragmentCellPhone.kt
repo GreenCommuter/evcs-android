@@ -51,8 +51,8 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     override fun populate() {
         mBinding.fragmentRegisterCellPhoneTitle.text =
             getString(R.string.fragment_register_cell_phone_title, UserUtils.getLoggedUser().firstName)
-        mBinding.fragmentRegisterCellphoneValidateLater.isVisible =
-                (activity as VerifyPhoneActivity).mFromAuth
+//        mBinding.fragmentRegisterCellphoneValidateLater.isVisible =
+//                (activity as VerifyPhoneActivity).mFromAuth
     }
 
     override fun setListeners() {
@@ -60,9 +60,9 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
         val validatorManager = ValidatorManager()
         validatorManager.addValidator(PhoneTextInputValidator(mBinding.fragmentRegisterCellphoneNumber))
         validatorManager.setOnAnyTextChangedListener { setEnableButton(validatorManager.areAllFieldsValid()) }
-        mBinding.fragmentRegisterCellphoneValidateLater.setOnClickListener {
-            (requireActivity() as VerifyPhoneActivity).onCancel()
-        }
+//        mBinding.fragmentRegisterCellphoneValidateLater.setOnClickListener {
+//            (requireActivity() as VerifyPhoneActivity).onCancel()
+//        }
     }
 
     fun setEnableButton(validFields: Boolean) {
@@ -85,7 +85,6 @@ class RegisterFragmentCellPhone : ErrorFragment<RegisterPresenterCellphone<Regis
     }
 
     override fun onBackPressed(): Boolean {
-        activity?.finish()
         return true
     }
 }

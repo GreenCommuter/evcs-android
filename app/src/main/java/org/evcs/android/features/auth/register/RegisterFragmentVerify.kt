@@ -9,6 +9,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
+import com.base.core.util.ToastUtils
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import com.rollbar.android.Rollbar
 import org.evcs.android.EVCSApplication
@@ -107,6 +108,7 @@ class RegisterFragmentVerify : ErrorFragment<RegisterPresenterVerify>(), Registe
     }
 
     override fun onCellphoneSent() {
+        ToastUtils.show("Phone verified")
         progressDialog.dismiss()
     }
 

@@ -50,7 +50,7 @@ class EVCSToolbar2 : LinearLayout {
         }
     }
 
-    fun setNavigationText(text: String) {
+    fun setNavigationText(text: String?) {
         mBinding.toolbarEvcsNavbutton.showOrHide(text)
     }
 

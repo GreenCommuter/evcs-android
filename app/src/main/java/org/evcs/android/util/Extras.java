@@ -28,7 +28,8 @@ public class Extras {
 
     public static final class VerifyActivity {
         public static final String RESULT = "result";
-        public static final String FROM_AUTH = "from_auth";
+        public static final String USE_CASE = "from_auth";
+        public static final String ASK_FOR_CAR = "ask_for_car";
     }
 
     public static final class ForgotPassword {

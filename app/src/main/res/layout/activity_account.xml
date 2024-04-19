@@ -42,8 +42,7 @@
             android:id="@+id/fragment_account_phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:lbv_label="@string/my_information_phone_number"
-            app:showButton="false"/>
+            app:lbv_label="@string/my_information_phone_number" />
 
     </LinearLayout>
 

@@ -10,26 +10,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
-        custom:title="@string/fragment_validate_old_user_title"
-        custom:navigationIcon="@null"/>
+        custom:title="@string/activity_account_delete_account"/>
 
     <TextView
         android:id="@+id/fragment_register_cell_phone_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/spacing_medium"
-        android:layout_marginStart="@dimen/padding_ariel_standard"
-        android:layout_marginEnd="@dimen/padding_ariel_standard"
+        android:layout_marginStart="@dimen/spacing_large_k"
+        android:layout_marginEnd="@dimen/spacing_large_k"
         android:textColor="@color/evcs_black"
-        android:text="@string/fragment_validate_old_user_subtitle"
+        android:text="@string/delete_account_error_subtitle"
         style="@style/Title.Large"/>
 
     <TextView
         android:id="@+id/fragment_register_cell_phone_subtitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/fragment_validate_old_user_description"
-        android:padding="@dimen/spacing_medium_extra"
+        android:text="@string/delete_account_error_description"
+        android:padding="@dimen/spacing_large_k"
         style="@style/Body.Medium.Black"/>
 
     <LinearLayout
@@ -47,19 +46,29 @@
             android:layout_weight="1"/>
 
         <TextView
-            android:id="@+id/fragment_validate_old_user_button"
+            android:id="@+id/fragment_delete_account_error_pay_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_validate_old_user_title"
+            android:text="@string/delete_account_error_pay_balance"
             android:layout_marginBottom="@dimen/spacing_medium_extra"
             style="@style/ButtonK.Orange" />
 
         <TextView
-            android:id="@+id/fragment_validate_old_user_logout"
+            android:id="@+id/fragment_delete_account_error_opt_out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Log Out"
-            style="@style/ButtonK.BlackOutline" />
+            android:layout_marginBottom="@dimen/spacing_medium_extra"
+            android:text="@string/delete_account_error_opt_out"
+            style="@style/ButtonK.BlackOutline"/>
+
+        <TextView
+            android:id="@+id/fragment_delete_account_error_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_cancel"
+            style="@style/ButtonK.BlackOutline"
+            android:background="@null"/>
+
 
     </LinearLayout>
 

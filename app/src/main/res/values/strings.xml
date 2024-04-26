@@ -42,14 +42,6 @@
     <string name="auth_register">Sign Up</string>
     <string name="auth_or">or continue with</string>
 
-    <!-- Choose Plan -->
-    <string name="choose_plan_title">Choose plan</string>
-    <string name="choose_plan_pay_as_you_go_title">Pay as you go</string>
-    <string name="choose_plan_pay_as_you_go_description">No regular fee. Pay for each rental. This plan is ideal for occasional use.</string>
-    <string name="choose_plan_basic_title">Basic membership</string>
-    <string name="choose_plan_basic_description">$%1$.2f monthly fee applied as credit to rentals. %2$d%% off regular rate. \nNote: Limited vehicle availability.</string>
-    <string name="choose_plan_premium_title">Premium membership</string>
-
     <!-- Gatecode dialog -->
     <string name="gatecode_dialog_title">Access requirement</string>
     <string name="gatecode_dialog_subtitle">This location requires a gate code to access it. You can always view the code in the location details.</string>
@@ -216,7 +208,7 @@
     <!-- Charging History -->
     <string name="charging_history_empty">Charge your EV to see your history here.</string>
 
-    <!--Search Location-->
+    <!-- Search Location-->
     <string name="search_location_explanation">Start typing the address and then select from \n the results</string>
 
     <!-- Change password -->
@@ -227,6 +219,16 @@
     <string name="change_password_button">Change your password</string>
     <string name="change_password_reset">Forgot password? Reset it via email</string>
 
+    <!-- Delete Account-->
+    <string name="delete_account_warning_subtitle">Everything related to your account will be lost. This action can\'t be undone.</string>
+    <string name="delete_account_warning_ok">Yes, delete my account</string>
+    <string name="delete_account_toast">Your account has been deleted</string>
+    <string name="delete_account_error_subtitle">You have an outstanding balance!</string>
+    <string name="delete_account_error_description">There are unpaid charges on your account that must be resolved before you can delete your account.\n\nYou may choose to “Opt-Out”. Under this option, we will stop sending you marketing messages and stop sharing your data with third parties, unless it is applicable to paying off your balance.</string>
+    <string name="delete_account_error_pay_balance">Pay Balance</string>
+    <string name="delete_account_error_opt_out">Opt Out</string>
+    <string name="delete_account_opt_out_title">Opted-Out</string>
+    <string name="delete_account_opt_out_subtitle">You are now Opted-Out. You will still be able to log into your account using your existing credentials and pay the outstanding balance.\n\nPlease check your email for more information about the Opt-Out status of your account.</string>
     <!-- Drawer -->
     <string name="drawer_header_user_format">%1$s %2$s</string>
     <string name="drawer_menu_open">Open</string>
@@ -240,7 +242,7 @@
 
     <!-- Notifications -->
     <string name="notifications_title">Notifications</string>
-    <string name="notifications_marketing">Marketing communications</string>
+    <string name="notifications_marketing">Marketing communications &amp; data sharing</string>
     <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>
     <string name="notifications_email_confirmation_reminder">Remember to confirm your email address so you can begin using our services.</string>

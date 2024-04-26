@@ -16,7 +16,7 @@ class AccountActivity : BaseActivity2() {
         replaceFragment(R.id.activity_base_content, AccountFragment::class.java)
     }
 
-    fun goToDelete() {
+    fun goToDeleteError() {
         supportFragmentManager.beginTransaction().add(R.id.activity_base_content, DeleteAccountErrorFragment.newInstance())
             .addToBackStack(null).commit()
     }

@@ -54,6 +54,7 @@ class DeleteAccountErrorFragment : ErrorFragment<NotificationsPresenter?>(), Not
             .setTitle(getString(R.string.delete_account_opt_out_title))
             .setSubtitle(getString(R.string.delete_account_opt_out_subtitle))
             .addButton(getString(R.string.app_close), { dialog ->
+                //TODO: close fragment?
                  dialog.dismiss()
             }, R.style.ButtonK_Blue)
             .show(childFragmentManager)

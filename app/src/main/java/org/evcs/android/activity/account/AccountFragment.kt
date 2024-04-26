@@ -2,6 +2,7 @@ package org.evcs.android.activity.account
 
 import android.content.Intent
 import android.telephony.PhoneNumberUtils
+import android.view.Gravity
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -61,17 +62,19 @@ class AccountFragment : ErrorFragment<DeleteAccountPresenter>(), DeleteAccountVi
 //            mChangeUserResult.launch(Intent(this, ChangePhoneNumberActivity::class.java))
         }
         mBinding.fragmentAccountDelete.setOnClickListener {
-            (requireActivity() as AccountActivity).goToDelete()
-            return@setOnClickListener
             EVCSDialogFragment.Builder()
-                    .setTitle("Are you sure?")
-                    .setSubtitle(getString(R.string.delete_account_warning_subtitle))
+                    //.setTitle("Are you sure?")
+                    .setSubtitle(getString(R.string.delete_account_warning_subtitle), Gravity.CENTER)
                     .addButton(getString(R.string.delete_account_warning_ok), { dialog ->
                         dialog.dismiss()
-                        mBinding.fragmentAccountDelete.isEnabled = false
-                        presenter.deleteAccount()
-                    }, R.style.ButtonK_Danger)
-                    .showCancel("No")
+                        if (true) {//TODO: user has pending payments, or maybe the presenter will tell me
+                            (requireActivity() as AccountActivity).goToDeleteError()
+                        } else {
+                            mBinding.fragmentAccountDelete.isEnabled = false
+                            presenter.deleteAccount()
+                        }
+                    }, R.style.ButtonK_Blue)
+                    .addButton(getString(R.string.app_cancel), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
                     .show(childFragmentManager)
         }
     }

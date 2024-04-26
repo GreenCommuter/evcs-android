@@ -119,7 +119,7 @@
     <string name="profile_support_faq">Help Center FAQ</string>
     <string name="profile_support_feedback">Submit a Request</string>
     <string name="profile_privacy_section">Privacy</string>
-    <string name="profile_privacy_notifications">Notifications</string>
+    <string name="profile_privacy_notifications">Communications</string>
     <string name="profile_privacy_tandc">Terms and Conditions</string>
     <string name="profile_account_section">Account</string>
     <string name="profile_charge_history">Charge History</string>
@@ -133,7 +133,7 @@
         <item>charging when you upgrade your plan!</item>
     </string-array>
     <string name="profile_explore_plans_text">Upgrade your plan for discounted charging</string>
-    <string name="profile_payment_issue">One or more credit card payments were declined.</string>
+    <string name="profile_payment_issue">There are pending unpaid charges on your account that must be resolved before you can continue.</string>
     <string name="profile_payment_button">Resolve</string>
     <string name="profile_subscription_issue_button">Update payment method</string>
 
@@ -219,8 +219,8 @@
     <string name="change_password_reset">Forgot password? Reset it via email</string>
 
     <!-- Delete Account-->
-    <string name="delete_account_warning_subtitle">Everything related to your account will be lost. This action can\'t be undone.</string>
-    <string name="delete_account_warning_ok">Yes, delete my account</string>
+    <string name="delete_account_warning_subtitle">This will completely delete your account, are you sure?</string>
+    <string name="delete_account_warning_ok">Confirm</string>
     <string name="delete_account_toast">Your account has been deleted</string>
     <string name="delete_account_error_subtitle">You have an outstanding balance!</string>
     <string name="delete_account_error_description">There are unpaid charges on your account that must be resolved before you can delete your account.\n\nYou may choose to “Opt-Out”. Under this option, we will stop sending you marketing messages and stop sharing your data with third parties, unless it is applicable to paying off your balance.</string>
@@ -240,7 +240,7 @@
     <string name="monthly_fee_text">Monthly fee</string>
 
     <!-- Notifications -->
-    <string name="notifications_title">Notifications</string>
+    <string name="notifications_title">Communications</string>
     <string name="notifications_marketing">Marketing communications &amp; data sharing</string>
     <string name="notifications_car_not_plugged">The car is not plugged in. Please return to plug it in.</string>
     <string name="notifications_thank_you_for_registering">Thank you for registering with EVCS. Please check your email now so we can confirm your email address and you can start using our services.</string>

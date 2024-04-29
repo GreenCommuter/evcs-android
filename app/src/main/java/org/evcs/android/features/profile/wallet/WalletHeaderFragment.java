@@ -13,7 +13,6 @@ import org.evcs.android.features.shared.EVCSDialogFragment;
 import org.evcs.android.model.PaymentMethod;
 import org.evcs.android.model.shared.RequestError;
 import org.evcs.android.ui.fragment.ErrorFragment;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
@@ -110,7 +109,7 @@ public abstract class WalletHeaderFragment extends ErrorFragment<WalletHeaderPre
     }
 
     @Override
-    public void onDefaultPaymentMethodSet(@NotNull PaymentMethod item) {
+    public void onDefaultPaymentMethodSet(@NonNull PaymentMethod item) {
         hideProgressDialog();
         mCreditCardsAdapter.setDefault(item);
         ((WalletActivity) getActivity()).onPaymentMethodChanged(mCreditCardsAdapter.getDefault());

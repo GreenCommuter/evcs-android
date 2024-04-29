@@ -47,6 +47,9 @@ open class CreditCardPresenter<T : ICreditCardView?>(viewInstance: T, services: 
         val user = UserUtils.getLoggedUser()
         user.defaultPm = item.id
         UserUtils.saveUser(user)
+
+        StorageUtils.storeInSharedPreferences(Extras.ChangePaymentMethod.PAYMENT_METHODS, item)
+
         view.onDefaultPaymentMethodSet(item)
     }
 

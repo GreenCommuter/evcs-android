@@ -40,7 +40,7 @@ open class User : Serializable {
     }
 
     fun canDoTrial() : Boolean {
-        return previousSubscription == null
+        return previousSubscription == null && appliesTrial == true
     }
 
     val hasAnySubscription: Boolean
@@ -69,6 +69,7 @@ open class User : Serializable {
 //    "subscription_user":false,
     val createdFrom: String? = null
     val createdFromDescription: String? = null
+    val appliesTrial: Boolean? = null
 
     fun isLyftUser() : Boolean {
         return "Lyft".equals(createdFrom, ignoreCase = true) && createdFromDescription != null

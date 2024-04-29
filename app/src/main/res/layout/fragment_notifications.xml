@@ -11,14 +11,15 @@
         android:layout_marginBottom="@dimen/spacing_toolbar_bottom_extra"
         app:title="@string/notifications_title"/>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_ariel_standard">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="@string/notifications_marketing"
             android:textColor="@color/evcs_black"
             android:layout_gravity="center_vertical"
@@ -29,9 +30,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:thumb="@drawable/rectangle_switch_thumb"
-            android:layout_gravity="end"
+            android:layout_gravity="center|end"
             app:track="@drawable/rectangle_switch_track"/>
 
-    </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

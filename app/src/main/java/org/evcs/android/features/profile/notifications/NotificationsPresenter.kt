@@ -12,20 +12,29 @@ import org.evcs.android.util.ErrorUtils
 class NotificationsPresenter(viewInstance: NotificationsView, services: RetrofitServices) :
     ServicesPresenter<NotificationsView>(viewInstance, services) {
 
+    fun getCallback(): AuthCallback<Void?> {
+        return object : AuthCallback<Void?>(this) {
+            override fun onResponseSuccessful(response: Void?) {
+                view.onSuccess()
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable?) {
+                view.showError(RequestError.getNetworkError())
+            }
+        }
+    }
+
+    fun optOut() {
+        getService(MessageService::class.java).optOut()
+            .enqueue(getCallback())
+    }
+
     fun toggleNotifications(checked: Boolean) {
         getService(MessageService::class.java).enableNotifications(BooleanWrapper(checked.toString()))
-            .enqueue(object : AuthCallback<Void?>(this) {
-                override fun onResponseSuccessful(response: Void?) {
-                    view.onSuccess()
-                }
-
-                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                    view.showError(ErrorUtils.getError(responseBody))
-                }
-
-                override fun onCallFailure(t: Throwable?) {
-                    view.showError(RequestError.getNetworkError())
-                }
-        })
+            .enqueue(getCallback())
     }
 }

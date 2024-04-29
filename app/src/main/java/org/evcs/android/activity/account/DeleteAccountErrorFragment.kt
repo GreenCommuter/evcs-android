@@ -47,8 +47,7 @@ class DeleteAccountErrorFragment : ErrorFragment<NotificationsPresenter?>(), Not
         }
         mBinding.fragmentDeleteAccountErrorOptOut.setOnClickListener {
             showProgressDialog()
-            //TODO: change endpoint when we have it
-            presenter?.toggleNotifications(false)
+            presenter?.optOut()
         }
         mBinding.fragmentDeleteAccountErrorCancel.setOnClickListener {
             onBackPressed()
@@ -70,7 +69,7 @@ class DeleteAccountErrorFragment : ErrorFragment<NotificationsPresenter?>(), Not
             .setTitle(getString(R.string.delete_account_opt_out_title))
             .setSubtitle(getString(R.string.delete_account_opt_out_subtitle))
             .addButton(getString(R.string.app_close), { dialog ->
-                //close fragment?
+                 onBackPressed()
                  dialog.dismiss()
             }, R.style.ButtonK_Blue)
             .show(childFragmentManager)

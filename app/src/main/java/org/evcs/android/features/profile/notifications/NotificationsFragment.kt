@@ -37,7 +37,7 @@ class NotificationsFragment : ErrorFragment<NotificationsPresenter>(), Notificat
     }
 
     override fun onSuccess() {
-        ToastUtils.show("Successfully " + (if (mBinding.notificationsSwitch.isChecked) "un" else "") + "subscribed")
+        ToastUtils.show("Successfully " + (if (!mBinding.notificationsSwitch.isChecked) "un" else "") + "subscribed")
     }
 
     override fun showError(requestError: RequestError) {

@@ -2,8 +2,10 @@ package org.evcs.android.activity.account
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
+import org.evcs.android.model.Payment
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.network.callback.AuthCallback
+import org.evcs.android.network.service.PaymentsService
 import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
@@ -30,6 +32,27 @@ class DeleteAccountPresenter(viewInstance: DeleteAccountView, services: Retrofit
                         view.showError(RequestError.getNetworkError())
                     }
                 })
+    }
+
+    fun checkPaymentsAndDeleteAccount() {
+        getService(PaymentsService::class.java).rejectedPayments.enqueue(
+            object : AuthCallback<ArrayList<Payment>>(this) {
+                override fun onResponseSuccessful(response: ArrayList<Payment>) {
+                    if (response.isNotEmpty()) {
+                        view.showPaymentIssue()
+                    } else {
+                        deleteAccount()
+                    }
+                }
+
+                override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
+                    view.showError(ErrorUtils.getError(responseBody))
+                }
+
+                override fun onCallFailure(t: Throwable?) {
+                    view.showError(RequestError.getNetworkError())
+                }
+            })
     }
 
 }

@@ -225,7 +225,7 @@
     <string name="delete_account_error_subtitle">You have an outstanding balance!</string>
     <string name="delete_account_error_description">There are unpaid charges on your account that must be resolved before you can delete your account.\n\nYou may choose to “Opt-Out”. Under this option, we will stop sending you marketing messages and stop sharing your data with third parties, unless it is applicable to paying off your balance.</string>
     <string name="delete_account_error_pay_balance">Pay Balance</string>
-    <string name="delete_account_error_opt_out">Opt Out</string>
+    <string name="delete_account_error_opt_out">Opt-Out</string>
     <string name="delete_account_opt_out_title">Opted-Out</string>
     <string name="delete_account_opt_out_subtitle">You are now Opted-Out. You will still be able to log into your account using your existing credentials and pay the outstanding balance.\n\nPlease check your email for more information about the Opt-Out status of your account.</string>
     <!-- Drawer -->

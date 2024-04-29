@@ -67,19 +67,23 @@ class AccountFragment : ErrorFragment<DeleteAccountPresenter>(), DeleteAccountVi
                     .setSubtitle(getString(R.string.delete_account_warning_subtitle), Gravity.CENTER)
                     .addButton(getString(R.string.delete_account_warning_ok), { dialog ->
                         dialog.dismiss()
-                        if (true) {//TODO: user has pending payments, or maybe the presenter will tell me
-                            (requireActivity() as AccountActivity).goToDeleteError()
-                        } else {
-                            mBinding.fragmentAccountDelete.isEnabled = false
-                            presenter.deleteAccount()
-                        }
+                        showProgressDialog()
+                        mBinding.fragmentAccountDelete.isEnabled = false
+                        presenter.checkPaymentsAndDeleteAccount()
                     }, R.style.ButtonK_Blue)
                     .addButton(getString(R.string.app_cancel), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
                     .show(childFragmentManager)
         }
     }
 
+    override fun showPaymentIssue() {
+        hideProgressDialog()
+        mBinding.fragmentAccountDelete.isEnabled = true
+        (requireActivity() as AccountActivity).goToDeleteError()
+    }
+
     override fun onAccountDeleted() {
+        hideProgressDialog()
         ToastUtils.show(getString(R.string.delete_account_toast))
     }
 

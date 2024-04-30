@@ -59,7 +59,9 @@ class AccountFragment : ErrorFragment<DeleteAccountPresenter>(), DeleteAccountVi
             mChangeUserResult.launch(Intent(requireContext(), ChangeEmailActivity::class.java))
         }
         mBinding.fragmentAccountPhone.setOnClickListener {
-//            mChangeUserResult.launch(Intent(this, ChangePhoneNumberActivity::class.java))
+            val intent = Intent(requireContext(), VerifyPhoneActivity::class.java)
+            intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.USER_REQUEST)
+            mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountDelete.setOnClickListener {
             EVCSDialogFragment.Builder()

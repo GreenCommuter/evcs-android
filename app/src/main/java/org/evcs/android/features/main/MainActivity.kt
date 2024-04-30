@@ -2,13 +2,17 @@ package org.evcs.android.features.main
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.CallSuper
+import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation.findNavController
 import com.base.core.util.NavigationUtils
@@ -34,9 +38,14 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     private lateinit var mButton: TextView
     var isBottomOfStack = true
         private set
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                result -> if (result.resultCode == RESULT_OK)
+                    showSuccessDialog(R.string.success_dialog_subtitle_phone)
+        }
         isBottomOfStack = intent.getBooleanExtra(Extras.MainActivity.IS_BOTTOM, true)
     }
 
@@ -161,21 +170,27 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .show(supportFragmentManager)
     }
 
-    fun showSuccessDialog() {
+    fun showSuccessDialog(@StringRes subtitle : Int = R.string.success_dialog_subtitle) {
         val textView = TextView(this)
         textView.text = getString(R.string.success_dialog_cta)
         textView.setTextAppearance(this, R.style.Label_Medium)
         textView.gravity = Gravity.CENTER
         textView.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_big_k).toInt())
 
-        EVCSSliderDialogFragment.Builder()
+        val button = if (UserUtils.userCanDoTrial()) R.string.app_trial_cta_default
+        else R.string.plan_info_explore_plans
+
+        var dialogBuilder = EVCSSliderDialogFragment.Builder()
             .setTitle(getString(R.string.success_dialog_title), R.style.Label_Large)
-            .setSubtitle(getString(R.string.success_dialog_subtitle))
-            .addView(textView)
-            .addButton(getString(R.string.app_trial_cta_default)) {
+            .setSubtitle(getString(subtitle))
+
+        if (UserUtils.getLoggedUser() == null || UserUtils.getLoggedUser().activeSubscription == null) {
+            dialogBuilder = dialogBuilder.addView(textView)
+            dialogBuilder.addButton(getString(button)) {
                 NavigationUtils.jumpTo(this, PlansActivity::class.java)
             }
-            .show(supportFragmentManager)
+        }
+        dialogBuilder.show(supportFragmentManager)
     }
 
     fun showCongratulationsDialog(subscription: Subscription) {
@@ -214,4 +229,13 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         KeyboardListener.detach(window.decorView.rootView)
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (UserUtils.getLoggedUser() == null) return
+        if (!(UserUtils.getLoggedUser().isPhoneVerified)) {
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.OUR_REQUEST)
+            startForResult.launch(intent)
+        }
+    }
 }

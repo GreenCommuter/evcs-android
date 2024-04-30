@@ -154,5 +154,9 @@ public final class UserUtils {
         return getLoggedUser() == null ? 0 : getLoggedUser().getId() ;
     }
 
+    public static boolean userCanDoTrial() {
+        return getLoggedUser() == null || getLoggedUser().canDoTrial();
+    }
+
 }
 

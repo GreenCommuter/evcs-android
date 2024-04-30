@@ -57,8 +57,6 @@
             android:id="@+id/fragment_register_enter_code_edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Edit your number"
-            android:textColor="@color/evcs_orange"
             android:visibility="gone"/>
 
         <TextView
@@ -68,7 +66,7 @@
             android:layout_marginBottom="@dimen/spacing_big_k"
             android:enabled="false"
             android:text="@string/app_continue"
-            style="@style/ButtonK.Orange" />
+            style="@style/ButtonK.Orange.Tall" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -103,7 +101,8 @@
             android:gravity="center"
             android:padding="18dp"
             android:text="@string/fragment_register_cell_phone_validate_later"
-            style="@style/Label.Large" />
+            style="@style/Label.Large"
+            android:visibility="gone"/>
 
     </LinearLayout>
 

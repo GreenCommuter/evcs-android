@@ -4,10 +4,12 @@ import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
 import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.PhoneWrapper
+import org.evcs.android.model.user.User
 import org.evcs.android.network.callback.AuthCallback
 import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
 import org.evcs.android.util.ErrorUtils
+import org.evcs.android.util.UserUtils
 
 open class RegisterPresenterCellphone<T : RegisterViewCellphone?>(viewInstance: T, services: RetrofitServices) :
     ServicesPresenter<T>(viewInstance, services) {
@@ -16,6 +18,9 @@ open class RegisterPresenterCellphone<T : RegisterViewCellphone?>(viewInstance: 
         getService(UserService::class.java).sendPhoneToVerify(PhoneWrapper(number))
             .enqueue(object : AuthCallback<Void>(this) {
                 override fun onResponseSuccessful(p0: Void?) {
+                    val user = UserUtils.getLoggedUser()
+                    user.phone = number
+                    UserUtils.saveUser(user)
                     view?.onCellphoneSent()
                 }
 

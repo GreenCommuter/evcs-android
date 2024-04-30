@@ -352,6 +352,10 @@
     <string name="register_your_car_model">Model</string>
     <string name="register_your_car_make">Make</string>
 
+    <string name="fragment_validate_old_user_title">Validate Phone Number</string>
+    <string name="fragment_validate_old_user_subtitle">Please validate your phone number</string>
+    <string name="fragment_validate_old_user_description">We now require a valid phone number for security purposes. If you would like to continue using our service, please validate your phone number.\n\nIf you log out, you can still view charger locations; in order to charge you need to validate your phone number.</string>
+
     <string name="fragment_register_cell_phone_title">Welcome %s.\nAlmost there!</string>
     <string name="fragment_register_cell_phone_subtitle">To activate your account we need you to validate your phone number</string>
     <string name="fragment_register_cell_phone_button">Send me a code</string>
@@ -376,6 +380,7 @@
     <string name="welcome_dialog_subtitle">Your Pay As You Go Membership is now active. You can charge at a simple flat rate, any time, across the entire EVCS network.</string>
     <string name="success_dialog_title">Success!</string>
     <string name="success_dialog_subtitle">You’re now an EVCS member. Enjoy discounted rates on Pay As You Go.</string>
+    <string name="success_dialog_subtitle_phone">Thank you for validating your phone number; you can now continue using the EVCS app</string>
     <string name="success_dialog_cta">Want to save more?\nExplore EVCS subscription plans</string>
     <string name="congratulations_dialog_title">Congratulations!</string>
     <string name="congratulations_dialog_subtitle">Your %1$s is now active. %2$s</string>

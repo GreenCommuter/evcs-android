@@ -5,6 +5,19 @@
     android:id="@+id/navigation_verify.xml"
     app:startDestination="@id/registerFragmentYourCar">
 
+    <fragment android:id="@+id/placeholder"
+        android:name="org.evcs.android.ui.fragment.EmptyFragment">
+        <action
+            android:id="@+id/action_placeholder_to_planInfoFragment"
+            app:destination="@id/registerFragmentYourCar" />
+        <action
+            android:id="@+id/action_placeholder_to_fragmentValidateOldUser"
+            app:destination="@id/fragmentValidateOldUser" />
+        <action
+            android:id="@+id/action_placeholder_to_changePhoneFragment"
+            app:destination="@id/changePhoneFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/registerFragmentYourCar"
         android:name="org.evcs.android.features.auth.register.RegisterFragmentYourCar"
@@ -13,6 +26,16 @@
         <action
             android:id="@+id/action_registerFragmentYourCar_to_registerFragmentCellPhone"
             app:destination="@id/registerFragmentCellPhone" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentValidateOldUser"
+        android:name="org.evcs.android.features.auth.register.FragmentValidateOldUser"
+        android:label="RegisterFragmentYourCar"
+        tools:layout="@layout/fragment_validate_old_user">
+        <action
+            android:id="@+id/action_registerFragmentYourCar_to_registerFragmentCellPhone"
+            app:destination="@id/fragmentCellPhoneOldUser" />
     </fragment>
 
     <fragment
@@ -33,6 +56,25 @@
             android:name="previous_number"
             app:argType="string"
             android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePhoneFragment"
+        android:name="org.evcs.android.features.auth.register.ChangePhoneFragment"
+        android:label="ChangePhoneFragment"
+        tools:layout="@layout/fragment_register_cell_phone">
+        <action
+            android:id="@+id/action_changePhoneFragment_to_registerFragmentVerify"
+            app:destination="@id/registerFragmentVerify" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentCellPhoneOldUser"
+        android:name="org.evcs.android.features.auth.register.FragmentCellPhoneOldUser"
+        android:label="FragmentCellPhoneOldUser"
+        tools:layout="@layout/fragment_register_cell_phone">
+        <action
+            android:id="@+id/action_fragmentCellPhoneOldUser_to_registerFragmentVerify"
+            app:destination="@id/registerFragmentVerify" />
     </fragment>
 
 </navigation>

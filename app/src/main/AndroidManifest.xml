@@ -97,13 +97,6 @@
             android:theme="@style/SplashTheme" />
 
         <activity
-            android:name="org.evcs.android.activity.account.ChangePhoneNumberActivity"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleTask"
-            android:theme="@style/SplashTheme" />
-
-        <activity
             android:name="org.evcs.android.features.profile.wallet.WalletActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize"

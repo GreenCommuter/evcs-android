@@ -34,7 +34,10 @@ class GetPlanActivity : BaseActivity2() {
 
     override fun init() {
         if (!(UserUtils.getLoggedUser().isPhoneVerified) || UserUtils.getLoggedUser().userCar == null) {
-            mLauncher.launch(Intent(this, VerifyPhoneActivity::class.java))
+            val intent = Intent(this, VerifyPhoneActivity::class.java)
+            intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.OUR_REQUEST)
+            intent.putExtra(Extras.VerifyActivity.ASK_FOR_CAR, true)
+            mLauncher.launch(intent)
         }
     }
 

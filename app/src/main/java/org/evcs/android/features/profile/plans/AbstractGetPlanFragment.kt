@@ -7,6 +7,7 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
+import androidx.core.view.isVisible
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentGetPlanBinding
@@ -60,7 +61,7 @@ abstract class AbstractGetPlanFragment : ErrorFragment<GetPlanPresenter>(), GetP
         mBinding.getPlanToolbar.setTitle(getToolbarTitle())
         mBinding.getPlanPlan.text = mPlan.name
         mBinding.getPlanFreeTrial.showOrHide(getTrialLabel())
-
+        mBinding.getPlanFreeTrialLabel.isVisible = getTrialLabel() != null
         //TODO: el payg no tiene monthly rate y esconde el check, muestra el start date
         mBinding.getPlanMonthlyRate.setLabel(getMonthlyLabel(dateFormatter))
         mBinding.getPlanMonthlyRate.setText(String.format("\$%.2f per %s", mPlan.price, mPlan.renewalPeriod))

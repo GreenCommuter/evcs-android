@@ -33,7 +33,7 @@ class GetPlanFragment : AbstractGetPlanFragment() {
     }
 
     override fun getTrialLabel(): String? {
-        if (UserUtils.getLoggedUser() == null || UserUtils.getLoggedUser().canDoTrial()) {
+        if (UserUtils.userCanDoTrial()) {
             return getString(R.string.get_plan_trial_label, mPlan.trialKwh, mPlan.trialDays)
         } else {
             return null
@@ -45,6 +45,6 @@ class GetPlanFragment : AbstractGetPlanFragment() {
     }
 
     override fun showToday(): Boolean {
-        return true
+        return UserUtils.userCanDoTrial()
     }
 }

@@ -168,11 +168,14 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         textView.gravity = Gravity.CENTER
         textView.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_big_k).toInt())
 
+        val button = if (UserUtils.userCanDoTrial()) R.string.app_trial_cta_default
+                     else R.string.plan_info_explore_plans
+
         EVCSSliderDialogFragment.Builder()
             .setTitle(getString(R.string.success_dialog_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.success_dialog_subtitle))
             .addView(textView)
-            .addButton(getString(R.string.app_trial_cta_default)) {
+            .addButton(getString(button)) {
                 NavigationUtils.jumpTo(this, PlansActivity::class.java)
             }
             .show(supportFragmentManager)

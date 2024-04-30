@@ -17,17 +17,16 @@ class FragmentCellPhoneOldUser : AbstractChangePhoneFragment() {
         return fragment
     }
 
-    override fun getTitle(): String? {
-        return "Our request"
+    override fun getTitle(): String {
+        return "Almost there!"
     }
 
     override fun getSubtitle() : String? {
-        return getString(R.string.fragment_register_cell_phone_subtitle)
+        return " "
     }
 
     override fun userCanExit(): Boolean {
         return false
     }
-
 
 }

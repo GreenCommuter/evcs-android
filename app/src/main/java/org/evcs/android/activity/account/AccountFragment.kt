@@ -64,18 +64,24 @@ class AccountFragment : ErrorFragment<DeleteAccountPresenter>(), DeleteAccountVi
             mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountDelete.setOnClickListener {
-            EVCSDialogFragment.Builder()
-                    //.setTitle("Are you sure?")
-                    .setSubtitle(getString(R.string.delete_account_warning_subtitle), Gravity.CENTER)
-                    .addButton(getString(R.string.delete_account_warning_ok), { dialog ->
-                        dialog.dismiss()
-                        showProgressDialog()
-                        mBinding.fragmentAccountDelete.isEnabled = false
-                        presenter.checkPaymentsAndDeleteAccount()
-                    }, R.style.ButtonK_Blue)
-                    .addButton(getString(R.string.app_cancel), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
-                    .show(childFragmentManager)
+            showProgressDialog()
+            presenter.checkPayments()
         }
+    }
+
+    override fun showConfirmDialog() {
+        hideProgressDialog()
+        EVCSDialogFragment.Builder()
+            //.setTitle("Are you sure?")
+            .setSubtitle(getString(R.string.delete_account_warning_subtitle), Gravity.CENTER)
+            .addButton(getString(R.string.delete_account_warning_ok), { dialog ->
+                dialog.dismiss()
+                showProgressDialog()
+                mBinding.fragmentAccountDelete.isEnabled = false
+                presenter.deleteAccount()
+            }, R.style.ButtonK_Blue)
+            .addButton(getString(R.string.app_cancel), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
+            .show(childFragmentManager)
     }
 
     override fun showPaymentIssue() {

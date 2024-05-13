@@ -34,14 +34,14 @@ class DeleteAccountPresenter(viewInstance: DeleteAccountView, services: Retrofit
                 })
     }
 
-    fun checkPaymentsAndDeleteAccount() {
+    fun checkPayments() {
         getService(PaymentsService::class.java).rejectedPayments.enqueue(
             object : AuthCallback<ArrayList<Payment>>(this) {
                 override fun onResponseSuccessful(response: ArrayList<Payment>) {
                     if (response.isNotEmpty()) {
                         view.showPaymentIssue()
                     } else {
-                        deleteAccount()
+                        view.showConfirmDialog()
                     }
                 }
 

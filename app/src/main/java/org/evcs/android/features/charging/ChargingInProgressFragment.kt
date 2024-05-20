@@ -115,6 +115,8 @@ class ChargingInProgressFragment : ErrorFragment<ChargingInProgressPresenter>(),
             setDuration(response.duration.toLong())
             startTimerUpdates()
         }
+
+        mBinding.chargingInProgressStateOfCharge.setState(mSession.firstSoc, mSession.lastSoc)
 //        mBinding.chargingInProgressCost.setText(String.format("\$%.2f", mSession.ongoingRate?.sessionFeeValue))
         mBinding.chargingInProgressCost.setText(mSession.ongoingRate?.sessionFeeValue)
         mBinding.chargingInProgressCost.setLabel(mSession.ongoingRate?.sessionFeeLabel?:"")

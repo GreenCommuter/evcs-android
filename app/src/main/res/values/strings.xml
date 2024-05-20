@@ -448,6 +448,10 @@
     <string name="charging_in_progress_data_delay">*Final energy delivered may vary</string>
 <!--    <string name="charging_in_progress_error_title">Charging issue</string>-->
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
+    <string name="state_of_charge_unsupported">The vehicle or charger may not support\ndisplaying this information.</string>
+    <string name="state_of_charge_title">Battery State of Charge</string>
+    <string name="state_of_charge_start">Start %d%%</string>
+    <string name="state_of_charge_end">End %d%%</string>
 
     <!-- Session information -->
     <string name="session_information_energy">Energy Delivered</string>

@@ -9,4 +9,6 @@ class Session : Charge(), Serializable {
     //    "status":"active",
     val updatedAt: DateTime? = null
     val ongoingRate: OngoingRate? = null
+    val firstSoc: Int? = null
+    val lastSoc: Int? = null
 }

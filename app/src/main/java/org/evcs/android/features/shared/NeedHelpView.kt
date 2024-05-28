@@ -23,7 +23,7 @@ class NeedHelpView : androidx.appcompat.widget.AppCompatTextView {
         val medium = context.resources.getDimension(R.dimen.spacing_medium).toInt()
         setPadding(medium, medium, medium, medium)
         gravity = Gravity.CENTER
-        text = context.getText(R.string.session_information_help)
+        text = context.getText(R.string.app_need_help)
         setOnClickListener { NavigationUtils.jumpTo(context, ContactSupportActivity::class.java) }
     }
 }

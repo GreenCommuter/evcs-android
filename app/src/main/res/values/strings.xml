@@ -30,6 +30,7 @@
     <string name="app_close">Close</string>
     <string name="app_cancel">Cancel</string>
     <string name="app_trial_cta_default">Start Your Free Trial</string>
+    <string name="app_need_help">Need help? <u>Contact Customer Support</u></string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
     <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
@@ -101,11 +102,6 @@
     <string name="my_information_zip_code">Zipcode</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
-
-    <!-- BrainTree -->
-    <string name="braintree_title">Add Credit or Debit Card</string>
-    <string name="braintree_error_token">Error retrieving token</string>
-    <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
 
     <!-- Profile -->
     <string name="profile_title">Profile</string>
@@ -192,6 +188,7 @@
     <string name="add_credit_card_name">Cardholder name</string>
     <string name="add_credit_card_set_default">Set as default payment method</string>
     <string name="add_credit_card_success">Your card was successfully added</string>
+    <string name="add_credit_card_title">Add Credit or Debit Card</string>
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>
@@ -450,16 +447,17 @@
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
 
     <!-- Session information -->
-    <string name="session_information_energy">Energy Delivered</string>
-    <string name="session_information_time">Elapsed time</string>
+    <string name="session_information_energy">Total Energy Delivered</string>
+    <string name="session_information_time">Total Elapsed Time</string>
     <string name="session_information_payment_method">Payment Method</string>
     <string name="session_information_plan">Plan type</string>
     <string name="session_information_id">Session ID</string>
     <string name="session_information_station_id">Station ID</string>
     <string name="session_information_price">Total</string>
     <string name="session_information_receipt">View Receipt</string>
-    <string name="session_information_help">Need help? <u>Contact Customer Support</u></string>
-    <string name="session_information_title">Session Detail</string>
+    <string name="session_information_title">Charge Receipt</string>
+    <string name="session_information_max_rate">Maximum Rate of Energy Transfer</string>
+    <string name="session_information_thank_you">Thank you for charging with EV Charging Solutions, Inc. (EVCS)</string>
 
     <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>

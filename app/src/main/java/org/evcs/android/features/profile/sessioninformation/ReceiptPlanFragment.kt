@@ -39,7 +39,7 @@ class ReceiptPlanFragment : ErrorFragment<BasePresenter<*>>() {
         mBinding.receiptPlanDate.setText(mPayment.createdAt)
 
         mPayment.receipt.forEach { line ->
-            val v = StandardTextFieldNoBorder(requireContext(), line.label, line.detail)
+            val v = StandardTextFieldNoBorder(requireContext(), line.label!!, line.detail!!)
 //            (v.layoutParams as LinearLayout.LayoutParams)
             v.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
             mBinding.receiptPlanLayout.addView(v)

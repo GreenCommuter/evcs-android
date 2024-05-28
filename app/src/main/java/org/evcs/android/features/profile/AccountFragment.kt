@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.profile
 
 import android.content.Intent
 import android.telephony.PhoneNumberUtils
@@ -10,6 +10,10 @@ import com.base.core.util.NavigationUtils.jumpTo
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.account.AccountActivity
+import org.evcs.android.activity.account.ChangeEmailActivity
+import org.evcs.android.activity.account.ChangeNameActivity
+import org.evcs.android.activity.account.ChangePasswordActivity
 import org.evcs.android.databinding.ActivityAccountBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.shared.EVCSDialogFragment

@@ -221,7 +221,6 @@
     <string name="delete_account_toast">Your account has been deleted</string>
     <string name="delete_account_error_subtitle">You have an outstanding balance!</string>
     <string name="delete_account_error_description">There are unpaid charges on your account that must be resolved before you can delete your account.\n\nYou may choose to “Opt-Out”. Under this option, we will stop sending you marketing messages and stop sharing your data with third parties, unless it is applicable to paying off your balance.</string>
-    <string name="delete_account_error_pay_balance">Pay Balance</string>
     <string name="delete_account_error_opt_out">Opt-Out</string>
     <string name="delete_account_opt_out_title">Opted-Out</string>
     <string name="delete_account_opt_out_subtitle">You are now Opted-Out. You will still be able to log into your account using your existing credentials and pay the outstanding balance.\n\nPlease check your email for more information about the Opt-Out status of your account.</string>
@@ -252,9 +251,6 @@
     <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
     <string name="vanpool_travel_information_km_distance_format">%1$.1f Km</string>
     <string name="vanpool_travel_information_time_format">%1$d min</string>
-
-    <!-- Congratulations Fragment -->
-    <string name="vanpool_detail_congratulations_fragment_description">Thank you for your payment. Your vanpool is scheduled to begin on %1$s. $%2$.2f will be deducted monthly from your credit card on file.</string>
 
     <!-- Vanpool Status -->
     <string name="vanpool_status_cancelled">Canceled</string>
@@ -583,6 +579,12 @@
     <string name="free_trial_reminder_description_4">If this charging session exceeds %.0f kWh, you will be</string>
     <string name="free_trial_reminder_description_5">automatically billed</string>
     <string name="free_trial_reminder_description_6">for the first %1$s installment of $%2$.2f for your %3$s Plan.</string>
+
+    <!-- Pay Balance -->
+    <string name="pay_balance_pending">Pending Payments</string>
+    <string name="pay_balance_process_payment">Process Payment</string>
+    <string name="pay_balance_title">Pay Balance</string>
+    <string name="pay_balance_success">Success! Your payment has been processed.</string>
 
     <string-array name="lyft_array">
         <item>You are connected to </item>

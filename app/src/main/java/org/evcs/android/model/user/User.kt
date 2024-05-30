@@ -49,7 +49,7 @@ open class User : Serializable {
     val isCorporateUser: Boolean
         get() = false
 
-    val marketingNotifications: Boolean? = null
+    var marketingNotifications: Boolean? = null
     val hasCompletedCarScreen: Boolean
         get() = zipCode != null
 

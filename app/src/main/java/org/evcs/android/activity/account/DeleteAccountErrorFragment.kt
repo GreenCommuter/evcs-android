@@ -1,9 +1,11 @@
 package org.evcs.android.activity.account
 
 import android.view.View
+import com.base.core.util.NavigationUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentDeleteAccountErrorBinding
+import org.evcs.android.features.profile.notifications.NotificationsActivity
 import org.evcs.android.features.profile.notifications.NotificationsPresenter
 import org.evcs.android.features.profile.notifications.NotificationsView
 import org.evcs.android.features.shared.EVCSDialogFragment
@@ -47,8 +49,7 @@ class DeleteAccountErrorFragment : ErrorFragment<NotificationsPresenter?>(), Not
         }
         mBinding.fragmentDeleteAccountErrorOptOut.setOnClickListener {
             showProgressDialog()
-            //TODO: change endpoint when we have it
-            presenter?.toggleNotifications(false)
+            presenter?.optOut()
         }
         mBinding.fragmentDeleteAccountErrorCancel.setOnClickListener {
             onBackPressed()
@@ -64,15 +65,21 @@ class DeleteAccountErrorFragment : ErrorFragment<NotificationsPresenter?>(), Not
     }
 
     override fun onSuccess() {
+        val user = UserUtils.getLoggedUser()
+        user.marketingNotifications = false
+        UserUtils.saveUser(user)
+
         hideProgressDialog()
         setOptOutButton(false)
         EVCSDialogFragment.Builder()
             .setTitle(getString(R.string.delete_account_opt_out_title))
             .setSubtitle(getString(R.string.delete_account_opt_out_subtitle))
             .addButton(getString(R.string.app_close), { dialog ->
-                //close fragment?
-                 dialog.dismiss()
+                dialog.dismiss()
+                requireActivity().finish()
+                NavigationUtils.jumpTo(requireContext(), NotificationsActivity::class.java)
             }, R.style.ButtonK_Blue)
+            .setCancelable(false)
             .show(childFragmentManager)
     }
 

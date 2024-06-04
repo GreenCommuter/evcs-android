@@ -387,6 +387,12 @@
         <item>be able to start a charging session, including with a Subscription Plan, until you pay the outstanding balance.</item>
     </string-array>
     <string name="account_suspended_button">Pay Balance</string>
+    <string name="payment_failure_title">Payment Failure</string>
+    <string name="payment_failure_subtitle">Your Subscription Plan has unfortunately been canceled due to payment failure. You have been moved to the default Pay As You Go membership.</string>
+    <string name="payment_failure_reactivate">Reactivate Previous Plan</string>
+    <string name="payment_failure_remain">Remain Pay As You Go</string>
+    <string name="payment_failure_explore">Explore Other Options</string>
+    <string name="payment_failure_remain_dialog_subtitle">You are a Pay As You Go Member.</string>
 
     <!-- Search Location Child -->
     <string name="search_activity_hint">Location or zipcode</string>

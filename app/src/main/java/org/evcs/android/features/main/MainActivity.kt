@@ -224,6 +224,31 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .show(supportFragmentManager)
     }
 
+    fun showPaymentFailureDialog() {
+        EVCSDialogFragment.Builder()
+            .setTitle(getString(R.string.payment_failure_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.payment_failure_subtitle), Gravity.CENTER)
+            .addButton(getString(R.string.payment_failure_reactivate), {
+                //TODO: reactivate
+            }, R.style.ButtonK_Blue)
+            .addButton(getString(R.string.payment_failure_remain), { fragment ->
+                fragment.dismiss()
+                showRemainDialog()
+            }, R.style.ButtonK_BlueOutline)
+            .addButton(getString(R.string.payment_failure_explore), {
+                NavigationUtils.jumpTo(this, PlansActivity::class.java)
+            }, R.style.Label_Medium)
+            .show(supportFragmentManager)
+    }
+
+    private fun showRemainDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.success_dialog_title))
+            .setSubtitle(getString(R.string.payment_failure_remain_dialog_subtitle), Gravity.CENTER)
+            .addButton("Done") { fragment -> fragment.dismiss() }
+            .show(supportFragmentManager)
+    }
+
     //Needed because if there's a scrollview the menu can be shown above the keyboard instead of below
     fun attachKeyboardListener() {
         val view = window.decorView.rootView

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/evcs_white">
+
+    <org.evcs.android.ui.view.shared.EVCSToolbar2
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="@string/plan_info_title"
+        app:navigationIcon="@null"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/spacing_big_extra_k"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_medium_extra"
+                android:text="@string/account_suspended_title"
+                style="@style/Title.Large"/>
+
+            <TextView
+                android:id="@+id/account_suspended_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/spacing_big_extra_k"
+                style="@style/Body.Medium"/>
+
+            <TextView
+                android:id="@+id/account_suspended_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/account_suspended_button"
+                style="@style/ButtonK.Blue"/>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

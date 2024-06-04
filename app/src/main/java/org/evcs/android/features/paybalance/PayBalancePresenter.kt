@@ -21,6 +21,7 @@ class PayBalancePresenter(viewInstance: PayBalanceView, services: RetrofitServic
                         view.showPendingPayment(response.first())
                     } else {
                         Rollbar.instance().warning("More than one payment returned: " + response.size.toString())
+                        view.showError(RequestError.getUnknownError())
                     }
                 }
 

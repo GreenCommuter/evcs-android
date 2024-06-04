@@ -447,13 +447,13 @@
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
 
     <!-- Session information -->
-    <string name="session_information_energy">Total Energy Delivered</string>
-    <string name="session_information_time">Total Elapsed Time</string>
+    <string name="session_information_energy">Energy Delivered</string>
+    <string name="session_information_time">Charging time</string>
     <string name="session_information_payment_method">Payment Method</string>
     <string name="session_information_plan">Plan type</string>
     <string name="session_information_id">Session ID</string>
     <string name="session_information_station_id">Station ID</string>
-    <string name="session_information_price">Total</string>
+    <string name="session_information_price">Total Cost</string>
     <string name="session_information_receipt">View Receipt</string>
     <string name="session_information_title">Charge Receipt</string>
     <string name="session_information_max_rate">Maximum Rate of Energy Transfer</string>

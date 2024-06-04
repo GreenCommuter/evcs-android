@@ -99,7 +99,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Today's Cost"
+                    android:text="@string/session_information_price"
                     style="@style/Body.Medium.Bold"/>
 
                 <TextView
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="$7.80"
+                    tools:text="$7.80"
                     style="@style/Body.Medium.Bold"/>
 
             </FrameLayout>
@@ -207,7 +207,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:text="24484587"
+                    tools:text="Level 2: 7 kW"
                     style="@style/Body.Medium"/>
 
             </org.evcs.android.features.shared.StandardTextFieldNoBorder>
@@ -226,8 +226,7 @@
                 android:layout_height="wrap_content"
                 android:paddingStart="@dimen/padding_ariel_standard"
                 android:paddingEnd="@dimen/padding_ariel_standard"
-                android:layout_marginBottom="@dimen/spacing_big_k"
-                >
+                android:layout_marginBottom="@dimen/spacing_big_k">
 
                 <TextView
                     android:id="@+id/session_information_charging_site_subtitle"

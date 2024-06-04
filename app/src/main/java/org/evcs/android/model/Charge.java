@@ -64,7 +64,7 @@ public class Charge implements Serializable {
         if (getDuration() == 0) return "--";
         Period period = new Period(0, (long) getDuration());
         PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
-                .appendHours().appendSuffix(" hr, ")
+                .appendHours().appendSuffix(" hr, ").printZeroAlways()
                 .appendMinutes().appendSuffix(" min, ")
                 .appendSeconds().appendSuffix(" sec")
                 .toFormatter();

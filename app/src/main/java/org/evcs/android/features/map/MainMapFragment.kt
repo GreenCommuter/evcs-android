@@ -14,6 +14,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.databinding.FragmentMainMapBinding
+import org.evcs.android.features.main.InitialDialogsFragment
 import org.evcs.android.features.main.MainActivity
 import org.evcs.android.features.map.clustermap.InnerMapFragment
 import org.evcs.android.features.map.location_list.LocationListFragment
@@ -88,6 +89,9 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         mListFragment = LocationListFragment.newInstance()
         mListFragment.setLocationClickListener(this)
         requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
+
+        requireFragmentManager().beginTransaction().replace(R.id.fragment_dialog_helper_layout,
+            InitialDialogsFragment.newInstance()).commit()
 
         if ((activity as MainActivity).isBottomOfStack) return
         setTraslucentStatusBar()

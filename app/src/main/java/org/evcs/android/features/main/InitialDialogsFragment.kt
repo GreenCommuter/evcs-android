@@ -8,10 +8,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import com.base.core.util.NavigationUtils
+import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
+import org.evcs.android.features.profile.plans.GetPlanActivity
 import org.evcs.android.features.profile.plans.PlanViewHelper
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
@@ -141,20 +143,25 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
             .show(childFragmentManager)
     }
 
-    override fun onPendingCancelation() {
-        showPaymentFailureDialog()
+    override fun onPendingCancelation(previousSubscription: Subscription) {
+        showPaymentFailureDialog(previousSubscription)
     }
 
-    fun showPaymentFailureDialog() {
+    override fun onConfirmCancelation() {
+        showRemainDialog()
+    }
+
+    fun showPaymentFailureDialog(previousSubscription: Subscription) {
         EVCSDialogFragment.Builder()
             .setTitle(getString(R.string.payment_failure_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.payment_failure_subtitle), Gravity.CENTER)
             .addButton(getString(R.string.payment_failure_reactivate), {
-                //TODO:reactivate
+                val intentExtra = IntentExtra(Extras.PlanActivity.PLAN, previousSubscription.plan)
+                NavigationUtils.jumpTo(requireContext(), GetPlanActivity::class.java, intentExtra)
             }, R.style.ButtonK_Blue)
             .addButton(getString(R.string.payment_failure_remain), { fragment ->
                 fragment.dismiss()
-                presenter?.confirmCancelation()
+                presenter?.confirmCancelation(previousSubscription.id)
             }, R.style.ButtonK_BlueOutline)
             .addButton(getString(R.string.payment_failure_explore), {
                 NavigationUtils.jumpTo(requireContext(), PlansActivity::class.java)

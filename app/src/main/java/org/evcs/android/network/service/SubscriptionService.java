@@ -39,6 +39,9 @@ public interface SubscriptionService {
     @POST("/members/v1/subscriptions/{id}/void_cancelation")
     Call<Void> voidSubscriptionCancelation(@Path("id") String id);
 
+    @POST ("members/v1/subscriptions/{id}/confirm_cancelation")
+    Call<Void> confirmCancelation(@Path("id") String id);
+
     @GET("subscriptions.evcs.com/learn_more")
     Call<Void> getLearnMore(@Query("plan_id") String planId, @Query("user_id") String userId);
 

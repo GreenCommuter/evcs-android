@@ -3,11 +3,13 @@ package org.evcs.android.features.main
 import com.base.networking.retrofit.RetrofitServices
 import com.base.networking.retrofit.callback.NetworkCallback
 import okhttp3.ResponseBody
-import org.evcs.android.EVCSApplication
+import org.evcs.android.model.shared.RequestError
 import org.evcs.android.model.user.AuthUser
 import org.evcs.android.model.user.User
+import org.evcs.android.network.service.SubscriptionService
 import org.evcs.android.network.service.UserService
 import org.evcs.android.network.service.presenter.ServicesPresenter
+import org.evcs.android.util.ErrorUtils
 import org.evcs.android.util.UserUtils
 
 class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: RetrofitServices?)
@@ -21,8 +23,7 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
     }
 
     fun refreshToken() {
-        val service = EVCSApplication.getInstance().retrofitServices.getService(UserService::class.java)
-        service.refreshToken().enqueue(object : NetworkCallback<AuthUser>() {
+        getService(UserService::class.java).refreshToken().enqueue(object : NetworkCallback<AuthUser>() {
             override fun onResponseSuccessful(response: AuthUser) {
                 UserUtils.saveAuthUser(response)
             }
@@ -36,12 +37,12 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
     }
 
     fun checkPendingCancelation() {
-        val service = EVCSApplication.getInstance().retrofitServices.getService(UserService::class.java)
-        service.currentUser.enqueue(object : NetworkCallback<User?>() {
+        getService(UserService::class.java).currentUser.enqueue(object : NetworkCallback<User?>() {
             override fun onResponseSuccessful(response: User?) {
                 if (response?.previousSubscription?.pendingCancelConfirmation == true
                     && response.activeSubscription == null) {
-                    view?.onPendingCancelation()
+                } else {
+                    view?.onPendingCancelation(response?.activeSubscription!!)
                 }
             }
 
@@ -53,8 +54,21 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
         })
     }
 
-    fun confirmCancelation() {
-        TODO("Not yet implemented")
+    fun confirmCancelation(id: String) {
+        getService(SubscriptionService::class.java).confirmCancelation(id).enqueue(object : NetworkCallback<Void?>() {
+            override fun onResponseSuccessful(response: Void?) {
+                view?.onConfirmCancelation()
+            }
+
+            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
+                view.showError(ErrorUtils.getError(responseBody))
+            }
+
+            override fun onCallFailure(t: Throwable) {
+                runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
+            }
+
+        })
     }
 
 

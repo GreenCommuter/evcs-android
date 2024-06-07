@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_planInfoFragment_to_freeTrialReminderFragment"
             app:destination="@id/freeTrialReminderFragment" />
+        <action
+            android:id="@+id/action_planInfoFragment_to_overLimitWarningFragment"
+            app:destination="@id/overLimitWarningFragment" />
     </fragment>
     <fragment
         android:id="@+id/startChargingFragment"
@@ -66,4 +69,13 @@
         android:name="org.evcs.android.features.charging.FreeTrialReminderFragment"
         android:label="FreeTrialReminderFragment"
         tools:layout="@layout/fragment_free_trial_reminder"/>
+    <fragment
+        android:id="@+id/overLimitWarningFragment"
+        android:name="org.evcs.android.features.charging.OverLimitWarningFragment"
+        android:label="OverLimitWarningFragment"
+        tools:layout="@layout/fragment_over_limit_warning">
+        <action
+            android:id="@+id/action_overLimitWarningFragment_to_startChargingFragment"
+            app:destination="@id/startChargingFragment" />
+    </fragment>
 </navigation>

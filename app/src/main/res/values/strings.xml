@@ -569,6 +569,12 @@
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
 
+    <!-- Over Limit Warning -->
+    <string name="over_limit_warning_title">Attention!</string>
+    <string name="over_limit_warning_text">Per your subscription details, this charging session falls outside your EVCS subscription allowance and is billed separately. \n\nIf your charging session payment is declined, your account will be suspended. \n\nYou will <b>NOT</b> be able to use your subscription plan or charge with the app until the balance has been paid.</string>
+    <string name="over_limit_warning_checkbox">I agree to the terms above</string>
+    <string name="over_limit_warning_button">Agree &amp; Continue</string>
+
     <string-array name="lyft_array">
         <item>You are connected to </item>
         <item>Lyft</item>

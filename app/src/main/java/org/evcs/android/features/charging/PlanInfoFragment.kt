@@ -1,11 +1,13 @@
 package org.evcs.android.features.charging
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.view.Gravity
 import android.view.View
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.view.isVisible
+import androidx.fragment.app.FragmentManager
 import com.base.core.util.NavigationUtils
 import com.base.core.util.ToastUtils
 import com.base.networking.utils.NetworkCodes
@@ -35,6 +37,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     private var mSelectedPM: PaymentMethod? = null
     private lateinit var mBinding: FragmentPlanInfoBinding
     private lateinit var mExplorePlansText: CharSequence
+    private var mShowWarning = false
 
     private val mListener = ChargingNavigationController.getInstance()
 
@@ -71,14 +74,15 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             mWalletLauncher.launch(WalletActivity.buildIntent(requireContext(), true))
         }
         mBinding.planInfoCouponCode.setListener {  }
-        mBinding.planInfoChargeWithPayg.setOnClickListener {
-            //TODO: check
-            goToStartCharging()
-        }
+//        mBinding.planInfoChargeWithPayg.setOnClickListener {
+//            showStartChargingDialog()
+//        }
     }
 
     override fun show(station: Station, status: SubscriptionStatus?) {
         hideProgressDialog()
+        mShowWarning = true
+
         (activity as ChargingActivity).setActiveSession()
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
         mBinding.planInfoSubscriptionName.setText(status?.planName ?: getString(R.string.plan_info_pay_as_you_go))
@@ -105,6 +109,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
+            mShowWarning = true
         }
         if (status.isSuspended) {
             showIssue(status.issueMessage, null, getString(R.string.plan_info_payment_error_update))
@@ -136,20 +141,21 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                     status.totalKwh, resetDate, status.pricePerKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
+            mShowWarning = true
         }
     }
 
     private fun showIssue(issueMessage: String, issueUrl: String?, issueUrlTitle: String?) {
         mBinding.planInfoAlertMessage.setParentVisibility(true)
         mBinding.planInfoAlertMessage.text = issueMessage
-        mBinding.planInfoChargeWithPayg.visibility = View.VISIBLE
+//        mBinding.planInfoChargeWithPayg.visibility = View.VISIBLE
         mBinding.planInfoButton.showOrHide(issueUrlTitle)
         mBinding.planInfoButton.setOnClickListener { launchUrl(issueUrl) }
     }
 
     private fun setUpButton() {
         mBinding.planInfoButton.isEnabled = true
-        mBinding.planInfoButton.setOnClickListener { goToStartCharging() }
+        mBinding.planInfoButton.setOnClickListener { onStartChargingClicked() }
     }
 
     private fun showPlanDialog(message: CharSequence, isUpgradePlan: Boolean, accountUrl: String?) {
@@ -187,7 +193,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
         mBinding.planInfoButton.isEnabled = mSelectedPM != null
         mBinding.planInfoButton.setOnClickListener {
-            goToStartCharging()
+            onStartChargingClicked()
         }
     }
 
@@ -222,15 +228,30 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         return R.layout.spinner_layout_black
     }
 
+    private fun onStartChargingClicked() {
+        if (mShowWarning) mListener.goToOverLimitWarning(presenter.getStationId(), mSelectedPM?.id, null)
+        else showStartChargingDialog()
+    }
+
+    private fun showStartChargingDialog() {
+        Companion.showStartChargingDialog(requireContext(), childFragmentManager) { goToStartCharging() }
+    }
+
     private fun goToStartCharging() {
-        EVCSDialogFragment.Builder()
-            .setTitle(getString(R.string.plan_info_dialog_title))
-            .setSubtitle(getString(R.string.plan_info_dialog_subtitle), Gravity.CENTER)
-            .addButton(getString(R.string.plan_info_dialog_yes), {
-                mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
-            }, R.style.ButtonK_Blue)
-            .showCancel(true)
-            .show(childFragmentManager)
+        mListener.goToStartCharging(presenter.getStationId(), mSelectedPM?.id, null)
+    }
+
+    companion object {
+        fun showStartChargingDialog(context: Context, fragmentManager: FragmentManager, callback: () -> Unit) {
+            EVCSDialogFragment.Builder()
+                .setTitle(context.getString(R.string.plan_info_dialog_title))
+                .setSubtitle(context.getString(R.string.plan_info_dialog_subtitle), Gravity.CENTER)
+                .addButton(context.getString(R.string.plan_info_dialog_yes), {
+                    callback.invoke()
+                }, R.style.ButtonK_Blue)
+                .showCancel(true)
+                .show(fragmentManager)
+        }
     }
 
 }

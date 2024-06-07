@@ -75,4 +75,11 @@ public class ChargingNavigationController extends AbstractNavigationController {
         replaceLastKey(R.id.sessionInformationFragment, args);
     }
 
+    public void goToOverLimitWarning(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
+        Bundle args = new Bundle();
+        args.putInt(Extras.StartCharging.STATION_ID, stationId);
+        args.putString(Extras.StartCharging.PM_ID, pmId);
+        args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        navigate(R.id.overLimitWarningFragment, args);
+    }
 }

@@ -21,7 +21,6 @@ import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
-import org.evcs.android.features.charging.KeyboardListener
 import org.evcs.android.features.profile.plans.PlanViewHelper
 import org.evcs.android.features.profile.plans.PlansActivity
 import org.evcs.android.features.shared.EVCSSliderDialogFragment

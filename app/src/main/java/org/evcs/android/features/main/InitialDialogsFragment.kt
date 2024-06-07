@@ -9,6 +9,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import com.base.core.util.NavigationUtils
 import com.base.core.util.NavigationUtils.IntentExtra
+import com.rollbar.android.Rollbar
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
@@ -62,13 +63,19 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
                 AbstractSupportedVersionActivity.RESULT_CANCELED
             ))
             intent.removeExtra(Extras.VerifyActivity.RESULT)
-            //requireActivity().intent = intent
         }
         if (intent.hasExtra(Extras.PlanActivity.PLAN)) {
             showCongratulationsDialog(intent.getSerializableExtra(Extras.PlanActivity.PLAN) as Subscription)
             intent.removeExtra(Extras.PlanActivity.PLAN)
-            //requireActivity().intent = intent
         }
+        if (intent.getBooleanExtra(Extras.Root.OPENING_KEY, false)) {
+            intent.removeExtra(Extras.Root.OPENING_KEY)
+            onAppStarted()
+        }
+    }
+
+    fun onAppStarted() {
+        presenter.checkPendingCancelation()
     }
 
     override fun onResume() {
@@ -80,9 +87,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
             startForResult.launch(intent)
         }
         //presenter.checkTokenExpiration()
-        presenter.checkPendingCancelation()
     }
-
 
     fun showWelcomeDialog() {
         EVCSSliderDialogFragment.Builder()
@@ -144,7 +149,11 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
     }
 
     override fun onPendingCancelation(previousSubscription: Subscription) {
-        showPaymentFailureDialog(previousSubscription)
+        try {
+            showPaymentFailureDialog(previousSubscription)
+        } catch (e : Exception) {
+            Rollbar.instance().error(e)
+        }
     }
 
     override fun onConfirmCancelation() {

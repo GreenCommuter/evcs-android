@@ -41,7 +41,6 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
             override fun onResponseSuccessful(response: User?) {
                 if (response?.previousSubscription?.pendingCancelConfirmation == true
                     && response.activeSubscription == null) {
-                } else {
                     view?.onPendingCancelation(response?.activeSubscription!!)
                 }
             }
@@ -70,6 +69,5 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
 
         })
     }
-
 
 }

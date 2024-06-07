@@ -81,16 +81,16 @@ class MainMapFragment : ErrorFragment<MainMapPresenter>(), IMainMapView, Fragmen
         setStatusBarHeight()
         mSearchLocationChildFragment = SearchLocationChildFragment.newInstance()
 //        mSearchLocationChildFragment.setDefault("asdasd")
-        requireFragmentManager().beginTransaction().replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fragment_search_location_address_layout, mSearchLocationChildFragment).commit()
 
         mInnerMapFragment = InnerMapFragment.newInstance()
         mInnerMapFragment.setLocationClickListener(this)
-        requireFragmentManager().beginTransaction().replace(R.id.fragment_main_map_layout, mInnerMapFragment).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fragment_main_map_layout, mInnerMapFragment).commit()
         mListFragment = LocationListFragment.newInstance()
         mListFragment.setLocationClickListener(this)
-        requireFragmentManager().beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
+        childFragmentManager.beginTransaction().replace(R.id.fragment_list_layout, mListFragment).commit()
 
-        requireFragmentManager().beginTransaction().replace(R.id.fragment_dialog_helper_layout,
+        childFragmentManager.beginTransaction().replace(R.id.fragment_dialog_helper_layout,
             InitialDialogsFragment.newInstance()).commit()
 
         if ((activity as MainActivity).isBottomOfStack) return

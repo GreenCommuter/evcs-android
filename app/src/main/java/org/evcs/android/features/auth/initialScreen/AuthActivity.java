@@ -48,17 +48,21 @@ public class AuthActivity extends AbstractSupportedVersionActivity {
         }
     }
 
+    private Intent mainActivityIntent() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(Extras.Root.OPENING_KEY, true);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        return intent;
+    }
+
     public void onAuthFinished() {
-//        intent.putExtra(Extras.Root.ID, mId);
-//        intent.putExtra(Extras.Root.OPENING_KEY, true);
-        NavigationUtils.jumpToClearingTask(this, MainActivity.class);
+        startActivity(mainActivityIntent());
     }
 
 
     private void onAuthFinished(int resultCode) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = mainActivityIntent();
         intent.putExtra(Extras.VerifyActivity.RESULT, resultCode);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
     }
 

@@ -2,13 +2,11 @@ package org.evcs.android.features.main
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
 import androidx.navigation.Navigation.findNavController
@@ -29,7 +27,6 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
     private lateinit var mButton: TextView
     var isBottomOfStack = true
         private set
-    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +39,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         createNotificationChannel()
         mNavigationController = MainNavigationController(this, true,
             findNavController(this, R.id.activity_base_content))
-        mNavigationController!!.startFlow()
+        //mNavigationController!!.startFlow()
 
 //        if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
 //            return

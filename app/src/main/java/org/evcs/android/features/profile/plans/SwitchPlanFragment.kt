@@ -6,7 +6,6 @@ import org.evcs.android.model.Plan
 import org.evcs.android.util.Extras
 import org.evcs.android.util.UserUtils
 import org.joda.time.DateTime
-import org.joda.time.format.DateTimeFormatter
 
 class SwitchPlanFragment : AbstractGetPlanFragment() {
 

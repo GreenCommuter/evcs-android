@@ -22,6 +22,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/over_limit_warning_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_big_extra_k"
@@ -30,19 +31,17 @@
                 style="@style/Title.Large"/>
 
             <TextView
+                android:id="@+id/over_limit_warning_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/padding_ariel_standard"
+                android:layout_marginBottom="@dimen/spacing_big_extra_k"
                 android:text="@string/over_limit_warning_text"
-                style="@style/Body.Medium"
-                />
+                style="@style/Body.Medium"/>
 
             <org.evcs.android.features.subscriptions.ImageCheckBoxLayout
                 android:id="@+id/over_limit_warning_checkbox"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/spacing_medium_extra"
-                android:visibility="visible"/>
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

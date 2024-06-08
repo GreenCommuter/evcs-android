@@ -1,55 +1,16 @@
 package org.evcs.android.features.charging
 
-import android.view.View
-import androidx.navigation.fragment.findNavController
-import org.evcs.android.ui.fragment.ErrorFragment
 import com.base.core.presenter.BasePresenter
 import org.evcs.android.R
-import org.evcs.android.databinding.FragmentOverLimitWarningBinding
-import org.evcs.android.util.Extras
-import java.util.ArrayList
 
-class OverLimitWarningFragment : ErrorFragment<BasePresenter<*>>() {
+class OverLimitWarningFragment : WarningFragment<BasePresenter<*>>() {
 
-    private lateinit var mBinding: FragmentOverLimitWarningBinding
-    private val mListener = ChargingNavigationController.getInstance()
-
-    override fun layout(): Int {
-        return R.layout.fragment_over_limit_warning
+    override fun getTitle(): CharSequence {
+        return getString(R.string.over_limit_warning_title)
     }
 
-    override fun setUi(v: View) {
-        super.setUi(v)
-        mBinding = FragmentOverLimitWarningBinding.bind(v)
+    override fun getDescription(): CharSequence {
+        return getText(R.string.over_limit_warning_text)
     }
 
-    override fun createPresenter(): BasePresenter<*> {
-        return BasePresenter(this)
-    }
-
-    override fun init() {}
-
-    override fun populate() {
-        mBinding.overLimitWarningCheckbox.setDescription(getString(R.string.over_limit_warning_checkbox))
-    }
-
-    override fun setListeners() {
-        mBinding.overLimitWarningCheckbox.setOnCheckedClickListener { _, isChecked ->
-            mBinding.overLimitWarningContinue.isEnabled = isChecked
-        }
-        mBinding.overLimitWarningCancel.setOnClickListener {
-            findNavController().popBackStack()
-        }
-        mBinding.overLimitWarningContinue.setOnClickListener {
-            PlanInfoFragment.showStartChargingDialog(requireContext(), childFragmentManager) { goToStartCharging() }
-        }
-    }
-
-    private fun goToStartCharging() {
-        mListener.goToStartCharging(
-            requireArguments().getInt(Extras.StartCharging.STATION_ID),
-            requireArguments().getString(Extras.StartCharging.PM_ID),
-            requireArguments().getSerializable(Extras.StartCharging.COUPONS) as ArrayList<String>?
-        )
-    }
 }

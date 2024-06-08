@@ -11,7 +11,6 @@ import org.evcs.android.R;
 import org.evcs.android.model.Session;
 import org.evcs.android.navigation.controller.AbstractNavigationController;
 import org.evcs.android.util.Extras;
-import org.evcs.android.util.UserUtils;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -44,10 +43,6 @@ public class ChargingNavigationController extends AbstractNavigationController {
         args.putString(Extras.PlanInfo.STATION_ID, id);
         args.putBoolean(Extras.PlanInfo.FROM_QR, fromQR);
         navigate(R.id.planInfoFragment, args);
-        if (UserUtils.getLoggedUser().getActiveSubscription() != null
-                && UserUtils.getLoggedUser().getActiveSubscription().onTrialPeriod) {
-            navigate(R.id.freeTrialReminderFragment);
-        }
     }
 
     public void goToStartCharging(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
@@ -81,5 +76,13 @@ public class ChargingNavigationController extends AbstractNavigationController {
         args.putString(Extras.StartCharging.PM_ID, pmId);
         args.putSerializable(Extras.StartCharging.COUPONS, coupons);
         navigate(R.id.overLimitWarningFragment, args);
+    }
+
+    public void goToTrialReminder(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
+        Bundle args = new Bundle();
+        args.putInt(Extras.StartCharging.STATION_ID, stationId);
+        args.putString(Extras.StartCharging.PM_ID, pmId);
+        args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        navigate(R.id.freeTrialReminderFragment, args);
     }
 }

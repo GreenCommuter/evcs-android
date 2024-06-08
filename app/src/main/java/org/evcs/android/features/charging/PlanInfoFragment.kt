@@ -81,7 +81,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
 
     override fun show(station: Station, status: SubscriptionStatus?) {
         hideProgressDialog()
-        mShowWarning = true
 
         (activity as ChargingActivity).setActiveSession()
         mBinding.planInfoSubscriptionName.visibility = View.VISIBLE
@@ -229,7 +228,11 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     private fun onStartChargingClicked() {
-        if (mShowWarning) mListener.goToOverLimitWarning(presenter.getStationId(), mSelectedPM?.id, null)
+        if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod == true) {
+            mListener.goToTrialReminder(presenter.getStationId(), mSelectedPM?.id, null)
+        } else if (mShowWarning) {
+            mListener.goToOverLimitWarning(presenter.getStationId(), mSelectedPM?.id, null)
+        }
         else showStartChargingDialog()
     }
 

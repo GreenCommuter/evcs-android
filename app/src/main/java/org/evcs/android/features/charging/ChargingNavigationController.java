@@ -46,10 +46,7 @@ public class ChargingNavigationController extends AbstractNavigationController {
     }
 
     public void goToStartCharging(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
-        Bundle args = new Bundle();
-        args.putInt(Extras.StartCharging.STATION_ID, stationId);
-        args.putString(Extras.StartCharging.PM_ID, pmId);
-        args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        Bundle args = startChargingArgs(stationId, pmId, coupons);
         replaceLastKey(R.id.startChargingFragment, args);
     }
 
@@ -71,18 +68,20 @@ public class ChargingNavigationController extends AbstractNavigationController {
     }
 
     public void goToOverLimitWarning(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
-        Bundle args = new Bundle();
-        args.putInt(Extras.StartCharging.STATION_ID, stationId);
-        args.putString(Extras.StartCharging.PM_ID, pmId);
-        args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        Bundle args = startChargingArgs(stationId, pmId, coupons);
         navigate(R.id.overLimitWarningFragment, args);
     }
 
-    public void goToTrialReminder(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
+    private Bundle startChargingArgs(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
         Bundle args = new Bundle();
         args.putInt(Extras.StartCharging.STATION_ID, stationId);
         args.putString(Extras.StartCharging.PM_ID, pmId);
         args.putSerializable(Extras.StartCharging.COUPONS, coupons);
+        return args;
+    }
+
+    public void goToTrialReminder(int stationId, @Nullable String pmId, @Nullable ArrayList<String> coupons) {
+        Bundle args = startChargingArgs(stationId, pmId, coupons);
         navigate(R.id.freeTrialReminderFragment, args);
     }
 }

@@ -230,9 +230,9 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     private fun onStartChargingClicked() {
         if (UserUtils.getLoggedUser().activeSubscription?.onTrialPeriod == true) {
             mListener.goToTrialReminder(presenter.getStationId(), mSelectedPM?.id, null)
-        } else if (mShowWarning) {
+        } /*else if (mShowWarning) {
             mListener.goToOverLimitWarning(presenter.getStationId(), mSelectedPM?.id, null)
-        }
+        }*/
         else showStartChargingDialog()
     }
 

@@ -10,12 +10,13 @@ import org.joda.time.format.PeriodFormatter;
 import org.joda.time.format.PeriodFormatterBuilder;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Charge implements Serializable {
     private int id;
     private String noodoeId;
     private String startedAt;
-//            "completed_at": "2020-08-13T15:01:51.000Z",
+    private String completedAt;
     private int locationId;
     private String locationName;
     private float duration; //unit? ms?
@@ -33,6 +34,7 @@ public class Charge implements Serializable {
     private Float paymentAmount;
     @SerializedName("payment_last_4")
     private String paymentLast4;
+    public ArrayList<InvoiceLine> costBreakdown;
 
     public int getId() {
         return id;
@@ -40,6 +42,10 @@ public class Charge implements Serializable {
 
     public DateTime getStartedAt() {
         return DateTime.parse(startedAt);
+    }
+
+    public DateTime getCompletedAt() {
+        return DateTime.parse(completedAt);
     }
 
     public String getLocationName() {
@@ -58,8 +64,9 @@ public class Charge implements Serializable {
         if (getDuration() == 0) return "--";
         Period period = new Period(0, (long) getDuration());
         PeriodFormatter periodFormatter = new PeriodFormatterBuilder()
-                .appendHours().appendSuffix("hr ")
-                .appendMinutes().appendSuffix("min")
+                .appendHours().appendSuffix(" hr, ").printZeroAlways()
+                .appendMinutes().appendSuffix(" min, ")
+                .appendSeconds().appendSuffix(" sec")
                 .toFormatter();
         return periodFormatter.print(period);
     }
@@ -114,5 +121,12 @@ public class Charge implements Serializable {
 
     public String getPaymentLast4() {
         return paymentLast4;
+    }
+
+    public Station getStation() {
+        for (Station s : location.getStations()) {
+            if (s.getName().equals(stationName)) return s;
+        }
+        return null;
     }
 }

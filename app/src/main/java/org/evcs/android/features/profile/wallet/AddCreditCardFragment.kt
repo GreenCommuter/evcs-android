@@ -1,7 +1,6 @@
 package org.evcs.android.features.profile.wallet
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.annotation.CallSuper
 import androidx.core.view.isVisible
@@ -68,7 +67,7 @@ class AddCreditCardFragment : AbstractCreditCardFragment(), AddCreditCardView {
     }
 
     override fun getToolbarTitle(): String {
-        return getString(R.string.braintree_title)
+        return getString(R.string.add_credit_card_title)
     }
 
     override fun getButtonStyle(): Int {

@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.profile
 
 import android.view.View
 import com.base.core.util.NavigationUtils

@@ -3,25 +3,32 @@ package org.evcs.android.features.profile.sessioninformation
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
-import androidx.navigation.fragment.findNavController
-import com.base.core.util.NavigationUtils
-import com.base.core.util.NavigationUtils.IntentExtra
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
-import org.evcs.android.activity.ContactSupportActivity
 import org.evcs.android.databinding.ActivitySessionInformationBinding
 import org.evcs.android.model.Charge
 import org.evcs.android.ui.fragment.ErrorFragment
-import org.evcs.android.util.Extras
-import org.evcs.android.util.ViewUtils.setParentVisibility
+import org.evcs.android.ui.view.shared.ReceiptItemView
+import org.evcs.android.util.ViewUtils.setMargins
 import org.joda.time.format.DateTimeFormat
 import org.joda.time.format.DateTimeFormatter
 
 open class SessionInformationFragment : ErrorFragment<SessionInformationPresenter>(), ISessionInformationView {
 
     private lateinit var mCharge: Charge
-    private lateinit var mDateTimeFormatter: DateTimeFormatter
+    private lateinit var mDateFormatter: DateTimeFormatter
+    private lateinit var mTimeFormatter: DateTimeFormatter
     protected lateinit var mBinding: ActivitySessionInformationBinding
+
+    companion object {
+        fun newInstance(chargeId: Int): SessionInformationFragment {
+            val args = Bundle()
+            args.putInt("chargeId", chargeId)
+            val fragment = SessionInformationFragment()
+            fragment.arguments = args
+            return fragment
+        }
+    }
 
     override fun createPresenter(): SessionInformationPresenter {
         return SessionInformationPresenter(
@@ -38,7 +45,8 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
     }
 
     override fun init() {
-        mDateTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_datetime_format))
+        mDateFormatter = DateTimeFormat.forPattern(getString(R.string.app_date_format))
+        mTimeFormatter = DateTimeFormat.forPattern(getString(R.string.app_time_format))
     }
 
     override fun populate() {
@@ -47,11 +55,22 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
         presenter.getCharge(chargeId)
     }
 
+    override fun setListeners() {
+        mBinding.sessionInformationClose.setOnClickListener { requireActivity().finish() }
+    }
+
     override fun showCharge(charge: Charge) {
         hideProgressDialog()
         mCharge = charge
-        if (mCharge.startedAt != null)
-            mBinding.sessionInformationChargingSiteDate.text = mDateTimeFormatter.print(mCharge.startedAt)
+        if (mCharge.startedAt != null) {
+            var dateString = mDateFormatter.print(mCharge.startedAt)
+            if (mCharge.startedAt.withTimeAtStartOfDay() != mCharge.completedAt.withTimeAtStartOfDay()) {
+                dateString += " - " + mDateFormatter.print(mCharge.completedAt)
+            }
+            mBinding.sessionInformationChargingSiteDate.text = dateString
+            mBinding.sessionInformationChargingSiteTime.text =
+                mTimeFormatter.print(mCharge.startedAt) + " to " + mTimeFormatter.print(mCharge.completedAt)
+        }
         mBinding.sessionInformationDuration.text = mCharge.printableDuration
         mBinding.sessionInformationEnergy.text = mCharge.printKwh()
         mBinding.sessionInformationPrice.text = getString(R.string.app_price_format, mCharge.paymentAmount)
@@ -71,21 +90,14 @@ open class SessionInformationFragment : ErrorFragment<SessionInformationPresente
             mBinding.sessionInformationImage.isVisible = true
             mBinding.sessionInformationImage.setImageURI(mCharge.image)
         }
-        if (mCharge.paymentAmount == 0f) {
-            mBinding.sessionInformationReceipt.isVisible = false
-        }
-    }
 
-    override fun setListeners() {
-        //TODO: check if show address or request
-        mBinding.sessionInformationHelp.setOnClickListener {
-            NavigationUtils.jumpTo(requireContext(), ContactSupportActivity::class.java)
+        mCharge.costBreakdown.forEach { invoiceline ->
+            val v = ReceiptItemView(requireContext(), invoiceline.label, invoiceline.detail, invoiceline.amount)
+            v.setMargins(0, 0, 0, resources.getDimension(R.dimen.spacing_medium_extra).toInt())
+            mBinding.sessionInformationCostBreakdown.addView(v)
         }
-        mBinding.sessionInformationReceipt.setOnClickListener {
-            val args = Bundle()
-            args.putSerializable(Extras.SessionInformationActivity.CHARGE, mCharge)
-            findNavController().navigate(R.id.receiptFragment, args)
-        }
+
+        mBinding.sessionInformationMaxRate.setText(mCharge.station.printStationPower())
     }
 
 }

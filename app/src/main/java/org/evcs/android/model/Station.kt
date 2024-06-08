@@ -77,4 +77,8 @@ class Station : Serializable {
         DC("DC Fast")
     }
 
+    fun printStationPower(): String {
+        return getChargerType().printableName + ": " + printKw()
+    }
+
 }

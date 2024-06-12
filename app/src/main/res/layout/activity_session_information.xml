@@ -250,6 +250,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/spacing_big_k"
+                android:paddingStart="@dimen/padding_ariel_standard"
+                android:paddingEnd="@dimen/padding_ariel_standard"
                 android:text="@string/session_information_thank_you"
                 android:gravity="center"
                 android:textColor="@color/evcs_secondary_800"

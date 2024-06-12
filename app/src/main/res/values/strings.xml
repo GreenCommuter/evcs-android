@@ -452,15 +452,15 @@
 
     <!-- Session information -->
     <string name="session_information_energy">Energy Delivered</string>
-    <string name="session_information_time">Charging time</string>
+    <string name="session_information_time">Charging Time</string>
     <string name="session_information_payment_method">Payment Method</string>
-    <string name="session_information_plan">Plan type</string>
+    <string name="session_information_plan">Plan Type</string>
     <string name="session_information_id">Session ID</string>
     <string name="session_information_station_id">Station ID</string>
     <string name="session_information_price">Total Cost</string>
     <string name="session_information_receipt">View Receipt</string>
-    <string name="session_information_title">Charge Receipt</string>
-    <string name="session_information_max_rate">Maximum Rate of Energy Transfer</string>
+    <string name="session_information_title">Charging Receipt</string>
+    <string name="session_information_max_rate">Maximum Power</string>
     <string name="session_information_thank_you">Thank you for charging with EV Charging Solutions, Inc. (EVCS)</string>
 
     <!-- Manage Plan -->

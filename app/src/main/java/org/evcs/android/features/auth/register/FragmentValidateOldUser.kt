@@ -1,6 +1,7 @@
 package org.evcs.android.features.auth.register
 
 import android.os.Bundle
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.base.core.presenter.BasePresenter
@@ -39,6 +40,7 @@ class FragmentValidateOldUser : ErrorFragment<BasePresenter<*>>() {
     }
 
     override fun init() {
+        mBinding.fragmentRegisterCellPhoneSubtitle.movementMethod = ScrollingMovementMethod()
     }
 
     override fun setListeners() {

@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.profile
 
 import android.content.Intent
 import android.telephony.PhoneNumberUtils
@@ -10,6 +10,10 @@ import com.base.core.util.NavigationUtils.jumpTo
 import com.base.core.util.ToastUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.account.AccountActivity
+import org.evcs.android.activity.account.ChangeEmailActivity
+import org.evcs.android.activity.account.ChangeNameActivity
+import org.evcs.android.activity.account.ChangePasswordActivity
 import org.evcs.android.databinding.ActivityAccountBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
 import org.evcs.android.features.shared.EVCSDialogFragment
@@ -64,18 +68,24 @@ class AccountFragment : ErrorFragment<DeleteAccountPresenter>(), DeleteAccountVi
             mChangeUserResult.launch(intent)
         }
         mBinding.fragmentAccountDelete.setOnClickListener {
-            EVCSDialogFragment.Builder()
-                    //.setTitle("Are you sure?")
-                    .setSubtitle(getString(R.string.delete_account_warning_subtitle), Gravity.CENTER)
-                    .addButton(getString(R.string.delete_account_warning_ok), { dialog ->
-                        dialog.dismiss()
-                        showProgressDialog()
-                        mBinding.fragmentAccountDelete.isEnabled = false
-                        presenter.checkPaymentsAndDeleteAccount()
-                    }, R.style.ButtonK_Blue)
-                    .addButton(getString(R.string.app_cancel), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
-                    .show(childFragmentManager)
+            showProgressDialog()
+            presenter.checkPayments()
         }
+    }
+
+    override fun showConfirmDialog() {
+        hideProgressDialog()
+        EVCSDialogFragment.Builder()
+            //.setTitle("Are you sure?")
+            .setSubtitle(getString(R.string.delete_account_warning_subtitle), Gravity.CENTER)
+            .addButton(getString(R.string.delete_account_warning_ok), { dialog ->
+                dialog.dismiss()
+                showProgressDialog()
+                mBinding.fragmentAccountDelete.isEnabled = false
+                presenter.deleteAccount()
+            }, R.style.ButtonK_Blue)
+            .addButton(getString(R.string.app_cancel), { dialog -> dialog.dismiss() }, R.style.ButtonK_BlueOutline)
+            .show(childFragmentManager)
     }
 
     override fun showPaymentIssue() {

@@ -74,6 +74,7 @@
     </style>
 
     <style name="Label.Medium">
+        <item name="android:background">@color/evcs_transparent</item>
         <item name="android:textSize">@dimen/font_medium_more</item>
         <item name="lineHeight">@dimen/font_medium_extra</item>
         <item name="android:letterSpacing">0.0312</item>

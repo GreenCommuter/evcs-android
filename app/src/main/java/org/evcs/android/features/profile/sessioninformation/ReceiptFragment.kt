@@ -11,6 +11,7 @@ import org.evcs.android.model.Charge
 import org.evcs.android.util.Extras
 import org.joda.time.format.DateTimeFormat
 
+@Deprecated("")
 class ReceiptFragment : ErrorFragment<BasePresenter<*>>() {
 
     private lateinit var mBinding: FragmentReceiptBinding

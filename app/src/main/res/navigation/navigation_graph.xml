@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_preChargingFragment_to_chargingFragment"
             app:destination="@id/chargingFragment" />
+        <action
+            android:id="@+id/action_preChargingFragment_to_accountSuspendedFragment"
+            app:destination="@id/accountSuspendedFragment" />
     </dialog>
     <fragment
         android:id="@+id/chargingFragment"
@@ -75,18 +78,10 @@
         android:name="org.evcs.android.features.profile.sessioninformation.SessionInformationFragment"
         android:label="SessionInformationFragment"
         tools:layout="@layout/activity_session_information">
-        <action
-            android:id="@+id/action_sessionInformationFragment_to_receiptFragment"
-            app:destination="@id/receiptFragment" />
         <argument
             android:name="chargeId"
             app:argType="integer" />
     </fragment>
-    <fragment
-        android:id="@+id/receiptFragment"
-        android:name="org.evcs.android.features.profile.sessioninformation.ReceiptFragment"
-        android:label="ReceiptFragment"
-        tools:layout="@layout/fragment_receipt"/>
     <fragment
         android:id="@+id/paymentHistoryFragment"
         android:name="org.evcs.android.features.profile.payments.PaymentHistoryFragment"
@@ -104,4 +99,9 @@
         android:name="org.evcs.android.features.profile.sessioninformation.ReceiptPlanFragment"
         android:label="ReceiptPlanFragment"
         tools:layout="@layout/fragment_receipt_plan"/>
+    <fragment
+        android:id="@+id/accountSuspendedFragment"
+        android:name="org.evcs.android.features.charging.AccountSuspendedFragment"
+        android:label="AccountSuspendedFragment"
+        tools:layout="@layout/fragment_account_suspended"/>
 </navigation>

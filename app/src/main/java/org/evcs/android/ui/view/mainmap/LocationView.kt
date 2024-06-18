@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.view.isInvisible
+import androidx.core.view.isVisible
+import androidx.core.view.marginBottom
 import androidx.fragment.app.FragmentManager
 import com.base.core.util.NavigationUtils
 import org.evcs.android.BaseConfiguration
@@ -56,12 +58,9 @@ class LocationView : LinearLayout {
         mBinding.viewLocationTitle.text = location.name
         mBinding.viewLocationAddress.text = location.address.toString()
         mBinding.viewLocationPicture.setImageURI(location.imageUrls?.firstOrNull())
+        mBinding.viewLocationPicture.isVisible = location.imageUrls?.firstOrNull() != null
 
         mBinding.viewLocationConnectors.removeAllViews()
-        location.stations!!.forEach { station ->
-            val v = StationView(context, station)
-            mBinding.viewLocationConnectors.addView(v)
-        }
 
         if (location.comingSoon!!) {
             mBinding.viewLocationStartCharging.visibility = View.GONE
@@ -76,10 +75,19 @@ class LocationView : LinearLayout {
         mBinding.viewLocationHint.showOrHide(location.directions)
 //        mBinding.viewLocationHint.text = location.directions
 //        if (location.directions == null) mBinding.viewLocationHint.visibility = View.GONE
+        setStations(location)
+        //        mBinding.activityLocationHint.text = response?
+
+    }
+
+    fun setStations(location: Location) {
+        if (location.stations == null) return
+        location.stations!!.forEach { station ->
+            val v = StationView(context, station)
+            mBinding.viewLocationConnectors.addView(v)
+        }
         showPriceIfExists(mBinding.viewLocationTypePriceAc, location.acPrice, context.getString(R.string.location_view_ac_price_format))
         showPriceIfExists(mBinding.viewLocationTypePriceDc, location.dcPrice, context.getString(R.string.location_view_dc_price_format))
-
-        //        mBinding.activityLocationHint.text = response?
 
     }
 
@@ -108,6 +116,21 @@ class LocationView : LinearLayout {
 
     fun resizePicture(height: Int) {
         mBinding.viewLocationPicture.resize(height)
+    }
+
+    //The space for the image will be counted even if it's set as gone later, but it's ok
+    fun getMinVisibleHeight(): Int {
+        mBinding.root.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
+        var res = 0
+        for (i in 0..mBinding.root.childCount) {
+            val v = mBinding.root.getChildAt(i)
+            res += v.measuredHeight
+            res += v.marginBottom
+            res += v.paddingBottom
+            if (v == mBinding.viewLocationGatecode)
+                return res + 4
+        }
+        return 0
     }
 
     fun pack(stations: List<Station>): ArrayList<List<Station>> {

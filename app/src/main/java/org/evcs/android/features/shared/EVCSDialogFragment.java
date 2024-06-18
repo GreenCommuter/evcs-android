@@ -46,7 +46,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
 
     private Map<String, ButtonInfo> mButtons = new LinkedHashMap<>();
     private String mTitleResource;
-    private String mSubtitleResource;
+    private CharSequence mSubtitleResource;
     private List<View> mViews;
     //Don't show if null
     private @Nullable String mCancel;
@@ -173,7 +173,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
     }
 
     protected void setParams(String titleResource, @StyleRes int titleAppearance,
-                             String subtitleResource, int subtitleGravity,
+                             CharSequence subtitleResource, int subtitleGravity,
                              Map<String, ButtonInfo> buttons, List<View> views, String cancel,
                              OnClickListener cancelOnClickListener, boolean cancelable) {
         if (mLogParams) {
@@ -203,7 +203,7 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
         protected final ArrayList<View> mViews = new ArrayList<>();
         protected String mTitleResource;
         protected @StyleRes int mTitleAppearance;
-        protected String mSubtitleResource;
+        protected CharSequence mSubtitleResource;
         protected int mSubtitleGravity;
         protected String mCancel;
         protected OnClickListener mCancelOnClickListener;
@@ -233,11 +233,11 @@ public class EVCSDialogFragment extends SingletonDialog<BasePresenter> {
          *
          * @return Builder for further customization
          */
-        public Builder setSubtitle(String subtitle) {
+        public Builder setSubtitle(CharSequence subtitle) {
             return setSubtitle(subtitle, Gravity.START);
         }
 
-        public Builder setSubtitle(String subtitle, int gravity) {
+        public Builder setSubtitle(CharSequence subtitle, int gravity) {
             mSubtitleResource = subtitle;
             mSubtitleGravity = gravity;
             return this;

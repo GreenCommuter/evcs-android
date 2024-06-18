@@ -21,7 +21,7 @@ class StationView : LinearLayout {
 
     private fun init(context: Context) {
         val binding = ViewStationBinding.inflate(LayoutInflater.from(context), this, true)
-        binding.stationPower.text = mStation.getChargerType().printableName + ": " + mStation.printKw()
+        binding.stationPower.text = mStation.printStationPower()
         binding.stationId.text = String.format("Station ID: %s", mStation.name)
 
         mStation.connectorTypes.forEach { connectorType ->

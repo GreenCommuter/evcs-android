@@ -1,4 +1,4 @@
-package org.evcs.android.activity.account
+package org.evcs.android.features.profile
 
 import com.base.networking.retrofit.RetrofitServices
 import okhttp3.ResponseBody
@@ -34,14 +34,14 @@ class DeleteAccountPresenter(viewInstance: DeleteAccountView, services: Retrofit
                 })
     }
 
-    fun checkPaymentsAndDeleteAccount() {
+    fun checkPayments() {
         getService(PaymentsService::class.java).rejectedPayments.enqueue(
             object : AuthCallback<ArrayList<Payment>>(this) {
                 override fun onResponseSuccessful(response: ArrayList<Payment>) {
                     if (response.isNotEmpty()) {
                         view.showPaymentIssue()
                     } else {
-                        deleteAccount()
+                        view.showConfirmDialog()
                     }
                 }
 

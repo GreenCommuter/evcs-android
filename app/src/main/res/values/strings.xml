@@ -30,6 +30,7 @@
     <string name="app_close">Close</string>
     <string name="app_cancel">Cancel</string>
     <string name="app_trial_cta_default">Start Your Free Trial</string>
+    <string name="app_need_help">Need help? <u>Contact Customer Support</u></string>
     <string name="facebook_app_id">528030565777317</string>
     <string name="fb_login_protocol_scheme">fb869623280823970</string>
     <string name="facebook_client_token">8bfc277e54647c67bf270a8aa2c2c181</string>
@@ -101,11 +102,6 @@
     <string name="my_information_zip_code">Zipcode</string>
     <string name="my_information_phone_number">Phone Number</string>
     <string name="my_information_email_taken">Email has already been taken</string>
-
-    <!-- BrainTree -->
-    <string name="braintree_title">Add Credit or Debit Card</string>
-    <string name="braintree_error_token">Error retrieving token</string>
-    <string name="braintree_vanpool_description">A monthly subscription of %1$.2f will be set by the vanpool starting date: %2$s"</string>
 
     <!-- Profile -->
     <string name="profile_title">Profile</string>
@@ -192,6 +188,7 @@
     <string name="add_credit_card_name">Cardholder name</string>
     <string name="add_credit_card_set_default">Set as default payment method</string>
     <string name="add_credit_card_success">Your card was successfully added</string>
+    <string name="add_credit_card_title">Add Credit or Debit Card</string>
 
     <!--Payment History-->
     <string name="payment_history_title">Payment History</string>
@@ -224,7 +221,6 @@
     <string name="delete_account_toast">Your account has been deleted</string>
     <string name="delete_account_error_subtitle">You have an outstanding balance!</string>
     <string name="delete_account_error_description">There are unpaid charges on your account that must be resolved before you can delete your account.\n\nYou may choose to “Opt-Out”. Under this option, we will stop sending you marketing messages and stop sharing your data with third parties, unless it is applicable to paying off your balance.</string>
-    <string name="delete_account_error_pay_balance">Pay Balance</string>
     <string name="delete_account_error_opt_out">Opt-Out</string>
     <string name="delete_account_opt_out_title">Opted-Out</string>
     <string name="delete_account_opt_out_subtitle">You are now Opted-Out. You will still be able to log into your account using your existing credentials and pay the outstanding balance.\n\nPlease check your email for more information about the Opt-Out status of your account.</string>
@@ -255,9 +251,6 @@
     <string name="vanpool_travel_information_miles_distance_format">%1$.1f Miles</string>
     <string name="vanpool_travel_information_km_distance_format">%1$.1f Km</string>
     <string name="vanpool_travel_information_time_format">%1$d min</string>
-
-    <!-- Congratulations Fragment -->
-    <string name="vanpool_detail_congratulations_fragment_description">Thank you for your payment. Your vanpool is scheduled to begin on %1$s. $%2$.2f will be deducted monthly from your credit card on file.</string>
 
     <!-- Vanpool Status -->
     <string name="vanpool_status_cancelled">Canceled</string>
@@ -387,9 +380,19 @@
     <string name="congratulations_dialog_subtitle_1">Enjoy your discounted charging rates.</string>
     <string name="congratulations_dialog_subtitle_2">You can charge at no cost from %1$s to %2$s across the entire EVCS network.</string>
     <string name="congratulations_dialog_subtitle_3">You can charge at no cost 24/7 across the entire EVCS network.</string>
-    <string name="account_not_validated_title">Account Not Validated</string>
-    <string name="account_not_validated_subtitle">You will need to validate your phone number to activate your account and receive the member discounts on charging sessions.\n\nYou can do this anytime in your profile.</string>
-    <string name="account_not_validated_button">Validate Phone Number</string>
+    <string name="account_suspended_title">Account Suspended</string>
+    <string-array name="account_suspended_subtitle">
+        <item>Payment for your last charging session has been declined. Your account is now suspended.\n\nYou will</item>
+        <item>NOT</item>
+        <item>be able to start a charging session, including with a Subscription Plan, until you pay the outstanding balance.</item>
+    </string-array>
+    <string name="account_suspended_button">Pay Balance</string>
+    <string name="payment_failure_title">Payment Failure</string>
+    <string name="payment_failure_subtitle">Your Subscription Plan has unfortunately been canceled due to payment failure. You have been moved to the default Pay As You Go membership.</string>
+    <string name="payment_failure_reactivate">Reactivate Previous Plan</string>
+    <string name="payment_failure_remain">Remain Pay As You Go</string>
+    <string name="payment_failure_explore">Explore Other Options</string>
+    <string name="payment_failure_remain_dialog_subtitle">You are a Pay As You Go Member.</string>
 
     <!-- Search Location Child -->
     <string name="search_activity_hint">Location or zipcode</string>
@@ -448,18 +451,23 @@
     <string name="charging_in_progress_data_delay">*Final energy delivered may vary</string>
 <!--    <string name="charging_in_progress_error_title">Charging issue</string>-->
 <!--    <string name="charging_in_progress_error_subtitle">There has been an issue with the charging session. Try disconnecting and reconnecting the connector to your vehicle.</string>-->
+    <string name="state_of_charge_unsupported">EV or charger may not enable this function.</string>
+    <string name="state_of_charge_title">Battery State of Charge</string>
+    <string name="state_of_charge_start">Start %d%%</string>
+    <string name="state_of_charge_end">Current %d%%</string>
 
     <!-- Session information -->
     <string name="session_information_energy">Energy Delivered</string>
-    <string name="session_information_time">Elapsed time</string>
+    <string name="session_information_time">Charging Time</string>
     <string name="session_information_payment_method">Payment Method</string>
-    <string name="session_information_plan">Plan type</string>
+    <string name="session_information_plan">Plan Type</string>
     <string name="session_information_id">Session ID</string>
     <string name="session_information_station_id">Station ID</string>
-    <string name="session_information_price">Total</string>
+    <string name="session_information_price">Total Cost</string>
     <string name="session_information_receipt">View Receipt</string>
-    <string name="session_information_help">Need help? <u>Contact Customer Support</u></string>
-    <string name="session_information_title">Session Detail</string>
+    <string name="session_information_title">Charging Receipt</string>
+    <string name="session_information_max_rate">Maximum Power</string>
+    <string name="session_information_thank_you">Thank you for charging with EV Charging Solutions, Inc. (EVCS)</string>
 
     <!-- Manage Plan -->
     <string name="manage_plan_enrolled">Enrolled</string>
@@ -566,6 +574,27 @@
     <string name="charging_tab_enter_id">Enter the station ID</string>
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
+
+    <!-- Over Limit Warning -->
+    <string name="over_limit_warning_title">Attention!</string>
+    <string name="over_limit_warning_text">Per your subscription details, this charging session falls outside your EVCS subscription allowance and is billed separately. \n\nIf your charging session payment is declined, your account will be suspended. \n\nYou will <b>NOT</b> be able to use your subscription plan or charge with the app until the balance has been paid.</string>
+    <string name="over_limit_warning_checkbox">I agree to the terms above.</string>
+    <string name="over_limit_warning_button">Agree &amp; Continue</string>
+
+    <!-- Free Trial Reminder -->
+    <string name="free_trial_reminder_title">Free Trial Reminder!</string>
+    <string name="free_trial_reminder_description_1">You have</string>
+    <string name="free_trial_reminder_description_2">%.0f of %dkWh</string>
+    <string name="free_trial_reminder_description_3">remaining in your Free Trial</string>
+    <string name="free_trial_reminder_description_4">If this charging session exceeds %.0f kWh, you will be</string>
+    <string name="free_trial_reminder_description_5">automatically billed</string>
+    <string name="free_trial_reminder_description_6">for the first %1$s installment of $%2$.2f for your %3$s Plan.</string>
+
+    <!-- Pay Balance -->
+    <string name="pay_balance_pending">Pending Payments</string>
+    <string name="pay_balance_process_payment">Process Payment</string>
+    <string name="pay_balance_title">Pay Balance</string>
+    <string name="pay_balance_success">Success! Your payment has been processed.</string>
 
     <string-array name="lyft_array">
         <item>You are connected to </item>

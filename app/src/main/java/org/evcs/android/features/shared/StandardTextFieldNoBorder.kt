@@ -23,7 +23,7 @@ open class StandardTextFieldNoBorder : StandardTextField {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(context,
         attrs, defStyleAttr) {}
 
-    constructor(context: Context, label: String, text: String, @StyleRes textStyle: Int = R.style.Body_Medium) :
+    constructor(context: Context, label: String, text: String?, @StyleRes textStyle: Int = R.style.Body_Medium) :
         super(context) {
         setLabel(label)
         val tv = TextView(context)

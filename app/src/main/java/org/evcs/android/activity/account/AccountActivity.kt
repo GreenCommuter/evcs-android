@@ -5,6 +5,8 @@ import android.view.View
 import org.evcs.android.R
 import org.evcs.android.activity.BaseActivity2
 import org.evcs.android.databinding.ActivityBaseBinding
+import org.evcs.android.features.profile.AccountFragment
+import org.evcs.android.features.profile.DeleteAccountErrorFragment
 
 class AccountActivity : BaseActivity2() {
 

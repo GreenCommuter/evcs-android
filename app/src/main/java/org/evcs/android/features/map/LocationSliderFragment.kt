@@ -46,21 +46,32 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         presenter.onViewCreated()
         location = requireArguments().getSerializable(Extras.LocationActivity.LOCATION) as Location
         presenter.getLocation(location.id)
-        mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
-        val height = mBinding.mapItemFragmentEmpty.measuredHeight
+        setLocation(location)
+        val emptyViewHeight = measureEmptyViewHeight()
         val shadowPadding = 4
-        mMaxScroll = height - shadowPadding
+        resizeViewHeight(mBinding.mapItemFragmentEmpty, emptyViewHeight)
 
-        val screenHeight = Resources.getSystem().displayMetrics.heightPixels
-        val innerScrollInitialHeight = screenHeight -
-                mBinding.fragmentLocationHandler.measuredHeight - shadowPadding
-        resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
+        mMaxScroll = emptyViewHeight - shadowPadding
 
         keepStatusBar(mBinding.root)
     }
 
+    private fun measureEmptyViewHeight(): Int {
+        mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
+//        val height = mBinding.mapItemFragmentEmpty.measuredHeight
+        val shadowPadding = 4
+
+        val screenHeight = Resources.getSystem().displayMetrics.heightPixels
+        val innerScrollInitialHeight = screenHeight -
+                mBinding.fragmentLocationHandler.measuredHeight - shadowPadding
+//        resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
+        val emptyViewHeight = innerScrollInitialHeight - mBinding.mapItemFragmentLocationView.paddingTop
+        return emptyViewHeight - mBinding.mapItemFragmentLocationView.getMinVisibleHeight()
+    }
+
+    //Stations are the only thing not retrieved from the map
     override fun showLocation(response: Location) {
-        setLocation(response)
+        mBinding.mapItemFragmentLocationView.setStations(response)
     }
 
     override fun showError(requestError: RequestError) {
@@ -88,7 +99,7 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
             when (event.action) {
                 MotionEvent.ACTION_MOVE -> {
                     mLastY = currentY()
-                    resizePicture(mLastY / 2)
+//                    resizePicture(mLastY / 2)
                 }
                 MotionEvent.ACTION_UP -> {
                     snap(v)
@@ -124,7 +135,7 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         if (currentY() > mLastY) {
             if (currentY() <= getMaxScroll()) {
                 scroll(getMaxScroll())
-                resizePicture(getMaxScroll()/2)
+//                resizePicture(getMaxScroll()/2)
             }
         } else {
             //Scroll downwards. If the view was already at the bottom, both current and last equal 0
@@ -136,7 +147,7 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
                 dismiss()
             } else if (currentY() < mLastY && currentY() <= getMaxScroll()) {
                 scroll(0)
-                resizePicture(0)
+//                resizePicture(0)
             }
         }
     }

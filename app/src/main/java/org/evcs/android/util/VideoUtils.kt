@@ -5,15 +5,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.media.MediaPlayer
 import android.net.Uri
+import android.view.View
 import android.widget.VideoView
 import androidx.annotation.RawRes
+import com.rollbar.android.Rollbar
 import kotlin.math.roundToInt
 
 object VideoUtils {
 
     private fun VideoView.scaleView(videoWidth: Int, videoHeight: Int) {
         val lp = layoutParams
-        val prop = width / videoWidth.toFloat()
+        //match parent sometimes fails
+        lp.width = (parent as View).width
+        val prop = lp.width / videoWidth.toFloat()
         lp.height = (videoHeight * prop).roundToInt()
         layoutParams = lp
     }
@@ -24,6 +28,10 @@ object VideoUtils {
     }
 
     fun VideoView.startAndLoop() {
+        setOnErrorListener { mp, what, extra ->
+            Rollbar.instance().error("Error playing video: ${mp.duration} $what $extra")
+            true
+        }
         setOnPreparedListener { mp ->
             scaleView(mp.videoWidth, mp.videoHeight)
             start()

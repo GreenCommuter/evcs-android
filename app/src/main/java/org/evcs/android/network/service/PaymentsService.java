@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface PaymentsService {
@@ -16,4 +17,7 @@ public interface PaymentsService {
 
     @GET("/members/v1/payments/rejected")
     Call<ArrayList<Payment>> getRejectedPayments();
+
+    @GET("/members/v1/payments/{id}/run")
+    Call<Void> processPayment(@Path("id") String id);
 }

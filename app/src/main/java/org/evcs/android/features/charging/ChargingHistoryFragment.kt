@@ -1,13 +1,13 @@
 package org.evcs.android.features.charging
 
 import android.os.Bundle
-import androidx.navigation.fragment.findNavController
+import com.base.core.util.NavigationUtils
 import org.evcs.android.EVCSApplication
 import org.evcs.android.R
+import org.evcs.android.activity.ChargeReceiptActivity
 import org.evcs.android.features.profile.payments.PaginationFragment
 import org.evcs.android.features.profile.payments.PaginationView
 import org.evcs.android.model.Charge
-import org.evcs.android.util.Extras
 
 class ChargingHistoryFragment : PaginationFragment<Charge, ChargingHistoryPresenter, ChargingHistoryAdapter>(), PaginationView<Charge> {
 
@@ -23,7 +23,7 @@ class ChargingHistoryFragment : PaginationFragment<Charge, ChargingHistoryPresen
     override fun setListeners() {
         super.setListeners()
         setItemClickListener { item ->
-            findNavController().navigate(ChargingHistoryFragmentDirections.actionChargingHistoryFragmentToSessionInformationFragment(item.id))
+            NavigationUtils.jumpTo(requireContext(), ChargeReceiptActivity::class.java, NavigationUtils.IntentExtra("id", item.id))
         }
     }
 

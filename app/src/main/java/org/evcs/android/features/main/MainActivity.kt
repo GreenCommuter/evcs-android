@@ -3,6 +3,7 @@ package org.evcs.android.features.main
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.Gravity
@@ -21,15 +22,17 @@ import org.evcs.android.R
 import org.evcs.android.activity.AbstractSupportedVersionActivity
 import org.evcs.android.databinding.ActivityBaseNavhostWithBottomNavBinding
 import org.evcs.android.features.auth.register.VerifyPhoneActivity
-import org.evcs.android.features.charging.KeyboardListener
 import org.evcs.android.features.profile.plans.PlanViewHelper
 import org.evcs.android.features.profile.plans.PlansActivity
+import org.evcs.android.features.shared.EVCSDialogFragment
 import org.evcs.android.features.shared.EVCSSliderDialogFragment
 import org.evcs.android.features.shared.IVersionView
 import org.evcs.android.model.Subscription
 import org.evcs.android.util.Extras
+import org.evcs.android.util.FontUtils
 import org.evcs.android.util.PushNotificationUtils
 import org.evcs.android.util.UserUtils
+import org.evcs.android.util.PaymentUtils
 import org.evcs.android.util.ViewUtils.setMargins
 
 class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
@@ -204,17 +207,45 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
             .show(supportFragmentManager)
     }
 
-    fun showAccountNotValidatedDialog() {
-        EVCSSliderDialogFragment.Builder()
-            .setTitle(getString(R.string.account_not_validated_title))
-            .setSubtitle(getString(R.string.account_not_validated_subtitle))
-            .addButton(getString(R.string.account_not_validated_button), {
+    fun showAccountSuspendedDialog() {
+        val subtitle = FontUtils.getSpannable(
+            resources.getStringArray(R.array.account_suspended_subtitle), Color.BLACK)
+
+        EVCSDialogFragment.Builder()
+            .setTitle(getString(R.string.account_suspended_title))
+            .setSubtitle(subtitle, Gravity.CENTER)
+            .addButton(getString(R.string.account_suspended_button), {
                     fragment -> fragment.dismiss()
-                    //TODO: handle result
-                    NavigationUtils.jumpTo(this, VerifyPhoneActivity::class.java)
+                    PaymentUtils.goToPendingPayment(this)
             },
                 R.style.ButtonK_Blue)
-            .addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.style.ButtonK_BlackOutline)
+            .showCancel(getString(R.string.app_close))
+            //addButton(getString(R.string.app_close), { fragment -> fragment.dismiss() }, R.style.ButtonK_BlackOutline)
+            .show(supportFragmentManager)
+    }
+
+    fun showPaymentFailureDialog() {
+        EVCSDialogFragment.Builder()
+            .setTitle(getString(R.string.payment_failure_title), R.style.Label_Large)
+            .setSubtitle(getString(R.string.payment_failure_subtitle), Gravity.CENTER)
+            .addButton(getString(R.string.payment_failure_reactivate), {
+                //TODO: reactivate
+            }, R.style.ButtonK_Blue)
+            .addButton(getString(R.string.payment_failure_remain), { fragment ->
+                fragment.dismiss()
+                showRemainDialog()
+            }, R.style.ButtonK_BlueOutline)
+            .addButton(getString(R.string.payment_failure_explore), {
+                NavigationUtils.jumpTo(this, PlansActivity::class.java)
+            }, R.style.Label_Medium)
+            .show(supportFragmentManager)
+    }
+
+    private fun showRemainDialog() {
+        EVCSSliderDialogFragment.Builder()
+            .setTitle(getString(R.string.success_dialog_title))
+            .setSubtitle(getString(R.string.payment_failure_remain_dialog_subtitle), Gravity.CENTER)
+            .addButton("Done") { fragment -> fragment.dismiss() }
             .show(supportFragmentManager)
     }
 

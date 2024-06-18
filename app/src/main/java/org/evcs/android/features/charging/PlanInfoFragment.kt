@@ -108,7 +108,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
             val text = getString(R.string.plan_info_peak_hours, status.plan.startHour(), status.plan.finishHour(), pricing.priceKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
-            mShowWarning = true
+            mShowWarning = status.pendingPaygConfirmation
         }
         if (status.isSuspended) {
             showIssue(status.issueMessage, null, getString(R.string.plan_info_payment_error_update))
@@ -140,7 +140,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
                     status.totalKwh, resetDate, status.pricePerKwh)
             showPlanDialog(text, true, status.accountUrl)
             showPaymentInfo()
-            mShowWarning = true
+            mShowWarning = status.pendingPaygConfirmation
         }
     }
 

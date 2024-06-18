@@ -60,6 +60,7 @@ public class SubscriptionStatus implements Serializable {
 //        "remaining_charges_restored_at":"2023-04-13T00:01:07.717-07:00",
 //        "next_remaining_charge_restoration":"2023-05-13T00:01:07.717-07:00",
     public boolean pendingCancelConfirmation;
+    public boolean pendingPaygConfirmation;
 
     //si es null el remaining puede ser unlimited
     //        "monthly_kwh":null,

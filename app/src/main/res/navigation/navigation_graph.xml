@@ -24,6 +24,9 @@
         <action
             android:id="@+id/action_preChargingFragment_to_chargingFragment"
             app:destination="@id/chargingFragment" />
+        <action
+            android:id="@+id/action_preChargingFragment_to_accountSuspendedFragment"
+            app:destination="@id/accountSuspendedFragment" />
     </dialog>
     <fragment
         android:id="@+id/chargingFragment"
@@ -96,4 +99,9 @@
         android:name="org.evcs.android.features.profile.sessioninformation.ReceiptPlanFragment"
         android:label="ReceiptPlanFragment"
         tools:layout="@layout/fragment_receipt_plan"/>
+    <fragment
+        android:id="@+id/accountSuspendedFragment"
+        android:name="org.evcs.android.features.charging.AccountSuspendedFragment"
+        android:label="AccountSuspendedFragment"
+        tools:layout="@layout/fragment_account_suspended"/>
 </navigation>

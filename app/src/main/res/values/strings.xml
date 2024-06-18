@@ -389,6 +389,7 @@
     <string name="account_suspended_button">Pay Balance</string>
     <string name="payment_failure_title">Payment Failure</string>
     <string name="payment_failure_subtitle">Your Subscription Plan has unfortunately been canceled due to payment failure. You have been moved to the default Pay As You Go membership.</string>
+    <string name="payment_failure_subtitle_variant">You have reached your 30 kWh Trial Offer limit. Subscription Plan payment failed, so charging was discontinued. Please update your payment information to activate your plan.</string>
     <string name="payment_failure_reactivate">Reactivate Previous Plan</string>
     <string name="payment_failure_remain">Remain Pay As You Go</string>
     <string name="payment_failure_explore">Explore Other Options</string>

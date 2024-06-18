@@ -27,24 +27,21 @@
     <TextView
         android:id="@+id/fragment_register_cell_phone_subtitle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:text="@string/fragment_validate_old_user_description"
         android:padding="@dimen/spacing_medium_extra"
+        android:scrollbars="vertical"
         style="@style/Body.Medium.Black"/>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="@dimen/padding_ariel_standard"
         android:paddingRight="@dimen/padding_ariel_standard"
         android:paddingTop="@dimen/padding_ariel_standard"
         android:paddingBottom="@dimen/spacing_medium">
-
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_weight="1"/>
 
         <TextView
             android:id="@+id/fragment_validate_old_user_button"

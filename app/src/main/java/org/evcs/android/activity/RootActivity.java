@@ -40,6 +40,8 @@ public class RootActivity extends AppCompatActivity {
             newIntent = new Intent(this, AuthActivity.class);
         }
 
+        newIntent.putExtra(Extras.Root.OPENING_KEY, true);
+
         if (getIntent().getData() != null)
             Log.e("intentdatapath", getIntent().getData().getPath());
         else

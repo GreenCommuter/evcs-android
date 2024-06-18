@@ -55,6 +55,7 @@ public class Plan implements Serializable {
     public String priceTitle;
     public ArrayList<String> displayDetails;
     public ArrayList<TextWrapper> displayButtons;
+    public boolean blocked;
 
     public RenewalPeriod getRenewalPeriod() {
         if (weeklyPrice != null) return RenewalPeriod.WEEK;

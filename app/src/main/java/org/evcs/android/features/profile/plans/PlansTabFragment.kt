@@ -3,6 +3,7 @@ package org.evcs.android.features.profile.plans
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.LinearLayout
@@ -85,11 +86,21 @@ class PlansTabFragment : ErrorFragment<BasePresenter<*>>(), PlanView.PlanViewLis
             NavigationUtils.jumpTo(requireContext(), AuthActivity::class.java, param)
         } else if (plan == null) {
             mWalletLauncher.launch(Intent(requireContext(), WalletActivity::class.java))
+        } else if (plan.blocked) {
+            showBlockedPlanDialog()
         } else if (UserUtils.getLoggedUser()?.hasAnySubscription ?: false) {
             showChangePlanDialog(UserUtils.getLoggedUser().activeSubscription!!, plan)
         } else {
             gotoPlan(plan)
         }
+    }
+
+    private fun showBlockedPlanDialog() {
+        EVCSDialogFragment.Builder()
+            .setTitle(getString(R.string.over_limit_warning_title))
+            .setSubtitle("You are no longer eligible to subscribe to this plan.", Gravity.CENTER)
+            .addButton("Done", { fragment -> fragment.dismiss() }, R.style.ButtonK_Blue)
+            .show(childFragmentManager)
     }
 
     private fun showChangePlanDialog(activeSubscription: Subscription, plan: Plan) {

@@ -85,4 +85,7 @@ public interface UserService {
     @DELETE("/members/v1/users/")
     Call<Void> deleteAccount();
 
+    @POST("/members/v1/refresh/")
+    Call<AuthUser> refreshToken();
+
 }

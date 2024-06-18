@@ -1,4 +1,4 @@
-package org.evcs.android.features.charging
+package org.evcs.android.features.main
 
 import android.graphics.Rect
 import android.view.View

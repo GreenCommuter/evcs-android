@@ -569,6 +569,21 @@
     <string name="charging_tab_hint">Station ID</string>
     <string name="charging_tab_title">Start Charging</string>
 
+    <!-- Over Limit Warning -->
+    <string name="over_limit_warning_title">Attention!</string>
+    <string name="over_limit_warning_text">Per your subscription details, this charging session falls outside your EVCS subscription allowance and is billed separately. \n\nIf your charging session payment is declined, your account will be suspended. \n\nYou will <b>NOT</b> be able to use your subscription plan or charge with the app until the balance has been paid.</string>
+    <string name="over_limit_warning_checkbox">I agree to the terms above.</string>
+    <string name="over_limit_warning_button">Agree &amp; Continue</string>
+
+    <!-- Free Trial Reminder -->
+    <string name="free_trial_reminder_title">Free Trial Reminder!</string>
+    <string name="free_trial_reminder_description_1">You have</string>
+    <string name="free_trial_reminder_description_2">%.0f of %dkWh</string>
+    <string name="free_trial_reminder_description_3">remaining in your Free Trial</string>
+    <string name="free_trial_reminder_description_4">If this charging session exceeds %.0f kWh, you will be</string>
+    <string name="free_trial_reminder_description_5">automatically billed</string>
+    <string name="free_trial_reminder_description_6">for the first %1$s installment of $%2$.2f for your %3$s Plan.</string>
+
     <string-array name="lyft_array">
         <item>You are connected to </item>
         <item>Lyft</item>

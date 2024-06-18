@@ -8,6 +8,7 @@ import android.net.Uri
 import android.view.View
 import android.widget.VideoView
 import androidx.annotation.RawRes
+import com.rollbar.android.Rollbar
 import kotlin.math.roundToInt
 
 object VideoUtils {
@@ -27,6 +28,10 @@ object VideoUtils {
     }
 
     fun VideoView.startAndLoop() {
+        setOnErrorListener { mp, what, extra ->
+            Rollbar.instance().error("Error playing video: ${mp.duration} $what $extra")
+            true
+        }
         setOnPreparedListener { mp ->
             scaleView(mp.videoWidth, mp.videoHeight)
             start()

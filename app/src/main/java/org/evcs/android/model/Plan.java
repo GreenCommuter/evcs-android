@@ -46,6 +46,7 @@ public class Plan implements Serializable {
 //    public String tab;
     public String banner;
     public String useCase;
+    public boolean blocked;
 
     public RenewalPeriod getRenewalPeriod() {
         if (weeklyPrice != null) return RenewalPeriod.WEEK;

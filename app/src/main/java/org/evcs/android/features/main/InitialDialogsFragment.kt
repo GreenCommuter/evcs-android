@@ -76,6 +76,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
 
     fun onAppStarted() {
         presenter.checkPendingCancelation()
+        presenter.checkAccountSuspended()
     }
 
     override fun onResume() {
@@ -131,7 +132,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
             .show(childFragmentManager)
     }
 
-    fun showAccountSuspendedDialog() {
+    override fun showAccountSuspendedDialog() {
         val subtitle = FontUtils.getSpannable(
             resources.getStringArray(R.array.account_suspended_subtitle), Color.BLACK)
 

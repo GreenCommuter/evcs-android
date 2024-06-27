@@ -69,4 +69,6 @@ class ChargingSessionInformationFragment : SessionInformationFragment(), Initial
             .addButton("Done") { fragment -> fragment.dismiss() }
             .show(childFragmentManager)
     }
+
+    override fun showAccountSuspendedDialog() {}
 }

@@ -47,26 +47,17 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         location = requireArguments().getSerializable(Extras.LocationActivity.LOCATION) as Location
         presenter.getLocation(location.id)
         setLocation(location)
-        val emptyViewHeight = measureEmptyViewHeight()
-        val shadowPadding = 4
-        resizeViewHeight(mBinding.mapItemFragmentEmpty, emptyViewHeight)
-
-        mMaxScroll = emptyViewHeight - shadowPadding
-
-        keepStatusBar(mBinding.root)
-    }
-
-    private fun measureEmptyViewHeight(): Int {
         mBinding.mapItemFragmentScroll.measure(MeasureSpec.UNSPECIFIED, MeasureSpec.UNSPECIFIED)
-//        val height = mBinding.mapItemFragmentEmpty.measuredHeight
+        val height = mBinding.mapItemFragmentEmpty.measuredHeight
         val shadowPadding = 4
+        mMaxScroll = height - shadowPadding
 
         val screenHeight = Resources.getSystem().displayMetrics.heightPixels
         val innerScrollInitialHeight = screenHeight -
                 mBinding.fragmentLocationHandler.measuredHeight - shadowPadding
-//        resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
-        val emptyViewHeight = innerScrollInitialHeight - mBinding.mapItemFragmentLocationView.paddingTop
-        return emptyViewHeight - mBinding.mapItemFragmentLocationView.getMinVisibleHeight()
+        resizeViewHeight(mBinding.mapItemFragmentInnerScroll.parent as View, innerScrollInitialHeight)
+
+        keepStatusBar(mBinding.root)
     }
 
     //Stations are the only thing not retrieved from the map
@@ -99,7 +90,7 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
             when (event.action) {
                 MotionEvent.ACTION_MOVE -> {
                     mLastY = currentY()
-//                    resizePicture(mLastY / 2)
+                    resizePicture(mLastY / 2)
                 }
                 MotionEvent.ACTION_UP -> {
                     snap(v)
@@ -135,7 +126,7 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
         if (currentY() > mLastY) {
             if (currentY() <= getMaxScroll()) {
                 scroll(getMaxScroll())
-//                resizePicture(getMaxScroll()/2)
+                resizePicture(getMaxScroll()/2)
             }
         } else {
             //Scroll downwards. If the view was already at the bottom, both current and last equal 0
@@ -147,7 +138,7 @@ class LocationSliderFragment : BaseDialogFragment<LocationPresenter>(),
                 dismiss()
             } else if (currentY() < mLastY && currentY() <= getMaxScroll()) {
                 scroll(0)
-//                resizePicture(0)
+                resizePicture(0)
             }
         }
     }

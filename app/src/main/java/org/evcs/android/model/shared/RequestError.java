@@ -38,4 +38,8 @@ public class RequestError {
         return "error_pending_payment".equals(error);
     }
 
+    public boolean isPreauthError() {
+        return "error_preauth_failed".equals(error);
+    }
+
 }

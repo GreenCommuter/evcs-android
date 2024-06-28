@@ -84,6 +84,10 @@ class StartChargingFragment : ErrorFragment<StartChargingPresenter>(), StartChar
             PaymentUtils.showPaymentDialog(requireActivity(), requestError)
             return
         }
+        if (requestError.isPreauthError) {
+            PaymentUtils.showPreauthDialog(requireActivity()) { startCharging() }
+            return
+        }
         mBinding.startChargingImage.stopPlayback()
         EVCSDialogFragment.Builder()
                 .setTitle(getString(R.string.start_charging_error_title))

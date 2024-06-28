@@ -14,17 +14,22 @@ class PayBalancePresenter(viewInstance: PayBalanceView, services: RetrofitServic
     ServicesPresenter<PayBalanceView?>(viewInstance, services) {
 
     private lateinit var mPendingPaymentId: String
+    var mMorePendingPayments: Boolean = false
 
     fun getPendingPayment() {
         getService(PaymentsService::class.java).rejectedPayments.enqueue(
             object : AuthCallback<ArrayList<Payment>>(this) {
                 override fun onResponseSuccessful(response: ArrayList<Payment>) {
-                    if (response.size == 1) {
+                    if (response.size == 0) {
+                        Rollbar.instance().warning("No payments returned")
+                        view.showError(RequestError.getUnknownError())
+                    } else {
+                        if (response.size > 1) {
+                            Rollbar.instance().warning("More than one pending payment returned: " + response.size.toString())
+                            mMorePendingPayments = true
+                        }
                         view.showPendingPayment(response.first())
                         mPendingPaymentId = response.first().id
-                    } else {
-                        Rollbar.instance().warning("More than one payment returned: " + response.size.toString())
-                        view.showError(RequestError.getUnknownError())
                     }
                 }
 

@@ -58,6 +58,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
         mWalletLauncher = WalletActivity.getDefaultLauncher(this) {
             pm -> mSelectedPM = pm
             mBinding.planInfoCreditCard.setPaymentMethod(pm)
+            mBinding.planInfoButton.isEnabled = true
         }
         mBinding.planInfoAnim.setVideoResource(R.raw.evcs_scene1, requireContext())
         mBinding.planInfoAnim.startAndLoop()
@@ -180,7 +181,7 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     }
 
     override fun showDefaultPM(paymentMethod: PaymentMethod?) {
-        onPaymentMethodChanged(paymentMethod)
+        mSelectedPM = paymentMethod
     }
 
     private fun showPaymentInfo() {
@@ -217,10 +218,6 @@ class PlanInfoFragment : ErrorFragment<PlanInfoPresenter>(), PlanInfoView {
     override fun onBackPressed(): Boolean {
         (activity as ChargingActivity).cancelSession(childFragmentManager)
         return true
-    }
-
-    fun onPaymentMethodChanged(paymentMethod: PaymentMethod?) {
-        mSelectedPM = paymentMethod
     }
 
     override fun getProgressDialogLayout(): Int {

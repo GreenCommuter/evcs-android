@@ -87,7 +87,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
             intent.putExtra(Extras.VerifyActivity.USE_CASE, VerifyPhoneActivity.UseCase.OUR_REQUEST)
             startForResult.launch(intent)
         }
-        //presenter.checkTokenExpiration()
+        presenter.checkTokenExpiration()
     }
 
     fun showWelcomeDialog() {

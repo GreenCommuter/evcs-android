@@ -13,6 +13,7 @@ import org.evcs.android.features.profile.wallet.WalletActivity
 import org.evcs.android.model.Payment
 import org.evcs.android.model.PaymentMethod
 import org.evcs.android.ui.fragment.ErrorFragment
+import org.evcs.android.util.PaymentUtils
 
 class PayBalanceFragment : ErrorFragment<PayBalancePresenter>(), PayBalanceView {
 
@@ -58,13 +59,21 @@ class PayBalanceFragment : ErrorFragment<PayBalancePresenter>(), PayBalanceView 
 
     override fun onPaymentSuccess() {
         ToastUtils.show(getString(R.string.pay_balance_success))
-        NavigationUtils.jumpToClearingTask(requireContext(), MainActivity::class.java)
+        //Could show all here but we still need to pay them one by one
+        //Anyway, there shouldn't be any cases of several pending payments in the near future
+        if (presenter.mMorePendingPayments) {
+            requireActivity().finish()
+            PaymentUtils.goToPendingPayment(requireContext())
+        } else {
+            NavigationUtils.jumpToClearingTask(requireContext(), MainActivity::class.java)
+        }
     }
 
     override fun showPendingPayment(payment: Payment) {
         hideProgressDialog()
         mBinding.payBalanceDescription.text = payment.description
         mBinding.payBalanceAmount.text = payment.amount.toString()
+        mBinding.payBalanceProcessPayment.isEnabled = true
     }
 
 }

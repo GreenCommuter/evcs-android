@@ -34,7 +34,7 @@ class ChargingSessionInformationFragment : SessionInformationFragment(), Initial
         progressDialog.setCancelable(true)
         presenter?.getChargeFromSession(
                 requireArguments().getInt(Extras.SessionInformationActivity.CHARGE_ID))
-        mInitialDialogsPresenter.checkPendingCancelation()
+        mInitialDialogsPresenter.checkPaymentIssues()
     }
 
     override fun populate() {
@@ -45,7 +45,14 @@ class ChargingSessionInformationFragment : SessionInformationFragment(), Initial
         return true
     }
 
-    override fun onPendingCancelation(previousSubscription: Subscription) {
+    override fun onPaymentIssuesResponse(response: InitialDialogsPresenter.PaymentIssue,
+        previousSubscription: Subscription?) {
+            if (response == InitialDialogsPresenter.PaymentIssue.PENDING_CANCELATION) {
+                onPendingCancelation(previousSubscription!!)
+            }
+    }
+
+    fun onPendingCancelation(previousSubscription: Subscription) {
         EVCSDialogFragment.Builder()
             .setTitle(getString(R.string.payment_failure_title))
             .setSubtitle(getString(R.string.payment_failure_subtitle_variant), Gravity.CENTER)
@@ -70,5 +77,4 @@ class ChargingSessionInformationFragment : SessionInformationFragment(), Initial
             .show(childFragmentManager)
     }
 
-    override fun showAccountSuspendedDialog() {}
 }

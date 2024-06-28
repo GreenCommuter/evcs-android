@@ -75,8 +75,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
     }
 
     fun onAppStarted() {
-        presenter.checkPendingCancelation()
-        presenter.checkAccountSuspended()
+        presenter.checkPaymentIssues()
     }
 
     override fun onResume() {
@@ -132,7 +131,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
             .show(childFragmentManager)
     }
 
-    override fun showAccountSuspendedDialog() {
+    fun showAccountSuspendedDialog() {
         val subtitle = FontUtils.getSpannable(
             resources.getStringArray(R.array.account_suspended_subtitle), Color.BLACK)
 
@@ -149,12 +148,21 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
             .show(childFragmentManager)
     }
 
-    override fun onPendingCancelation(previousSubscription: Subscription) {
+    fun onPendingCancelation(previousSubscription: Subscription) {
         try {
             showPaymentFailureDialog(previousSubscription)
         } catch (e : Exception) {
             Rollbar.instance().error(e)
         }
+    }
+
+    override fun onPaymentIssuesResponse(response: InitialDialogsPresenter.PaymentIssue,
+        previousSubscription: Subscription?) {
+            if (response == InitialDialogsPresenter.PaymentIssue.PENDING_CANCELATION) {
+                onPendingCancelation(previousSubscription!!)
+            } else if (response == InitialDialogsPresenter.PaymentIssue.ACCOUNT_SUSPENDED) {
+                showAccountSuspendedDialog()
+            }
     }
 
     override fun onConfirmCancelation() {
@@ -165,6 +173,7 @@ class InitialDialogsFragment : ErrorFragment<InitialDialogsPresenter>(), Initial
         EVCSDialogFragment.Builder()
             .setTitle(getString(R.string.payment_failure_title), R.style.Label_Large)
             .setSubtitle(getString(R.string.payment_failure_subtitle), Gravity.CENTER)
+            .setCancelable(false)
             .addButton(getString(R.string.payment_failure_reactivate), {
                 val intentExtra = IntentExtra(Extras.PlanActivity.PLAN, previousSubscription.plan)
                 NavigationUtils.jumpTo(requireContext(), GetPlanActivity::class.java, intentExtra)

@@ -131,7 +131,7 @@
     <string name="profile_explore_plans_text">Upgrade your plan for discounted charging</string>
     <string name="profile_payment_issue">There are pending unpaid charges on your account that must be resolved before you can continue.</string>
     <string name="profile_payment_button">Resolve</string>
-    <string name="profile_subscription_issue_button">Update payment method</string>
+    <string name="profile_subscription_issue_button">Update Payment Method</string>
 
     <string name="profile_avatar_change_title">Change Profile Picture</string>
     <string name="profile_avatar_change_camera_button">Take a picture</string>
@@ -424,8 +424,8 @@
     <string name="plan_info_explore_plans">Explore Plans</string>
     <string name="plan_info_charge_with_payg">Charge With Pay As You Go</string>
 <!--    <string name="plan_info_payment_error_title">Payment</string>-->
-<!--    <string name="plan_info_payment_error_subtitle">We were unable to process your card, please update your payment method or try again.</string>-->
-    <string name="plan_info_payment_error_update">Update payment method</string>
+    <string name="plan_info_payment_error_subtitle">We were unable to process your card, please update your payment method or try again.</string>
+    <string name="plan_info_payment_error_update">Update Payment Method</string>
     <string name="plan_info_dialog_title">Are you connected?</string>
     <string name="plan_info_dialog_subtitle">Please plug the charging connector into your vehicle.</string>
     <string name="plan_info_dialog_yes">Yes, Start Charging</string>

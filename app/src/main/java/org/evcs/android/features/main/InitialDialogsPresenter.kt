@@ -39,20 +39,30 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
         })
     }
 
-    fun checkPendingCancelation() {
+    fun checkPaymentIssues() {
+        if (UserUtils.getLoggedUser() == null) return
+        if (UserUtils.getLoggedUser().activeSubscription == null) {
+            checkRejectedPayments()
+            return
+        }
         getService(UserService::class.java).currentUser.enqueue(object : NetworkCallback<User?>() {
             override fun onResponseSuccessful(response: User?) {
                 if (response?.previousSubscription?.pendingCancelConfirmation == true
                     && response.activeSubscription == null) {
-                    view?.onPendingCancelation(response?.activeSubscription!!)
+                    view?.onPaymentIssuesResponse(PaymentIssue.PENDING_CANCELATION, response?.activeSubscription!!)
                 }
+                else if (response?.activeSubscription?.isSuspended == true) {
+                    view?.onPaymentIssuesResponse(PaymentIssue.ACCOUNT_SUSPENDED, null)
+                }
+                else {
+                    view?.onPaymentIssuesResponse(PaymentIssue.NONE, null)
+                }
+
             }
 
-            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {
-            }
+            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {}
 
-            override fun onCallFailure(throwable: Throwable) {
-            }
+            override fun onCallFailure(throwable: Throwable) {}
         })
     }
 
@@ -73,39 +83,24 @@ class InitialDialogsPresenter(viewInstance: InitialDialogsView?, services: Retro
         })
     }
 
-    fun checkAccountSuspended() {
-        if (UserUtils.getLoggedUser() == null) return
+    fun checkRejectedPayments() {
+        getService(PaymentsService::class.java).rejectedPayments.enqueue(object : AuthCallback<ArrayList<Payment>>(this) {
+            override fun onResponseSuccessful(response: ArrayList<Payment>) {
+                if (response.isNotEmpty())
+                    view?.onPaymentIssuesResponse(PaymentIssue.ACCOUNT_SUSPENDED, null)
+                else
+                    view?.onPaymentIssuesResponse(PaymentIssue.NONE, null)
+            }
 
-        //TODO: don't bring the user twice with check pending
-        if (UserUtils.getLoggedUser().activeSubscription != null) {
-            getService(UserService::class.java).getCurrentUser().enqueue(getAccountSuspendedCallback<User> {
-                user -> user.activeSubscription?.isSuspended == true
-            })
-        } else {
-            getService(PaymentsService::class.java).rejectedPayments.enqueue(getAccountSuspendedCallback<ArrayList<Payment>> {
-                payments -> payments.isNotEmpty()
-            })
-        }
+            override fun onResponseFailed(responseBody: ResponseBody, i: Int) {}
+
+            override fun onCallFailure(t: Throwable) {}
+
+        })
     }
 
-    fun <T> getAccountSuspendedCallback(onSuccess: (T) -> Boolean): AuthCallback<T> {
-        return object : AuthCallback<T>(this) {
-            override fun onResponseSuccessful(response: T) {
-                if (onSuccess.invoke(response)) {
-                    view.showAccountSuspendedDialog()
-                }
-            }
-
-            override fun onResponseFailed(responseBody: ResponseBody, code: Int) {
-                view.showError(ErrorUtils.getError(responseBody))
-            }
-
-            override fun onCallFailure(t: Throwable?) {
-                runIfViewCreated(Runnable { view?.showError(RequestError.getNetworkError()) })
-            }
-
-        }
-
+    enum class PaymentIssue {
+        PENDING_CANCELATION, ACCOUNT_SUSPENDED, NONE;
     }
 
 }

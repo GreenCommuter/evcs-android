@@ -40,6 +40,7 @@ class MainActivity : AbstractSupportedVersionActivity(), IVersionView {
         mNavigationController = MainNavigationController(this, true,
             findNavController(this, R.id.activity_base_content))
         //mNavigationController!!.startFlow()
+        setSelectedItem(R.id.menu_drawer_map)
 
 //        if (!intent.hasExtra(Extras.Root.VIEW_KEY)) {
 //            return

@@ -4,7 +4,6 @@ import org.evcs.android.model.Subscription
 import org.evcs.android.ui.view.shared.IErrorView
 
 interface InitialDialogsView : IErrorView {
-    fun onPendingCancelation(previousSubscription: Subscription)
+    fun onPaymentIssuesResponse(response: InitialDialogsPresenter.PaymentIssue, previousSubscription: Subscription?)
     fun onConfirmCancelation()
-    fun showAccountSuspendedDialog()
 }
